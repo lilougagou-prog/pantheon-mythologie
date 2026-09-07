@@ -779,3 +779,39 @@ secrète dans `app.js`). `service-worker.js` : `pantheon-v14` → `pantheon-v15`
 **Action requise, une seule fois, côté tableau de bord Vercel** : ajouter la variable
 d'environnement `OWNER_PREVIEW_KEY` (Production) — la création par CLI a été bloquée pour cette
 session. Voir `.env.example` pour le format attendu.
+
+## Identité visuelle — illustrations de symboles (Abeille, Aigle)
+
+Même principe que les badges de tuile/onglet ci-dessus, mais appliqué cette fois à deux entrées
+de la Bibliothèque symbolique plutôt qu'à la navigation principale : `SYMBOL_ILLUSTRATIONS`
+(`app.js`), une table `id → chemin d'asset` calquée sur `DEITY_PORTRAITS`, remplace l'emoji 🐝/🦅
+par une illustration dédiée (fournie par l'utilisatrice) partout où ce symbole apparaît — icône
+géante de sa propre fiche détail (`detailHeadingImageHTML()`, factorisée pour être partagée par
+`renderSymbolDetail()`, `renderPaywall()` et `renderOwnerPreviewLoading()`, ces deux derniers déjà
+premium pour l'Abeille et l'Aigle) et vignette dans les chips « Symboles associés » partout
+ailleurs (`symbolChipIconHTML()`, pendant symbolique de `genealogyPortraitHTML()`). Un symbole
+absent de la table retombe simplement sur son emoji d'origine, sans rien casser — la liste
+grandira au fil des illustrations fournies.
+
+**Retouche d'image nécessaire pour l'aigle.** L'illustration de l'abeille arrivait déjà avec un
+vrai canal alpha (fond transparent). Celle de l'aigle, elle, avait son damier de transparence
+aplati en pixels RGB opaques (aucun canal alpha) — reconstruit par un script dédié
+(`scratchpad`, jamais commité) : détection du damier par saturation quasi nulle (`R≈G≈B`, teintes
+claires) plutôt que par une couleur fixe, ne retenant que les régions connectées au bord de
+l'image (`scipy.ndimage.label`) pour ne jamais toucher aux zones grisâtres internes du plumage,
+légère dilatation du masque de fond puis flou gaussien pour manger le liseré anti-aliasé restant.
+Les deux images sont ensuite recadrées au plus près du sujet, réduites à 520px sur leur plus
+grand côté et exportées en WebP avec canal alpha (`assets/symbol-abeille.webp`,
+`assets/symbol-aigle.webp`, ~100 Ko et ~62 Ko) — même format et même philosophie de poids que les
+badges existants, adaptée ici à des illustrations isolées (pas de recadrage circulaire : `contain`
+plutôt que `cover`, pour ne jamais rogner les ailes déployées).
+
+Nouvelles classes CSS : `.symbol-illustration-big` (en-tête de fiche détail, `max-width: 220px`,
+`drop-shadow` plutôt qu'un cadre puisque le fond est déjà transparent) et `.chip-symbol-icon`
+(vignette 20×20 dans les chips). Les deux fichiers sont précachés par le service worker.
+
+Testé par un script dédié (`scratchpad`, 18 vérifications : présence et poids raisonnable des deux
+fichiers, références correctes dans `app.js` et `styles.css`, précache et version du service
+worker, syntaxe JS valide) et vérifié visuellement par captures d'écran Playwright (fiche
+« Abeille », fiche « Aigle », chip illustrée « Aigle » sur la fiche « Foudre »). `service-worker.js` :
+`pantheon-v16` → `pantheon-v17`.

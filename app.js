@@ -435,6 +435,15 @@ const DEITY_PORTRAITS = {
   "ulysse": "assets/deity-ulysse.jpg",
   "télémaque": "assets/deity-telemaque.jpg",
 };
+// Même principe que DEITY_PORTRAITS, mais pour la bibliothèque symbolique : une illustration
+// dédiée (fournie par l'utilisatrice, fond détouré) qui remplace l'emoji d'un symbole partout où
+// il apparaît (fiche détaillée, chips « symboles associés »). Une entrée absente ici retombe
+// simplement sur SYMBOL_LIBRARY[id].icon, comme avant — la liste grandira au fil des illustrations
+// fournies, sans rien casser pour les symboles qui n'en ont pas encore.
+const SYMBOL_ILLUSTRATIONS = {
+  "abeille": "assets/symbol-abeille.webp",
+  "aigle": "assets/symbol-aigle.webp",
+};
 const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux"]);
 const DEITY_INLINE_PORTRAITS = {
   "dionysos": [
@@ -830,6 +839,15 @@ function genealogyPortraitHTML(id){
   return `<img class="tree-portrait" src="${escapeHTML(portrait)}" alt="" loading="lazy">`;
 }
 
+// Équivalent pour les chips « symbole associé » : une vignette de l'illustration dédiée
+// (SYMBOL_ILLUSTRATIONS) quand le symbole en a une, sinon son emoji habituel (SYMBOL_LIBRARY[id]
+// .icon) suivi d'un espace — mêmes usages qu'avant, juste transformés en illustration réelle.
+function symbolChipIconHTML(id, s){
+  const illustration = SYMBOL_ILLUSTRATIONS[id];
+  if(illustration) return `<img class="chip-symbol-icon" src="${escapeHTML(illustration)}" alt="" loading="lazy">`;
+  return `${s.icon || "✦"} `;
+}
+
 // Regroupe les enfants d'une figure par union (l'autre parent, ou null si non documenté) —
 // c'est ce regroupement qui permet d'identifier la mère (ou le père) de chaque enfant plutôt
 // que de les présenter en un seul bloc indifférencié.
@@ -995,13 +1013,23 @@ function fetchOwnerPreviewContent(type, id){
     });
 }
 
-function renderOwnerPreviewLoading({ icon, portrait, name, note }){
+// Vignette d'en-tête partagée par la fiche détail et ses deux écrans de repli (paywall, chargement
+// de l'aperçu propriétaire) : portrait de figure (rectangulaire, DEITY_PORTRAITS), illustration de
+// symbole (détourée, SYMBOL_ILLUSTRATIONS) ou, à défaut, l'emoji d'origine — dans cet ordre.
+function detailHeadingImageHTML({ icon, portrait, illustration, name }){
+  if(portrait) return `<img class="deity-portrait" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy">`;
+  if(illustration) return `<img class="symbol-illustration-big" src="${escapeHTML(illustration)}" alt="${escapeHTML(name)}" loading="lazy">`;
+  if(icon) return `<div class="symbol-icon-big">${icon}</div>`;
+  return "";
+}
+
+function renderOwnerPreviewLoading({ icon, portrait, illustration, name, note }){
   return `
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
     </div>
     <article class="detail">
-      ${portrait ? `<img class="deity-portrait" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy">` : (icon ? `<div class="symbol-icon-big">${icon}</div>` : "")}
+      ${detailHeadingImageHTML({ icon, portrait, illustration, name })}
       <h2>${escapeHTML(name)}</h2>
       ${note ? `<p class="note">${escapeHTML(note)}</p>` : ""}
       <p class="empty">Chargement du contenu premium (aperçu propriétaire)…</p>
@@ -1013,13 +1041,13 @@ function renderOwnerPreviewLoading({ icon, portrait, name, note }){
 // boutons y figurent déjà (voir section 4/23 de l'audit) mais restent volontairement inertes
 // dans ce contexte web — attemptPurchase()/attemptRestore() l'expliquent clairement plutôt que
 // de simuler un achat qui n'engagerait à rien.
-function renderPaywall({ icon, portrait, name, note }){
+function renderPaywall({ icon, portrait, illustration, name, note }){
   return `
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
     </div>
     <article class="detail paywall-detail">
-      ${portrait ? `<img class="deity-portrait" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy">` : (icon ? `<div class="symbol-icon-big">${icon}</div>` : "")}
+      ${detailHeadingImageHTML({ icon, portrait, illustration, name })}
       <h2>${escapeHTML(name)}</h2>
       ${note ? `<p class="note">${escapeHTML(note)}</p>` : ""}
       <section class="paywall-box">
@@ -1381,7 +1409,7 @@ function relatedChipsHTML(entries, kind){
       <div class="chips">
         ${entries.map(([id, val]) => {
           const label = kind === "deity" ? (id.charAt(0).toUpperCase() + id.slice(1)) : val.label;
-          const icon = kind === "symbol" ? `${val.icon || "✦"} ` : "";
+          const icon = kind === "symbol" ? symbolChipIconHTML(id, val) : "";
           return `<button class="${cls}" ${attr} data-id="${escapeHTML(id)}">${icon}${escapeHTML(label)}</button>`;
         }).join("")}
       </div>
@@ -1748,7 +1776,7 @@ function symbolRelatedHTML(ids){
       <div class="chips">
         ${ids.filter(sid => sid in SYMBOL_LIBRARY).map(sid => {
           const rs = SYMBOL_LIBRARY[sid];
-          return `<button class="chip chip-symbol" data-nav="symbolDetail" data-id="${escapeHTML(sid)}">${rs.icon || "✦"} ${escapeHTML(rs.label)}</button>`;
+          return `<button class="chip chip-symbol" data-nav="symbolDetail" data-id="${escapeHTML(sid)}">${symbolChipIconHTML(sid, rs)}${escapeHTML(rs.label)}</button>`;
         }).join("")}
       </div>
     </div>
@@ -1771,13 +1799,13 @@ function symbolSourcesHTML(sources){
 function renderSymbolDetail(id){
   let s = SYMBOL_LIBRARY[id];
   if(symbolAccess(id) === "premium" && !isPremiumUnlocked()){
-    if(!hasOwnerPreview()) return renderPaywall({ icon: s.icon, name: s.label, note: s.desc });
+    if(!hasOwnerPreview()) return renderPaywall({ icon: s.icon, illustration: SYMBOL_ILLUSTRATIONS[id], name: s.label, note: s.desc });
     const cached = OWNER_PREVIEW_CACHE.symbols[id];
     if(!cached || cached.loading){
       fetchOwnerPreviewContent("symbols", id);
-      return renderOwnerPreviewLoading({ icon: s.icon, name: s.label, note: s.desc });
+      return renderOwnerPreviewLoading({ icon: s.icon, illustration: SYMBOL_ILLUSTRATIONS[id], name: s.label, note: s.desc });
     }
-    if(cached.locked) return renderPaywall({ icon: s.icon, name: s.label, note: s.desc });
+    if(cached.locked) return renderPaywall({ icon: s.icon, illustration: SYMBOL_ILLUSTRATIONS[id], name: s.label, note: s.desc });
     // content.json garde déjà icon/label/category/desc en plus du reste : un simple fusion
     // suffit, s redevient l'équivalent de la fiche complète d'avant la séparation du bundle.
     s = { ...s, ...cached.content };
@@ -1788,7 +1816,7 @@ function renderSymbolDetail(id){
       <button class="back" data-nav="back">← Retour</button>
     </div>
     <article class="detail symbol-detail">
-      <div class="symbol-icon-big">${s.icon || "✦"}</div>
+      ${detailHeadingImageHTML({ icon: s.icon, illustration: SYMBOL_ILLUSTRATIONS[id], name: s.label })}
       <h2>${escapeHTML(s.label)}</h2>
       <p class="note">${escapeHTML(s.desc)}</p>
 
