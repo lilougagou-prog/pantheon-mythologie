@@ -1009,6 +1009,19 @@ const DEITY_NOTES = {
   "uranie":"Muse de l'astronomie, homonyme d'une épiclèse d'Aphrodite sans lien de parenté.",
   "heures":"Trois déesses filles de Zeus et de Thémis, gardiennes de l'ordre saisonnier et moral du monde.",
   "parques":"Trois déesses du destin qui filent, mesurent et tranchent le fil de chaque existence.",
+  // Onze figures ajoutées pour étoffer deux lignées jugées trop peu développées : celle de
+  // Cadmos (le cycle thébain) et celle de Zeus et Europe (la Crète de Minos).
+  "épaphos":"Fils de Zeus et d'Io, ancêtre des grandes lignées royales d'Argos et de Thèbes.",
+  "ino":"Fille de Cadmos, devenue déesse marine sous le nom de Leucothéa après avoir sauté à la mer avec son fils.",
+  "autonoë":"Fille de Cadmos, mère du chasseur Actéon, déchiré par ses propres chiens.",
+  "agavé":"Fille de Cadmos, mère de Penthée qu'elle mit en pièces en pleine transe bachique.",
+  "polydoros":"Fils de Cadmos, roi de Thèbes entre son père et son petit-fils Laïos — à ne pas confondre avec le fils de Priam du même nom.",
+  "labdacos":"Fils de Polydoros, il donne son nom à la dynastie des Labdacides — celle de Laïos et d'Œdipe.",
+  "laïos":"Roi de Thèbes, père d'Œdipe et victime de la prophétie qu'il tenta en vain de déjouer.",
+  "amphion":"Fils de Zeus et d'Antiope, il bâtit avec son frère jumeau Zéthos les murailles de Thèbes au son de sa lyre.",
+  "zéthos":"Frère jumeau d'Amphion, il posa de ses mains les fondations des murailles de Thèbes.",
+  "rhadamanthys":"Fils de Zeus et d'Europe, frère de Minos, réputé pour sa justice jusque chez les morts.",
+  "sarpédon":"Fils de Zeus et d'Europe, frère de Minos, il quitta la Crète pour régner sur la Lycie.",
 };
 const DEITY_LORE = {
   "dionysos": [
@@ -1140,7 +1153,7 @@ const DEITY_LORE = {
     "Il aima aussi la mortelle Leucothoé, changée en arbuste à encens après avoir été enterrée vivante par son propre père, et la nymphe Clytie, qui se consuma de jalousie à l'idée de l'avoir perdu : restée à le fixer sans relâche, elle finit par s'enraciner et devenir cette fleur qui, encore aujourd'hui, tourne son visage vers le soleil tout au long du jour.",
   ],
   "minos": [
-    "Roi légendaire de Crète de son vivant, Minos devint après sa mort l'un des trois juges des Enfers, réputé pour la rigueur impartiale de ses jugements — une réputation acquise du temps où il régnait déjà avec une justice sans complaisance.",
+    "Fils de Zeus et d'Europe (voir les fiches « Zeus » et « Europe »), frère de Rhadamanthys et de Sarpédon (voir les fiches « Rhadamanthys » et « Sarpédon »), Minos régna sur la Crète de son vivant puis devint, après sa mort, l'un des trois juges des Enfers, réputé pour la rigueur impartiale de ses jugements — une réputation acquise du temps où il régnait déjà avec une justice sans complaisance.",
     "Sur terre, il fit construire par Dédale le Labyrinthe pour y enfermer le Minotaure, fruit d'une union contre nature de son épouse Pasiphaé (voir la fiche « Pasiphaé ») — un épisode qui n'entacha jamais, dans les Enfers, la légitimité de son jugement sur les autres âmes. C'est sa propre fille Ariane qui, en secret, permit à Thésée d'en ressortir vivant (voir la fiche « Ariane »).",
   ],
   "gaïa": [
@@ -1509,7 +1522,7 @@ const DEITY_LORE = {
     "Elles pourchassèrent ainsi Oreste après qu'il eut tué sa mère pour venger son père, jusqu'à ce qu'un tribunal institué par Athéna elle-même vienne, pour la première fois, remplacer leur vengeance sans fin par un jugement.",
   ],
   "actéon": [
-    "Chasseur habile, Actéon surprit un jour par mégarde la déesse Artémis se baignant nue dans une source avec ses nymphes.",
+    "Fils d'Aristée et d'Autonoë (voir les fiches « Aristée » et « Autonoë »), Actéon, chasseur habile, surprit un jour par mégarde la déesse Artémis se baignant nue dans une source avec ses nymphes.",
     "Furieuse d'avoir été vue, la déesse le changea sur-le-champ en cerf ; ses propres chiens de chasse, ne le reconnaissant plus, le poursuivirent et le déchirèrent — puni non pour une faute voulue, mais pour avoir simplement vu ce qui ne devait pas l'être.",
   ],
   "artémis": [
@@ -1576,7 +1589,7 @@ const DEITY_LORE = {
   ],
   "europe": [
     "Princesse phénicienne, fille du roi Agénor et sœur de Cadmos (voir la fiche « Cadmos »), Europe fut un jour abordée sur une plage par un taureau d'une blancheur et d'une douceur telles qu'elle osa grimper sur son dos sans la moindre crainte — c'était Zeus lui-même, épris d'elle, qui s'élança aussitôt dans les flots et l'emporta jusqu'en Crète, loin de tout secours.",
-    "De cette traversée naquirent trois fils : Minos (voir la fiche « Minos »), futur roi de Crète et juge des Enfers ; Rhadamanthe, réputé pour sa droiture incorruptible ; et Sarpédon, qui régna plus tard sur la Lycie. Devenue reine de l'île par son mariage avec le roi Astérion, sans enfant lui-même, elle vit ses trois fils élevés comme les siens et destinés à régner en son nom.",
+    "De cette traversée naquirent trois fils : Minos (voir la fiche « Minos »), futur roi de Crète et juge des Enfers ; Rhadamanthys (voir la fiche « Rhadamanthys »), réputé pour sa droiture incorruptible ; et Sarpédon (voir la fiche « Sarpédon »), qui régna plus tard sur la Lycie. Devenue reine de l'île par son mariage avec le roi Astérion, sans enfant lui-même, elle vit ses trois fils élevés comme les siens et destinés à régner en son nom.",
     "Son frère Cadmos, envoyé par leur père à sa recherche avec l'ordre de ne jamais revenir sans elle, ne la retrouva jamais — mais l'oracle de Delphes qui l'orienta vers une quête différente le mena, sans qu'il s'y attende, à fonder Thèbes à sa place (voir la fiche « Cadmos »).",
     "Le nom d'Europe, donné plus tard à tout le continent, reste depuis attaché à cette seule traversée — la mémoire d'un enlèvement devenue, avec le temps, le nom même d'un monde.",
   ],
@@ -1633,12 +1646,12 @@ const DEITY_LORE = {
     "Grisé par le vol et la liberté nouvelle qu'il découvrait, Icare grimpa toujours plus haut sans écouter son père : la cire fondit, les plumes se détachèrent une à une, et il tomba dans la mer qui porte depuis son nom, la mer Icarienne. Une tradition rapporte qu'Héraclès (voir la fiche « Héraclès »), retrouvant plus tard son corps échoué sur une île voisine, lui offrit une sépulture — l'île prit elle aussi, en mémoire de lui, le nom d'Icarie.",
   ],
   "penthée": [
-    "Roi de Thèbes, petit-fils de Cadmos (voir la fiche « Cadmos ») par sa mère Agavé, Penthée était le cousin mortel de Dionysos (voir la fiche « Dionysos ») — mais refusa obstinément de reconnaître sa divinité, interdisant son culte nouveau et faisant emprisonner ses fidèles.",
+    "Roi de Thèbes, petit-fils de Cadmos (voir la fiche « Cadmos ») par sa mère Agavé (voir la fiche « Agavé »), Penthée était le cousin mortel de Dionysos (voir la fiche « Dionysos ») — mais refusa obstinément de reconnaître sa divinité, interdisant son culte nouveau et faisant emprisonner ses fidèles.",
     "Pour le punir de cet aveuglement, Dionysos l'attira lui-même, déguisé en femme, à espionner en secret les rites des Ménades sur le mont Cithéron — un piège qui devait le pousser à voir de ses propres yeux ce qu'il avait toujours nié.",
     "Repéré par les Ménades en pleine transe bachique, il fut pris pour un lion par sa propre mère Agavé, qui le déchira de ses mains avec les autres fidèles avant de brandir sa tête en triomphe, croyant tenir un trophée de chasse — elle ne reconnut le visage de son fils qu'une fois la folie dissipée.",
   ],
   "niobé": [
-    "Reine de Thèbes, épouse d'Amphion — fils de la première Antiope, celle que persécuta sa propre tante Dircé (voir la fiche « Antiope ») —, Niobé se vantait avec orgueil d'avoir mis au monde quatorze enfants, sept fils et sept filles, quand Léto (voir la fiche « Léto ») n'en avait eu que deux.",
+    "Reine de Thèbes, épouse d'Amphion (voir la fiche « Amphion ») — fils de la première Antiope, celle que persécuta sa propre tante Dircé (voir la fiche « Antiope ») —, Niobé se vantait avec orgueil d'avoir mis au monde quatorze enfants, sept fils et sept filles, quand Léto (voir la fiche « Léto ») n'en avait eu que deux.",
     "Blessée par cette insulte faite à sa propre maternité, Léto envoya Apollon et Artémis (voir les fiches « Apollon » et « Artémis ») venger l'affront : l'un abattit à l'arc tous les fils de Niobé, l'autre toutes ses filles, sans qu'aucune supplication ne parvienne à arrêter leurs flèches.",
     "Pétrifiée de chagrin, Niobé se changea en rocher sur le mont Sipyle, d'où continue, dit-on, de suinter une eau semblable à des larmes sans fin — un deuil si absolu qu'il ne s'exprime même plus par des mots, seulement par une pierre qui pleure encore.",
   ],
@@ -1689,6 +1702,7 @@ const DEITY_LORE = {
     "Fils du roi Agénor de Phénicie et frère d'Europe (voir la fiche « Europe ») — enlevée par Zeus changé en taureau —, Cadmos partit à la recherche de sa sœur sans jamais la retrouver. L'oracle du temple de Delphes (voir la fiche « Temple ») lui conseilla d'abandonner cette quête et de suivre à la place une vache marquée d'un croissant de lune jusqu'à ce qu'elle s'arrête d'elle-même : à cet endroit précis, il devrait fonder une ville.",
     "La vache s'arrêta sur le site de la future Thèbes. Pour un sacrifice, Cadmos envoya ses compagnons chercher de l'eau à une source voisine, gardée par un dragon consacré à Arès (voir la fiche « Arès »), qui les tua tous. Cadmos vainquit à son tour le dragon puis, sur les conseils d'Athéna, sema ses dents dans le sol : des guerriers tout armés en surgirent aussitôt et s'entretuèrent jusqu'à ce qu'il n'en reste que cinq, devenus les ancêtres des plus grandes familles de Thèbes.",
     "Pour avoir tué un être consacré à Arès, Cadmos dut servir le dieu pendant huit années. Sa peine achevée, il fut réconcilié avec lui et reçut pour épouse Harmonie, fille d'Arès et d'Aphrodite (voir la fiche « Harmonie ») — des noces où tous les dieux de l'Olympe vinrent en personne, chose presque jamais accordée à des mortels.",
+    "De cette union naquirent cinq enfants : Sémélé, future mère de Dionysos, Ino, Autonoë et Agavé, et Polydoros, seul fils du couple et son unique héritier légitime sur le trône de Thèbes (voir les fiches « Sémélé », « Ino », « Autonoë », « Agavé » et « Polydoros »).",
     "Devenus vieux, Cadmos et Harmonie furent changés ensemble en serpents et menés vers les Champs Élysées plutôt que vers une fin funeste — une métamorphose vécue comme une grâce plutôt qu'une punition, pour avoir traversé côte à côte tant d'épreuves. La tradition grecque attribue aussi à Cadmos l'introduction de l'alphabet en Grèce.",
     "Cadmos est particulièrement associé à Harmonie.",
   ],
@@ -1950,7 +1964,7 @@ const DEITY_LORE = {
     "Reine ou princesse parmi les Amazones, Antiope est celle que Thésée ramena avec lui d'une expédition sur leurs terres pour l'épouser (voir la fiche « Thésée ») — même si les auteurs anciens ne s'accordent pas sur son identité exacte : Plutarque rapporte que certaines de ses sources l'appellent Antiope, d'autres lui préfèrent le nom d'Hippolyté, la reine amazone dont Héraclès obtint par ailleurs la ceinture dans un tout autre épisode (voir la fiche « Hippolyté ») — au point qu'il est parfois difficile de savoir s'il s'agit de la même figure sous deux noms, ou de deux sœurs distinctes.",
     "Furieuses de cet enlèvement, les Amazones envahirent l'Attique et marchèrent jusqu'au cœur d'Athènes pour l'affronter. Acquise désormais à son mari, Antiope se retourna contre son propre peuple pour le défendre, et mourut au combat à ses côtés plutôt que contre lui.",
     "De leur union naquit un fils, lui aussi appelé Hippolyte (voir la fiche « Hippolyte ») — dévot d'Artémis et rival malgré lui d'Aphrodite, dont la légende se conclut de façon plus tragique encore que celle de sa mère.",
-    "Une autre Antiope, fille du roi thébain Nyctée, n'a quant à elle aucun lien avec les Amazones : séduite par Zeus, elle enfanta les jumeaux Amphion et Zéthos, persécutée ensuite par sa propre tante Dircé — un tout autre récit que seul le nom partagé relie à la reine guerrière.",
+    "Une autre Antiope, fille du roi thébain Nyctée, n'a quant à elle aucun lien avec les Amazones : séduite par Zeus, elle enfanta les jumeaux Amphion et Zéthos (voir les fiches « Amphion » et « Zéthos »), persécutée ensuite par sa propre tante Dircé — un tout autre récit que seul le nom partagé relie à la reine guerrière.",
   ],
   "thésée": [
     "Fils du roi Égée d'Athènes — ou, selon une tradition parallèle, de Poséidon lui-même, les deux s'étant unis la même nuit à sa mère Éthra —, Thésée grandit loin de son père, élevé secrètement à Trézène. Avant de repartir pour Athènes, Égée avait caché sous un rocher son épée et ses sandales, ne laissant à son fils que la promesse de venir le rejoindre une fois assez fort pour les soulever seul.",
@@ -2148,10 +2162,10 @@ const DEITY_LORE = {
     "Prêtresse d'Héra à Argos, Io fut aimée de Zeus, qui la changea lui-même en génisse d'une blancheur éclatante pour dissimuler leur liaison à son épouse — ou, selon une autre version, ce fut Héra elle-même qui la surprit et la transforma. Peu dupe malgré tout, la déesse réclama l'animal en cadeau et le fit surveiller jour et nuit par le géant Argos Panoptès, « celui qui voit tout », dont les cent yeux ne se fermaient jamais tous à la fois.",
     "Zeus envoya Hermès délivrer sa bien-aimée : déguisé en berger, le dieu endormit Argos au son de sa flûte avant de le tuer d'un coup de serpe. Héra, en deuil de son fidèle gardien, recueillit ses cent yeux pour en parer la queue de son oiseau favori, le paon (voir la fiche « Paon »).",
     "Loin d'être libérée pour autant, Io fut alors pourchassée par un taon envoyé par Héra, dont la piqûre incessante la fit errer, toujours sous forme de génisse, à travers la Grèce et l'Asie tout entières — un détroit qu'elle traversa à la nage lui laissa le nom de Bosphore, « le passage de la vache », et la mer qu'elle longea plus au sud celui de mer Ionienne.",
-    "Ce n'est qu'en atteignant l'Égypte, épuisée, qu'elle retrouva enfin forme humaine et mit au monde Épaphos, né du seul toucher de la main de Zeus — un fils dont la descendance, par Libye (voir la fiche « Libye »), donnera naissance aux deux plus grandes lignées royales de la mythologie grecque, celle d'Argos et celle de Thèbes. Une tradition locale plus tardive lui donne aussi une fille, Kéroessa, dont le fils Byzas donnera plus tard son nom à Byzance (voir la fiche « Byzas »).",
+    "Ce n'est qu'en atteignant l'Égypte, épuisée, qu'elle retrouva enfin forme humaine et mit au monde Épaphos (voir la fiche « Épaphos »), né du seul toucher de la main de Zeus — un fils dont la descendance, par Libye (voir la fiche « Libye »), donnera naissance aux deux plus grandes lignées royales de la mythologie grecque, celle d'Argos et celle de Thèbes. Une tradition locale plus tardive lui donne aussi une fille, Kéroessa, dont le fils Byzas donnera plus tard son nom à Byzance (voir la fiche « Byzas »).",
   ],
   "libye": [
-    "Fille d'Épaphos — le fils qu'Io (voir la fiche « Io »), une jeune femme aimée de Zeus puis changée en génisse par la jalousie d'Héra, mit au monde après ses longues errances jusqu'en Égypte —, Libye donna son nom au continent tout entier qui porte encore le sien aujourd'hui.",
+    "Fille d'Épaphos (voir la fiche « Épaphos ») — le fils qu'Io (voir la fiche « Io »), une jeune femme aimée de Zeus puis changée en génisse par la jalousie d'Héra, mit au monde après ses longues errances jusqu'en Égypte —, Libye donna son nom au continent tout entier qui porte encore le sien aujourd'hui.",
     "Unie au dieu-fleuve Nil, elle mit au monde des jumeaux, Bélos et Agénor : le premier régna sur l'Égypte et engendra à son tour Égyptos et Danaos (voir les fiches « Égyptos » et « Danaos »), tandis que le second partit fonder Tyr et Sidon, où naquirent plus tard Cadmos et Europe (voir les fiches « Cadmos » et « Europe »).",
     "Par cette double descendance, Libye se trouve à l'origine à la fois de la lignée royale d'Argos, promise aux Danaïdes et à Persée, et de celle de Thèbes, promise à Cadmos et à ses propres descendants — une même aïeule à l'origine de deux des plus grandes maisons de la mythologie grecque.",
   ],
@@ -2266,13 +2280,13 @@ const DEITY_LORE = {
     "Sa clémence envers son père finit par être découverte : chassée de Lemnos par les autres femmes, elle fut vendue comme esclave et devint nourrice du petit prince Opheltès à Némée. Une négligence d'un instant — le temps de guider des voyageurs, dont les futurs Sept contre Thèbes, jusqu'à une source — coûta la vie à l'enfant, mordu par un serpent ; en sa mémoire furent institués les Jeux Néméens, célébrés depuis tous les deux ans.",
   ],
   "œdipe": [
-    "Fils de Laïos, roi de Thèbes descendant de Cadmos (voir la fiche « Cadmos »), et de Jocaste (voir la fiche « Jocaste »), Œdipe fut exposé sur le mont Cithéron, les chevilles percées et liées, dès sa naissance : un oracle avait prédit qu'il tuerait son propre père.",
+    "Fils de Laïos (voir la fiche « Laïos »), roi de Thèbes descendant de Cadmos (voir la fiche « Cadmos »), et de Jocaste (voir la fiche « Jocaste »), Œdipe fut exposé sur le mont Cithéron, les chevilles percées et liées, dès sa naissance : un oracle avait prédit qu'il tuerait son propre père.",
     "Recueilli par des bergers puis élevé à la cour de Corinthe sans jamais connaître ses origines, il consulta à son tour l'oracle de Delphes une fois adulte, qui lui répéta la même prophétie — sans qu'il sache qu'il ne parlait déjà plus de ses parents adoptifs. Fuyant Corinthe pour l'éviter, il tua sans le savoir son père Laïos lors d'une rixe sur la route, au croisement de trois chemins.",
     "Arrivé à Thèbes, il délivra la ville du Sphinx en résolvant seul son énigme — quel est l'être qui marche à quatre pattes le matin, deux à midi et trois le soir ? l'homme, à chaque âge de sa vie —, et reçut pour récompense la main de la reine veuve, Jocaste, sans savoir qu'il épousait sa propre mère.",
     "La vérité éclata des années plus tard, lors d'une peste qui frappait Thèbes pour purifier la faute cachée : Jocaste se donna la mort en l'apprenant, et Œdipe, horrifié, se creva lui-même les yeux avant de partir en exil, accompagné de sa fille Antigone (voir la fiche « Antigone »).",
   ],
   "jocaste": [
-    "Reine de Thèbes, descendante de Cadmos (voir la fiche « Cadmos »), Jocaste épousa Laïos, qu'un oracle avertit qu'un fils né d'elle le tuerait un jour — un avertissement qui poussa le couple à faire exposer leur unique enfant dès sa naissance plutôt que de risquer cette prophétie.",
+    "Reine de Thèbes, descendante de Cadmos (voir la fiche « Cadmos »), Jocaste épousa Laïos (voir la fiche « Laïos »), qu'un oracle avertit qu'un fils né d'elle le tuerait un jour — un avertissement qui poussa le couple à faire exposer leur unique enfant dès sa naissance plutôt que de risquer cette prophétie.",
     "Devenue veuve après la mort de Laïos, tué par un inconnu sur la route, elle épousa sans le savoir Œdipe (voir la fiche « Œdipe »), le vainqueur du Sphinx venu délivrer la ville — son propre fils, qu'elle croyait mort depuis longtemps.",
     "Elle eut de lui quatre enfants, dont Antigone (voir la fiche « Antigone »), avant qu'une peste ne révèle enfin la vérité sur cette double faute involontaire. Incapable de survivre à cette découverte, Jocaste se pendit de ses propres mains, laissant Œdipe seul face à l'horreur de ce qu'il avait accompli sans le savoir.",
   ],
@@ -2368,6 +2382,60 @@ const DEITY_LORE = {
     "Les Moires — en français plus couramment les Parques, du nom latin qui leur est resté — sont trois : Clotho, qui file le fil de chaque existence sur son fuseau ; Lachésis, qui en mesure la longueur et fixe la part de destin échue à chacun ; et Atropos, « celle qu'on ne peut détourner », qui tranche ce même fil au moment de la mort.",
     "Hésiode lui-même les fait naître deux fois dans sa Théogonie, sans jamais harmoniser les deux versions : la plus ancienne les dit filles de Nyx, la Nuit, seule (voir la fiche « Nyx »), nées aux côtés de la Mort et du Sommeil ; un passage plus tardif du même poème en fait plutôt les filles de Zeus et de Thémis (voir la fiche « Thémis »), sœurs des Heures (voir la fiche « Heures »).",
     "Une tradition orphique en fait plutôt les filles d'Ananké, la Nécessité elle-même (voir la fiche « Ananké ») — Platon décrit leur fuseau tournant sur les genoux de leur mère, axe autour duquel le monde entier accomplit sa course. Même Zeus s'incline devant leurs décrets dans la tradition la plus ancienne ; une épiclèse plus tardive, Zeus Moiragète, « guide des Moires », suggère pourtant une relation plus nuancée qu'une simple soumission.",
+  ],
+  "épaphos": [
+    "Né en Égypte du seul contact de la main de Zeus sur le front d'Io (voir les fiches « Zeus » et « Io »), enfin rendue à sa forme humaine après son long périple sous forme de génisse, Épaphos tire son nom de ce geste : « celui né du toucher ».",
+    "Devenu roi d'Égypte, il épousa Memphis, fille du dieu-fleuve Nil, et fonda la ville qui porte son nom. De leur union naquit Libye (voir la fiche « Libye »), dont la propre descendance allait se scinder en deux branches rivales — celle d'Argos par Danaos, celle d'Égypte par Égyptos (voir les fiches « Danaos » et « Égyptos ») — avant de se rejoindre bien plus tard dans la lignée de Persée.",
+    "Une rivale jalouse contesta un jour sa filiation avec Zeus — un doute que ses propres exploits, dit-on, suffirent à dissiper, et qu'aucune tradition n'a jamais réussi à faire vraiment vaciller.",
+  ],
+  "ino": [
+    "Fille de Cadmos et d'Harmonie (voir les fiches « Cadmos » et « Harmonie »), Ino épousa le roi Athamas de Béotie et recueillit un temps le jeune Dionysos, fils de sa propre sœur Sémélé (voir les fiches « Dionysos » et « Sémélé »), pour le soustraire à la colère d'Héra.",
+    "Cette générosité lui valut justement la vengeance d'Héra : la déesse rendit Athamas fou, au point qu'il tua l'un de leurs fils en le prenant pour un cerf. Pour sauver l'autre, Mélicerte, Ino se jeta avec lui du haut d'une falaise dans la mer.",
+    "Plutôt que de périr, la mère et l'enfant furent changés en divinités marines : Ino devint Leucothéa, « la déesse blanche », protectrice des marins en détresse — à ne pas confondre avec l'autre Leucothéa, une nymphe rhodienne du nom d'Halia honorée localement sous ce même nom après un tout autre drame (voir la fiche « Halia »), ni avec Leucothoé, princesse aimée d'Hélios, dont le nom ne diffère que d'une lettre (voir la fiche « Leucothoé »).",
+  ],
+  "autonoë": [
+    "Fille de Cadmos et d'Harmonie (voir les fiches « Cadmos » et « Harmonie »), Autonoë épousa Aristée (voir la fiche « Aristée »), le fils d'Apollon versé dans l'art de l'agriculture, et lui donna un fils, Actéon (voir la fiche « Actéon »).",
+    "Après la mort tragique de son fils, changé en cerf et dévoré par sa propre meute pour avoir surpris Artémis au bain, Autonoë quitta Thèbes, incapable d'y rester après un tel malheur, et finit ses jours en exil loin de la cité de son père.",
+  ],
+  "agavé": [
+    "Fille de Cadmos et d'Harmonie (voir les fiches « Cadmos » et « Harmonie »), Agavé épousa Échion, l'un des cinq guerriers survivants nés des dents du dragon semées par son propre père, et lui donna un fils, Penthée (voir la fiche « Penthée »), qui devait un jour lui succéder sur le trône de Thèbes.",
+    "Lorsque Penthée refusa de reconnaître le culte de Dionysos, son cousin divin (voir la fiche « Dionysos »), le dieu plongea Agavé et les autres femmes thébaines dans une transe bachique sur le mont Cithéron. Prise pour un lion par sa propre mère égarée, Penthée y fut mis en pièces de ses mains avant qu'elle ne reprenne ses esprits, sa tête encore brandie en trophée.",
+    "Bannie de Thèbes pour ce crime commis malgré elle, Agavé erra ensuite loin de la cité qu'avait fondée son père — un châtiment que la tradition attribue moins à sa propre faute qu'à la colère de Dionysos contre toute sa famille.",
+  ],
+  "polydoros": [
+    "Fils de Cadmos et d'Harmonie (voir les fiches « Cadmos » et « Harmonie »), Polydoros succéda à son père sur le trône de Thèbes — à ne pas confondre avec l'homonyme troyen, plus jeune fils de Priam, déjà présent dans cette bibliothèque sous une orthographe presque identique, « Polydore ».",
+    "Les sources antiques racontent peu de son propre règne, éclipsé par ceux de son père et de son petit-fils : il resta surtout le maillon nécessaire d'une lignée, celui qui transmit la couronne de Cadmos jusqu'à Laïos et, par lui, jusqu'à Œdipe (voir les fiches « Laïos » et « Œdipe »).",
+    "Son fils Labdacos (voir la fiche « Labdacos ») lui succéda encore enfant, sous la régence de Nyctée puis de Lycos — un royaume déjà marqué, avant même la naissance d'Œdipe, par les malheurs qui allaient s'attacher durablement à la maison de Cadmos.",
+  ],
+  "labdacos": [
+    "Fils de Polydoros (voir la fiche « Polydoros ») et petit-fils de Cadmos, Labdacos monta sur le trône de Thèbes encore enfant, d'abord sous la régence de son grand-oncle Nyctée puis de Lycos.",
+    "Il mourut jeune, laissant à son tour un fils en bas âge, Laïos (voir la fiche « Laïos ») — la dynastie qui porte son nom, les Labdacides, devait bientôt connaître, par ce fils puis par son petit-fils Œdipe, les malheurs les plus célèbres de toute la mythologie thébaine.",
+  ],
+  "laïos": [
+    "Fils de Labdacos (voir la fiche « Labdacos ») et descendant de Cadmos, Laïos fut chassé de Thèbes encore enfant lors des troubles qui suivirent la mort prématurée de son père, et grandit en exil loin de la cité de ses ancêtres.",
+    "Revenu sur le trône à l'âge adulte, il épousa Jocaste (voir la fiche « Jocaste ») — mais un oracle l'avertit qu'un fils né d'elle le tuerait un jour. Pour déjouer la prophétie, il fit exposer leur unique enfant, les chevilles percées et liées, sur le mont Cithéron dès sa naissance.",
+    "L'enfant survécut malgré tout, recueilli et élevé loin de Thèbes sans jamais connaître ses origines : devenu adulte sous le nom d'Œdipe (voir la fiche « Œdipe »), il croisa un jour son propre père sur une route étroite, sans le reconnaître — une dispute pour le passage qui devait accomplir, dans le sang, la prophétie que Laïos avait cru déjouer.",
+  ],
+  "amphion": [
+    "Fils de Zeus et d'Antiope, fille du roi thébain Nyctée — une autre Antiope que la reine amazone du même nom, déjà présente dans cette bibliothèque (voir la fiche « Antiope ») —, Amphion naquit avec son frère jumeau Zéthos (voir la fiche « Zéthos ») sur le mont Cithéron, où leur mère les abandonna par crainte de la colère de sa propre tante Dircé.",
+    "Recueillis et élevés par des bergers sans connaître leurs origines, les jumeaux retournèrent plus tard à Thèbes, découvrirent la vérité sur leur naissance et vengèrent leur mère en punissant Dircé — avant de s'emparer eux-mêmes du trône de la cité.",
+    "Musicien accompli, Amphion avait reçu d'Hermès une lyre magique (voir la fiche « Hermès ») dont le seul son suffisait à mouvoir les pierres : c'est ainsi que les blocs des murailles de Thèbes se mirent en place d'eux-mêmes, portés par sa musique, pendant que Zéthos, de force plus brute, en posait les fondations.",
+    "Amphion épousa Niobé (voir la fiche « Niobé ») — un mariage qui devait s'achever, comme tous les grands bonheurs de la maison thébaine, dans le deuil le plus total après l'insulte de son épouse à Léto.",
+  ],
+  "zéthos": [
+    "Fils de Zeus et d'Antiope, frère jumeau d'Amphion (voir la fiche « Amphion »), Zéthos partagea avec lui une jeunesse de berger sur le mont Cithéron, ignorant tout de sa naissance royale jusqu'à son retour à Thèbes.",
+    "Moins porté sur la musique que son frère, il préférait la chasse et la force physique — un contraste que la légende exploite jusque dans la construction des murailles de Thèbes : quand la lyre d'Amphion faisait venir les pierres d'elles-mêmes, c'est Zéthos qui, de ses seules mains, les assemblait et les portait en place.",
+    "Il épousa Thébé, dont le nom se substitua bientôt à celui de la cité elle-même — Thèbes portant depuis, dans la tradition, le souvenir de cette reine plutôt que celui de son fondateur.",
+  ],
+  "rhadamanthys": [
+    "Fils de Zeus et d'Europe (voir les fiches « Zeus » et « Europe »), frère de Minos et de Sarpédon (voir les fiches « Minos » et « Sarpédon »), Rhadamanthys régna sur la Crète avec une droiture si reconnue qu'elle traversa la mort elle-même.",
+    "Devenu l'un des trois juges des Enfers aux côtés de son frère Minos et d'Éaque, il présidait plus particulièrement au jugement des âmes venues d'Asie — une répartition géographique qui reflétait, jusque dans l'au-delà, l'étendue de son autorité de son vivant.",
+    "Selon certaines traditions, il régna aussi sur les Champs Élysées eux-mêmes, séjour réservé aux âmes vertueuses — une récompense à la mesure de la rigueur incorruptible qu'il avait montrée toute sa vie.",
+  ],
+  "sarpédon": [
+    "Fils de Zeus et d'Europe (voir les fiches « Zeus » et « Europe »), frère de Minos et de Rhadamanthys (voir les fiches « Minos » et « Rhadamanthys »), Sarpédon quitta la Crète après une querelle avec Minos pour le trône et s'exila en Lycie, sur la côte d'Asie Mineure, où il fonda son propre royaume.",
+    "Zeus lui accorda en dédommagement un privilège rare parmi les mortels : vivre trois générations humaines entières avant de mourir, bien au-delà de la durée d'une vie ordinaire.",
+    "Une tradition épique bien plus tardive donne aussi ce même nom à un tout autre Sarpédon, roi de Lycie et allié de Troie, tué par Patrocle sous les yeux d'Achille — un lointain descendant plutôt que la même figure, la légende ayant fini par confondre les deux générations sous une identité commune.",
   ],
 };
 const DEITY_PORTRAITS = {
@@ -2645,7 +2713,16 @@ const GENEALOGY_PARENTS = {
   "uranie": ["zeus", "mnémosyne"],
   "érato": ["zeus", "mnémosyne"],
   "heures": ["zeus", "thémis"],
-  // Deuxième génération olympienne.
+  // Les trois Charites, filles de Zeus et de l'Océanide Eurynomé (sans fiche propre) — même
+  // logique de doublon assumé que les Muses ci-dessus (le collectif ET chaque figure nommée).
+  "charites": ["zeus"],
+  "aglaé": ["zeus"],
+  "euphrosyne": ["zeus"],
+  "thalia": ["zeus"],
+  // Deuxième génération olympienne — la liste la plus longue et la plus disputée de tout le
+  // corpus : chaque enfant de Zeus cité ici l'est avec la mère qui lui est attribuée dans sa
+  // propre fiche, pour qu'elle reste identifiable à chaque fois plutôt que noyée dans un bloc
+  // indifférencié (voir genealogyRelations(), qui regroupe justement les enfants par union).
   "apollon": ["zeus", "léto"],
   "artémis": ["zeus", "léto"],
   "perséphone": ["zeus", "déméter"],
@@ -2661,11 +2738,32 @@ const GENEALOGY_PARENTS = {
   "pollux": ["zeus", "léda"],
   "castor": ["léda"],
   "héraclès": ["zeus"],
+  "minos": ["zeus", "europe"],
+  "rhadamanthys": ["zeus", "europe"],
+  "sarpédon": ["zeus", "europe"],
+  // Épaphos (fils de Zeus et d'Io) est défini plus bas, avec Libye et le reste de sa lignée.
+  // Amphion et Zéthos sont bien fils de Zeus et d'une Antiope thébaine dans le mythe — mais
+  // l'unique fiche « antiope » de ce corpus couvre AUSSI la reine amazone épouse de Thésée
+  // (les deux traditions distinctes y sont expliquées ensemble). Les relier ici à "antiope"
+  // les ferait apparaître à tort comme demi-frères d'Hippolyte dans l'arbre : on ne retient
+  // donc que Zeus comme parent identifié pour la généalogie, la nuance restant expliquée en
+  // toutes lettres dans le texte de leurs fiches respectives.
+  "amphion": ["zeus"],
+  "zéthos": ["zeus"],
+  // Deux traditions concurrentes, rapportées telles quelles dans leurs propres fiches plutôt
+  // que tranchées arbitrairement : Zeus comme un des parents possibles, sans que cela exclue
+  // l'autre version qu'elles citent aussi (Chronos pour Aletheia, l'Océan pour Tyché).
+  "aletheia": ["zeus"],
+  "tyché": ["zeus"],
   // Enfants d'Arès.
   "phobos": ["arès", "aphrodite"],
   "harmonie": ["arès", "aphrodite"],
   "alcippé": ["arès", "aglauros"],
   "penthésilée": ["arès"],
+  // Autres enfants d'Aphrodite et d'Hermès.
+  "hermaphrodite": ["aphrodite", "hermès"],
+  "priape": ["aphrodite", "dionysos"],
+  "pan": ["hermès"],
   // Cécrops, premier roi d'Athènes, et sa descendance.
   "cécrops": [],
   "aglauros": ["cécrops"],
@@ -2683,8 +2781,9 @@ const GENEALOGY_PARENTS = {
   "mestor": ["persée", "andromède"],
   "héléos": ["persée", "andromède"],
   "persès": ["persée", "andromède"],
-  // Danaos, Égyptos et leur descendance.
-  "libye": [],
+  // Io, Épaphos, Libye et leur descendance jusqu'à Danaos et Égyptos.
+  "épaphos": ["zeus", "io"],
+  "libye": ["épaphos"],
   "danaos": [],
   "égyptos": [],
   "danaïdes": ["danaos"],
@@ -2727,11 +2826,20 @@ const GENEALOGY_PARENTS = {
   "télégonos": ["circé", "ulysse"],
   "télémaque": ["ulysse", "pénélope"],
   "alceste": ["pélias"],
-  // Le cycle thébain.
+  // Le cycle thébain : les cinq enfants de Cadmos et Harmonie, puis la lignée royale de
+  // Thèbes jusqu'à Œdipe (Polydoros -> Labdacos -> Laïos -> Œdipe -> Antigone).
   "cadmos": [],
   "europe": [],
   "sémélé": ["cadmos", "harmonie"],
-  "œdipe": ["jocaste"],
+  "ino": ["cadmos", "harmonie"],
+  "autonoë": ["cadmos", "harmonie"],
+  "agavé": ["cadmos", "harmonie"],
+  "polydoros": ["cadmos", "harmonie"],
+  "labdacos": ["polydoros"],
+  "laïos": ["labdacos"],
+  "actéon": ["aristée", "autonoë"],
+  "penthée": ["agavé"],
+  "œdipe": ["laïos", "jocaste"],
   "jocaste": [],
   "antigone": ["œdipe", "jocaste"],
   // Deucalion et Pyrrha, seuls survivants du déluge.
@@ -2791,21 +2899,116 @@ function genealogyHasData(id){
   return rel.parents.length > 0 || rel.children.length > 0 || rel.partners.length > 0 || rel.siblings.length > 0;
 }
 
+function genealogyDisplayName(id){
+  return id.charAt(0).toUpperCase() + id.slice(1);
+}
+function byGenealogyDisplayName(a, b){
+  return genealogyDisplayName(a).localeCompare(genealogyDisplayName(b), "fr");
+}
+
+// Une figure a "sa propre grosse généalogie" — et devient donc cliquable plutôt que
+// développée en ligne dans l'arbre — dès qu'elle a au moins deux enfants à elle. En dessous
+// de ce seuil (0 ou 1 enfant), sa descendance tient en une ligne ou deux : autant l'afficher
+// directement, ça évite un clic pour rien.
+function isGenealogyHub(id){
+  return (GENEALOGY_CHILDREN[id] || []).length >= 2;
+}
+
+// Regroupe les enfants d'une figure par union (l'autre parent, ou null si non documenté) —
+// c'est ce regroupement qui permet d'identifier la mère (ou le père) de chaque enfant plutôt
+// que de les présenter en un seul bloc indifférencié.
+function genealogyChildUnions(id){
+  const children = GENEALOGY_CHILDREN[id] || [];
+  const groups = new Map(); // partnerId|null -> [childId,...]
+  for(const childId of children){
+    const parents = GENEALOGY_PARENTS[childId] || [];
+    const partner = parents.find(p => p !== id) || null;
+    if(!groups.has(partner)) groups.set(partner, []);
+    groups.get(partner).push(childId);
+  }
+  return [...groups.entries()]
+    .map(([partner, kids]) => ({ partner, children: kids.sort(byGenealogyDisplayName) }))
+    .sort((a, b) => {
+      if(!a.partner) return 1;
+      if(!b.partner) return -1;
+      return byGenealogyDisplayName(a.partner, b.partner);
+    });
+}
+
+// Construit récursivement l'arbre descendant à afficher, en s'arrêtant de développer une
+// branche dès qu'elle atteint une figure ayant elle-même une grosse généalogie (isGenealogyHub)
+// — pour ne pas surcharger l'écran, celle-ci devient alors un lien cliquable vers son propre
+// arbre plutôt que d'être développée en ligne. Une branche "mineure" (0 ou 1 enfant à chaque
+// génération) continue au contraire de se dérouler jusqu'à son terme naturel. maxDepth est un
+// filet de sécurité, jamais atteint en pratique tant que les données restent un arbre sans
+// cycle.
+//
+// seenChildren (partagé et muté à travers toute la construction, jamais recréé par appel
+// récursif) évite une confusion propre aux mythes grecs : deux frères et sœurs mariés ensemble
+// (Océan et Téthys, Cronos et Rhéa...) partagent les mêmes enfants — la même figure apparaît
+// donc légitimement sous les deux, mais sans marquage elle ressemblerait à deux enfants
+// distincts. Toute réapparition au-delà de la première est marquée `duplicate` et rendue en
+// renvoi discret plutôt que redéveloppée une seconde fois.
+function buildGenealogyDescendantTree(id, depth = 0, maxDepth = 12, seenChildren = new Set()){
+  const unions = depth >= maxDepth ? [] : genealogyChildUnions(id);
+  return {
+    id,
+    unions: unions.map(u => ({
+      partner: u.partner,
+      children: u.children.map(childId => {
+        const duplicate = seenChildren.has(childId);
+        const expand = !isGenealogyHub(childId) && !duplicate;
+        if(!duplicate) seenChildren.add(childId);
+        return {
+          id: childId,
+          hub: !expand,
+          duplicate,
+          subtree: expand ? buildGenealogyDescendantTree(childId, depth + 1, maxDepth, seenChildren) : null,
+        };
+      }),
+    })),
+  };
+}
+
+// Construit récursivement l'arbre ascendant (les ancêtres) d'une figure, jusqu'à la racine du
+// corpus (Chaos) ou jusqu'à maxDepth générations — toujours développé en entier, sans seuil de
+// collapse : la chaîne des ancêtres reste courte et centrale, contrairement à la descendance.
+function buildGenealogyAncestorTree(id, depth = 0, maxDepth = 10){
+  const parents = depth >= maxDepth ? [] : (GENEALOGY_PARENTS[id] || []);
+  return { id, parents: parents.map(p => buildGenealogyAncestorTree(p, depth + 1, maxDepth)) };
+}
+
 // Nombre de figures reliées par au moins un lien de généalogie (parent ou enfant), tous
 // comptés une seule fois — sert au décompte affiché sur la tuile d'accueil.
 const GENEALOGY_FIGURE_COUNT = new Set([...Object.keys(GENEALOGY_PARENTS), ...Object.keys(GENEALOGY_CHILDREN)]).size;
 
+// Les douze Olympiens (place traditionnellement disputée entre Hestia et Dionysos — on
+// retient ici la liste la plus courante, Hestia cédant sa place ; elle reste visible comme
+// sœur dans l'arbre de ses frères et sœurs). Chacun devient un point d'entrée vers son propre
+// arbre complet (ascendance ET descendance), plutôt que de se concentrer sur Zeus seul.
+const OLYMPIAN_IDS = ["zeus", "héra", "poséidon", "déméter", "athéna", "apollon", "artémis", "arès", "aphrodite", "héphaïstos", "hermès", "dionysos"];
+
+function olympianAscendanceLine(id){
+  const parents = GENEALOGY_PARENTS[id] || [];
+  if(!parents.length) return "Origine incertaine, sans parent documenté";
+  return "Enfant de " + parents.map(genealogyDisplayName).join(" et ");
+}
+
 // Points d'entrée choisis pour l'écran d'accueil de la généalogie — un aperçu large plutôt
-// qu'une liste exhaustive des 253 figures, chacun menant à un pan bien documenté du corpus.
+// qu'une liste exhaustive des 264 figures. Chaque point de départ ouvre désormais l'arbre
+// complet à partir de sa racine (branches et sous-branches comprises, pas une seule figure
+// isolée) : les Titans partent d'Ouranos et Gaïa pour montrer toute leur génération plutôt que
+// Cronos seul, et les Olympiens ont leur propre écran dédié (voir OLYMPIAN_IDS) plutôt que de
+// se concentrer sur Zeus.
 const GENEALOGY_STARTING_POINTS = [
-  ["chaos", "Les origines du monde"],
-  ["cronos", "Les Titans"],
-  ["zeus", "Les douze Olympiens"],
-  ["persée", "La lignée de Persée"],
-  ["priam", "La guerre de Troie"],
-  ["agamemnon", "Les Atrides"],
-  ["cadmos", "Le cycle thébain"],
-  ["ulysse", "La famille d'Ulysse"],
+  { id: "chaos", label: "Les origines du monde", sub: "Chaos et les quatre puissances premières" },
+  { id: "ouranos", label: "Les douze Titans", sub: "Ouranos, Gaïa et toute leur descendance" },
+  { special: "olympiansOverview", label: "Les douze Olympiens", sub: "Chacun avec sa propre ascendance" },
+  { id: "persée", label: "La lignée de Persée", sub: "De Zeus et Danaé à ses sept enfants" },
+  { id: "priam", label: "La guerre de Troie", sub: "Priam, Hécube et leurs nombreux enfants" },
+  { id: "agamemnon", label: "Les Atrides", sub: "Agamemnon, Clytemnestre et leur descendance" },
+  { id: "cadmos", label: "Le cycle thébain", sub: "Cadmos, Harmonie et cinq générations de Thèbes" },
+  { id: "ulysse", label: "La famille d'Ulysse", sub: "Ulysse, Pénélope, Circé et leurs fils" },
 ];
 
 // Table de résolution "nom affiché" -> cible cliquable (figure mythologique ou symbole),
@@ -3105,27 +3308,85 @@ function relatedChipsHTML(entries, kind){
 // recentrent l'arbre généalogique sur la figure cliquée — c'est tout l'intérêt de l'écran.
 function genealogyChipsHTML(ids, title){
   if(!ids.length) return "";
-  const sorted = ids.slice().sort((a, b) => (a.charAt(0).toUpperCase() + a.slice(1)).localeCompare(b.charAt(0).toUpperCase() + b.slice(1), "fr"));
+  const sorted = ids.slice().sort(byGenealogyDisplayName);
   return `
     <div class="geneal-group">
       <h4>${escapeHTML(title)}</h4>
       <div class="chips">
-        ${sorted.map(gid => `<button class="chip" data-nav="genealogy" data-id="${escapeHTML(gid)}">${escapeHTML(gid.charAt(0).toUpperCase() + gid.slice(1))}</button>`).join("")}
+        ${sorted.map(gid => `<button class="chip" data-nav="genealogy" data-id="${escapeHTML(gid)}">${escapeHTML(genealogyDisplayName(gid))}</button>`).join("")}
       </div>
     </div>
   `;
 }
 
-// Aperçu « Lignée » directement sur la fiche d'une figure : ses parents et enfants les plus
-// proches, plus un lien vers l'arbre complet — sans quitter la fiche pour les cas simples.
+// Rendu récursif de l'arbre descendant construit par buildGenealogyDescendantTree() : chaque
+// union est un groupe à part (avec le nom de l'autre parent en tête, pour toujours savoir de
+// qui vient chaque enfant), et chaque enfant est soit développé en ligne (branche mineure),
+// soit rendu comme un simple lien cliquable vers son propre arbre (dès qu'il a lui-même une
+// grosse généalogie — voir isGenealogyHub).
+function genealogyDescendantTreeHTML(node){
+  if(!node.unions.length) return "";
+  return `
+    <div class="tree-unions">
+      ${node.unions.map(u => `
+        <div class="tree-union">
+          <div class="tree-union-label">${u.partner
+            ? `avec <button class="tree-union-link" data-nav="genealogy" data-id="${escapeHTML(u.partner)}">${escapeHTML(genealogyDisplayName(u.partner))}</button>`
+            : `<span class="tree-union-unknown">union non précisée</span>`}</div>
+          <div class="tree-children">
+            ${u.children.map(c => {
+              if(c.duplicate) return `<div class="tree-child"><button class="tree-link tree-link-dup" data-nav="genealogy" data-id="${escapeHTML(c.id)}">${escapeHTML(genealogyDisplayName(c.id))} <span class="tree-dup-note">(même enfant que ci-dessus, union commune)</span></button></div>`;
+              if(c.hub) return `<div class="tree-child"><button class="tree-link" data-nav="genealogy" data-id="${escapeHTML(c.id)}">${escapeHTML(genealogyDisplayName(c.id))} →</button></div>`;
+              return `<div class="tree-child"><div class="tree-name">${escapeHTML(genealogyDisplayName(c.id))}</div>${genealogyDescendantTreeHTML(c.subtree)}</div>`;
+            }).join("")}
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+// Rendu récursif de l'arbre ascendant construit par buildGenealogyAncestorTree() : toujours
+// développé en entier (jamais de seuil de collapse ici), chaque ancêtre reste cliquable pour
+// explorer sa propre branche à son tour.
+function genealogyAncestorTreeHTML(node){
+  if(!node.parents.length) return "";
+  return `
+    <div class="tree-ancestors">
+      ${node.parents.map(p => `
+        <div class="tree-ancestor">
+          <button class="tree-link" data-nav="genealogy" data-id="${escapeHTML(p.id)}">${escapeHTML(genealogyDisplayName(p.id))}</button>
+          ${genealogyAncestorTreeHTML(p)}
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+// Aperçu « Lignée » directement sur la fiche d'une figure : ses parents et ses enfants (groupés
+// par union, pour identifier la mère de chacun) sans quitter la fiche, plus un lien vers
+// l'arbre complet pour aller plus loin.
 function genealogyLineageHTML(id){
   if(!genealogyHasData(id)) return "";
   const rel = genealogyRelations(id);
+  const unions = genealogyChildUnions(id);
   return `
     <div class="related geneal-lineage">
       <h3>Lignée</h3>
       ${genealogyChipsHTML(rel.parents, "Parents")}
-      ${genealogyChipsHTML(rel.children, "Enfants")}
+      ${unions.length ? `
+        <div class="geneal-group">
+          <h4>Enfants</h4>
+          ${unions.map(u => `
+            <div class="geneal-union-line">
+              <span class="geneal-union-label">${u.partner ? `avec ${escapeHTML(genealogyDisplayName(u.partner))} :` : "union non précisée :"}</span>
+              <div class="chips">
+                ${u.children.map(cid => `<button class="chip" data-nav="genealogy" data-id="${escapeHTML(cid)}">${escapeHTML(genealogyDisplayName(cid))}</button>`).join("")}
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      ` : ""}
       <button class="geneal-tree-link" data-nav="genealogy" data-id="${escapeHTML(id)}">🌳 Voir dans l'arbre généalogique</button>
     </div>
   `;
@@ -3175,35 +3436,62 @@ function renderSymbolDetail(id){
 }
 
 // Écran d'accueil de la généalogie : quelques points d'entrée choisis (voir
-// GENEALOGY_STARTING_POINTS) plutôt qu'une liste des 253 figures — chacun ouvre l'arbre
-// recentré sur une figure bien documentée, d'où l'exploration peut ensuite se poursuivre de
-// proche en proche, un clic à la fois.
+// GENEALOGY_STARTING_POINTS) plutôt qu'une liste des 264 figures — chacun ouvre désormais
+// l'arbre complet à partir de sa racine (branches et sous-branches sur plusieurs générations,
+// jamais une seule figure isolée), d'où l'exploration peut ensuite se poursuivre de proche en
+// proche, un clic à la fois.
 function renderGenealogyHome(){
   return `
     <div class="screen-header">
       <h2>Généalogie des dieux</h2>
     </div>
-    <p class="note">Explorez les liens de parenté entre les figures du corpus : parents, unions, frères et sœurs, enfants. Choisissez un point de départ, puis cliquez sur n'importe quel nom pour recentrer l'arbre sur lui.</p>
+    <p class="note">Explorez les liens de parenté entre les figures du corpus sur plusieurs générations : parents, unions, frères et sœurs, enfants. Choisissez un point de départ, puis cliquez sur n'importe quel nom pour poursuivre l'exploration de proche en proche.</p>
     <div class="geneal-entrypoints">
-      ${GENEALOGY_STARTING_POINTS.map(([gid, label]) => `
-        <button class="geneal-entry" data-nav="genealogy" data-id="${escapeHTML(gid)}">
-          <span class="geneal-entry-title">${escapeHTML(label)}</span>
-          <span class="geneal-entry-sub">${escapeHTML(gid.charAt(0).toUpperCase() + gid.slice(1))}</span>
+      ${GENEALOGY_STARTING_POINTS.map(pt => `
+        <button class="geneal-entry" data-nav="${pt.special ? escapeHTML(pt.special) : "genealogy"}"${pt.special ? "" : ` data-id="${escapeHTML(pt.id)}"`}>
+          <span class="geneal-entry-title">${escapeHTML(pt.label)}</span>
+          <span class="geneal-entry-sub">${escapeHTML(pt.sub)}</span>
         </button>
       `).join("")}
     </div>
   `;
 }
 
-// Écran d'exploration : une figure recentrée au milieu, avec ses parents, union(s), fratrie
-// et enfants tout autour — cliquer sur n'importe lequel recentre l'arbre à son tour (chaque
+// Écran dédié aux douze Olympiens (voir OLYMPIAN_IDS) : chacun avec sa propre ligne
+// d'ascendance directe, plutôt qu'un seul point d'entrée centré sur Zeus. Cliquer sur l'un
+// d'eux ouvre son arbre personnel complet — ascendance ET descendance — sur renderGenealogy().
+function renderOlympiansOverview(){
+  return `
+    <div class="screen-header">
+      <button class="back" data-nav="back">← Retour</button>
+      <h2>Les douze Olympiens</h2>
+    </div>
+    <p class="note">Chacun avec sa propre ascendance — cliquez sur un nom pour ouvrir son arbre généalogique complet, parents et enfants compris.</p>
+    <div class="geneal-entrypoints">
+      ${OLYMPIAN_IDS.map(oid => `
+        <button class="geneal-entry" data-nav="genealogy" data-id="${escapeHTML(oid)}">
+          <span class="geneal-entry-title">${escapeHTML(genealogyDisplayName(oid))}</span>
+          <span class="geneal-entry-sub">${escapeHTML(olympianAscendanceLine(oid))}</span>
+        </button>
+      `).join("")}
+    </div>
+  `;
+}
+
+// Écran d'exploration : une figure recentrée en tête, avec son ascendance complète au-dessus
+// (jusqu'à la racine du corpus), sa fratrie à côté, et l'arbre complet de sa descendance
+// dessous — chaque branche mineure développée en ligne, chaque figure ayant sa propre grosse
+// généalogie rendue comme un lien cliquable vers son propre arbre plutôt que développée ici
+// (voir isGenealogyHub). Cliquer sur n'importe quel nom recentre l'arbre à son tour (chaque
 // clic empile un écran, si bien que « ← Retour » redéroule l'exploration pas à pas).
 function renderGenealogy(id){
-  const name = id.charAt(0).toUpperCase() + id.slice(1);
+  const name = genealogyDisplayName(id);
   const note = DEITY_NOTES[id];
   const portrait = DEITY_PORTRAITS[id];
   const rel = genealogyRelations(id);
-  const hasAny = rel.parents.length || rel.partners.length || rel.siblings.length || rel.children.length;
+  const hasAny = rel.parents.length || rel.siblings.length || rel.children.length;
+  const ancestorTree = rel.parents.length ? genealogyAncestorTreeHTML(buildGenealogyAncestorTree(id)) : "";
+  const descendantTree = rel.children.length ? genealogyDescendantTreeHTML(buildGenealogyDescendantTree(id)) : "";
   return `
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
@@ -3215,10 +3503,9 @@ function renderGenealogy(id){
       <button class="geneal-fiche-link" data-nav="figureDetail" data-id="${escapeHTML(id)}">Voir la fiche complète →</button>
     </div>
     ${hasAny ? `
-      ${genealogyChipsHTML(rel.parents, "Parents")}
-      ${genealogyChipsHTML(rel.partners, rel.partners.length > 1 ? "Unions" : "Union")}
+      ${ancestorTree ? `<div class="geneal-section"><h3>Ascendance</h3>${ancestorTree}</div>` : ""}
       ${genealogyChipsHTML(rel.siblings, "Frères et sœurs")}
-      ${genealogyChipsHTML(rel.children, "Enfants")}
+      ${descendantTree ? `<div class="geneal-section"><h3>Descendance</h3>${descendantTree}</div>` : ""}
     ` : `<p class="empty">Aucune parenté connue pour ${escapeHTML(name)} dans ce corpus.</p>`}
   `;
 }
@@ -3239,7 +3526,7 @@ const TABS = [
 function activeTabType(){
   if(currentScreen.type === "figureDetail") return "figures";
   if(currentScreen.type === "symbolDetail") return "symbols";
-  if(currentScreen.type === "genealogy") return "genealogyHome";
+  if(currentScreen.type === "genealogy" || currentScreen.type === "olympiansOverview") return "genealogyHome";
   return currentScreen.type;
 }
 
@@ -3266,6 +3553,7 @@ function render(){
     case "symbols": html = renderSymbols(); break;
     case "symbolDetail": html = renderSymbolDetail(currentScreen.id); break;
     case "genealogyHome": html = renderGenealogyHome(); break;
+    case "olympiansOverview": html = renderOlympiansOverview(); break;
     case "genealogy": html = renderGenealogy(currentScreen.id); break;
     default: html = renderHome();
   }
@@ -3291,6 +3579,7 @@ function bindAppClickDelegation(){
       else if(nav === "figureDetail") go({ type: "figureDetail", id: navEl.dataset.id });
       else if(nav === "symbolDetail") go({ type: "symbolDetail", id: navEl.dataset.id });
       else if(nav === "genealogy") go({ type: "genealogy", id: navEl.dataset.id });
+      else if(nav === "olympiansOverview") go({ type: "olympiansOverview" });
       return;
     }
     const deityEl = e.target.closest("[data-deity]");

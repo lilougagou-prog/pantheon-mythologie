@@ -16,10 +16,11 @@ une **généalogie des dieux** navigable (pas encore construite, voir plus bas).
 
 ## Contenu
 
-- **253 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
+- **264 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
   quelles depuis Tarot-mythologie (mêmes textes, mêmes portraits, même mécanisme de
   citations croisées `(voir la fiche « Nom »)` résolu par `linkifyLore()`), complétées par
-  18 figures primordiales et Titans créées directement dans Panthéon (voir plus bas). Contrairement à l'appli
+  29 figures créées directement dans Panthéon (18 primordiales et Titans, puis 11 pour étoffer
+  les lignées de Cadmos et de Zeus/Europe — voir plus bas). Contrairement à l'appli
   Tarot, qui ne garde localement que les 78 figures directement incarnées par une carte,
   Panthéon garde l'intégralité du corpus : c'est la collection complète, du premier Titan
   au dernier héros mineur.
@@ -121,55 +122,92 @@ depuis Tarot-mythologie (celui-ci partait directement des douze Olympiens).
   jour de leurs décomptes 235 → 253) : tout au vert.
 - `service-worker.js` : `pantheon-v3` → `pantheon-v4`.
 
-## Généalogie des dieux
+## Généalogie des dieux (V1)
 
 La fonctionnalité phare annoncée pour Panthéon, construite en s'appuyant directement sur le
 travail de fiches primordiales/Titans ci-dessus. Reprend la recommandation faite à
-l'utilisatrice (Option A d'une comparaison à trois présentations) : une **fiche recentrée**
+l'utilisatrice (Option A d'une comparaison à trois présentations) : une fiche recentrée
 plutôt qu'un arbre graphique complexe à faire tenir sur un écran de téléphone.
 
-- **Une seule source de vérité**, `GENEALOGY_PARENTS` (id → [parents]) : tout le reste —
-  enfants, union(s), fratrie — s'en déduit automatiquement (`genealogyRelations()`), jamais
-  saisi à la main, pour ne jamais désynchroniser les deux sens d'une même relation. Construite
-  exclusivement à partir de liens déjà énoncés en toutes lettres dans `DEITY_LORE` (jamais un
-  lien inventé pour l'occasion) : le socle primordiaux → Titans → Olympiens au complet, puis
-  les lignées héroïques les mieux documentées du corpus — Persée et ses sept enfants, les
-  Atrides, la famille royale de Troie, le cycle thébain, la famille d'Ulysse, Minos et Thésée,
-  Nérée et sa descendance marine, Danaos/Égyptos, entre autres. Couverture volontairement
-  partielle (une centaine de figures reliées sur 253) plutôt qu'une tentative hasardeuse sur
-  l'ensemble du corpus, y compris pour des parentés mortelles sans fiche propre (un roi
-  mentionné en passant sans jamais avoir son propre id, par exemple).
-- **Écran d'exploration** (`renderGenealogy()`) : la figure choisie au centre, avec quatre
-  groupes de chips tout autour — Parents, Union(s), Frères et sœurs, Enfants — chacun cliquable
-  pour recentrer l'arbre à son tour (chaque clic empile un écran, si bien que « ← Retour »
-  redéroule l'exploration pas à pas plutôt que de revenir directement à l'accueil). Un bouton
-  « Voir la fiche complète » ouvre la fiche narrative habituelle sans quitter le fil.
-- **Écran d'accueil dédié** (`renderGenealogyHome()`) : huit points d'entrée choisis plutôt
-  qu'une liste des 253 figures — les origines du monde (Chaos), les Titans (Cronos), les douze
-  Olympiens (Zeus), la lignée de Persée, la guerre de Troie (Priam), les Atrides (Agamemnon),
-  le cycle thébain (Cadmos), la famille d'Ulysse — chacun menant à un pan bien documenté d'où
-  l'exploration se poursuit ensuite de proche en proche.
-- **Chips « Lignée » directement sur chaque fiche concernée** (`genealogyLineageHTML()`) :
-  parents et enfants les plus proches affichés sans quitter la fiche narrative, plus un lien
-  vers l'arbre complet — pour les cas simples, l'utilisatrice n'a jamais besoin de changer
-  d'écran. Rien ne s'affiche sur les fiches sans aucune donnée de généalogie (la majorité des
-  253, en particulier les figures mineures ou purement allégoriques).
-- **Tuile d'accueil et onglet du menu du bas** : la mention « Bientôt » disparaît, remplacée
-  par un vrai bouton menant à `genealogyHome` — la tuile affiche le nombre de figures reliées
-  par au moins un lien de généalogie plutôt qu'un badge « Bientôt ».
-- Un piège de calcul corrigé en cours de route : Gaïa étant à la fois mère d'Ouranos seule
-  *et* mère des Titans avec lui, un calcul naïf de fratrie faisait apparaître Ouranos comme
-  « frère » de Cronos alors qu'il est déjà son père — corrigé en excluant les propres
-  parents/enfants d'une figure de son propre calcul de fratrie.
-- Testé par un script dédié (34 vérifications : intégrité des données — clés/parents tous des
-  figures existantes, aucune figure son propre parent, `GENEALOGY_CHILDREN` exact miroir de
-  `GENEALOGY_PARENTS`, socle primordial correct —, chaînes de parenté connues, navigation
-  complète — tuile, onglet, points d'entrée, recentrage, retour, fiche complète, absence de
-  section Lignée sans donnée, message d'absence de parenté —, plus la non-régression des
-  citations et du décompte de 253 figures) + les trois suites précédentes (27 + 14 + 88
-  vérifications, dont une assertion mise à jour côté v2 pour refléter la tuile désormais
-  cliquable) : tout au vert. Vérifié aussi visuellement par captures d'écran.
-- `service-worker.js` : `pantheon-v4` → `pantheon-v5`.
+- `GENEALOGY_PARENTS` (id → [parents]) : source de vérité unique, construite exclusivement à
+  partir de liens déjà énoncés en toutes lettres dans `DEITY_LORE`. Enfants, unions et fratrie
+  s'en déduisent automatiquement (`genealogyRelations()`), jamais saisis à la main.
+- Écran d'exploration centré sur une figure (`renderGenealogy()`), avec Parents/Union(s)/Frères
+  et sœurs/Enfants en chips cliquables, plus un écran d'accueil à huit points d'entrée choisis.
+- Chips « Lignée » directement sur chaque fiche concernée.
+- Un piège de calcul corrigé : Gaïa étant à la fois mère d'Ouranos seule *et* mère des Titans
+  avec lui, un calcul naïf de fratrie faisait apparaître Ouranos comme « frère » de Cronos.
+
+Testé par 34 vérifications, tout au vert — **mais jugée nettement insuffisante par
+l'utilisatrice dès le premier retour** (voir ci-dessous, retravaillée dans la foulée).
+
+## Généalogie des dieux (V2 — retour et refonte)
+
+Premier retour concret de l'utilisatrice sur la V1 : « c'est pas du tout assez complet [...] il
+faut pas focaliser sur un seul dieu [...] il faut faire l'arbre généalogique avec les branches
+[...] L'arbre de Cadmos n'est pas du tout assez développée [...] Fais l'arbre ascendant de
+chaque olympien [...] Vas bien chercher tous les enfants [...] je veux pouvoir bien identifier
+la mère à chaque fois. » Quatre chantiers distincts pour y répondre :
+
+- **11 figures créées pour étoffer deux lignées sous-développées** (264 figures au total,
+  253 → 264) : Épaphos (fils de Zeus et d'Io, souche des lignées d'Argos et de Thèbes via
+  Libye), Ino, Autonoë, Agavé et Polydoros (les cinq enfants de Cadmos et Harmonie — jusque-là
+  seule Sémélé avait sa fiche), Labdacos et Laïos (la lignée royale thébaine jusqu'à Œdipe),
+  Amphion et Zéthos (fils de Zeus, fondateurs des murailles de Thèbes), Rhadamanthys et
+  Sarpédon (fils de Zeus et d'Europe, frères de Minos). Piège d'homonymie traité comme pour les
+  Titans : Polydoros (fils de Cadmos) reste distinct de Polydore (fils de Priam, déjà existant),
+  jamais fusionnés malgré l'orthographe presque identique.
+- **Les enfants de Zeus, bien plus complets** (16 → 36 recensés) : Minos/Rhadamanthys/Sarpédon
+  (avec Europe), Épaphos (avec Io), Amphion/Zéthos (avec Antiope de Thèbes — volontairement
+  non reliée à la fiche « Antiope », qui couvre aussi la reine amazone épouse de Thésée, pour ne
+  pas laisser croire à tort qu'Amphion et Hippolyte sont demi-frères), les trois Charites et
+  leurs membres nommés (avec Eurynomé, sans fiche propre), Aletheia et Tyché (traditions
+  alternatives, rapportées telles quelles). Hermaphrodite et Priape, eux, sont bien enfants
+  d'Aphrodite (avec Hermès, puis avec Dionysos) et non de Zeus — retrofit au passage.
+- **L'arbre de Cadmos, cinq fois plus développé** : 1 → 5 enfants directs (Sémélé, Ino, Autonoë,
+  Agavé, Polydoros), avec leurs propres branches — Autonoë → Actéon, Agavé → Penthée, Sémélé →
+  Dionysos → Priape, et la lignée royale complète Polydoros → Labdacos → Laïos → Œdipe →
+  Antigone, cinq générations en tout là où il n'y en avait qu'une seule avant ce round.
+- **Refonte de l'écran d'exploration en véritable arbre à branches**, remplaçant les quatre
+  groupes de chips plats de la V1 :
+  - **Ascendance** (`buildGenealogyAncestorTree()` + `genealogyAncestorTreeHTML()`) : la chaîne
+    complète des ancêtres au-dessus de la figure choisie, jusqu'à Chaos, toujours développée
+    en entier (rarement plus de 3-4 générations).
+  - **Descendance** (`buildGenealogyDescendantTree()` + `genealogyDescendantTreeHTML()`) : les
+    enfants **groupés par union** — un bloc « avec {mère/père} » par partenaire connu, pour
+    identifier de qui vient chaque enfant plutôt que de les mélanger en un seul bloc — puis
+    développés récursivement sur plusieurs générations. Pour ne jamais surcharger l'écran, une
+    branche s'arrête de se développer en ligne dès qu'elle atteint une figure ayant elle-même
+    une « grosse généalogie » (`isGenealogyHub()`, seuil : au moins deux enfants propres) — elle
+    devient alors un simple lien cliquable vers son propre arbre plutôt que redessinée ici.
+  - **Déduplication** : deux frères et sœurs mariés ensemble (Océan et Téthys, Cronos et
+    Rhéa...) partagent les mêmes enfants dans le mythe ; sans protection, chacun des deux,
+    développé en ligne, aurait redessiné deux fois la même descendance. Toute réapparition
+    d'un même enfant dans un même arbre est désormais marquée et rendue en renvoi discret
+    (« *(même enfant que ci-dessus, union commune)* ») plutôt que redéveloppée.
+  - Les chips « Lignée » sur chaque fiche affichent elles aussi désormais les enfants groupés
+    par union, pour la même raison.
+- **Les points d'entrée corrigés pour ne plus focaliser sur une seule figure** :
+  - « Les Titans » part maintenant d'Ouranos (montre toute la génération des douze Titans
+    d'un coup) plutôt que de Cronos seul.
+  - **Nouvel écran dédié « Les douze Olympiens »** (`renderOlympiansOverview()`, douze cartes)
+    remplace l'ancien point d'entrée qui menait directement à l'arbre de Zeus : chacun des
+    douze (`OLYMPIAN_IDS`) affiche sa propre ligne d'ascendance directe (« Enfant de Cronos et
+    Rhéa », « Enfant d'Héra seule » pour Héphaïstos, etc.), et cliquer dessus ouvre son arbre
+    personnel complet — ascendance ET descendance — plutôt que de se concentrer sur Zeus.
+  - Chaque tuile de l'accueil de la généalogie porte désormais un sous-titre qui promet
+    explicitement la largeur de l'arbre plutôt qu'un seul nom (« Ouranos, Gaïa et toute leur
+    descendance », « Cadmos, Harmonie et cinq générations de Thèbes »...).
+- Testé par un script dédié (49 vérifications : intégrité des 11 nouvelles figures, arbre de
+  Cadmos, complétude des enfants de Zeus, regroupement par union, seuil de collapse
+  `isGenealogyHub`, déduplication des enfants partagés, ascendance jusqu'à Chaos, écran des
+  douze Olympiens et navigation associée, points d'entrée corrigés, non-régression des
+  citations et des décomptes) + les quatre suites précédentes (27 + 14 + 88 + 34 vérifications,
+  décomptes 253 → 264 mis à jour) : tout au vert. Vérifié aussi visuellement par captures
+  d'écran (dont un aller-retour pour confirmer que la déduplication fonctionnait réellement —
+  un premier essai avait paru en échec à cause d'un cache de service worker resservant une
+  ancienne version d'`app.js`, corrigé en désactivant les service workers pour la vérification).
+- `service-worker.js` : `pantheon-v5` → `pantheon-v6`.
 
 ## Ce qui n'est PAS encore construit
 
@@ -177,20 +215,21 @@ plutôt qu'un arbre graphique complexe à faire tenir sur un écran de télépho
   navigateur basique du service worker — volontairement minimal pour cette V1.
 - Pas d'appel IA, pas de backend (`api/`) : contrairement à Tarot-mythologie, Panthéon est
   pour l'instant un site 100% statique.
-- La généalogie ne couvre qu'une centaine de figures sur 253 (voir plus haut) — étendre la
-  couverture à d'autres lignées bien documentées du corpus reste une piste de suite naturelle.
+- La généalogie ne couvre encore qu'une partie du corpus (voir plus haut, `GENEALOGY_PARENTS`)
+  — étendre la couverture à d'autres lignées bien documentées reste une piste de suite
+  naturelle, désormais sur une base de données et d'interface bien plus solide.
 
 ## Architecture
 
-Un seul fichier `app.js` (~3300 lignes), sur le même principe que l'appli Tarot : les
+Un seul fichier `app.js` (~3500 lignes), sur le même principe que l'appli Tarot : les
 données mythologiques d'abord (`SYMBOL_LIBRARY`, `DEITY_NOTES`, `DEITY_LORE`,
 `DEITY_PORTRAITS`, `DEITY_PORTRAIT_WIDE`, `DEITY_INLINE_PORTRAITS`, `GENEALOGY_PARENTS`), puis
 le mécanisme de citations (`LORE_LINK_TARGETS`, `linkifyLore()` — code strictement identique à
 celui de Tarot-mythologie, porté sans modification), puis une petite couche applicative propre
-à Panthéon : navigation par pile (`go()`/`back()`), sept écrans (accueil, liste des figures,
-fiche figure, liste des symboles, fiche symbole, accueil généalogie, exploration généalogie),
-recherche en direct sur chaque liste, délégation d'événements unique posée une fois sur `#app`
-plutôt que ré-attachée à chaque rendu.
+à Panthéon : navigation par pile (`go()`/`back()`), huit écrans (accueil, liste des figures,
+fiche figure, liste des symboles, fiche symbole, accueil généalogie, douze Olympiens,
+exploration généalogie en arbre), recherche en direct sur chaque liste, délégation
+d'événements unique posée une fois sur `#app` plutôt que ré-attachée à chaque rendu.
 
 Palette visuelle volontairement distincte de l'identité nocturne de Tarot ("Delphes") :
 marbre et bronze plutôt que ciel étoilé, polices Cinzel (titres) et Source Serif 4 (corps),
@@ -214,8 +253,7 @@ API).
 
 ## Pistes de suite possibles
 
-- Étendre la couverture de `GENEALOGY_PARENTS` à d'autres lignées bien documentées du corpus
-  (voir plus haut) — la généalogie ne relie aujourd'hui qu'une centaine de figures sur 253.
+- Étendre encore la couverture de `GENEALOGY_PARENTS` à d'autres lignées du corpus.
 - Suivi de progression (fiches consultées), sur le modèle de ce qui existe déjà côté Tarot.
 - Lien croisé vers l'appli Tarot depuis une fiche figure quand celle-ci est aussi incarnée
   par une carte (utile dans les deux sens une fois les deux applis en ligne).

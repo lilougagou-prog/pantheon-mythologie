@@ -1,4 +1,4 @@
-const CACHE="pantheon-v5";
+const CACHE="pantheon-v6";
 const ASSETS=["./","./index.html","./styles.css","./app.js","./manifest.json","./icon.svg","./icon-192.png","./icon-512.png","./icon-180.png"];
 
 self.addEventListener("install",event=>{
