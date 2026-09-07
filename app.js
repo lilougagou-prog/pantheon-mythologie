@@ -4544,6 +4544,35 @@ const GENEALOGY_STARTING_POINTS = [
   { id: "ulysse", label: "La famille d'Ulysse", sub: "Ulysse, Pénélope, Circé et leurs fils" },
 ];
 
+/* ===================== MODÈLE D'ACCÈS FREE / PREMIUM ===================== */
+
+// Liste explicite et nommée — jamais un array.slice(0, 5) ni un index < 5 — des identifiants
+// qui restent accessibles gratuitement. C'est la SEULE source de vérité pour la frontière
+// free/premium côté contenu : modifier ce qui est gratuit ne demande jamais de toucher à la
+// logique applicative (figureAccess()/symbolAccess()/genealogyAccess() ci-dessous), seulement
+// à ces trois listes. Tout ce qui n'y figure pas est premium par défaut — la liste positive
+// (plutôt qu'une liste de ce qui est premium) rend impossible d'oublier de verrouiller une
+// nouvelle fiche ajoutée plus tard : elle est premium tant qu'elle n'est pas explicitement
+// ajoutée ici.
+//
+// IMPORTANT — ce fichier reste pour l'instant un unique bundle statique livré tel quel au
+// client (voir README, section "Premium & sécurité") : cette liste ne fait à ce stade
+// qu'annoter les données, elle ne protège RIEN par elle-même. La vraie frontière de sécurité
+// (contenu premium jamais envoyé avant vérification d'achat) dépend du backend à construire
+// (api/), qui seul doit trancher qui reçoit le contenu complet.
+const FREE_FIGURE_IDS = new Set(["zeus", "héra", "poséidon", "athéna", "apollon"]);
+const FREE_SYMBOL_IDS = new Set(["chouette", "laurier", "foudre", "serpent", "olivier"]);
+// GENEALOGY_STARTING_POINTS identifie chaque point d'entrée soit par "id" (une figure), soit
+// par "special" (l'écran dédié aux douze Olympiens) — la clé de free/premium doit donc gérer
+// les deux, voir genealogyAccess() ci-dessous.
+const FREE_GENEALOGY_KEYS = new Set(["olympiansOverview"]);
+
+function figureAccess(id){ return FREE_FIGURE_IDS.has(id) ? "free" : "premium"; }
+function symbolAccess(id){ return FREE_SYMBOL_IDS.has(id) ? "free" : "premium"; }
+function genealogyAccess(startingPoint){
+  return FREE_GENEALOGY_KEYS.has(startingPoint.special || startingPoint.id) ? "free" : "premium";
+}
+
 // Table de résolution "nom affiché" -> cible cliquable (figure mythologique ou symbole),
 // construite une seule fois à partir des données déjà là : DEITY_NOTES (id -> nom, simple
 // majuscule initiale) et SYMBOL_LIBRARY (id -> label, qui peut différer de l'id — ex. « Enfer /
