@@ -266,6 +266,74 @@ l'arbre plus visuel. » Quatre chantiers :
   Cadmos) : tout au vert. Vérifié aussi visuellement par captures d'écran.
 - `service-worker.js` : `pantheon-v6` → `pantheon-v7`.
 
+## Généalogie des dieux (V4 — troisième retour) et deux corrections indépendantes
+
+Troisième retour sur la généalogie, plus deux signalements séparés au passage : « Dans les
+frères et sœurs, ne mets que les « vrais » [...] pour Castor et Pollux [...] ils ont toute
+leur importance » ; « tes arbres ne sont pas intuitifs [...] Mettre son père et sa mère, ses
+deux grands-parents. Puis sa femme, ses enfants et c'est tout [...] Ne mets pas de texte
+« ascendants » etc. [...] prends toute la page » ; « mettre Chronos + Rhéa en haut au centre,
+puis en dessous Déméter, Hestia, Héra, Poséidon, Zeus, Hadès [...] partant d'une flèche de
+Zeus [...] à côté [...] directement lié à Ouranos [...] la mer [...] Aphrodite » ; « Évite les
+césures de mots » ; « la figure du jour change tout le temps, il faut que ce soit la même
+pendant 24 heures. »
+
+- **Fratrie filtrée aux « vrais » frères et sœurs** (`SIBLING_PARENT_MAX_PARTNERS = 3`,
+  `siblingContributingChildren()`) : un parent ne contribue plus à la fratrie de ses enfants
+  au-delà de ce nombre de partenaires différents. Zeus (une bonne douzaine de partenaires
+  connues) ne fait donc plus apparaître à peu près tout le panthéon comme « frère » ou « sœur »
+  de Persée — qui n'a désormais plus aucune fratrie affichée, comme demandé. Sous le seuil, les
+  demi-frères et sœurs continuent de s'afficher normalement : Castor et Pollux (par leur mère
+  commune Léda, deux partenaires seulement) restent bien listés l'un pour l'autre, avec Hélène
+  et Clytemnestre.
+- **La fiche familiale remplace l'arbre à branches multi-génération** (`buildFamilyCard()`) :
+  toujours exactement deux générations en amont (grands-parents, parents), une seule en aval
+  (les enfants directs, jamais leurs propres enfants) — jamais plus, jamais moins, quelle que
+  soit la figure. L'exemple donné par l'utilisatrice, Persée, donne exactement : Cronos, Rhéa
+  et Acrisios (grands-parents) ; Zeus et Danaé (parents) ; Andromède (femme) ; ses 7 enfants.
+  Aucun texte de section (« Ascendance », « Descendance », « Union(s) »...) : la disposition en
+  rangées empilées et centrées se lit d'elle-même. `isGenealogyHub`,
+  `buildGenealogyDescendantTree`, `buildGenealogyAncestorTree` (le seuil de collapse et la
+  récursion multi-génération de la V2/V3) ont été retirés — devenus inutiles, une fiche à
+  profondeur fixe n'en a plus besoin. Pour aller plus loin, un clic sur n'importe quel nom
+  recentre l'écran sur lui, comme avant.
+- **« Les douze Olympiens » devient un vrai diagramme généalogique par génération**, dessiné
+  à la main d'après le croquis fourni plutôt que déduit automatiquement (bien que chaque lien
+  reste vérifié contre `GENEALOGY_PARENTS`, rien n'est inventé) : Cronos et Rhéa en tête,
+  centrés ; leurs six enfants juste en dessous — Déméter, Hestia, Héra, Poséidon, Zeus et
+  Hadès, y compris les deux qui ne comptent pas parmi les douze Olympiens canoniques mais
+  restent bien de la même fratrie ; une rangée de branches partant spécifiquement de Zeus
+  (`OLYMPIANS_ZEUS_BRANCHES`) vers Hermès (avec Pléiades), Artémis et Apollon (avec Léto),
+  Athéna (avec Métis) ; et, à part, la branche d'Aphrodite reliée directement à Ouranos et
+  « la mer » (avec un lien vers la fiche symbole correspondante).
+- **Toute la largeur de la page pour les écrans de généalogie** (`#app.wide`, posée
+  dynamiquement par `render()` selon l'écran courant) : ces deux écrans passent de 760px à
+  1100px de large, pour que les rangées de la fiche familiale et du diagramme des Olympiens
+  s'étalent plutôt que de rester comprimées dans la colonne de lecture étroite du reste de
+  l'appli.
+- **Portraits** : conservés partout où ils existaient déjà (voir V3), désormais aussi sur les
+  nœuds de la fiche familiale et du diagramme des Olympiens.
+- **Corrections indépendantes, signalées au même moment** :
+  - Les paragraphes justifiés (`.lore-text`, `.detail .note`) ne coupent plus les mots en fin
+    de ligne (`hyphens: none`, plutôt que `hyphens: auto`).
+  - La « figure du jour » est désormais épinglée dans `localStorage` pour toute la journée
+    (`figureOfTheDay()`) : sans ça, chaque mise à jour du corpus en cours de journée changeait
+    la longueur de `FIGURE_ENTRIES`, donc le reste de la division `hash % longueur`, et donc la
+    figure affichée — ce qui, avec les nombreux déploiements de cette session, avait pu donner
+    l'impression qu'elle changeait sans cesse. Un choix épinglé pour une date donnée ne change
+    plus avant le lendemain, quoi qu'il arrive au corpus entre-temps.
+- Testé par un script dédié (33 vérifications : fratrie filtrée — Persée sans demi-frères
+  fantômes, Castor/Pollux préservés —, fiche familiale à profondeur fixe sur Persée et sur une
+  figure racine (Chaos), absence de tout texte de section, diagramme des Olympiens conforme au
+  croquis et vérifié contre les données réelles, classe `wide` posée/retirée selon l'écran,
+  absence de `hyphens: auto`, stabilité de la figure du jour même si la taille du corpus change
+  en cours de journée, non-régression des citations et des décomptes) + les six suites
+  précédentes (27 + 14 + 88 + 34 + 34 + 29 vérifications, plusieurs assertions devenues
+  obsolètes par ce changement d'architecture — l'arbre à branches, le hub-collapse, les
+  sections textuelles — retirées et remplacées par une note renvoyant à ce nouveau script) :
+  tout au vert. Vérifié aussi visuellement par captures d'écran, à largeur mobile et large.
+- `service-worker.js` : `pantheon-v7` → `pantheon-v8`.
+
 ## Ce qui n'est PAS encore construit
 
 - Pas de suivi de progression, pas de compte, pas de mode hors-ligne au-delà du cache
@@ -278,15 +346,15 @@ l'arbre plus visuel. » Quatre chantiers :
 
 ## Architecture
 
-Un seul fichier `app.js` (~3500 lignes), sur le même principe que l'appli Tarot : les
+Un seul fichier `app.js` (~3600 lignes), sur le même principe que l'appli Tarot : les
 données mythologiques d'abord (`SYMBOL_LIBRARY`, `DEITY_NOTES`, `DEITY_LORE`,
 `DEITY_PORTRAITS`, `DEITY_PORTRAIT_WIDE`, `DEITY_INLINE_PORTRAITS`, `GENEALOGY_PARENTS`), puis
 le mécanisme de citations (`LORE_LINK_TARGETS`, `linkifyLore()` — code strictement identique à
 celui de Tarot-mythologie, porté sans modification), puis une petite couche applicative propre
 à Panthéon : navigation par pile (`go()`/`back()`), huit écrans (accueil, liste des figures,
-fiche figure, liste des symboles, fiche symbole, accueil généalogie, douze Olympiens,
-exploration généalogie en arbre), recherche en direct sur chaque liste, délégation
-d'événements unique posée une fois sur `#app` plutôt que ré-attachée à chaque rendu.
+fiche figure, liste des symboles, fiche symbole, accueil généalogie, douze Olympiens, fiche
+familiale généalogique), recherche en direct sur chaque liste, délégation d'événements unique
+posée une fois sur `#app` plutôt que ré-attachée à chaque rendu.
 
 Palette visuelle volontairement distincte de l'identité nocturne de Tarot ("Delphes") :
 marbre et bronze plutôt que ciel étoilé, polices Cinzel (titres) et Source Serif 4 (corps),

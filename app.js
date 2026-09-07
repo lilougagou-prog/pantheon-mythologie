@@ -2952,6 +2952,27 @@ const GENEALOGY_CHILDREN = (() => {
 // Pour une figure donnée : ses parents (peut être vide), ses enfants (déduits de l'index
 // inverse), ses union(s) (les autres parents de ses enfants, déduits eux aussi) et sa
 // fratrie (les autres figures qui partagent au moins un même parent qu'elle).
+// Un parent ne contribue à la fratrie de ses enfants que s'il n'a pas eu d'enfants avec un
+// nombre de partenaires différents dépassant ce seuil. Au-delà, ses enfants avec des
+// partenaires différents ne forment plus une "vraie" fratrie au sens narratif — le cas de
+// Zeus, avec une bonne douzaine de partenaires connues, qui ferait sinon apparaître comme
+// "frère" ou "sœur" de Persée à peu près tout le reste du panthéon. En dessous du seuil, même
+// des demi-frères et sœurs (partenaires différents mais peu nombreux) continuent de s'afficher
+// — Castor et Pollux, demi-frères par leur mère commune Léda (seulement deux partenaires,
+// Tyndare et Zeus), gardent ainsi toute leur importance l'un pour l'autre. Les naissances
+// "en solitaire" (sans second parent identifié, comme Ouranos ou Aphrodite) ne comptent pour
+// aucun partenaire et ne créent donc jamais de fratrie fantôme à ce niveau.
+const SIBLING_PARENT_MAX_PARTNERS = 3;
+
+// Les enfants qu'un parent contribue au calcul de fratrie : uniquement ceux nés d'une union
+// avec un autre parent identifié (jamais des naissances en solitaire, qui ne font de personne
+// des frères et sœurs), et seulement si ce parent reste sous SIBLING_PARENT_MAX_PARTNERS.
+function siblingContributingChildren(parentId){
+  const unions = genealogyChildUnions(parentId).filter(u => u.partner);
+  if(unions.length > SIBLING_PARENT_MAX_PARTNERS) return [];
+  return unions.flatMap(u => u.children);
+}
+
 function genealogyRelations(id){
   const parents = GENEALOGY_PARENTS[id] || [];
   const children = GENEALOGY_CHILDREN[id] || [];
@@ -2967,7 +2988,7 @@ function genealogyRelations(id){
   // parent commun, mais à deux générations différentes).
   const siblingSet = new Set();
   for(const p of parents){
-    for(const sib of (GENEALOGY_CHILDREN[p] || [])){
+    for(const sib of siblingContributingChildren(p)){
       if(sib !== id && !parents.includes(sib) && !children.includes(sib)) siblingSet.add(sib);
     }
   }
@@ -2995,14 +3016,6 @@ function genealogyPortraitHTML(id){
   return `<img class="tree-portrait" src="${escapeHTML(portrait)}" alt="" loading="lazy">`;
 }
 
-// Une figure a "sa propre grosse généalogie" — et devient donc cliquable plutôt que
-// développée en ligne dans l'arbre — dès qu'elle a au moins deux enfants à elle. En dessous
-// de ce seuil (0 ou 1 enfant), sa descendance tient en une ligne ou deux : autant l'afficher
-// directement, ça évite un clic pour rien.
-function isGenealogyHub(id){
-  return (GENEALOGY_CHILDREN[id] || []).length >= 2;
-}
-
 // Regroupe les enfants d'une figure par union (l'autre parent, ou null si non documenté) —
 // c'est ce regroupement qui permet d'identifier la mère (ou le père) de chaque enfant plutôt
 // que de les présenter en un seul bloc indifférencié.
@@ -3024,47 +3037,21 @@ function genealogyChildUnions(id){
     });
 }
 
-// Construit récursivement l'arbre descendant à afficher, en s'arrêtant de développer une
-// branche dès qu'elle atteint une figure ayant elle-même une grosse généalogie (isGenealogyHub)
-// — pour ne pas surcharger l'écran, celle-ci devient alors un lien cliquable vers son propre
-// arbre plutôt que d'être développée en ligne. Une branche "mineure" (0 ou 1 enfant à chaque
-// génération) continue au contraire de se dérouler jusqu'à son terme naturel. maxDepth est un
-// filet de sécurité, jamais atteint en pratique tant que les données restent un arbre sans
-// cycle.
-//
-// seenChildren (partagé et muté à travers toute la construction, jamais recréé par appel
-// récursif) évite une confusion propre aux mythes grecs : deux frères et sœurs mariés ensemble
-// (Océan et Téthys, Cronos et Rhéa...) partagent les mêmes enfants — la même figure apparaît
-// donc légitimement sous les deux, mais sans marquage elle ressemblerait à deux enfants
-// distincts. Toute réapparition au-delà de la première est marquée `duplicate` et rendue en
-// renvoi discret plutôt que redéveloppée une seconde fois.
-function buildGenealogyDescendantTree(id, depth = 0, maxDepth = 12, seenChildren = new Set()){
-  const unions = depth >= maxDepth ? [] : genealogyChildUnions(id);
-  return {
-    id,
-    unions: unions.map(u => ({
-      partner: u.partner,
-      children: u.children.map(childId => {
-        const duplicate = seenChildren.has(childId);
-        const expand = !isGenealogyHub(childId) && !duplicate;
-        if(!duplicate) seenChildren.add(childId);
-        return {
-          id: childId,
-          hub: !expand,
-          duplicate,
-          subtree: expand ? buildGenealogyDescendantTree(childId, depth + 1, maxDepth, seenChildren) : null,
-        };
-      }),
-    })),
-  };
-}
-
-// Construit récursivement l'arbre ascendant (les ancêtres) d'une figure, jusqu'à la racine du
-// corpus (Chaos) ou jusqu'à maxDepth générations — toujours développé en entier, sans seuil de
-// collapse : la chaîne des ancêtres reste courte et centrale, contrairement à la descendance.
-function buildGenealogyAncestorTree(id, depth = 0, maxDepth = 10){
-  const parents = depth >= maxDepth ? [] : (GENEALOGY_PARENTS[id] || []);
-  return { id, parents: parents.map(p => buildGenealogyAncestorTree(p, depth + 1, maxDepth)) };
+// « Mettre son père et sa mère, ses deux grands-parents. Puis sa femme, ses enfants et c'est
+// tout. » — la fiche familiale d'une figure ne va plus jamais au-delà de deux générations en
+// amont (parents, grands-parents) ni d'une génération en aval (les enfants directs, jamais
+// leurs propres enfants) : pour aller plus loin, un clic sur n'importe quel nom recentre
+// l'écran sur lui, plutôt que de tout développer en ligne comme l'ancienne version le faisait.
+function buildFamilyCard(id){
+  const parents = GENEALOGY_PARENTS[id] || [];
+  const grandparents = [];
+  for(const p of parents){
+    for(const gp of (GENEALOGY_PARENTS[p] || [])){
+      if(!grandparents.includes(gp)) grandparents.push(gp);
+    }
+  }
+  const rel = genealogyRelations(id);
+  return { id, parents, grandparents, siblings: rel.siblings, partners: rel.partners, childUnions: genealogyChildUnions(id) };
 }
 
 // Nombre de figures reliées par au moins un lien de généalogie (parent ou enfant), tous
@@ -3072,16 +3059,9 @@ function buildGenealogyAncestorTree(id, depth = 0, maxDepth = 10){
 const GENEALOGY_FIGURE_COUNT = new Set([...Object.keys(GENEALOGY_PARENTS), ...Object.keys(GENEALOGY_CHILDREN)]).size;
 
 // Les douze Olympiens (place traditionnellement disputée entre Hestia et Dionysos — on
-// retient ici la liste la plus courante, Hestia cédant sa place ; elle reste visible comme
-// sœur dans l'arbre de ses frères et sœurs). Chacun devient un point d'entrée vers son propre
-// arbre complet (ascendance ET descendance), plutôt que de se concentrer sur Zeus seul.
+// retient ici la liste la plus courante, Hestia cédant sa place). Chacun devient un point
+// d'entrée vers sa propre fiche familiale complète, plutôt que de se concentrer sur Zeus seul.
 const OLYMPIAN_IDS = ["zeus", "héra", "poséidon", "déméter", "athéna", "apollon", "artémis", "arès", "aphrodite", "héphaïstos", "hermès", "dionysos"];
-
-function olympianAscendanceLine(id){
-  const parents = GENEALOGY_PARENTS[id] || [];
-  if(!parents.length) return "Origine incertaine, sans parent documenté";
-  return "Enfant de " + parents.map(genealogyDisplayName).join(" et ");
-}
 
 // Points d'entrée choisis pour l'écran d'accueil de la généalogie — un aperçu large plutôt
 // qu'une liste exhaustive des 264 figures. Chaque point de départ ouvre désormais l'arbre
@@ -3264,10 +3244,29 @@ function djb2Hash(str){
   return hash;
 }
 
+// Choisit la figure du jour de façon déterministe (hash du jour civil), puis épingle ce choix
+// dans localStorage pour toute la journée : sans ça, une mise à jour du corpus en cours de
+// journée (une figure ajoutée ou retirée change la longueur de FIGURE_ENTRIES, donc le reste
+// de la division hash % longueur) ferait changer la figure affichée en plein milieu de la
+// journée pour qui rechargerait la page — précisément ce que l'utilisatrice a signalé. Une
+// fois choisie pour une date donnée, elle ne change plus avant le lendemain, quoi qu'il
+// arrive au corpus entre-temps.
 function figureOfTheDay(){
   const today = new Date();
   const key = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
-  return FIGURE_ENTRIES[djb2Hash(key) % FIGURE_ENTRIES.length];
+  const compute = () => FIGURE_ENTRIES[djb2Hash(key) % FIGURE_ENTRIES.length];
+  try {
+    const stored = JSON.parse(localStorage.getItem("pantheon-fotd") || "null");
+    if(stored && stored.date === key){
+      const pinned = FIGURE_ENTRIES.find(e => e[0] === stored.id);
+      if(pinned) return pinned;
+    }
+    const entry = compute();
+    localStorage.setItem("pantheon-fotd", JSON.stringify({ date: key, id: entry[0] }));
+    return entry;
+  } catch(e){
+    return compute();
+  }
 }
 
 /* ===================== RENDU : ÉCRANS ===================== */
@@ -3408,48 +3407,19 @@ function genealogyChipsHTML(ids, title){
   `;
 }
 
-// Rendu récursif de l'arbre descendant construit par buildGenealogyDescendantTree() : chaque
-// union est un groupe à part (avec le nom de l'autre parent en tête, pour toujours savoir de
-// qui vient chaque enfant), et chaque enfant est soit développé en ligne (branche mineure),
-// soit rendu comme un simple lien cliquable vers son propre arbre (dès qu'il a lui-même une
-// grosse généalogie — voir isGenealogyHub).
-function genealogyDescendantTreeHTML(node){
-  if(!node.unions.length) return "";
-  return `
-    <div class="tree-unions">
-      ${node.unions.map(u => `
-        <div class="tree-union">
-          <div class="tree-union-label">${u.partner
-            ? `avec <button class="tree-union-link" data-nav="genealogy" data-id="${escapeHTML(u.partner)}">${genealogyPortraitHTML(u.partner)}${escapeHTML(genealogyDisplayName(u.partner))}</button>`
-            : `<span class="tree-union-unknown">union non précisée</span>`}</div>
-          <div class="tree-children">
-            ${u.children.map(c => {
-              if(c.duplicate) return `<div class="tree-child"><button class="tree-link tree-link-dup" data-nav="genealogy" data-id="${escapeHTML(c.id)}">${genealogyPortraitHTML(c.id)}${escapeHTML(genealogyDisplayName(c.id))} <span class="tree-dup-note">(même enfant que ci-dessus, union commune)</span></button></div>`;
-              if(c.hub) return `<div class="tree-child"><button class="tree-link" data-nav="genealogy" data-id="${escapeHTML(c.id)}">${genealogyPortraitHTML(c.id)}${escapeHTML(genealogyDisplayName(c.id))} →</button></div>`;
-              return `<div class="tree-child"><div class="tree-name">${genealogyPortraitHTML(c.id)}${escapeHTML(genealogyDisplayName(c.id))}</div>${genealogyDescendantTreeHTML(c.subtree)}</div>`;
-            }).join("")}
-          </div>
-        </div>
-      `).join("")}
-    </div>
-  `;
+// Un nœud de la fiche familiale (grand-parent, parent, frère/sœur, conjoint, enfant) : un
+// simple bouton avec son portrait s'il en a un, cliquable pour recentrer l'écran sur lui.
+// Brique commune à renderGenealogy() et à l'écran dédié des douze Olympiens.
+function familyCardNodeHTML(nid, extraClass){
+  return `<button class="fam-node${extraClass ? " " + extraClass : ""}" data-nav="genealogy" data-id="${escapeHTML(nid)}">${genealogyPortraitHTML(nid)}<span>${escapeHTML(genealogyDisplayName(nid))}</span></button>`;
 }
 
-// Rendu récursif de l'arbre ascendant construit par buildGenealogyAncestorTree() : toujours
-// développé en entier (jamais de seuil de collapse ici), chaque ancêtre reste cliquable pour
-// explorer sa propre branche à son tour.
-function genealogyAncestorTreeHTML(node){
-  if(!node.parents.length) return "";
-  return `
-    <div class="tree-ancestors">
-      ${node.parents.map(p => `
-        <div class="tree-ancestor">
-          <button class="tree-link" data-nav="genealogy" data-id="${escapeHTML(p.id)}">${genealogyPortraitHTML(p.id)}${escapeHTML(genealogyDisplayName(p.id))}</button>
-          ${genealogyAncestorTreeHTML(p)}
-        </div>
-      `).join("")}
-    </div>
-  `;
+// L'étiquette d'une union ("avec {conjoint}"), cliquable — placée au-dessus du groupe
+// d'enfants qu'elle a eus avec la figure centrale, pour toujours identifier qui est la mère
+// (ou le père) de chacun plutôt que de mélanger tous les enfants en un seul bloc.
+function familyUnionLabelHTML(partnerId){
+  if(!partnerId) return `<span class="fam-group-label fam-group-unknown">union non précisée</span>`;
+  return `<button class="fam-group-label" data-nav="genealogy" data-id="${escapeHTML(partnerId)}">avec ${genealogyPortraitHTML(partnerId)}${escapeHTML(genealogyDisplayName(partnerId))}</button>`;
 }
 
 // Aperçu « Lignée » directement sur la fiche d'une figure : ses parents et ses enfants (groupés
@@ -3550,75 +3520,101 @@ function renderGenealogyHome(){
 // partagent souvent les mêmes (Cronos et Rhéa pour Zeus/Héra/Poséidon/Déméter, par exemple) —
 // pour l'écran dédié ci-dessous : un vrai arbre montrant les douze d'un coup, un seul niveau
 // de parenté (pas plus, pour ne pas surcharger), plutôt qu'une liste de cartes séparées.
-function buildOlympiansGroups(){
-  const groups = new Map(); // clé = parents triés, jamais affichée telle quelle
-  for(const oid of OLYMPIAN_IDS){
-    const parents = GENEALOGY_PARENTS[oid] || [];
-    const key = parents.slice().sort().join("+") || "(inconnu)";
-    if(!groups.has(key)) groups.set(key, { parents, members: [] });
-    groups.get(key).members.push(oid);
-  }
-  return [...groups.values()];
-}
+// Les branches partant spécifiquement de Zeus qui complètent le tableau des Olympiens avec le
+// reste du grand panthéon (Hermès, Artémis, Apollon, Athéna) sans afficher tous ses 36 enfants
+// recensés — un choix éditorial pour cet écran précis, pas une règle générale de collapse
+// (voir GENEALOGY_PARENTS pour vérifier que chaque lien ci-dessous est bien réel).
+const OLYMPIANS_ZEUS_BRANCHES = [
+  ["pléiades", ["hermès"]],
+  ["léto", ["artémis", "apollon"]],
+  ["métis", ["athéna"]],
+];
 
-// Écran dédié aux douze Olympiens : un arbre montrant les douze d'un seul coup, groupés par
-// parents (voir buildOlympiansGroups) — sciemment limité à ce seul niveau d'ascendance pour ne
-// pas surcharger l'écran. Cliquer sur un parent ou sur un Olympien ouvre son propre arbre
-// personnel complet (ascendance ET descendance) sur renderGenealogy().
+// Écran dédié aux douze Olympiens : un vrai arbre généalogique par génération plutôt qu'une
+// liste — Cronos et Rhéa en tête, leurs six enfants juste en dessous (les Olympiens ET Hadès,
+// leur frère resté hors de l'Olympe mais bien de la même fratrie), puis, partant de Zeus,
+// quelques-uns de ses propres enfants qui complètent le panthéon (voir
+// OLYMPIANS_ZEUS_BRANCHES), et enfin Aphrodite, dans sa branche à part issue d'Ouranos seul.
+// Cliquer sur n'importe quel nom ouvre sa propre fiche familiale complète (renderGenealogy()).
 function renderOlympiansOverview(){
-  const groups = buildOlympiansGroups();
+  const row2 = ["déméter", "hestia", "héra", "poséidon", "zeus", "hadès"];
   return `
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
       <h2>Les douze Olympiens</h2>
     </div>
-    <p class="note">Les douze Olympiens et leurs parents directs. Cliquez sur n'importe quel nom pour ouvrir son arbre généalogique complet.</p>
-    <div class="tree-unions">
-      ${groups.map(g => `
-        <div class="tree-union">
-          <div class="tree-union-label">${g.parents.length
-            ? "Parents : " + g.parents.map(p => `<button class="tree-union-link" data-nav="genealogy" data-id="${escapeHTML(p)}">${genealogyPortraitHTML(p)}${escapeHTML(genealogyDisplayName(p))}</button>`).join(" et ")
-            : `<span class="tree-union-unknown">origine incertaine</span>`}</div>
-          <div class="tree-children">
-            ${g.members.map(mid => `<div class="tree-child"><button class="tree-link" data-nav="genealogy" data-id="${escapeHTML(mid)}">${genealogyPortraitHTML(mid)}${escapeHTML(genealogyDisplayName(mid))} →</button></div>`).join("")}
+    <div class="olytree">
+      <div class="olytree-row olytree-couple">
+        ${familyCardNodeHTML("cronos")}
+        <span class="olytree-plus">+</span>
+        ${familyCardNodeHTML("rhéa")}
+      </div>
+      <div class="olytree-row olytree-children">
+        ${row2.map(cid => familyCardNodeHTML(cid)).join("")}
+      </div>
+      <div class="olytree-row olytree-branches">
+        ${OLYMPIANS_ZEUS_BRANCHES.map(([partner, kids]) => `
+          <div class="olytree-branch">
+            ${familyUnionLabelHTML(partner)}
+            <div class="olytree-branch-children">${kids.map(cid => familyCardNodeHTML(cid)).join("")}</div>
           </div>
-        </div>
-      `).join("")}
+        `).join("")}
+      </div>
+      <div class="olytree-row olytree-couple olytree-side">
+        ${familyCardNodeHTML("ouranos")}
+        <span class="olytree-plus">+</span>
+        <button class="fam-node" data-nav="symbolDetail" data-id="mer"><span>la mer</span></button>
+      </div>
+      <div class="olytree-row olytree-children">
+        ${familyCardNodeHTML("aphrodite")}
+      </div>
     </div>
   `;
 }
 
-// Écran d'exploration : une figure recentrée en tête, dans cet ordre — Ascendance (jusqu'à la
-// racine du corpus), Unions (les partenaires connus, pour toujours voir avec qui viennent les
-// enfants qui suivent), Frères et sœurs, puis l'arbre complet de la Descendance. Chaque branche
-// mineure de la descendance est développée en ligne, chaque figure ayant sa propre grosse
-// généalogie rendue comme un lien cliquable vers son propre arbre plutôt que développée ici
-// (voir isGenealogyHub). Cliquer sur n'importe quel nom recentre l'arbre à son tour (chaque
-// clic empile un écran, si bien que « ← Retour » redéroule l'exploration pas à pas).
+// Fiche familiale d'une figure : ses grands-parents et parents au-dessus, ses frères et sœurs
+// (les vrais, ou ceux qui comptent vraiment — voir SIBLING_PARENT_MAX_PARTNERS) et son ou ses
+// conjoint(s) à ses côtés, ses enfants juste en dessous (groupés par union, pour toujours
+// identifier leur mère ou leur père) — et rien de plus : jamais les grands-parents au-delà,
+// jamais les petits-enfants. Aucun texte de section ("Ascendance", "Descendance"...), l'arbre
+// lui-même suffit à se faire comprendre. Cliquer sur n'importe quel nom recentre l'écran sur
+// lui (chaque clic empile un écran, si bien que « ← Retour » redéroule l'exploration pas à
+// pas) ; pour aller plus loin qu'une génération, il suffit de cliquer à nouveau.
 function renderGenealogy(id){
   const name = genealogyDisplayName(id);
   const note = DEITY_NOTES[id];
   const portrait = DEITY_PORTRAITS[id];
-  const rel = genealogyRelations(id);
-  const hasAny = rel.parents.length || rel.partners.length || rel.siblings.length || rel.children.length;
-  const ancestorTree = rel.parents.length ? genealogyAncestorTreeHTML(buildGenealogyAncestorTree(id)) : "";
-  const descendantTree = rel.children.length ? genealogyDescendantTreeHTML(buildGenealogyDescendantTree(id)) : "";
+  const card = buildFamilyCard(id);
+  const hasAny = card.parents.length || card.grandparents.length || card.partners.length || card.siblings.length || card.childUnions.length;
   return `
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
     </div>
-    <div class="geneal-center">
-      ${portrait ? `<img class="geneal-portrait" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy">` : ""}
-      <h2>${escapeHTML(name)}</h2>
-      ${note ? `<p class="note">${escapeHTML(note)}</p>` : ""}
-      <button class="geneal-fiche-link" data-nav="figureDetail" data-id="${escapeHTML(id)}">Voir la fiche complète →</button>
+    <div class="fam-card">
+      ${card.grandparents.length ? `<div class="fam-row fam-grandparents">${card.grandparents.map(gp => familyCardNodeHTML(gp)).join("")}</div>` : ""}
+      ${card.parents.length ? `<div class="fam-row fam-parents">${card.parents.map(p => familyCardNodeHTML(p)).join("")}</div>` : ""}
+      ${card.siblings.length ? `<div class="fam-row fam-siblings">${card.siblings.map(s => familyCardNodeHTML(s, "fam-node-minor")).join("")}</div>` : ""}
+      <div class="fam-row fam-self-row">
+        <div class="fam-self">
+          ${portrait ? `<img class="geneal-portrait" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy">` : ""}
+          <h2>${escapeHTML(name)}</h2>
+          ${note ? `<p class="note">${escapeHTML(note)}</p>` : ""}
+          <button class="geneal-fiche-link" data-nav="figureDetail" data-id="${escapeHTML(id)}">Voir la fiche complète →</button>
+        </div>
+        ${card.partners.length ? `<div class="fam-spouses">${card.partners.map(p => familyCardNodeHTML(p, "fam-node-minor")).join("")}</div>` : ""}
+      </div>
+      ${card.childUnions.length ? `
+        <div class="fam-row fam-children-groups">
+          ${card.childUnions.map(u => `
+            <div class="fam-child-group">
+              ${familyUnionLabelHTML(u.partner)}
+              <div class="fam-group-children">${u.children.map(c => familyCardNodeHTML(c)).join("")}</div>
+            </div>
+          `).join("")}
+        </div>
+      ` : ""}
+      ${!hasAny ? `<p class="empty">Aucune parenté connue pour ${escapeHTML(name)} dans ce corpus.</p>` : ""}
     </div>
-    ${hasAny ? `
-      ${ancestorTree ? `<div class="geneal-section"><h3>Ascendance</h3>${ancestorTree}</div>` : ""}
-      ${genealogyChipsHTML(rel.partners, rel.partners.length > 1 ? "Unions" : "Union")}
-      ${genealogyChipsHTML(rel.siblings, "Frères et sœurs")}
-      ${descendantTree ? `<div class="geneal-section"><h3>Descendance</h3>${descendantTree}</div>` : ""}
-    ` : `<p class="empty">Aucune parenté connue pour ${escapeHTML(name)} dans ce corpus.</p>`}
   `;
 }
 
@@ -3670,6 +3666,12 @@ function render(){
     default: html = renderHome();
   }
   app.innerHTML = html;
+  // Les écrans d'arbre généalogique profitent de toute la largeur disponible plutôt que de
+  // rester cantonnés à la colonne de lecture étroite du reste de l'appli (voir #app.wide dans
+  // styles.css) — vérifié défensivement, certains DOM simulés des tests n'ont pas classList.
+  if(app.classList){
+    app.classList.toggle("wide", currentScreen.type === "genealogy" || currentScreen.type === "olympiansOverview");
+  }
   document.getElementById("bottomNav").innerHTML = renderBottomNav();
   bindScreenEvents();
 }
