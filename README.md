@@ -736,3 +736,40 @@ l'ancien `hero-mark`, rendu correct de la bannière et des quatre badges, tuile 
 « Lieux » inchangés, précache du service worker) + deux assertions obsolètes corrigées dans
 `smoke_pantheon_v2.js` (l'ancien test cherchait l'emoji 🏠/🏛️ littéral dans le menu du bas).
 `service-worker.js` : `pantheon-v13` → `pantheon-v14`.
+
+## Aperçu propriétaire — voir tout le Premium sans achat StoreKit réel
+
+Besoin distinct du chantier Premium ci-dessus, volontairement tenu à l'écart de sa logique
+d'achat : en attendant l'accès à un Mac (Capacitor, StoreKit — voir plus haut), l'utilisatrice
+doit pouvoir continuer à relire l'intégralité du contenu Premium elle-même, sans qu'aucun achat
+réel ne soit possible pour l'instant. Ce mécanisme est construit comme un deuxième chemin de
+déverrouillage, séparé de `isPremiumUnlocked()` à chaque niveau (nommage, emplacement de la
+vérification côté serveur, commentaires) — pour ne jamais confondre « la propriétaire prévisualise
+son contenu » avec « un client a payé ».
+
+**Fonctionnement.** Une variable d'environnement Vercel, `OWNER_PREVIEW_KEY` (voir
+`.env.example`), connue de la seule propriétaire, contient une longue valeur aléatoire choisie
+par elle. Ouvrir l'app une fois avec `?preview=<cette-valeur>` dans l'URL mémorise la clé en
+`localStorage` puis nettoie l'URL ; chaque fiche premium consultée ensuite envoie cette clé en
+en-tête `x-owner-preview-key` à `/api/content`, qui la compare à `OWNER_PREVIEW_KEY` **avant même
+de toucher la base de données** — le mécanisme fonctionne donc dès maintenant, sans attendre que
+Neon Postgres soit configuré. `app.js` (public) ne connaît et ne compare jamais la vraie valeur :
+il se contente de renvoyer ce que l'URL contenait, exactement comme un mot de passe qu'on retape
+sans jamais le vérifier soi-même. Une clé absente ou refusée par le serveur retombe proprement
+sur le paywall habituel — jamais un contenu à moitié affiché. La généalogie premium (dont les
+données de parenté n'ont jamais quitté `app.js`, seul le récit détaillé des fiches a été exporté)
+se débloque localement, sans appel réseau.
+
+`isPremiumUnlocked()` reste inchangée et continue de renvoyer honnêtement `false` : l'aperçu
+propriétaire ne l'affecte jamais, il ouvre un second chemin d'accès au contenu, il ne simule
+jamais un achat.
+
+Tests : `smoke_pantheon_owner_preview.js` (12 vérifications : capture et mémorisation de la clé
+d'URL, `isPremiumUnlocked()` toujours honnêtement `false` même aperçu actif, état de chargement
+puis contenu complet une fois `/api/content` répondu, en-tête envoyé correctement, repli sur le
+paywall pour une clé refusée, généalogie débloquée sans appel réseau, absence de la valeur
+secrète dans `app.js`). `service-worker.js` : `pantheon-v14` → `pantheon-v15`.
+
+**Action requise, une seule fois, côté tableau de bord Vercel** : ajouter la variable
+d'environnement `OWNER_PREVIEW_KEY` (Production) — la création par CLI a été bloquée pour cette
+session. Voir `.env.example` pour le format attendu.

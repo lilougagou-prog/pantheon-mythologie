@@ -936,6 +936,79 @@ function isPremiumUnlocked(){
   return false;
 }
 
+// ===================== APERÇU PROPRIÉTAIRE (jamais un achat) =====================
+//
+// Mécanisme réservé au propriétaire de l'app pour continuer à tout relire pendant le
+// développement, tant qu'aucun achat StoreKit réel n'est possible (ni Capacitor, ni compte
+// Apple Developer branchés). Ouvre l'app une fois avec ?preview=<clé> dans l'URL : la clé est
+// mémorisée dans localStorage, puis envoyée en en-tête à chaque appel à /api/content, qui la
+// compare lui-même à sa propre variable d'environnement serveur (jamais présente ici, dans
+// le code public) avant de renvoyer le contenu complet. app.js ne connaît donc jamais la bonne
+// valeur — seulement ce que l'URL contenait —, exactement comme un mot de passe qu'on retape
+// sans jamais le comparer soi-même. N'affecte JAMAIS isPremiumUnlocked() : ceci reste un aperçu
+// pour une seule personne qui connaît la clé, pas une preuve d'achat.
+function ownerPreviewKey(){
+  try { return localStorage.getItem("pantheon-owner-preview-key") || null; } catch(e){ return null; }
+}
+function hasOwnerPreview(){
+  return !!ownerPreviewKey();
+}
+
+// Capture ?preview=<clé> une seule fois au chargement, la mémorise, puis nettoie l'URL — pour
+// ne pas la laisser traîner dans l'historique ou un partage de lien accidentel.
+function initOwnerPreviewFromUrl(){
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const key = params.get("preview");
+    if(!key) return;
+    localStorage.setItem("pantheon-owner-preview-key", key);
+    params.delete("preview");
+    const rest = params.toString();
+    const newUrl = window.location.pathname + (rest ? `?${rest}` : "") + window.location.hash;
+    window.history.replaceState({}, "", newUrl);
+  } catch(e){}
+}
+
+// Cache mémoire (perdu au rechargement, volontairement — rien de plus à gérer) : { loading },
+// { locked: true } (mauvaise clé ou clé absente côté serveur) ou { content } (fiche complète).
+const OWNER_PREVIEW_CACHE = { figures: {}, symbols: {} };
+
+function fetchOwnerPreviewContent(type, id){
+  if(OWNER_PREVIEW_CACHE[type][id]) return; // déjà en cache, en cours ou déjà résolu
+  const key = ownerPreviewKey();
+  if(!key) return;
+  OWNER_PREVIEW_CACHE[type][id] = { loading: true };
+  fetch(`api/content?type=${encodeURIComponent(type)}&id=${encodeURIComponent(id)}`, {
+    headers: { "x-owner-preview-key": key },
+  })
+    .then(res => res.json())
+    .then(data => {
+      OWNER_PREVIEW_CACHE[type][id] = data.locked ? { locked: true } : { content: data.content };
+      // Ne redessine que si la fiche demandée est toujours celle affichée à l'écran.
+      const expectedScreen = type === "figures" ? "figureDetail" : "symbolDetail";
+      if(currentScreen.type === expectedScreen && currentScreen.id === id) render();
+    })
+    .catch(() => {
+      OWNER_PREVIEW_CACHE[type][id] = { locked: true };
+      const expectedScreen = type === "figures" ? "figureDetail" : "symbolDetail";
+      if(currentScreen.type === expectedScreen && currentScreen.id === id) render();
+    });
+}
+
+function renderOwnerPreviewLoading({ icon, portrait, name, note }){
+  return `
+    <div class="screen-header">
+      <button class="back" data-nav="back">← Retour</button>
+    </div>
+    <article class="detail">
+      ${portrait ? `<img class="deity-portrait" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy">` : (icon ? `<div class="symbol-icon-big">${icon}</div>` : "")}
+      <h2>${escapeHTML(name)}</h2>
+      ${note ? `<p class="note">${escapeHTML(note)}</p>` : ""}
+      <p class="empty">Chargement du contenu premium (aperçu propriétaire)…</p>
+    </article>
+  `;
+}
+
 // Écran affiché à la place d'une fiche premium tant que l'achat n'est pas débloqué. Les
 // boutons y figurent déjà (voir section 4/23 de l'audit) mais restent volontairement inertes
 // dans ce contexte web — attemptPurchase()/attemptRestore() l'expliquent clairement plutôt que
@@ -1578,10 +1651,17 @@ function renderFigureDetail(id){
   const name = id.charAt(0).toUpperCase() + id.slice(1);
   const note = DEITY_NOTES[id];
   const portrait = DEITY_PORTRAITS[id];
+  let paragraphs = DEITY_LORE[id] || [];
   if(figureAccess(id) === "premium" && !isPremiumUnlocked()){
-    return renderPaywall({ portrait, name, note });
+    if(!hasOwnerPreview()) return renderPaywall({ portrait, name, note });
+    const cached = OWNER_PREVIEW_CACHE.figures[id];
+    if(!cached || cached.loading){
+      fetchOwnerPreviewContent("figures", id);
+      return renderOwnerPreviewLoading({ portrait, name, note });
+    }
+    if(cached.locked) return renderPaywall({ portrait, name, note });
+    paragraphs = cached.content.lore;
   }
-  const paragraphs = DEITY_LORE[id] || [];
   const inlinePortraits = DEITY_INLINE_PORTRAITS[id] || [];
   const related = symbolsLinkingTo(id);
   return `
@@ -1689,9 +1769,18 @@ function symbolSourcesHTML(sources){
 // documentée — la section correspondante n'apparaît alors simplement pas, plutôt que d'être
 // remplie pour la forme.
 function renderSymbolDetail(id){
-  const s = SYMBOL_LIBRARY[id];
+  let s = SYMBOL_LIBRARY[id];
   if(symbolAccess(id) === "premium" && !isPremiumUnlocked()){
-    return renderPaywall({ icon: s.icon, name: s.label, note: s.desc });
+    if(!hasOwnerPreview()) return renderPaywall({ icon: s.icon, name: s.label, note: s.desc });
+    const cached = OWNER_PREVIEW_CACHE.symbols[id];
+    if(!cached || cached.loading){
+      fetchOwnerPreviewContent("symbols", id);
+      return renderOwnerPreviewLoading({ icon: s.icon, name: s.label, note: s.desc });
+    }
+    if(cached.locked) return renderPaywall({ icon: s.icon, name: s.label, note: s.desc });
+    // content.json garde déjà icon/label/category/desc en plus du reste : un simple fusion
+    // suffit, s redevient l'équivalent de la fiche complète d'avant la séparation du bundle.
+    s = { ...s, ...cached.content };
   }
   const related = (s.links || []).map(dId => [dId, dId]).filter(([dId]) => dId in DEITY_NOTES);
   return `
@@ -1852,7 +1941,7 @@ function renderGenealogy(id){
   // généalogique" depuis n'importe quelle fiche figure, même gratuite) : fermer ici plutôt
   // que de gater chaque point d'entrée séparément évite tout contournement par un chemin
   // détourné vers la même fonction.
-  if(!isPremiumUnlocked()){
+  if(!isPremiumUnlocked() && !hasOwnerPreview()){
     return renderPaywall({ portrait, name, note });
   }
   const card = buildFamilyCard(id);
@@ -2246,6 +2335,7 @@ function bindScreenEvents(){
 
 /* ===================== INIT ===================== */
 
+initOwnerPreviewFromUrl();
 bindAppClickDelegation();
 window.addEventListener("resize", handleFamTreeWindowResize);
 window.addEventListener("resize", handlePlacesMapWindowResize);

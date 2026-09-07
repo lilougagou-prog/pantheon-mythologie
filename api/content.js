@@ -56,6 +56,17 @@ module.exports = async function handler(req, res){
     return;
   }
 
+  // Aperçu propriétaire : contourne entièrement la vérification en base — utile tant qu'aucune
+  // base de données n'est encore configurée, et pour toujours pouvoir tout relire soi-même sans
+  // passer par un achat réel. Jamais un mécanisme pour un utilisateur normal : la clé n'est
+  // connue que du propriétaire (variable d'environnement Vercel), jamais présente dans app.js
+  // (public) — seul ce fichier, qui ne tourne jamais dans le navigateur, la connaît.
+  const ownerKey = req.headers["x-owner-preview-key"];
+  if(process.env.OWNER_PREVIEW_KEY && ownerKey === process.env.OWNER_PREVIEW_KEY){
+    res.status(200).json({ locked: false, content: full });
+    return;
+  }
+
   try {
     await ensureSchema();
     const originalTransactionId = req.headers["x-original-transaction-id"];
