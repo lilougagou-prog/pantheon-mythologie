@@ -139,7 +139,6 @@ h1, h2, h3{
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .tile:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px var(--shadow); }
-.tile-icon{ font-size: 2rem; }
 .tile-badge{ width: 52px; height: 52px; border-radius: 50%; object-fit: cover; }
 .tile-title{ font-family: "Cinzel", Georgia, serif; font-size: 1.1rem; color: var(--laurel-deep); }
 .tile-count{ font-size: 0.85rem; color: var(--bronze); font-weight: 600; }

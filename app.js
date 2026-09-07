@@ -1306,7 +1306,7 @@ function renderHome(){
         <span class="tile-count">${GENEALOGY_FIGURE_COUNT} figures reliées</span>
       </button>
       <button class="tile" data-nav="places">
-        <span class="tile-icon">🗺️</span>
+        <img class="tile-badge" src="assets/badge-places-map.webp" alt="">
         <span class="tile-title">Lieux mythologiques</span>
         <span class="tile-count">${MAP_PLACES.length} lieux sur la carte</span>
       </button>
@@ -2194,16 +2194,15 @@ function renderPlaceDetail(id){
 
 /* ===================== RENDU : MENU FIXE ===================== */
 
-// Les icônes des quatre premiers onglets sont des badges illustrés (voir assets/badge-*.webp)
-// plutôt que des emoji — insérés tels quels dans renderBottomNav(), qui ne les échappe pas
-// (elles ne viennent jamais d'une saisie utilisateur). « Lieux » garde son emoji d'origine,
-// aucune illustration n'ayant été demandée pour cet onglet.
+// Les icônes des cinq onglets sont des badges illustrés (voir assets/badge-*.webp) plutôt que
+// des emoji — insérés tels quels dans renderBottomNav(), qui ne les échappe pas (elles ne
+// viennent jamais d'une saisie utilisateur).
 const TABS = [
   { type: "home", icon: '<img class="nav-badge" src="assets/badge-home-temple.webp" alt="">', label: "Accueil" },
   { type: "figures", icon: '<img class="nav-badge" src="assets/badge-figures-portrait.webp" alt="">', label: "Figures" },
   { type: "symbols", icon: '<img class="nav-badge" src="assets/badge-symbols-lyre.webp" alt="">', label: "Symboles" },
   { type: "genealogyHome", icon: '<img class="nav-badge" src="assets/badge-genealogy-mother.webp" alt="">', label: "Généalogie" },
-  { type: "places", icon: "🗺️", label: "Lieux" },
+  { type: "places", icon: '<img class="nav-badge" src="assets/badge-places-map.webp" alt="">', label: "Lieux" },
 ];
 
 // Un onglet du bas reste actif tant qu'on est sur une fiche de sa section (figureDetail

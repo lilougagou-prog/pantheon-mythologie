@@ -714,28 +714,34 @@ retravaillées pour l'occasion (fournies par l'utilisatrice, retouchées pour l'
   dans l'image (Hestia, Déméter, Héra, Zeus, Poséidon, Apollon, Artémis, Athéna, Arès,
   Aphrodite, Héphaïstos, Hermès). Rognée de ses marges blanches d'origine pour remplir
   pleinement son cadre.
-- **Trois badges de tuile et d'onglet** (`assets/badge-*.webp`, détourés en cercle, fond
+- **Quatre badges de tuile et d'onglet** (`assets/badge-*.webp`, détourés en cercle, fond
   transparent) : un portrait pour « Figures mythologiques », une lyre pour « Bibliothèque
-  symbolique », une mère et son enfant pour « Généalogie des dieux ». Chaque badge remplace à la
-  fois l'emoji de la tuile d'accueil et celui de l'onglet correspondant dans le menu du bas.
+  symbolique », une mère et son enfant pour « Généalogie des dieux », une carte-médaillon de la
+  Méditerranée (relief doré, couronne d'olivier) pour « Lieux mythologiques ». Chaque badge
+  remplace à la fois l'emoji de la tuile d'accueil et celui de l'onglet correspondant dans le
+  menu du bas.
 - **Badge « Accueil »** (`badge-home-temple.webp`, un temple grec) remplace l'emoji 🏠 du menu
   du bas.
-- **« Lieux mythologiques » n'a volontairement pas été touché** (ni tuile ni onglet) : aucune
-  illustration n'a été fournie pour cet écran, il garde son emoji 🗺️.
 
-Les quatre badges sont exportés en WebP avec canal alpha (fond transparent, cercle détouré au
-plus près du cadre doré déjà présent dans l'image) — environ 10 fois plus léger qu'un PNG
-équivalent pour un rendu identique. La bannière, elle, n'a pas besoin de transparence et reste en
-JPEG. Poids total des cinq fichiers : ~420 Ko. Les cinq sont précachés par le service worker
-(disponibles hors-ligne dès la première visite), et les captures d'écran App Store ont été
-reprises pour refléter la nouvelle page d'accueil.
+Les cinq badges sont exportés en WebP avec canal alpha (fond transparent, cercle détouré au plus
+près du cadre doré déjà présent dans l'image) — environ 10 fois plus léger qu'un PNG équivalent
+pour un rendu identique. La bannière, elle, n'a pas besoin de transparence et reste en JPEG. Poids
+total des six fichiers : ~490 Ko. Les six sont précachés par le service worker (disponibles
+hors-ligne dès la première visite).
 
 Testé par un script dédié (`smoke_pantheon_illustrations.js`, 14 vérifications : présence et
 poids raisonnable des fichiers, références correctes dans `app.js`, absence de tout résidu de
-l'ancien `hero-mark`, rendu correct de la bannière et des quatre badges, tuile et onglet
-« Lieux » inchangés, précache du service worker) + deux assertions obsolètes corrigées dans
-`smoke_pantheon_v2.js` (l'ancien test cherchait l'emoji 🏠/🏛️ littéral dans le menu du bas).
-`service-worker.js` : `pantheon-v13` → `pantheon-v14`.
+l'ancien `hero-mark`, rendu correct de la bannière et des quatre badges, précache du service
+worker) + deux assertions obsolètes corrigées dans `smoke_pantheon_v2.js` (l'ancien test
+cherchait l'emoji 🏠/🏛️ littéral dans le menu du bas). `service-worker.js` : `pantheon-v13` →
+`pantheon-v14`.
+
+**Mise à jour ultérieure — badge « Lieux »** : illustration fournie après coup (une carte de la
+Méditerranée en médaillon doré), ajoutée à l'identique du même traitement (`badge-places-map.webp`,
+512×512, WebP + alpha). Remplace l'emoji 🗺️ resté en place jusque-là sur la tuile d'accueil et
+l'onglet du bas — l'onglet « Lieux » est donc maintenant illustré comme les quatre autres, et la
+classe CSS `.tile-icon` (plus utilisée nulle part) a été retirée. `smoke_pantheon_illustrations.js`
+mis à jour en conséquence. `service-worker.js` : `pantheon-v15` → `pantheon-v16`.
 
 ## Aperçu propriétaire — voir tout le Premium sans achat StoreKit réel
 
