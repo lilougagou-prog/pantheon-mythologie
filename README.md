@@ -16,11 +16,12 @@ une **généalogie des dieux** navigable (pas encore construite, voir plus bas).
 
 ## Contenu
 
-- **264 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
+- **274 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
   quelles depuis Tarot-mythologie (mêmes textes, mêmes portraits, même mécanisme de
   citations croisées `(voir la fiche « Nom »)` résolu par `linkifyLore()`), complétées par
-  29 figures créées directement dans Panthéon (18 primordiales et Titans, puis 11 pour étoffer
-  les lignées de Cadmos et de Zeus/Europe — voir plus bas). Contrairement à l'appli
+  39 figures créées directement dans Panthéon (18 primordiales et Titans, 11 pour étoffer les
+  lignées de Cadmos et de Zeus/Europe, 10 pour affilier tous les enfants déjà recensés à leur
+  mère ou leur père — voir plus bas). Contrairement à l'appli
   Tarot, qui ne garde localement que les 78 figures directement incarnées par une carte,
   Panthéon garde l'intégralité du corpus : c'est la collection complète, du premier Titan
   au dernier héros mineur.
@@ -208,6 +209,62 @@ la mère à chaque fois. » Quatre chantiers distincts pour y répondre :
   un premier essai avait paru en échec à cause d'un cache de service worker resservant une
   ancienne version d'`app.js`, corrigé en désactivant les service workers pour la vérification).
 - `service-worker.js` : `pantheon-v5` → `pantheon-v6`.
+
+## Généalogie des dieux (V3 — deuxième retour)
+
+Deuxième retour, immédiatement après la V2 : « Quand on clique sur douze olympien, je veux
+déjà l'arbre généalogique, avec les douze olympiens présents [...] fais juste leurs parents à
+chacun pour pas surcharger. Ensuite, pour Zeus, fais ses parents puis ses amantes et ses
+enfants. Vérifie aussi les enfants que tu n'as pas affilié : Héraclès par exemple, pourquoi ne
+pas l'avoir affilié à sa mère ? Aussi : quand tu as un portrait illustré, insère-le pour rendre
+l'arbre plus visuel. » Quatre chantiers :
+
+- **10 nouvelles figures pour affilier tous les enfants déjà recensés** (274 figures au total,
+  264 → 274) : Alcmène et Amphitryon (mère et père légal d'Héraclès — Zeus reste son seul père
+  biologique), Tyndare et Icarios (fils de Gorgophoné, respectivement père mortel de Castor et
+  Clytemnestre, et père de Pénélope), Atrée et Thyeste (les Atrides retrouvent enfin leur
+  ancêtre éponyme, jusque-là complètement absent malgré le nom de la lignée), Acrisios (père de
+  Danaé, grand-père de Persée), Bélos et Agénor (les jumeaux fils de Libye, pères respectifs de
+  Danaos/Égyptos et de Cadmos/Europe), Abas (fils de Lyncée et d'Hypermestre, père d'Acrisios).
+  Toutes construites à partir de mentions déjà présentes dans le corpus mais jusque-là sans
+  fiche propre ni citation.
+- **Les grandes lignées remontent désormais jusqu'à Chaos.** Avant ce round, Cadmos, Europe,
+  Danaos, Égyptos, Danaé et Héraclès étaient chacun des racines isolées dans l'arbre — aucun
+  parent connu. Elles se rejoignent maintenant toutes à la même souche : Cadmos et Europe par
+  Agénor, Danaos et Égyptos par Bélos, tous deux fils de Libye (déjà reliée à Épaphos, Io et
+  Zeus depuis la V2) ; Danaé par Acrisios, lui-même par Abas, fils de Lyncée et Hypermestre —
+  déjà les deux seuls Danaïdes épargnés — refermant ainsi la boucle jusqu'à Danaos. Conséquence
+  concrète : les tuiles « Le cycle thébain » et « La lignée de Persée » affichent maintenant
+  une section Ascendance complète, là où elles n'en avaient aucune.
+- **« Les douze Olympiens » devient un vrai arbre, pas une liste de cartes.** L'écran de la V2
+  affichait douze cartes séparées, chacune avec une ligne de texte résumant son ascendance —
+  proche, en pratique, d'une liste plate. Il est remplacé par `buildOlympiansGroups()` +
+  `renderOlympiansOverview()` : un arbre unique regroupant les douze par couple de parents
+  (Cronos et Rhéa pour Zeus/Héra/Poséidon/Déméter, Zeus et Léto pour Apollon/Artémis, Héra
+  seule pour Héphaïstos...), sciemment limité à ce seul niveau d'ascendance pour ne pas
+  surcharger l'écran — cliquer sur un Olympien ou sur un parent ouvre son propre arbre complet.
+- **Une section « Unions » explicite, restaurée dans l'ordre demandé.** L'écran d'exploration
+  affiche maintenant Ascendance, puis Unions (tous les partenaires connus d'une figure, en
+  chips — pour Zeus : Alcmène, Danaé, Déméter, Europe, Héra, Io, Léda, Léto, Métis, Mnémosyne,
+  Pléiades, Sémélé, Thémis), puis Frères et sœurs, puis Descendance — la V2 avait fusionné cette
+  information dans les seuls en-têtes « avec {mère} » de l'arbre des enfants, jugée pas assez
+  visible en elle-même.
+- **Portraits insérés dans l'arbre partout où ils existent** (`genealogyPortraitHTML()`) : une
+  vignette de `DEITY_PORTRAITS` apparaît désormais devant chaque nom de l'arbre (ascendance,
+  descendance, unions, chips « Lignée », écran des Olympiens) quand la figure en a un — l'arbre
+  reste un simple nom nu pour les figures sans portrait (la majorité), mais devient nettement
+  plus visuel pour les figures majeures.
+- Testé par un script dédié (39 vérifications : les 10 nouvelles figures, chaque enfant
+  désormais affilié — Héraclès/Alcmène, Castor-Clytemnestre/Tyndare, Danaé/Acrisios,
+  Pénélope/Icarios, Agamemnon-Ménélas/Atrée, Égisthe/Thyeste, Cadmos-Europe/Agénor,
+  Danaos-Égyptos/Bélos —, les grandes lignées remontant bien jusqu'à Chaos, le regroupement des
+  douze Olympiens par couple de parents, l'arbre — pas la liste de cartes — sur cet écran, la
+  section Unions présente et dans le bon ordre, les portraits insérés, non-régression des
+  citations et des décomptes) + les cinq suites précédentes (27 + 14 + 88 + 34 + 49
+  vérifications, décomptes 264 → 274 mis à jour, deux assertions de la V2 réécrites pour
+  refléter le nouvel écran des Olympiens et l'ascendance désormais présente sur l'écran de
+  Cadmos) : tout au vert. Vérifié aussi visuellement par captures d'écran.
+- `service-worker.js` : `pantheon-v6` → `pantheon-v7`.
 
 ## Ce qui n'est PAS encore construit
 

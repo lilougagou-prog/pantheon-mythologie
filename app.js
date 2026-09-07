@@ -1022,6 +1022,20 @@ const DEITY_NOTES = {
   "zéthos":"Frère jumeau d'Amphion, il posa de ses mains les fondations des murailles de Thèbes.",
   "rhadamanthys":"Fils de Zeus et d'Europe, frère de Minos, réputé pour sa justice jusque chez les morts.",
   "sarpédon":"Fils de Zeus et d'Europe, frère de Minos, il quitta la Crète pour régner sur la Lycie.",
+  // Dix figures ajoutées pour que les enfants déjà recensés (Héraclès, Castor, Clytemnestre,
+  // Danaé, Pénélope...) aient tous leur mère ou leur père identifiable, et pour relier
+  // définitivement les racines encore isolées (Cadmos/Europe, Danaos/Égyptos, Persée) jusqu'au
+  // socle primordial du corpus.
+  "alcmène":"Fille d'Électryon, mère d'Héraclès par Zeus, épouse d'Amphitryon.",
+  "amphitryon":"Fils d'Alcée, époux d'Alcmène et père légal d'Héraclès, qu'il éleva sans savoir qu'il était de Zeus.",
+  "tyndare":"Roi de Sparte, époux de Léda, père mortel de Castor et de Clytemnestre.",
+  "icarios":"Fils de Gorgophoné, père de Pénélope.",
+  "atrée":"Roi de Mycènes, père d'Agamemnon et de Ménélas, dont la vengeance sur son frère Thyeste maudit toute sa lignée.",
+  "thyeste":"Frère jumeau d'Atrée, père d'Égisthe qu'il conçut avec sa propre fille sur l'ordre d'un oracle.",
+  "acrisios":"Roi d'Argos, père de Danaé et grand-père de Persée, tué malgré lui par ce petit-fils qu'il avait cru éviter.",
+  "bélos":"Fils de Libye, père jumeau d'Égyptos et de Danaos, roi légendaire d'Égypte.",
+  "agénor":"Fils de Libye, frère jumeau de Bélos, roi de Phénicie et père de Cadmos et d'Europe.",
+  "abas":"Fils de Lyncée et d'Hypermestre, roi d'Argos, père d'Acrisios.",
 };
 const DEITY_LORE = {
   "dionysos": [
@@ -1090,7 +1104,7 @@ const DEITY_LORE = {
     "Représentée portant une corne d'abondance et un gouvernail, parfois les yeux bandés, elle peut combler de richesses comme ruiner en un instant, sans qu'aucun mérite ni aucune faute n'entre en compte — la roue qu'on lui associe (voir la fiche « Roue ») tourne sans se soucier de qui elle élève ou abaisse.",
   ],
   "héraclès": [
-    "Fils de Zeus et d'une mortelle, Alcmène, l'enfant fut d'abord nommé Alcide, du nom de son grand-père Alcée (voir la fiche « Alcée »). Il fut la cible de la jalousie d'Héra avant même sa naissance : elle chargea Ilithyie de retenir l'accouchement par magie, une ruse à peine déjouée (voir la fiche « Ilithyie »), puis, une fois l'enfant né, envoya deux serpents l'étrangler dans son sommeil — qu'il étrangla lui-même de ses propres mains encore enfant.",
+    "Fils de Zeus et d'une mortelle, Alcmène (voir la fiche « Alcmène »), l'enfant fut d'abord nommé Alcide, du nom de son grand-père Alcée (voir la fiche « Alcée »). Il fut la cible de la jalousie d'Héra avant même sa naissance : elle chargea Ilithyie de retenir l'accouchement par magie, une ruse à peine déjouée (voir la fiche « Ilithyie »), puis, une fois l'enfant né, envoya deux serpents l'étrangler dans son sommeil — qu'il étrangla lui-même de ses propres mains encore enfant.",
     "Zeus, voulant offrir à son fils mortel une part d'immortalité, le fit un jour approcher du sein d'Héra endormie, espérant qu'il tète son lait divin sans qu'elle le sache. L'enfant tira si fort qu'elle se réveilla en sursaut et l'écarta d'un geste brusque : le lait jaillit à travers le ciel nocturne et y forma la traînée blanche que l'on nomme depuis la Voie lactée.",
     "Rendu fou par Héra à l'âge adulte, il tua sa propre famille dans un accès de délire. Pour s'en purifier, l'oracle de Delphes lui ordonna de se mettre au service du roi Eurysthée pendant douze ans et de prendre un nouveau nom, Héraclès — « la gloire d'Héra » — comme pour retourner contre elle-même la persécution qu'elle lui infligeait : chaque exploit accompli sous ce nom deviendrait, malgré elle, un hommage à la déesse.",
     "Avant même de se mettre au service d'Eurysthée, il séjourna cinquante nuits chez le roi Thespios, désireux d'obtenir de nombreux descendants d'un héros d'une telle force : chacune de ses cinquante filles vint ainsi, une nuit après l'autre, partager la couche d'Héraclès, qui les crut toutes, dit-on, n'être qu'une seule et même femme. De cette hospitalité peu commune naquirent cinquante fils, les Thespiades, qui essaimèrent ensuite dans toute la Grèce et jusqu'en Sardaigne.",
@@ -1398,7 +1412,7 @@ const DEITY_LORE = {
     "Son retour chez lui prit dix années supplémentaires, semées d'épreuves — le Cyclope Polyphème, les sirènes, Circé, Charybde et Scylla — durant lesquelles son intelligence lui permit chaque fois d'échapper à des périls que la seule force n'aurait pas surmontés.",
   ],
   "pénélope": [
-    "Fille du roi Icarios et cousine d'Hélène et de Clytemnestre (voir les fiches « Hélène » et « Clytemnestre »), Pénélope épousa Ulysse (voir la fiche « Ulysse »), roi d'Ithaque, peu avant que celui-ci ne parte combattre à Troie — laissant derrière lui une épouse enceinte de leur fils Télémaque (voir la fiche « Télémaque ») et un royaume qu'elle dut gouverner seule pendant vingt années.",
+    "Fille du roi Icarios (voir la fiche « Icarios ») et cousine d'Hélène et de Clytemnestre (voir les fiches « Hélène » et « Clytemnestre »), Pénélope épousa Ulysse (voir la fiche « Ulysse »), roi d'Ithaque, peu avant que celui-ci ne parte combattre à Troie — laissant derrière lui une épouse enceinte de leur fils Télémaque (voir la fiche « Télémaque ») et un royaume qu'elle dut gouverner seule pendant vingt années.",
     "Durant l'absence prolongée de son mari, présumé mort par beaucoup, une foule de prétendants envahit le palais d'Ithaque pour la contraindre à un nouveau mariage. Pénélope les tint à distance par la ruse : elle promit de choisir un époux dès qu'elle aurait terminé de tisser le linceul funéraire de son beau-père Laërte, mais défaisait chaque nuit, en secret, l'ouvrage du jour — un stratagème qui dura trois ans, jusqu'à ce qu'une servante infidèle la trahisse.",
     "À son retour, Ulysse, déguisé en mendiant pour ne pas être reconnu, retrouva son palais livré aux prétendants ; Pénélope organisa alors l'épreuve de l'arc (voir la fiche « Arc ») — nul ne pouvant prétendre à sa main sans réussir à le bander et à tirer une flèche à travers douze anneaux alignés —, épreuve qu'aucun des prétendants ne put surmonter, et que le mendiant inconnu accomplit sans effort avant de révéler sa véritable identité et de massacrer les prétendants avec l'aide de son fils.",
     "Même alors, Pénélope hésita à reconnaître son époux après vingt ans d'absence, et le mit à l'épreuve : elle ordonna qu'on déplace leur lit nuptial, construit autour du tronc d'un olivier vivant et donc impossible à déplacer sans le briser — un secret que seuls eux deux connaissaient. La réaction indignée d'Ulysse, découvrant le piège, lui apporta la preuve qu'elle cherchait, et les deux époux furent enfin réunis.",
@@ -1454,28 +1468,28 @@ const DEITY_LORE = {
     "Après la chute de Troie, elle retourna à Sparte auprès de Ménélas, qui lui pardonna sa beauté retrouvée plutôt que de la punir comme les Grecs l'avaient juré pendant tout le siège — preuve, une dernière fois, du pouvoir qu'elle exerçait sur quiconque la regardait.",
   ],
   "castor": [
-    "Fils mortel du roi Tyndare et de Léda (voir la fiche « Léda »), Castor forme avec son frère Pollux (voir la fiche « Pollux »), lui engendré par Zeus la même nuit sous la forme d'un cygne, les jumeaux Dioscures — l'un mortel, l'autre immortel, unis toute leur vie par un attachement que rien ne parvint à rompre.",
+    "Fils mortel du roi Tyndare (voir la fiche « Tyndare ») et de Léda (voir la fiche « Léda »), Castor forme avec son frère Pollux (voir la fiche « Pollux »), lui engendré par Zeus la même nuit sous la forme d'un cygne, les jumeaux Dioscures — l'un mortel, l'autre immortel, unis toute leur vie par un attachement que rien ne parvint à rompre.",
     "Dompteur de chevaux réputé, il participa avec son frère à l'expédition des Argonautes menée par Jason (voir la fiche « Jason ») et à la chasse du sanglier de Calydon, avant qu'un différend avec leurs cousins Idas et Lyncée, pour le partage d'un butin de bétail, ne tourne à l'affrontement mortel : Castor y trouva la mort, tué par Idas.",
     "Fou de douleur, Pollux refusa l'immortalité qui l'aurait séparé pour toujours de son frère et supplia Zeus de partager son propre sort avec lui : Zeus accorda que les deux frères ne soient plus jamais séparés, mais au prix d'une vie à cheval entre deux mondes — une journée ensemble parmi les vivants sur l'Olympe, la suivante ensemble parmi les morts aux Enfers, et ainsi de suite, sans fin. Marins et voyageurs leur rendaient un culte particulier, les tenant pour responsables du feu follet qui apparaît parfois au sommet des mâts par gros temps, signe de leur protection.",
   ],
   "pollux": [
-    "Fils de Zeus et de Léda (voir la fiche « Léda »), conçu la même nuit où son frère Castor (voir la fiche « Castor ») fut engendré par le roi Tyndare, Pollux forme avec lui les jumeaux Dioscures — inséparables depuis l'enfance, malgré la différence de nature qui les séparait déjà, l'un mortel, l'autre non.",
+    "Fils de Zeus et de Léda (voir la fiche « Léda »), conçu la même nuit où son frère Castor (voir la fiche « Castor ») fut engendré par le roi Tyndare (voir la fiche « Tyndare »), Pollux forme avec lui les jumeaux Dioscures — inséparables depuis l'enfance, malgré la différence de nature qui les séparait déjà, l'un mortel, l'autre non.",
     "Pugiliste redouté, il combattit aux côtés de son frère lors de l'expédition des Argonautes menée par Jason (voir la fiche « Jason »), où il triompha en un combat de boxe du roi Amycos. Un différend avec leurs cousins Idas et Lyncée pour un partage de butin tourna à l'affrontement : Castor y fut tué, laissant Pollux seul survivant d'un lien qu'il refusait d'accepter rompu.",
     "Plutôt que de vivre éternellement séparé de son frère, il supplia Zeus de lui laisser partager son immortalité avec lui : Zeus leur accorda de ne plus jamais se quitter, mais au prix d'une existence partagée entre deux mondes — un jour ensemble parmi les vivants sur l'Olympe, le jour suivant ensemble parmi les morts aux Enfers, en alternance perpétuelle. Élevés parmi les étoiles sous la forme de la constellation des Gémeaux (voir la fiche « Étoile »), ils restent depuis l'image même de la fraternité plus forte que la mort.",
   ],
   "léda": [
-    "Reine de Sparte, épouse du roi Tyndare, Léda fut séduite par Zeus qui prit la forme d'un cygne pour s'unir à elle — la même nuit, dit-on, où elle s'unissait aussi à son propre époux, mêlant ainsi en une seule nuit une descendance mortelle et une descendance divine.",
+    "Reine de Sparte, épouse du roi Tyndare (voir la fiche « Tyndare »), Léda fut séduite par Zeus qui prit la forme d'un cygne pour s'unir à elle — la même nuit, dit-on, où elle s'unissait aussi à son propre époux, mêlant ainsi en une seule nuit une descendance mortelle et une descendance divine.",
     "De cette double union naquirent, selon les traditions les plus répandues, deux œufs : l'un donna naissance à Hélène (voir la fiche « Hélène »), dont la beauté allait plus tard déclencher la guerre de Troie, et à Pollux, l'immortel des Dioscures (voir la fiche « Pollux ») ; l'autre à Castor, son frère mortel (voir la fiche « Castor »), et à Clytemnestre (voir la fiche « Clytemnestre »), promise à un destin tout aussi tragique.",
     "Léda reste, dans l'art comme dans le mythe, la figure même de la rencontre improbable entre le monde divin et le monde mortel — une seule nuit d'où naquirent à la fois la plus belle femme du monde grec et les deux frères les plus fidèles de toute la mythologie.",
   ],
   "clytemnestre": [
-    "Fille de Léda et du roi Tyndare (voir la fiche « Léda »), sœur d'Hélène (voir la fiche « Hélène »), Clytemnestre épousa Agamemnon (voir la fiche « Agamemnon »), roi de Mycènes, avec qui elle eut plusieurs enfants, dont Iphigénie et Oreste (voir les fiches « Iphigénie » et « Oreste »).",
+    "Fille de Léda et du roi Tyndare (voir les fiches « Léda » et « Tyndare »), sœur d'Hélène (voir la fiche « Hélène »), Clytemnestre épousa Agamemnon (voir la fiche « Agamemnon »), roi de Mycènes, avec qui elle eut plusieurs enfants, dont Iphigénie et Oreste (voir les fiches « Iphigénie » et « Oreste »).",
     "Lorsque la flotte grecque, immobilisée par un vent contraire à Aulis, ne put appareiller pour Troie qu'au prix du sacrifice de leur fille Iphigénie, Agamemnon s'y résolut malgré tout — un geste que Clytemnestre ne lui pardonna jamais, même après qu'Artémis eut secrètement sauvé la jeune fille au dernier instant (voir la fiche « Artémis »), une pitié divine dont la reine, restée à Mycènes, ignora longtemps jusqu'à l'existence.",
     "Durant les dix années du siège de Troie, elle prit pour amant Égisthe (voir la fiche « Égisthe »), cousin d'Agamemnon déjà porteur d'une haine ancienne envers sa famille. À son retour, elle accueillit son époux en épouse fidèle en apparence, avant de le piéger dans un filet au sortir du bain et de le tuer avec Égisthe — vengeance de mère autant que trahison conjugale, selon l'interprétation qu'on en fait.",
     "Elle mourut à son tour des années plus tard, tuée par son propre fils Oreste (voir la fiche « Oreste ») venu venger son père — un matricide qui déchaîna sur lui la fureur des Érinyes (voir la fiche « Érinyes »), jusqu'à ce qu'un tribunal institué par Athéna vienne, pour la première fois, remplacer leur vengeance sans fin par un jugement.",
   ],
   "persée": [
-    "Fils de Zeus et de la mortelle Danaé, Persée naquit d'une pluie d'or : le roi Acrisios, son grand-père, avait enfermé sa fille dans une chambre de bronze après qu'un oracle lui eut prédit la mort de sa propre main par un futur petit-fils — mais Zeus s'unit à elle sous cette forme, déjouant sans effort la précaution. Acrisios, découvrant l'enfant, jeta mère et fils à la mer dans un coffre de bois, que les flots portèrent jusqu'à l'île de Sériphos, où un pêcheur nommé Dictys les recueillit et les éleva.",
+    "Fils de Zeus et de la mortelle Danaé (voir la fiche « Danaé »), Persée naquit d'une pluie d'or : le roi Acrisios (voir la fiche « Acrisios »), son grand-père, avait enfermé sa fille dans une chambre de bronze après qu'un oracle lui eut prédit la mort de sa propre main par un futur petit-fils — mais Zeus s'unit à elle sous cette forme, déjouant sans effort la précaution. Acrisios, découvrant l'enfant, jeta mère et fils à la mer dans un coffre de bois, que les flots portèrent jusqu'à l'île de Sériphos, où un pêcheur nommé Dictys les recueillit et les éleva.",
     "Devenu adulte, Persée dut affronter le frère de Dictys, le roi Polydectès, épris de Danaé et désireux de se débarrasser de son fils encombrant : il le mit au défi de lui rapporter la tête de la Gorgone Méduse, dont le seul regard pétrifiait quiconque le croisait — une mission pensée comme un aller sans retour.",
     "Guidé par Athéna et Hermès, il commença par arracher aux Grées, trois sœurs nées vieilles et ne partageant à elles trois qu'un seul œil, le secret du repaire des Nymphes en subtilisant cet œil unique le temps qu'elles le lui échangent contre sa restitution. Les Nymphes lui remirent alors des sandales ailées, un casque d'invisibilité emprunté à Hadès lui-même, et une besace magique, tandis qu'Hermès lui offrit une serpe et Athéna un bouclier poli comme un miroir : ainsi équipé, il put trancher la tête de Méduse sans jamais la regarder directement, se guidant sur son seul reflet.",
     "Du sang jailli de la blessure naquirent d'un coup Pégase, le cheval ailé que domptera plus tard le héros Bellérophon (voir la fiche « Bellérophon »), et le géant Chrysaor — tous deux déjà conçus en elle par Poséidon avant sa mise à mort. Sur le chemin du retour, Persée se servit une première fois de sa terrible prise pour punir le Titan Atlas, qui lui avait refusé l'hospitalité : pétrifié d'un seul regard, celui-ci devint la chaîne de montagnes qui porte encore son nom (voir la fiche « Atlas »).",
@@ -1489,7 +1503,7 @@ const DEITY_LORE = {
     "Ce Persès ne doit pas être confondu avec un autre dieu du même nom, le Titan marin époux d'Astéria (voir la fiche « Astéria ») et père d'Hécate (voir la fiche « Hécate ») — un homonyme fréquent dans la mythologie grecque, où plusieurs figures sans aucun lien de parenté portent parfois un nom identique.",
   ],
   "électryon": [
-    "Fils de Persée et Andromède (voir les fiches « Persée » et « Andromède »), Électryon succéda à son père sur le trône de Mycènes. De son épouse Anaxo, il eut plusieurs fils et une fille, Alcmène, promise dès l'enfance à son cousin Amphitryon, fils de son frère Alcée (voir la fiche « Alcée »).",
+    "Fils de Persée et Andromède (voir les fiches « Persée » et « Andromède »), Électryon succéda à son père sur le trône de Mycènes. De son épouse Anaxo, il eut plusieurs fils et une fille, Alcmène (voir la fiche « Alcmène »), promise dès l'enfance à son cousin Amphitryon (voir la fiche « Amphitryon »), fils de son frère Alcée (voir la fiche « Alcée »).",
     "Ses fils trouvèrent la mort presque tous ensemble dans un même raid : les Téléboens, menés par les descendants de son propre frère Mestor (voir la fiche « Mestor »), envahirent Mycènes pour réclamer un droit ancien sur le bétail royal et massacrèrent tous les fils d'Électryon, à l'exception d'un seul, Licymnios.",
     "Amphitryon partit venger ses beaux-frères et recouvra le bétail volé, mais en le ramenant, un coup de bâton destiné à calmer une bête récalcitrante dévia et frappa Électryon lui-même, le tuant sur le coup. Ce meurtre involontaire contraignit Amphitryon à l'exil et à la purification, retardant d'autant son mariage avec Alcmène et, par ricochet, la naissance d'Héraclès (voir la fiche « Héraclès »).",
   ],
@@ -1500,11 +1514,11 @@ const DEITY_LORE = {
   ],
   "gorgophoné": [
     "Fille de Persée et Andromède (voir les fiches « Persée » et « Andromède »), Gorgophoné épousa d'abord Périérès, roi de Messénie, dont elle eut deux fils, Aphareus et Leucippe — le premier devenu à son tour père des jumeaux Idas et Lyncée, cousins et rivaux de Castor et Pollux (voir les fiches « Castor » et « Pollux ») dans la querelle qui coûtera la vie à Castor.",
-    "Selon Pausanias, elle fut la première veuve de toute la mythologie grecque à se remarier : devenue l'épouse du roi de Sparte Œbalos, elle lui donna trois autres enfants — Tyndare, futur époux de Léda (voir la fiche « Léda ») et père légal de Castor et Pollux, Icarios, futur père de Pénélope (voir la fiche « Pénélope »), et Hippocoon, qui usurpera un temps le trône de Sparte avant d'être tué par Héraclès (voir la fiche « Héraclès »).",
+    "Selon Pausanias, elle fut la première veuve de toute la mythologie grecque à se remarier : devenue l'épouse du roi de Sparte Œbalos, elle lui donna trois autres enfants — Tyndare (voir la fiche « Tyndare »), futur époux de Léda (voir la fiche « Léda ») et père légal de Castor et Pollux, Icarios (voir la fiche « Icarios »), futur père de Pénélope (voir la fiche « Pénélope »), et Hippocoon, qui usurpera un temps le trône de Sparte avant d'être tué par Héraclès (voir la fiche « Héraclès »).",
     "Par ses deux mariages, Gorgophoné se retrouve ainsi à la racine de presque toute la génération héroïque qui précède la guerre de Troie — grand-mère à la fois des Dioscures, par alliance des Atrides, et de la propre épouse d'Ulysse (voir la fiche « Ulysse »).",
   ],
   "alcée": [
-    "Fils de Persée et Andromède (voir les fiches « Persée » et « Andromède »), Alcée régna sur Tirynthe. De son mariage naquit un fils, Amphitryon, promis dès l'enfance à sa cousine Alcmène, fille de leur oncle Électryon (voir la fiche « Électryon »).",
+    "Fils de Persée et Andromède (voir les fiches « Persée » et « Andromède »), Alcée régna sur Tirynthe. De son mariage naquit un fils, Amphitryon (voir la fiche « Amphitryon »), promis dès l'enfance à sa cousine Alcmène (voir la fiche « Alcmène »), fille de leur oncle Électryon (voir la fiche « Électryon »).",
     "Après avoir tué par accident son propre beau-père Électryon (voir la fiche « Électryon »), Amphitryon dut fuir Tirynthe et se réfugier à Thèbes, où le roi Créon le purifia de ce meurtre involontaire.",
     "Quand Héraclès naquit, on le nomma d'abord Alcide, du nom de son grand-père Alcée — un nom qu'il ne troqua contre celui d'Héraclès, « la gloire d'Héra », que plus tard, sur l'ordre de l'oracle de Delphes (voir la fiche « Héraclès »).",
   ],
@@ -1550,7 +1564,7 @@ const DEITY_LORE = {
     "Iphigénie est particulièrement associée à Artémis.",
   ],
   "agamemnon": [
-    "Fils d'Atrée, roi de Mycènes, Agamemnon hérita avec son frère Ménélas (voir la fiche « Ménélas ») d'une lignée déjà lourde d'un crime ancien — son propre père avait un jour servi aux dieux la chair des fils de son frère Thyeste, en pleine querelle pour le trône. Il épousa Clytemnestre (voir la fiche « Clytemnestre »), fille du roi Tyndare, tandis que Ménélas épousait sa sœur Hélène (voir la fiche « Hélène ») — deux mariages qui allaient bientôt lier leur maison au sort de Troie tout entière.",
+    "Fils d'Atrée (voir la fiche « Atrée »), roi de Mycènes, Agamemnon hérita avec son frère Ménélas (voir la fiche « Ménélas ») d'une lignée déjà lourde d'un crime ancien — son propre père avait un jour servi aux dieux la chair des fils de son frère Thyeste (voir la fiche « Thyeste »), en pleine querelle pour le trône. Il épousa Clytemnestre (voir la fiche « Clytemnestre »), fille du roi Tyndare (voir la fiche « Tyndare »), tandis que Ménélas épousait sa sœur Hélène (voir la fiche « Hélène ») — deux mariages qui allaient bientôt lier leur maison au sort de Troie tout entière.",
     "Désigné chef de la coalition grecque après l'enlèvement d'Hélène par Pâris (voir la fiche « Pâris »), il vit sa flotte immobilisée à Aulis par un vent contraire, punition d'Artémis qu'il avait offensée : seul le sacrifice de sa propre fille Iphigénie (voir la fiche « Iphigénie ») pouvait, selon le devin Calchas, apaiser la déesse — un geste qu'il accepta, sans savoir qu'Artémis substituerait au dernier instant une biche sur l'autel.",
     "Devant Troie, sa querelle avec Achille (voir la fiche « Achille ») faillit coûter la guerre aux Grecs : contraint de rendre sa propre captive Chryséis (voir la fiche « Chryséis ») pour calmer la colère d'Apollon, il s'empara par dépit de Briséis (voir la fiche « Briséis »), celle d'Achille, qui se retira aussitôt du combat et laissa les Troyens reprendre l'avantage.",
     "À la chute de la ville, il reçut pour part de butin la prophétesse Cassandre (voir la fiche « Cassandre »), fille de Priam (voir la fiche « Priam ») — sans jamais croire ses avertissements sur le sort funeste qui les attendait tous deux à leur retour.",
@@ -1588,7 +1602,7 @@ const DEITY_LORE = {
     "Le retour ne fut pourtant pas immédiat : détourné par les vents pendant des années le long des côtes d'Égypte, il ne put reprendre la mer qu'après avoir surpris et interrogé de force le devin marin Protée (voir la fiche « Protée »), seul capable de lui révéler le chemin du retour. Le même oracle lui annonça un destin que nul autre mortel ne connaîtrait : épargné par la mort elle-même, gendre de Zeus par son mariage avec Hélène, il serait un jour conduit vivant aux Champs Élysées plutôt qu'au royaume ordinaire des morts.",
   ],
   "europe": [
-    "Princesse phénicienne, fille du roi Agénor et sœur de Cadmos (voir la fiche « Cadmos »), Europe fut un jour abordée sur une plage par un taureau d'une blancheur et d'une douceur telles qu'elle osa grimper sur son dos sans la moindre crainte — c'était Zeus lui-même, épris d'elle, qui s'élança aussitôt dans les flots et l'emporta jusqu'en Crète, loin de tout secours.",
+    "Princesse phénicienne, fille du roi Agénor (voir la fiche « Agénor ») et sœur de Cadmos (voir la fiche « Cadmos »), Europe fut un jour abordée sur une plage par un taureau d'une blancheur et d'une douceur telles qu'elle osa grimper sur son dos sans la moindre crainte — c'était Zeus lui-même, épris d'elle, qui s'élança aussitôt dans les flots et l'emporta jusqu'en Crète, loin de tout secours.",
     "De cette traversée naquirent trois fils : Minos (voir la fiche « Minos »), futur roi de Crète et juge des Enfers ; Rhadamanthys (voir la fiche « Rhadamanthys »), réputé pour sa droiture incorruptible ; et Sarpédon (voir la fiche « Sarpédon »), qui régna plus tard sur la Lycie. Devenue reine de l'île par son mariage avec le roi Astérion, sans enfant lui-même, elle vit ses trois fils élevés comme les siens et destinés à régner en son nom.",
     "Son frère Cadmos, envoyé par leur père à sa recherche avec l'ordre de ne jamais revenir sans elle, ne la retrouva jamais — mais l'oracle de Delphes qui l'orienta vers une quête différente le mena, sans qu'il s'y attende, à fonder Thèbes à sa place (voir la fiche « Cadmos »).",
     "Le nom d'Europe, donné plus tard à tout le continent, reste depuis attaché à cette seule traversée — la mémoire d'un enlèvement devenue, avec le temps, le nom même d'un monde.",
@@ -1600,7 +1614,7 @@ const DEITY_LORE = {
     "Thésée, y croyant sans hésiter, appela sur son propre fils l'une des trois malédictions que lui devait Poséidon (voir la fiche « Poséidon ») — une vengeance qui coûta la vie à Hippolyte et ne révéla la vérité qu'une fois la tragédie déjà accomplie.",
   ],
   "égisthe": [
-    "Fils de Thyeste, Égisthe naquit d'une union que son propre père avait contractée avec sa fille sur l'ordre d'un oracle, seul moyen annoncé de venger un jour l'outrage que lui avait fait subir son frère Atrée, le propre père d'Agamemnon (voir la fiche « Agamemnon ») : celui-ci avait un jour servi à Thyeste, en un festin de réconciliation feinte, la chair de ses propres enfants.",
+    "Fils de Thyeste (voir la fiche « Thyeste »), Égisthe naquit d'une union que son propre père avait contractée avec sa fille sur l'ordre d'un oracle, seul moyen annoncé de venger un jour l'outrage que lui avait fait subir son frère Atrée (voir la fiche « Atrée »), le propre père d'Agamemnon (voir la fiche « Agamemnon ») : celui-ci avait un jour servi à Thyeste, en un festin de réconciliation feinte, la chair de ses propres enfants.",
     "Élevé sans connaître ses origines, Égisthe finit par apprendre la vérité et tua Atrée pour rétablir son père sur le trône — mais la haine ancienne entre les deux branches de la famille ne s'éteignit pas pour autant, et se reporta tout entière sur Agamemnon, fils du bourreau de Thyeste.",
     "Pendant que celui-ci guerroyait dix ans à Troie, Égisthe séduisit son épouse Clytemnestre (voir la fiche « Clytemnestre »), déjà rongée par la colère du sacrifice de leur fille Iphigénie (voir la fiche « Iphigénie ») — une complicité qui se mua en conspiration à son retour : ensemble, ils le piégèrent et le tuèrent.",
     "Il régna plusieurs années aux côtés de Clytemnestre sur Mycènes, jusqu'à ce qu'Oreste (voir la fiche « Oreste »), le propre fils d'Agamemnon, revienne venger son père en les tuant tous les deux à leur tour — la vengeance d'une génération refermant, dans le sang, celle de la génération précédente.",
@@ -1699,7 +1713,7 @@ const DEITY_LORE = {
     "Astéria est particulièrement associée à Léto et à Hécate.",
   ],
   "cadmos": [
-    "Fils du roi Agénor de Phénicie et frère d'Europe (voir la fiche « Europe ») — enlevée par Zeus changé en taureau —, Cadmos partit à la recherche de sa sœur sans jamais la retrouver. L'oracle du temple de Delphes (voir la fiche « Temple ») lui conseilla d'abandonner cette quête et de suivre à la place une vache marquée d'un croissant de lune jusqu'à ce qu'elle s'arrête d'elle-même : à cet endroit précis, il devrait fonder une ville.",
+    "Fils du roi Agénor (voir la fiche « Agénor ») de Phénicie et frère d'Europe (voir la fiche « Europe ») — enlevée par Zeus changé en taureau —, Cadmos partit à la recherche de sa sœur sans jamais la retrouver. L'oracle du temple de Delphes (voir la fiche « Temple ») lui conseilla d'abandonner cette quête et de suivre à la place une vache marquée d'un croissant de lune jusqu'à ce qu'elle s'arrête d'elle-même : à cet endroit précis, il devrait fonder une ville.",
     "La vache s'arrêta sur le site de la future Thèbes. Pour un sacrifice, Cadmos envoya ses compagnons chercher de l'eau à une source voisine, gardée par un dragon consacré à Arès (voir la fiche « Arès »), qui les tua tous. Cadmos vainquit à son tour le dragon puis, sur les conseils d'Athéna, sema ses dents dans le sol : des guerriers tout armés en surgirent aussitôt et s'entretuèrent jusqu'à ce qu'il n'en reste que cinq, devenus les ancêtres des plus grandes familles de Thèbes.",
     "Pour avoir tué un être consacré à Arès, Cadmos dut servir le dieu pendant huit années. Sa peine achevée, il fut réconcilié avec lui et reçut pour épouse Harmonie, fille d'Arès et d'Aphrodite (voir la fiche « Harmonie ») — des noces où tous les dieux de l'Olympe vinrent en personne, chose presque jamais accordée à des mortels.",
     "De cette union naquirent cinq enfants : Sémélé, future mère de Dionysos, Ino, Autonoë et Agavé, et Polydoros, seul fils du couple et son unique héritier légitime sur le trône de Thèbes (voir les fiches « Sémélé », « Ino », « Autonoë », « Agavé » et « Polydoros »).",
@@ -2060,7 +2074,7 @@ const DEITY_LORE = {
     "Restée assise nue sur la terre nue neuf jours durant, sans boire ni manger, à suivre des yeux la course du dieu à travers le ciel, elle finit par s'enraciner sur place et se changer en une fleur qui tourne encore aujourd'hui son visage vers le soleil tout au long du jour.",
   ],
   "danaé": [
-    "Fille du roi Acrisios d'Argos, Danaé fut enfermée par son père dans une chambre de bronze après qu'un oracle lui eut prédit la mort de sa propre main par un futur petit-fils — une précaution que Zeus déjoua sans effort en s'unissant à elle sous la forme d'une pluie d'or.",
+    "Fille du roi Acrisios (voir la fiche « Acrisios ») d'Argos, Danaé fut enfermée par son père dans une chambre de bronze après qu'un oracle lui eut prédit la mort de sa propre main par un futur petit-fils — une précaution que Zeus déjoua sans effort en s'unissant à elle sous la forme d'une pluie d'or.",
     "De cette union naquit Persée (voir la fiche « Persée »). Acrisios, découvrant l'enfant, jeta mère et fils à la mer dans un coffre de bois, que les flots portèrent jusqu'à l'île de Sériphos, où un pêcheur nommé Dictys les recueillit et les éleva.",
     "Le frère de Dictys, le roi Polydectès, épris de Danaé et désireux de se débarrasser de son fils devenu gênant, envoya Persée chercher la tête de la Gorgone Méduse (voir la fiche « Méduse ») — une mission pensée comme un aller sans retour. De retour victorieux, Persée pétrifia Polydectès et toute sa cour d'un dernier regard de la Gorgone, libérant enfin sa mère de cette emprise.",
   ],
@@ -2166,11 +2180,11 @@ const DEITY_LORE = {
   ],
   "libye": [
     "Fille d'Épaphos (voir la fiche « Épaphos ») — le fils qu'Io (voir la fiche « Io »), une jeune femme aimée de Zeus puis changée en génisse par la jalousie d'Héra, mit au monde après ses longues errances jusqu'en Égypte —, Libye donna son nom au continent tout entier qui porte encore le sien aujourd'hui.",
-    "Unie au dieu-fleuve Nil, elle mit au monde des jumeaux, Bélos et Agénor : le premier régna sur l'Égypte et engendra à son tour Égyptos et Danaos (voir les fiches « Égyptos » et « Danaos »), tandis que le second partit fonder Tyr et Sidon, où naquirent plus tard Cadmos et Europe (voir les fiches « Cadmos » et « Europe »).",
+    "Unie au dieu-fleuve Nil, elle mit au monde des jumeaux, Bélos (voir la fiche « Bélos ») et Agénor (voir la fiche « Agénor ») : le premier régna sur l'Égypte et engendra à son tour Égyptos et Danaos (voir les fiches « Égyptos » et « Danaos »), tandis que le second partit fonder Tyr et Sidon, où naquirent plus tard Cadmos et Europe (voir les fiches « Cadmos » et « Europe »).",
     "Par cette double descendance, Libye se trouve à l'origine à la fois de la lignée royale d'Argos, promise aux Danaïdes et à Persée, et de celle de Thèbes, promise à Cadmos et à ses propres descendants — une même aïeule à l'origine de deux des plus grandes maisons de la mythologie grecque.",
   ],
   "égyptos": [
-    "Roi jumeau de Danaos (voir la fiche « Danaos »), petit-fils de Libye (voir la fiche « Libye ») par leur père Bélos, Égyptos régna sur l'Égypte et engendra cinquante fils, tandis que son frère n'eut que cinquante filles, les Danaïdes (voir la fiche « Danaïdes »).",
+    "Roi jumeau de Danaos (voir la fiche « Danaos »), petit-fils de Libye (voir la fiche « Libye ») par leur père Bélos (voir la fiche « Bélos »), Égyptos régna sur l'Égypte et engendra cinquante fils, tandis que son frère n'eut que cinquante filles, les Danaïdes (voir la fiche « Danaïdes »).",
     "Voulant réconcilier les deux branches rivales de la famille, il proposa à Danaos de marier ses cinquante fils à ses cinquante nièces — une offre que Danaos, averti par un oracle qu'un de ses futurs gendres le tuerait un jour, accepta en apparence tout en préparant en secret un tout autre sort à ses fils.",
     "La nuit même des noces, quarante-neuf des cinquante fils d'Égyptos furent poignardés par leurs jeunes épouses sur l'ordre de leur père — seul Lyncée (voir la fiche « Lyncée »), épargné par sa femme Hypermestre (voir la fiche « Hypermestre »), survécut à ce massacre nuptial.",
   ],
@@ -2192,7 +2206,7 @@ const DEITY_LORE = {
   "lyncée": [
     "Fils d'Égyptos (voir la fiche « Égyptos ») et l'un des cinquante prétendants mariés de force aux Danaïdes (voir la fiche « Danaïdes »), Lyncée fut le seul à échapper au massacre organisé par son beau-père Danaos (voir la fiche « Danaos ») la nuit de ses propres noces.",
     "Son épouse Hypermestre (voir la fiche « Hypermestre »), amoureuse de lui plutôt que soumise à l'ordre paternel, le laissa fuir avant de l'aider à revenir plus tard reprendre le trône d'Argos, une fois Danaos disparu.",
-    "De leur réconciliation naquit Abas, puis, quelques générations plus tard, Acrisios et Danaé (voir la fiche « Danaé »), dont le fils Persée (voir la fiche « Persée ») referme ainsi la boucle : le seul couple épargné parmi les Danaïdes se révèle, au bout du compte, l'ancêtre du plus grand tueur de monstres de la mythologie grecque.",
+    "De leur réconciliation naquit Abas (voir la fiche « Abas »), puis, quelques générations plus tard, Acrisios (voir la fiche « Acrisios ») et Danaé (voir la fiche « Danaé »), dont le fils Persée (voir la fiche « Persée ») referme ainsi la boucle : le seul couple épargné parmi les Danaïdes se révèle, au bout du compte, l'ancêtre du plus grand tueur de monstres de la mythologie grecque.",
   ],
   "byzas": [
     "Fils de Poséidon (voir la fiche « Poséidon ») et de la nymphe Kéroessa — elle-même fille d'Io (voir la fiche « Io ») et de Zeus, née près d'une corne d'or à l'embouchure d'une baie qui prit depuis le nom de Corne d'Or —, Byzas grandit sur les rives du Bosphore avant de consulter l'oracle du temple de Delphes (voir la fiche « Temple ») pour savoir où fonder sa propre cité.",
@@ -2436,6 +2450,52 @@ const DEITY_LORE = {
     "Fils de Zeus et d'Europe (voir les fiches « Zeus » et « Europe »), frère de Minos et de Rhadamanthys (voir les fiches « Minos » et « Rhadamanthys »), Sarpédon quitta la Crète après une querelle avec Minos pour le trône et s'exila en Lycie, sur la côte d'Asie Mineure, où il fonda son propre royaume.",
     "Zeus lui accorda en dédommagement un privilège rare parmi les mortels : vivre trois générations humaines entières avant de mourir, bien au-delà de la durée d'une vie ordinaire.",
     "Une tradition épique bien plus tardive donne aussi ce même nom à un tout autre Sarpédon, roi de Lycie et allié de Troie, tué par Patrocle sous les yeux d'Achille — un lointain descendant plutôt que la même figure, la légende ayant fini par confondre les deux générations sous une identité commune.",
+  ],
+  "alcmène": [
+    "Fille d'Électryon (voir la fiche « Électryon »), roi de Mycènes, Alcmène était promise dès l'enfance à son cousin Amphitryon (voir la fiche « Amphitryon »), fils d'Alcée — mais leur mariage resta d'abord sans lendemain : Amphitryon, ayant tué son propre beau-père par accident, dut fuir en exil avec elle avant même de consommer leur union.",
+    "Zeus, séduit par sa beauté et sa vertu, profita de l'absence d'Amphitryon parti venger les frères d'Alcmène pour se présenter à elle sous les traits mêmes de son époux — prolongeant la nuit trois fois sa durée ordinaire pour savourer plus longtemps sa présence. D'une même nuit naquirent deux fils : Héraclès, de Zeus, et Iphiclès, du véritable Amphitryon rentré le lendemain (voir la fiche « Héraclès »).",
+    "Après la mort d'Amphitryon, Zeus offrit à Alcmène l'immortalité — un don qu'elle refusa, préférant rejoindre son époux mortel dans la mort plutôt que de lui survivre éternellement seule.",
+  ],
+  "amphitryon": [
+    "Fils d'Alcée (voir la fiche « Alcée »), roi de Tirynthe, Amphitryon était promis dès l'enfance à sa cousine Alcmène (voir la fiche « Alcmène »), fille de son oncle Électryon (voir la fiche « Électryon ») — mais tua accidentellement son futur beau-père d'un coup de bâton destiné à un bœuf récalcitrant, et dut fuir en exil avec elle avant même leurs noces.",
+    "Pour prouver sa valeur à Alcmène, qui refusait de le rejoindre tant que la mort de ses frères, tués par les Téléboens, ne serait pas vengée, il partit mener campagne contre ce peuple et revint victorieux — pour découvrir, à son retour, que Zeus l'avait devancé d'une nuit sous ses propres traits.",
+    "Il éleva malgré tout Héraclès comme son fils, aux côtés de son propre enfant Iphiclès, né de la même nuit — sans jamais laisser cette naissance divine entamer l'affection qu'il portait à l'un comme à l'autre.",
+  ],
+  "tyndare": [
+    "Fils d'Œbalos et de Gorgophoné (voir la fiche « Gorgophoné »), Tyndare fut un temps chassé de Sparte par son demi-frère Hippocoon, avant d'y être restauré sur le trône avec l'aide d'Héraclès (voir la fiche « Héraclès »).",
+    "Il épousa Léda (voir la fiche « Léda ») — la même nuit où Zeus, changé en cygne, s'unissait à elle : de cette double union naquirent Castor et Clytemnestre, ses propres enfants, aux côtés d'Hélène et de Pollux, ceux de Zeus (voir les fiches « Castor » et « Clytemnestre »).",
+    "À la mort de Castor, resté mortel comme lui, Tyndare tenta en vain d'obtenir justice contre les meurtriers de son fils — un deuil qui l'accompagna jusqu'à ce qu'il cède finalement le trône de Sparte à son gendre Ménélas (voir la fiche « Ménélas »).",
+  ],
+  "icarios": [
+    "Fils de Gorgophoné et du roi Œbalos de Sparte (voir la fiche « Gorgophoné »), Icarios est surtout connu comme le père de Pénélope (voir la fiche « Pénélope »), future épouse d'Ulysse.",
+    "Selon une tradition, si attaché à sa fille qu'il tenta de la retenir à Sparte plutôt que de la laisser partir avec son nouvel époux, il fit courir Ulysse en char à ses côtés pour le convaincre de rester — jusqu'à ce que Pénélope elle-même, interrogée, réponde en silence en baissant son voile : un geste que son père comprit comme un choix sans appel, et qu'il finit par accepter.",
+  ],
+  "atrée": [
+    "Fils de Pélops, Atrée disputa le trône de Mycènes à son frère jumeau Thyeste (voir la fiche « Thyeste ») — une rivalité qui, selon une version, opposa même le cours du soleil lui-même, chacun invoquant un présage céleste pour appuyer sa prétention légitime au pouvoir.",
+    "Découvrant que Thyeste avait séduit son épouse pour s'emparer du trône, Atrée feignit une réconciliation et l'invita à un festin — où il lui servit, sans qu'il le sache, la chair de ses propres fils, révélée seulement une fois le repas achevé. Ce crime devait peser sur toute sa descendance jusqu'à la génération de ses petits-enfants.",
+    "De son épouse Aéropé, il eut deux fils, Agamemnon et Ménélas (voir les fiches « Agamemnon » et « Ménélas »), qui héritèrent avec le trône de Mycènes cette malédiction familiale — Agamemnon devant lui-même mourir assassiné, comme Atrée, par un membre de sa propre maison.",
+  ],
+  "thyeste": [
+    "Fils de Pélops et frère jumeau d'Atrée (voir la fiche « Atrée »), Thyeste lui disputa le trône de Mycènes, allant jusqu'à séduire son épouse pour s'en emparer — une trahison qu'Atrée vengea d'une manière si cruelle qu'elle marqua toute la mythologie grecque : servie à son insu lors d'un festin de fausse réconciliation, la chair de ses propres fils.",
+    "Un oracle, consulté pour savoir comment se venger à son tour, lui répondit qu'un fils né de sa propre fille Pélopia serait seul capable d'accomplir cette vengeance. Thyeste s'unit donc à elle dans l'obscurité, sans qu'elle reconnaisse son propre père, et Égisthe naquit de cette union contre nature (voir la fiche « Égisthe »).",
+    "Des années plus tard, Égisthe devenu adulte reconnut Thyeste comme son père et tua Atrée en son nom, rétablissant son père sur le trône de Mycènes — avant que la haine entre les deux branches de la famille ne se reporte, une génération plus tard, sur Agamemnon lui-même.",
+  ],
+  "acrisios": [
+    "Roi d'Argos, Acrisios apprit d'un oracle qu'un fils né de sa fille Danaé (voir la fiche « Danaé ») le tuerait un jour — pour déjouer cette prophétie, il l'enferma dans une chambre de bronze, loin de tout prétendant possible.",
+    "Zeus, épris d'elle, s'unit malgré tout à Danaé sous la forme d'une pluie d'or qui se glissa par une fissure du toit. De cette union naquit Persée (voir la fiche « Persée ») — qu'Acrisios, découvrant l'enfant, jeta à la mer avec sa mère dans un coffre de bois plutôt que de le tuer de ses propres mains, espérant ainsi échapper à sa propre culpabilité autant qu'à la prophétie.",
+    "Des années plus tard, lors de jeux funéraires auxquels il assistait incognito, Acrisios fut frappé mortellement par un disque que Persée, devenu adulte et ne le reconnaissant pas, avait lancé et dévié par le vent — accomplissant malgré eux deux la prophétie que toute une vie de précautions n'avait fait que retarder.",
+  ],
+  "bélos": [
+    "Fils de Libye et du dieu-fleuve Nil (voir la fiche « Libye »), Bélos régna sur l'Égypte et engendra deux fils jumeaux, Égyptos et Danaos (voir les fiches « Égyptos » et « Danaos »), dont la rivalité devait un jour opposer leurs cinquante enfants respectifs.",
+    "Selon certaines traditions, il eut aussi deux autres fils, Céphée et Phinée, rois d'Éthiopie et de Phénicie — mais c'est par Égyptos et Danaos que sa descendance allait marquer le plus durablement la mythologie grecque, jusqu'à Persée lui-même.",
+  ],
+  "agénor": [
+    "Fils de Libye et du dieu-fleuve Nil (voir la fiche « Libye »), frère jumeau de Bélos (voir la fiche « Bélos »), Agénor quitta l'Égypte pour fonder Tyr et Sidon en Phénicie, où il régna avec son épouse Téléphassa.",
+    "De cette union naquirent Cadmos et Europe (voir les fiches « Cadmos » et « Europe »), ainsi que d'autres fils selon les traditions — Phénix et Cilix, qui donnèrent chacun leur nom à un peuple ou une région. C'est lui qui envoya Cadmos à la recherche de sa sœur enlevée par Zeus, une quête qui devait mener son fils, sans qu'il le retrouve jamais, jusqu'à la fondation de Thèbes.",
+  ],
+  "abas": [
+    "Fils de Lyncée et d'Hypermestre (voir les fiches « Lyncée » et « Hypermestre »), seule des cinquante Danaïdes à avoir épargné son époux la nuit des noces, Abas hérita du trône d'Argos et le transmit à son tour à ses fils.",
+    "Il eut des jumeaux, Acrisios et Proétos, dont la rivalité commença dès le ventre de leur mère, dit-on, et se poursuivit toute leur vie — Acrisios régnant finalement sur Argos, quand Proétos dut se contenter de Tirynthe voisine (voir la fiche « Acrisios »).",
   ],
 };
 const DEITY_PORTRAITS = {
@@ -2736,8 +2796,8 @@ const GENEALOGY_PARENTS = {
   "persée": ["zeus", "danaé"],
   "hélène": ["zeus", "léda"],
   "pollux": ["zeus", "léda"],
-  "castor": ["léda"],
-  "héraclès": ["zeus"],
+  "castor": ["léda", "tyndare"],
+  "héraclès": ["zeus", "alcmène"],
   "minos": ["zeus", "europe"],
   "rhadamanthys": ["zeus", "europe"],
   "sarpédon": ["zeus", "europe"],
@@ -2770,8 +2830,9 @@ const GENEALOGY_PARENTS = {
   "hersé": ["cécrops"],
   "pandrosos": ["cécrops"],
   "érichthonios": ["gaïa"],
-  // Lignée de Persée.
-  "danaé": [],
+  // Lignée de Persée, remontant désormais jusqu'à Abas et Bélos/Agénor (donc jusqu'au socle
+  // primordial) grâce à Acrisios (père de Danaé) et aux figures créées pour lui.
+  "danaé": ["acrisios"],
   "cassiopée": [],
   "andromède": ["cassiopée"],
   "électryon": ["persée", "andromède"],
@@ -2781,19 +2842,35 @@ const GENEALOGY_PARENTS = {
   "mestor": ["persée", "andromède"],
   "héléos": ["persée", "andromède"],
   "persès": ["persée", "andromède"],
-  // Io, Épaphos, Libye et leur descendance jusqu'à Danaos et Égyptos.
+  // Alcmène (mère d'Héraclès) et Amphitryon (son père légal, mais pas biologique — voir la
+  // fiche « Héraclès ») : les deux branches d'Électryon et d'Alcée se rejoignent ici.
+  "alcmène": ["électryon"],
+  "amphitryon": ["alcée"],
+  // Io, Épaphos, Libye et leur descendance jusqu'à Danaos et Égyptos (par Bélos) et jusqu'à
+  // Cadmos et Europe (par Agénor) — les deux grandes lignées thébaine et argienne, désormais
+  // reliées à la même souche.
   "épaphos": ["zeus", "io"],
   "libye": ["épaphos"],
-  "danaos": [],
-  "égyptos": [],
+  "bélos": ["libye"],
+  "agénor": ["libye"],
+  "danaos": ["bélos"],
+  "égyptos": ["bélos"],
   "danaïdes": ["danaos"],
   "hypermestre": ["danaos"],
   "lyncée": ["égyptos"],
+  "abas": ["lyncée", "hypermestre"],
+  "acrisios": ["abas"],
   "byzas": ["poséidon"],
-  // Les Atrides.
-  "agamemnon": [],
-  "ménélas": [],
-  "clytemnestre": ["léda"],
+  // Les Atrides, désormais reliées à leur ancêtre Atrée (et son frère Thyeste, père d'Égisthe).
+  "atrée": [],
+  "thyeste": [],
+  "agamemnon": ["atrée"],
+  "ménélas": ["atrée"],
+  "égisthe": ["thyeste"],
+  "clytemnestre": ["léda", "tyndare"],
+  // Tyndare et Icarios, fils de Gorgophoné (déjà eux-mêmes petits-fils de Persée).
+  "tyndare": ["gorgophoné"],
+  "icarios": ["gorgophoné"],
   "oreste": ["agamemnon", "clytemnestre"],
   "iphigénie": ["agamemnon", "clytemnestre"],
   "électre": ["agamemnon", "clytemnestre"],
@@ -2825,11 +2902,14 @@ const GENEALOGY_PARENTS = {
   "circé": ["hélios"],
   "télégonos": ["circé", "ulysse"],
   "télémaque": ["ulysse", "pénélope"],
+  "pénélope": ["icarios"],
   "alceste": ["pélias"],
   // Le cycle thébain : les cinq enfants de Cadmos et Harmonie, puis la lignée royale de
-  // Thèbes jusqu'à Œdipe (Polydoros -> Labdacos -> Laïos -> Œdipe -> Antigone).
-  "cadmos": [],
-  "europe": [],
+  // Thèbes jusqu'à Œdipe (Polydoros -> Labdacos -> Laïos -> Œdipe -> Antigone). Cadmos et
+  // Europe remontent désormais eux aussi jusqu'à Agénor, donc jusqu'à la même souche que
+  // Danaos et Égyptos (voir Libye/Bélos/Agénor plus haut).
+  "cadmos": ["agénor"],
+  "europe": ["agénor"],
   "sémélé": ["cadmos", "harmonie"],
   "ino": ["cadmos", "harmonie"],
   "autonoë": ["cadmos", "harmonie"],
@@ -2904,6 +2984,15 @@ function genealogyDisplayName(id){
 }
 function byGenealogyDisplayName(a, b){
   return genealogyDisplayName(a).localeCompare(genealogyDisplayName(b), "fr");
+}
+
+// Petite vignette de portrait, insérée devant un nom partout où l'arbre affiche une figure qui
+// en a un (DEITY_PORTRAITS) — pour rendre l'arbre plus visuel plutôt qu'une suite de noms nus.
+// Chaîne vide, sans rien casser, pour les figures sans portrait (la majorité).
+function genealogyPortraitHTML(id){
+  const portrait = DEITY_PORTRAITS[id];
+  if(!portrait) return "";
+  return `<img class="tree-portrait" src="${escapeHTML(portrait)}" alt="" loading="lazy">`;
 }
 
 // Une figure a "sa propre grosse généalogie" — et devient donc cliquable plutôt que
@@ -3313,7 +3402,7 @@ function genealogyChipsHTML(ids, title){
     <div class="geneal-group">
       <h4>${escapeHTML(title)}</h4>
       <div class="chips">
-        ${sorted.map(gid => `<button class="chip" data-nav="genealogy" data-id="${escapeHTML(gid)}">${escapeHTML(genealogyDisplayName(gid))}</button>`).join("")}
+        ${sorted.map(gid => `<button class="chip${DEITY_PORTRAITS[gid] ? " chip-portrait" : ""}" data-nav="genealogy" data-id="${escapeHTML(gid)}">${genealogyPortraitHTML(gid)}${escapeHTML(genealogyDisplayName(gid))}</button>`).join("")}
       </div>
     </div>
   `;
@@ -3331,13 +3420,13 @@ function genealogyDescendantTreeHTML(node){
       ${node.unions.map(u => `
         <div class="tree-union">
           <div class="tree-union-label">${u.partner
-            ? `avec <button class="tree-union-link" data-nav="genealogy" data-id="${escapeHTML(u.partner)}">${escapeHTML(genealogyDisplayName(u.partner))}</button>`
+            ? `avec <button class="tree-union-link" data-nav="genealogy" data-id="${escapeHTML(u.partner)}">${genealogyPortraitHTML(u.partner)}${escapeHTML(genealogyDisplayName(u.partner))}</button>`
             : `<span class="tree-union-unknown">union non précisée</span>`}</div>
           <div class="tree-children">
             ${u.children.map(c => {
-              if(c.duplicate) return `<div class="tree-child"><button class="tree-link tree-link-dup" data-nav="genealogy" data-id="${escapeHTML(c.id)}">${escapeHTML(genealogyDisplayName(c.id))} <span class="tree-dup-note">(même enfant que ci-dessus, union commune)</span></button></div>`;
-              if(c.hub) return `<div class="tree-child"><button class="tree-link" data-nav="genealogy" data-id="${escapeHTML(c.id)}">${escapeHTML(genealogyDisplayName(c.id))} →</button></div>`;
-              return `<div class="tree-child"><div class="tree-name">${escapeHTML(genealogyDisplayName(c.id))}</div>${genealogyDescendantTreeHTML(c.subtree)}</div>`;
+              if(c.duplicate) return `<div class="tree-child"><button class="tree-link tree-link-dup" data-nav="genealogy" data-id="${escapeHTML(c.id)}">${genealogyPortraitHTML(c.id)}${escapeHTML(genealogyDisplayName(c.id))} <span class="tree-dup-note">(même enfant que ci-dessus, union commune)</span></button></div>`;
+              if(c.hub) return `<div class="tree-child"><button class="tree-link" data-nav="genealogy" data-id="${escapeHTML(c.id)}">${genealogyPortraitHTML(c.id)}${escapeHTML(genealogyDisplayName(c.id))} →</button></div>`;
+              return `<div class="tree-child"><div class="tree-name">${genealogyPortraitHTML(c.id)}${escapeHTML(genealogyDisplayName(c.id))}</div>${genealogyDescendantTreeHTML(c.subtree)}</div>`;
             }).join("")}
           </div>
         </div>
@@ -3355,7 +3444,7 @@ function genealogyAncestorTreeHTML(node){
     <div class="tree-ancestors">
       ${node.parents.map(p => `
         <div class="tree-ancestor">
-          <button class="tree-link" data-nav="genealogy" data-id="${escapeHTML(p.id)}">${escapeHTML(genealogyDisplayName(p.id))}</button>
+          <button class="tree-link" data-nav="genealogy" data-id="${escapeHTML(p.id)}">${genealogyPortraitHTML(p.id)}${escapeHTML(genealogyDisplayName(p.id))}</button>
           ${genealogyAncestorTreeHTML(p)}
         </div>
       `).join("")}
@@ -3381,7 +3470,7 @@ function genealogyLineageHTML(id){
             <div class="geneal-union-line">
               <span class="geneal-union-label">${u.partner ? `avec ${escapeHTML(genealogyDisplayName(u.partner))} :` : "union non précisée :"}</span>
               <div class="chips">
-                ${u.children.map(cid => `<button class="chip" data-nav="genealogy" data-id="${escapeHTML(cid)}">${escapeHTML(genealogyDisplayName(cid))}</button>`).join("")}
+                ${u.children.map(cid => `<button class="chip${DEITY_PORTRAITS[cid] ? " chip-portrait" : ""}" data-nav="genealogy" data-id="${escapeHTML(cid)}">${genealogyPortraitHTML(cid)}${escapeHTML(genealogyDisplayName(cid))}</button>`).join("")}
               </div>
             </div>
           `).join("")}
@@ -3457,30 +3546,52 @@ function renderGenealogyHome(){
   `;
 }
 
-// Écran dédié aux douze Olympiens (voir OLYMPIAN_IDS) : chacun avec sa propre ligne
-// d'ascendance directe, plutôt qu'un seul point d'entrée centré sur Zeus. Cliquer sur l'un
-// d'eux ouvre son arbre personnel complet — ascendance ET descendance — sur renderGenealogy().
+// Regroupe les douze Olympiens (voir OLYMPIAN_IDS) par couple de parents — plusieurs Olympiens
+// partagent souvent les mêmes (Cronos et Rhéa pour Zeus/Héra/Poséidon/Déméter, par exemple) —
+// pour l'écran dédié ci-dessous : un vrai arbre montrant les douze d'un coup, un seul niveau
+// de parenté (pas plus, pour ne pas surcharger), plutôt qu'une liste de cartes séparées.
+function buildOlympiansGroups(){
+  const groups = new Map(); // clé = parents triés, jamais affichée telle quelle
+  for(const oid of OLYMPIAN_IDS){
+    const parents = GENEALOGY_PARENTS[oid] || [];
+    const key = parents.slice().sort().join("+") || "(inconnu)";
+    if(!groups.has(key)) groups.set(key, { parents, members: [] });
+    groups.get(key).members.push(oid);
+  }
+  return [...groups.values()];
+}
+
+// Écran dédié aux douze Olympiens : un arbre montrant les douze d'un seul coup, groupés par
+// parents (voir buildOlympiansGroups) — sciemment limité à ce seul niveau d'ascendance pour ne
+// pas surcharger l'écran. Cliquer sur un parent ou sur un Olympien ouvre son propre arbre
+// personnel complet (ascendance ET descendance) sur renderGenealogy().
 function renderOlympiansOverview(){
+  const groups = buildOlympiansGroups();
   return `
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
       <h2>Les douze Olympiens</h2>
     </div>
-    <p class="note">Chacun avec sa propre ascendance — cliquez sur un nom pour ouvrir son arbre généalogique complet, parents et enfants compris.</p>
-    <div class="geneal-entrypoints">
-      ${OLYMPIAN_IDS.map(oid => `
-        <button class="geneal-entry" data-nav="genealogy" data-id="${escapeHTML(oid)}">
-          <span class="geneal-entry-title">${escapeHTML(genealogyDisplayName(oid))}</span>
-          <span class="geneal-entry-sub">${escapeHTML(olympianAscendanceLine(oid))}</span>
-        </button>
+    <p class="note">Les douze Olympiens et leurs parents directs. Cliquez sur n'importe quel nom pour ouvrir son arbre généalogique complet.</p>
+    <div class="tree-unions">
+      ${groups.map(g => `
+        <div class="tree-union">
+          <div class="tree-union-label">${g.parents.length
+            ? "Parents : " + g.parents.map(p => `<button class="tree-union-link" data-nav="genealogy" data-id="${escapeHTML(p)}">${genealogyPortraitHTML(p)}${escapeHTML(genealogyDisplayName(p))}</button>`).join(" et ")
+            : `<span class="tree-union-unknown">origine incertaine</span>`}</div>
+          <div class="tree-children">
+            ${g.members.map(mid => `<div class="tree-child"><button class="tree-link" data-nav="genealogy" data-id="${escapeHTML(mid)}">${genealogyPortraitHTML(mid)}${escapeHTML(genealogyDisplayName(mid))} →</button></div>`).join("")}
+          </div>
+        </div>
       `).join("")}
     </div>
   `;
 }
 
-// Écran d'exploration : une figure recentrée en tête, avec son ascendance complète au-dessus
-// (jusqu'à la racine du corpus), sa fratrie à côté, et l'arbre complet de sa descendance
-// dessous — chaque branche mineure développée en ligne, chaque figure ayant sa propre grosse
+// Écran d'exploration : une figure recentrée en tête, dans cet ordre — Ascendance (jusqu'à la
+// racine du corpus), Unions (les partenaires connus, pour toujours voir avec qui viennent les
+// enfants qui suivent), Frères et sœurs, puis l'arbre complet de la Descendance. Chaque branche
+// mineure de la descendance est développée en ligne, chaque figure ayant sa propre grosse
 // généalogie rendue comme un lien cliquable vers son propre arbre plutôt que développée ici
 // (voir isGenealogyHub). Cliquer sur n'importe quel nom recentre l'arbre à son tour (chaque
 // clic empile un écran, si bien que « ← Retour » redéroule l'exploration pas à pas).
@@ -3489,7 +3600,7 @@ function renderGenealogy(id){
   const note = DEITY_NOTES[id];
   const portrait = DEITY_PORTRAITS[id];
   const rel = genealogyRelations(id);
-  const hasAny = rel.parents.length || rel.siblings.length || rel.children.length;
+  const hasAny = rel.parents.length || rel.partners.length || rel.siblings.length || rel.children.length;
   const ancestorTree = rel.parents.length ? genealogyAncestorTreeHTML(buildGenealogyAncestorTree(id)) : "";
   const descendantTree = rel.children.length ? genealogyDescendantTreeHTML(buildGenealogyDescendantTree(id)) : "";
   return `
@@ -3504,6 +3615,7 @@ function renderGenealogy(id){
     </div>
     ${hasAny ? `
       ${ancestorTree ? `<div class="geneal-section"><h3>Ascendance</h3>${ancestorTree}</div>` : ""}
+      ${genealogyChipsHTML(rel.partners, rel.partners.length > 1 ? "Unions" : "Union")}
       ${genealogyChipsHTML(rel.siblings, "Frères et sœurs")}
       ${descendantTree ? `<div class="geneal-section"><h3>Descendance</h3>${descendantTree}</div>` : ""}
     ` : `<p class="empty">Aucune parenté connue pour ${escapeHTML(name)} dans ce corpus.</p>`}
