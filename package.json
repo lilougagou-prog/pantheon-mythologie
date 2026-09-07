@@ -1,0 +1,11 @@
+{
+  "name": "pantheon-mythologie",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Panthéon — mythologie grecque, PWA enveloppée en app iOS (Capacitor) avec Premium par achat unique Apple (StoreKit, backend serverless).",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@apple/app-store-server-library": "^3.1.0",
+    "@neondatabase/serverless": "^1.1.0"
+  }
+}

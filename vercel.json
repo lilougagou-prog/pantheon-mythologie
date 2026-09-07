@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "api/verify-purchase.js": {},
+    "api/entitlement.js": {},
+    "api/apple-notifications.js": {},
+    "api/content.js": {}
+  }
+}

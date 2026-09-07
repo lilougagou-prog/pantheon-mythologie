@@ -595,3 +595,69 @@ d'écran (liste complète, fiche détaillée, recherche et filtres actifs, repli
 Leaflet) : aucune erreur JavaScript, dégradation transparente lorsque le CDN Leaflet n'est pas
 joignable.
 - `service-worker.js` : `pantheon-v10` → `pantheon-v11`.
+
+## Premium (achat unique App Store) — architecture de sécurité
+
+Préparation d'un modèle FREE / PREMIUM débloqué par un achat unique Apple (StoreKit, produit
+non-consommable `premium_full_access`, 39,99 €, sans abonnement). Voir l'audit de sécurité livré
+en même temps que ce chantier pour le détail complet (failles identifiées, corrections,
+architecture cible) ; ce qui suit résume ce qui a été construit.
+
+**Modèle d'accès aux données.** `FREE_FIGURE_IDS` / `FREE_SYMBOL_IDS` / `FREE_GENEALOGY_KEYS`
+(app.js) : listes explicites et nommées — jamais un `array.slice(0, 5)` ni un `index < 5` —
+déterminant les 5 figures (Zeus, Héra, Poséidon, Athéna, Apollon), 5 symboles (Chouette,
+Laurier, Foudre, Serpent, Olivier) et 1 généalogie (Les douze Olympiens) qui restent gratuites.
+Tout le reste est premium par défaut (liste positive : impossible d'oublier de verrouiller une
+nouvelle fiche ajoutée plus tard). Les lieux (`MAP_PLACES`) restent hors périmètre — pas dans la
+demande initiale — et intégralement gratuits.
+
+**Séparation réelle du bundle** (`scripts/export-premium-content.js`, lancé une fois manuellement
+— voir son en-tête pour la procédure et ses préconditions) : le récit complet des 269 figures et
+93 symboles premium a été retiré d'`app.js` (qui ne garde plus qu'un aperçu : icône, libellé,
+catégorie, courte description) et déplacé vers `api/_data/content.json`, un fichier privé jamais
+servi publiquement (`vercel.json` limite explicitement les fonctions routables à
+`api/verify-purchase.js`, `api/entitlement.js`, `api/apple-notifications.js` et `api/content.js`
+— rien d'autre sous `api/` n'est une route). `app.js` est passé de 739 Ko à 175 Ko après ce
+retrait. Un utilisateur qui inspecterait le bundle public ne peut donc plus extraire le contenu
+premium complet, contrairement à une simple fiche masquée par CSS ou par un `if(!isPremium)`
+côté client.
+
+**Backend serverless** (`api/`, Vercel + base de données Neon Postgres) :
+- `verify-purchase.js` — reçoit la transaction StoreKit signée par Apple, la vérifie réellement
+  (`@apple/app-store-server-library`, chaîne de certificats jusqu'aux autorités racines Apple —
+  jamais un JWS décodé « à la main »), rejette tout ce qui n'est pas exactement l'achat non-
+  consommable `premium_full_access`, puis persiste l'entitlement en base (ancré sur
+  l'`originalTransactionId`, l'identifiant Apple stable qui survit à un changement d'appareil ou
+  une réinstallation).
+- `entitlement.js` — lecture rapide du droit déjà persisté, sans re-vérifier la signature à
+  chaque appel.
+- `apple-notifications.js` — webhook App Store Server Notifications V2 : réagit à `REFUND`/
+  `REVOKE` en marquant l'entitlement correspondant révoqué, jamais l'inverse.
+- `content.js` — sert le contenu premium complet uniquement après vérification serveur du droit
+  d'accès (jamais une confiance dans ce que le client affirme) ; le mode liste ne renvoie jamais
+  le contenu complet, entitled ou non (anti-énumération : récupérer toute la bibliothèque
+  demande un appel par fiche, ralenti par la limitation de débit de `_lib/rate-limit.js`).
+
+**Frontend** : badge 🔒 sur les fiches premium dans les listes (cartes visibles, jamais masquées) ;
+`renderPaywall()` affiché à la place d'une fiche premium (nom, aperçu, prix — actuellement un
+espace réservé, 39,99 €, à remplacer par le prix localisé StoreKit une fois branché — boutons
+« Débloquer Premium » et « Restaurer mon achat ») ; `isPremiumUnlocked()` renvoie
+délibérément `false` tant que StoreKit n'est pas intégré côté app — jamais un localStorage ou un
+booléen local présenté comme une preuve d'achat.
+
+**Ce qui reste à faire, et pourquoi ça dépend d'un Mac** : StoreKit n'est accessible que depuis
+du code natif ou hybride (Capacitor) — impossible depuis une PWA pure. Décisions prises avec
+l'utilisatrice : envelopper l'app existante avec **Capacitor**, backend sur **Vercel serverless +
+Neon Postgres** (ci-dessus). Restent à faire, sur un Mac avec Xcode (non disponible dans
+l'environnement de développement de cette session) : générer le projet Xcode
+(`npx cap add ios`), brancher un plugin StoreKit pour l'achat non-consommable, remplacer
+`isPremiumUnlocked()` par un vrai appel à `/api/entitlement`, protection capture d'écran/
+multitâche (API publiques Apple uniquement), configuration du produit dans App Store Connect.
+
+Tests : `smoke_pantheon_access_model.js` (16 vérifications, modèle de données), `smoke_pantheon_
+backend.js` (18 vérifications, logique des 4 endpoints avec base de données et vérification
+Apple simulées), `smoke_pantheon_premium.js` (19 vérifications, séparation du bundle + paywall
+côté client) — 53 nouvelles vérifications, toutes au vert, en plus des onze suites précédentes
+(remises au vert : le paywall est contourné dans les tests qui vérifient le moteur de rendu de
+l'arbre généalogique ou la structure d'une fiche, pas la frontière Premium elle-même — voir les
+commentaires ajoutés dans ces fichiers).

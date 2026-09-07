@@ -728,3 +728,66 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
   .places-map{ height: 260px; }
   .place-detail-map{ height: 170px; }
 }
+
+/* ----- Premium : badge de verrou et paywall ----- */
+
+.lock-badge{ font-size: 0.8em; opacity: 0.75; }
+
+.paywall-detail{ text-align: center; }
+.paywall-detail h2{ margin-top: 12px; }
+.paywall-box{
+  margin: 22px auto 0;
+  max-width: 420px;
+  background: var(--marble-deep);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 22px;
+}
+.paywall-box h3{ margin: 0 0 8px; font-size: 1.2rem; }
+.paywall-box p{ margin: 0 0 10px; color: var(--ink); }
+.paywall-access{
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+  color: var(--bronze);
+  font-weight: 600;
+}
+.paywall-price{
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 2rem;
+  color: var(--laurel-deep);
+  margin: 4px 0 16px !important;
+}
+.paywall-cta{
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: var(--laurel-deep);
+  color: var(--marble);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.paywall-cta:hover{ background: var(--laurel); }
+.paywall-restore{
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: none;
+  color: var(--ink-soft);
+  font-family: inherit;
+  font-size: 0.88rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.paywall-fineprint{
+  margin-top: 14px !important;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
