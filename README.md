@@ -703,3 +703,36 @@ Tests : nouveau `smoke_pantheon_appstore_prep.js` (21 vérifications), plus deux
 ajoutées à `smoke_pantheon_backend.js` (purge protégée par secret) et `smoke_pantheon_premium.js`
 (vercel.json à jour) — 74 vérifications au total pour ce round, en plus des quatorze suites
 précédentes, toutes au vert. `service-worker.js` : `pantheon-v12` → `pantheon-v13`.
+
+## Identité visuelle — illustrations dédiées (accueil et menu du bas)
+
+Remplace les emoji de l'écran d'accueil et du menu du bas par des illustrations générées et
+retravaillées pour l'occasion (fournies par l'utilisatrice, retouchées pour l'intégration) :
+
+- **Bannière d'accueil** (`assets/hero-olympians.jpg`) : remplace le petit éclair (⚡) au-dessus
+  du titre « Panthéon » par une fresque des douze Olympiens, légendée en français directement
+  dans l'image (Hestia, Déméter, Héra, Zeus, Poséidon, Apollon, Artémis, Athéna, Arès,
+  Aphrodite, Héphaïstos, Hermès). Rognée de ses marges blanches d'origine pour remplir
+  pleinement son cadre.
+- **Trois badges de tuile et d'onglet** (`assets/badge-*.webp`, détourés en cercle, fond
+  transparent) : un portrait pour « Figures mythologiques », une lyre pour « Bibliothèque
+  symbolique », une mère et son enfant pour « Généalogie des dieux ». Chaque badge remplace à la
+  fois l'emoji de la tuile d'accueil et celui de l'onglet correspondant dans le menu du bas.
+- **Badge « Accueil »** (`badge-home-temple.webp`, un temple grec) remplace l'emoji 🏠 du menu
+  du bas.
+- **« Lieux mythologiques » n'a volontairement pas été touché** (ni tuile ni onglet) : aucune
+  illustration n'a été fournie pour cet écran, il garde son emoji 🗺️.
+
+Les quatre badges sont exportés en WebP avec canal alpha (fond transparent, cercle détouré au
+plus près du cadre doré déjà présent dans l'image) — environ 10 fois plus léger qu'un PNG
+équivalent pour un rendu identique. La bannière, elle, n'a pas besoin de transparence et reste en
+JPEG. Poids total des cinq fichiers : ~420 Ko. Les cinq sont précachés par le service worker
+(disponibles hors-ligne dès la première visite), et les captures d'écran App Store ont été
+reprises pour refléter la nouvelle page d'accueil.
+
+Testé par un script dédié (`smoke_pantheon_illustrations.js`, 14 vérifications : présence et
+poids raisonnable des fichiers, références correctes dans `app.js`, absence de tout résidu de
+l'ancien `hero-mark`, rendu correct de la bannière et des quatre badges, tuile et onglet
+« Lieux » inchangés, précache du service worker) + deux assertions obsolètes corrigées dans
+`smoke_pantheon_v2.js` (l'ancien test cherchait l'emoji 🏠/🏛️ littéral dans le menu du bas).
+`service-worker.js` : `pantheon-v13` → `pantheon-v14`.

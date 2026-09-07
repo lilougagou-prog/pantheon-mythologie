@@ -1211,24 +1211,24 @@ function figureOfTheDayHTML(){
 function renderHome(){
   return `
     <header class="hero">
-      <div class="hero-mark">⚡</div>
+      <img class="hero-banner" src="assets/hero-olympians.jpg" alt="Les douze dieux de l'Olympe : Hestia, Déméter, Héra, Zeus, Poséidon, Apollon, Artémis, Athéna, Arès, Aphrodite, Héphaïstos et Hermès">
       <h1>Panthéon</h1>
       <p class="tagline">Apprendre la mythologie grecque — dieux, héros et symboles</p>
     </header>
     ${figureOfTheDayHTML()}
     <div class="tiles">
       <button class="tile" data-nav="figures">
-        <span class="tile-icon">🏛️</span>
+        <img class="tile-badge" src="assets/badge-figures-portrait.webp" alt="">
         <span class="tile-title">Figures mythologiques</span>
         <span class="tile-count">${FIGURE_ENTRIES.length} fiches</span>
       </button>
       <button class="tile" data-nav="symbols">
-        <span class="tile-icon">🔱</span>
+        <img class="tile-badge" src="assets/badge-symbols-lyre.webp" alt="">
         <span class="tile-title">Bibliothèque symbolique</span>
         <span class="tile-count">${SYMBOL_ENTRIES.length} symboles</span>
       </button>
       <button class="tile" data-nav="genealogyHome">
-        <span class="tile-icon">🌳</span>
+        <img class="tile-badge" src="assets/badge-genealogy-mother.webp" alt="">
         <span class="tile-title">Généalogie des dieux</span>
         <span class="tile-count">${GENEALOGY_FIGURE_COUNT} figures reliées</span>
       </button>
@@ -2105,11 +2105,15 @@ function renderPlaceDetail(id){
 
 /* ===================== RENDU : MENU FIXE ===================== */
 
+// Les icônes des quatre premiers onglets sont des badges illustrés (voir assets/badge-*.webp)
+// plutôt que des emoji — insérés tels quels dans renderBottomNav(), qui ne les échappe pas
+// (elles ne viennent jamais d'une saisie utilisateur). « Lieux » garde son emoji d'origine,
+// aucune illustration n'ayant été demandée pour cet onglet.
 const TABS = [
-  { type: "home", icon: "🏠", label: "Accueil" },
-  { type: "figures", icon: "🏛️", label: "Figures" },
-  { type: "symbols", icon: "🔱", label: "Symboles" },
-  { type: "genealogyHome", icon: "🌳", label: "Généalogie" },
+  { type: "home", icon: '<img class="nav-badge" src="assets/badge-home-temple.webp" alt="">', label: "Accueil" },
+  { type: "figures", icon: '<img class="nav-badge" src="assets/badge-figures-portrait.webp" alt="">', label: "Figures" },
+  { type: "symbols", icon: '<img class="nav-badge" src="assets/badge-symbols-lyre.webp" alt="">', label: "Symboles" },
+  { type: "genealogyHome", icon: '<img class="nav-badge" src="assets/badge-genealogy-mother.webp" alt="">', label: "Généalogie" },
   { type: "places", icon: "🗺️", label: "Lieux" },
 ];
 

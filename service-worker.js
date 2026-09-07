@@ -1,5 +1,5 @@
-const CACHE="pantheon-v13";
-const ASSETS=["./","./index.html","./styles.css","./app.js","./manifest.json","./icon.svg","./icon-192.png","./icon-512.png","./icon-180.png","./politique-confidentialite.html"];
+const CACHE="pantheon-v14";
+const ASSETS=["./","./index.html","./styles.css","./app.js","./manifest.json","./icon.svg","./icon-192.png","./icon-512.png","./icon-180.png","./politique-confidentialite.html","./assets/hero-olympians.jpg","./assets/badge-home-temple.webp","./assets/badge-figures-portrait.webp","./assets/badge-symbols-lyre.webp","./assets/badge-genealogy-mother.webp"];
 
 self.addEventListener("install",event=>{
   event.waitUntil(
