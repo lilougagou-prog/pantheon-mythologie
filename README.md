@@ -449,3 +449,88 @@ API).
 - Suivi de progression (fiches consultées), sur le modèle de ce qui existe déjà côté Tarot.
 - Lien croisé vers l'appli Tarot depuis une fiche figure quand celle-ci est aussi incarnée
   par une carte (utile dans les deux sens une fois les deux applis en ligne).
+
+## Bibliothèque symbolique (refonte — sources, certitude et réseau)
+
+Refonte complète de la Bibliothèque symbolique : passer d'un ensemble de courtes définitions
+(« la chouette représente la sagesse ») à une véritable bibliothèque de référence, qui explique
+*pourquoi* une association existe, d'où elle vient, dans quels mythes elle apparaît, et jusqu'à
+quel point elle est effectivement attestée dans l'Antiquité plutôt que reconstituée après coup.
+
+**Audit préalable.** Les 90 fiches existantes ont d'abord été relues intégralement (icône,
+libellé, catégorie, description courte, `lore`, liens vers les figures) avant toute
+modification — rien n'a été supprimé ; le travail déjà validé (notamment les six paragraphes de
+`lore` par fiche, écrits lors d'un round précédent) a été conservé tel quel et complété.
+
+**Nouveau schéma de données**, ajouté à chaque entrée de `SYMBOL_LIBRARY` en plus des champs
+existants (`icon`, `label`, `category`, `desc`, `links`, `lore`) :
+- `atGlance` — synthèse immédiate (« en un coup d'œil »).
+- `why` — explique l'origine de l'association plutôt que de se contenter de l'énoncer :
+  propriété naturelle de l'objet/l'animal/la plante, rôle concret dans la société grecque,
+  épithète homérique, usage rituel, etc.
+- `deities: [{id, role, certainty}]` — les figures associées, chacune avec la nature précise du
+  lien et un niveau de certitude explicite plutôt qu'une liste plate de noms. **Peut être
+  vide** : quand aucune association divine clairement attestée n'existe, la fiche l'affiche
+  honnêtement (« Aucune association divine clairement attestée n'a été identifiée pour ce
+  symbole. ») plutôt que d'en inventer une pour remplir la section.
+- `dimensions: [{axis, text}]` — les différents axes symboliques quand ils coexistent
+  (vie/mort, protection/menace, sagesse/ruse...), pour éviter d'aplatir un symbole ambivalent
+  en une seule signification.
+- `iconography`, `cult`, `history` — trois champs optionnels, affichés en sections repliables,
+  renseignés seulement quand la matière le justifie réellement (attribut dans l'art antique,
+  monnaie, sanctuaire, rituel, sacrifice, évolution archaïque → classique → hellénistique →
+  romaine).
+- `sources` — bibliographie associée à la fiche (auteurs antiques en priorité, puis sources
+  archéologiques/épigraphiques, puis académiques) ; jamais de référence inventée.
+- `relatedSymbols` — renvois vers d'autres fiches symbole, pour que la bibliothèque forme un
+  réseau (ex. Laurier → Apollon → Daphné → métamorphose → Delphes → Pythie → divination) plutôt
+  qu'une collection de fiches isolées.
+
+**Niveaux de certitude.** Cinq niveaux définis dans `SYMBOL_CERTAINTY_LABELS` et appliqués à
+chaque association `deities[]` : *attesté* (directement documenté dans les sources antiques),
+*fortement établi* (plusieurs sources convergentes), *interprétation* (plausible mais non
+explicitement attestée), *tardif* (issu surtout d'une tradition postérieure) et *moderne*
+(symbolique principalement contemporaine). Affichés discrètement en italique à côté de chaque
+divinité associée, sans alourdir la lecture.
+
+**Chevauchements résolus sans rien supprimer.** Trois paires de fiches proches ont été
+différenciées plutôt que fusionnées, chacune avec un angle distinct et un renvoi croisé via
+`relatedSymbols` : *torches* (rite collectif, cortèges d'Hécate et Déméter) / *torche*
+(relais individuel, lampadédromies, feu de Prométhée) ; *blé* (plante cultivée, diffusion par
+Triptolème) / *épis* (épis isolés, révélation silencieuse d'Éleusis) ; *olivier* (mythe
+fondateur, concours avec Poséidon) / *olive* (fruit concret, huile, athlètes).
+
+**Huit symboles manquants ajoutés**, identifiés comme des lacunes réelles pendant l'audit :
+sanglier, égide, lance, fil, carrefour, source, ouroboros, fleur de narcisse — chacun avec le
+schéma complet ci-dessus. Cas particulier de l'**ouroboros** : la fiche précise explicitement
+qu'il ne s'agit *pas* d'un symbole de la mythologie grecque classique mais d'un motif attesté
+d'abord en Égypte ancienne (dès le Nouvel Empire), repris seulement plus tard par l'alchimie
+hellénistique d'Alexandrie — `deities` y est délibérément vide, sans association grecque
+forcée, et la fiche a sa propre catégorie neuve, « Motifs & concepts ».
+
+**Vigilance contre les généralisations non fondées.** Les affirmations du type « les Grecs
+considéraient toujours X comme Y » ont été évitées ; quand une pratique est propre à un lieu,
+une période ou un culte particulier (Delphes, l'Acropole, les Panathénées...), la fiche le
+précise plutôt que de généraliser à « les Grecs » sans nuance.
+
+**Interface.** Nouvel enchaînement de lecture sur `renderSymbolDetail()` : icône → titre →
+description courte → « En un coup d'œil » → « Pourquoi ? » → « Dans la mythologie » →
+« Divinités associées » (avec certitude) → dimensions symboliques → sections repliables
+(Iconographie / Culte et religion / Histoire et évolution, chacune affichée seulement si
+renseignée) → Sources → Figures associées (existant) → Symboles associés (nouveau, réseau).
+Palette et typographie inchangées (marbre, bronze, Cinzel/Source Serif 4) ; nouvelles classes
+CSS ajoutées sans toucher au reste de la feuille de style : `.symbol-glance`, `.symbol-why`,
+`.symbol-deities`/`.symbol-deity`/`.symbol-certainty`, `.symbol-dimensions`, `details.symbol-more`
+(sections repliables avec marqueur `▸`/`▾` personnalisé), `.symbol-sources`, `.chip-inactive`
+(pour une association citée mais non encore documentée comme fiche, ex. Daphné, Pélops — un
+chip visible mais non cliquable plutôt qu'un lien mort).
+
+**Résultat : 98 symboles** (90 existants enrichis + 8 nouveaux), 274 figures inchangées. Testé
+par un script dédié (`smoke_pantheon_symbols.js`, 24 vérifications : comptes globaux, structure
+complète de chaque fiche, validité des niveaux de certitude, cohérence du réseau
+`relatedSymbols`, différenciation des trois paires résolues, présence et rigueur documentaire
+de l'ouroboros, rendu HTML de la fiche Chouette avec toutes les nouvelles sections, message
+honnête d'absence d'association sur l'ouroboros, classes CSS, et intégrité totale des citations
+sur l'ensemble du corpus — 0 résiduelle) + les neuf suites précédentes, remises au vert
+(quelques décomptes obsolètes de « 90 symboles » mis à jour vers 98).
+- `service-worker.js` : `pantheon-v9` → `pantheon-v10`.

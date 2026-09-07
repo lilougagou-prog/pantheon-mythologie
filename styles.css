@@ -506,6 +506,96 @@ h1, h2, h3{
 .chip:hover{ background: var(--border); }
 .chip-symbol{ color: var(--bronze); }
 .chip-portrait{ display: inline-flex; align-items: center; gap: 6px; padding-left: 4px; }
+.chip-inactive{ cursor: default; opacity: 0.75; }
+.chip-inactive:hover{ background: var(--marble-deep); }
+
+/* ----- Fiche symbolique enrichie ----- */
+
+.symbol-detail .symbol-glance{
+  background: var(--marble-deep);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 4px 0 22px;
+}
+.symbol-detail .symbol-glance h4{
+  margin: 0 0 6px;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--bronze);
+}
+.symbol-detail .symbol-glance p{ margin: 0; color: var(--ink); line-height: 1.55; }
+
+.symbol-detail .symbol-why{ margin-bottom: 8px; }
+
+.symbol-deities{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 8px 0 20px;
+}
+.symbol-deity{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.symbol-deity:last-child{ border-bottom: none; padding-bottom: 0; }
+.symbol-deity-role{ color: var(--ink); font-size: 0.92rem; }
+.symbol-certainty{
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  flex-basis: 100%;
+}
+
+.symbol-dimensions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 22px;
+}
+.symbol-dimension{
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+.symbol-dimension strong{ color: var(--laurel-deep); font-family: "Cinzel", Georgia, serif; font-weight: 600; }
+
+details.symbol-more{
+  border-top: 1px solid var(--border);
+  padding: 12px 0;
+}
+details.symbol-more:last-of-type{ border-bottom: 1px solid var(--border); }
+details.symbol-more summary{
+  cursor: pointer;
+  font-family: "Cinzel", Georgia, serif;
+  font-weight: 600;
+  color: var(--laurel-deep);
+  font-size: 1.02rem;
+  list-style: none;
+}
+details.symbol-more summary::-webkit-details-marker{ display: none; }
+details.symbol-more summary::before{
+  content: "▸ ";
+  color: var(--bronze);
+}
+details.symbol-more[open] summary::before{ content: "▾ "; }
+details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
+.symbol-sources{
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
 
 /* ----- Menu fixe en bas ----- */
 

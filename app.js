@@ -20,70 +20,216 @@ function escapeHTML(value){
 
 const SYMBOL_LIBRARY = {
   // Lieux & passages
-  "porte":{icon:"🚪",label:"Porte",category:"Lieux & passages",desc:"Seuil, choix à faire, passage d'un état à un autre.",links:[],lore:[
+  "porte":{icon:"🚪",label:"Porte",category:"Lieux & passages",desc:"Seuil, choix à faire, passage d'un état à un autre.",
+    atGlance:"Un seuil qui sépare deux mondes ou deux états — franchir une porte, dans les récits grecs, n'est jamais un geste neutre : c'est le moment où un choix devient irréversible.",
+    why:"Dans une culture où les grandes frontières du récit (profane/sacré, vivants/morts, illusion/vérité) structurent le mythe, l'acte de franchir un seuil devient le point de bascule narratif. Homère en tire une véritable image mentale — les deux portes du sommeil — plutôt qu'un simple décor architectural : la porte n'ouvre pas seulement sur un lieu, elle ouvre sur une vérité ou sur un mensonge.",
+    links:[],lore:[
     "Dans la mythologie grecque, les portes ne sont jamais anodines : elles séparent deux mondes et marquent le moment où un choix devient irréversible.",
     "Homère décrit dans l'Odyssée deux portes du sommeil, l'une de corne, l'autre d'ivoire : les rêves qui passent par la porte de corne se réalisent, ceux qui passent par la porte d'ivoire ne sont que des illusions trompeuses. Franchir une porte n'est donc jamais un geste neutre — encore faut-il savoir laquelle on choisit.",
     "La porte la plus chargée de sens de toute l'Iliade est sans doute la porte Scée de Troie : c'est là qu'Hector fait ses adieux à Andromaque avant son dernier combat contre Achille, et c'est par elle que le vieux roi Priam sortira plus tard, seul et sans escorte, supplier le meurtrier de son fils de lui rendre son corps (voir les fiches « Hector », « Andromaque » et « Priam »).",
     "Les portes des Enfers, elles, gardées par Cerbère, ne se franchissent que dans un sens pour les mortels ordinaires : entrer y est possible, en ressortir exige une faveur exceptionnelle.",
     "La porte est ainsi devenue un symbole de seuil, de choix décisif, de passage d'un état à un autre et de ce qui sépare l'illusion de la vérité.",
-  ]},
-  "chemin":{icon:"🛤",label:"Chemin",category:"Lieux & passages",desc:"Évolution en cours, quête, direction prise plutôt qu'imposée.",links:[],lore:[
+  ],
+    deities:[
+      {id:"hécate",role:"déesse des seuils et des carrefours, invoquée aux portes des maisons",certainty:"interprétation"},
+    ],
+    dimensions:[
+      {axis:"choix",text:"le moment où une décision devient irréversible"},
+      {axis:"passage",text:"franchissement d'un état à un autre, jamais neutre"},
+      {axis:"vérité / illusion",text:"les deux portes du sommeil chez Homère, l'une trompeuse, l'autre non"},
+    ],
+    iconography:"La porte n'est presque jamais représentée comme un attribut porté par une figure : elle apparaît en contexte architectural (portes monumentales de cités, comme la porte Scée de Troie ou la porte des Lionnes de Mycènes) plutôt que comme un objet symbolique isolé dans l'art grec.",
+    cult:"Les seuils des maisons grecques étaient parfois protégés par des hermès ou des objets apotropaïques destinés à empêcher le mal d'entrer — une pratique religieuse discrète, mais réelle, liée à la vulnérabilité particulière du passage.",
+    history:"La personnification d'un dieu spécifiquement chargé des portes, comme le Janus bifrons romain, n'a pas de véritable équivalent dans le panthéon grec classique : c'est une divinité proprement romaine, souvent associée à tort à la Grèce antique par extension.",
+    sources:["Homère, Odyssée, chant XIX (les deux portes du sommeil)","Homère, Iliade, chant VI (la porte Scée)"],
+    relatedSymbols:["chemin","clé","labyrinthe"],
+  },
+  "chemin":{icon:"🛤",label:"Chemin",category:"Lieux & passages",desc:"Évolution en cours, quête, direction prise plutôt qu'imposée.",
+    atGlance:"La route qu'on choisit à un carrefour engage tout ce qui suivra — un des plus anciens symboles du choix humain, que la mythologie grecque met en scène comme une véritable épreuve morale.",
+    why:"Le chemin matérialise un choix dans l'espace : contrairement au destin, qui s'impose, le chemin qu'on prend reste — au moins en apparence — une décision. Les Grecs en ont fait une scène philosophique explicite avec l'apologue d'Héraclès au carrefour, rapporté par le sophiste Prodicos au Ve siècle avant notre ère et repris ensuite par Xénophon.",
+    links:[],lore:[
     "Le chemin est l'un des symboles les plus anciens du choix humain, et la mythologie grecque en a fait une véritable scène philosophique.",
     "Selon un récit rapporté par le sophiste Prodicos, le jeune Héraclès, arrivé à un carrefour, vit apparaître deux figures : la Vertu, qui lui promettait une vie difficile mais glorieuse, et le Vice, qui lui promettait une vie facile mais sans grandeur. Héraclès dut choisir sa route avant même d'avoir accompli le moindre exploit.",
     "Le chemin que suivit Thésée (voir la fiche « Thésée ») pour rejoindre Athènes illustre la même idée sous un tout autre angle : plutôt que la route maritime, plus sûre, le jeune héros choisit délibérément la voie terrestre, infestée de brigands, et les vainquit un à un en chemin — Périphétès, Sinis, Sciron, Cercyon, Procruste — arrivant à la cour de son père déjà couvert de gloire, avant même d'y être reconnu.",
     "Le chemin qu'on choisit à ce carrefour engage tout ce qui suivra — non pas un simple décor, mais une direction qui façonne le reste de l'histoire.",
     "Le chemin est devenu un symbole de choix, de direction assumée, de quête et d'évolution en cours plutôt qu'imposée.",
-  ]},
-  "pont":{icon:"🌉",label:"Pont",category:"Lieux & passages",desc:"Transition, lien construit entre deux états qui semblaient séparés.",links:[],lore:[
+  ],
+    deities:[
+      {id:"héraclès",role:"héros du choix allégorique au carrefour (récit de Prodicos)",certainty:"attesté"},
+      {id:"hécate",role:"déesse des carrefours (trois voies), invoquée aux croisements",certainty:"fortement établi"},
+    ],
+    dimensions:[
+      {axis:"choix",text:"l'apologue d'Héraclès entre Vertu et Vice"},
+      {axis:"quête",text:"la route terrestre choisie par Thésée plutôt que la mer, plus sûre"},
+      {axis:"direction assumée",text:"un chemin qui façonne l'histoire plutôt qu'un simple décor"},
+    ],
+    iconography:"Le carrefour à trois voies (triodos) est le lieu concret le plus chargé de sens : on y dressait des statues d'Hécate à trois visages (Hécate triple), tournés vers chacune des trois directions — une iconographie directement liée au symbole du chemin qui bifurque.",
+    sources:["Xénophon, Mémorables, II, 1, 21-34 (rapportant l'apologue de Prodicos)","Plutarque, Vie de Thésée"],
+    relatedSymbols:["porte","montagne","labyrinthe"],
+  },
+  "pont":{icon:"🌉",label:"Pont",category:"Lieux & passages",desc:"Transition, lien construit entre deux états qui semblaient séparés.",
+    atGlance:"Un symbole plus discret que la porte ou le chemin dans les mythes grecs, où l'on franchit plus souvent les frontières par un passeur ou par les airs — ce qui rend le pont, quand il apparaît, particulièrement chargé de sens : un lien qu'on bâtit soi-même.",
+    why:"La mythologie grecque privilégie les figures qui font franchir une frontière (Charon, Hermès, Iris) plutôt que les ouvrages qui la franchissent d'eux-mêmes ; le pont, en comparaison, représente une solution humaine et construite plutôt qu'une intervention divine — ce qui explique sa symbolique de réconciliation choisie plutôt que de simple passage.",
+    links:[],lore:[
     "Le pont est un symbole plus discret dans la mythologie grecque que la porte ou le chemin : les récits antiques franchissent plus souvent les frontières par un passeur (Charon sur le Styx) ou par les airs (Hermès, Iris) que par une construction humaine.",
     "C'est peut-être ce qui rend le pont particulier : contrairement au passeur qu'il faut payer ou au messager qu'il faut attendre, le pont est un lien qu'on peut bâtir soi-même entre deux rives qui semblaient séparées pour toujours.",
     "La tradition en offre malgré tout un exemple concret et rituel : lors de la procession sacrée qui menait chaque année les futurs initiés d'Athènes à Éleusis pour les Mystères, un homme masqué, posté sur le pont franchissant le Céphise, couvrait les passants de moqueries et d'insultes — un rite appelé les gephyrismoi (« railleries du pont »), comme si le pont exigeait qu'on y dépose son orgueil avant d'accéder au sacré.",
     "Il est ainsi devenu un symbole de transition choisie, de lien construit et de réconciliation entre deux états qui semblaient incompatibles.",
-  ]},
-  "grotte":{icon:"🕳",label:"Grotte",category:"Lieux & passages",desc:"Inconscient, retrait nécessaire, initiation loin du regard des autres.",links:["rhéa"],lore:[
+  ],
+    deities:[],
+    dimensions:[
+      {axis:"transition choisie",text:"un lien construit, non un don des dieux"},
+      {axis:"initiation",text:"le rite des gephyrismoi sur le pont du Céphise, avant Éleusis"},
+    ],
+    cult:"Les gephyrismoi (« railleries du pont ») accompagnaient la procession annuelle des Grands Mystères d'Éleusis : les moqueries adressées aux initiés au passage du pont visaient à les dépouiller de leur orgueil avant l'entrée dans le sacré — un rituel de dérision purificatrice attesté par plusieurs sources antiques tardives.",
+    sources:["Hésychius d'Alexandrie, s.v. gephyristaí","Strabon, Géographie, IX"],
+    relatedSymbols:["porte","rivière","temple"],
+  },
+  "grotte":{icon:"🕳",label:"Grotte",category:"Lieux & passages",desc:"Inconscient, retrait nécessaire, initiation loin du regard des autres.",
+    atGlance:"Un lieu caché, à l'écart du regard des dieux comme des hommes, où se jouent les événements les plus décisifs et les plus secrets — à commencer par la naissance de Zeus lui-même.",
+    why:"Avant les temples construits, le culte grec le plus ancien se pratiquait souvent en plein air ou dans des grottes naturelles — des lieux où la limite entre le monde humain et le sacré s'estompe déjà physiquement. La grotte hérite symboliquement de cette antériorité : ce qui s'y passe échappe au regard ordinaire et à l'autorité en place, ce qui en fait le refuge naturel des naissances qu'il faut cacher et des vérités qu'on ne peut recevoir qu'à l'écart.",
+    links:["rhéa"],lore:[
     "La grotte occupe une place à part dans la mythologie grecque : c'est un lieu caché, à l'écart du regard des dieux comme des hommes, où peuvent se produire des événements décisifs.",
     "Le mythe le plus célèbre est celui de la naissance de Zeus lui-même : pour le soustraire à son père Cronos, qui dévorait ses enfants, sa mère Rhéa (voir la fiche « Rhéa ») le cacha dans une grotte du mont Ida, en Crète, où il fut élevé en secret jusqu'à pouvoir renverser son père.",
     "Les grottes abritent aussi des figures oraculaires, comme celle de Trophonios, où l'on descendait consulter un oracle si redoutable que ceux qui en ressortaient étaient dits ne plus jamais sourire.",
     "Homère en décrit une autre, plus paisible, dans l'Odyssée : la grotte des Nymphes sur l'île d'Ithaque, où les marins déposaient leurs offrandes. Elle possédait deux entrées, l'une réservée aux mortels, l'autre — tournée vers le nord — réservée aux seuls dieux, preuve qu'un même lieu caché peut ouvrir sur deux mondes selon la porte qu'on choisit d'emprunter.",
     "La grotte est devenue un symbole de retrait nécessaire, d'initiation loin du regard des autres et de protection avant de pouvoir affronter le monde.",
-  ]},
-  "montagne":{icon:"⛰",label:"Montagne",category:"Lieux & passages",desc:"Épreuve, élévation progressive, objectif qui se mérite.",links:[],lore:[
+  ],
+    deities:[
+      {id:"rhéa",role:"cache et élève Zeus nouveau-né dans la grotte du mont Ida",certainty:"attesté"},
+      {id:"zeus",role:"naissance et petite enfance secrète en grotte crétoise",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"protection",text:"soustraire un enfant à un danger immédiat"},
+      {axis:"initiation",text:"lieu d'oracles redoutés (Trophonios) et de révélations réservées"},
+      {axis:"seuil double",text:"la grotte des Nymphes d'Ithaque, entrée des hommes et entrée des dieux"},
+    ],
+    iconography:"Les grottes crétoises associées à la naissance de Zeus (celle du mont Ida et celle du mont Dicté, deux traditions concurrentes) ont fait l'objet de cultes archéologiquement attestés, avec offrandes votives retrouvées in situ — un cas où mythe et pratique religieuse concrète se recoupent directement.",
+    cult:"L'antre de Trophonios, à Lébadée en Béotie, fonctionnait comme un oracle à part entière où le consultant descendait physiquement dans un boyau souterrain pour recevoir une vision — une pratique religieuse attestée par Pausanias, qui affirme l'avoir lui-même expérimentée.",
+    sources:["Hésiode, Théogonie, v. 468-484 (naissance de Zeus)","Homère, Odyssée, chant XIII (la grotte des Nymphes)","Pausanias, Description de la Grèce, IX, 39 (l'oracle de Trophonios)"],
+    relatedSymbols:["montagne","chèvre","corne d'abondance"],
+  },
+  "montagne":{icon:"⛰",label:"Montagne",category:"Lieux & passages",desc:"Épreuve, élévation progressive, objectif qui se mérite.",
+    atGlance:"L'Olympe, demeure des dieux, domine l'imaginaire grec des sommets — mais chaque montagne sacrée (Parnasse, Pélion, Ida) porte sa propre fonction : inspiration, formation des héros, ou secret protégé.",
+    why:"Dans un pays aussi montagneux que la Grèce, où les sommets restent visibles depuis presque tous les points habités, l'idée qu'une présence divine ou un savoir supérieur réside en altitude découle directement du paysage lui-même : gravir une montagne engage un effort physique réel qui devient, par extension naturelle, une métaphore de l'effort nécessaire pour se rapprocher du sacré.",
+    links:[],lore:[
     "La montagne la plus importante de la mythologie grecque est bien sûr l'Olympe, demeure des dieux, si haute que son sommet touchait, croyait-on, le domaine céleste lui-même.",
     "Le mont Parnasse, non loin de Delphes, était quant à lui consacré à Apollon et aux Muses : c'est sur ses pentes que résonnait l'inspiration poétique et prophétique.",
     "Gravir une montagne dans l'imaginaire grec n'est donc jamais seulement un effort physique : c'est se rapprocher d'un savoir ou d'une présence qui ne se donne pas au niveau du sol.",
     "Le mont Pélion, en Thessalie, complète ce paysage sacré d'une autre manière : loin du faste de l'Olympe, c'est sur ses pentes boisées que le centaure Chiron éleva et forma les plus grands héros grecs — Achille, Jason, Asclépios — preuve qu'une montagne n'élève pas seulement vers les dieux, elle peut aussi façonner, à l'écart du monde, ceux qui deviendront des légendes.",
     "La montagne est devenue un symbole d'épreuve, d'élévation progressive et d'objectif qui se mérite à chaque pas.",
-  ]},
-  "forêt":{icon:"🌲",label:"Forêt",category:"Lieux & passages",desc:"Inconnu, instinct, risque de s'égarer avant de retrouver son chemin.",links:[],lore:[
+  ],
+    deities:[
+      {id:"zeus",role:"règne depuis le sommet de l'Olympe",certainty:"attesté"},
+      {id:"apollon",role:"consacré au mont Parnasse, siège de l'inspiration poétique",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"pouvoir",text:"l'Olympe, siège du gouvernement divin"},
+      {axis:"inspiration",text:"le Parnasse, résonance poétique et prophétique"},
+      {axis:"formation",text:"le Pélion, où Chiron éleva Achille, Jason et Asclépios"},
+    ],
+    iconography:"Les montagnes grecques sont rarement figurées pour elles-mêmes dans l'art antique : elles apparaissent en arrière-plan des scènes mythologiques ou sont désignées par leur sanctuaire (le temple d'Apollon au pied du Parnasse) plutôt que représentées comme un motif autonome.",
+    history:"L'identification précise du sommet de l'Olympe comme demeure littérale des dieux s'assouplit avec le temps : les auteurs hellénistiques et romains tendent à le lire de plus en plus comme une image du ciel céleste en général plutôt que comme une adresse géographique exacte.",
+    sources:["Homère, Iliade, chant I (l'Olympe, demeure des dieux)","Pindare, Pythiques (le Parnasse et Delphes)"],
+    relatedSymbols:["grotte","chemin","temple"],
+  },
+  "forêt":{icon:"🌲",label:"Forêt",category:"Lieux & passages",desc:"Inconnu, instinct, risque de s'égarer avant de retrouver son chemin.",
+    atGlance:"Le domaine d'Artémis et de Pan, où les repères de la cité s'effacent et où l'instinct — parfois la terreur pure — reprend le dessus sur la raison.",
+    why:"La forêt s'oppose, dans l'imaginaire grec, à la polis civilisée et cultivée : elle est ce qui reste sauvage, agrion, hors de portée des lois humaines — un espace que seules certaines divinités (celles justement liées à la marge, à la chasse, à l'instinct) peuvent traverser sans crainte.",
+    links:[],lore:[
     "La forêt appartient au domaine d'Artémis, déesse de la chasse et des espaces sauvages, qui y règne avec ses nymphes loin des cités et de leurs lois.",
     "C'est aussi le territoire de Pan, dieu à moitié bouc, dont la présence dans les bois profonds pouvait saisir le voyageur d'une terreur soudaine et irraisonnée — la « panique » lui doit d'ailleurs son nom.",
     "La forêt grecque n'est donc pas un simple décor : c'est un lieu où les repères de la civilisation s'effacent, où l'instinct reprend le dessus sur la raison.",
     "C'est aussi dans une forêt, celle du mont Érymanthe, qu'Héraclès dut traquer le sanglier monstrueux qui ravageait la région lors de son quatrième travail — une poursuite qui l'entraîna loin des sentiers connus, dans la neige et les broussailles, avant qu'il ne parvienne à capturer la bête vivante.",
     "Elle est devenue un symbole d'inconnu, d'instinct, de risque de s'égarer avant de retrouver son chemin — et de nature qui échappe à tout contrôle.",
-  ]},
-  "mer":{icon:"🌊",label:"Mer",category:"Lieux & passages",desc:"Inconscient, immensité, départ vers un ailleurs incertain.",links:["poséidon","nérée","ulysse"],lore:[
+  ],
+    deities:[
+      {id:"artémis",role:"règne sur les forêts et les espaces sauvages avec ses nymphes",certainty:"attesté"},
+      {id:"pan",role:"hante les bois profonds, source de la terreur « panique »",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"instinct",text:"un espace où la raison civique s'efface"},
+      {axis:"épreuve",text:"le sanglier d'Érymanthe, quatrième travail d'Héraclès"},
+      {axis:"peur irraisonnée",text:"la « panique », terreur attribuée à la présence de Pan"},
+    ],
+    sources:["Hymnes homériques, XIX, à Pan","Apollodore, Bibliothèque, II, 5, 4 (le sanglier d'Érymanthe)"],
+    relatedSymbols:["montagne","cerf","sanglier"],
+  },
+  "mer":{icon:"🌊",label:"Mer",category:"Lieux & passages",desc:"Inconscient, immensité, départ vers un ailleurs incertain.",
+    atGlance:"Le domaine instable de Poséidon, qui porte les navires ou les brise selon son humeur — mais aussi celui de figures plus anciennes et plus sages, comme Nérée, et de dangers qui guettent quiconque s'y aventure.",
+    why:"Pour un monde grec largement insulaire et côtier, la mer est à la fois la condition du commerce, du voyage et de la découverte, et une menace réelle et quotidienne (naufrages, tempêtes) : cette ambivalence concrète — ressource vitale et danger permanent — explique pourquoi son dieu, Poséidon, est réputé pour son humeur instable plutôt que pour une bienveillance constante.",
+    links:["poséidon","nérée","ulysse"],lore:[
     "La mer appartient avant tout à Poséidon, dieu des océans et des tremblements de terre, dont l'humeur changeante pouvait aussi bien porter les navires que les briser.",
     "Elle abrite aussi des figures plus anciennes et plus paisibles, comme Nérée, le « Vieillard de la mer », doué de sagesse et de don de prophétie, père des cinquante Néréides.",
     "La mer réunit ainsi deux visages : la puissance instable de Poséidon et la sagesse discrète de Nérée — la même immensité peut engloutir ou révéler.",
     "Elle abrite aussi des dangers d'une tout autre nature : les Sirènes, dont le chant était si envoûtant qu'aucun marin ne pouvait y résister sans se jeter par-dessus bord, guettaient les navires près de leur île. Ulysse n'y échappa qu'en se faisant attacher au mât pendant que ses compagnons, les oreilles bouchées de cire, ramaient sans rien entendre.",
     "Elle est devenue un symbole d'inconscient, d'immensité, de départ vers un ailleurs incertain et de puissance qu'on ne maîtrise jamais complètement.",
     "La mer est particulièrement associée à Poséidon, à Nérée et à Ulysse.",
-  ]},
-  "rivière":{icon:"🏞",label:"Rivière",category:"Lieux & passages",desc:"Passage, changement continu, ce qui circule sans jamais s'arrêter.",links:[],lore:[
+  ],
+    deities:[
+      {id:"poséidon",role:"dieu souverain de la mer, aux humeurs changeantes",certainty:"attesté"},
+      {id:"nérée",role:"« Vieillard de la mer », sagesse et don de prophétie",certainty:"attesté"},
+      {id:"ulysse",role:"dix années d'errance maritime au retour de Troie",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"puissance instable",text:"Poséidon, qui porte ou brise selon son humeur"},
+      {axis:"sagesse cachée",text:"Nérée, prophète discret des profondeurs"},
+      {axis:"danger / séduction",text:"les Sirènes et leur chant funeste"},
+    ],
+    iconography:"Poséidon est presque systématiquement figuré avec son trident (voir cette fiche) sur les vases attiques et les monnaies des cités côtières ; les Néréides, elles, apparaissent fréquemment chevauchant des créatures marines sur les sarcophages et mosaïques d'époque romaine.",
+    sources:["Homère, Odyssée, chant XII (les Sirènes)","Hésiode, Théogonie, v. 233-236 (Nérée)"],
+    relatedSymbols:["trident","dauphin","rivière"],
+  },
+  "rivière":{icon:"🏞",label:"Rivière",category:"Lieux & passages",desc:"Passage, changement continu, ce qui circule sans jamais s'arrêter.",
+    atGlance:"Les fleuves grecs sont des dieux à part entière, et certains d'entre eux — Styx en tête — marquent la frontière absolue entre le monde des vivants et celui des morts.",
+    why:"Diviniser les fleuves relève d'abord d'une évidence concrète : un cours d'eau grec change de débit, façonne le paysage, peut être franchi ou non selon la saison — une puissance vécue directement plutôt qu'abstraite. Le Styx, en particulier, devient le serment ultime des dieux eux-mêmes précisément parce qu'un serment prêté sur une puissance aussi ancienne et aussi réelle ne pouvait, croyait-on, être repris sans conséquence irréversible.",
+    links:[],lore:[
     "Les fleuves occupent une place à part dans la mythologie grecque : ce sont des divinités à part entière, et certains d'entre eux marquent la frontière entre le monde des vivants et celui des morts.",
     "Le Styx, fleuve des Enfers, est si sacré que les dieux eux-mêmes prêtaient sur ses eaux leurs serments les plus solennels — un serment fait sur le Styx ne pouvait jamais être rompu. Le Léthé, lui, faisait oublier aux âmes leur vie passée à celles qui buvaient de ses eaux avant de renaître.",
     "C'est aussi dans les eaux du Styx que Thétis plongea son fils Achille encore nourrisson, pour le rendre invulnérable — le tenant par le talon, seul point de son corps que le fleuve ne put jamais atteindre, et qui devait plus tard causer sa mort.",
     "Une rivière, dans cet imaginaire, n'est donc jamais un simple obstacle : elle engage, elle efface, elle fait passer d'un état à un autre sans retour possible.",
     "La rivière est devenue un symbole de passage, de changement continu et de ce qui circule sans jamais s'arrêter — parfois au prix d'un serment ou d'un oubli.",
-  ]},
-  "temple":{icon:"🏛",label:"Temple",category:"Lieux & passages",desc:"Connaissance sacrée, initiation, seuil entre le profane et le sacré.",links:[],lore:[
+  ],
+    deities:[
+      {id:"achille",role:"immergé enfant dans le Styx par Thétis, sauf au talon",certainty:"fortement établi"},
+    ],
+    dimensions:[
+      {axis:"serment inviolable",text:"le Styx, sur lequel les dieux eux-mêmes jurent"},
+      {axis:"oubli",text:"le Léthé, dont les âmes boivent avant de renaître"},
+      {axis:"passage sans retour",text:"la frontière entre vivants et morts"},
+    ],
+    cult:"Les serments prêtés « sur le Styx » (par la formule rituelle) engageaient jusqu'aux dieux eux-mêmes selon Hésiode : celui qui se parjurait tombait dans un long sommeil comateux avant d'être banni des banquets divins pendant neuf ans.",
+    sources:["Hésiode, Théogonie, v. 775-806 (le serment du Styx)","Homère, Iliade, chant XXI (les dieux-fleuves)"],
+    relatedSymbols:["mer","pont","monde souterrain"],
+  },
+  "temple":{icon:"🏛",label:"Temple",category:"Lieux & passages",desc:"Connaissance sacrée, initiation, seuil entre le profane et le sacré.",
+    atGlance:"Le lieu où le sacré se rend accessible aux mortels sans jamais leur appartenir tout à fait — le temple d'Apollon à Delphes et celui d'Artémis à Éphèse en restent les exemples les plus marquants.",
+    why:"Contrairement à une église moderne, le temple grec n'est pas un lieu de rassemblement collectif pour le culte : c'est la demeure de la statue du dieu, un espace réservé où le rituel se déroule surtout à l'extérieur, sur l'autel. Franchir le seuil du temple lui-même reste donc un acte rare et chargé, réservé aux prêtres ou aux occasions exceptionnelles — ce qui explique sa charge symbolique de seuil entre profane et sacré plutôt que de simple lieu de rassemblement.",
+    links:[],lore:[
     "Le temple est le lieu où le sacré se rend accessible aux mortels, sans jamais leur appartenir tout à fait.",
     "Le plus célèbre d'entre eux est sans doute le temple d'Apollon à Delphes, où la Pythie, assise sur son trépied, rendait des oracles réputés infaillibles — et où était gravée la maxime « Connais-toi toi-même ».",
     "Franchir le seuil d'un temple, c'était donc quitter le monde profane pour entrer dans un espace où la parole divine pouvait se faire entendre, à condition de savoir l'écouter.",
     "Le temple d'Artémis à Éphèse comptait, lui, parmi les Sept Merveilles du monde antique : reconstruit plusieurs fois après avoir été détruit, notamment par un incendie volontaire resté tristement célèbre, il attirait des pèlerins de toute l'Asie Mineure — preuve qu'un temple, une fois consacré, peut renaître de ses propres cendres aussi souvent qu'il le faut.",
     "Le temple est devenu un symbole de savoir sacré, d'initiation et de seuil entre le monde profane et ce qui le dépasse.",
-  ]},
-  "monde souterrain":{icon:"⚱",label:"Enfer / monde souterrain",category:"Lieux & passages",desc:"Transformation profonde, mort symbolique, vérité qui ne peut plus rester cachée.",links:["hadès","perséphone","orphée"],lore:[
+  ],
+    deities:[
+      {id:"apollon",role:"temple oraculaire de Delphes, siège de la Pythie",certainty:"attesté"},
+      {id:"artémis",role:"temple d'Éphèse, l'une des Sept Merveilles du monde antique",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"savoir sacré",text:"la maxime delphique « connais-toi toi-même »"},
+      {axis:"seuil",text:"passage du profane au sacré, réservé et codifié"},
+      {axis:"permanence",text:"le temple d'Éphèse, reconstruit après sa destruction"},
+    ],
+    iconography:"L'architecture du temple grec suit des ordres codifiés (dorique, ionique, corinthien) reconnaissables à leurs colonnes et frontons — une iconographie architecturale à part entière, abondamment documentée par les vestiges archéologiques (Parthénon, temple d'Apollon à Delphes, colonnes subsistantes d'Éphèse).",
+    history:"Le temple d'Éphèse fut incendié volontairement en 356 av. J.-C. par un certain Érostrate, désireux de rendre son nom immortel — un fait suffisamment attesté par les historiens antiques (Strabon, Cicéron) pour distinguer clairement l'événement historique de la légende qui l'entoure.",
+    sources:["Strabon, Géographie, XIV, 1, 22 (le temple d'Éphèse)","Pausanias, Description de la Grèce, X (Delphes)"],
+    relatedSymbols:["montagne","couronne","clé"],
+  },
+  "monde souterrain":{icon:"⚱",label:"Enfer / monde souterrain",category:"Lieux & passages",desc:"Transformation profonde, mort symbolique, vérité qui ne peut plus rester cachée.",
+    atGlance:"Le royaume d'Hadès n'est pas, contrairement à une idée reçue, un lieu de punition pour tous : c'est avant tout le domaine de ce qui a été transformé et ne peut plus revenir en arrière.",
+    why:"La conception grecque de l'au-delà distingue nettement le sort commun des âmes (une existence grise et diminuée dans la plaine d'Asphodèles) du châtiment réservé à une poignée de coupables exceptionnels (Tantale, Sisyphe, les Danaïdes) — une nuance essentielle que les lectures modernes, souvent influencées par l'enfer chrétien, ont tendance à effacer.",
+    links:["hadès","perséphone","orphée"],lore:[
     "Le monde souterrain est le royaume d'Hadès, frère de Zeus et de Poséidon, qui en hérita lors du partage du cosmos entre les trois dieux.",
     "Perséphone y règne à ses côtés une partie de l'année, après avoir été enlevée par Hadès et liée aux Enfers pour avoir mangé quelques grains de grenade (voir la fiche « Grenade »). Son passage entre les deux mondes rythme les saisons.",
     "Contrairement à une idée reçue, ce monde souterrain n'est pas un lieu de punition pour tous : c'est avant tout le domaine de ce qui a été transformé, de ce qui ne peut plus revenir en arrière — un passage plus qu'un châtiment.",
@@ -91,17 +237,52 @@ const SYMBOL_LIBRARY = {
     "Rares sont les vivants qui y sont descendus puis en sont ressortis : Orphée fut de ceux-là, sa lyre à la main, venu réclamer Eurydice à Hadès et Perséphone eux-mêmes (voir la fiche « Orphée ») — la preuve que ce royaume peut, à de très rares exceptions, entendre une supplique vivante.",
     "Il est devenu un symbole de transformation profonde, de mort symbolique et de vérité qui ne peut plus rester cachée une fois qu'on y est descendu.",
     "Le monde souterrain est particulièrement associé à Hadès et à Perséphone — et, par sa propre descente, à Orphée.",
-  ]},
-  "labyrinthe":{icon:"🌀",label:"Labyrinthe",category:"Lieux & passages",desc:"Épreuve complexe, chemin qui s'égare avant de se retrouver — à condition d'avoir un fil à suivre.",links:["minos","ariane","dédale","thésée"],lore:[
+  ],
+    deities:[
+      {id:"hadès",role:"souverain incontesté du royaume des morts",certainty:"attesté"},
+      {id:"perséphone",role:"reine des Enfers une partie de l'année",certainty:"attesté"},
+      {id:"orphée",role:"l'un des rares vivants à en être ressorti, par la musique",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"transformation",text:"un passage qui change irréversiblement, non un simple châtiment"},
+      {axis:"justice",text:"les trois juges, anciens rois mortels réputés justes"},
+      {axis:"exception",text:"les très rares vivants qui y sont descendus et en sont revenus"},
+    ],
+    cult:"Les Mystères d'Éleusis, centrés sur le rapt de Perséphone, promettaient à leurs initiés un sort meilleur dans l'au-delà — l'un des rares cas où la religion grecque officielle propose une espérance individuelle explicite liée au monde souterrain plutôt qu'une simple description de son fonctionnement.",
+    sources:["Homère, Odyssée, chant XI (la Nekyia, descente d'Ulysse)","Hymne homérique à Déméter"],
+    relatedSymbols:["grenade","porte","rivière"],
+  },
+  "labyrinthe":{icon:"🌀",label:"Labyrinthe",category:"Lieux & passages",desc:"Épreuve complexe, chemin qui s'égare avant de se retrouver — à condition d'avoir un fil à suivre.",
+    atGlance:"Construit en Crète par Dédale pour enfermer le Minotaure, le labyrinthe reste le symbole grec par excellence de l'épreuve complexe qu'on ne peut traverser seul — il y faut un fil.",
+    why:"Le labyrinthe grec fonctionne moins comme un casse-tête architectural que comme une mise en scène de l'inextricable : un piège qu'on peut créer soi-même (Minos l'a fait construire) sans pouvoir toujours s'en libérer soi-même (son propre architecte y reste prisonnier) — une ironie centrale du mythe.",
+    links:["minos","ariane","dédale","thésée"],lore:[
     "Le labyrinthe fut construit en Crète par l'architecte Dédale (voir la fiche « Dédale »), sur l'ordre du roi Minos (voir la fiche « Minos »), pour y enfermer le Minotaure : une créature à tête de taureau et corps d'homme, née de l'union contre nature de la reine Pasiphaé (voir la fiche « Pasiphaé ») et d'un taureau envoyé par Poséidon.",
     "Chaque année, Athènes devait envoyer sept jeunes gens et sept jeunes filles en offrande au monstre, jusqu'à ce que le héros Thésée se porte volontaire pour l'affronter (voir la fiche « Thésée »). Ariane, fille de Minos, tomba amoureuse de lui et lui offrit un fil à dérouler en avançant, afin de pouvoir retrouver la sortie une fois le Minotaure vaincu (voir la fiche « Ariane »).",
     "Thésée tua le monstre au cœur du dédale et en ressortit en suivant le fil à rebours — mais le labyrinthe garda une dernière victime : son propre architecte. Dédale, enfermé par Minos avec son fils Icare pour avoir aidé Ariane, ne put s'en échapper qu'en fabriquant des ailes de plumes et de cire, un vol dont Icare, monté trop près du soleil, ne revint jamais.",
     "Le labyrinthe est ainsi devenu un symbole d'épreuve complexe, de chemin qui s'égare avant de se retrouver, de piège qu'on peut créer soi-même sans pouvoir toujours s'en libérer, et de guidage indispensable — le fil — pour traverser ce qu'on ne peut affronter seul.",
     "Le labyrinthe est particulièrement associé à Minos, à Ariane et à Dédale, son architecte.",
-  ]},
+  ],
+    deities:[
+      {id:"minos",role:"commanditaire du labyrinthe, pour y enfermer le Minotaure",certainty:"attesté"},
+      {id:"dédale",role:"architecte du labyrinthe, plus tard prisonnier de sa propre création",certainty:"attesté"},
+      {id:"ariane",role:"offre le fil qui permet à Thésée d'en ressortir",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"épreuve",text:"un chemin qui s'égare volontairement, conçu pour piéger"},
+      {axis:"guidage",text:"le fil d'Ariane, seul recours contre l'inextricable"},
+      {axis:"ironie",text:"l'architecte lui-même prisonnier de son propre piège"},
+    ],
+    iconography:"Le motif du labyrinthe (une spirale à méandres) apparaît sur des monnaies crétoises de Cnossos dès le IIIe siècle av. J.-C., bien après le récit mythique lui-même, preuve de la persistance du symbole dans l'identité locale.",
+    history:"L'archéologie moderne (fouilles d'Arthur Evans à Cnossos, début XXe siècle) a rapproché le mythe du plan complexe du palais minoen réellement mis au jour — un rapprochement suggestif mais qui reste une hypothèse d'interprétation archéologique, non une preuve que le mythe décrit littéralement ce palais.",
+    sources:["Apollodore, Bibliothèque, épitomé I, 7-9","Plutarque, Vie de Thésée, 15-19"],
+    relatedSymbols:["porte","chaîne","ailes"],
+  },
 
   // Mythologie — attributs et divinités
-  "caducée":{icon:"⚕",label:"Caducée",category:"Mythologie",desc:"Attribut d'Hermès : médiation, circulation, communication entre des mondes séparés.",links:["hermès","cadmos","harmonie"],lore:[
+  "caducée":{icon:"⚕",label:"Caducée",category:"Mythologie",desc:"Attribut d'Hermès : médiation, circulation, communication entre des mondes séparés.",
+    atGlance:"Le bâton d'Hermès, aux deux serpents entrelacés et aux ailes, incarne sa fonction de messager qui circule sans entrave entre l'Olympe, le monde humain et le monde souterrain.",
+    why:"Hermès est le seul dieu olympien à traverser librement les trois grands domaines du cosmos grec ; son attribut devait donc représenter le mouvement et la médiation plutôt que la force. Le bâton de héraut (kerykeion) qu'il porte à l'origine — simple insigne d'inviolabilité pour les messagers et ambassadeurs — se charge ensuite de son ornementation la plus connue, les deux serpents, par un récit étiologique qui explique après coup une forme déjà existante.",
+    links:["hermès","cadmos","harmonie"],lore:[
     "Le caducée est le bâton d'Hermès, reconnaissable à ses deux serpents entrelacés et à ses ailes.",
     "Hermès est le messager des dieux. Il circule constamment entre les différents mondes : Olympe, monde humain et monde souterrain.",
     "Son bâton correspond donc parfaitement à sa fonction : il accompagne celui qui franchit les frontières et transporte les messages d'un monde à l'autre.",
@@ -110,80 +291,236 @@ const SYMBOL_LIBRARY = {
     "Le caducée est ainsi devenu un symbole de médiation, de communication, de circulation, de commerce, de passage et de lien entre les mondes.",
     "Le caducée est particulièrement associé à Hermès — et, par ce rapprochement plus tardif entre ses deux serpents, à Cadmos et Harmonie.",
     "Le caducée d'Hermès ne doit pas être confondu avec le bâton d'Asclépios, qui ne possède qu'un seul serpent et qui est le véritable symbole traditionnel de la médecine.",
-  ]},
-  "chouette":{icon:"🦉",label:"Chouette",category:"Mythologie",desc:"Attribut d'Athéna : sagesse, observation, vision claire dans l'obscurité.",links:["athéna"],lore:[
+  ],
+    deities:[
+      {id:"hermès",role:"porte le caducée comme insigne de messager et de médiateur",certainty:"attesté"},
+      {id:"cadmos",role:"changé en serpent aux côtés d'Harmonie — rapprochement poétique tardif, non un lien antique direct",certainty:"tardif"},
+    ],
+    dimensions:[
+      {axis:"médiation",text:"lien entre mondes séparés (Olympe, hommes, Enfers)"},
+      {axis:"commerce",text:"Hermès patron des marchands et des échanges"},
+      {axis:"communication",text:"insigne d'inviolabilité des messagers et hérauts"},
+    ],
+    iconography:"Le kerykeion (bâton de héraut) précède historiquement l'image des deux serpents entrelacés, qui se stabilise surtout à l'époque classique sur les vases et les reliefs ; sa confusion moderne avec le bâton à un seul serpent d'Asclépios (symbole médical) est un contresens fréquent, encore répandu dans l'usage commercial actuel du caducée comme emblème pharmaceutique.",
+    sources:["Homère, Hymne homérique à Hermès","Apollodore, Bibliothèque, III, 10, 2"],
+    relatedSymbols:["ailes","serpent","chaîne"],
+  },
+  "chouette":{icon:"🦉",label:"Chouette",category:"Mythologie",desc:"Attribut d'Athéna : sagesse, observation, vision claire dans l'obscurité.",
+    atGlance:"L'animal le plus immédiatement reconnaissable d'Athéna, dont la capacité supposée à voir dans l'obscurité en a fait une image naturelle de la clairvoyance et du discernement.",
+    why:"L'association précède peut-être Athéna elle-même : l'épithète homérique « Glaukôpis » (aux yeux pers/de chouette) suggère un lien remontant à des cultes pré-classiques, avant même que la déesse ne soit pleinement définie comme on la connaît. La capacité de l'oiseau à voir la nuit — quand tous les autres animaux diurnes sont aveugles — en fait, par analogie directe, l'image d'une intelligence qui perçoit ce que les autres ne voient pas.",
+    links:["athéna"],lore:[
     "La chouette accompagne Athéna et devient l'un des animaux les plus immédiatement reconnaissables de la déesse.",
     "Les Grecs lui attribuaient une capacité à voir dans l'obscurité. Cette particularité en faisait une image naturelle de la clairvoyance : là où les autres ne voient rien, la chouette voit.",
     "Elle correspond donc parfaitement à Athéna, dont la sagesse consiste non seulement à accumuler des connaissances, mais surtout à observer, comprendre et discerner avant d'agir.",
     "Homère donne d'ailleurs à Athéna l'épithète de « Glaukôpis », qu'on traduit par « aux yeux pers » ou « au regard de chouette » — un lien si ancien entre la déesse et l'oiseau qu'il remonte peut-être à des cultes antérieurs à l'époque classique. Les Athéniens frappèrent plus tard leur monnaie d'argent, la fameuse tétradrachme, à l'effigie de la chouette : une pièce si répandue dans tout le bassin méditerranéen qu'on la surnommait simplement « la chouette ».",
     "La chouette est devenue un symbole de sagesse, d'observation, de discernement, de connaissance et de clairvoyance.",
     "La chouette est particulièrement associée à Athéna.",
-  ]},
-  "paon":{icon:"🦚",label:"Paon",category:"Mythologie",desc:"Attribut d'Héra : beauté, vigilance, souveraineté légitime.",links:["héra"],lore:[
+  ],
+    deities:[
+      {id:"athéna",role:"attribut principal, présent dans l'iconographie dès l'époque archaïque",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"sagesse",text:"discernement plutôt que simple accumulation de savoir"},
+      {axis:"vigilance",text:"une vision qui perce l'obscurité que d'autres ne pénètrent pas"},
+      {axis:"identité civique",text:"symbole d'Athènes elle-même, via la monnaie"},
+    ],
+    iconography:"La chouette figure sur les tétradrachmes athéniens en argent dès la fin du VIe siècle av. J.-C., toujours de profil, associée au profil d'Athéna au droit et à un rameau d'olivier — une monnaie si largement diffusée dans le commerce méditerranéen qu'on la désignait simplement par le nom de l'oiseau (« glaux »).",
+    cult:"Des chouettes vivantes étaient semble-t-il tolérées, voire encouragées, sur l'Acropole d'Athènes autour du temple d'Athéna — un rapport concret entre l'animal réel et le lieu de culte de la déesse, documenté par des sources antiques tardives plutôt que par une prescription religieuse formelle.",
+    sources:["Homère, Iliade, I, 206 (« Glaukôpis »)","Aristophane, Les Oiseaux, v. 301 (référence à « porter des chouettes à Athènes »)"],
+    relatedSymbols:["olivier","corbeau","araignée"],
+  },
+  "paon":{icon:"🦚",label:"Paon",category:"Mythologie",desc:"Attribut d'Héra : beauté, vigilance, souveraineté légitime.",
+    atGlance:"Les cent yeux du gardien Argos Panoptès, recueillis par Héra sur la queue de son oiseau favori après sa mort, donnent au paon un regard qui semble toujours veiller.",
+    why:"Le paon (paon bleu, Pavo cristatus) n'est pas indigène à la Grèce continentale : c'est un oiseau exotique, importé d'Asie, connu des Grecs surtout à partir de l'époque classique et associé au luxe et à la rareté avant de devenir l'attribut d'Héra — ce qui explique pourquoi son entrée dans le mythe (via Argos) est relativement tardive comparée aux attributs des dieux les plus anciens.",
+    links:["héra"],lore:[
     "Le paon est devenu l'un des animaux emblématiques d'Héra.",
     "Selon le récit le plus célèbre, Héra plaça les nombreux yeux d'Argos Panoptès, son fidèle gardien, sur la queue du paon après la mort de celui-ci. Les motifs en forme d'yeux devinrent ainsi le souvenir éternel d'Argos.",
     "Argos Panoptès, « celui qui voit tout », devait son nom à son corps couvert de cent yeux, dont une partie restait toujours éveillée pendant que les autres dormaient. Héra l'avait chargé de surveiller Io (voir la fiche « Io »), une jeune femme aimée de Zeus qu'elle avait changée en génisse par jalousie — c'est en la délivrant de cette garde, sur ordre de Zeus, qu'Hermès endormit puis tua Argos, avant qu'Héra ne recueille ses cent yeux sur la queue de son oiseau favori.",
     "Le paon semble donc toujours regarder autour de lui. Son plumage magnifique rappelle également le rang d'Héra, reine des dieux, déesse du mariage et de la souveraineté.",
     "Le paon est devenu un symbole de beauté, de vigilance, de dignité, de souveraineté et de regard protecteur.",
     "Le paon est particulièrement associé à Héra.",
-  ]},
-  "foudre":{icon:"⚡",label:"Foudre",category:"Mythologie",desc:"Attribut de Zeus : autorité, révélation soudaine, jugement qui s'impose de lui-même.",links:["zeus"],lore:[
+  ],
+    deities:[
+      {id:"héra",role:"oiseau favori, orné des yeux d'Argos en sa mémoire",certainty:"fortement établi"},
+    ],
+    dimensions:[
+      {axis:"vigilance",text:"les cent yeux d'Argos jamais tous endormis à la fois"},
+      {axis:"souveraineté",text:"plumage somptueux, à l'image du rang d'Héra"},
+      {axis:"fidélité",text:"un serviteur honoré même dans la mort"},
+    ],
+    history:"L'association du paon à Héra se renforce surtout à l'époque hellénistique et romaine (où Junon, son équivalent romain, en fait un attribut systématique) ; les sources grecques classiques les plus anciennes restent plus discrètes sur ce lien précis que la tradition postérieure ne le laisse penser.",
+    sources:["Ovide, Métamorphoses, I, 622-723 (Io et Argos — réception latine du mythe)","Apollodore, Bibliothèque, II, 1, 3"],
+    relatedSymbols:["couronne","sceptre","corbeau"],
+  },
+  "foudre":{icon:"⚡",label:"Foudre",category:"Mythologie",desc:"Attribut de Zeus : autorité, révélation soudaine, jugement qui s'impose de lui-même.",
+    atGlance:"L'arme forgée par les Cyclopes pour Zeus après sa victoire sur les Titans, devenue l'instrument par excellence de son autorité — et, une fois, la cause involontaire de la mort de celle qu'il aimait.",
+    why:"Le pouvoir de frapper à distance, sans préavis et sans recours, correspond directement à la fonction de Zeus comme garant final de l'ordre cosmique : contrairement à une arme de mêlée, la foudre agit depuis le ciel, hors d'atteinte, ce qui en fait moins une arme de combat qu'un instrument de jugement.",
+    links:["zeus"],lore:[
     "La foudre est l'arme et l'emblème de Zeus.",
     "Après avoir vaincu les Titans, Zeus reçoit des Cyclopes la foudre comme arme divine. Elle devient ensuite l'instrument grâce auquel il impose son autorité et punit ceux qui défient l'ordre des dieux.",
     "Mais la foudre possède également une dimension de révélation : elle surgit brutalement dans le ciel et transforme la nuit en un éclair de lumière.",
     "Zeus l'utilisa un jour malgré lui contre celle qu'il aimait : Sémélé, désireuse de voir son amant divin sous sa forme véritable, l'exigea de lui — et fut instantanément réduite en cendres par l'éclat de la foudre, que nul mortel ne peut contempler sans en mourir (voir la fiche « Sémélé »).",
     "Elle est donc devenue un symbole de puissance divine, d'autorité, de révélation soudaine, de destruction et de transformation brutale.",
     "La foudre est particulièrement associée à Zeus.",
-  ]},
-  "trident":{icon:"🔱",label:"Trident",category:"Mythologie",desc:"Attribut de Poséidon : puissance sur les forces naturelles instables — mer, séismes, émotions profondes.",links:["poséidon"],lore:[
+  ],
+    deities:[
+      {id:"zeus",role:"arme et emblème souverain, reçue des Cyclopes",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"autorité",text:"instrument du jugement divin, hors de portée mortelle"},
+      {axis:"révélation",text:"lumière brutale qui déchire l'obscurité"},
+      {axis:"destruction",text:"la mort de Sémélé, incapable de survivre à la vraie forme de Zeus"},
+    ],
+    iconography:"Zeus est figuré brandissant la foudre — un faisceau stylisé, souvent ailé — sur les vases attiques à figures noires et rouges dès l'époque archaïque ; c'est l'un des attributs divins les plus anciens et les plus constants de toute l'iconographie grecque.",
+    sources:["Hésiode, Théogonie, v. 501-506 (don des Cyclopes)","Euripide, Bacchantes, v. 1-9 (mort de Sémélé)"],
+    relatedSymbols:["éclair","sceptre","aigle"],
+  },
+  "trident":{icon:"🔱",label:"Trident",category:"Mythologie",desc:"Attribut de Poséidon : puissance sur les forces naturelles instables — mer, séismes, émotions profondes.",
+    atGlance:"L'attribut le plus reconnaissable de Poséidon, capable d'agiter la mer et de provoquer les séismes — une arme à triple pointe pour un pouvoir qui se déploie dans plusieurs directions à la fois.",
+    why:"Le trident dérive vraisemblablement d'un outil réel de pêche à trois dents, transposé à l'échelle divine : l'instrument concret du monde marin devient, entre les mains du dieu qui gouverne la mer, une arme capable de soulever des vagues et de fissurer la terre — un exemple typique de la façon dont la mythologie grecque divinise un objet de la vie quotidienne en le démesurant.",
+    links:["poséidon"],lore:[
     "Le trident est l'attribut le plus reconnaissable de Poséidon.",
     "Le dieu de la mer le porte comme une arme et comme un instrument de domination sur les forces naturelles. Avec lui, il peut agiter la mer et provoquer les tremblements de terre.",
     "Le trident possède donc trois pointes comme si le pouvoir du dieu se déployait dans plusieurs directions à la fois, mais sa signification fondamentale reste celle de la puissance de Poséidon sur les éléments.",
     "Pendant la Gigantomachie, la guerre entre les dieux et les Géants, Poséidon aurait poursuivi le géant Polybotès à travers la mer Égée et, d'un coup de trident, arraché un morceau de l'île de Cos qu'il lui lança dessus — le fragment, retombé dans la mer, serait devenu l'île de Nisyros, écrasant le géant dessous pour l'éternité.",
     "Il est devenu un symbole de puissance, de maîtrise des forces naturelles, de mer, de profondeur et de force indomptable.",
     "Le trident est particulièrement associé à Poséidon.",
-  ]},
-  "lyre":{icon:"🎵",label:"Lyre",category:"Mythologie",desc:"Attribut d'Apollon : harmonie, vérité transmise par la beauté plutôt qu'imposée.",links:["apollon","orphée"],lore:[
+  ],
+    deities:[
+      {id:"poséidon",role:"arme souveraine, domination sur mer et séismes",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"puissance naturelle",text:"mer, tremblements de terre — des forces instables et redoutées"},
+      {axis:"souveraineté",text:"insigne de rang, parallèle à la foudre de Zeus et au sceptre d'Hadès"},
+    ],
+    iconography:"Poséidon brandissant son trident, souvent debout sur un char tiré par des hippocampes ou entouré de dauphins, est un motif récurrent sur les monnaies des cités côtières (Corinthe notamment) et sur les vases représentant la Gigantomachie.",
+    sources:["Homère, Iliade, chant XX (Poséidon et les séismes)","Hésiode, Théogonie, v. 930-933 (Poséidon « qui ébranle la terre »)"],
+    relatedSymbols:["mer","cheval","taureau"],
+  },
+  "lyre":{icon:"🎵",label:"Lyre",category:"Mythologie",desc:"Attribut d'Apollon : harmonie, vérité transmise par la beauté plutôt qu'imposée.",
+    atGlance:"L'instrument d'Apollon — mais inventé par Hermès enfant, à partir d'une carapace de tortue, avant d'être échangé contre le troupeau volé du dieu.",
+    why:"Apollon possède deux attributs a priori contradictoires, la lyre et l'arc : l'un persuade par l'harmonie, l'autre frappe à distance. Cette dualité n'est pas un hasard mais une définition complète du dieu — celui qui peut aussi bien atteindre par la beauté que par la force, selon ce que la situation exige.",
+    links:["apollon","orphée"],lore:[
     "La lyre est l'instrument d'Apollon, dieu de la musique, de la poésie et de la lumière — mais elle ne fut pas inventée par lui.",
     "Selon le mythe, c'est Hermès, encore enfant, qui façonna la première lyre à partir d'une carapace de tortue et de cordes tendues, avant de l'offrir à Apollon en échange du troupeau de bœufs qu'il lui avait dérobé. L'instrument de la beauté naît ainsi d'un geste de ruse réparé par un cadeau.",
     "Entre les mains d'Apollon, la lyre devient l'instrument d'une vérité qui persuade par l'harmonie plutôt que par la force — à l'opposé de l'arc, autre attribut du dieu, qui frappe à distance.",
     "C'est aussi une lyre, offerte par Apollon lui-même, qu'Orphée emporta jusqu'aux Enfers pour tenter de ramener son épouse Eurydice parmi les vivants : son chant, dit-on, faisait taire jusqu'aux tourments des damnés et adoucissait le cœur inflexible d'Hadès — la preuve que cet instrument peut atteindre ce que ni la force ni la prière ordinaire ne peuvent obtenir.",
     "La lyre est devenue un symbole d'harmonie, d'inspiration et de vérité transmise par la beauté plutôt qu'imposée.",
     "La lyre est particulièrement associée à Apollon et à Orphée.",
-  ]},
-  "arc":{icon:"🏹",label:"Arc",category:"Mythologie",desc:"Attribut d'Artémis la chasseresse et d'Éros : intention, concentration, désir qui vise juste sans toujours consulter la raison.",links:["artémis","éros"],lore:[
+  ],
+    deities:[
+      {id:"apollon",role:"attribut principal, reçu d'Hermès en échange de son troupeau",certainty:"attesté"},
+      {id:"orphée",role:"emporte une lyre offerte par Apollon jusqu'aux Enfers",certainty:"attesté"},
+      {id:"hermès",role:"inventeur de l'instrument, avant de le céder à Apollon",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"harmonie",text:"une vérité qui persuade plutôt qu'elle n'impose"},
+      {axis:"inspiration",text:"instrument des Muses et de la poésie chantée"},
+      {axis:"pouvoir extrême",text:"le chant d'Orphée, seul capable d'émouvoir Hadès"},
+    ],
+    iconography:"La lyre à sept cordes (kithara dans sa forme professionnelle, plus grande et plus ornée) figure abondamment sur les vases représentant Apollon Mousagète (« qui conduit les Muses ») et sur les monnaies de Delphes, associée à son rôle de patron des concours musicaux pythiques.",
+    sources:["Homère, Hymne homérique à Hermès, v. 24-61 (invention de la lyre)","Ovide, Métamorphoses, X, 1-85 (Orphée et Eurydice — réception latine)"],
+    relatedSymbols:["arc","couronne","flûte"],
+  },
+  "arc":{icon:"🏹",label:"Arc",category:"Mythologie",desc:"Attribut d'Artémis la chasseresse et d'Éros : intention, concentration, désir qui vise juste sans toujours consulter la raison.",
+    atGlance:"L'arme de la chasseuse Artémis, mais aussi d'Apollon et d'Éros — trois façons distinctes de « viser juste », de la mort donnée à distance jusqu'au désir qui frappe le cœur.",
+    why:"L'arc représente une puissance à distance et préméditée, par opposition à l'épée ou à la lance qui exigent le corps-à-corps : il correspond donc naturellement à des divinités qui agissent sans confrontation directe — la chasseuse qui traque sans être vue, le dieu qui punit de loin, l'enfant ailé dont personne ne voit venir la flèche.",
+    links:["artémis","éros"],lore:[
     "L'arc est l'instrument du chasseur : il permet d'atteindre sa cible à distance.",
     "Il est particulièrement associé à Artémis, déesse de la chasse et des espaces sauvages. Dans l'Hymne homérique qui lui est consacré, elle est explicitement décrite comme une chasseuse qui porte son arc et ses flèches.",
     "Son arc représente donc une puissance maîtrisée : la chasse n'est pas un geste désordonné, mais une concentration de l'attention sur une cible.",
     "L'arc d'Ulysse, dans l'Odyssée, illustre à lui seul cette maîtrise : à son retour, aucun des prétendants venus envahir son palais ne parvient même à le bander, tant sa tension exige une force et une habileté hors du commun — seul Ulysse, révélant enfin sa véritable identité, réussit à la fois à le tendre et à tirer une flèche à travers douze anneaux alignés, avant de se retourner contre les prétendants eux-mêmes.",
     "L'arc est devenu un symbole de volonté, d'intention, de concentration, de maîtrise de soi et de désir dirigé vers un objectif.",
     "L'arc est particulièrement associé à Artémis, mais également à Apollon et à Éros : trois façons différentes de viser juste.",
-  ]},
-  "torches":{icon:"🔥",label:"Torches",category:"Mythologie",desc:"Attribut d'Hécate : illumination, guidance dans l'obscurité sans jamais imposer le chemin.",links:["hécate","hyménée"],lore:[
+  ],
+    deities:[
+      {id:"artémis",role:"chasseresse à l'arc, attribut central dès les Hymnes homériques",certainty:"attesté"},
+      {id:"apollon",role:"arc jumeau de celui d'Artémis, utilisé pour punir à distance",certainty:"attesté"},
+      {id:"éros",role:"flèches qui provoquent le désir plutôt que la mort",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"maîtrise de soi",text:"concentration de l'attention sur une seule cible"},
+      {axis:"puissance à distance",text:"frapper sans confrontation directe"},
+      {axis:"désir",text:"chez Éros, une visée qui échappe à la raison"},
+    ],
+    sources:["Hymnes homériques, XXVII, à Artémis","Homère, Odyssée, chant XXI (l'arc d'Ulysse)"],
+    relatedSymbols:["flèche","cerf","laurier"],
+  },
+  "torches":{icon:"🔥",label:"Torches",category:"Mythologie",desc:"Attribut d'Hécate : illumination, guidance dans l'obscurité sans jamais imposer le chemin.",
+    atGlance:"Hécate rejoint Déméter, éperdue de chagrin après la disparition de Perséphone, avec des torches enflammées pour l'aider à chercher — la même lumière qui guide la recherche accompagne aussi, lors des noces grecques, la mariée jusqu'à sa nouvelle maison.",
+    why:"Contrairement à la torche unique des lampadédromies, un rite collectif de transmission (voir la fiche « Torche »), les torches d'Hécate se déploient au pluriel et dans un contexte de recherche individuelle et nocturne — deux flambeaux tenus par une déesse qui parcourt l'obscurité, pas un relais confié de main en main.",
+    links:["hécate","hyménée"],lore:[
     "Lorsque Perséphone disparaît, Déméter parcourt le monde à sa recherche pendant neuf jours. Hécate, qui a entendu les cris de Perséphone, rejoint ensuite Déméter avec des torches enflammées pour l'aider à découvrir ce qui s'est passé.",
     "La torche devient ainsi la lumière qui permet de traverser la nuit et de retrouver ce qui a été perdu.",
     "Hécate conserve ensuite cette fonction de déesse porteuse de torches, liée aux chemins nocturnes, aux seuils et au monde souterrain.",
     "Les torches accompagnent aussi un tout autre passage : lors des mariages grecs, un cortège nocturne conduisait la mariée jusqu'à la maison de son époux à la lueur de flambeaux, sous la protection d'Hyménée, dieu du mariage — la même lumière qui aide à chercher ce qui est perdu sert alors à célébrer ce qui vient de commencer.",
     "Les torches sont donc devenues un symbole de lumière, de connaissance, de révélation, de guidance et de recherche de la vérité.",
     "Les torches sont particulièrement associées à Hécate et, dans le mythe de Perséphone, à Déméter — et, lors des noces, à Hyménée.",
-  ]},
-  "vigne":{icon:"🍇",label:"Vigne",category:"Mythologie",desc:"Attribut de Dionysos : plaisir, transformation, abondance instinctive.",links:["dionysos"],lore:[
+  ],
+    deities:[
+      {id:"hécate",role:"porte deux torches pour aider Déméter à chercher Perséphone",certainty:"attesté"},
+      {id:"déméter",role:"parcourt le monde neuf jours à la recherche de sa fille",certainty:"attesté"},
+      {id:"hyménée",role:"protège le cortège aux flambeaux menant la mariée",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"recherche",text:"une quête nocturne individuelle, pas un relais collectif"},
+      {axis:"passage nuptial",text:"le cortège de mariage à la lueur des flambeaux"},
+    ],
+    iconography:"Hécate est très fréquemment représentée sous une forme triple (Hécate triviae, « des trois chemins »), chacune de ses figures tenant une torche — une iconographie distincte de la torche unique associée à d'autres contextes rituels.",
+    sources:["Hymne homérique à Déméter, v. 47-63 (Hécate et la recherche de Perséphone)"],
+    relatedSymbols:["torche","clé","chien"],
+  },
+  "vigne":{icon:"🍇",label:"Vigne",category:"Mythologie",desc:"Attribut de Dionysos : plaisir, transformation, abondance instinctive.",
+    atGlance:"Indissociable de Dionysos, la vigne porte à la fois la fécondité de la terre et la transformation par la fermentation — un même végétal pour la fête et pour le risque qu'elle comporte.",
+    why:"Le passage du raisin au vin par fermentation représente, aux yeux des Grecs, une transformation presque magique d'une substance en une autre capable de modifier l'état de conscience de qui la consomme — un phénomène naturel bien réel qui a directement nourri l'image de Dionysos comme dieu de la métamorphose autant que de l'ivresse.",
+    links:["dionysos"],lore:[
     "La vigne est indissociable de Dionysos, dieu du vin, de l'ivresse, de la fête, mais aussi de la transformation et de l'extase.",
     "Dans les mythes, Dionysos voyage avec son cortège de satyres, de ménades et de divinités liées à la nature sauvage. La vigne et le vin deviennent les moyens par lesquels l'être humain quitte momentanément son état ordinaire et entre dans un autre état de conscience.",
     "La vigne porte également l'idée de cycle : elle pousse, fleurit, produit ses grappes, puis perd ses feuilles avant de renaître au printemps. Elle rassemble donc la fécondité de la terre et la transformation.",
     "Le mythe d'Icarios rappelle que ce don comportait aussi un risque : Dionysos lui enseigna le premier l'art de faire du vin, mais les bergers auxquels il en fit goûter, ivres pour la première fois de leur vie, crurent avoir été empoisonnés et le tuèrent. Sa fille Érigone, désespérée de le retrouver mort, se pendit à son tour — un rappel que l'ivresse dionysiaque, aussi joyeuse soit-elle, n'est jamais totalement sans danger pour qui ne sait pas encore ce qu'elle est.",
     "Elle est devenue un symbole de plaisir, d'abondance, de transformation, d'extase, de fête et de vitalité.",
     "La vigne est particulièrement associée à Dionysos.",
-  ]},
-  "grenade":{icon:"🔴",label:"Grenade",category:"Mythologie",desc:"Le fruit aux innombrables graines : fertilité, abondance, cycle, attachement, ce qui relie au monde souterrain — associée à Perséphone et Hadès.",links:["perséphone","hadès","ascalaphos"],lore:[
+  ],
+    deities:[
+      {id:"dionysos",role:"maître de la vigne, du vin et de l'ivresse rituelle",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"transformation",text:"le raisin devenu vin, fermentation qui change l'état"},
+      {axis:"cycle",text:"floraison, récolte, dépouillement, renaissance"},
+      {axis:"danger",text:"le mythe d'Icarios, l'ivresse mal comprise qui tue"},
+    ],
+    cult:"Les Dionysies, célébrées à Athènes en l'honneur du dieu, incluaient des processions portant des répliques de vigne et donnaient lieu aux grandes compétitions de théâtre tragique et comique — la fête du vin devenue, par extension, la fête de tout le théâtre grec classique.",
+    sources:["Hymnes homériques, VII, à Dionysos","Apollodore, Bibliothèque, III, 14, 7 (Icarios et Érigone)"],
+    relatedSymbols:["raisin","lierre","bâton"],
+  },
+  "grenade":{icon:"🔴",label:"Grenade",category:"Mythologie",desc:"Le fruit aux innombrables graines : fertilité, abondance, cycle, attachement, ce qui relie au monde souterrain — associée à Perséphone et Hadès.",
+    atGlance:"Quelques grains mangés aux Enfers suffisent à lier Perséphone au royaume d'Hadès — le fruit qui explique, à lui seul, l'alternance des saisons.",
+    why:"La règle mythologique selon laquelle consommer la nourriture des morts crée un lien irréversible avec le monde souterrain est un motif attesté dans plusieurs traditions méditerranéennes ; la grenade, choisie pour ce rôle, doit sans doute son importance à son abondance visible de graines — une image de fécondité si concrète qu'elle devient tout naturellement aussi celle de l'attachement définitif.",
+    links:["perséphone","hadès","ascalaphos"],lore:[
     "Lorsque Perséphone fut enlevée par Hadès et conduite aux Enfers, elle y mangea quelques grains de grenade. Dans la mythologie grecque, manger la nourriture des morts crée un lien avec le monde souterrain. Perséphone ne pouvait donc plus simplement quitter les Enfers pour toujours.",
     "C'est Ascalaphos, gardien du jardin des Enfers, qui la vit cueillir ce fruit et le rapporta aux autres dieux — un témoignage qui scella son sort, et qui lui valut d'être changé en chouette une fois sa vengeance venue (voir la fiche « Ascalaphos »).",
     "Elle fut finalement autorisée à retourner auprès de sa mère Déméter pendant une partie de l'année, mais devait revenir auprès d'Hadès pour l'autre partie. Son départ vers les Enfers correspond à l'automne, tandis que son retour sur terre accompagne le renouveau du printemps.",
     "Au-delà de ce mythe, la grenade était aussi offerte lors des mariages grecs comme symbole de fécondité : ses innombrables graines rassemblées sous une même écorce évoquaient la promesse d'une descendance abondante.",
     "Elle est ainsi devenue un symbole de fertilité, d'abondance, de cycle, d'attachement et de ce qui relie irréversiblement au monde souterrain.",
     "La grenade est particulièrement associée à Perséphone.",
-  ]},
-  "épis":{icon:"🌾",label:"Épis de blé",category:"Mythologie",desc:"Attribut de Déméter : récolte, travail, nourriture, cycle des saisons.",links:["déméter"],lore:[
+  ],
+    deities:[
+      {id:"perséphone",role:"liée aux Enfers pour avoir mangé des grains de grenade",certainty:"attesté"},
+      {id:"hadès",role:"époux et souverain des Enfers où le fruit fut consommé",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"fertilité",text:"innombrables graines, promesse de descendance"},
+      {axis:"cycle des saisons",text:"automne du départ, printemps du retour"},
+      {axis:"attachement irréversible",text:"la nourriture des morts qui lie pour toujours"},
+    ],
+    cult:"Un culte archéologiquement attesté associait la grenade aux sanctuaires de Déméter et Perséphone (notamment à Cnossos et dans plusieurs sites du monde grec) sous forme d'offrandes votives en terre cuite représentant le fruit — un lien matériel, pas seulement narratif, entre le fruit et les deux déesses.",
+    sources:["Hymne homérique à Déméter, v. 371-374 (les grains de grenade)"],
+    relatedSymbols:["épis","monde souterrain","pomme"],
+  },
+  "épis":{icon:"🌾",label:"Épis de blé",category:"Mythologie",desc:"Attribut de Déméter : récolte, travail, nourriture, cycle des saisons.",
+    atGlance:"L'épi moissonné, montré en silence au sommet des Mystères d'Éleusis, concentrait à lui seul tout ce que l'initiation avait à révéler sur la vie, la mort et ce qui renaît.",
+    why:"L'agriculture, activité fondatrice de la civilisation grecque, dépend d'un cycle où la graine doit d'abord disparaître sous la terre avant de renaître en épi — un parallèle si direct avec le récit de Perséphone que le mythe agit, pour les Grecs, comme une véritable explication religieuse du phénomène agricole plutôt qu'une simple image poétique.",
+    links:["déméter"],lore:[
     "Le blé est avant tout associé à Déméter, déesse de l'agriculture et des récoltes.",
     "Lorsque Perséphone fut enlevée par Hadès, Déméter, accablée de chagrin, parcourut le monde à sa recherche et cessa de faire pousser les plantes. La terre devint stérile et les récoltes disparurent.",
     "Lorsque Perséphone put finalement revenir auprès d'elle, la terre recommença à produire. Le cycle de Perséphone expliquait ainsi symboliquement l'alternance des saisons et le retour des récoltes.",
@@ -191,63 +528,183 @@ const SYMBOL_LIBRARY = {
     "L'épi de blé représente donc ce qui nourrit les hommes mais aussi ce qui doit être semé, mourir, puis renaître pour produire une nouvelle récolte.",
     "Il est devenu un symbole de récolte, de nourriture, de travail, de fécondité, de cycle et d'abondance.",
     "Le blé et l'épi sont particulièrement associés à Déméter.",
-  ]},
-  "char solaire":{icon:"☀",label:"Char solaire",category:"Mythologie",desc:"Attribut d'Hélios (et repris par Apollon) : clarté, trajectoire réglée, rien ne peut rester caché sous cette lumière.",links:["hélios","apollon"],lore:[
+  ],
+    deities:[
+      {id:"déméter",role:"déesse tutélaire de l'agriculture et des Mystères d'Éleusis",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"nourriture",text:"ce qui fait vivre les hommes"},
+      {axis:"cycle",text:"semer, mourir sous terre, renaître en épi"},
+      {axis:"initiation",text:"le point culminant silencieux des Mystères d'Éleusis"},
+    ],
+    cult:"Selon plusieurs témoignages antiques (dont Hippolyte de Rome, chrétien mais rapportant une tradition plus ancienne), le sommet des Grands Mystères d'Éleusis consistait à montrer aux initiés, en silence total, un simple épi de blé moissonné — geste d'une sobriété jugée plus éloquente que n'importe quel discours sur la vie et la mort.",
+    sources:["Hymne homérique à Déméter","Hippolyte de Rome, Réfutation de toutes les hérésies, V, 8 (rapportant le rite éleusinien)"],
+    relatedSymbols:["grenade","graine","blé"],
+  },
+  "char solaire":{icon:"☀",label:"Char solaire",category:"Mythologie",desc:"Attribut d'Hélios (et repris par Apollon) : clarté, trajectoire réglée, rien ne peut rester caché sous cette lumière.",
+    atGlance:"Le char qui traverse chaque jour le ciel et fait apparaître le soleil — un objet qui ne se laisse conduire que par celui qui en a vraiment la maîtrise, comme l'apprend Phaéton à ses dépens.",
+    why:"Expliquer la course régulière du soleil par un char conduit chaque jour relève d'une logique mythologique cohérente : un phénomène céleste aussi constant et directionnel qu'un lever et un coucher quotidiens appelle naturellement l'image d'un trajet parcouru, donc d'un véhicule et d'un conducteur.",
+    links:["hélios","apollon"],lore:[
     "Le char est un objet majeur de la mythologie grecque parce qu'il permet aux dieux de parcourir le ciel.",
     "Le char d'Hélios traverse chaque jour le ciel et fait apparaître le soleil. Celui d'Apollon sera également associé au parcours solaire dans les traditions plus tardives.",
     "Le fils d'Hélios, Phaéton, obtint un jour de le conduire à la place de son père — et, incapable d'en maîtriser les chevaux, faillit embraser la terre entière avant que Zeus ne soit contraint de l'abattre d'un éclair pour l'arrêter. Le mythe rappelle qu'un tel char ne se laisse conduire que par celui qui en a vraiment la maîtrise.",
     "Le char représente donc une force qui possède une direction et que le conducteur doit être capable de maîtriser.",
     "Il est devenu un symbole de direction, de maîtrise, de progression, de mouvement et de conquête d'un chemin.",
-  ]},
-  "arc-en-ciel":{icon:"🌈",label:"Arc-en-ciel",category:"Mythologie",desc:"Attribut d'Iris : médiation, passage, réconciliation entre deux états.",links:["iris"],lore:[
+  ],
+    deities:[
+      {id:"hélios",role:"conducteur originel du char solaire",certainty:"attesté"},
+      {id:"apollon",role:"assimilé au parcours solaire surtout dans les traditions tardives",certainty:"tardif"},
+    ],
+    dimensions:[
+      {axis:"maîtrise",text:"un instrument que seul le véritable conducteur peut diriger"},
+      {axis:"régularité",text:"une trajectoire réglée, chaque jour identique"},
+      {axis:"démesure punie",text:"Phaéton, incapable de tenir les rênes, foudroyé par Zeus"},
+    ],
+    history:"L'identification d'Apollon comme dieu solaire (distinct d'Hélios, son propre titulaire originel) se développe surtout à partir de l'époque classique tardive et se généralise à l'époque hellénistique et romaine — une évolution progressive plutôt qu'une équivalence déjà présente chez Homère ou Hésiode.",
+    sources:["Ovide, Métamorphoses, II, 1-400 (Phaéton — réception latine détaillée du mythe)"],
+    relatedSymbols:["soleil","aigle","char"],
+  },
+  "arc-en-ciel":{icon:"🌈",label:"Arc-en-ciel",category:"Mythologie",desc:"Attribut d'Iris : médiation, passage, réconciliation entre deux états.",
+    atGlance:"Le corps même d'Iris, déesse messagère qui relie l'Olympe à la terre et à la mer par ce pont de couleurs fragile et fugace.",
+    why:"Contrairement à Hermès, tourné vers les messages entre dieux et hommes, Iris circule surtout ENTRE les dieux eux-mêmes ; son apparence — un phénomène atmosphérique visible mais insaisissable, qui relie littéralement le ciel à la terre pendant quelques instants — correspond exactement à sa fonction de messagère fugace et fiable à la fois.",
+    links:["iris"],lore:[
     "L'arc-en-ciel est le corps même d'Iris, déesse messagère qui relie l'Olympe à la terre et à la mer en empruntant ce pont de couleurs.",
     "Iris tient un rôle proche de celui d'Hermès, mais tourné vers les dieux plutôt que vers les hommes : elle porte leurs messages et, selon certaines traditions, va puiser l'eau sacrée du Styx sur laquelle les dieux prêtent leurs serments les plus solennels.",
     "Apparaître après l'orage, relier le ciel et la terre en un instant fragile : l'arc-en-ciel condense en une image la fonction même d'Iris, messagère et médiatrice.",
     "Dans l'Iliade, c'est elle que Zeus envoie porter à Priam l'ordre d'aller récupérer, sans crainte, le corps de son fils Hector auprès d'Achille — un message si périlleux qu'aucun mortel n'aurait osé le porter, mais qu'elle traverse en un instant, sans jamais risquer d'être elle-même retenue.",
     "Il est devenu un symbole de médiation, de passage et de réconciliation entre deux états qui semblaient incompatibles.",
     "L'arc-en-ciel est particulièrement associé à Iris.",
-  ]},
-  "flûte":{icon:"🎶",label:"Flûte",category:"Mythologie",desc:"Attribut de Pan : instinct non policé par la raison, appel de la nature brute.",links:["pan"],lore:[
+  ],
+    deities:[
+      {id:"iris",role:"personnification directe du phénomène, messagère des dieux",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"médiation",text:"lien fragile mais fiable entre ciel, terre et mer"},
+      {axis:"message",text:"transmission d'ordres divins, y compris les plus délicats"},
+    ],
+    sources:["Homère, Iliade, chant XXIV (Iris envoyée à Priam)","Hésiode, Théogonie, v. 265-266 et 780-787"],
+    relatedSymbols:["rivière","ailes","porte"],
+  },
+  "flûte":{icon:"🎶",label:"Flûte",category:"Mythologie",desc:"Attribut de Pan : instinct non policé par la raison, appel de la nature brute.",
+    atGlance:"Née d'une fuite et d'une métamorphose — la nymphe Syrinx changée en roseaux pour échapper à Pan — la flûte porte la trace d'un désir qui n'a pas obtenu ce qu'il cherchait.",
+    why:"L'opposition entre la flûte (aulos ou syrinx, instrument à vent, associé à l'ivresse et à l'instinct) et la lyre (instrument à cordes, associé à la raison et à la mesure) structure toute une part de la pensée musicale grecque : deux techniques d'instruments, deux tempéraments, incarnés respectivement par un dieu rustique et boiteux (Pan, le satyre Marsyas) et par un dieu de l'harmonie mesurée (Apollon) — opposition qui se résout toujours en faveur du second dans les récits, jamais sans violence.",
+    links:["pan"],lore:[
     "La flûte de Pan, ou syrinx, naît d'une histoire de fuite et de métamorphose.",
     "Pan, dieu à moitié bouc, poursuivait de son désir la nymphe Syrinx. Pour lui échapper, elle se réfugia au bord d'un fleuve et fut changée en roseaux au moment même où Pan croyait enfin la saisir. Ne serrant dans ses bras que des tiges creuses, il en assembla plusieurs de longueurs différentes pour en tirer un instrument — et lui donna le nom de la nymphe.",
     "La flûte de Pan porte ainsi la trace d'un désir qui n'a pas obtenu ce qu'il cherchait, mais qui en a fait naître autre chose : une musique instinctive, non policée par la raison, à l'image du dieu qui la joue.",
     "Un autre joueur de flûte osa un jour défier Apollon lui-même : le satyre Marsyas, qui avait ramassé l'instrument après qu'Athéna l'eut rejeté en voyant combien il déformait son visage en soufflant dedans. Vaincu au concours, Marsyas fut écorché vif par le dieu en punition de son insolence — un rappel brutal que l'instinct de la flûte, aussi séduisant soit-il, ne l'emporte jamais impunément sur l'harmonie mesurée de la lyre.",
     "Elle est devenue un symbole d'instinct, d'appel de la nature brute et de désir transformé plutôt qu'assouvi.",
     "La flûte est particulièrement associée à Pan.",
-  ]},
-  "balance":{icon:"⚖",label:"Balance",category:"Mythologie",desc:"Attribut de Thémis (et de Minos au Jugement) : équilibre, justice, mesure exacte avant toute décision.",links:["thémis","minos"],lore:[
+  ],
+    deities:[
+      {id:"pan",role:"inventeur et joueur de la syrinx, née de sa poursuite de la nymphe",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"instinct",text:"une musique non policée par la raison"},
+      {axis:"désir transformé",text:"un amour non consommé, devenu création"},
+      {axis:"démesure punie",text:"Marsyas écorché pour avoir défié l'harmonie d'Apollon"},
+    ],
+    iconography:"Athéna rejetant la flûte (aulos) en voyant son reflet déformé en la jouant est un motif attesté dans la sculpture classique (relief attribué à Myron) — un épisode qui explique, en amont du concours de Marsyas, pourquoi l'instrument revient à un satyre plutôt qu'à une déesse.",
+    sources:["Ovide, Métamorphoses, I, 689-712 (Syrinx — réception latine)","Apollodore, Bibliothèque, I, 4, 2 (Marsyas)"],
+    relatedSymbols:["lyre","forêt","serpent"],
+  },
+  "balance":{icon:"⚖",label:"Balance",category:"Mythologie",desc:"Attribut de Thémis (et de Minos au Jugement) : équilibre, justice, mesure exacte avant toute décision.",
+    atGlance:"Zeus lui-même pèse sur une balance d'or le destin d'Hector face à Achille — la justice comme une force qui mesure, sans se laisser guider par l'émotion.",
+    why:"La psychostasie (« pesée des âmes ») homérique n'est pas une pratique religieuse rituelle mais une IMAGE POÉTIQUE employée par Homère pour représenter visuellement l'inévitabilité du destin au moment le plus tendu d'un combat — un procédé narratif plutôt qu'une croyance sur un jugement post-mortem systématique (contrairement, par exemple, à la pesée du cœur dans la religion égyptienne, souvent confondue à tort avec cette scène).",
+    links:["thémis","minos"],lore:[
     "La balance représente ce qui doit être pesé et comparé avant qu'un jugement soit rendu.",
     "Cette idée existe déjà dans la mythologie grecque : Zeus est représenté pesant le destin des guerriers sur une balance, notamment dans les scènes de psychostasie, où le sort des combattants est mis en balance.",
     "Homère met en scène ce geste au moment le plus tendu de l'Iliade : avant le combat final entre Achille et Hector, Zeus place sur sa balance d'or les deux destins en jeu — celui d'Hector s'enfonce, signe que son heure est venue, et Apollon, qui le protégeait jusque-là, doit alors l'abandonner à son sort.",
     "La justice apparaît ainsi comme une force qui ne choisit pas selon les émotions, mais qui mesure et attribue à chacun ce qui lui revient.",
     "La balance est donc devenue un symbole de justice, d'équilibre, de mesure, de jugement et d'impartialité.",
     "Elle peut être associée à Thémis et à Dikè, personnifications de l'ordre divin et de la justice.",
-  ]},
-  "ailes":{icon:"🕊",label:"Ailes",category:"Mythologie",desc:"Selon le contexte : Niké (victoire), Hermès (rapidité, message) ou Éros (désir qui s'envole). Toujours un mouvement qui échappe à la pesanteur ordinaire.",links:["hermès","éros"],lore:[
+  ],
+    deities:[
+      {id:"thémis",role:"personnification de l'ordre divin et de la loi établie",certainty:"fortement établi"},
+      {id:"zeus",role:"pèse lui-même le destin d'Hector face à Achille dans l'Iliade",certainty:"attesté"},
+      {id:"minos",role:"juge des morts, associé tardivement à l'image de la balance",certainty:"interprétation"},
+    ],
+    dimensions:[
+      {axis:"justice impartiale",text:"une mesure qui ne se laisse pas guider par l'émotion"},
+      {axis:"destin",text:"la psychostasie homérique, image du sort qui bascule"},
+    ],
+    sources:["Homère, Iliade, chant XXII, v. 209-213 (la balance d'or)"],
+    relatedSymbols:["sceptre","monde souterrain","épée"],
+  },
+  "ailes":{icon:"🕊",label:"Ailes",category:"Mythologie",desc:"Selon le contexte : Niké (victoire), Hermès (rapidité, message) ou Éros (désir qui s'envole). Toujours un mouvement qui échappe à la pesanteur ordinaire.",
+    atGlance:"Trois figures, trois façons d'échapper au sol — le message d'Hermès, le désir d'Éros, la victoire de Niké — mais aussi un avertissement : les ailes ne garantissent jamais la maîtrise, comme l'apprend Icare.",
+    why:"Là où la plupart des dieux grecs restent anthropomorphes et terrestres, doter une figure d'ailes revient à la désigner explicitement comme échappant aux lois physiques ordinaires — un marqueur visuel immédiat, réservé aux figures dont la fonction même est le mouvement rapide, insaisissable ou incontrôlable.",
+    links:["hermès","éros"],lore:[
     "Les ailes, dans la mythologie grecque, distinguent ceux qui échappent à la pesanteur ordinaire du monde.",
     "Hermès porte des sandales ailées qui lui permettent de voyager entre l'Olympe, le monde des hommes et celui des morts à une vitesse que rien ne peut freiner. Éros, lui, est représenté avec des ailes qui traduisent la rapidité et l'imprévisibilité du désir amoureux, qui se pose où il veut sans qu'on puisse le retenir. Niké, déesse de la victoire, vole vers celui ou celle qu'elle choisit de couronner, et sa venue ne se commande pas.",
     "Trois figures, trois façons d'échapper au sol : le message, le désir, la victoire — chacun a ses propres ailes.",
     "Les ailes ne garantissent pourtant pas toujours la maîtrise : celles que Dédale fabriqua pour lui et son fils Icare, en plumes et en cire, leur permirent de fuir le labyrinthe crétois par les airs (voir la fiche « Labyrinthe ») — mais Icare, grisé par cette liberté nouvelle, s'éleva trop près du soleil, dont la chaleur fit fondre la cire, et il périt englouti par la mer.",
     "Elles sont devenues un symbole de mouvement qui échappe à la pesanteur ordinaire, de rapidité et de ce qui ne peut être ni retenu ni forcé.",
     "Les ailes sont particulièrement associées à Hermès et à Éros.",
-  ]},
+  ],
+    deities:[
+      {id:"hermès",role:"sandales ailées, vitesse entre les trois mondes",certainty:"attesté"},
+      {id:"éros",role:"ailes traduisant l'imprévisibilité du désir",certainty:"attesté"},
+      {id:"dédale",role:"ailes artificielles, fabriquées plutôt que naturelles",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"rapidité",text:"Hermès, message porté à une vitesse incontrôlable"},
+      {axis:"désir",text:"Éros, qui se pose où il veut sans qu'on le retienne"},
+      {axis:"démesure punie",text:"Icare, grisé par une liberté nouvelle, mal maîtrisée"},
+    ],
+    sources:["Homère, Odyssée, chant V (les sandales ailées d'Hermès)","Ovide, Métamorphoses, VIII, 183-235 (Dédale et Icare — réception latine)"],
+    relatedSymbols:["labyrinthe","caducée","chaîne"],
+  },
 
   // Objets classiques : bâton, coupe, épée, denier
-  "bâton":{icon:"🪄",label:"Bâton",category:"Objets",desc:"Enseigne liée au feu : volonté, énergie, croissance par l'action.",links:[],lore:[
+  "bâton":{icon:"🪄",label:"Bâton",category:"Objets",desc:"Enseigne liée au feu : volonté, énergie, croissance par l'action.",
+    atGlance:"Un objet d'action et de mouvement — bâton du voyageur, du berger ou du pèlerin — qu'une tradition de cartomancie occidentale plus tardive associe à l'élément du feu ; sa forme la plus chargée de sens dans le monde grec reste le thyrse dionysiaque.",
+    why:"Il faut le dire clairement : l'association « bâton = feu » relève d'un système de correspondance élémentaire propre à une tradition de cartes symboliques occidentales (attestée depuis la Renaissance européenne), et non d'une doctrine religieuse grecque antique — les Grecs n'ont jamais organisé leurs symboles selon quatre enseignes associées aux quatre éléments d'Empédocle de cette façon systématique. Ce qui EST réellement grec et antique, en revanche, c'est le thyrse dionysiaque cité plus bas, qui reste le bâton rituel le mieux attesté du monde hellénique.",
+    links:[],lore:[
     "Le bâton est avant tout un objet de mouvement et d'action. Dans les représentations anciennes, il peut être le bâton du voyageur, du berger, du pèlerin ou de celui qui avance à travers le monde.",
     "Il est l'emblème de l'énergie qui pousse à agir.",
     "Il évoque aussi directement la branche vivante : quelque chose qui pousse à partir de la terre et qui cherche la lumière.",
     "Le bâton le plus chargé de sens dans les cortèges dionysiaques est le thyrse : une tige de fenouil couronnée d'une pomme de pin et entourée de feuilles de lierre et de vigne (voir les fiches « Lierre » et « Vigne »), que Dionysos et ses suivants brandissaient comme une arme rituelle, capable, dit-on, de faire jaillir le vin ou le miel du sol d'un simple coup.",
     "Le bâton représente donc la volonté, l'énergie, l'action, l'ambition, la croissance, la créativité et la force vitale.",
-  ]},
-  "coupe":{icon:"🍷",label:"Coupe",category:"Objets",desc:"Enseigne liée à l'eau : émotion, réceptivité, relation qui se reçoit et se partage.",links:[],lore:[
+  ],
+    deities:[
+      {id:"dionysos",role:"le thyrse, bâton rituel de son cortège, seul lien vraiment antique",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"action",text:"énergie qui pousse à agir, à avancer"},
+      {axis:"rituel dionysiaque",text:"le thyrse, capable, dit-on, de faire jaillir le vin du sol"},
+    ],
+    history:"Le système des quatre enseignes (bâton/coupe/épée/denier) associées aux quatre éléments appartient à l'histoire des cartes symboliques occidentales, pas à la religion grecque antique — cette fiche illustre l'archétype par des épisodes mythologiques authentiques, mais la correspondance élémentaire elle-même est un cadre de lecture moderne superposé après coup.",
+    sources:["Euripide, Bacchantes (le thyrse dans le cortège dionysiaque)"],
+    relatedSymbols:["vigne","lierre","sceptre"],
+  },
+  "coupe":{icon:"🍷",label:"Coupe",category:"Objets",desc:"Enseigne liée à l'eau : émotion, réceptivité, relation qui se reçoit et se partage.",
+    atGlance:"Un récipient qui reçoit et conserve — l'image de l'univers intérieur dans le système des quatre enseignes, mais aussi, très concrètement, l'objet des libations et offrandes du culte grec réel.",
+    why:"Comme pour le bâton, l'équivalence « coupe = eau » est un cadre de lecture tardif, issu de la cartomancie occidentale, plutôt qu'une doctrine grecque ; la coupe grecque authentique (kylix, kantharos, phiale) est en revanche un objet religieux et social bien réel, central dans le symposion (banquet) comme dans le rituel de libation aux dieux.",
+    links:[],lore:[
     "La coupe est un récipient : elle reçoit, contient et conserve.",
     "Là où le bâton agit vers l'extérieur, la coupe accueille ce qui vient de l'extérieur. Elle devient donc l'image de l'univers intérieur : émotions, sentiments, intuition, imagination et relations.",
     "La coupe évoque également les récipients sacrés utilisés dans les cultes antiques pour contenir le vin, l'eau, le lait ou les offrandes faites aux dieux.",
     "Une coupe extraordinaire intervient dans le dixième travail d'Héraclès : pour traverser l'océan et atteindre le troupeau du géant Géryon, il emprunte la coupe d'or dans laquelle Hélios traverse chaque nuit le ciel d'ouest en est pour retrouver son point de départ — un récipient assez vaste, pour une fois, non pour contenir un breuvage mais pour porter un dieu, et cette fois un héros, d'un bout du monde à l'autre.",
     "La coupe est un symbole de l'émotion, de la réceptivité, de l'intuition, de l'amour, de la relation, de l'offrande et de ce que l'on porte intérieurement.",
-  ]},
-  "épée":{icon:"⚔",label:"Épée",category:"Objets",desc:"Enseigne liée à l'air : pensée, décision, conflit — et la vérité qui en découle.",links:[],lore:[
+  ],
+    deities:[
+      {id:"hélios",role:"traverse la mer chaque nuit dans une coupe d'or gigantesque",certainty:"attesté"},
+      {id:"héraclès",role:"emprunte cette même coupe pour atteindre le troupeau de Géryon",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"réceptivité",text:"ce qui accueille plutôt que ce qui agit"},
+      {axis:"offrande",text:"libations rituelles de vin, d'eau ou de lait aux dieux"},
+    ],
+    cult:"La libation (verser une portion de vin ou d'eau au sol ou sur l'autel avant de boire) est l'un des gestes religieux les plus fréquents et les plus anciens de la pratique grecque, attesté dès les poèmes homériques et pratiqué quotidiennement, non réservé aux grandes occasions.",
+    history:"L'équivalence « coupe = eau » des quatre enseignes appartient à ce système de cartes symboliques occidentales, non à une doctrine grecque antique.",
+    sources:["Homère, Iliade, chant XVI (libations)","Apollodore, Bibliothèque, II, 5, 10 (la coupe d'Hélios)"],
+    relatedSymbols:["vigne","mer","raisin"],
+  },
+  "épée":{icon:"⚔",label:"Épée",category:"Objets",desc:"Enseigne liée à l'air : pensée, décision, conflit — et la vérité qui en découle.",
+    atGlance:"L'arme qui tranche, sépare et met fin — associée dans cette même tradition de cartomancie occidentale à l'élément de l'air et à la pensée ; dans le monde grec, son incarnation la plus célèbre reste la harpé recourbée qui décapita la Gorgone Méduse.",
+    why:"Trancher engage une conséquence irréversible : c'est cette caractéristique physique concrète qui fonde toute la symbolique de rupture, de discernement et de décision attachée à l'épée, bien au-delà de son usage strictement guerrier.",
+    links:[],lore:[
     "L'épée est l'arme qui tranche.",
     "Cette caractéristique physique explique une grande partie de sa symbolique : elle sépare, coupe, distingue et met fin à ce qui doit être terminé.",
     "Mais l'épée est également une arme associée au pouvoir et à l'autorité. Elle peut protéger la justice, défendre une cause ou imposer une décision.",
@@ -255,17 +712,48 @@ const SYMBOL_LIBRARY = {
     "La harpé, épée recourbée que Persée reçut d'Hermès, tranche l'un des mythes les plus célèbres de toute la mythologie grecque : c'est elle qui décapite la Gorgone Méduse, dont le seul regard pétrifiait quiconque le croisait — un exploit que Persée n'accomplit qu'en évitant de la regarder directement, guidé par son reflet dans un bouclier poli.",
     "Sa lame droite évoque également une pensée qui va directement à l'essentiel.",
     "L'épée est ainsi devenue un symbole de pensée, de vérité, de discernement, de décision, de justice, de conflit, de rupture et de pouvoir : l'esprit qui tranche et révèle ce qui est vrai.",
-  ]},
-  "denier":{icon:"🪙",label:"Denier",category:"Objets",desc:"Enseigne liée à la terre : matière, travail, ressource, valeur concrète.",links:[],lore:[
+  ],
+    deities:[
+      {id:"persée",role:"reçoit la harpé d'Hermès pour décapiter Méduse",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"rupture",text:"ce qui sépare, coupe, met fin"},
+      {axis:"discernement",text:"une pensée qui va directement à l'essentiel"},
+      {axis:"exploit fondateur",text:"la décapitation de Méduse par Persée"},
+    ],
+    iconography:"La harpé se distingue par sa lame recourbée, parfois pourvue d'un crochet ou d'une pointe secondaire — une forme spécifique, distincte de l'épée droite (xiphos) du hoplite grec ordinaire, propre aux armes divines ou héroïques dans l'art antique.",
+    history:"L'équivalence « épée = air » des quatre enseignes appartient à ce système de cartes symboliques occidentales, non à une doctrine grecque antique.",
+    sources:["Apollodore, Bibliothèque, II, 4, 2 (Persée et Méduse)","Hésiode, Théogonie, v. 280-283"],
+    relatedSymbols:["chaîne","miroir","balance"],
+  },
+  "denier":{icon:"🪙",label:"Denier",category:"Objets",desc:"Enseigne liée à la terre : matière, travail, ressource, valeur concrète.",
+    atGlance:"Une pièce associée à la matière et à la richesse concrète — mais aussi, dans son usage le plus mythologiquement chargé, l'obole placée dans la bouche du défunt pour payer le passeur Charon.",
+    why:"Le denier romain (et ses équivalents grecs, l'obole ou la drachme) est d'abord un objet économique réel ; sa charge symbolique la plus forte dans l'imaginaire grec ne vient pas de sa valeur d'échange courante mais de son usage funéraire rituel, où une pièce minuscule devient la condition même du passage vers l'au-delà.",
+    links:[],lore:[
     "Le denier est une pièce de monnaie, associée directement à quelque chose de matériel et de tangible.",
     "La monnaie représente ce qui possède une valeur mesurable : richesse, ressources, travail, échange et possession — mais le denier ne se limite pas à l'argent. Il représente plus largement le monde concret : le corps, la matière, la maison, le travail, les ressources et tout ce que l'on construit dans le monde réel.",
     "Une seule pièce, minuscule, franchit pourtant la frontière entre les deux mondes : l'obole que l'on plaçait dans la bouche du défunt pour payer Charon, le passeur qui faisait traverser la rivière du Styx aux âmes des morts (voir la fiche « Rivière ») — sans cette pièce, disait-on, l'âme restait errante sur la rive, incapable de payer son dernier voyage.",
     "Sa forme ronde peut également évoquer le cycle, la terre, le soleil et ce qui se matérialise.",
     "Le denier est ainsi devenu un symbole de matière, de richesse, de travail, de ressources, de sécurité, de prospérité, de corps et d'ancrage : ce qui prend forme dans la matière.",
-  ]},
+  ],
+    deities:[
+      {id:"hadès",role:"royaume auquel l'obole funéraire donne accès, via Charon",certainty:"fortement établi"},
+    ],
+    dimensions:[
+      {axis:"matière",text:"richesse et ressource concrètes"},
+      {axis:"passage funéraire",text:"l'obole de Charon, condition du dernier voyage"},
+    ],
+    cult:"La coutume de placer une pièce (obole) sur ou dans la bouche du défunt avant l'inhumation est archéologiquement attestée dans de nombreuses tombes grecques et romaines — une pratique funéraire réelle, pas seulement une image littéraire.",
+    history:"L'équivalence « denier = terre » des quatre enseignes appartient à ce système de cartes symboliques occidentales, non à une doctrine grecque antique ; le mot « denier » lui-même désigne à l'origine une monnaie romaine plutôt que grecque, ce qui souligne encore la nature composite de cette enseigne.",
+    sources:["Aristophane, Les Grenouilles, v. 140 (l'obole de Charon)"],
+    relatedSymbols:["monde souterrain","rivière","balance"],
+  },
 
   // Objets mythologiques
-  "couronne":{icon:"👑",label:"Couronne",category:"Objets mythologiques",desc:"Autorité légitime, accomplissement, souveraineté assumée avec dignité.",links:["héra","apollon"],lore:[
+  "couronne":{icon:"👑",label:"Couronne",category:"Objets mythologiques",desc:"Autorité légitime, accomplissement, souveraineté assumée avec dignité.",
+    atGlance:"L'objet qui rend visible le rang de qui la porte — une souveraineté de naissance chez Héra, un mérite conquis chez Apollon : deux légitimités différentes sous une même forme.",
+    why:"La couronne grecque n'est pas d'abord un insigne monarchique rigide comme la couronne européenne médiévale : couronnes végétales (laurier, olivier, lierre) et couronnes métalliques coexistent, la première étant réservée au mérite temporaire d'une victoire, la seconde à un rang permanent — une distinction essentielle que l'image unique de « la couronne » tend à effacer.",
+    links:["héra","apollon"],lore:[
     "La couronne est l'objet qui rend visible le rang de celui ou celle qui la porte. Dans la mythologie grecque, les dieux souverains sont représentés avec des attributs qui manifestent leur autorité, et les couronnes végétales servent également à distinguer les vainqueurs, les héros et ceux qui ont reçu une reconnaissance divine.",
     "Héra, reine de l'Olympe, porte la sienne comme signe visible d'une souveraineté qui ne se discute pas — une autorité de naissance, non conquise (voir la fiche « Héra »).",
     "La couronne de laurier d'Apollon, elle, se mérite : elle devient le signe d'une victoire et d'un accomplissement après la transformation de Daphné en laurier.",
@@ -273,8 +761,25 @@ const SYMBOL_LIBRARY = {
     "Une autre couronne, offerte par Dionysos à son épouse Ariane (voir la fiche « Ariane »), fut plus tard placée parmi les étoiles sous le nom de Couronne boréale — preuve qu'une couronne peut aussi être un don d'amour plutôt qu'un simple insigne de pouvoir.",
     "Elle est devenue un symbole de souveraineté, d'autorité, de victoire, d'accomplissement et de reconnaissance.",
     "La couronne est particulièrement associée à Héra et à Apollon — deux légitimités différentes, l'une de rang, l'autre de mérite.",
-  ]},
-  "sceptre":{icon:"🔱",label:"Sceptre",category:"Objets mythologiques",desc:"Pouvoir stable, commandement exercé avec constance plutôt qu'imposé par la force.",links:["zeus","héra","héphaïstos"],lore:[
+  ],
+    deities:[
+      {id:"héra",role:"couronne de rang, souveraineté de naissance",certainty:"attesté"},
+      {id:"apollon",role:"couronne de laurier, mérite conquis (jeux Pythiques)",certainty:"attesté"},
+      {id:"dionysos",role:"offre une couronne à Ariane, placée parmi les étoiles",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"rang",text:"une autorité de naissance, non discutée"},
+      {axis:"mérite",text:"une victoire ou un accomplissement récompensés"},
+      {axis:"amour",text:"un don, non un simple insigne de pouvoir"},
+    ],
+    cult:"Les couronnes végétales des grands jeux panhelléniques variaient selon le sanctuaire : olivier sauvage à Olympie, laurier à Delphes (jeux Pythiques), pin à l'Isthme, ache sauvage à Némée — une distinction locale précise, bien attestée, souvent aplatie dans les résumés modernes qui parlent d'« une couronne de laurier » en général.",
+    sources:["Pindare, Odes (couronnes des jeux panhelléniques)","Pausanias, Description de la Grèce, V (Olympie)"],
+    relatedSymbols:["laurier","sceptre","étoiles"],
+  },
+  "sceptre":{icon:"🔱",label:"Sceptre",category:"Objets mythologiques",desc:"Pouvoir stable, commandement exercé avec constance plutôt qu'imposé par la force.",
+    atGlance:"Le sceptre d'Agamemnon porte le poids de plusieurs générations — forgé par Héphaïstos, offert par Zeus à Pélops, transmis de père en fils jusqu'à lui : une autorité qui se prouve par la lignée, non par la seule démonstration de force.",
+    why:"Chez Homère, le sceptre n'est pas qu'un insigne décoratif : celui qui le tient a matériellement le droit de parler devant l'assemblée — un objet qui structure concrètement la prise de parole politique, bien avant de devenir une simple image de pouvoir.",
+    links:["zeus","héra","héphaïstos"],lore:[
     "Le sceptre est le signe du pouvoir exercé par celui qui gouverne.",
     "Dans les récits homériques, Zeus tient le sceptre comme signe de sa souveraineté sur les dieux et les hommes. Le sceptre n'est donc pas seulement une arme : il représente l'autorité légitime et le droit de commander.",
     "Héra, reine de l'Olympe, porte elle aussi un sceptre — signe d'une autorité qui n'a besoin d'aucune démonstration de force pour s'imposer, à la différence de celle, plus spectaculaire, de Zeus (voir la fiche « Héra »).",
@@ -282,88 +787,248 @@ const SYMBOL_LIBRARY = {
     "Il est également utilisé par les rois et les magistrats comme marque de leur fonction.",
     "Le sceptre est ainsi devenu un symbole de pouvoir, de commandement, d'autorité, de gouvernement et de responsabilité.",
     "Le sceptre est particulièrement associé à Zeus et à Héra, ainsi qu'aux figures souveraines en général.",
-  ]},
-  "clé":{icon:"🗝",label:"Clé",category:"Objets mythologiques",desc:"Accès, connaissance réservée, passage qui ne s'ouvre qu'à qui sait où chercher.",links:["hécate"],lore:[
+  ],
+    deities:[
+      {id:"zeus",role:"sceptre souverain sur dieux et hommes",certainty:"attesté"},
+      {id:"héra",role:"sceptre de reine, autorité sans démonstration de force",certainty:"attesté"},
+      {id:"héphaïstos",role:"forgeron du sceptre d'Agamemnon",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"légitimité",text:"une lignée ininterrompue plutôt qu'une force brute"},
+      {axis:"parole politique",text:"chez Homère, condition matérielle du droit de parler"},
+    ],
+    iconography:"Dans l'Assemblée homérique (agora), le sceptre passe physiquement de main en main : seul celui qui le tient a le droit de s'exprimer devant les autres — une convention narrative qui reflète peut-être une pratique sociale réelle de l'époque archaïque.",
+    sources:["Homère, Iliade, chant II, v. 100-108 (généalogie du sceptre d'Agamemnon)"],
+    relatedSymbols:["couronne","foudre","balance"],
+  },
+  "clé":{icon:"🗝",label:"Clé",category:"Objets mythologiques",desc:"Accès, connaissance réservée, passage qui ne s'ouvre qu'à qui sait où chercher.",
+    atGlance:"Hécate, « celle qui tient les clés » (Kleidouchos), règne sur les carrefours, les seuils et les frontières — et dans plusieurs sanctuaires grecs, la clé du temple était très concrètement confiée à une prêtresse.",
+    why:"La fonction de « gardienne des clés » n'est pas qu'une image poétique : elle correspond à une charge sacerdotale réelle attestée dans l'épigraphie grecque (la kleidouchos), ce qui ancre le symbole autant dans la pratique religieuse concrète que dans le mythe.",
+    links:["hécate"],lore:[
     "La clé est littéralement ce qui permet de franchir une porte normalement fermée.",
     "Dans les traditions liées à Hécate, celle-ci est appelée « porteuse des clés » et Kleidouchos, « celle qui tient les clés ». Elle règne sur les carrefours, les seuils et les frontières entre différents espaces.",
     "La clé devient alors l'objet qui permet d'accéder à ce qui était caché.",
     "Cette fonction n'était pas seulement symbolique : dans plusieurs sanctuaires grecs, la clé du temple était matériellement confiée à une prêtresse, dont la charge consistait précisément à ouvrir et fermer l'accès au lieu sacré — un pouvoir concret sur le seuil, à l'image de celui qu'Hécate exerce sur les passages entre les mondes.",
     "Elle est devenue un symbole de passage, d'accès, de connaissance secrète, de pouvoir sur les seuils et d'ouverture vers un autre monde.",
     "La clé est particulièrement associée à Hécate.",
-  ]},
-  "lanterne":{icon:"🏮",label:"Lanterne",category:"Objets mythologiques",desc:"Recherche, lumière intérieure portée dans l'obscurité plutôt que réponse immédiate.",links:["déméter","hécate"],lore:[
+  ],
+    deities:[
+      {id:"hécate",role:"Kleidouchos, « porteuse des clés », maîtresse des seuils",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"accès",text:"ce qui permet de franchir un seuil normalement fermé"},
+      {axis:"charge sacerdotale",text:"une fonction religieuse réelle, pas seulement mythique"},
+    ],
+    cult:"Le titre de kleidouchos (« porteuse des clés ») désignait une charge sacerdotale réelle et documentée dans plusieurs cités grecques, responsable de l'ouverture et de la fermeture du temple — une prêtrise dont l'insigne matériel était littéralement une clé.",
+    sources:["Pausanias, Description de la Grèce (mentions de prêtresses kleidouchoi)"],
+    relatedSymbols:["porte","torche","lanterne"],
+  },
+  "lanterne":{icon:"🏮",label:"Lanterne",category:"Objets mythologiques",desc:"Recherche, lumière intérieure portée dans l'obscurité plutôt que réponse immédiate.",
+    atGlance:"Diogène de Sinope, dit-on, parcourait les rues d'Athènes en plein jour une lanterne à la main, affirmant chercher « un homme » — l'image même d'une lumière qui ne sert pas à éclairer le monde, mais à continuer d'avancer.",
+    why:"Contrairement à la torche, associée à des figures et des récits mythologiques précis (Hécate, Déméter), la lanterne n'a pas de mythe fondateur propre dans la tradition grecque classique : sa charge symbolique vient surtout d'un usage philosophique postérieur (l'anecdote de Diogène) plutôt que d'un récit religieux archaïque — une nuance à ne pas gommer.",
+    links:["déméter","hécate"],lore:[
     "La lanterne est plus tardive que la torche et ne possède pas, dans la mythologie grecque, un récit fondateur comparable au trident de Poséidon ou à la foudre de Zeus.",
     "Mais sa symbolique découle directement de l'idée ancienne de la lumière portée dans l'obscurité.",
     "Elle peut être reliée à Hécate et à sa fonction de guide nocturne : la déesse porte des torches lorsqu'elle accompagne Déméter dans sa recherche de Perséphone.",
     "La lanterne représente donc une lumière plus intime que la foudre : elle n'éclaire pas le monde entier, elle permet simplement de continuer à avancer lorsque l'on ne voit plus son chemin.",
     "L'anecdote la plus célèbre liée à une lanterne reste peut-être celle du philosophe Diogène de Sinope, qui aurait parcouru les rues d'Athènes en plein jour, une lanterne allumée à la main, en affirmant chercher « un homme » — un geste provocateur pour dénoncer, lanterne en plein soleil, combien l'honnêteté véritable restait introuvable même à la lumière du jour.",
     "Elle est devenue un symbole de recherche, de lumière intérieure, d'espoir, d'orientation et de découverte de ce qui était caché.",
-  ]},
-  "torche":{icon:"🔦",label:"Torche",category:"Objets mythologiques",desc:"Illumination, connaissance transmise, guidance dans l'incertitude.",links:["hécate","déméter","prométhée"],lore:[
-    "Lorsque Perséphone disparaît, Déméter parcourt le monde à sa recherche pendant neuf jours. Hécate, qui a entendu les cris de Perséphone, rejoint ensuite Déméter avec des torches enflammées pour l'aider à découvrir ce qui s'est passé.",
-    "La torche devient ainsi la lumière qui permet de traverser la nuit et de retrouver ce qui a été perdu.",
-    "Hécate conserve ensuite cette fonction de déesse porteuse de torches, liée aux chemins nocturnes, aux seuils et au monde souterrain.",
+  ],
+    deities:[
+      {id:"hécate",role:"lien indirect, par extension de sa fonction de guide aux torches",certainty:"interprétation"},
+    ],
+    dimensions:[
+      {axis:"recherche",text:"une quête plutôt qu'une réponse immédiate"},
+      {axis:"provocation philosophique",text:"Diogène, cherchant « un homme » en plein jour"},
+    ],
+    history:"L'anecdote de Diogène, rapportée par des sources bien postérieures à sa mort (notamment Diogène Laërce, IIIe siècle apr. J.-C.), appartient à la tradition philosophique cynique plutôt qu'au mythe religieux — une distinction utile pour ne pas confondre les deux registres.",
+    sources:["Diogène Laërce, Vies et doctrines des philosophes illustres, VI, 41"],
+    relatedSymbols:["torche","clé","chemin"],
+  },
+  "torche":{icon:"🔦",label:"Torche",category:"Objets mythologiques",desc:"Illumination, connaissance transmise, guidance dans l'incertitude.",
+    atGlance:"À Athènes, des courses de relais nocturnes, les lampadédromies, se transmettaient une torche allumée sans jamais la laisser s'éteindre — une manière de rejouer, dans la course, le don du feu qui avait fondé la civilisation.",
+    why:"Contrairement aux torches d'Hécate (voir la fiche « Torches »), tournées vers la recherche individuelle de ce qui est perdu, la torche prise isolément trouve sa signification la plus spécifiquement grecque dans un rite collectif bien attesté : la course de relais qui célèbre la transmission plutôt que la quête.",
+    links:["hécate","déméter","prométhée"],lore:[
     "À Athènes, des courses de relais nocturnes appelées lampadédromies opposaient des équipes de jeunes gens qui se transmettaient une torche allumée sans jamais la laisser s'éteindre, en l'honneur de Prométhée, d'Héphaïstos ou d'Athéna (voir la fiche « Prométhée ») — une manière de rejouer, dans la course, le don du feu qui avait fondé la civilisation elle-même.",
-    "La torche est donc devenue un symbole de lumière, de connaissance, de révélation, de guidance et de recherche de la vérité.",
-    "La torche est particulièrement associée à Hécate et, dans le mythe de Perséphone, à Déméter.",
-  ]},
-  "flèche":{icon:"🎯",label:"Flèche",category:"Objets mythologiques",desc:"Direction précise, volonté qui vise, conséquence qui suit le tir.",links:["éros"],lore:[
+    "Contrairement à une flamme statique, la torche de relais engage une responsabilité collective : chaque coureur reçoit une lumière qu'il n'a pas allumée lui-même et doit la transmettre intacte au suivant, sous peine de faire échouer toute l'équipe.",
+    "La torche est donc devenue un symbole de lumière, de connaissance, de révélation, de guidance et de recherche de la vérité — mais aussi, spécifiquement par les lampadédromies, de transmission collective et de relais entre générations.",
+    "La torche est particulièrement associée à Prométhée, à Héphaïstos et à Athéna par ce rite précis — et, plus largement, aux torches d'Hécate et de Déméter, dans le registre plus intime de la recherche individuelle (voir la fiche « Torches »).",
+  ],
+    deities:[
+      {id:"prométhée",role:"honoré par les lampadédromies, en mémoire du don du feu",certainty:"attesté"},
+      {id:"héphaïstos",role:"co-destinataire du rite, dieu de la forge et du feu",certainty:"attesté"},
+      {id:"athéna",role:"co-destinataire du rite dans certaines cités",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"transmission",text:"une lumière reçue, à ne jamais laisser s'éteindre"},
+      {axis:"responsabilité collective",text:"le relais engage toute l'équipe, pas un seul coureur"},
+      {axis:"civilisation",text:"le don du feu de Prométhée, rejoué symboliquement"},
+    ],
+    cult:"Les lampadédromies (courses aux flambeaux) sont attestées à Athènes lors des Panathénées, des Héphaistia et des Prométhia — des compétitions sportives à part entière, organisées par tribu, où la torche devait arriver allumée jusqu'à l'autel final pour que l'équipe l'emporte.",
+    sources:["Aristophane, Les Grenouilles, v. 1087-1098 (mention des lampadédromies)","Pausanias, Description de la Grèce, I, 30, 2"],
+    relatedSymbols:["torches","feu","clé"],
+  },
+  "flèche":{icon:"🎯",label:"Flèche",category:"Objets mythologiques",desc:"Direction précise, volonté qui vise, conséquence qui suit le tir.",
+    atGlance:"Le prolongement de l'intention de l'archer, qui une fois tirée ne peut plus revenir en arrière — chez Artémis et Apollon elle donne la mort à distance, chez Éros elle atteint directement le cœur.",
+    why:"La distinction entre l'arc (préparation, tension, potentiel) et la flèche (action irréversible une fois lancée) permet à un même attribut de couvrir deux moments narratifs différents : l'intention et sa conséquence — ce qui explique pourquoi les deux objets, bien qu'inséparables dans l'usage, portent des symboliques légèrement différentes.",
+    links:["éros"],lore:[
     "La flèche prolonge l'intention de l'archer : une fois tirée, elle ne peut plus revenir en arrière.",
     "Elle possède donc une symbolique différente de l'arc. L'arc représente la préparation et la tension ; la flèche représente le moment où l'intention devient action.",
     "Chez Artémis et Apollon, les flèches peuvent donner la mort à distance. Chez Éros, elles prennent une dimension différente : elles atteignent directement le cœur et provoquent l'amour ou le désir.",
     "Les flèches d'Héraclès, trempées dans le sang empoisonné de l'Hydre de Lerne, se révélèrent indispensables bien après sa mort : léguées au héros Philoctète, elles seules, selon un oracle, pouvaient permettre aux Grecs de vaincre Troie — obligeant ses compagnons à aller chercher Philoctète, qu'ils avaient pourtant abandonné blessé et hurlant de douleur sur l'île de Lemnos des années plus tôt.",
     "La flèche est ainsi devenue un symbole de direction, de volonté, d'action, de conséquence, de désir et d'atteinte d'un objectif.",
     "La flèche peut être associée à Artémis, Apollon et Éros selon le contexte.",
-  ]},
-  "miroir":{icon:"🪞",label:"Miroir",category:"Objets mythologiques",desc:"Introspection, vérité renvoyée, perception de soi parfois inconfortable.",links:["aphrodite"],lore:[
+  ],
+    deities:[
+      {id:"artémis",role:"flèches mortelles, chasse et punition à distance",certainty:"attesté"},
+      {id:"apollon",role:"flèches mortelles, souvent liées à la peste ou au châtiment",certainty:"attesté"},
+      {id:"éros",role:"flèches qui provoquent le désir plutôt que la mort",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"irréversibilité",text:"une fois tirée, l'action ne peut plus être annulée"},
+      {axis:"conséquence différée",text:"les flèches d'Héraclès, décisives des décennies après sa mort"},
+    ],
+    sources:["Sophocle, Philoctète","Homère, Iliade, chant I (les flèches d'Apollon, cause de la peste)"],
+    relatedSymbols:["arc","laurier","chaîne"],
+  },
+  "miroir":{icon:"🪞",label:"Miroir",category:"Objets mythologiques",desc:"Introspection, vérité renvoyée, perception de soi parfois inconfortable.",
+    atGlance:"Naturellement lié à Aphrodite et à la beauté, mais aussi, par le mythe de Narcisse, à ce que la même surface qui révèle peut retenir prisonnier celui qui s'y regarde trop longtemps.",
+    why:"Le miroir grec antique (un disque de métal poli, bronze le plus souvent, non le verre argenté moderne) donnait un reflet plus flou et plus instable que nos miroirs actuels — un détail matériel qui éclaire pourquoi son usage mythologique privilégie souvent une réflexion trompeuse ou partielle (le bouclier de Persée, l'eau de la source de Narcisse) plutôt qu'une image parfaitement fidèle.",
+    links:["aphrodite"],lore:[
     "Le miroir est naturellement associé à Aphrodite parce qu'il renvoie à la beauté et à la perception de son propre visage.",
     "Dans l'imaginaire mythologique, Aphrodite est la déesse dont la beauté peut provoquer le désir, la rivalité et même la guerre. Le miroir devient alors l'objet qui permet de contempler cette beauté mais aussi de prendre conscience de l'image que l'on renvoie aux autres.",
     "Il possède donc une double dimension : il montre ce qui est visible, mais il peut également révéler notre rapport à nous-mêmes.",
     "Le miroir rejoint aussi un tout autre mythe, plus sombre : Narcisse, épris de son propre reflet dans l'eau d'une source, ne put jamais s'en détacher et dépérit à force de le contempler sans fin (voir la fiche « Narcisse ») — la preuve que la même surface qui révèle peut aussi retenir prisonnier celui qui s'y regarde trop longtemps.",
     "Le miroir est devenu un symbole de beauté, de perception, d'introspection, d'identité, de désir et de connaissance de soi.",
     "Le miroir est particulièrement associé à Aphrodite.",
-  ]},
-  "voile":{icon:"🧣",label:"Voile",category:"Objets mythologiques",desc:"Secret, connaissance cachée, frontière entre ce qui se montre et ce qui se protège.",links:["métis"],lore:[
+  ],
+    deities:[
+      {id:"aphrodite",role:"attribut de beauté, lié à sa propre contemplation",certainty:"fortement établi"},
+      {id:"narcisse",role:"piégé par son propre reflet dans l'eau d'une source",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"beauté",text:"contemplation de soi, attribut d'Aphrodite"},
+      {axis:"piège",text:"Narcisse, incapable de se détacher de son image"},
+      {axis:"discernement indirect",text:"le bouclier-miroir qui permet à Persée de vaincre Méduse sans la regarder"},
+    ],
+    iconography:"Les miroirs de bronze poli, souvent munis d'un manche décoré ou d'une figure gravée au dos, comptent parmi les objets de toilette les plus fréquemment retrouvés dans les tombes féminines grecques — un objet réel autant que symbolique.",
+    sources:["Ovide, Métamorphoses, III, 339-510 (Narcisse — réception latine)"],
+    relatedSymbols:["épée","rose","poisson"],
+  },
+  "voile":{icon:"🧣",label:"Voile",category:"Objets mythologiques",desc:"Secret, connaissance cachée, frontière entre ce qui se montre et ce qui se protège.",
+    atGlance:"Lors du mariage grec, l'épouse retirait son voile devant son époux pour la première fois lors d'un rite précis, l'anakalyptêria — un geste qui rendait le mariage visible et effectif aux yeux de tous.",
+    why:"Le voile grec structure une frontière sociale concrète autant que symbolique : couvrir le visage d'une femme, dans certains contextes rituels et sociaux, signale un statut (jeune fille non mariée, nouvelle épouse, initiée aux mystères) plutôt qu'une simple pudeur — le retirer marque donc toujours un changement d'état officiel, pas un geste anodin.",
+    links:["métis"],lore:[
     "Le voile possède une symbolique particulièrement forte dans les rites grecs, notamment autour des femmes, du mariage et des mystères religieux.",
     "Couvrir le visage ou le corps signifie cacher quelque chose au regard ordinaire. Le voile crée donc une frontière entre ce qui peut être vu et ce qui doit rester secret.",
     "Cette symbolique convient particulièrement aux divinités et aux rites liés aux mystères : le sacré n'est pas entièrement accessible au regard profane.",
     "Le voile peut également représenter le passage d'un état à un autre, notamment dans le mariage, où la jeune femme change de statut.",
     "Ce même voile trouvait une place précise dans le rituel du mariage grec : lors de la cérémonie appelée anakalyptêria, littéralement le « dévoilement », l'épouse retirait son voile devant son époux pour la première fois — un geste qui rendait le mariage visible et effectif aux yeux de tous.",
     "Il est ainsi devenu un symbole de secret, de connaissance cachée, de mystère, de frontière, de transformation et de passage — ce qui existe derrière le monde visible mais qui n'est pas encore révélé.",
-  ]},
-  "chaîne":{icon:"⛓",label:"Chaîne",category:"Objets mythologiques",desc:"Attachement, dépendance, lien — la question est toujours de savoir s'il enferme ou s'il peut être dénoué.",links:["pan","prométhée"],lore:[
+  ],
+    deities:[],
+    dimensions:[
+      {axis:"secret",text:"frontière entre ce qui se montre et ce qui se protège"},
+      {axis:"passage",text:"l'anakalyptêria, dévoilement qui rend le mariage effectif"},
+    ],
+    cult:"L'anakalyptêria est un rite du mariage grec attesté par plusieurs sources et représentations (notamment sur des vases à figures rouges), où le moment précis du dévoilement de l'épouse constitue l'un des temps forts visuels de la cérémonie.",
+    sources:["Pollux, Onomasticon, III, 36 (mention de l'anakalyptêria)"],
+    relatedSymbols:["couronne","chaîne","porte"],
+  },
+  "chaîne":{icon:"⛓",label:"Chaîne",category:"Objets mythologiques",desc:"Attachement, dépendance, lien — la question est toujours de savoir s'il enferme ou s'il peut être dénoué.",
+    atGlance:"Celle de Prométhée, puni pour avoir donné le feu aux hommes ; celle d'Andromède, victime innocente livrée à un monstre marin — deux chaînes, deux natures d'attachement radicalement différentes.",
+    why:"En comparant systématiquement ces deux chaînes emblématiques — l'une punitive et méritée, l'autre injuste et salvatrice une fois rompue —, le mythe grec montre que l'objet lui-même est neutre : c'est le contexte moral du lien qui détermine s'il représente une punition juste, un sacrifice, ou une simple épreuve à surmonter.",
+    links:["pan","prométhée"],lore:[
     "La chaîne la plus célèbre de la mythologie grecque est celle qui retint Prométhée sur un rocher du Caucase, en punition d'avoir donné le feu aux hommes contre la volonté de Zeus.",
     "Chaque jour, un aigle venait dévorer son foie, qui repoussait chaque nuit, prolongeant son supplice sans fin — jusqu'à ce que Chiron accepte de mourir à sa place et qu'Héraclès mette fin au calvaire de Prométhée (voir la fiche « Prométhée »).",
     "La chaîne de Prométhée dit quelque chose de plus large que la simple punition : elle montre qu'un don fait sans autorisation a toujours un prix, et que l'attachement qui en résulte peut aussi bien enfermer que devenir, avec le temps, la preuve de ce qu'on a osé offrir.",
     "Une autre chaîne, tout aussi célèbre, retint Andromède à un rocher battu par les flots, livrée en sacrifice à un monstre marin pour expier l'orgueil de sa mère Cassiopée — jusqu'à ce que Persée, de retour avec la tête de Méduse, la délivre et l'épouse — tous deux changés plus tard en étoiles (voir la fiche « Étoile »). Contrairement à celle de Prométhée, cette chaîne-là ne punit aucune faute : elle ne fait que retenir une victime innocente, en attendant qu'un sauveur se présente.",
     "Elle est devenue un symbole d'attachement, de dépendance et de lien — la question étant toujours de savoir s'il enferme ou s'il peut être dénoué.",
     "La chaîne est particulièrement associée à Prométhée et à Pan — deux attachements de nature très différente.",
-  ]},
-  "roue":{icon:"☸",label:"Roue",category:"Objets mythologiques",desc:"Cycle, changement, destin qui tourne sans considération pour le mérite.",links:["tyché"],lore:[
+  ],
+    deities:[
+      {id:"prométhée",role:"enchaîné sur le Caucase, punition pour le don du feu",certainty:"attesté"},
+      {id:"andromède",role:"enchaînée à un rocher, victime innocente sauvée par Persée",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"punition méritée",text:"Prométhée, châtié pour un don interdit"},
+      {axis:"injustice",text:"Andromède, victime sans faute, attendant un sauveur"},
+      {axis:"délivrance",text:"les deux chaînes finissent par être rompues"},
+    ],
+    sources:["Eschyle, Prométhée enchaîné","Apollodore, Bibliothèque, II, 4, 3 (Andromède)"],
+    relatedSymbols:["aigle","étoiles","épée"],
+  },
+  "roue":{icon:"☸",label:"Roue",category:"Objets mythologiques",desc:"Cycle, changement, destin qui tourne sans considération pour le mérite.",
+    atGlance:"L'attribut de Tyché, déesse du hasard souvent représentée les yeux bandés — mais aussi, en punition cette fois, la roue enflammée à laquelle Ixion reste attaché pour l'éternité.",
+    why:"Le contraste entre les deux roues (celle, aveugle et amorale, de Tyché ; celle, punitive et méritée, d'Ixion) illustre une tension centrale de la pensée grecque sur le destin : une part du sort humain relève du pur hasard imprévisible, une autre part reste soumise à une justice qui punit précisément la faute commise — deux logiques que le mythe distingue soigneusement plutôt que de les confondre.",
+    links:["tyché"],lore:[
     "La roue est l'attribut de Tyché, déesse du hasard et de la fortune, souvent représentée les yeux bandés, un gouvernail à la main pour rappeler qu'elle dirige le destin des hommes sans qu'ils puissent l'influencer.",
     "Sa roue tourne sans considération pour le mérite : elle peut élever un inconnu au sommet ou faire chuter un roi, dans un mouvement que ni la vertu ni la faute ne peuvent arrêter.",
     "Contrairement à une punition ou une récompense méritée, ce que fait tourner la roue de Tyché échappe à toute logique morale — c'est précisément ce qui en fait un symbole aussi redouté que fascinant.",
     "Une autre roue, châtiment cette fois, retient Ixion pour l'éternité : ayant tenté de séduire Héra, il fut attaché à une roue enflammée tournant sans fin dans les Enfers — un tourment qui, contrairement à celui de Tyché, ne doit rien au hasard : c'est une punition méritée, non un coup du sort imprévisible.",
     "Elle est devenue un symbole de cycle, de changement et de destin qui tourne sans considération pour le mérite.",
     "La roue est particulièrement associée à Tyché.",
-  ]},
-  "char":{icon:"🏇",label:"Char",category:"Objets mythologiques",desc:"Direction, maîtrise, progression réglée vers un but choisi.",links:["apollon","hélios"],lore:[
+  ],
+    deities:[
+      {id:"tyché",role:"déesse du hasard, roue amorale du destin",certainty:"attesté"},
+      {id:"ixion",role:"attaché pour l'éternité à une roue enflammée, punition méritée",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"hasard amoral",text:"Tyché, qui élève ou fait chuter sans logique morale"},
+      {axis:"punition méritée",text:"Ixion, châtié pour avoir voulu séduire Héra"},
+    ],
+    sources:["Pindare, Odes olympiques, XII (Tyché)","Pindare, Pythiques, II, 21-48 (Ixion)"],
+    relatedSymbols:["char","corne d'abondance","chaîne"],
+  },
+  "char":{icon:"🏇",label:"Char",category:"Objets mythologiques",desc:"Direction, maîtrise, progression réglée vers un but choisi.",
+    atGlance:"Le char d'Hélios traverse chaque jour le ciel ; celui de Pélops, sabotage et malédiction fondatrice, porte au contraire la marque d'une lignée entière condamnée par un mensonge initial.",
+    why:"Le char engage un rapport de maîtrise entre le conducteur et une force qu'il ne contrôle qu'en partie (les chevaux) : c'est cette tension entre puissance disponible et compétence requise qui structure sa symbolique, du triomphe (course gagnée honnêtement) à la catastrophe (Phaéton, voir « Char solaire ») en passant par la corruption du moyen lui-même (l'essieu saboté de Pélops).",
+    links:["apollon","hélios"],lore:[
     "Le char est un objet majeur de la mythologie grecque parce qu'il permet aux dieux de parcourir le ciel.",
     "Le char d'Hélios traverse chaque jour le ciel et fait apparaître le soleil. Celui d'Apollon sera également associé au parcours solaire dans les traditions plus tardives.",
     "Un tout autre char porte, lui, la marque d'une malédiction familiale plutôt que celle du ciel : pour épouser Hippodamie, Pélops dut affronter son père en une course de chars à l'issue mortelle pour tous les prétendants précédents — il ne l'emporta qu'en sabotant secrètement l'essieu du char de son adversaire, un geste de tricherie qui pèsera sur toute sa descendance, jusqu'à la maison d'Atrée.",
     "Le char représente donc une force qui possède une direction et que le conducteur doit être capable de maîtriser.",
     "Il est devenu un symbole de direction, de maîtrise, de progression, de mouvement et de conquête d'un chemin.",
-  ]},
-  "corne d'abondance":{icon:"🐐",label:"Corne d'abondance",category:"Objets mythologiques",desc:"La corne de la chèvre Amalthée : abondance intarissable, don généreux qui ne s'épuise jamais.",links:["zeus"],lore:[
+  ],
+    deities:[
+      {id:"hélios",role:"char solaire, traversée quotidienne du ciel",certainty:"attesté"},
+      {id:"pélops",role:"course de chars truquée, malédiction fondatrice de sa lignée",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"maîtrise",text:"une force qui exige un conducteur compétent"},
+      {axis:"malédiction familiale",text:"la tricherie de Pélops, à l'origine du destin des Atrides"},
+    ],
+    sources:["Pindare, Olympiques, I (Pélops et la course de chars)"],
+    relatedSymbols:["char solaire","cheval","roue"],
+  },
+  "corne d'abondance":{icon:"🐐",label:"Corne d'abondance",category:"Objets mythologiques",desc:"La corne de la chèvre Amalthée : abondance intarissable, don généreux qui ne s'épuise jamais.",
+    atGlance:"Née d'une corne brisée par le jeune Zeus lui-même en jouant avec la chèvre qui l'avait nourri en secret — un geste de maladresse enfantine réparé par un don qui ne s'épuise jamais.",
+    why:"Le récit fait explicitement de l'abondance un acte de RÉPARATION plutôt qu'un simple attribut décoratif : Zeus dote la corne de son pouvoir merveilleux précisément pour compenser le tort accidentel qu'il a causé — la générosité naît ici d'une dette reconnue, non d'une largesse gratuite.",
+    links:["zeus"],lore:[
     "La corne d'abondance provient du mythe de la naissance de Zeus : caché dans une grotte du mont Ida, en Crète, pour échapper à son père Cronos, qui dévorait ses enfants (voir la fiche « Grotte »), le nourrisson fut nourri du lait de la chèvre Amalthée — ou, selon d'autres versions, d'une nymphe portant ce nom.",
     "En jouant avec elle, Zeus enfant aurait brisé accidentellement l'une de ses cornes. Pour se faire pardonner, il la dota d'un pouvoir merveilleux : produire indéfiniment tout ce que son propriétaire pouvait désirer — nourriture, fruits, richesses — sans jamais se vider.",
     "Devenu roi des dieux, Zeus plaça plus tard Amalthée elle-même parmi les étoiles, sous la forme de la constellation du Capricorne, en remerciement pour ces années passées à le nourrir en secret.",
     "La corne d'abondance est ainsi devenue un symbole de générosité, de prospérité intarissable, de nourriture toujours disponible et de gratitude qui répare un tort involontaire.",
     "La corne d'abondance est particulièrement associée à Zeus, par l'intermédiaire d'Amalthée.",
-  ]},
+  ],
+    deities:[
+      {id:"zeus",role:"crée la corne d'abondance en réparation d'un tort accidentel",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"abondance",text:"produit sans jamais s'épuiser"},
+      {axis:"réparation",text:"un don qui compense un tort involontaire"},
+      {axis:"gratitude",text:"Amalthée honorée jusque dans le ciel étoilé"},
+    ],
+    iconography:"La corne d'abondance (cornucopia) devient un attribut iconographique très fréquent à l'époque hellénistique et romaine, associée non seulement à Zeus/Amalthée mais aussi, plus largement, aux personnifications de la Prospérité et de la Fortune (Tyché) — une extension postérieure au récit d'origine.",
+    sources:["Apollodore, Bibliothèque, I, 1, 6-7 (naissance de Zeus et Amalthée)","Callimaque, Hymne à Zeus"],
+    relatedSymbols:["chèvre","grotte","olive"],
+  },
 
   // Animaux
-  "aigle":{icon:"🦅",label:"Aigle",category:"Animaux",desc:"Hauteur de vue, pouvoir, vision d'ensemble — lié à Zeus.",links:["zeus"],lore:[
+  "aigle":{icon:"🦅",label:"Aigle",category:"Animaux",desc:"Hauteur de vue, pouvoir, vision d'ensemble — lié à Zeus.",
+    atGlance:"L'oiseau de Zeus, capable de s'élever plus haut que tous les autres — un messager favorable quand le dieu l'envoie, mais aussi l'instrument choisi de sa punition la plus terrible, contre Prométhée.",
+    why:"L'aigle royal est réellement le plus grand rapace visible dans le ciel grec, capable de voler à très haute altitude et de repérer sa proie de loin : cette supériorité observable dans la nature en fait le choix logique pour représenter le dieu qui, depuis l'Olympe, voit et gouverne tout depuis les hauteurs.",
+    links:["zeus"],lore:[
     "L'aigle est l'oiseau de Zeus et l'un de ses attributs les plus reconnaissables. Dans les récits mythologiques, Zeus peut lui-même prendre la forme d'un aigle, notamment lorsqu'il enlève Ganymède pour l'amener auprès des dieux.",
     "Devenu l'échanson des dieux sur l'Olympe, Ganymède est à son tour placé parmi les étoiles par Zeus : il devient la constellation, puis le signe, du Verseau — l'aigle qui l'a porté jusque-là reste associé à ce voyage entre le ciel et la terre.",
     "L'aigle est aussi celui qui s'élève plus haut que les autres oiseaux et qui semble pouvoir regarder le monde depuis les hauteurs du ciel. Il devient ainsi l'image parfaite de Zeus, maître de l'Olympe et dieu du ciel.",
@@ -371,8 +1036,21 @@ const SYMBOL_LIBRARY = {
     "L'aigle est aussi l'instrument de la punition de Zeus : c'est un aigle qu'il envoie chaque jour dévorer le foie de Prométhée, retenu par une chaîne sur son rocher, un foie qui repousse chaque nuit pour que le châtiment ne s'achève jamais (voir la fiche « Chaîne ») — preuve que l'oiseau qui élève peut aussi, sur ordre du même dieu, devenir l'instrument d'un tourment sans fin.",
     "L'aigle est donc devenu un symbole de pouvoir, de souveraineté, de hauteur, de vision, de force et de message divin.",
     "L'aigle est particulièrement associé à Zeus.",
-  ]},
-  "serpent":{icon:"🐍",label:"Serpent",category:"Animaux",desc:"Transformation, connaissance, guérison, lien avec le monde souterrain.",links:["hygie"],lore:[
+  ],
+    deities:[{id:"zeus",role:"forme prise pour enlever Ganymède ; attribut souverain ; instrument du châtiment de Prométhée",certainty:"attesté"}],
+    dimensions:[
+      {axis:"souveraineté",text:"image du maître de l'Olympe"},
+      {axis:"présage",text:"signe favorable envoyé du ciel"},
+      {axis:"châtiment",text:"instrument du tourment infligé à Prométhée"},
+    ],
+    iconography:"L'aigle est l'attribut divin le plus constamment représenté avec Zeus dans toute la statuaire et la numismatique grecques, souvent posé à ses pieds ou tenant la foudre dans ses serres — une association d'une remarquable stabilité sur près d'un millénaire d'art antique.",
+    sources:["Homère, Iliade (l'aigle, présage de Zeus)","Hésiode, Théogonie, v. 523-525 (l'aigle et Prométhée)"],
+    relatedSymbols:["foudre","chaîne","étoiles"],
+  },
+  "serpent":{icon:"🐍",label:"Serpent",category:"Animaux",desc:"Transformation, connaissance, guérison, lien avec le monde souterrain.",
+    atGlance:"Un animal à la symbolique beaucoup plus riche et ambivalente que le simple mal : guérisseur chez Asclépios, gardien vaincu à Delphes, créature chthonienne liée aux profondeurs et aux secrets.",
+    why:"La mue du serpent — qui semble mourir puis renaître sous une peau neuve — et son habitat souterrain (fissures, grottes) expliquent conjointement pourquoi il devient, dans presque toutes les cultures méditerranéennes anciennes et pas seulement en Grèce, l'animal de la régénération et du monde chthonien à la fois.",
+    links:["hygie"],lore:[
     "Le serpent possède une symbolique beaucoup plus ancienne et plus complexe que celle d'un simple animal associé au mal.",
     "Il change de peau et semble ainsi mourir puis renaître. Cette capacité a nourri son association avec la transformation et le renouvellement.",
     "Il vit également dans les fissures du sol, les grottes et les lieux cachés. Il appartient donc symboliquement à ce qui se trouve sous la surface : la terre, les profondeurs et le monde souterrain.",
@@ -381,8 +1059,25 @@ const SYMBOL_LIBRARY = {
     "Enfin, dans de nombreux mythes grecs, les serpents gardent des lieux ou des secrets : ils deviennent ainsi des créatures placées entre le monde visible et ce qui est caché.",
     "Le serpent est donc devenu un symbole de transformation, de guérison, de connaissance cachée, de régénération et du monde souterrain.",
     "Le serpent est associé à plusieurs divinités, notamment Asclépios et sa fille Hygie, Athéna, Apollon et les puissances chthoniennes.",
-  ]},
-  "chien":{icon:"🐕",label:"Chien",category:"Animaux",desc:"Gardien des seuils, protection, instinct fidèle — lié à Hécate.",links:["hécate"],lore:[
+  ],
+    deities:[
+      {id:"asclépios",role:"bâton à un seul serpent, symbole international de la médecine",certainty:"attesté"},
+      {id:"hygie",role:"serpent enroulé autour d'une coupe, symbole de la pharmacie",certainty:"attesté"},
+      {id:"apollon",role:"vainqueur de Python à Delphes, fondateur du sanctuaire",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"guérison",text:"le bâton d'Asclépios, encore utilisé comme symbole médical"},
+      {axis:"monde chthonien",text:"habitant des profondeurs, gardien de secrets"},
+      {axis:"régénération",text:"la mue, image de mort et de renaissance"},
+    ],
+    history:"Le culte de Zeus Meilichios (« le doux »), souvent figuré sous forme de serpent sur des stèles votives, illustre une facette plus ancienne et plus discrète du serpent grec, liée à la purification et à la protection domestique — une tradition distincte du combat héroïque contre le serpent-monstre (Python, l'Hydre) et trop souvent absente des résumés courants du symbole.",
+    sources:["Homère, Hymne homérique à Apollon Pythien (le combat contre Python)"],
+    relatedSymbols:["caducée","monde souterrain","grotte"],
+  },
+  "chien":{icon:"🐕",label:"Chien",category:"Animaux",desc:"Gardien des seuils, protection, instinct fidèle — lié à Hécate.",
+    atGlance:"L'animal d'Hécate, dont l'arrivée est annoncée par des aboiements — mais le chien le plus redoutable de toute la mythologie grecque reste Cerbère, gardien à trois têtes de l'entrée des Enfers.",
+    why:"Le rôle de gardien vigilant, protecteur de la maison et des chemins dans la vie quotidienne grecque (le chien de garde bien réel) se prolonge naturellement, par extension mythologique, jusqu'à la garde de la frontière ultime — celle entre les vivants et les morts.",
+    links:["hécate"],lore:[
     "Le chien est particulièrement lié à Hécate.",
     "Hécate est une déesse des carrefours, de la nuit, de la magie et du monde des morts. Dans les récits antiques, son arrivée est annoncée par les aboiements des chiens et elle est accompagnée de chiens infernaux.",
     "Un récit raconte également qu'Hécube (voir la fiche « Hécube »), reine de Troie, fut transformée en chienne après la chute de Troie et devint ensuite la compagne d'Hécate.",
@@ -390,8 +1085,22 @@ const SYMBOL_LIBRARY = {
     "Le chien garde ainsi les frontières : il veille sur la maison, sur les chemins, sur les portes et, dans l'imaginaire d'Hécate, sur la frontière entre les vivants et les morts.",
     "Il est devenu un symbole de protection, de vigilance, d'instinct, de seuil et de passage entre les mondes.",
     "Le chien est particulièrement associé à Hécate.",
-  ]},
-  "cheval":{icon:"🐎",label:"Cheval",category:"Animaux",desc:"Mouvement, liberté, puissance mise en marche.",links:["poséidon"],lore:[
+  ],
+    deities:[
+      {id:"hécate",role:"annoncée par les aboiements, accompagnée de chiens infernaux",certainty:"attesté"},
+      {id:"héraclès",role:"seul mortel à avoir maîtrisé Cerbère, douzième travail",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"vigilance",text:"gardien de la maison, des chemins, des portes"},
+      {axis:"seuil ultime",text:"Cerbère, gardien de l'entrée des Enfers"},
+    ],
+    sources:["Apollodore, Bibliothèque, II, 5, 12 (Cerbère)","Théocrite, Idylles, II (chiens et arrivée d'Hécate)"],
+    relatedSymbols:["monde souterrain","clé","chemin"],
+  },
+  "cheval":{icon:"🐎",label:"Cheval",category:"Animaux",desc:"Mouvement, liberté, puissance mise en marche.",
+    atGlance:"Lié à Poséidon, dieu des chevaux autant que de la mer et des séismes — mais l'animal le plus célèbre de la guerre de Troie n'en était pas un vivant : un cheval de bois conçu par Ulysse.",
+    why:"La même divinité gouverne la mer, les tremblements de terre et les chevaux parce que les trois partagent, aux yeux des Grecs, une puissance également instable et difficile à contenir : la houle, la secousse tellurique et la ruée d'un cheval au galop relèvent d'une même énergie brute échappant au contrôle humain.",
+    links:["poséidon"],lore:[
     "Le cheval est avant tout lié à Poséidon.",
     "Lorsque les dieux se disputèrent la protection d'Athènes, Poséidon fit apparaître un cheval dans certaines traditions du mythe. Il devint ensuite le dieu des chevaux autant que celui de la mer et des tremblements de terre.",
     "Le cheval représente une force difficile à contenir : il court, franchit les distances et transporte l'être humain au-delà de ses propres limites.",
@@ -399,8 +1108,22 @@ const SYMBOL_LIBRARY = {
     "Le cheval le plus célèbre de la guerre de Troie n'en était pourtant pas un vivant : c'est un cheval de bois, conçu par Ulysse et empli de guerriers grecs cachés, qui permit de faire tomber la ville après dix années de siège infructueux — les Troyens, croyant recevoir une offrande de paix, l'introduisirent eux-mêmes derrière leurs propres murailles.",
     "Le cheval est donc devenu un symbole de mouvement, de liberté, de puissance, de vitesse et de force indomptée.",
     "Le cheval est particulièrement associé à Poséidon.",
-  ]},
-  "pégase":{icon:"🦄",label:"Pégase",category:"Animaux",desc:"Inspiration, élévation, maîtrise d'une force extraordinaire — monture de Bellérophon.",links:["bellérophon"],lore:[
+  ],
+    deities:[
+      {id:"poséidon",role:"dieu des chevaux, associé au mythe fondateur d'Athènes",certainty:"attesté"},
+      {id:"ulysse",role:"concepteur du cheval de bois de Troie",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"puissance indomptée",text:"une force qui échappe facilement au contrôle"},
+      {axis:"ruse militaire",text:"le cheval de bois, offrande trompeuse"},
+    ],
+    sources:["Homère, Odyssée, chant VIII (le cheval de Troie)","Pausanias, Description de la Grèce, VI, 20 (Poséidon Hippios)"],
+    relatedSymbols:["trident","pégase","mer"],
+  },
+  "pégase":{icon:"🦄",label:"Pégase",category:"Animaux",desc:"Inspiration, élévation, maîtrise d'une force extraordinaire — monture de Bellérophon.",
+    atGlance:"Né du sang de Méduse décapitée, le cheval ailé devient le compagnon de Bellérophon — jusqu'à ce que celui-ci, grisé par ses exploits, tente de rejoindre l'Olympe et soit désarçonné pour son excès d'orgueil.",
+    why:"Le mythe distingue soigneusement l'animal (Pégase, capable de s'élever) et le cavalier (Bellérophon, qui n'a droit qu'à un usage limité de cette élévation) : l'échec final n'est pas celui de la monture mais celui de l'ambition démesurée de l'homme qui croit pouvoir se hisser au rang des dieux.",
+    links:["bellérophon"],lore:[
     "Pégase naît du sang de Méduse lorsqu'elle est décapitée par Persée.",
     "Créature extraordinaire, cheval ailé capable de s'élever dans le ciel, il devient ensuite le compagnon du héros Bellérophon, qui tente de le maîtriser pour combattre la Chimère.",
     "Pégase représente donc quelque chose de plus subtil que le simple cheval : c'est la force qui s'élève au-dessus de la matière.",
@@ -408,24 +1131,68 @@ const SYMBOL_LIBRARY = {
     "Grisé par ses exploits, Bellérophon tenta un jour de s'élever sur Pégase jusqu'à l'Olympe lui-même, comme s'il pouvait rejoindre le rang des dieux (voir la fiche « Bellérophon ») — Zeus envoya un simple taon piquer la monture, qui se cabra et désarçonna le héros, le laissant retomber sur terre boiteux et solitaire pour le reste de sa vie, tandis que Pégase, lui, poursuivait seul son ascension.",
     "Pégase est ainsi devenu un symbole de l'inspiration, de l'imagination, de l'élévation, de la liberté et de la maîtrise d'une force exceptionnelle.",
     "Pégase est particulièrement associé à Bellérophon et, dans les traditions ultérieures, aux Muses.",
-  ]},
-  "dauphin":{icon:"🐬",label:"Dauphin",category:"Animaux",desc:"Guidance, mer, protection pendant la traversée.",links:["poséidon","dionysos","apollon"],lore:[
+  ],
+    deities:[
+      {id:"bellérophon",role:"cavalier de Pégase, contre la Chimère puis contre l'Olympe",certainty:"attesté"},
+      {id:"méduse",role:"Pégase naît de son sang au moment de sa décapitation",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"inspiration",text:"association tardive aux Muses et à la source Hippocrène"},
+      {axis:"démesure punie",text:"la chute de Bellérophon, non celle de Pégase lui-même"},
+    ],
+    history:"Le lien entre Pégase et les Muses (via la source Hippocrène, jaillie d'un coup de son sabot sur le mont Hélicon) se développe surtout dans la tradition hellénistique et romaine ; il est absent des récits les plus anciens centrés sur Bellérophon et la Chimère.",
+    sources:["Hésiode, Théogonie, v. 280-286","Pindare, Olympiques, XIII (Bellérophon et Pégase)"],
+    relatedSymbols:["cheval","ailes","lyre"],
+  },
+  "dauphin":{icon:"🐬",label:"Dauphin",category:"Animaux",desc:"Guidance, mer, protection pendant la traversée.",
+    atGlance:"L'animal qui vient au secours des marins en perdition — que ce soit en retrouvant Amphitrite pour Poséidon ou, selon le mythe, en devenant lui-même la forme finale de pirates punis par Dionysos.",
+    why:"Le comportement réel des dauphins, qui accompagnent parfois les navires et semblent réagir aux humains en détresse, a nourri très concrètement leur réputation antique de sauveteurs bienveillants — une observation naturelle transformée en récit mythologique plutôt qu'une pure invention.",
+    links:["poséidon","dionysos","apollon"],lore:[
     "Le dauphin appartient au monde de Poséidon et de la mer.",
     "Dans un célèbre récit, Poséidon cherchait Amphitrite, qui s'était enfuie. Un dauphin la retrouva et la conduisit auprès du dieu. Pour le remercier, Poséidon plaça ensuite le dauphin dans le ciel sous la forme de la constellation Delphinus.",
     "Le dauphin apparaît aussi dans plusieurs récits comme un animal qui vient au secours des hommes et les guide à travers la mer.",
     "Il est aussi lié à Dionysos par un mythe plus inattendu : des pirates l'ayant capturé sans reconnaître sa nature divine, le dieu fit surgir de la vigne sur le pont du navire et se changea lui-même en lion, semant une telle terreur que les marins se jetèrent à l'eau — où ils furent aussitôt changés en dauphins, condamnés à porter secours aux marins en perdition pour le reste des temps.",
     "Il est donc devenu un symbole de guidance, de navigation, de protection, de mer et d'intervention bienveillante du monde marin.",
     "Le dauphin est particulièrement associé à Poséidon, mais également à Apollon dans certains mythes.",
-  ]},
-  "colombe":{icon:"🕊",label:"Colombe",category:"Animaux",desc:"Amour, paix — liée à Aphrodite.",links:["aphrodite"],lore:[
+  ],
+    deities:[
+      {id:"poséidon",role:"le dauphin lui ramène Amphitrite, placé ensuite parmi les étoiles",certainty:"attesté"},
+      {id:"dionysos",role:"transforme des pirates en dauphins protecteurs des marins",certainty:"attesté"},
+      {id:"apollon",role:"aurait guidé sous cette forme les fondateurs de Delphes (Hymne homérique)",certainty:"interprétation"},
+    ],
+    dimensions:[
+      {axis:"guidance",text:"retrouve et conduit ceux qui se sont perdus en mer"},
+      {axis:"punition transformée en grâce",text:"des pirates devenus, malgré eux, des sauveteurs"},
+    ],
+    sources:["Hymne homérique à Dionysos, VII","Hymne homérique à Apollon Delphien (l'étymologie de Delphes liée au dauphin)"],
+    relatedSymbols:["mer","vigne","étoiles"],
+  },
+  "colombe":{icon:"🕊",label:"Colombe",category:"Animaux",desc:"Amour, paix — liée à Aphrodite.",
+    atGlance:"L'oiseau tendre d'Aphrodite, mais aussi l'éclaireuse envoyée par Jason pour tester le passage périlleux des Symplégades avant que l'Argo ne s'y risque.",
+    why:"Contrairement aux rapaces ou aux oiseaux de mauvais augure, la colombe est un animal réellement paisible et facile à apprivoiser dans la vie quotidienne grecque — une douceur observable qui en fait le choix naturel pour représenter un amour tendre plutôt qu'un désir dévorant, à la différence, par exemple, du taureau.",
+    links:["aphrodite"],lore:[
     "La colombe est l'un des oiseaux d'Aphrodite.",
     "Elle représente l'amour doux et l'attachement amoureux. Contrairement aux animaux puissants ou menaçants, elle évoque quelque chose de tendre, intime et pacifique.",
     "Son association avec Aphrodite s'est renforcée par sa présence dans l'iconographie de la déesse et dans la symbolique amoureuse antique.",
     "Les colombes jouent aussi un rôle décisif dans l'expédition des Argonautes : pour franchir les Symplégades, deux rochers mobiles qui se refermaient sur tout ce qui tentait de passer entre eux, Jason envoya d'abord une colombe en éclaireur — l'oiseau ne perdit que quelques plumes de sa queue au moment où les rochers se refermèrent, leur indiquant l'instant exact où le navire pourrait s'y risquer à son tour.",
     "Elle est ainsi devenue un symbole de l'amour, de la tendresse, de la paix, de l'union et de la beauté.",
     "La colombe est particulièrement associée à Aphrodite.",
-  ]},
-  "corbeau":{icon:"🐦‍⬛",label:"Corbeau",category:"Animaux",desc:"Présage, connaissance du monde invisible.",links:["apollon","athéna"],lore:[
+  ],
+    deities:[
+      {id:"aphrodite",role:"oiseau tendre, attribut amoureux constant de l'iconographie",certainty:"attesté"},
+      {id:"jason",role:"envoie une colombe éclaireuse pour tester les Symplégades",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"amour",text:"douceur, par opposition aux animaux puissants ou menaçants"},
+      {axis:"éclaireur",text:"la colombe des Symplégades, qui teste un passage mortel"},
+    ],
+    sources:["Apollonios de Rhodes, Argonautiques, II, 549-618 (les Symplégades)"],
+    relatedSymbols:["rose","myrte","mer"],
+  },
+  "corbeau":{icon:"🐦‍⬛",label:"Corbeau",category:"Animaux",desc:"Présage, connaissance du monde invisible.",
+    atGlance:"Autrefois blanc et messager loyal d'Apollon, l'oiseau fut noirci en punition d'un mensonge — un même animal, deux fonctions : le présage divin et la mémoire d'une faute.",
+    why:"Le mythe étiologique du plumage noirci répond à une question naturelle (pourquoi le corbeau est-il noir, contrairement à d'autres oiseaux sacrés plus clairs ?) par un récit moral sur le mensonge — un procédé caractéristique de la pensée mythologique grecque, qui explique un trait observé du monde par une faute passée plutôt que par le hasard.",
+    links:["apollon","athéna"],lore:[
     "Le corbeau est particulièrement lié à Apollon et à la divination.",
     "Dans un récit, Apollon envoie un corbeau chercher de l'eau pour accomplir un sacrifice. Mais l'oiseau s'attarde auprès d'un figuier, mange les figues et revient trop tard. Pour se justifier, il accuse un serpent d'avoir empêché sa mission.",
     "Apollon comprend le mensonge et punit le corbeau. Il aurait alors noirci son plumage et placé le corbeau, le serpent et la coupe dans le ciel sous forme de constellations.",
@@ -433,16 +1200,42 @@ const SYMBOL_LIBRARY = {
     "Le corbeau — ou la corneille, selon les versions — aurait autrefois été l'oiseau d'Athéna, avant d'être banni de sa suite : c'est lui qui vint lui rapporter qu'Érichthonios, l'enfant né du désir déçu d'Héphaïstos, avait été découvert malgré son interdiction de regarder le coffre où elle l'avait caché (voir les fiches « Héphaïstos » et « Érichthonios ») — furieuse d'une nouvelle qu'elle n'avait pas demandée, la déesse chassa l'oiseau bavard et lui préféra désormais la chouette, plus silencieuse.",
     "Le corbeau est donc devenu un symbole de présage, de connaissance, d'observation, de vérité cachée et du monde invisible.",
     "Le corbeau est particulièrement associé à Apollon.",
-  ]},
-  "abeille":{icon:"🐝",label:"Abeille",category:"Animaux",desc:"Travail, organisation collective, abondance construite patiemment.",links:[],lore:[
+  ],
+    deities:[
+      {id:"apollon",role:"messager puni pour mensonge, plumage noirci en conséquence",certainty:"attesté"},
+      {id:"athéna",role:"ancien oiseau de la déesse, banni après une nouvelle non désirée",certainty:"fortement établi"},
+    ],
+    dimensions:[
+      {axis:"présage",text:"messager divin de la volonté d'Apollon"},
+      {axis:"vérité",text:"un mensonge puni, un oiseau devenu noir"},
+    ],
+    sources:["Ovide, Métamorphoses, II, 531-632 (le corbeau et le figuier)"],
+    relatedSymbols:["chouette","serpent","figue"],
+  },
+  "abeille":{icon:"🐝",label:"Abeille",category:"Animaux",desc:"Travail, organisation collective, abondance construite patiemment.",
+    atGlance:"À Delphes même, les prêtresses de l'oracle étaient parfois appelées Mélissai, « les abeilles » — un nom qui renvoie à leur pureté et à leur discrétion, à l'image de l'insecte qui butine sans rien gaspiller.",
+    why:"L'organisation sociale réelle de la ruche — travail collectif, division des tâches, production patiente d'une substance précieuse — offrait aux Grecs un modèle naturel directement observable pour penser une communauté vertueuse, ce qui explique pourquoi l'abeille devient l'emblème de prêtresses et de figures associées à la pureté rituelle plutôt qu'à une seule divinité précise.",
+    links:[],lore:[
     "L'abeille possède une symbolique ancienne liée au travail, à l'organisation et à l'abondance.",
     "Dans la mythologie grecque, les abeilles apparaissent notamment dans les traditions liées à Dionysos et à certaines figures de prêtresses et de nymphes. Le miel était également une offrande précieuse aux divinités.",
     "L'abeille forme une société organisée où chaque individu participe à une œuvre collective. Elle transforme les fleurs en miel et rassemble ainsi les richesses dispersées de la nature.",
     "À Delphes même, les prêtresses de l'oracle étaient parfois appelées Mélissai, « les abeilles » — un nom qui renvoyait à leur pureté et à leur discrétion, à l'image de l'insecte qui butine sans jamais rien gaspiller de ce qu'il recueille.",
     "Elle est devenue une image de travail, d'organisation, de fécondité, d'abondance, de coopération et de transformation de la matière.",
     "L'abeille peut être associée à plusieurs traditions grecques, notamment à Dionysos et aux cultes initiatiques.",
-  ]},
-  "papillon":{icon:"🦋",label:"Papillon",category:"Animaux",desc:"Transformation, âme, métamorphose accomplie.",links:[],lore:[
+  ],
+    deities:[],
+    dimensions:[
+      {axis:"travail collectif",text:"organisation sociale de la ruche, modèle antique"},
+      {axis:"pureté rituelle",text:"les Mélissai, prêtresses-abeilles de Delphes"},
+    ],
+    cult:"Le titre de Mélissai (« abeilles ») était porté par plusieurs catégories de prêtresses grecques, notamment à Delphes et dans le culte de Déméter à Éleusis — un usage religieux attesté, pas une simple métaphore poétique.",
+    sources:["Pindare, Pythiques, IV, 60 (la Pythie comparée à une abeille)"],
+    relatedSymbols:["abeille","chouette","olivier"],
+  },
+  "papillon":{icon:"🦋",label:"Papillon",category:"Animaux",desc:"Transformation, âme, métamorphose accomplie.",
+    atGlance:"En grec ancien, psychê signifie à la fois « âme » et « papillon » — un même mot pour l'insecte et pour ce qui anime le corps, littéralement incarné dans le mythe de Psyché elle-même.",
+    why:"L'identité linguistique entre « âme » et « papillon » (psychê) n'est pas une coïncidence poétique tardive : c'est une des rares associations symboliques grecques directement inscrites DANS la langue elle-même, ce qui en fait un cas particulièrement solide et attesté, indépendant de tout récit narratif spécifique.",
+    links:[],lore:[
     "Le papillon possède une association particulièrement forte avec Psyché.",
     "En grec ancien, psychê signifie à la fois « âme » et « souffle de vie ». Dans l'Antiquité, l'âme humaine pouvait être représentée sous la forme d'un papillon.",
     "Le mythe de Psyché raconte l'histoire d'une mortelle dont les épreuves la conduisent finalement à devenir immortelle et à rejoindre Éros parmi les dieux.",
@@ -450,8 +1243,21 @@ const SYMBOL_LIBRARY = {
     "Sur certains vases funéraires grecs, l'âme du défunt est représentée s'échappant du corps sous la forme d'un minuscule papillon ailé — une image qui unit, dans un même souffle, la mort du corps et l'envol de ce qui lui survit.",
     "Le papillon est donc devenu un symbole de transformation, d'âme, de renaissance, d'évolution et de passage vers un nouvel état.",
     "Le papillon est particulièrement associé à Psyché.",
-  ]},
-  "cerf":{icon:"🦌",label:"Cerf",category:"Animaux",desc:"Nature, intuition, passage entre deux mondes.",links:["artémis","héraclès"],lore:[
+  ],
+    deities:[{id:"psyché",role:"personnification de l'âme, littéralement nommée « papillon »",certainty:"attesté"}],
+    dimensions:[
+      {axis:"âme",text:"identité linguistique directe (psychê) entre âme et papillon"},
+      {axis:"métamorphose",text:"chrysalide devenue être ailé"},
+    ],
+    iconography:"Sur les stèles funéraires et certains vases, un minuscule papillon s'échappant du corps figure l'âme du défunt — un motif documenté mais moins fréquent que d'autres symboles funéraires grecs (comme le canthare ou la sirène-oiseau).",
+    history:"Le récit narratif complet de Psyché comme personnage (mortelle éprouvée, aimée d'Éros) est surtout connu par sa version latine tardive, chez Apulée (IIe siècle apr. J.-C.) — l'association psychê/papillon comme fait de langue est en revanche bien plus ancienne.",
+    sources:["Apulée, Métamorphoses (l'Âne d'or), livres IV-VI — réception latine du conte de Psyché"],
+    relatedSymbols:["ailes","serpent","rose"],
+  },
+  "cerf":{icon:"🦌",label:"Cerf",category:"Animaux",desc:"Nature, intuition, passage entre deux mondes.",
+    atGlance:"Le cerf de Cérynie, aux bois d'or et aux sabots d'airain, qu'Héraclès dut poursuivre une année entière et capturer vivant — un animal consacré à Artémis qu'on ne peut toucher sans en répondre devant elle.",
+    why:"Le mythe d'Actéon (transformé en cerf pour avoir vu Artémis nue, puis dévoré par ses propres chiens) et celui du cerf de Cérynie (qui doit être pris SANS être blessé) racontent, chacun à sa façon, la même règle : la nature sauvage protégée par Artémis se laisse approcher, jamais posséder ou violée sans conséquence.",
+    links:["artémis","héraclès"],lore:[
     "Le cerf est profondément lié à Artémis, déesse de la chasse, des forêts et des animaux sauvages.",
     "Dans plusieurs récits, les cerfs sont placés sous sa protection. Le plus célèbre est celui du cerf de Cérynie, une bête extraordinaire aux bois d'or et aux sabots d'airain qu'Héraclès doit capturer lors de son troisième travail. Mais le cerf apparaît également dans les récits qui rappellent le pouvoir d'Artémis sur la nature sauvage.",
     "Le mythe d'Actéon montre d'ailleurs l'autre aspect de cette relation : le chasseur surprend Artémis alors qu'elle se baigne. Furieuse, la déesse le transforme en cerf et ses propres chiens le dévorent sans le reconnaître.",
@@ -459,33 +1265,87 @@ const SYMBOL_LIBRARY = {
     "Le cerf devient ainsi une créature située à la frontière entre l'homme et la nature sauvage. Il représente une nature belle et libre, mais qui ne peut être possédée sans conséquences.",
     "Le cerf est devenu un symbole de nature sauvage, d'instinct, d'intuition, de vigilance, de sensibilité et de passage entre le monde humain et le monde naturel.",
     "Le cerf est particulièrement associé à Artémis.",
-  ]},
-  "taureau":{icon:"🐂",label:"Taureau",category:"Animaux",desc:"Puissance brute, désir irrésistible — et, parfois, ce qu'elle engendre de monstrueux.",links:["zeus","poséidon","minos","pasiphaé"],lore:[
+  ],
+    deities:[
+      {id:"artémis",role:"protectrice des cerfs, punit qui les touche sans son accord",certainty:"attesté"},
+      {id:"héraclès",role:"capture la biche de Cérynie vivante, sans la blesser",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"nature protégée",text:"un animal consacré, à approcher jamais à posséder"},
+      {axis:"transgression punie",text:"Actéon, dévoré par ses propres chiens"},
+    ],
+    sources:["Apollodore, Bibliothèque, II, 5, 3 (la biche de Cérynie)","Ovide, Métamorphoses, III, 138-252 (Actéon — réception latine)"],
+    relatedSymbols:["arc","forêt","chien"],
+  },
+  "taureau":{icon:"🐂",label:"Taureau",category:"Animaux",desc:"Puissance brute, désir irrésistible — et, parfois, ce qu'elle engendre de monstrueux.",
+    atGlance:"Zeus en taureau pour enlever Europe, le taureau crétois de Poséidon devenu incontrôlable, celui qui unit contre nature Pasiphaé : trois taureaux, trois façons différentes dont la puissance échappe à tout contrôle.",
+    why:"Multiplier les mythes de taureaux plutôt que de n'en garder qu'un seul illustre bien la logique de cette bibliothèque : un même animal peut porter des significations contradictoires (séduction bienveillante chez Zeus/Europe, punition et monstruosité chez Minos/Pasiphaé) selon le contexte précis du récit, sans qu'un sens unique doive s'imposer.",
+    links:["zeus","poséidon","minos","pasiphaé"],lore:[
     "Le taureau intervient dans plusieurs métamorphoses parmi les plus célèbres de la mythologie grecque. Zeus, épris de la princesse phénicienne Europe, se changea en taureau d'une blancheur et d'une douceur telles qu'elle grimpa sur son dos sans crainte — avant qu'il ne s'élance dans la mer et l'emporte jusqu'en Crète, où elle lui donna plusieurs fils, dont Minos (voir la fiche « Minos »).",
     "Un autre taureau, offert par Poséidon à ce même Minos devenu roi de Crète pour qu'il le lui sacrifie, était si beau que Minos, incapable de s'en séparer, le garda pour lui et sacrifia un animal ordinaire à la place. En punition, Poséidon rendit folle d'amour pour ce taureau l'épouse de Minos, Pasiphaé (voir la fiche « Pasiphaé ») — de leur union naquit le Minotaure, tête de taureau et corps d'homme, enfermé plus tard dans le Labyrinthe (voir la fiche « Labyrinthe »).",
     "Ce même taureau, devenu incontrôlable, ravagea ensuite la campagne crétoise jusqu'à ce qu'Héraclès le capture vivant lors de son septième travail et le ramène en Grèce continentale — où, relâché, il finira par causer la mort du prince Androgée, déclenchant la guerre entre Athènes et la Crète qui est à l'origine du tribut envoyé au Minotaure.",
     "Le taureau est ainsi devenu un symbole de puissance brute, de désir irrésistible, de fécondité et, selon le contexte, de ce que cette puissance peut engendrer de monstrueux lorsqu'elle échappe à tout contrôle.",
     "Le taureau est particulièrement associé à Zeus, à Poséidon et, par le Minotaure, à Minos et à Pasiphaé.",
-  ]},
-  "cygne":{icon:"🦢",label:"Cygne",category:"Animaux",desc:"Métamorphose séduisante, beauté qui dissimule un dessein — lié à Zeus.",links:["zeus"],lore:[
+  ],
+    deities:[
+      {id:"zeus",role:"prend la forme d'un taureau pour enlever Europe",certainty:"attesté"},
+      {id:"poséidon",role:"offre le taureau crétois puis punit Minos de l'avoir gardé",certainty:"attesté"},
+      {id:"pasiphaé",role:"unie contre nature au taureau, mère du Minotaure",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"séduction",text:"Zeus, douceur trompeuse pour approcher Europe"},
+      {axis:"punition",text:"Minos, châtié pour avoir gardé le taureau sacré"},
+      {axis:"monstruosité",text:"le Minotaure, produit d'un désir contre nature"},
+    ],
+    iconography:"La tauromachie minoenne (acrobates sautant par-dessus un taureau) est un motif archéologiquement bien attesté par les fresques du palais de Cnossos — un rapport concret entre le taureau et la civilisation crétoise, antérieur et parallèle au récit mythologique grec.",
+    sources:["Apollodore, Bibliothèque, III, 1, 3-4 (Europe et le Minotaure)"],
+    relatedSymbols:["labyrinthe","araignée","mer"],
+  },
+  "cygne":{icon:"🦢",label:"Cygne",category:"Animaux",desc:"Métamorphose séduisante, beauté qui dissimule un dessein — lié à Zeus.",
+    atGlance:"La forme que prend Zeus pour séduire Léda, reine de Sparte — donnant naissance à Hélène et aux Dioscures, l'un mortel, l'autre immortel, unis dans une même fratrie double.",
+    why:"Contrairement au taureau (puissance brute et visible) ou au cygne, dont la blancheur et l'élégance paisibles trompent précisément par leur apparente innocence, cette métamorphose particulière de Zeus joue sur la discrétion plutôt que sur la démonstration de force — une séduction qui se dissimule sous une image rassurante.",
+    links:["zeus"],lore:[
     "Le cygne est la forme que prend Zeus pour séduire Léda (voir la fiche « Léda »), reine de Sparte : sous cette apparence trompeusement paisible, il s'unit à elle le même jour que son propre époux, Tyndare.",
     "De cette double union naquirent, selon les traditions les plus répandues, Hélène (voir la fiche « Hélène ») — dont la beauté déclenchera plus tard la guerre de Troie — et les Dioscures Castor et Pollux (voir les fiches « Castor » et « Pollux »), l'un mortel par son père humain, l'autre immortel par Zeus, unis au point de partager leur immortalité à parts égales après la mort de l'un d'eux.",
     "Le cygne est ainsi devenu un symbole de métamorphose séduisante, de beauté qui dissimule un dessein, et d'une naissance double où se mêlent l'humain et le divin.",
     "Le cygne est particulièrement associé à Zeus, par le mythe de Léda.",
-  ]},
-  "araignée":{icon:"🕷",label:"Araignée",category:"Animaux",desc:"Habileté sans limite, orgueil qui défie trop haut — la punition d'Arachné.",links:["athéna"],lore:[
+  ],
+    deities:[{id:"zeus",role:"forme prise pour s'unir à Léda",certainty:"attesté"}],
+    dimensions:[
+      {axis:"séduction discrète",text:"une beauté paisible qui dissimule un dessein"},
+      {axis:"double naissance",text:"mortel et immortel mêlés dans une même fratrie"},
+    ],
+    iconography:"« Léda et le cygne » devient un motif iconographique extrêmement fréquent à partir de l'époque hellénistique, puis dans l'art romain et la peinture occidentale ultérieure — une popularité artistique bien postérieure aux premières attestations littéraires du mythe.",
+    sources:["Euripide, Hélène (allusions au mythe de Léda)"],
+    relatedSymbols:["étoiles","poisson","cheval"],
+  },
+  "araignée":{icon:"🕷",label:"Araignée",category:"Animaux",desc:"Habileté sans limite, orgueil qui défie trop haut — la punition d'Arachné.",
+    atGlance:"Une tisserande d'un talent si parfait qu'elle osa défier Athéna elle-même — punie non pour la qualité de son travail, irréprochable, mais pour l'orgueil de l'avoir proclamé supérieur à celui d'une déesse.",
+    why:"Le mythe distingue explicitement deux fautes différentes : le talent d'Arachné n'est jamais critiqué (« son travail ne laissait rien à reprocher ») — c'est l'hybris, la prétention à l'égalité avec le divin, qui est punie, une nuance essentielle de l'éthique grecque où l'excellence humaine reste toujours subordonnée au respect dû aux dieux.",
+    links:["athéna"],lore:[
     "Arachné était une jeune tisserande d'une habileté si extraordinaire qu'elle osa prétendre surpasser Athéna elle-même, déesse du tissage autant que de la sagesse.",
     "Athéna, déguisée en vieille femme, la mit d'abord en garde — en vain. Les deux rivales tissèrent alors chacune une tapisserie : celle d'Athéna glorifiait les dieux de l'Olympe, celle d'Arachné représentait sans détour leurs tromperies et leurs scandales, dont les métamorphoses de Zeus lui-même — changé en taureau ou sous d'autres formes — pour séduire des mortelles (voir la fiche « Taureau »).",
     "Le travail d'Arachné, techniquement parfait, ne laissait rien à reprocher — ce qui rendit la déesse plus furieuse encore. Athéna déchira la tapisserie et frappa la jeune femme, qui, de honte, tenta de se pendre. Prise de pitié au dernier instant, Athéna la sauva de la mort mais la changea en araignée, la condamnant à tisser sans fin, suspendue à son propre fil.",
     "L'araignée est ainsi devenue un symbole d'habileté sans limite, de création patiente, mais aussi d'orgueil qui défie trop haut et de talent qui, pour n'avoir pas su se taire, se retrouve puni jusque dans sa propre perfection.",
     "L'araignée est particulièrement associée à Athéna, par le mythe d'Arachné.",
-  ]},
+  ],
+    deities:[{id:"athéna",role:"punit Arachné pour hybris, non pour son talent",certainty:"attesté"}],
+    dimensions:[
+      {axis:"habileté",text:"une perfection technique jamais remise en cause"},
+      {axis:"hybris",text:"la faute punie n'est pas le talent, mais l'orgueil"},
+    ],
+    sources:["Ovide, Métamorphoses, VI, 1-145 (Arachné — réception latine détaillée)"],
+    relatedSymbols:["chouette","taureau","voile"],
+  },
   // Les six animaux qui suivent ont été écrits pour l'Animal représentatif, retiré depuis
   // (voir plus haut, "En fait on va carrément l'enlever" — les fiches elles-mêmes restent,
   // "garde bien les textes écrit sur les animaux") : chaque signe du zodiaque qui EST
   // littéralement un animal dans son mythe fondateur (plutôt qu'une simple association
   // thématique) a sa propre fiche ici.
-  "bélier":{icon:"🐏",label:"Bélier",category:"Animaux",desc:"Le bélier à la Toison d'or : sacrifice salvateur, guide céleste, quête à accomplir.",links:["hermès"],lore:[
+  "bélier":{icon:"🐏",label:"Bélier",category:"Animaux",desc:"Le bélier à la Toison d'or : sacrifice salvateur, guide céleste, quête à accomplir.",
+    atGlance:"Un bélier volant et parlant, offert par Hermès pour sauver deux enfants promis au sacrifice — dont la toison, devenue d'or, deviendra plus tard l'objet de la quête de Jason et des Argonautes.",
+    why:"En sacrifiant l'animal qui vient de lui sauver la vie plutôt que de le garder pour lui, Phrixos établit le geste de gratitude religieuse qui fonde la légitimité de la toison comme objet sacré — c'est cette origine, un sacrifice consenti en remerciement, qui explique pourquoi la Toison d'or vaut ensuite toute une expédition héroïque.",
+    links:["hermès"],lore:[
     "Phrixos et Hellé, les enfants de la reine Néphélé, sont promis au sacrifice par leur belle-mère Ino, qui a fait mentir un oracle pour s'en débarrasser. Pour les sauver, leur mère obtient d'Hermès un bélier extraordinaire à la toison d'or, capable de voler et de parler.",
     "Le bélier emporte les deux enfants dans les airs, loin du danger. En chemin, Hellé, prise de vertige, tombe dans le détroit qui portera désormais son nom, l'Hellespont — seul Phrixos achève le voyage, jusqu'en Colchide, à l'autre bout du monde connu.",
     "En remerciement d'avoir eu la vie sauve, Phrixos sacrifie le bélier à Zeus et suspend sa toison, devenue d'or, à un arbre sacré gardé par un dragon qui ne dort jamais.",
@@ -493,64 +1353,169 @@ const SYMBOL_LIBRARY = {
     "En mémoire du sacrifice, Zeus place le bélier parmi les étoiles : il devient la constellation, puis le signe, du Bélier.",
     "Le bélier est ainsi devenu un symbole de sacrifice salvateur, de protection accordée aux plus faibles, de voyage périlleux et de quête à mener jusqu'au bout.",
     "Le bélier est particulièrement associé à Hermès, qui offre l'animal salvateur, et à Zeus, qui le place parmi les étoiles.",
-  ]},
-  "crabe":{icon:"🦀",label:"Crabe",category:"Animaux",desc:"Envoyé par Héra contre Héraclès : loyauté obstinée, sacrifice sans éclat.",links:["héra","héraclès"],lore:[
+  ],
+    deities:[
+      {id:"hermès",role:"offre le bélier salvateur à Néphélé",certainty:"attesté"},
+      {id:"zeus",role:"reçoit le sacrifice, place le bélier parmi les étoiles",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"sacrifice",text:"gratitude qui fonde la légitimité de la Toison d'or"},
+      {axis:"quête",text:"objet de l'expédition de Jason, des générations plus tard"},
+    ],
+    sources:["Apollonios de Rhodes, Argonautiques (la quête de la Toison d'or)","Apollodore, Bibliothèque, I, 9, 1"],
+    relatedSymbols:["étoiles","rivière","chèvre"],
+  },
+  "crabe":{icon:"🦀",label:"Crabe",category:"Animaux",desc:"Envoyé par Héra contre Héraclès : loyauté obstinée, sacrifice sans éclat.",
+    atGlance:"Un détail presque anecdotique au milieu d'un combat titanesque contre l'Hydre de Lerne — mais assez pour qu'Héra, reconnaissante de cette loyauté vaine, place le crabe parmi les étoiles.",
+    why:"L'échec du crabe (écrasé sans même interrompre le geste d'Héraclès) n'empêche pas sa récompense céleste : le mythe valorise ici l'intention et le dévouement plutôt que le résultat, une nuance qui distingue ce cas des autres constellations obtenues par un exploit réussi (le lion de Némée, le cerf de Cérynie).",
+    links:["héra","héraclès"],lore:[
     "Le crabe apparaît dans le deuxième des douze travaux d'Héraclès, lorsque le héros affronte l'hydre de Lerne, un monstre à plusieurs têtes dont deux repoussent à chaque fois qu'une seule est tranchée (voir la fiche « Héraclès »).",
     "Héra, qui poursuit Héraclès d'une haine implacable depuis sa naissance, envoie alors un crabe géant lui pincer le pied pour le distraire pendant le combat.",
     "Héraclès, sans même interrompre son geste, écrase le crabe sous son talon — un détail presque anecdotique au milieu d'un combat autrement titanesque, mais qui n'échappe pas à la reconnaissance d'Héra.",
     "En remerciement de cette loyauté, même vaine, la déesse place le crabe parmi les étoiles : il devient la constellation, puis le signe, du Cancer.",
     "Le crabe est ainsi devenu un symbole de loyauté obstinée, de sacrifice sans éclat au service d'une cause plus grande que soi, et de protection têtue même quand l'issue est perdue d'avance.",
     "Le crabe est particulièrement associé à Héra, qui l'envoie contre Héraclès et le récompense malgré son échec.",
-  ]},
-  "lion":{icon:"🦁",label:"Lion",category:"Animaux",desc:"Lié à Héraclès : courage, force domptée sans violence gratuite.",links:["héraclès"],lore:[
+  ],
+    deities:[{id:"héra",role:"envoie le crabe contre Héraclès, le récompense malgré son échec",certainty:"attesté"}],
+    dimensions:[
+      {axis:"loyauté",text:"un dévouement récompensé malgré l'échec"},
+      {axis:"sacrifice sans éclat",text:"un détail mineur au milieu d'un exploit majeur"},
+    ],
+    sources:["Apollodore, Bibliothèque, II, 5, 2 (l'hydre de Lerne et le crabe)"],
+    relatedSymbols:["serpent","chaîne","étoiles"],
+  },
+  "lion":{icon:"🦁",label:"Lion",category:"Animaux",desc:"Lié à Héraclès : courage, force domptée sans violence gratuite.",
+    atGlance:"Le lion de Némée, dont la peau résistait à toute arme, ne put être vaincu qu'à mains nues — la dépouille elle-même devenant ensuite l'armure emblématique d'Héraclès.",
+    why:"L'impossibilité de blesser le lion avec une arme oblige Héraclès à recourir à sa propre force physique brute (l'étouffement), ce qui fait de ce premier travail une démonstration fondatrice : sa force dépasse celle de tout objet fabriqué, un trait qui définira ensuite son personnage dans tous les récits suivants.",
+    links:["héraclès"],lore:[
     "Le lion est lié à Héraclès à travers son premier grand exploit : le lion de Némée.",
     "Cette créature monstrueuse ravageait la région de Némée et possédait une peau que les armes ordinaires ne pouvaient transpercer. Héraclès dut finalement l'affronter à mains nues et l'étouffa.",
     "Après avoir vaincu le lion, il utilisa ses propres griffes pour découper sa peau, qu'il porta ensuite comme une armure. La dépouille du monstre devint ainsi le signe visible de sa force et de son triomphe.",
     "Zeus aurait ensuite placé le lion de Némée parmi les étoiles, où il devint la constellation, puis le signe, du Lion — un rappel céleste, comme pour le corbeau ou le dauphin, que certains exploits méritent d'être fixés dans le ciel pour ne jamais être oubliés.",
     "Le lion est devenu un symbole de courage, de puissance, de force, de victoire et de dépassement de l'impossible.",
     "Le lion est particulièrement associé à Héraclès.",
-  ]},
-  "scorpion":{icon:"🦂",label:"Scorpion",category:"Animaux",desc:"Envoyé par Apollon contre Orion : jalousie protectrice, mise à distance éternelle.",links:["apollon","artémis"],lore:[
+  ],
+    deities:[{id:"héraclès",role:"vainqueur du lion, porte sa dépouille comme armure emblématique",certainty:"attesté"}],
+    dimensions:[
+      {axis:"force pure",text:"un combat à mains nues, sans arme"},
+      {axis:"identité héroïque",text:"la peau du lion, attribut visuel constant d'Héraclès"},
+    ],
+    iconography:"La dépouille du lion de Némée, portée comme capuchon et cape, devient l'attribut iconographique le plus systématique d'Héraclès dans toute la sculpture et la céramique grecques — plus constant encore que sa massue.",
+    sources:["Apollodore, Bibliothèque, II, 5, 1 (le lion de Némée)","Théocrite, Idylles, XXV"],
+    relatedSymbols:["crabe","cerf","chaîne"],
+  },
+  "scorpion":{icon:"🦂",label:"Scorpion",category:"Animaux",desc:"Envoyé par Apollon contre Orion : jalousie protectrice, mise à distance éternelle.",
+    atGlance:"Apollon, craignant l'attachement de sa sœur Artémis pour le chasseur Orion, lance un scorpion géant à sa poursuite — puis pousse Artémis elle-même, sans qu'elle le sache, à tuer celui qu'elle aimait.",
+    why:"La cruauté de ce mythe (une déesse manipulée pour tuer sans le savoir celui qu'elle aime) illustre une dimension plus sombre de la fratrie Apollon/Artémis, rarement mise en avant dans les résumés simplifiés du couple divin — la protection fraternelle peut ici prendre une forme presque destructrice.",
+    links:["apollon","artémis"],lore:[
     "Le scorpion apparaît dans le mythe d'Orion, le chasseur géant devenu le compagnon de chasse d'Artémis — une complicité si grande qu'Apollon, craignant de voir sa sœur s'éprendre d'un mortel, décide d'y mettre fin (voir la fiche « Orion »).",
     "Apollon lance un scorpion géant à la poursuite d'Orion, qui ne parvient à lui échapper qu'en se jetant à la mer.",
     "Désignant alors à Artémis une forme sombre qui nage au loin sans lui révéler qui elle est, Apollon met sa sœur au défi de l'atteindre de ses flèches — elle vise juste, sans jamais savoir qu'elle vient de tuer celui qu'elle aimait.",
     "Bouleversée, Artémis obtient qu'Orion soit placé parmi les étoiles ; le scorpion y est envoyé lui aussi, mais assez loin pour que les deux constellations ne se lèvent jamais ensemble dans le ciel.",
     "Le scorpion est ainsi devenu un symbole de jalousie protectrice, de piège tendu par ruse plutôt que par force, et de mise à distance qui dure jusque dans le ciel.",
     "Le scorpion est particulièrement associé à Apollon, qui l'envoie contre Orion, et à Artémis, malgré elle.",
-  ]},
-  "chèvre":{icon:"🐐",label:"Chèvre",category:"Animaux",desc:"Amalthée, qui nourrit Zeus enfant en secret : dévouement discret, protection généreuse.",links:["zeus"],lore:[
+  ],
+    deities:[
+      {id:"apollon",role:"envoie le scorpion, orchestre la mort d'Orion par ruse",certainty:"attesté"},
+      {id:"artémis",role:"tue Orion sans le savoir, manipulée par son frère",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"jalousie protectrice",text:"Apollon, craignant l'attachement de sa sœur pour un mortel"},
+      {axis:"manipulation",text:"une déesse trompée pour accomplir un meurtre involontaire"},
+    ],
+    sources:["Aratos, Phénomènes, v. 634-646 (Orion et le Scorpion)"],
+    relatedSymbols:["arc","étoiles","forêt"],
+  },
+  "chèvre":{icon:"🐐",label:"Chèvre",category:"Animaux",desc:"Amalthée, qui nourrit Zeus enfant en secret : dévouement discret, protection généreuse.",
+    atGlance:"Amalthée nourrit le nourrisson Zeus caché dans la grotte du mont Ida — un dévouement discret que le dieu, devenu souverain de l'Olympe, n'oublie pas.",
+    why:"Le double don d'Amalthée (le lait qui sauve l'enfant, puis la corne qui devient corne d'abondance) fait d'elle une figure de générosité redoublée : elle donne d'abord sans qu'on le lui demande, puis reçoit un pouvoir merveilleux en réparation d'un tort accidentel — un cycle complet de don et de gratitude.",
+    links:["zeus"],lore:[
     "La chèvre est liée à Amalthée, qui nourrit Zeus de son lait alors qu'il est encore nourrisson, caché dans une grotte du mont Ida en Crète pour échapper à son père Cronos, qui dévore ses propres enfants (voir la fiche « Grotte »).",
     "En jouant avec elle, le jeune Zeus lui brise accidentellement une corne. Pour se faire pardonner, il la dote d'un pouvoir merveilleux : produire indéfiniment tout ce que son propriétaire peut désirer — c'est la naissance de la corne d'abondance (voir la fiche « Corne d'abondance »).",
     "Devenu roi des dieux, Zeus n'oublie pas ce dévouement discret : il place Amalthée elle-même parmi les étoiles, sous la forme de la constellation, puis du signe, du Capricorne.",
     "La chèvre est ainsi devenue un symbole de dévouement discret, de protection généreuse offerte sans rien attendre en retour, et de tendresse qui traverse même l'enfance d'un dieu.",
     "La chèvre est particulièrement associée à Zeus, par l'intermédiaire d'Amalthée.",
-  ]},
-  "poisson":{icon:"🐟",label:"Poisson",category:"Animaux",desc:"Aphrodite et Éros changés en poissons pour fuir Typhon : fuite salvatrice, lien qui ne se rompt pas.",links:["aphrodite","éros"],lore:[
+  ],
+    deities:[{id:"zeus",role:"nourri par Amalthée enfant, la place ensuite parmi les étoiles",certainty:"attesté"}],
+    dimensions:[
+      {axis:"dévouement",text:"un don discret, sans rien attendre en retour"},
+      {axis:"gratitude",text:"la corne d'abondance, réparation d'un tort accidentel"},
+    ],
+    sources:["Callimaque, Hymne à Zeus, v. 46-54 (Amalthée)"],
+    relatedSymbols:["corne d'abondance","grotte","étoiles"],
+  },
+  "poisson":{icon:"🐟",label:"Poisson",category:"Animaux",desc:"Aphrodite et Éros changés en poissons pour fuir Typhon : fuite salvatrice, lien qui ne se rompt pas.",
+    atGlance:"Face à Typhon, le monstre le plus terrifiant jamais enfanté par Gaïa, Aphrodite et Éros se jettent dans l'Euphrate et se changent en poissons attachés l'un à l'autre pour ne jamais se perdre.",
+    why:"Que la déesse de l'amour elle-même doive fuir, comme tous les autres Olympiens, devant Typhon souligne l'ampleur exceptionnelle de cette menace dans la mythologie grecque : c'est l'un des très rares épisodes où la panique gagne le panthéon presque entier, pas seulement des figures mineures.",
+    links:["aphrodite","éros"],lore:[
     "Le mythe des poissons du zodiaque met en scène Aphrodite et son fils Éros, surpris par l'arrivée soudaine de Typhon, le monstre le plus terrifiant jamais enfanté par Gaïa, capable de faire fuir jusqu'aux dieux de l'Olympe.",
     "Pour lui échapper, Aphrodite et Éros se jettent dans l'Euphrate et se changent en poissons — certaines versions racontent qu'ils s'attachent l'un à l'autre par une corde, pour ne jamais se perdre dans la fuite.",
     "Les deux poissons, unis par ce lien, sont ensuite placés parmi les étoiles : ils deviennent la constellation, puis le signe, des Poissons.",
     "Le poisson est ainsi devenu un symbole de fuite salvatrice devant un danger qui dépasse même les dieux, et de lien qui résiste à la panique et ne se rompt jamais.",
     "Le poisson est particulièrement associé à Aphrodite et à Éros, unis dans cette fuite commune.",
-  ]},
+  ],
+    deities:[{id:"aphrodite",role:"fuit Typhon changée en poisson, liée à Éros par une corde",certainty:"attesté"},{id:"éros",role:"fuit avec sa mère, uni à elle pour ne jamais se perdre",certainty:"attesté"}],
+    dimensions:[
+      {axis:"fuite salvatrice",text:"un danger si grand qu'il fait fuir les dieux eux-mêmes"},
+      {axis:"lien indéfectible",text:"attachés l'un à l'autre pour ne jamais se perdre"},
+    ],
+    history:"Ce mythe est surtout connu par des sources tardives (Hyginus, Astronomie poétique, IIe siècle apr. J.-C.), qui rassemblent et systématisent les récits d'origine des douze signes zodiacaux — la version grecque ancienne de cet épisode précis est plus fragmentaire.",
+    sources:["Hyginus, Astronomie poétique, II, 30 (Poissons)"],
+    relatedSymbols:["cygne","mer","colombe"],
+  },
 
   // Plantes & végétaux
-  "laurier":{icon:"🌿",label:"Laurier",category:"Plantes",desc:"Victoire, gloire, accomplissement mérité après l'effort.",links:["apollon","éros"],lore:[
+  "laurier":{icon:"🌿",label:"Laurier",category:"Plantes",desc:"Victoire, gloire, accomplissement mérité après l'effort.",
+    atGlance:"L'arbre en lequel Daphné fut changée pour échapper à l'amour d'Apollon — qui, ne pouvant l'avoir, en fit son emblème permanent et la parure de tous les vainqueurs.",
+    why:"Le laurier reste vert toute l'année (arbre à feuillage persistant), une propriété naturelle qui en a fait, comme le lierre ou le cyprès, un symbole de permanence — mais ici une permanence liée non à la mort (cyprès) mais à la gloire qui, elle non plus, ne se flétrit pas.",
+    links:["apollon","éros"],lore:[
     "Le laurier est intimement lié à Apollon. Selon le mythe, Apollon, frappé d'une flèche d'or par Éros après l'avoir raillé sur son habileté à l'arc (voir la fiche « Éros »), tomba éperdument amoureux de la nymphe Daphné — elle-même atteinte d'une flèche de plomb qui la rendit incapable de l'aimer en retour. Daphné, refusant ses avances, demanda à être sauvée et fut transformée en laurier par son père, le dieu-fleuve Pénée.",
     "Apollon, comprenant qu'il ne pourrait jamais l'avoir, déclara alors que le laurier lui serait désormais consacré. Il en porta une couronne et en fit un arbre sacré.",
     "Les Grecs offrirent ensuite des couronnes de laurier aux vainqueurs, aux poètes et à ceux qui avaient accompli de grandes choses. À Delphes, le laurier était également associé aux pratiques prophétiques d'Apollon.",
     "Les jeux Pythiques, célébrés tous les quatre ans à Delphes en l'honneur d'Apollon, récompensaient ainsi leurs vainqueurs — musiciens, poètes et athlètes — d'une couronne de laurier coupé dans la vallée voisine de Tempé, là où, selon la légende, Apollon lui-même s'était purifié après avoir tué le serpent Python (voir la fiche « Serpent »).",
     "Le laurier est ainsi devenu un symbole de victoire, de gloire, d'accomplissement, de poésie, de prophétie et de reconnaissance.",
     "Le laurier est particulièrement associé à Apollon et à Daphné.",
-  ]},
-  "olivier":{icon:"🫒",label:"Olivier",category:"Plantes",desc:"Paix, sagesse, prospérité durable.",links:["athéna","poséidon"],lore:[
+  ],
+    deities:[
+      {id:"apollon",role:"consacre le laurier après la métamorphose de Daphné",certainty:"attesté"},
+      {id:"daphné",role:"changée en laurier pour échapper à Apollon",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"victoire",text:"couronne des vainqueurs des jeux Pythiques"},
+      {axis:"prophétie",text:"associé aux pratiques oraculaires de Delphes"},
+      {axis:"amour non réciproque",text:"un attachement qui devient culte plutôt que possession"},
+    ],
+    cult:"Le pèlerin qui allait consulter l'oracle de Delphes passait traditionnellement par la vallée de Tempé pour y couper le laurier destiné aux jeux Pythiques — un geste rituel géographiquement précis, pas une simple image littéraire.",
+    sources:["Ovide, Métamorphoses, I, 452-567 (Apollon et Daphné — réception latine détaillée)","Pausanias, Description de la Grèce, X, 7 (jeux Pythiques)"],
+    relatedSymbols:["couronne","lyre","serpent"],
+  },
+  "olivier":{icon:"🫒",label:"Olivier",category:"Plantes",desc:"Paix, sagesse, prospérité durable.",
+    atGlance:"L'arbre offert par Athéna à Athènes contre la source d'eau salée de Poséidon — un don jugé plus précieux parce que directement utile à la vie quotidienne, choix fondateur qui donne son nom à la cité.",
+    why:"Le concours entre Athéna et Poséidon oppose explicitement deux types de dons : une démonstration de puissance spectaculaire (une source jaillie du sol) contre une utilité concrète et durable (un arbre nourricier). Le choix des Athéniens en faveur de l'olivier est donc un jugement de valeur explicite sur ce que la civilisation doit privilégier — la sagesse pratique plutôt que la force pure.",
+    links:["athéna","poséidon"],lore:[
     "L'olivier est lié à Athéna et à la naissance symbolique d'Athènes. Lorsque Poséidon et Athéna se disputèrent la protection de la cité, les deux divinités offrirent un présent aux habitants.",
     "Poséidon fit jaillir une source d'eau salée. Athéna planta quant à elle le premier olivier. Les habitants considérèrent ce cadeau comme plus précieux, car l'arbre pouvait leur donner de la nourriture, de l'huile, du bois et de la lumière.",
     "Athéna devint ainsi la protectrice de la cité, qui prit son nom : Athènes.",
     "Les oliviers sacrés d'Athènes, descendants directs de celui planté par Athéna, étaient protégés par une loi si stricte que déraciner l'un d'eux, même sur son propre terrain, pouvait valoir l'exil à son propriétaire — preuve que ce don, des siècles après le mythe, restait toujours traité comme un bien appartenant à la cité entière plutôt qu'à un seul homme.",
     "L'olivier est devenu le symbole de la paix, de la sagesse, de la prospérité, de la civilisation et de la protection divine.",
     "L'olivier est particulièrement associé à Athéna.",
-  ]},
-  "blé":{icon:"🌾",label:"Blé",category:"Plantes",desc:"Récolte, travail, nourriture, cycle des saisons.",links:["déméter","perséphone","triptolème"],lore:[
+  ],
+    deities:[
+      {id:"athéna",role:"plante le premier olivier, devient protectrice d'Athènes",certainty:"attesté"},
+      {id:"poséidon",role:"concurrent malheureux, offre une source d'eau salée",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"civilisation",text:"un don utile plutôt qu'une démonstration de puissance"},
+      {axis:"protection légale",text:"les oliviers sacrés, propriété collective protégée par la loi"},
+    ],
+    cult:"Les moriai (oliviers sacrés d'Athènes) faisaient l'objet d'une surveillance légale attestée par les discours judiciaires attiques (notamment Lysias) : les déraciner, même par accident, exposait à des poursuites graves — un exemple rare où mythe fondateur et droit civique réel se rejoignent directement.",
+    sources:["Hérodote, Histoires, VIII, 55","Apollodore, Bibliothèque, III, 14, 1 (le concours Athéna/Poséidon)"],
+    relatedSymbols:["olive","chouette","corne d'abondance"],
+  },
+  "blé":{icon:"🌾",label:"Blé",category:"Plantes",desc:"Récolte, travail, nourriture, cycle des saisons.",
+    atGlance:"Déméter choisit un jeune prince éleusinien, Triptolème, pour répandre l'art de l'agriculture à travers le monde entier, sur un char tiré par des dragons ailés.",
+    why:"Contrairement aux épis de blé isolés, montrés en silence au sommet des Mystères d'Éleusis pour la révélation individuelle et intime de l'initié (voir la fiche « Épis de blé »), le blé pris comme plante cultivée porte ici un récit de diffusion collective : Triptolème parcourt le monde entier pour enseigner l'agriculture à tous les peuples, faisant du don de Déméter une civilisation partagée plutôt qu'un secret réservé.",
+    links:["déméter","perséphone","triptolème"],lore:[
     "Le blé est avant tout associé à Déméter, déesse de l'agriculture et des récoltes.",
     "Lorsque Perséphone fut enlevée par Hadès, Déméter, accablée de chagrin, parcourut le monde à sa recherche et cessa de faire pousser les plantes. La terre devint stérile et les récoltes disparurent.",
     "Lorsque Perséphone put finalement revenir auprès d'elle, la terre recommença à produire. Le cycle de Perséphone expliquait ainsi symboliquement l'alternance des saisons et le retour des récoltes.",
@@ -558,8 +1523,23 @@ const SYMBOL_LIBRARY = {
     "L'épi de blé représente donc ce qui nourrit les hommes mais aussi ce qui doit être semé, mourir, puis renaître pour produire une nouvelle récolte.",
     "Il est devenu un symbole de récolte, de nourriture, de travail, de fécondité, de cycle et d'abondance.",
     "Le blé et l'épi sont particulièrement associés à Déméter.",
-  ]},
-  "cyprès":{icon:"🌲",label:"Cyprès",category:"Plantes",desc:"Mort, mémoire, passage — arbre funéraire qui reste vert toute l'année.",links:["hadès","apollon"],lore:[
+  ],
+    deities:[
+      {id:"déméter",role:"déesse de l'agriculture, dont le chagrin rend la terre stérile",certainty:"attesté"},
+      {id:"triptolème",role:"envoyé par Déméter diffuser l'agriculture dans le monde entier",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"diffusion civilisatrice",text:"Triptolème, enseignant l'agriculture à tous les peuples"},
+      {axis:"cycle",text:"semer, mourir sous terre, renaître en récolte"},
+    ],
+    iconography:"Triptolème sur son char ailé, recevant des épis de blé des mains de Déméter, est un motif fréquent sur les vases attiques à figures rouges du Ve siècle av. J.-C. — une scène de transmission représentée littéralement, pas seulement racontée.",
+    sources:["Hymne homérique à Déméter","Apollodore, Bibliothèque, I, 5, 2 (Triptolème)"],
+    relatedSymbols:["épis","grenade","graine"],
+  },
+  "cyprès":{icon:"🌲",label:"Cyprès",category:"Plantes",desc:"Mort, mémoire, passage — arbre funéraire qui reste vert toute l'année.",
+    atGlance:"Planté aux abords des tombeaux, son feuillage qui ne tombe jamais en a fait l'arbre de la permanence du deuil — et son bois, quasiment imputrescible, servait très concrètement à fabriquer cercueils et sarcophages.",
+    why:"Contrairement à d'autres associations symboliques plus abstraites, celle du cyprès à la mort repose sur une PROPRIÉTÉ MATÉRIELLE réellement vérifiable (bois résistant à la pourriture) autant que sur le mythe de Cyparisse — un cas où pratique funéraire concrète et récit mythologique se renforcent mutuellement plutôt que l'un précédant l'autre.",
+    links:["hadès","apollon"],lore:[
     "Le cyprès possède une association très forte avec la mort et le monde funéraire dans l'Antiquité grecque : planté aux abords des tombeaux, son feuillage qui ne tombe jamais en fit l'arbre de la permanence du deuil, dressé à la frontière entre le monde des vivants et celui d'Hadès (voir la fiche « Hadès »).",
     "Un des récits les plus célèbres est celui de Cyparisse, un jeune homme aimé d'Apollon. Il possédait un cerf qu'il aimait profondément. Après avoir tué accidentellement l'animal, Cyparisse fut inconsolable et demanda à pouvoir pleurer éternellement.",
     "Apollon le transforma alors en cyprès.",
@@ -567,153 +1547,414 @@ const SYMBOL_LIBRARY = {
     "Le bois de cyprès, réputé quasiment imputrescible, était d'ailleurs concrètement utilisé pour fabriquer cercueils et sarcophages dans l'Antiquité — une propriété bien réelle qui renforçait encore, très concrètement, son lien avec la mort et la permanence au-delà du corps.",
     "Le cyprès est devenu un symbole de mort, de deuil, de mémoire, de passage et de permanence du souvenir.",
     "Le cyprès est particulièrement associé à Hadès et au monde funéraire, ainsi qu'à Apollon à travers le mythe de Cyparisse.",
-  ]},
-  "rose":{icon:"🌹",label:"Rose",category:"Plantes",desc:"Amour, beauté, désir — et la vulnérabilité qui va avec.",links:["aphrodite"],lore:[
+  ],
+    deities:[
+      {id:"apollon",role:"transforme Cyparisse en cyprès à sa demande",certainty:"attesté"},
+      {id:"hadès",role:"association générale au monde funéraire, non un mythe précis",certainty:"interprétation"},
+    ],
+    dimensions:[
+      {axis:"deuil",text:"chagrin inconsolable, changé en arbre pour durer"},
+      {axis:"permanence matérielle",text:"un bois quasi imputrescible, utilisé pour les sarcophages"},
+    ],
+    sources:["Ovide, Métamorphoses, X, 106-142 (Cyparisse — réception latine)"],
+    relatedSymbols:["monde souterrain","cerf","chêne"],
+  },
+  "rose":{icon:"🌹",label:"Rose",category:"Plantes",desc:"Amour, beauté, désir — et la vulnérabilité qui va avec.",
+    atGlance:"En courant pieds nus porter secours à Adonis mortellement blessé, Aphrodite se serait blessée sur les épines d'un rosier jusque-là blanc — son sang aurait teint les fleurs d'un rouge qu'elles n'ont plus jamais perdu.",
+    why:"La rose combine trois traits physiques réels (beauté, parfum, épines) en une seule image de l'amour : ce qui attire peut aussi blesser — une correspondance directe entre l'observation botanique et l'expérience amoureuse qui rend cette association particulièrement intuitive et durable.",
+    links:["aphrodite"],lore:[
     "La rose est principalement associée à Aphrodite, déesse de l'amour et de la beauté.",
     "Dans certaines traditions mythologiques, les roses seraient apparues à travers les histoires liées à Aphrodite et à ceux qu'elle aimait. Leur beauté, leur parfum et leurs épines correspondent parfaitement à la double nature de l'amour : attirant et merveilleux, mais capable aussi de blesser.",
     "La couleur rouge a progressivement renforcé l'association entre la rose et le désir, le sang, la passion et l'amour charnel.",
     "Un mythe précis explique même cette couleur : en courant pieds nus porter secours à Adonis mortellement blessé par un sanglier, Aphrodite se serait blessée sur les épines d'un rosier jusque-là blanc — son sang aurait alors teint les fleurs d'un rouge qu'elles n'ont plus jamais perdu.",
     "La rose est donc devenue un symbole de l'amour, de la beauté, du désir, de la passion mais aussi de la vulnérabilité et de la douleur qui peuvent accompagner l'amour.",
     "La rose est particulièrement associée à Aphrodite.",
-  ]},
-  "myrte":{icon:"🌸",label:"Myrte",category:"Plantes",desc:"Amour, mariage — liée à Aphrodite.",links:["aphrodite"],lore:[
+  ],
+    deities:[{id:"aphrodite",role:"son sang teint la rose de rouge en courant vers Adonis blessé",certainty:"fortement établi"}],
+    dimensions:[
+      {axis:"beauté",text:"parfum et couleur, attribut constant d'Aphrodite"},
+      {axis:"vulnérabilité",text:"les épines, la douleur qui accompagne l'amour"},
+    ],
+    history:"L'association rose rouge/sang d'Aphrodite est surtout développée dans les sources hellénistiques et romaines tardives ; les toutes premières traditions grecques sur les fleurs sacrées d'Aphrodite privilégient davantage le myrte (voir cette fiche), plus anciennement attesté.",
+    sources:["Bion de Smyrne, Chant funèbre pour Adonis (source hellénistique tardive)"],
+    relatedSymbols:["myrte","colombe","miroir"],
+  },
+  "myrte":{icon:"🌸",label:"Myrte",category:"Plantes",desc:"Amour, mariage — liée à Aphrodite.",
+    atGlance:"Lorsqu'Aphrodite sortit de la mer, elle aurait cherché à dissimuler sa nudité derrière des branches de myrte — l'arbuste devenant depuis l'un de ses végétaux sacrés, utilisé dans les mariages grecs comme promesse d'union durable.",
+    why:"Contrairement à la rose (association plus tardive), le myrte est le végétal sacré d'Aphrodite le mieux attesté dans les sources anciennes et le plus directement lié à son mythe de naissance lui-même — une antériorité qui en fait, historiquement, le plus solide des deux liens botaniques de la déesse.",
+    links:["aphrodite"],lore:[
     "Le myrte est une plante sacrée d'Aphrodite.",
     "Selon une tradition, lorsqu'Aphrodite sortit de la mer, elle aurait cherché à dissimuler sa nudité derrière des branches de myrte. L'arbuste devint alors l'un de ses végétaux sacrés.",
     "Le myrte était également utilisé lors des mariages et des cérémonies liées à l'amour. Il représentait une union durable et la fécondité du couple.",
     "Une tradition raconte même qu'un satyre l'aurait un jour épiée alors qu'elle se baignait, cachée derrière des branches de myrte insuffisamment épaisses pour la dissimuler tout à fait — une pudeur trahie qui n'a jamais empêché l'arbuste de rester associé à elle depuis.",
     "Il est ainsi devenu un symbole de l'amour, du mariage, de la beauté, de la fécondité et de l'union.",
     "Le myrte est particulièrement associé à Aphrodite.",
-  ]},
-  "lierre":{icon:"🍃",label:"Lierre",category:"Plantes",desc:"Attachement, immortalité — lié à Dionysos.",links:["dionysos"],lore:[
+  ],
+    deities:[{id:"aphrodite",role:"se dissimule derrière le myrte à sa naissance marine",certainty:"attesté"}],
+    dimensions:[
+      {axis:"mariage",text:"union durable, fécondité du couple"},
+      {axis:"pudeur",text:"protection lors de la naissance de la déesse"},
+    ],
+    cult:"Le myrte figurait parmi les plantes couronnant les jeunes mariées grecques et ornait les autels d'Aphrodite lors des Aphrodisia (fêtes en son honneur) — un usage rituel concret, pas seulement une image poétique.",
+    sources:["Pausanias, Description de la Grèce, II, 32, 8 (le myrte et Aphrodite)"],
+    relatedSymbols:["rose","couronne","voile"],
+  },
+  "lierre":{icon:"🍃",label:"Lierre",category:"Plantes",desc:"Attachement, immortalité — lié à Dionysos.",
+    atGlance:"Le lierre aurait poussé si vite autour du berceau de Dionysos enfant qu'il le dissimula entièrement aux yeux d'Héra, furieuse de la naissance de ce fils illégitime de Zeus.",
+    why:"Contrairement à la vigne, qui perd ses feuilles en hiver avant de renaître (cycle de mort et renaissance), le lierre reste vert toute l'année : cette différence botanique bien réelle entre les deux plantes dionysiaques explique pourquoi elles portent des nuances symboliques distinctes — la vigne pour la transformation cyclique, le lierre pour la permanence et la protection.",
+    links:["dionysos"],lore:[
     "Le lierre est l'une des plantes les plus fortement liées à Dionysos.",
     "Contrairement à la vigne, qui disparaît pendant l'hiver avant de renaître, le lierre reste vert et continue de s'accrocher aux arbres et aux pierres. Cette résistance lui a donné une dimension d'immortalité et de permanence.",
     "Les cortèges de Dionysos sont souvent représentés avec du lierre, porté en couronne ou utilisé pour orner les thyrses et les objets rituels.",
     "Selon une tradition, le lierre aurait protégé Dionysos enfant en poussant si vite autour de son berceau qu'il le dissimula entièrement aux yeux d'Héra, furieuse de la naissance de ce fils illégitime de Zeus — un geste de protection végétale qui explique pourquoi la plante lui reste depuis indéfectiblement attachée.",
     "Le lierre est ainsi devenu un symbole de Dionysos, de l'attachement, de la vitalité, de l'immortalité et de ce qui survit au passage du temps.",
     "Le lierre est particulièrement associé à Dionysos.",
-  ]},
-  "lotus":{icon:"🪷",label:"Lotus",category:"Plantes",desc:"Émergence, purification, renaissance depuis les eaux troubles.",links:[],lore:[
+  ],
+    deities:[{id:"dionysos",role:"protégé enfant par le lierre, plante permanente de son cortège",certainty:"attesté"}],
+    dimensions:[
+      {axis:"protection",text:"cache le nourrisson Dionysos de la colère d'Héra"},
+      {axis:"permanence",text:"feuillage persistant, contrairement à la vigne"},
+    ],
+    iconography:"La couronne de lierre, distincte de la couronne de laurier ou d'olivier, identifie spécifiquement les figures liées au culte dionysiaque (ménades, satyres, Dionysos lui-même) dans la céramique grecque à figures rouges et noires.",
+    sources:["Euripide, Bacchantes (le lierre dans le cortège dionysiaque)"],
+    relatedSymbols:["vigne","bâton","raisin"],
+  },
+  "lotus":{icon:"🪷",label:"Lotus",category:"Plantes",desc:"Émergence, purification, renaissance depuis les eaux troubles.",
+    atGlance:"Une mise en garde nécessaire : le « lotus » des textes grecs ne correspond pas forcément à la fleur qu'on imagine aujourd'hui — chez Homère, c'est surtout la nourriture d'un peuple, les Lotophages, qui efface la mémoire de qui la mange.",
+    why:"Cette fiche illustre directement la règle de prudence documentaire centrale de cette bibliothèque : le mot grec « lotos » désignait plusieurs plantes différentes selon les auteurs et les contextes (un arbuste à fruits comestibles chez Homère, potentiellement une fleur aquatique dans d'autres emplois plus tardifs) — attribuer sans nuance au « lotus grec » toute la riche symbolique égyptienne ou indienne de la fleur de lotus serait une erreur de méthode.",
+    links:[],lore:[
     "Le lotus possède une symbolique particulière parce qu'il pousse dans la boue et l'eau avant de faire apparaître une fleur à la surface.",
     "Dans l'imaginaire antique, cette capacité à émerger d'un milieu sombre pour s'ouvrir à la lumière pouvait évoquer la purification et la renaissance.",
     "Il faut toutefois être prudent avec l'association directe entre le lotus et une divinité grecque précise : le « lotus » des textes grecs ne correspond pas nécessairement à la fleur de lotus telle qu'on la représente aujourd'hui. Chez Homère, les Lotophages sont notamment un peuple dont la nourriture provoque l'oubli et le désir de ne plus retourner chez soi.",
     "Homère précise que ce fruit était si doux que quiconque y goûtait perdait aussitôt tout désir de rentrer chez soi et tout souvenir du chemin du retour — les compagnons d'Ulysse qui en mangèrent durent être ramenés de force, en pleurs, jusqu'aux navires.",
     "Il peut ainsi représenter émergence, purification, renaissance, oubli et transformation.",
-  ]},
-  "pavot":{icon:"🌺",label:"Pavot",category:"Plantes",desc:"Sommeil, oubli, rêve — ce qui apaise mais peut aussi endormir la vigilance.",links:["hypnos","morphée"],lore:[
+  ],
+    deities:[],
+    dimensions:[
+      {axis:"oubli",text:"chez Homère, un fruit qui efface tout désir de retour"},
+      {axis:"émergence (tradition plus large)",text:"une fleur née de la boue, ouverte à la lumière"},
+    ],
+    history:"Le lotos homérique n'est identifié avec certitude par aucun consensus moderne : les hypothèses botaniques varient (jujubier, nénuphar) selon les commentateurs — un cas typique où la prudence documentaire s'impose plutôt qu'une identification catégorique.",
+    sources:["Homère, Odyssée, chant IX, v. 82-104 (les Lotophages)"],
+    relatedSymbols:["eau","chemin","pavot"],
+  },
+  "pavot":{icon:"🌺",label:"Pavot",category:"Plantes",desc:"Sommeil, oubli, rêve — ce qui apaise mais peut aussi endormir la vigilance.",
+    atGlance:"L'attribut d'Hypnos, dieu du Sommeil, et de son fils Morphée — un lien si étroit entre la plante et l'endormissement qu'il a traversé les siècles jusque dans le vocabulaire médical de l'opium et de la morphine.",
+    why:"Les propriétés soporifiques réelles du pavot (dont dérive l'opium) fondent directement sa symbolique : contrairement à d'autres associations plus culturelles, celle-ci repose sur un effet pharmacologique observable, ce qui explique sa remarquable stabilité depuis l'Antiquité jusqu'au vocabulaire scientifique moderne.",
+    links:["hypnos","morphée"],lore:[
     "Le pavot est lié à plusieurs divinités, notamment Déméter et Perséphone, et à l'univers du sommeil et de l'oubli.",
     "Ses propriétés soporifiques étaient connues dans l'Antiquité. La fleur pouvait donc symboliser le sommeil, l'apaisement et l'oubli.",
     "Dans le contexte du mythe de Déméter et de Perséphone, le pavot est également associé à la fertilité et aux mystères liés à la terre. Il peut ainsi relier le sommeil de l'être humain au repos de la nature avant son réveil.",
     "Le pavot est aussi l'attribut d'Hypnos, dieu du Sommeil, et de son fils Morphée (voir la fiche « Morphée »), qu'on représente parfois une tige de pavot à la main ou une couronne de ces mêmes fleurs sur la tête — un lien si étroit entre la plante et le sommeil qu'il a traversé les siècles jusque dans le vocabulaire médical de l'opium et de la morphine.",
     "Le pavot est devenu un symbole de sommeil, d'oubli, de rêve, d'apaisement et de passage entre deux états.",
     "Le pavot peut être particulièrement associé à Déméter et Perséphone — et, par son usage le plus direct, à Hypnos et à son fils Morphée.",
-  ]},
-  "crocus":{icon:"🌼",label:"Fleur de crocus",category:"Plantes",desc:"Renouveau, printemps, transformation qui recommence.",links:[],lore:[
+  ],
+    deities:[
+      {id:"hypnos",role:"attribut direct, tige ou couronne de pavot",certainty:"attesté"},
+      {id:"morphée",role:"attribut hérité de son père Hypnos",certainty:"attesté"},
+      {id:"déméter",role:"association secondaire, via le repos de la nature",certainty:"interprétation"},
+    ],
+    dimensions:[
+      {axis:"sommeil",text:"propriété pharmacologique réelle, attestée dès l'Antiquité"},
+      {axis:"oubli",text:"apaisement qui peut aussi endormir la vigilance"},
+    ],
+    history:"Le nom moderne de la morphine, dérivée pharmacologiquement du pavot à opium, vient directement de Morphée — un cas rare où le vocabulaire scientifique contemporain préserve explicitement le nom d'une divinité grecque.",
+    sources:["Ovide, Métamorphoses, XI, 592-649 (la demeure d'Hypnos — réception latine)"],
+    relatedSymbols:["lotus","grenade","monde souterrain"],
+  },
+  "crocus":{icon:"🌼",label:"Fleur de crocus",category:"Plantes",desc:"Renouveau, printemps, transformation qui recommence.",
+    atGlance:"Homère décrit le sol se couvrant spontanément de crocus au moment où Zeus et Héra s'unissent sur le mont Ida — comme si la terre elle-même célébrait, par sa fleur la plus précoce, l'union du roi et de la reine des dieux.",
+    why:"Sa floraison exceptionnellement précoce (parfois avant la fin de l'hiver) est une observation botanique directe qui explique pourquoi le crocus, plus que d'autres fleurs printanières, est devenu l'image privilégiée du retour de la vie après le froid — une association fondée sur un fait naturel vérifiable plutôt que sur une pure convention.",
+    links:[],lore:[
     "Le crocus est lié à une histoire de transformation particulièrement tragique.",
     "Selon le mythe, Crocos était un jeune homme associé à Hermès. Après sa mort accidentelle, il fut transformé en fleur. Dans certaines traditions, la fleur apparaît également dans les récits liés à Perséphone et à son retour saisonnier.",
     "Le crocus fleurit très tôt, parfois alors que l'hiver n'est pas encore totalement terminé. Il est donc naturellement devenu une image du retour de la vie après une période de froid et d'immobilité.",
     "Dans l'Iliade, Homère décrit le sol se couvrant spontanément de crocus, de lotus et de jacinthe tendre au moment où Zeus et Héra s'unissent sur le mont Ida — comme si la terre elle-même célébrait, par ses fleurs les plus fragiles, l'union du roi et de la reine des dieux.",
     "Sa floraison précoce permet d'en faire un symbole de renouveau, de printemps, de transformation et de renaissance après une période sombre.",
     "Le crocus est particulièrement intéressant pour représenter la transformation : quelque chose meurt ou disparaît, puis réapparaît sous une autre forme.",
-  ]},
-  "chêne":{icon:"🌳",label:"Chêne",category:"Plantes",desc:"Arbre sacré de Zeus : force tranquille, sagesse qui parle par le vent plutôt que par des mots clairs.",links:["zeus"],lore:[
+  ],
+    deities:[
+      {id:"hermès",role:"associé au jeune Crocos, changé en fleur après sa mort",certainty:"interprétation"},
+      {id:"héra",role:"le sol se couvre de crocus lors de son union avec Zeus",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"renouveau",text:"floraison précoce, avant même la fin de l'hiver"},
+      {axis:"transformation",text:"un jeune homme changé en fleur après sa mort"},
+    ],
+    sources:["Homère, Iliade, chant XIV, v. 347-351 (le lit fleuri de Zeus et Héra)"],
+    relatedSymbols:["rose","graine","pavot"],
+  },
+  "chêne":{icon:"🌳",label:"Chêne",category:"Plantes",desc:"Arbre sacré de Zeus : force tranquille, sagesse qui parle par le vent plutôt que par des mots clairs.",
+    atGlance:"L'oracle de Dodone, le plus ancien de toute la Grèce, rendait ses réponses non par la voix d'une prêtresse mais par le simple bruissement des feuilles d'un chêne sacré, interprété par des prêtres appelés Selloi.",
+    why:"Contrairement à Delphes, où la Pythie parle un langage articulé, Dodone laisse à des interprètes humains le soin de traduire un bruit naturel non verbal — une forme de divination plus ancienne et plus directement liée à la nature elle-même, cohérente avec la solidité et l'ancrage bien réels de l'arbre qui la porte.",
+    links:["zeus"],lore:[
     "Le chêne est l'arbre sacré de Zeus, et le plus ancien oracle de toute la Grèce, celui de Dodone, en Épire, lui était entièrement consacré.",
     "Contrairement à Delphes, où la Pythie prononçait des paroles, l'oracle de Dodone rendait ses réponses par le simple bruissement des feuilles d'un chêne sacré planté au cœur du sanctuaire — des prêtres appelés Selloi interprétaient ensuite ce murmure pour en tirer un sens destiné aux pèlerins venus consulter le dieu.",
     "Sa solidité, sa longévité et ses racines profondément ancrées dans le sol en ont naturellement fait l'image d'une force tranquille, capable de résister aux tempêtes les plus violentes sans jamais rompre.",
     "Le chêne est ainsi devenu un symbole de force stable, de sagesse ancienne, de protection divine et d'une vérité qui se murmure plutôt qu'elle ne s'impose.",
     "Le chêne est particulièrement associé à Zeus.",
-  ]},
+  ],
+    deities:[{id:"zeus",role:"arbre sacré, siège de l'oracle de Dodone",certainty:"attesté"}],
+    dimensions:[
+      {axis:"force stable",text:"solidité, longévité, résistance à la tempête"},
+      {axis:"divination non verbale",text:"un message lu dans le bruissement des feuilles"},
+    ],
+    cult:"L'oracle de Dodone est archéologiquement documenté par des tablettes de plomb inscrites des questions posées par les pèlerins (retrouvées sur le site), offrant un aperçu concret et daté des préoccupations réelles adressées au sanctuaire — mariage, voyages, affaires, santé.",
+    sources:["Homère, Odyssée, chant XIV, v. 327-330 (l'oracle de Dodone)","Hérodote, Histoires, II, 55-57"],
+    relatedSymbols:["foudre","chemin","montagne"],
+  },
 
   // Fruits & graines
-  "raisin":{icon:"🍇",label:"Raisin",category:"Fruits & graines",desc:"Abondance, plaisir partagé, transformation par la fermentation.",links:["dionysos"],lore:[
+  "raisin":{icon:"🍇",label:"Raisin",category:"Fruits & graines",desc:"Abondance, plaisir partagé, transformation par la fermentation.",
+    atGlance:"Le vin si fort du prêtre Maron, qu'il fallait couper avec vingt parts d'eau selon Homère — celui-là même qu'Ulysse utilise pour enivrer le Cyclope Polyphème avant de lui échapper.",
+    why:"La transformation physique et observable du raisin en vin par fermentation offrait aux Grecs un exemple concret et quotidien de métamorphose de la matière, ce qui explique pourquoi ce fruit précis (plutôt que la vigne dans son ensemble) concentre la dimension la plus radicalement transformatrice de l'univers dionysiaque : ce n'est plus la plante qui change, mais la substance qu'elle produit.",
+    links:["dionysos"],lore:[
     "Le raisin est le fruit de Dionysos. Il concentre tout ce que représente la vigne : abondance, plaisir et transformation.",
     "Le raisin fraîchement cueilli devient du vin après fermentation. Ce changement physique fascinait les anciens et correspond parfaitement à l'univers de Dionysos : quelque chose de naturel se transforme en une substance capable de modifier profondément l'état de celui qui la consomme.",
     "Un vin resté célèbre dans l'Odyssée est celui que le prêtre Maron offre à Ulysse : si fort qu'il fallait le couper avec vingt parts d'eau, c'est lui qu'Ulysse utilise pour enivrer le Cyclope Polyphème avant de lui crever son unique œil et de s'échapper de sa caverne.",
     "Le raisin symbolise donc l'abondance, le plaisir, la transformation, la fête et l'ivresse.",
     "Le raisin est particulièrement associé à Dionysos.",
-  ]},
-  "olive":{icon:"🫒",label:"Olive",category:"Fruits & graines",desc:"Le fruit concret du don d'Athéna : nourriture, huile, paix, prospérité.",links:["athéna"],lore:[
+  ],
+    deities:[{id:"dionysos",role:"fruit central de son culte, transformation par fermentation",certainty:"attesté"}],
+    dimensions:[
+      {axis:"transformation",text:"fermentation, changement d'état de la matière"},
+      {axis:"ruse",text:"le vin de Maron, arme d'Ulysse contre Polyphème"},
+    ],
+    sources:["Homère, Odyssée, chant IX, v. 196-215 (le vin de Maron)"],
+    relatedSymbols:["vigne","lierre","coupe"],
+  },
+  "olive":{icon:"🫒",label:"Olive",category:"Fruits & graines",desc:"Le fruit concret du don d'Athéna : nourriture, huile, paix, prospérité.",
+    atGlance:"Les vainqueurs des Jeux panathénaïques recevaient, en récompense, de grandes amphores remplies d'huile d'olive sacrée pressée des oliviers issus directement de celui planté par Athéna.",
+    why:"Là où la fiche « Olivier » raconte le MYTHE fondateur (le don, le concours contre Poséidon), celle-ci se concentre sur ce que ce don a produit CONCRÈTEMENT dans la vie grecque réelle : une denrée économique, un prix sportif, une huile vendue dans tout le bassin méditerranéen — la suite matérielle et historique du récit mythologique.",
+    links:["athéna"],lore:[
     "L'olive est le fruit de l'arbre offert par Athéna à la cité d'Athènes.",
     "Elle représente donc la partie concrète du don d'Athéna : une nourriture, une huile précieuse, une source de lumière et un produit essentiel à la vie quotidienne.",
     "Elle porte la symbolique de l'olivier mais de manière plus directement liée à la prospérité, à la nourriture, à la paix et aux bienfaits de la civilisation.",
     "Lors des Jeux panathénaïques d'Athènes, les vainqueurs des épreuves sportives recevaient comme récompense de grandes amphores remplies d'huile d'olive sacrée, pressée des oliviers issus directement de celui planté par Athéna — un prix aussi précieux que pratique, puisque cette huile pouvait ensuite être vendue ou échangée dans tout le monde grec.",
     "L'olive est particulièrement associée à Athéna.",
-  ]},
-  "figue":{icon:"🫐",label:"Figue",category:"Fruits & graines",desc:"Fécondité douce, plaisir simple, maturité assumée.",links:[],lore:[
+  ],
+    deities:[{id:"athéna",role:"fruit concret de son don fondateur à Athènes",certainty:"attesté"}],
+    dimensions:[
+      {axis:"prospérité concrète",text:"nourriture, huile, lumière — un produit de la vie quotidienne"},
+      {axis:"récompense",text:"prix des vainqueurs des Jeux panathénaïques"},
+    ],
+    iconography:"Les amphores panathénaïques, à figures noires, représentaient Athéna armée d'un côté et l'épreuve sportive récompensée de l'autre — des milliers d'exemplaires ont été retrouvés dans toute la Méditerranée, preuve de la diffusion réelle de ce prix en huile d'olive.",
+    sources:["Aristote, Constitution d'Athènes, LX (organisation des Jeux panathénaïques)"],
+    relatedSymbols:["olivier","couronne","corne d'abondance"],
+  },
+  "figue":{icon:"🫐",label:"Figue",category:"Fruits & graines",desc:"Fécondité douce, plaisir simple, maturité assumée.",
+    atGlance:"Ce que nous appelons une « figue » est en réalité une structure remplie de nombreuses petites fleurs devenues fruits — une richesse cachée à l'intérieur qui en a fait naturellement une image de fécondité.",
+    why:"La structure botanique réelle du fruit (une inflorescence complexe, non un fruit simple) fonde directement l'association à la fécondité multiple, indépendamment de tout récit mythologique précis — un cas où l'observation naturelle suffit à expliquer le symbole, sans qu'un mythe fondateur ne soit nécessaire.",
+    links:[],lore:[
     "La figue était un fruit important dans le monde grec et était liée à la fertilité et à l'abondance.",
     "Son apparence est elle-même particulière : ce que nous appelons une « figue » est en réalité une structure remplie de nombreuses petites fleurs devenues fruits. Elle contient donc une multitude de graines cachées à l'intérieur.",
     "Cette richesse intérieure en a fait un fruit naturellement associé à la fécondité, à l'abondance et à la prospérité.",
     "Le figuier était aussi associé à Dionysos : lors des processions rituelles en son honneur, on portait des représentations en bois de figuier taillées en forme phallique, symboles explicites de la fécondité que le dieu était censé répandre sur la terre et les hommes.",
     "La figue peut donc représenter fertilité, abondance, nourriture, richesse cachée et fécondité de la terre.",
-  ]},
-  "pomme":{icon:"🍎",label:"Pomme",category:"Fruits & graines",desc:"Beauté, désir et rivalité — le fruit du jugement de Pâris.",links:["aphrodite","héraclès"],lore:[
+  ],
+    deities:[{id:"dionysos",role:"représentations rituelles en bois de figuier lors de ses processions",certainty:"attesté"}],
+    dimensions:[
+      {axis:"fécondité",text:"structure botanique riche en graines cachées"},
+      {axis:"fête rituelle",text:"objets phalliques en bois de figuier, processions dionysiaques"},
+    ],
+    cult:"Les phallophories (processions portant des représentations phalliques, notamment en bois de figuier) faisaient partie des rites dionysiaques ruraux attestés par Aristote comme origine possible de la comédie grecque — un rite explicite de fertilité agraire, documenté indépendamment du mythe.",
+    sources:["Aristote, Poétique, IV, 1449a (origine des phallophories)"],
+    relatedSymbols:["vigne","corbeau","grenade"],
+  },
+  "pomme":{icon:"🍎",label:"Pomme",category:"Fruits & graines",desc:"Beauté, désir et rivalité — le fruit du jugement de Pâris.",
+    atGlance:"La pomme d'or lancée par Eris, déesse de la Discorde, portait l'inscription « à la plus belle » — un geste minuscule qui déclencha la rivalité entre trois déesses, le jugement de Pâris, et finalement la guerre de Troie.",
+    why:"En choisissant une inscription délibérément ambiguë (« à la plus belle », sans nommer de destinataire) plutôt qu'un objet directement disputé, Eris transforme un simple fruit en piège rhétorique parfait : ce n'est pas la pomme elle-même qui a de la valeur, mais l'INTERPRÉTATION que chacune des trois déesses s'empresse d'en faire — un mécanisme de discorde qui repose entièrement sur l'orgueil des receveurs, pas sur l'objet.",
+    links:["aphrodite","héraclès"],lore:[
     "La pomme possède plusieurs associations mythologiques grecques.",
     "La plus célèbre est sans doute la pomme d'or offerte par Eris lors du mariage de Pélée et Thétis. La déesse de la Discorde lança la pomme portant l'inscription destinée « à la plus belle », ce qui déclencha la rivalité entre Héra, Athéna et Aphrodite et conduisit finalement au jugement de Pâris (voir la fiche « Pâris »).",
     "La pomme devient alors le fruit de la beauté, du désir, de la rivalité et du choix.",
     "Les pommes d'or du jardin des Hespérides sont également liées à Héraclès et à l'immortalité.",
     "Ces mêmes pommes d'or jouent aussi un rôle décisif dans la course d'Atalante (voir la fiche « Atalante ») : pour la ralentir, Hippomène en laisse tomber trois devant elle, empruntées au jardin des Hespérides, et c'est en s'arrêtant chaque fois pour les ramasser qu'elle finit par perdre la course — et gagner, du même geste, un mari à sa mesure.",
     "La pomme peut donc représenter beauté, désir, tentation, rivalité, choix et immortalité.",
-  ]},
-  "noix":{icon:"🌰",label:"Noix",category:"Fruits & graines",desc:"Ce qui reste protégé, caché, réservé à qui sait ouvrir la coque.",links:[],lore:[
+  ],
+    deities:[
+      {id:"aphrodite",role:"gagnante du jugement de Pâris, grâce à la pomme d'Eris",certainty:"attesté"},
+      {id:"héraclès",role:"cueille les pommes d'or du jardin des Hespérides",certainty:"attesté"},
+      {id:"atalante",role:"distraite par trois pommes d'or lors de sa course",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"discorde",text:"un fruit qui déclenche une rivalité entre déesses"},
+      {axis:"immortalité",text:"les pommes d'or des Hespérides"},
+      {axis:"distraction",text:"la course d'Atalante, perdue par trois pommes"},
+    ],
+    sources:["Apollodore, Épitomé, III, 2 (le jugement de Pâris)","Apollodore, Bibliothèque, III, 9, 2 (Atalante et Hippomène)"],
+    relatedSymbols:["miroir","laurier","corne d'abondance"],
+  },
+  "noix":{icon:"🌰",label:"Noix",category:"Fruits & graines",desc:"Ce qui reste protégé, caché, réservé à qui sait ouvrir la coque.",
+    atGlance:"Carya, princesse de Laconie aimée de Dionysos, fut changée en noyer après sa mort — les Spartiates lui élevèrent un temple et sculptèrent en son honneur les caryatides, colonnes en forme de jeunes femmes.",
+    why:"L'étymologie du mot « caryatide » (du grec karya, « noyer ») ancre directement ce mythe, souvent négligé face à ceux de la grenade ou du laurier, dans un vocabulaire architectural encore utilisé aujourd'hui — un exemple concret de la façon dont un récit mythologique laisse une trace linguistique durable et vérifiable.",
+    links:[],lore:[
     "La noix est particulièrement intéressante parce qu'elle possède une coque dure qui protège une nourriture cachée à l'intérieur.",
     "Dans le symbolisme antique, cette structure pouvait naturellement évoquer ce qui est dissimulé, protégé ou réservé à celui qui sait ouvrir la coque.",
     "Le noyer porte en réalité un mythe précis, moins connu que celui de la grenade ou du laurier : Carya, princesse de Laconie aimée de Dionysos, mourut et fut changée par le dieu en noyer. Les Dioscures, informés par Artémis, en avertirent les Spartiates, qui lui élevèrent un temple et sculptèrent en son honneur des colonnes en forme de jeunes femmes — les caryatides, dont le nom vient directement du grec karya, « noyer ».",
     "Elle reste ainsi un symbole de ce qui est dissimulé, protégé, réservé à celui qui sait ouvrir la coque — et, par Carya, d'un amour que même la mort n'a pas empêché de rester visible.",
-  ]},
-  "graine":{icon:"🌱",label:"Graine",category:"Fruits & graines",desc:"Potentiel pur, ce qui n'a pas encore germé mais porte déjà toute la forme à venir.",links:[],lore:[
+  ],
+    deities:[{id:"dionysos",role:"change Carya en noyer après sa mort",certainty:"attesté"}],
+    dimensions:[
+      {axis:"protection",text:"une coque dure autour d'une nourriture cachée"},
+      {axis:"mémoire architecturale",text:"les caryatides, encore visibles aujourd'hui"},
+    ],
+    iconography:"Les caryatides de l'Érechthéion, sur l'Acropole d'Athènes, restent l'exemple le plus célèbre et le mieux conservé de cette forme architecturale — un lien direct et visible entre le mythe de Carya et un monument encore débout.",
+    sources:["Vitruve, De architectura, I, 1, 5 (origine légendaire des caryatides — source romaine)"],
+    relatedSymbols:["couronne","chêne","voile"],
+  },
+  "graine":{icon:"🌱",label:"Graine",category:"Fruits & graines",desc:"Potentiel pur, ce qui n'a pas encore germé mais porte déjà toute la forme à venir.",
+    atGlance:"Selon certaines versions du mythe, Perséphone aurait avalé six grains de grenade — un compte exact qui explique pourquoi elle doit passer six mois de l'année aux Enfers avant de remonter passer les six autres auprès de sa mère.",
+    why:"La graine, contrairement au fruit déjà mûr qu'elle deviendra, incarne le potentiel non encore accompli — un état intermédiaire entre la mort apparente (enfouie, invisible) et la vie à venir (la plante qu'elle contient déjà en germe), ce qui en fait l'image la plus abstraite et la plus universelle des cycles de la mythologie grecque, applicable à tous les récits de mort et de renaissance plutôt qu'à un seul.",
+    links:[],lore:[
     "Elle semble morte lorsqu'elle est enfouie dans la terre. Pourtant, elle contient déjà la possibilité d'une nouvelle plante. Elle disparaît donc temporairement pour réapparaître sous une autre forme.",
     "Cette idée rejoint parfaitement les grands cycles de la mythologie grecque : Perséphone descend sous la terre puis revient, les champs meurent en hiver puis renaissent au printemps, et la terre recommence chaque année son œuvre.",
     "Une tradition précise même le nombre de ces graines : selon certaines versions du mythe, Perséphone en aurait avalé six, ce qui explique pourquoi elle doit passer six mois de l'année aux Enfers avant de remonter passer les six autres auprès de sa mère — un compte exact pour un mythe qui explique, graine par graine, le rythme même des saisons.",
     "La graine peut ainsi représenter le potentiel, le commencement, la gestation, la transformation, la mort apparente et la renaissance.",
-  ]},
+  ],
+    deities:[{id:"perséphone",role:"les six grains de grenade qui règlent son rythme annuel",certainty:"fortement établi"}],
+    dimensions:[
+      {axis:"potentiel",text:"une forme déjà présente, pas encore accomplie"},
+      {axis:"cycle",text:"mort apparente et renaissance, calquées sur les saisons"},
+    ],
+    history:"Le nombre précis de grains avalés par Perséphone (trois, quatre ou six selon les versions) varie d'une source antique à l'autre — une divergence qui rappelle que le détail exact du mythe n'était pas fixé une fois pour toutes, contrairement à son schéma général.",
+    sources:["Hymne homérique à Déméter, v. 393-400"],
+    relatedSymbols:["grenade","épis","monde souterrain"],
+  },
 
   // Éléments
-  "feu":{icon:"🔥",label:"Feu",category:"Éléments",desc:"Flamme, étincelle, soleil, fumée : action, volonté, élan.",links:["prométhée","hestia"],lore:[
+  "feu":{icon:"🔥",label:"Feu",category:"Éléments",desc:"Flamme, étincelle, soleil, fumée : action, volonté, élan.",
+    atGlance:"Le seul élément que les dieux ont d'abord refusé aux hommes — dérobé par Prométhée dans une tige de fenouil, au prix d'une chaîne éternelle.",
+    why:"En faisant du feu un don VOLÉ plutôt qu'accordé, le mythe grec inscrit la technique humaine (cuisson, métallurgie, civilisation) dans une transgression fondatrice : le progrès humain naît d'un geste que les dieux n'ont pas autorisé, et qui a un prix — une vision bien plus ambivalente du progrès que le simple récit d'un cadeau généreux.",
+    links:["prométhée","hestia"],lore:[
     "Le feu occupe une place unique dans la mythologie grecque : c'est le seul élément que les dieux ont d'abord refusé aux hommes.",
     "Prométhée le déroba à l'Olympe, caché dans une tige de fenouil, pour l'offrir à l'humanité — un geste qui lui valut d'être retenu par une chaîne pour l'éternité (voir la fiche « Chaîne »). Le feu devint ainsi le premier outil véritablement humain, celui qui permit la technique, la cuisson, la métallurgie et la civilisation elle-même.",
     "Le philosophe Empédocle en fit plus tard l'une des quatre racines de toute matière, aux côtés de l'eau, de l'air et de la terre — une théorie qui a nourri toute la pensée grecque sur la nature du monde, bien après les mythes qui l'avaient d'abord racontée.",
     "Ce feu volé devait aussi être entretenu sans jamais s'éteindre : dans chaque cité grecque, une flamme perpétuelle brûlait au prytanée, sous la garde d'Hestia (voir la fiche « Hestia »), et les colons qui partaient fonder une nouvelle ville emportaient toujours un peu de cette braise pour allumer le premier feu de leur nouveau foyer.",
     "Le feu est devenu un symbole d'action, de volonté, d'élan — et du prix qu'il faut parfois payer pour ce qu'on ose transmettre.",
-  ]},
-  "eau":{icon:"💧",label:"Eau",category:"Éléments",desc:"Source, rivière, vague, pluie, miroir : émotion, relation, ce qui circule.",links:[],lore:[
+  ],
+    deities:[
+      {id:"prométhée",role:"vole le feu de l'Olympe pour l'offrir aux hommes",certainty:"attesté"},
+      {id:"hestia",role:"gardienne du foyer, flamme perpétuelle du prytanée",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"technique",text:"outil fondateur de la civilisation humaine"},
+      {axis:"transgression",text:"un don volé, jamais accordé"},
+      {axis:"permanence civique",text:"la flamme du prytanée, jamais éteinte"},
+    ],
+    cult:"La flamme du prytanée, cœur symbolique de chaque cité grecque, était rallumée d'après un feu réputé pur (parfois obtenu par un miroir ardent) en cas d'extinction accidentelle — un rite de purification attesté, signe que la continuité du feu civique était prise très au sérieux.",
+    history:"La physique d'Empédocle (Ve siècle av. J.-C.), qui fait du feu l'une des quatre racines de toute matière aux côtés de l'eau, de l'air et de la terre, transforme l'élément mythologique en concept philosophique fondateur — une théorie qui influencera toute la pensée grecque ultérieure sur la nature, bien après le récit de Prométhée.",
+    sources:["Hésiode, Théogonie, v. 561-569 (le vol du feu)","Diogène Laërce, Vies des philosophes, VIII (Empédocle et les quatre éléments)"],
+    relatedSymbols:["chaîne","torche","aigle"],
+  },
+  "eau":{icon:"💧",label:"Eau",category:"Éléments",desc:"Source, rivière, vague, pluie, miroir : émotion, relation, ce qui circule.",
+    atGlance:"L'élément qui traverse aussi bien le monde des vivants que celui des morts — les fleuves des Enfers en sont, et c'est sur l'eau du Styx que les dieux prêtent leurs serments les plus sacrés.",
+    why:"Contrairement au feu (volé, transgressif) ou à la terre (stable, nourricière), l'eau grecque incarne ce qui circule et relie sans jamais s'arrêter — une qualité observable directement dans la nature (le cycle des sources, des fleuves, des marées) qui en fait le symbole naturel de l'émotion et de la relation, toujours en mouvement.",
+    links:[],lore:[
     "L'eau est, dans la mythologie grecque, l'élément qui traverse aussi bien le monde des vivants que celui des morts : les fleuves des Enfers (Styx, Léthé, Achéron) sont tous des cours d'eau, et c'est sur l'eau du Styx que les dieux prêtaient leurs serments les plus sacrés.",
     "Elle est aussi le domaine de Poséidon et de tout un peuple de divinités marines et fluviales, des Néréides aux dieux-fleuves, qui montrent que l'eau n'est jamais un simple décor mais un ensemble de forces vivantes.",
     "Empédocle en fit l'une des quatre racines de toute matière, aux côtés du feu, de l'air et de la terre — l'élément de ce qui coule, se mêle et jamais ne reste immobile.",
     "À Delphes, les pèlerins venus consulter l'oracle devaient d'abord se purifier dans les eaux de la source Castalie, au pied du mont Parnasse — un geste rituel qui rappelle qu'aucune parole divine ne pouvait être reçue sans être, au préalable, purifiée par l'eau.",
     "L'eau est devenue un symbole d'émotion, de relation et de ce qui circule sans jamais s'arrêter tout à fait.",
-  ]},
-  "air":{icon:"🌬",label:"Air",category:"Éléments",desc:"Vent, souffle, plume, nuage : pensée, décision, clarté mentale.",links:["hermès","iris","borée","zéphyr"],lore:[
+  ],
+    deities:[{id:"poséidon",role:"souverain des eaux marines et douces",certainty:"attesté"}],
+    dimensions:[
+      {axis:"serment",text:"le Styx, sur lequel les dieux jurent"},
+      {axis:"purification rituelle",text:"la source Castalie, avant de consulter l'oracle"},
+    ],
+    cult:"La purification par l'eau (source, mer ou bain rituel) précède presque systématiquement tout acte religieux grec important — sacrifice, consultation oraculaire, entrée dans un sanctuaire — une pratique si constante qu'elle structure la topographie même des grands lieux de culte, toujours pourvus d'une source ou d'un point d'eau.",
+    sources:["Pausanias, Description de la Grèce, X, 8 (la source Castalie)"],
+    relatedSymbols:["rivière","mer","lotus"],
+  },
+  "air":{icon:"🌬",label:"Air",category:"Éléments",desc:"Vent, souffle, plume, nuage : pensée, décision, clarté mentale.",
+    atGlance:"Le domaine où circulent les messages divins — Hermès et Iris y voyagent — mais aussi le souffle (pneuma) que les Anciens associaient directement à la vie et à la pensée.",
+    why:"L'identification grecque entre le souffle vital et le principe de pensée (le même mot, pneuma, couvre les deux) explique pourquoi l'air devient le symbole de la clarté mentale plutôt que d'un simple élément météorologique — respirer et penser relèvent, dans cette conception, d'un seul et même principe invisible.",
+    links:["hermès","iris","borée","zéphyr"],lore:[
     "L'air, dans la mythologie grecque, est le domaine où circulent les messages : c'est par les airs qu'Hermès porte ses nouvelles et qu'Iris tend son arc-en-ciel entre le ciel et la terre.",
     "C'est aussi le souffle (pneuma) que les Anciens associaient à la vie elle-même et, plus tard, à la pensée et à l'inspiration — respirer et penser relevaient d'un même principe invisible.",
     "Les quatre vents cardinaux, les Anémoi, personnifient directement cet air en mouvement : Borée au nord (voir la fiche « Borée »), Notos au sud, Euros à l'est et Zéphyr à l'ouest (voir la fiche « Zéphyr »), chacun soufflant avec un caractère bien distinct, du plus brutal au plus doux.",
     "Empédocle en fit l'une des quatre racines de toute matière, aux côtés du feu, de l'eau et de la terre — l'élément qu'on ne voit jamais directement, mais dont les effets se sentent partout.",
     "L'air est devenu un symbole de pensée, de décision et de clarté mentale — ce qui circule sans jamais se laisser saisir.",
-  ]},
-  "terre":{icon:"🌿",label:"Terre",category:"Éléments",desc:"Racine, pierre, sol, montagne : matière, croissance, incarnation concrète.",links:["gaïa","déméter"],lore:[
+  ],
+    deities:[
+      {id:"hermès",role:"voyage par les airs pour porter les messages divins",certainty:"attesté"},
+      {id:"iris",role:"tend l'arc-en-ciel entre ciel et terre",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"pensée",text:"le pneuma, souffle vital identifié à l'esprit"},
+      {axis:"message",text:"médium du déplacement des messagers divins"},
+    ],
+    sources:["Aristote, De Anima (le pneuma et le principe vital, réception philosophique)"],
+    relatedSymbols:["ailes","arc-en-ciel","caducée"],
+  },
+  "terre":{icon:"🌿",label:"Terre",category:"Éléments",desc:"Racine, pierre, sol, montagne : matière, croissance, incarnation concrète.",
+    atGlance:"Gaïa engendre en premier le Ciel (Ouranos) et donne naissance à toutes les générations divines qui suivront — la terre n'est pas un simple décor mais la toute première puissance du cosmos grec.",
+    why:"En plaçant la Terre elle-même comme la première entité à émerger du Chaos primordial, la cosmogonie grecque fait de l'élément terrestre non un simple matériau mais littéralement l'ancêtre de tous les dieux — une antériorité absolue qui explique pourquoi le contact avec le sol (comme pour le géant Antée) reste une source de puissance qu'aucun autre élément ne possède.",
+    links:["gaïa","déméter"],lore:[
     "La terre est, dans la mythologie grecque, une puissance primordiale : Gaïa, la Terre elle-même, engendre en premier le Ciel (Ouranos) et donne naissance à toutes les générations divines qui suivront, y compris les Titans et, à travers eux, les dieux de l'Olympe.",
     "Elle est aussi le domaine de Déméter, déesse des moissons, dont le chagrin après l'enlèvement de Perséphone rend la terre stérile chaque année, avant que son retour ne la fasse à nouveau produire.",
     "Le géant Antée, fils de Gaïa et de Poséidon, tirait toute sa force du contact avec sa mère la Terre : invincible tant qu'il restait au sol, il ne fut vaincu par Héraclès que lorsque celui-ci comprit qu'il fallait le soulever à bout de bras, le coupant ainsi de la source même de sa puissance, pour pouvoir enfin l'étouffer.",
     "Empédocle en fit l'une des quatre racines de toute matière, aux côtés du feu, de l'eau et de l'air — l'élément le plus stable, celui qui porte et nourrit tous les autres.",
     "La terre est devenue un symbole de matière, de croissance et d'incarnation concrète — ce qui accueille, porte et fait pousser.",
-  ]},
+  ],
+    deities:[
+      {id:"gaïa",role:"puissance primordiale, mère de toutes les générations divines",certainty:"attesté"},
+      {id:"déméter",role:"déesse des moissons, dont le chagrin rend la terre stérile",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"origine",text:"première puissance à émerger du Chaos"},
+      {axis:"force par contact",text:"Antée, invincible tant qu'il touche le sol"},
+    ],
+    sources:["Hésiode, Théogonie, v. 116-138 (Gaïa, origine du cosmos)"],
+    relatedSymbols:["chêne","montagne","graine"],
+  },
 
   // Astres & phénomènes
-  "soleil":{icon:"☀",label:"Soleil",category:"Astres & phénomènes",desc:"Clarté, conscience, vitalité, vérité qui n'a plus besoin de se cacher.",links:["hélios"],lore:[
+  "soleil":{icon:"☀",label:"Soleil",category:"Astres & phénomènes",desc:"Clarté, conscience, vitalité, vérité qui n'a plus besoin de se cacher.",
+    atGlance:"Le corps même d'Hélios, témoin universel devant qui rien ne reste caché — c'est lui qui surprit Arès et Aphrodite et le rapporta aussitôt à Héphaïstos, l'époux trompé.",
+    why:"Puisque le soleil voit littéralement tout ce qui se passe sous ses rayons au cours de sa traversée quotidienne du ciel, il devient logiquement, dans les récits grecs, le témoin auquel on ne peut rien cacher — un rôle narratif directement déduit de sa position et de son parcours observables.",
+    links:["hélios"],lore:[
     "Le soleil est le corps même d'Hélios, qui traverse chaque jour le ciel sur son char de feu, voyant tout ce qui se passe sur terre sans qu'aucun secret ne puisse lui échapper.",
     "Son fils Phaéton, voulant un jour conduire le char à sa place, en perdit le contrôle et faillit embraser la terre entière — un rappel que la lumière qui révèle tout est aussi une force qu'il faut savoir maîtriser.",
     "Le soleil ne se cache jamais : c'est précisément ce qui en fait, dans cette mythologie, le témoin par excellence, celui devant qui rien ne reste dans l'ombre.",
     "C'est lui, dit-on, qui surprit un jour Arès et Aphrodite dans les bras l'un de l'autre et le rapporta aussitôt à Héphaïstos, l'époux trompé (voir les fiches « Arès » et « Aphrodite ») — une preuve concrète que rien, dans cette mythologie, n'échappe longtemps au regard du Soleil.",
     "Il est devenu un symbole de clarté, de conscience, de vitalité et de vérité qui n'a plus besoin de se cacher.",
     "Le soleil est particulièrement associé à Hélios.",
-  ]},
-  "lune":{icon:"🌙",label:"Lune",category:"Astres & phénomènes",desc:"Inconscient, intuition, cycles, incertitude qui n'empêche pas d'avancer.",links:["séléné","métis"],lore:[
+  ],
+    deities:[{id:"hélios",role:"corps solaire, témoin universel de tout ce qui se passe sur terre",certainty:"attesté"}],
+    dimensions:[
+      {axis:"vérité",text:"un témoin devant qui rien ne reste caché"},
+      {axis:"vitalité",text:"lumière et énergie quotidiennes"},
+    ],
+    sources:["Homère, Odyssée, chant VIII, v. 266-366 (le Soleil dénonce Arès et Aphrodite)"],
+    relatedSymbols:["char solaire","aigle","aurore"],
+  },
+  "lune":{icon:"🌙",label:"Lune",category:"Astres & phénomènes",desc:"Inconscient, intuition, cycles, incertitude qui n'empêche pas d'avancer.",
+    atGlance:"Le corps de Séléné, dont l'amour pour le berger Endymion la pousse à lui obtenir un sommeil éternel plutôt que la mort, afin de pouvoir continuer, chaque nuit, à venir le contempler.",
+    why:"Contrairement au soleil qui révèle tout d'un coup, la lune se montre par phases successives, jamais entière d'un seul regard — une observation astronomique directe qui fonde son association à un savoir progressif et à l'intuition plutôt qu'à la clarté immédiate.",
+    links:["séléné","métis"],lore:[
     "La lune est le corps de Séléné, qui traverse le ciel nocturne comme son frère Hélios traverse le ciel diurne.",
     "Son mythe le plus connu est celui d'Endymion, berger d'une beauté si parfaite que Séléné, tombée amoureuse, obtint pour lui un sommeil éternel plutôt que la mort — afin de pouvoir continuer, chaque nuit, à venir le contempler.",
     "La lune porte aussi la trace de Métis, titanide de la ruse et de la sagesse cachée : un savoir qui, comme la lune elle-même, ne se montre jamais tout entier d'un coup, mais se dévoile par phases.",
-    "Un mythe plus étrange lui prête aussi une autre conquête : le dieu Pan, désireux de la séduire, se serait déguisé en bélier à la toison d'un blanc éclatant pour l'attirer dans les bois et gagner ses faveurs — preuve que même la lune, réputée insaisissable, pouvait se laisser surprendre par la ruse.",
+    "Un mythe plus étrange lui prête aussi une autre conquête : le dieu Pan, désireux de la séduire, se serait déguisé en bélier à la toison d'un blanc éclatant pour l'attirer dans les bois et gagner ses faveurs — preuve que même la lune, réputée insaisissable, pouvait se laisser surprise par la ruse.",
     "Elle est devenue un symbole d'inconscient, d'intuition, de cycles et d'incertitude qui n'empêche pas d'avancer.",
     "La lune est particulièrement associée à Séléné et à Métis.",
-  ]},
-  "étoiles":{icon:"✦",label:"Étoile",category:"Astres & phénomènes",desc:"Orientation, espoir, inspiration retrouvée après l'épreuve.",links:["hécate","astéria","éos","cassiopée"],lore:[
+  ],
+    deities:[
+      {id:"séléné",role:"corps lunaire, amoureuse d'Endymion",certainty:"attesté"},
+      {id:"métis",role:"association poétique à un savoir qui se dévoile par phases",certainty:"interprétation"},
+    ],
+    dimensions:[
+      {axis:"cycle",text:"phases successives, jamais montrée d'un coup"},
+      {axis:"amour contemplatif",text:"Séléné, préférant regarder Endymion pour toujours"},
+    ],
+    sources:["Apollonios de Rhodes, Argonautiques, IV, 57-65 (Séléné et Endymion)"],
+    relatedSymbols:["soleil","étoiles","chèvre"],
+  },
+  "étoiles":{icon:"✦",label:"Étoile",category:"Astres & phénomènes",desc:"Orientation, espoir, inspiration retrouvée après l'épreuve.",
+    atGlance:"Toutes les constellations ne sont pas des récompenses : la reine Cassiopée, punie pour son orgueil, y tourne la tête en bas une partie de l'année, quand Orion, lui, y fut placé en hommage.",
+    why:"Le catastérisme (transformation en étoile ou constellation) est l'un des dénouements les plus fréquents de la mythologie grecque, mais il porte des valeurs opposées selon les cas : cette même destination céleste peut couronner un exploit (Orion, le lion de Némée) ou perpétuer une punition (Cassiopée, Ixion sur sa roue) — ce n'est donc jamais, en soi, une fin univoque.",
+    links:["hécate","astéria","éos","cassiopée"],lore:[
     "Les étoiles se rattachent à Hécate par sa mère, Astéria, titanide dont le nom signifie littéralement « étoilée ».",
     "Pour échapper aux avances de Zeus, Astéria se jeta dans la mer et fut changée en île — Délos, selon certaines traditions — après avoir été un temps assimilée aux étoiles filantes. Sa fille Hécate hérita de cette proximité avec le ciel nocturne et l'orientation qu'il offre à qui sait le lire.",
     "Contrairement au soleil qui révèle tout d'un coup, les étoiles n'éclairent que faiblement — mais elles suffisent à orienter celui qui a perdu son chemin dans l'obscurité.",
@@ -721,29 +1962,252 @@ const SYMBOL_LIBRARY = {
     "Toutes les constellations ne sont pas des récompenses : la reine Cassiopée, punie pour s'être vantée d'une beauté supérieure à celle des Néréides, fut elle aussi placée parmi les étoiles, mais condamnée à y tourner la tête en bas une bonne partie de l'année (voir la fiche « Cassiopée »).",
     "Elles sont devenues un symbole d'orientation, d'espoir et d'inspiration retrouvée après l'épreuve — mais aussi, parfois, de mémoire durable d'une faute qu'on continue de porter.",
     "Les étoiles sont particulièrement associées à Hécate, par sa mère Astéria, et servent aussi de sanction éternelle à Cassiopée.",
-  ]},
-  "aurore":{icon:"🌅",label:"Aurore",category:"Astres & phénomènes",desc:"Commencement, renaissance, ce qui redémarre après l'obscurité.",links:["éos","hélios"],lore:[
+  ],
+    deities:[
+      {id:"hécate",role:"héritière de la proximité céleste de sa mère Astéria",certainty:"interprétation"},
+      {id:"cassiopée",role:"punie parmi les étoiles pour son orgueil",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"orientation",text:"une lumière faible mais suffisante pour guider"},
+      {axis:"récompense",text:"Orion, honoré après sa mort"},
+      {axis:"punition perpétuelle",text:"Cassiopée, condamnée à tourner la tête en bas"},
+    ],
+    sources:["Aratos, Phénomènes (catalogue poétique des constellations)"],
+    relatedSymbols:["chaîne","lune","couronne"],
+  },
+  "aurore":{icon:"🌅",label:"Aurore",category:"Astres & phénomènes",desc:"Commencement, renaissance, ce qui redémarre après l'obscurité.",
+    atGlance:"Éos, déesse aux doigts de rose, obtint l'immortalité pour son amant Tithonos sans penser à demander aussi l'éternelle jeunesse — un rappel que même un don des dieux peut se retourner si l'on ne pense pas à tout.",
+    why:"L'épithète homérique constante « aux doigts de rose » (rhododaktylos) fixe une image sensorielle précise et récurrente qui ouvre littéralement chaque nouvelle journée dans la poésie épique — un phénomène observé quotidiennement, transformé en rituel narratif répété à chaque aube du récit.",
+    links:["éos","hélios"],lore:[
     "L'aurore est le corps d'Éos, déesse aux doigts de rose qui ouvre chaque jour les portes du ciel pour annoncer le passage d'Hélios.",
     "Éos est aussi connue pour ses amours mortelles, comme Tithonos, à qui elle obtint l'immortalité sans penser à demander aussi l'éternelle jeunesse — un rappel que même un don des dieux peut se retourner si l'on ne pense pas à tout.",
     "Elle pleure aussi un fils tombé à la guerre de Troie, Memnon, roi des Éthiopiens tué par Achille : chaque matin, dit-on, la rosée qui couvre l'herbe n'est autre que les larmes qu'elle continue de verser sur lui, inlassablement, depuis sa mort.",
     "Chaque aurore répète ainsi un même geste : ouvrir à nouveau ce qui semblait clos, redonner une chance après la nuit la plus sombre.",
     "Elle est devenue un symbole de commencement, de renaissance et de ce qui redémarre après l'obscurité.",
-  ]},
-  "éclipse":{icon:"🌑",label:"Éclipse",category:"Astres & phénomènes",desc:"Obscurcissement temporaire, transition, révélation qui attend son heure.",links:[],lore:[
+  ],
+    deities:[{id:"éos",role:"personnification directe de l'aurore quotidienne",certainty:"attesté"}],
+    dimensions:[
+      {axis:"commencement",text:"ouverture répétée d'une nouvelle journée"},
+      {axis:"don incomplet",text:"Tithonos, immortel mais vieillissant sans fin"},
+      {axis:"deuil quotidien",text:"la rosée, larmes versées sur Memnon"},
+    ],
+    sources:["Homère, épithète récurrente « Éos aux doigts de rose » (Iliade et Odyssée)","Hymne homérique à Aphrodite, v. 218-238 (Tithonos)"],
+    relatedSymbols:["soleil","rose","char solaire"],
+  },
+  "éclipse":{icon:"🌑",label:"Éclipse",category:"Astres & phénomènes",desc:"Obscurcissement temporaire, transition, révélation qui attend son heure.",
+    atGlance:"Une éclipse prédite à l'avance par le philosophe Thalès de Milet terrifia deux armées en pleine bataille au point de les pousser à conclure la paix sur-le-champ — le moment précis où le mythe cède la place à l'explication rationnelle.",
+    why:"Cette fiche illustre directement la distinction entre croyance populaire (l'éclipse comme présage divin redouté) et explication scientifique naissante (Anaxagore, Thalès) au sein même de la culture grecque antique — la Grèce classique n'est pas monolithique : elle contient à la fois la peur superstitieuse et les débuts de l'astronomie rationnelle, parfois chez les mêmes générations.",
+    links:[],lore:[
     "Longtemps, une éclipse fut perçue comme un présage redoutable : le soleil ou la lune s'éteignant sans explication ne pouvait, croyait-on, qu'annoncer un désordre plus grand encore.",
     "C'est un Grec, le philosophe Anaxagore, qui proposa au Ve siècle avant notre ère l'une des premières explications naturelles de ce phénomène : l'éclipse ne serait pas un signe des dieux mais l'ombre portée d'un astre sur un autre — une idée si audacieuse pour son temps qu'elle lui valut d'être accusé d'impiété.",
     "Hérodote raconte qu'une éclipse survenue en pleine bataille entre Lydiens et Mèdes, prédite à l'avance par le philosophe Thalès de Milet, terrifia les deux armées au point de les pousser à conclure la paix sur-le-champ — la première éclipse de l'histoire dont la date peut être calculée avec précision aujourd'hui, à partir de ce seul récit.",
     "L'éclipse raconte ainsi, mieux qu'aucun autre phénomène céleste, le moment où le mythe cède la place à l'explication — sans que le sentiment de mystère ne disparaisse tout à fait.",
     "Elle est devenue un symbole d'obscurcissement temporaire, de transition et de révélation qui attend son heure pour se manifester.",
-  ]},
-  "éclair":{icon:"⚡",label:"Éclair",category:"Astres & phénomènes",desc:"Révélation brutale, rupture soudaine, énergie qui ne prévient pas.",links:["zeus","poséidon"],lore:[
+  ],
+    deities:[],
+    dimensions:[
+      {axis:"présage redouté",text:"croyance populaire, désordre annoncé"},
+      {axis:"explication rationnelle",text:"Anaxagore et Thalès, débuts de l'astronomie"},
+    ],
+    history:"Le passage d'une lecture purement religieuse du ciel à une explication naturelle est un tournant documenté de la pensée grecque classique (Ve siècle av. J.-C.) — Anaxagore fut poursuivi pour impiété précisément pour avoir défendu cette explication, preuve que la coexistence des deux visions n'allait pas sans tension.",
+    sources:["Hérodote, Histoires, I, 74 (l'éclipse de Thalès)","Plutarque, Vie de Périclès, XXXII (le procès d'Anaxagore)"],
+    relatedSymbols:["soleil","lune","éclair"],
+  },
+  "éclair":{icon:"⚡",label:"Éclair",category:"Astres & phénomènes",desc:"Révélation brutale, rupture soudaine, énergie qui ne prévient pas.",
+    atGlance:"Un roi mortel, Salmonée, poussa l'orgueil jusqu'à imiter le tonnerre avec des chaudrons de bronze traînés derrière son char — Zeus le foudroya sur-le-champ d'un authentique éclair pour cette imposture.",
+    why:"Le châtiment de Salmonée illustre une règle constante de la mythologie grecque : imiter ou usurper un attribut divin (ici, littéralement le bruit et la lumière de l'arme de Zeus) constitue une hybris punie sans délai — l'éclair n'est donc pas qu'un phénomène naturel, c'est aussi le signe visible de ce qui distingue irréductiblement le divin du mortel.",
+    links:["zeus","poséidon"],lore:[
     "L'éclair partage son origine avec la foudre (voir cette fiche) : c'est l'arme que les Cyclopes forgèrent pour Zeus après sa victoire sur les Titans.",
     "Mais l'éclair est aussi ce qui rend visible, l'espace d'un instant, ce que l'obscurité cachait — une déchirure brève dans la nuit, plutôt que le coup qui suit. Poséidon, de son côté, produit une violence tout aussi soudaine mais depuis le sol : ses coups de trident font trembler la terre avec la même absence totale de préavis.",
     "Zeus dans le ciel, Poséidon sous la terre : à eux deux, ils montrent qu'aucun des deux royaumes, ni le plus haut ni le plus profond, n'est à l'abri d'une violence instantanée.",
     "Un roi mortel, Salmonée, poussa un jour l'orgueil jusqu'à vouloir imiter cette arme : il traînait des chaudrons de bronze derrière son char pour en imiter le tonnerre et lançait des torches enflammées en se proclamant l'égal de Zeus — le vrai dieu, furieux de cette imposture, le foudroya sur-le-champ d'un authentique éclair.",
     "L'éclair est devenu un symbole de révélation brutale, de rupture soudaine et d'énergie qui ne prévient pas.",
     "L'éclair est particulièrement associé à Zeus et à Poséidon.",
-  ]},
+  ],
+    deities:[
+      {id:"zeus",role:"foudroie Salmonée pour avoir imité son arme",certainty:"attesté"},
+      {id:"poséidon",role:"violence soudaine parallèle, depuis le sol",certainty:"interprétation"},
+    ],
+    dimensions:[
+      {axis:"révélation instantanée",text:"une déchirure brève qui rend visible l'obscurité"},
+      {axis:"hybris punie",text:"Salmonée, châtié pour avoir usurpé l'arme d'un dieu"},
+    ],
+    sources:["Virgile, Énéide, VI, 585-594 (Salmonée — réception latine, dans la description des Enfers)"],
+    relatedSymbols:["foudre","éclipse","chaîne"],
+  },
+
+  // Symboles ajoutés lors de la refonte de la bibliothèque : identifiés comme des lacunes
+  // importantes après audit des 90 fiches existantes (voir README) — chacun vérifié avant
+  // ajout, jamais forcé pour remplir une catégorie.
+  "sanglier":{icon:"🐗",label:"Sanglier",category:"Animaux",desc:"Sanglier de Calydon et d'Érymanthe, mort d'Adonis : violence sauvage indomptée, souffrance qui suit une offense.",
+    atGlance:"Le sanglier de Calydon, envoyé par Artémis outragée pour ravager le royaume d'Œnée, déclencha une chasse héroïque qui vira à la tragédie familiale — quand celui d'Érymanthe devint le quatrième travail d'Héraclès, et qu'un troisième sanglier, anonyme celui-là, tua Adonis d'un coup de défense.",
+    why:"Contrairement au taureau (désir, puissance canalisable) ou au lion (courage qui se domine), le sanglier grec reste presque toujours un fléau à combattre plutôt qu'une force à canaliser : sa férocité imprévisible dans les forêts et les cultures ravagées correspondait à une menace agricole bien réelle pour les communautés rurales grecques, ce qui explique son rôle constant de monstre à vaincre plutôt que d'attribut à porter.",
+    links:["artémis","héraclès","atalante"],lore:[
+    "Le roi Œnée de Calydon, ayant oublié de sacrifier à Artémis lors des prémices de sa récolte, s'attira la colère de la déesse : elle envoya un sanglier monstrueux ravager ses terres, forçant les plus grands héros de Grèce à se rassembler pour une chasse commune restée célèbre.",
+    "C'est la chasseresse Atalante qui porta le premier coup à la bête, avant que le prince Méléagre ne l'achève et lui offre la dépouille en hommage — un geste qui déclencha une querelle mortelle jusque dans son propre camp (voir la fiche « Atalante »).",
+    "Un autre sanglier, celui du mont Érymanthe, devint le quatrième travail d'Héraclès : il dut le traquer dans la neige avant de le rapporter vivant, ligoté, jusqu'à son commanditaire Eurysthée, terrifié à sa seule vue.",
+    "Un troisième sanglier, sans nom cette fois, causa l'une des morts les plus pleurées de toute la mythologie : celle d'Adonis, éventré d'un coup de défense alors qu'il chassait seul, sous les yeux impuissants d'Aphrodite accourue trop tard, teignant de son sang la rose jusque-là blanche (voir la fiche « Rose »).",
+    "Le sanglier est ainsi devenu un symbole de violence sauvage indomptée, de fléau envoyé en punition, et de souffrance qui suit toujours une offense — volontaire ou non — faite aux dieux.",
+  ],
+    deities:[
+      {id:"artémis",role:"envoie le sanglier de Calydon en punition d'un sacrifice oublié",certainty:"attesté"},
+      {id:"héraclès",role:"capture vivant le sanglier d'Érymanthe, quatrième travail",certainty:"attesté"},
+      {id:"atalante",role:"porte le premier coup au sanglier de Calydon",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"punition divine",text:"un fléau envoyé pour venger un sacrifice oublié"},
+      {axis:"épreuve héroïque",text:"le sanglier d'Érymanthe, exploit d'Héraclès"},
+      {axis:"mort brutale",text:"Adonis, tué d'un coup de défense"},
+    ],
+    sources:["Homère, Iliade, chant IX, v. 529-599 (la chasse calydonienne)","Apollodore, Bibliothèque, I, 8, 2-3"],
+    relatedSymbols:["forêt","cerf","rose"],
+  },
+  "égide":{icon:"🛡",label:"Égide",category:"Objets mythologiques",desc:"Le bouclier-peau à tête de Gorgone : protection redoutable, terreur qui repousse par sa seule apparition.",
+    atGlance:"L'égide, peau de la chèvre Amalthée selon certaines traditions ou forgée par Héphaïstos selon d'autres, porte en son centre la tête de la Gorgone Méduse — un objet si terrifiant que sa seule vue suffit à semer la panique dans une armée entière.",
+    why:"Contrairement à une arme qui frappe, l'égide agit par la terreur pure qu'elle inspire à distance, avant même tout contact — elle protège moins en repoussant les coups qu'en empêchant l'ennemi d'oser attaquer, un mécanisme de dissuasion plutôt que de défense active.",
+    links:["zeus","athéna","méduse"],lore:[
+    "L'égide est l'attribut protecteur le plus redoutable du panthéon grec : une sorte de bouclier ou de pectoral, souvent décrit comme la peau d'une chèvre ou d'un monstre, porté par Zeus puis, plus fréquemment encore, par Athéna.",
+    "Selon une tradition, elle proviendrait de la peau de la chèvre Amalthée elle-même, qui avait nourri Zeus enfant (voir la fiche « Chèvre ») ; selon une autre, plus tardive, Héphaïstos l'aurait forgée pour Zeus, qui la confia ensuite à sa fille.",
+    "C'est sur cette égide qu'Athéna fixe la tête de la Gorgone Méduse, offerte par Persée après qu'il l'eut décapitée : quiconque croise ce regard, même pétrifié par la mort, reste changé en pierre.",
+    "Dans l'Iliade, secouer l'égide suffit à Zeus ou à Athéna pour semer une terreur immédiate dans les rangs ennemis, sans qu'un seul coup ne soit porté — l'objet agit par ce qu'il montre, pas par ce qu'il frappe.",
+    "L'égide est ainsi devenue un symbole de protection redoutable, de terreur dissuasive et de pouvoir qui n'a pas besoin de frapper pour vaincre.",
+  ],
+    deities:[
+      {id:"zeus",role:"porte l'égide comme arme et emblème avant de la confier à Athéna",certainty:"attesté"},
+      {id:"athéna",role:"porte l'égide ornée de la tête de Méduse",certainty:"attesté"},
+      {id:"méduse",role:"sa tête pétrifiante orne le centre de l'égide",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"terreur dissuasive",text:"agit par la peur qu'elle inspire, avant tout contact"},
+      {axis:"protection absolue",text:"un bouclier que rien ne semble pouvoir percer"},
+    ],
+    iconography:"L'égide d'Athéna, couverte de petits serpents sur son pourtour et centrée sur la tête de Gorgone, devient l'un des attributs les plus systématiques de la déesse dans la sculpture grecque classique, notamment sur la statue chryséléphantine de Phidias au Parthénon.",
+    sources:["Homère, Iliade, chant V, v. 738-742 (description de l'égide)"],
+    relatedSymbols:["chèvre","épée","serpent"],
+  },
+  "lance":{icon:"🗡",label:"Lance",category:"Objets mythologiques",desc:"Arme d'Achille et d'Athéna : force qui blesse et, seule entre toutes, peut aussi guérir la blessure qu'elle a causée.",
+    atGlance:"La lance de Pélée, héritée par son fils Achille, possédait un pouvoir unique : seule la rouille raclée de sa pointe pouvait guérir les blessures qu'elle infligeait — comme le découvrit à ses dépens le roi Télèphe.",
+    why:"Le paradoxe de la lance guérisseuse (blesser et soigner par le même instrument) illustre une idée reprise plus tard dans l'expression latine « vulnus vulnerans idem sanat » (« la même blessure qui blesse guérit ») : ce qui cause un mal peut, dans certaines conditions précises, en être aussi le remède — une logique qu'on retrouve ailleurs dans le mythe, comme pour le sang de l'Hydre.",
+    links:["achille","athéna"],lore:[
+    "La lance de Pélée, taillée dans un frêne du mont Pélion et offerte par les dieux ou les Centaures selon les versions, ne pouvait être maniée que par Achille, seul assez fort pour la porter au combat.",
+    "Elle possédait un pouvoir aussi étrange que redouté : la rouille raclée de sa pointe pouvait guérir la blessure qu'elle avait elle-même infligée — un pouvoir que découvrit à ses dépens le roi mysien Télèphe, blessé par Achille lors d'un débarquement grec malencontreux, puis guéri des années plus tard par ce même fer, sur les conseils d'un oracle.",
+    "Athéna, de son côté, porte aussi une lance comme attribut de sa fonction guerrière — une guerre pensée comme stratégie et défense plutôt que comme fureur aveugle, à la différence d'Arès.",
+    "La lance est ainsi devenue un symbole de force qui blesse, mais aussi, dans le cas très particulier de celle d'Achille, de ce qui peut réparer le mal qu'il a causé.",
+  ],
+    deities:[
+      {id:"achille",role:"seul capable de manier la lance de Pélée, à la fois arme et remède",certainty:"attesté"},
+      {id:"athéna",role:"porte la lance comme attribut de la guerre stratégique",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"blessure et remède",text:"un même fer peut causer le mal et le guérir"},
+      {axis:"guerre réfléchie",text:"attribut d'Athéna, stratégie plutôt que fureur"},
+    ],
+    sources:["Homère, Iliade, chant XVI, v. 140-144 (la lance de Pélée)","Apollodore, Épitomé, III, 17-20 (Télèphe)"],
+    relatedSymbols:["épée","sceptre","égide"],
+  },
+  "fil":{icon:"🧵",label:"Fil",category:"Objets mythologiques",desc:"Fil d'Ariane, fil des Moires : ce qui guide hors de l'inextricable, ce qui mesure et tranche la durée d'une vie.",
+    atGlance:"Deux fils, deux pouvoirs : celui qu'Ariane offre à Thésée pour ressortir vivant du labyrinthe, et celui que tissent, mesurent puis coupent les trois Moires, maîtresses absolues de la durée de toute vie mortelle.",
+    why:"Le fil condense une idée centrale de la pensée grecque du destin : une existence — humaine, ou une trajectoire dans un piège — se représente comme un chemin linéaire qu'on peut suivre (Ariane), mesurer et finalement interrompre (les Moires), jamais comme un simple point figé.",
+    links:["ariane","thésée"],lore:[
+    "Le fil le plus célèbre de la mythologie grecque est sans doute celui qu'Ariane, fille de Minos, offrit à Thésée avant qu'il n'entre dans le labyrinthe : en le déroulant à mesure qu'il avançait vers le Minotaure, le héros put ensuite retrouver la sortie en le suivant à rebours (voir la fiche « Labyrinthe »).",
+    "Un tout autre fil, cette fois métaphorique, est tissé par les trois Moires, filles de la Nuit ou de Zeus et Thémis selon les traditions : Clotho file le fil de chaque vie humaine à sa naissance, Lachésis en mesure la longueur, et Atropos, la plus redoutée, le tranche d'un coup de ciseaux au moment fixé — un instant qu'aucun dieu, pas même Zeus, ne peut repousser.",
+    "Les deux fils partagent une même logique : l'un guide à travers un espace inextricable, l'autre mesure un temps qu'on ne maîtrise pas — dans les deux cas, un fil rend visible et suivable ce qui, sans lui, resterait perdu.",
+    "Le fil est ainsi devenu un symbole de guidage salvateur, de mesure du destin et de ce qui relie, mesure ou tranche une trajectoire, spatiale ou temporelle.",
+  ],
+    deities:[
+      {id:"ariane",role:"offre le fil qui permet à Thésée de ressortir du labyrinthe",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"guidage",text:"le fil d'Ariane, retrouver son chemin dans l'inextricable"},
+      {axis:"destin mesuré",text:"les Moires, qui filent, mesurent et tranchent chaque vie"},
+    ],
+    history:"Les Moires (Clotho, Lachésis, Atropos) sont déjà nommées chez Hésiode, mais l'image concrète du fil filé, mesuré puis coupé se précise surtout dans la tragédie classique et la poésie ultérieure.",
+    sources:["Hésiode, Théogonie, v. 217-222 (les Moires)","Plutarque, Vie de Thésée, 19 (le fil d'Ariane)"],
+    relatedSymbols:["labyrinthe","araignée","épée"],
+  },
+  "carrefour":{icon:"✳",label:"Carrefour",category:"Lieux & passages",desc:"Domaine d'Hécate Trioditis : lieu à la fois dangereux et sacré, où l'on déposait des offrandes nocturnes à la déesse.",
+    atGlance:"Le carrefour à trois voies (triodos) est le territoire d'Hécate Trioditis, « des trois chemins » : chaque mois, les Athéniens y déposaient à la nouvelle lune un repas rituel, le deipnon, laissé aux plus démunis ou aux esprits errants.",
+    why:"Un carrefour est, par nature géométrique, un point où plusieurs chemins et donc plusieurs destins possibles se croisent sans qu'aucun ne s'impose — ce qui en fait le lieu logique d'une déesse associée à l'incertitude, à la magie et au choix, plutôt qu'un simple point de passage neutre.",
+    links:["hécate"],lore:[
+    "Le carrefour, en grec ancien triodos (« trois chemins »), est le territoire privilégié d'Hécate, souvent représentée sous une forme triple, un visage tourné vers chacune des voies qui s'y croisent.",
+    "Chaque mois, à la nouvelle lune, les Athéniens déposaient sur ces carrefours un repas rituel appelé le deipnon d'Hécate : des offrandes de nourriture laissées à la déesse pour apaiser les esprits errants et purifier la maison des souillures accumulées — un repas que les plus pauvres de la cité venaient parfois discrètement récupérer.",
+    "Le carrefour est aussi, dans l'imaginaire grec plus large, un lieu d'incertitude : c'est à un carrefour, sur le chemin de sa propre vie, que le jeune Héraclès rencontre la Vertu et le Vice (voir la fiche « Chemin »), et c'est également à un carrefour, sans le savoir, qu'Œdipe croise et tue son propre père Laïos, sans se douter de qui il est.",
+    "Le carrefour est ainsi devenu un symbole de choix incertain, de magie nocturne, de purification rituelle et de rencontre avec ce qu'on ne voit pas venir.",
+  ],
+    deities:[
+      {id:"hécate",role:"déesse triple des carrefours, destinataire du deipnon mensuel",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"choix incertain",text:"plusieurs directions possibles, aucune imposée"},
+      {axis:"purification",text:"le deipnon d'Hécate, offrande mensuelle rituelle"},
+      {axis:"rencontre funeste",text:"Œdipe tuant Laïos sans le savoir, à un carrefour"},
+    ],
+    cult:"Le deipnon d'Hécate, célébré à chaque nouvelle lune sur les carrefours athéniens, est l'un des rites domestiques les mieux attestés de la religion populaire grecque — un geste de purification collective renouvelé chaque mois, documenté par plusieurs sources antiques et par la comédie.",
+    sources:["Aristophane, Ploutos, v. 594-597 (mention du deipnon d'Hécate)","Sophocle, Œdipe roi (le carrefour où Œdipe tue Laïos)"],
+    relatedSymbols:["chemin","clé","torches"],
+  },
+  "source":{icon:"⛲",label:"Source",category:"Lieux & passages",desc:"Castalie à Delphes, Hippocrène sur l'Hélicon : l'eau qui jaillit de la terre, purifie et inspire.",
+    atGlance:"Avant de consulter l'oracle de Delphes, chaque pèlerin devait se purifier dans les eaux de la source Castalie — et sur le mont Hélicon, c'est un coup de sabot de Pégase qui aurait fait jaillir l'Hippocrène, source d'inspiration des Muses.",
+    why:"Une source, contrairement à la rivière qui coule ou à la mer qui s'étend, jaillit d'un point précis et fixe de la terre — cette apparition localisée et mystérieuse de l'eau, sans cours visible en amont, en a naturellement fait un lieu privilégié de rencontre entre le monde souterrain et la surface, propice à la purification et à la révélation.",
+    links:["apollon","narcisse"],lore:[
+    "La source occupe une place à part parmi les lieux consacrés grecs : contrairement à la rivière, dont on peut suivre le cours, elle semble jaillir sans origine visible, comme un don direct de la terre.",
+    "La source Castalie, au pied du mont Parnasse, était le lieu où l'eau purifiait obligatoirement tout pèlerin venu consulter l'oracle de Delphes (voir la fiche « Eau ») — un passage rituel avant d'accéder à la parole d'Apollon.",
+    "Sur le mont Hélicon, la source Hippocrène (« la source du cheval ») serait née d'un coup de sabot de Pégase, le cheval ailé né du sang de Méduse (voir la fiche « Pégase ») — ses eaux, dit-on, inspiraient directement les poètes qui venaient y boire, sous la protection des Muses.",
+    "Une source plus funeste encore est celle où Narcisse, épris de son propre reflet, se pencha jusqu'à en dépérir sans jamais pouvoir s'en détacher (voir la fiche « Narcisse »).",
+    "La source est ainsi devenue un symbole de purification, d'inspiration, de révélation soudaine — et, parfois, de piège pour qui s'y regarde trop longtemps.",
+  ],
+    deities:[
+      {id:"apollon",role:"la source Castalie, purification avant de consulter son oracle",certainty:"attesté"},
+      {id:"narcisse",role:"se penche sur une source jusqu'à en dépérir",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"purification",text:"Castalie, passage obligé avant l'oracle"},
+      {axis:"inspiration",text:"Hippocrène, née d'un sabot de Pégase"},
+      {axis:"piège du reflet",text:"Narcisse, incapable de se détacher de son image"},
+    ],
+    sources:["Pausanias, Description de la Grèce, IX, 31 (l'Hippocrène)","Ovide, Métamorphoses, III, 407-510 (Narcisse — réception latine)"],
+    relatedSymbols:["eau","miroir","pégase"],
+  },
+  "ouroboros":{icon:"♾",label:"Ouroboros",category:"Motifs & concepts",desc:"Le serpent qui se mord la queue : symbole surtout attesté dans l'Égypte antique et l'hermétisme tardif, pas dans le mythe grec classique.",
+    atGlance:"Contrairement à une idée répandue, l'ouroboros n'est pas un symbole central de la mythologie grecque classique : son attestation la plus ancienne vient de l'Égypte pharaonique, et son usage documenté dans le monde grec appartient surtout à l'alchimie et à l'hermétisme de l'Antiquité tardive.",
+    why:"Cette fiche existe précisément pour corriger une confusion fréquente, qui présente l'ouroboros comme « un symbole grec antique du cycle éternel » sans plus de précision. Il faut distinguer : le motif du serpent circulaire existe bien dans le monde méditerranéen ancien, mais son foyer d'origine documenté est égyptien, et sa reprise dans un contexte grec est tardive et minoritaire, liée à l'alchimie gréco-égyptienne d'Alexandrie plutôt qu'à la religion olympienne.",
+    links:[],lore:[
+    "Le mot « ouroboros » est grec (« qui se mord la queue »), mais le motif qu'il désigne — un serpent ou un dragon formant un cercle en avalant sa propre queue — n'appartient pas au fonds mythologique grec classique : aucun des grands poètes ou mythographes (Homère, Hésiode, Apollodore) ne le mentionne.",
+    "Sa plus ancienne attestation connue vient d'Égypte, dans des textes funéraires royaux gravés sur la tombe de Toutânkhamon (XIVe siècle av. J.-C.), où il représente le cycle du soleil traversant le monde souterrain chaque nuit avant de renaître chaque matin.",
+    "Dans le monde grec, l'image n'apparaît de façon documentée qu'à l'époque hellénistique tardive et surtout dans les textes alchimiques et hermétiques d'Alexandrie, notamment la Chrysopée de Cléopâtre (attribuée à une alchimiste légendaire des premiers siècles de notre ère), où il illustre l'unité cyclique de toute matière — « le Tout est Un ».",
+    "L'usage moderne de l'ouroboros comme symbole universel du cycle éternel, de l'infini et de l'auto-régénération doit donc surtout à sa reprise beaucoup plus tardive dans les traditions ésotériques occidentales, plutôt qu'à une place centrale dans la religion grecque antique elle-même.",
+    "L'ouroboros reste néanmoins un motif réel et documenté du monde méditerranéen ancien — à condition de ne pas le faire passer pour ce qu'il n'est pas : un symbole olympien.",
+  ],
+    deities:[],
+    dimensions:[
+      {axis:"cycle (tradition égyptienne)",text:"le soleil qui traverse le monde souterrain et renaît"},
+      {axis:"unité de la matière (alchimie tardive)",text:"« le Tout est Un », Chrysopée de Cléopâtre"},
+    ],
+    history:"Attesté en Égypte dès le XIVe siècle av. J.-C., le motif n'entre dans un contexte grec que par le biais de l'alchimie hellénistique d'Alexandrie (autour des IIe-IIIe siècles apr. J.-C.) — un décalage chronologique de plus de mille ans qui interdit de le présenter comme un symbole de la mythologie grecque classique.",
+    sources:["Texte funéraire de la tombe de Toutânkhamon (Nouvel Empire égyptien)","Corpus alchimique grec, Chrysopée de Cléopâtre (transmission tardive)"],
+    relatedSymbols:["serpent","soleil","monde souterrain"],
+  },
+  "narcisse-fleur":{icon:"🥀",label:"Fleur de narcisse",category:"Plantes",desc:"La fleur née du corps de Narcisse, épris de son propre reflet — mais aussi, chez Homère, la fleur que cueillait Perséphone au moment de son enlèvement.",
+    atGlance:"Deux récits distincts se rencontrent dans cette même fleur : celui, tardif et célèbre, de Narcisse changé en fleur après avoir dépéri devant son reflet — et celui, beaucoup plus ancien, du narcisse que cueillait Perséphone dans un pré quand Hadès surgit pour l'enlever.",
+    why:"Il faut distinguer soigneusement deux traditions d'âge très différent : l'Hymne homérique à Déméter (période archaïque) mentionne le narcisse comme une fleur-piège, spécialement créée par Gaïa à la demande de Zeus pour attirer Perséphone au moment précis de son enlèvement — un récit bien antérieur à celui, plus tardif et surtout connu par sa version latine chez Ovide, du jeune homme Narcisse épris de lui-même.",
+    links:["narcisse","perséphone"],lore:[
+    "L'Hymne homérique à Déméter, l'une des sources les plus anciennes sur l'enlèvement de Perséphone, précise que la jeune fille cueillait justement un narcisse — une fleur d'une beauté et d'un parfum extraordinaires, créée par Gaïa elle-même à la demande de Zeus pour servir de piège — au moment exact où le sol s'ouvrit sous elle et où Hadès surgit pour l'emporter.",
+    "Un tout autre récit, beaucoup plus tardif et surtout transmis par sa version latine, raconte l'histoire du jeune Narcisse, d'une beauté si parfaite qu'il repoussait tous ceux qui l'aimaient — dont la nymphe Écho, réduite à ne plus pouvoir que répéter les derniers mots qu'on lui adressait. Puni pour son indifférence, Narcisse s'éprit de son propre reflet dans une source et, incapable de s'en détacher, dépérit sur place jusqu'à se changer en la fleur qui porte désormais son nom (voir la fiche « Narcisse »).",
+    "Ces deux récits ne racontent pas la même chose : l'un fait du narcisse un piège tendu par les dieux, l'autre une punition de l'orgueil et de l'indifférence amoureuse — deux traditions distinctes, à ne pas confondre l'une avec l'autre malgré le nom commun de la fleur.",
+    "Le narcisse est ainsi devenu un symbole de piège séduisant, d'enlèvement fatal dans sa tradition la plus ancienne — et, dans sa tradition la plus connue aujourd'hui, de vanité, d'amour de soi et d'incapacité à se détacher de sa propre image.",
+  ],
+    deities:[
+      {id:"perséphone",role:"cueille un narcisse au moment précis de son enlèvement",certainty:"attesté"},
+      {id:"narcisse",role:"changé en fleur après avoir dépéri devant son propre reflet",certainty:"attesté"},
+    ],
+    dimensions:[
+      {axis:"piège divin",text:"une fleur créée par Gaïa pour attirer Perséphone"},
+      {axis:"vanité",text:"amour de soi, incapacité à se détacher de son image"},
+    ],
+    history:"Le récit du piège floral de Perséphone (Hymne homérique à Déméter, période archaïque) précède de plusieurs siècles celui de Narcisse épris de lui-même, popularisé surtout par Ovide à l'époque augustéenne — deux traditions d'âges très différents, réunies seulement par le nom de la fleur.",
+    sources:["Hymne homérique à Déméter, v. 5-16 (le narcisse, piège de Perséphone)","Ovide, Métamorphoses, III, 339-510 (Narcisse — réception latine)"],
+    relatedSymbols:["grenade","miroir","source"],
+  },
 };
 const DEITY_NOTES = {
   "dionysos":"Dieu de la vigne, de l'ivresse sacrée et de la métamorphose.",
@@ -3674,6 +5138,91 @@ function renderFigureDetail(id){
   `;
 }
 
+// Niveau de confiance d'une association symbole/divinité — affiché discrètement (une étiquette
+// en italique, pas un badge de couleur criard) plutôt que présenté comme un fait uniforme :
+// distinguer ce qui est explicitement attesté dans l'Antiquité de ce qui relève d'une
+// interprétation, d'une tradition tardive ou d'une lecture moderne est un principe central de
+// cette bibliothèque (voir le round de refonte demandé — "ne présente jamais une interprétation
+// moderne comme une croyance grecque antique").
+const SYMBOL_CERTAINTY_LABELS = {
+  "attesté": "attesté dans les sources antiques",
+  "fortement établi": "fortement établi par plusieurs sources convergentes",
+  "interprétation": "interprétation plausible, non explicitement attestée",
+  "tardif": "surtout issu d'une tradition postérieure",
+  "moderne": "symbolique principalement moderne",
+};
+
+// La liste structurée des divinités/figures associées à un symbole (voir SYMBOL_LIBRARY[id]
+// .deities) : chaque entrée précise la nature du lien et son degré de certitude plutôt que de
+// se contenter d'un nom seul — c'est ce qui distingue "la chouette accompagne Athéna" (attesté,
+// iconographie et monnaies à l'appui) d'une association forcée qui n'existerait que pour
+// remplir une case.
+function symbolDeitiesHTML(deities){
+  if(!deities || !deities.length) return `<p class="empty">Aucune association divine clairement attestée n'a été identifiée pour ce symbole.</p>`;
+  return `
+    <div class="symbol-deities">
+      ${deities.map(d => {
+        const known = d.id in DEITY_NOTES;
+        const name = d.id.charAt(0).toUpperCase() + d.id.slice(1);
+        const certaintyLabel = SYMBOL_CERTAINTY_LABELS[d.certainty] || "";
+        return `
+          <div class="symbol-deity">
+            ${known
+              ? `<button class="chip" data-nav="figureDetail" data-id="${escapeHTML(d.id)}">${escapeHTML(name)}</button>`
+              : `<span class="chip chip-inactive">${escapeHTML(name)}</span>`}
+            <span class="symbol-deity-role">${escapeHTML(d.role)}</span>
+            ${certaintyLabel ? `<span class="symbol-certainty">${escapeHTML(certaintyLabel)}</span>` : ""}
+          </div>
+        `;
+      }).join("")}
+    </div>
+  `;
+}
+
+// Les grands axes symboliques du symbole (vie, mort, guerre, sagesse, fertilité...), affichés
+// en petites étiquettes plutôt qu'en une seule définition fourre-tout — un même symbole peut
+// porter plusieurs significations, parfois contradictoires, selon le contexte.
+function symbolDimensionsHTML(dimensions){
+  if(!dimensions || !dimensions.length) return "";
+  return `
+    <div class="symbol-dimensions">
+      ${dimensions.map(d => `<span class="symbol-dimension"><strong>${escapeHTML(d.axis)}</strong> — ${escapeHTML(d.text)}</span>`).join("")}
+    </div>
+  `;
+}
+
+// Renvoie vers d'autres fiches symboliques thématiquement liées (voir SYMBOL_LIBRARY[id]
+// .relatedSymbols) — c'est ce qui transforme une collection de fiches isolées en un vrai réseau
+// qu'on peut parcourir de proche en proche (ex. Laurier → Couronne → Lyre, tous liés à Apollon
+// sous des angles différents).
+function symbolRelatedHTML(ids){
+  if(!ids || !ids.length) return "";
+  return `
+    <div class="related">
+      <h3>Symboles associés</h3>
+      <div class="chips">
+        ${ids.filter(sid => sid in SYMBOL_LIBRARY).map(sid => {
+          const rs = SYMBOL_LIBRARY[sid];
+          return `<button class="chip chip-symbol" data-nav="symbolDetail" data-id="${escapeHTML(sid)}">${rs.icon || "✦"} ${escapeHTML(rs.label)}</button>`;
+        }).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function symbolSourcesHTML(sources){
+  if(!sources || !sources.length) return `<p class="empty">Pas de source ancienne précise identifiée pour ce symbole — voir la mythologie ci-dessus pour le contexte général.</p>`;
+  return `<ul class="symbol-sources">${sources.map(src => `<li>${escapeHTML(src)}</li>`).join("")}</ul>`;
+}
+
+// Fiche symbolique enrichie : synthèse immédiate, explication du "pourquoi", mythologie (le
+// récit déjà présent, riche, sourcé et prudent sur les niveaux de certitude), divinités
+// associées avec la nature exacte du lien, dimensions symboliques par grands axes, puis trois
+// sections plus profondes repliées par défaut (iconographie, culte, histoire et évolution) pour
+// que la fiche reste agréable à lire malgré sa profondeur, et enfin les sources et le réseau de
+// fiches associées. Toutes les fiches n'ont pas de section culte ou d'évolution historique
+// documentée — la section correspondante n'apparaît alors simplement pas, plutôt que d'être
+// remplie pour la forme.
 function renderSymbolDetail(id){
   const s = SYMBOL_LIBRARY[id];
   const related = (s.links || []).map(dId => [dId, dId]).filter(([dId]) => dId in DEITY_NOTES);
@@ -3681,12 +5230,60 @@ function renderSymbolDetail(id){
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
     </div>
-    <article class="detail">
+    <article class="detail symbol-detail">
       <div class="symbol-icon-big">${s.icon || "✦"}</div>
       <h2>${escapeHTML(s.label)}</h2>
       <p class="note">${escapeHTML(s.desc)}</p>
-      ${(s.lore || []).length ? `<h3>Aux origines du symbole</h3>${s.lore.map(p => `<p class="lore-text">${linkifyLore(p)}</p>`).join("")}` : ""}
+
+      ${s.atGlance ? `
+        <section class="symbol-glance">
+          <h4>En un coup d'œil</h4>
+          <p>${linkifyLore(s.atGlance)}</p>
+        </section>
+      ` : ""}
+
+      ${s.why ? `
+        <section class="symbol-why">
+          <h3>Pourquoi ?</h3>
+          <p class="lore-text">${linkifyLore(s.why)}</p>
+        </section>
+      ` : ""}
+
+      ${(s.lore || []).length ? `<h3>Dans la mythologie</h3>${s.lore.map(p => `<p class="lore-text">${linkifyLore(p)}</p>`).join("")}` : ""}
+
+      <h3>Divinités associées</h3>
+      ${symbolDeitiesHTML(s.deities)}
+
+      ${symbolDimensionsHTML(s.dimensions)}
+
+      ${s.iconography ? `
+        <details class="symbol-more">
+          <summary>Iconographie</summary>
+          <p class="lore-text">${linkifyLore(s.iconography)}</p>
+        </details>
+      ` : ""}
+
+      ${s.cult ? `
+        <details class="symbol-more">
+          <summary>Culte et religion</summary>
+          <p class="lore-text">${linkifyLore(s.cult)}</p>
+        </details>
+      ` : ""}
+
+      ${s.history ? `
+        <details class="symbol-more">
+          <summary>Histoire et évolution</summary>
+          <p class="lore-text">${linkifyLore(s.history)}</p>
+        </details>
+      ` : ""}
+
+      <details class="symbol-more">
+        <summary>Sources</summary>
+        ${symbolSourcesHTML(s.sources)}
+      </details>
+
       ${relatedChipsHTML(related, "deity")}
+      ${symbolRelatedHTML(s.relatedSymbols)}
     </article>
   `;
 }
