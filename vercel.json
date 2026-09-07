@@ -1,8 +1,8 @@
 {
   "functions": {
-    "api/verify-purchase.js": {},
-    "api/entitlement.js": {},
-    "api/apple-notifications.js": {},
-    "api/content.js": {}
+    "api/verify-purchase.js": { "maxDuration": 10 },
+    "api/entitlement.js": { "maxDuration": 10 },
+    "api/apple-notifications.js": { "maxDuration": 10 },
+    "api/content.js": { "maxDuration": 10 }
   }
 }
