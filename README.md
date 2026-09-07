@@ -61,6 +61,32 @@ correct sur tous les écrans, justification effective en CSS, plus les garanties
 place (0 citation résiduelle sur les 235 figures + 90 symboles, tous les fichiers d'images
 référencés existent). Vérifié aussi visuellement par captures d'écran.
 
+## Retouches supplémentaires
+
+- **Recherche insensible aux accents** : `normalizeSearch()` (décomposition Unicode NFD +
+  retrait des marques diacritiques + minuscules) — chercher « Acteon » trouve désormais
+  « Actéon », que la requête ou le contenu porte l'accent ou non, sur les deux écrans de
+  recherche (figures et symboles).
+- **Purge complète des références au Tarot** : au-delà des 80 paragraphes qui commençaient
+  littéralement par « Dans le Tarot » (une convention systématique héritée de
+  Tarot-mythologie, un paragraphe de ce type par figure ayant sa propre carte), une
+  recherche plus large a débusqué 9 mentions isolées, disséminées au milieu d'autres
+  phrases plutôt qu'en tête de paragraphe : la mer associée « dans le Tarot » à Ulysse, la
+  lyre à Orphée, l'arc à Éros (deux fois, dont une dans le `desc` du symbole lui-même), le
+  temple de Delphes (« pour ce tarot »), les symboles bâton/coupe/épée/denier — les quatre
+  enseignes du Tarot Marseille — dont trois phrases expliquaient leur sens spécifiquement
+  « dans le Tarot », et un paragraphe entier chez Léto bâti autour d'un pont vers « la
+  carte VII — Le Chariot ». Chacune corrigée au cas par cas : simple retrait de la
+  formule quand le reste de la phrase tient seul (ex. « associée à Poséidon, à Nérée et à
+  Ulysse » sans la mention du Tarot), ou suppression complète du paragraphe quand son seul
+  objet était la correspondance avec une carte (Léto — son contenu réel, déjà raconté par
+  ailleurs dans sa fiche, n'en souffre pas).
+- Testé par un script dédié (14 vérifications : recherche accents-insensible sur figures et
+  symboles, absence totale du mot « tarot » après l'en-tête du fichier, aucune fiche vidée
+  par la suppression, intégrité de la fiche de Léto) + la suite précédente (27
+  vérifications) : tout au vert.
+- `service-worker.js` : `pantheon-v2` → `pantheon-v3`.
+
 ## Ce qui n'est PAS encore construit
 
 - **Généalogie des dieux** : la fonctionnalité phare annoncée pour Panthéon, pas encore

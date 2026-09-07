@@ -67,7 +67,7 @@ const SYMBOL_LIBRARY = {
     "La mer réunit ainsi deux visages : la puissance instable de Poséidon et la sagesse discrète de Nérée — la même immensité peut engloutir ou révéler.",
     "Elle abrite aussi des dangers d'une tout autre nature : les Sirènes, dont le chant était si envoûtant qu'aucun marin ne pouvait y résister sans se jeter par-dessus bord, guettaient les navires près de leur île. Ulysse n'y échappa qu'en se faisant attacher au mât pendant que ses compagnons, les oreilles bouchées de cire, ramaient sans rien entendre.",
     "Elle est devenue un symbole d'inconscient, d'immensité, de départ vers un ailleurs incertain et de puissance qu'on ne maîtrise jamais complètement.",
-    "La mer est particulièrement associée à Poséidon et à Nérée — et, dans le Tarot, à Ulysse.",
+    "La mer est particulièrement associée à Poséidon, à Nérée et à Ulysse.",
   ]},
   "rivière":{icon:"🏞",label:"Rivière",category:"Lieux & passages",desc:"Passage, changement continu, ce qui circule sans jamais s'arrêter.",links:[],lore:[
     "Les fleuves occupent une place à part dans la mythologie grecque : ce sont des divinités à part entière, et certains d'entre eux marquent la frontière entre le monde des vivants et celui des morts.",
@@ -78,7 +78,7 @@ const SYMBOL_LIBRARY = {
   ]},
   "temple":{icon:"🏛",label:"Temple",category:"Lieux & passages",desc:"Connaissance sacrée, initiation, seuil entre le profane et le sacré.",links:[],lore:[
     "Le temple est le lieu où le sacré se rend accessible aux mortels, sans jamais leur appartenir tout à fait.",
-    "Le plus célèbre d'entre eux, pour ce tarot, est sans doute le temple d'Apollon à Delphes, où la Pythie, assise sur son trépied, rendait des oracles réputés infaillibles — et où était gravée la maxime « Connais-toi toi-même ».",
+    "Le plus célèbre d'entre eux est sans doute le temple d'Apollon à Delphes, où la Pythie, assise sur son trépied, rendait des oracles réputés infaillibles — et où était gravée la maxime « Connais-toi toi-même ».",
     "Franchir le seuil d'un temple, c'était donc quitter le monde profane pour entrer dans un espace où la parole divine pouvait se faire entendre, à condition de savoir l'écouter.",
     "Le temple d'Artémis à Éphèse comptait, lui, parmi les Sept Merveilles du monde antique : reconstruit plusieurs fois après avoir été détruit, notamment par un incendie volontaire resté tristement célèbre, il attirait des pèlerins de toute l'Asie Mineure — preuve qu'un temple, une fois consacré, peut renaître de ses propres cendres aussi souvent qu'il le faut.",
     "Le temple est devenu un symbole de savoir sacré, d'initiation et de seuil entre le monde profane et ce qui le dépasse.",
@@ -149,15 +149,15 @@ const SYMBOL_LIBRARY = {
     "Entre les mains d'Apollon, la lyre devient l'instrument d'une vérité qui persuade par l'harmonie plutôt que par la force — à l'opposé de l'arc, autre attribut du dieu, qui frappe à distance.",
     "C'est aussi une lyre, offerte par Apollon lui-même, qu'Orphée emporta jusqu'aux Enfers pour tenter de ramener son épouse Eurydice parmi les vivants : son chant, dit-on, faisait taire jusqu'aux tourments des damnés et adoucissait le cœur inflexible d'Hadès — la preuve que cet instrument peut atteindre ce que ni la force ni la prière ordinaire ne peuvent obtenir.",
     "La lyre est devenue un symbole d'harmonie, d'inspiration et de vérité transmise par la beauté plutôt qu'imposée.",
-    "La lyre est particulièrement associée à Apollon — et, dans le Tarot, à Orphée.",
+    "La lyre est particulièrement associée à Apollon et à Orphée.",
   ]},
-  "arc":{icon:"🏹",label:"Arc",category:"Mythologie",desc:"Attribut d'Artémis la chasseresse — et, dans le Tarot, d'Éros : intention, concentration, désir qui vise juste sans toujours consulter la raison.",links:["artémis","éros"],lore:[
+  "arc":{icon:"🏹",label:"Arc",category:"Mythologie",desc:"Attribut d'Artémis la chasseresse et d'Éros : intention, concentration, désir qui vise juste sans toujours consulter la raison.",links:["artémis","éros"],lore:[
     "L'arc est l'instrument du chasseur : il permet d'atteindre sa cible à distance.",
     "Il est particulièrement associé à Artémis, déesse de la chasse et des espaces sauvages. Dans l'Hymne homérique qui lui est consacré, elle est explicitement décrite comme une chasseuse qui porte son arc et ses flèches.",
     "Son arc représente donc une puissance maîtrisée : la chasse n'est pas un geste désordonné, mais une concentration de l'attention sur une cible.",
     "L'arc d'Ulysse, dans l'Odyssée, illustre à lui seul cette maîtrise : à son retour, aucun des prétendants venus envahir son palais ne parvient même à le bander, tant sa tension exige une force et une habileté hors du commun — seul Ulysse, révélant enfin sa véritable identité, réussit à la fois à le tendre et à tirer une flèche à travers douze anneaux alignés, avant de se retourner contre les prétendants eux-mêmes.",
     "L'arc est devenu un symbole de volonté, d'intention, de concentration, de maîtrise de soi et de désir dirigé vers un objectif.",
-    "L'arc est particulièrement associé à Artémis, mais également à Apollon — et, dans le Tarot, à Éros : trois façons différentes de viser juste.",
+    "L'arc est particulièrement associé à Artémis, mais également à Apollon et à Éros : trois façons différentes de viser juste.",
   ]},
   "torches":{icon:"🔥",label:"Torches",category:"Mythologie",desc:"Attribut d'Hécate : illumination, guidance dans l'obscurité sans jamais imposer le chemin.",links:["hécate","hyménée"],lore:[
     "Lorsque Perséphone disparaît, Déméter parcourt le monde à sa recherche pendant neuf jours. Hécate, qui a entendu les cris de Perséphone, rejoint ensuite Déméter avec des torches enflammées pour l'aider à découvrir ce qui s'est passé.",
@@ -232,7 +232,7 @@ const SYMBOL_LIBRARY = {
     "Les ailes sont particulièrement associées à Hermès et à Éros.",
   ]},
 
-  // Objets classiques du Tarot
+  // Objets classiques : bâton, coupe, épée, denier
   "bâton":{icon:"🪄",label:"Bâton",category:"Objets",desc:"Enseigne liée au feu : volonté, énergie, croissance par l'action.",links:[],lore:[
     "Le bâton est avant tout un objet de mouvement et d'action. Dans les représentations anciennes, il peut être le bâton du voyageur, du berger, du pèlerin ou de celui qui avance à travers le monde.",
     "Il est l'emblème de l'énergie qui pousse à agir.",
@@ -242,7 +242,7 @@ const SYMBOL_LIBRARY = {
   ]},
   "coupe":{icon:"🍷",label:"Coupe",category:"Objets",desc:"Enseigne liée à l'eau : émotion, réceptivité, relation qui se reçoit et se partage.",links:[],lore:[
     "La coupe est un récipient : elle reçoit, contient et conserve.",
-    "C'est précisément ce qui explique sa symbolique dans le Tarot. Là où le bâton agit vers l'extérieur, la coupe accueille ce qui vient de l'extérieur. Elle devient donc l'image de l'univers intérieur : émotions, sentiments, intuition, imagination et relations.",
+    "Là où le bâton agit vers l'extérieur, la coupe accueille ce qui vient de l'extérieur. Elle devient donc l'image de l'univers intérieur : émotions, sentiments, intuition, imagination et relations.",
     "La coupe évoque également les récipients sacrés utilisés dans les cultes antiques pour contenir le vin, l'eau, le lait ou les offrandes faites aux dieux.",
     "Une coupe extraordinaire intervient dans le dixième travail d'Héraclès : pour traverser l'océan et atteindre le troupeau du géant Géryon, il emprunte la coupe d'or dans laquelle Hélios traverse chaque nuit le ciel d'ouest en est pour retrouver son point de départ — un récipient assez vaste, pour une fois, non pour contenir un breuvage mais pour porter un dieu, et cette fois un héros, d'un bout du monde à l'autre.",
     "La coupe est un symbole de l'émotion, de la réceptivité, de l'intuition, de l'amour, de la relation, de l'offrande et de ce que l'on porte intérieurement.",
@@ -257,9 +257,8 @@ const SYMBOL_LIBRARY = {
     "L'épée est ainsi devenue un symbole de pensée, de vérité, de discernement, de décision, de justice, de conflit, de rupture et de pouvoir : l'esprit qui tranche et révèle ce qui est vrai.",
   ]},
   "denier":{icon:"🪙",label:"Denier",category:"Objets",desc:"Enseigne liée à la terre : matière, travail, ressource, valeur concrète.",links:[],lore:[
-    "Le denier est une pièce de monnaie. C'est le seul des quatre emblèmes du Tarot qui représente directement quelque chose de matériel et de tangible.",
-    "La monnaie représente ce qui possède une valeur mesurable : richesse, ressources, travail, échange et possession.",
-    "Mais dans le Tarot, le denier ne se limite pas à l'argent. Il représente plus largement le monde concret : le corps, la matière, la maison, le travail, les ressources et tout ce que l'on construit dans le monde réel.",
+    "Le denier est une pièce de monnaie, associée directement à quelque chose de matériel et de tangible.",
+    "La monnaie représente ce qui possède une valeur mesurable : richesse, ressources, travail, échange et possession — mais le denier ne se limite pas à l'argent. Il représente plus largement le monde concret : le corps, la matière, la maison, le travail, les ressources et tout ce que l'on construit dans le monde réel.",
     "Une seule pièce, minuscule, franchit pourtant la frontière entre les deux mondes : l'obole que l'on plaçait dans la bouche du défunt pour payer Charon, le passeur qui faisait traverser la rivière du Styx aux âmes des morts (voir la fiche « Rivière ») — sans cette pièce, disait-on, l'âme restait errante sur la rive, incapable de payer son dernier voyage.",
     "Sa forme ronde peut également évoquer le cycle, la terre, le soleil et ce qui se matérialise.",
     "Le denier est ainsi devenu un symbole de matière, de richesse, de travail, de ressources, de sécurité, de prospérité, de corps et d'ancrage : ce qui prend forme dans la matière.",
@@ -330,14 +329,12 @@ const SYMBOL_LIBRARY = {
     "Cette symbolique convient particulièrement aux divinités et aux rites liés aux mystères : le sacré n'est pas entièrement accessible au regard profane.",
     "Le voile peut également représenter le passage d'un état à un autre, notamment dans le mariage, où la jeune femme change de statut.",
     "Ce même voile trouvait une place précise dans le rituel du mariage grec : lors de la cérémonie appelée anakalyptêria, littéralement le « dévoilement », l'épouse retirait son voile devant son époux pour la première fois — un geste qui rendait le mariage visible et effectif aux yeux de tous.",
-    "Dans le Tarot, ce voile est celui de la Papesse, associée à Métis : un savoir qui ne s'expose pas mais agit depuis l'intérieur, retenu derrière un voile plutôt qu'imposé au regard (voir la fiche « Métis »).",
     "Il est ainsi devenu un symbole de secret, de connaissance cachée, de mystère, de frontière, de transformation et de passage — ce qui existe derrière le monde visible mais qui n'est pas encore révélé.",
   ]},
   "chaîne":{icon:"⛓",label:"Chaîne",category:"Objets mythologiques",desc:"Attachement, dépendance, lien — la question est toujours de savoir s'il enferme ou s'il peut être dénoué.",links:["pan","prométhée"],lore:[
     "La chaîne la plus célèbre de la mythologie grecque est celle qui retint Prométhée sur un rocher du Caucase, en punition d'avoir donné le feu aux hommes contre la volonté de Zeus.",
     "Chaque jour, un aigle venait dévorer son foie, qui repoussait chaque nuit, prolongeant son supplice sans fin — jusqu'à ce que Chiron accepte de mourir à sa place et qu'Héraclès mette fin au calvaire de Prométhée (voir la fiche « Prométhée »).",
     "La chaîne de Prométhée dit quelque chose de plus large que la simple punition : elle montre qu'un don fait sans autorisation a toujours un prix, et que l'attachement qui en résulte peut aussi bien enfermer que devenir, avec le temps, la preuve de ce qu'on a osé offrir.",
-    "Dans le Tarot, la chaîne est aussi l'attribut du Diable, associé à Pan : elle n'y figure plus une punition méritée mais un attachement à l'instinct, moins imposé de l'extérieur qu'accepté de l'intérieur (voir la fiche « Pan »).",
     "Une autre chaîne, tout aussi célèbre, retint Andromède à un rocher battu par les flots, livrée en sacrifice à un monstre marin pour expier l'orgueil de sa mère Cassiopée — jusqu'à ce que Persée, de retour avec la tête de Méduse, la délivre et l'épouse — tous deux changés plus tard en étoiles (voir la fiche « Étoile »). Contrairement à celle de Prométhée, cette chaîne-là ne punit aucune faute : elle ne fait que retenir une victime innocente, en attendant qu'un sauveur se présente.",
     "Elle est devenue un symbole d'attachement, de dépendance et de lien — la question étant toujours de savoir s'il enferme ou s'il peut être dénoué.",
     "La chaîne est particulièrement associée à Prométhée et à Pan — deux attachements de nature très différente.",
@@ -1004,45 +1001,38 @@ const DEITY_LORE = {
     "Une réconciliation passagère avec Aphrodite, après qu'elle se fut un temps éprise d'Adonis, lui donna aussi un fils, Priape — un enfant que la jalousie d'Héra frappa dès sa naissance d'une laideur difforme (voir les fiches « Aphrodite » et « Priape »).",
     "Dieu de la métamorphose autant que de l'ivresse, il incarne ce qui échappe à la raison et à l'ordre établi.",
     "Bacchos, son autre nom presque interchangeable, est resté le plus connu de tous ; Lysios, « le Libérateur », l'honorait comme celui qui délivre des soucis par le vin — le poète latin Virgile lui donnera plutôt le nom de Lyaios pour ce même rôle. Eleuthereus, du nom de sa ville d'origine supposée, Eleuthères, le rattachait à la grande fête des Dionysies à Athènes. La tradition orphique, enfin, distingue parfois un Dionysos plus ancien et mystique, Zagreus, fils de Zeus et de Perséphone (voir la fiche « Perséphone »), déchiré encore enfant par les Titans avant de renaître, dit-on, en la personne du Dionysos que tout le monde connaît — une figure que les cultes à mystères associaient volontiers à lui, sans que les récits s'accordent toujours sur les détails exacts de cette double naissance.",
-    "Dans le Tarot, Dionysos est le Mat, l'arcane sans numéro qui échappe à toute séquence : comme lui, il ne suit aucune route tracée, parcourant le monde en marge de l'ordre olympien, son thiase pour seul cortège. Sa légende porte une même leçon à double tranchant : la liberté totale libère ceux qui l'acceptent — l'épouse qu'il immortalisa sur l'île de Naxos, sa propre mère déifiée — et détruit ceux qui la refusent, comme Penthée déchiré pour avoir nié le dieu. Le Mat n'est ainsi jamais un aboutissement, seulement un risque assumé.",
   ],
   "hermès": [
     "Fils de Zeus et de Maïa, l'aînée des Pléiades (voir la fiche « Pléiades »), Hermès naquit dans une grotte du mont Cyllène (voir la fiche « Grotte ») et manifesta son astuce dès le jour de sa naissance : il déroba le troupeau de son frère Apollon, puis inventa la lyre à partir d'une carapace de tortue et la lui offrit en échange de son pardon (voir la fiche « Lyre »).",
     "Messager officiel de Zeus et guide des âmes des morts vers l'autre monde, Hermès franchit sans entrave les frontières entre l'Olympe, la terre et les Enfers — un privilège qu'on lui prête souvent, à tort, comme exclusif : Iris relie elle aussi le ciel et la terre, et va jusqu'aux portes du Styx lorsqu'il faut y puiser l'eau du serment sacré (voir la fiche « Iris »), tandis qu'Hécate, de par sa nature triple, circule tout aussi librement entre les trois royaumes (voir la fiche « Hécate »). Ce qui distingue Hermès n'est donc pas l'exclusivité du passage, mais la diversité des rôles qu'il y joue : messager, psychopompe, patron des voyageurs, des marchands et des voleurs.",
     "Sa vie amoureuse est aussi mouvementée que ses voyages. D'Aphrodite (voir la fiche « Aphrodite »), il eut un fils à la double nature, Hermaphrodite, fusionné plus tard avec la nymphe Salmacis en un seul être aux deux sexes (voir la fiche « Hermaphrodite »). De la nymphe Dryope, il eut Pan (voir la fiche « Pan »), né avec des cornes et des sabots de bouc, que sa propre mère fuit à sa naissance. D'une troisième union, avec Chioné, naquit Autolycos, voleur si habile qu'il pouvait changer à volonté la forme et la couleur de tout ce qu'il dérobait — un don hérité directement de son père, et qui fera de lui, plus tard, le grand-père maternel d'Ulysse (voir la fiche « Ulysse »). Une quatrième liaison, avec Hersé, fille de Cécrops, l'entraîna un jour jusqu'au seuil de sa maison même, où sa sœur Aglauros tenta de lui barrer le passage (voir la fiche « Hersé »).",
     "On l'honorait aussi sous des noms plus spécifiques : Agoraios, sur l'agora même où se négociait tout commerce ; et surtout Kriophoros, « le Porteur de bélier », à Tanagra — une légende locale raconte qu'Hermès, pour écarter une épidémie de la ville, en fit le tour portant un bélier sur ses épaules ; en souvenir de ce geste, le plus bel éphèbe de la cité refaisait chaque année le même tour, un agneau sur le dos.",
-    "Dans le Tarot, Hermès est le Bateleur (I), la carte du potentiel et de l'habileté à mettre en mouvement ce qui existe déjà : comme lui, le Bateleur ne crée rien à partir de rien — il détourne un troupeau en pardon, une carapace en instrument, un désir en descendance rusée, et fait de chaque passage une occasion plutôt qu'un simple trajet.",
   ],
   "métis": [
     "Titanide de la ruse, Métis fut la première épouse de Zeus. Une prophétie annonçait qu'elle enfanterait un fils plus puissant que son père : Zeus, pour l'empêcher, l'avala tout entière alors qu'elle était enceinte.",
     "Loin de disparaître, Métis continua d'agir depuis l'intérieur de Zeus, forgeant en secret l'armure de leur fille : le moment venu, Athéna jaillit tout armée du crâne de son père, portant en elle la ruse de sa mère autant que la puissance de Zeus.",
-    "Dans le Tarot, Métis est la Papesse (II), assise entre deux colonnes avec un livre fermé sur les genoux : un savoir qui ne se donne jamais à voir directement. Avalée par Zeus pour l'empêcher d'agir, elle continue pourtant, invisible, à forger depuis l'intérieur même de son vainqueur l'armure de leur fille — la meilleure preuve qu'un savoir réduit au silence n'en reste pas moins à l'œuvre.",
   ],
   "héra": [
     "Sœur et épouse de Zeus, Héra règne sur l'Olympe comme protectrice du mariage et garante de l'ordre légitime — un rôle qu'elle défend avec une fermeté que la mythologie associe souvent à la jalousie, tant les infidélités de son époux sont nombreuses.",
     "Elle ne se contente jamais d'observer : elle pousse Sémélé à sa perte par ruse (voir la fiche « Sémélé »), poursuit Héraclès de sa colère toute sa vie durant simplement parce qu'il est le fruit d'une liaison de Zeus (voir la fiche « Héraclès »), et impose à Léto l'interdiction de mettre au monde ses enfants sur la moindre terre ferme, retardant ainsi la naissance d'Apollon et d'Artémis (voir la fiche « Léto »).",
     "Reine avant d'être épouse, elle incarne la légitimité et l'autorité plus que la douceur.",
     "À Argos, son principal foyer de culte, on l'honorait comme Héra Argienne ; mais c'est à Stymphale qu'elle recevait l'hommage le plus original, avec trois sanctuaires distincts dédiés à Héra Pais (l'enfant), Héra Teleia (l'épouse accomplie) et Héra Khéra (la veuve), comme les trois âges d'un même mariage. Une légende argienne ajoutait qu'elle retrouvait chaque année sa virginité en se baignant dans la source de Canathos à Nauplie — un secret réservé à ses mystères, et un renouveau que sa propre réputation de jalousie perpétuelle semble pourtant démentir sans cesse.",
-    "Dans le Tarot, Héra est l'Impératrice (III), sceptre et écu en main : une souveraineté qui ne se conquiert pas, mais qui s'assume à travers son statut. Reine avant d'être épouse, elle rappelle que l'autorité la plus stable n'est jamais celle qui s'impose par la force, mais celle qui s'exerce depuis une légitimité incontestée — quitte à devoir sans cesse la défendre contre les infidélités qui la menacent.",
   ],
   "zeus": [
     "Plus jeune fils de Cronos et de Rhéa, Zeus échappa au sort de ses frères et sœurs — avalés à la naissance par un père craignant d'être détrôné — grâce à sa mère, qui le cacha dans une grotte du mont Ida en Crète et fit avaler à Cronos une pierre emmaillotée à sa place.",
     "Devenu adulte, il libéra ses frères et sœurs et mena la guerre contre les Titans, dont il sortit vainqueur pour établir un nouvel ordre cosmique sur l'Olympe, dont il devint le souverain incontesté, maître de la foudre.",
     "Garant de l'ordre du monde, il reste pourtant l'un des dieux aux liaisons et aux colères les plus nombreuses de toute la mythologie.",
     "On l'invoquait aussi sous des noms précis, selon la part de sa protection sollicitée : Xénios veillait sur les hôtes et les étrangers, vengeant lui-même toute entorse aux devoirs de l'hospitalité ; Herkeios protégeait l'autel dressé dans la cour de chaque maison, marque d'une famille reconnue comme telle ; et Horkios, le plus redouté, gardait la sincérité des serments — sa statue à Olympie, brandissant la foudre, était si terrifiante qu'aucun athlète ni juge ne s'y serait parjuré de sang-froid. Une facette plus modeste, Zeus Ctésios, veillait quant à elle sur les provisions de chaque foyer (voir la fiche « Ctésios »).",
-    "Dans le Tarot, Zeus est l'Empereur (IV), assis de profil dans une posture qui ne se remet jamais en question : une autorité qui n'a plus à se prouver. Vainqueur de son propre père puis des Titans, il n'impose pas son pouvoir par caprice mais parce que le monde, sans un ordre assumé quelque part, retomberait dans le chaos qu'il a lui-même vaincu — la leçon d'un empereur qui gouverne moins pour lui-même que pour que tout le reste tienne debout.",
   ],
   "chiron": [
     "Contrairement aux autres centaures, réputés violents et incontrôlés, Chiron était réputé pour sa sagesse et sa maîtrise de la médecine, de la musique et du tir à l'arc — il forma parmi ses élèves Achille, Jason et Asclépios.",
     "Immortel, il fut pourtant blessé accidentellement par une flèche empoisonnée d'Héraclès et, ne pouvant ni guérir ni mourir, souffrit sans fin jusqu'à ce qu'il accepte d'échanger son immortalité contre la libération de Prométhée enchaîné (voir la fiche « Prométhée »).",
     "Sa blessure incurable en fait le symbole du guérisseur qui ne peut se soigner lui-même — celui qui transmet un savoir né de sa propre douleur.",
-    "Dans le Tarot, Chiron est le Pape (V), qui bénit deux disciples agenouillés : la transmission d'un savoir d'un être à un autre. Immortel mais rongé sans fin par une blessure qu'il ne pouvait guérir, il enseigna pourtant jusqu'au bout à Achille, Jason et Asclépios, avant de racheter Prométhée au prix de sa propre immortalité — la leçon du Pape n'est jamais de transmettre un savoir parfait, mais d'oser transmettre malgré une blessure qu'on ne referme jamais soi-même.",
   ],
   "éros": [
     "Aux origines les plus anciennes du mythe, Éros est une force primordiale née dès l'origine du monde, avant même les dieux de l'Olympe — une puissance d'attraction qui met en mouvement toute chose.",
     "Les récits plus tardifs en font le fils d'Aphrodite, armé d'un arc dont les flèches font naître l'amour chez quiconque elles atteignent, y compris les dieux eux-mêmes. Son propre amour pour la mortelle Psyché (voir la fiche « Psyché ») ne fut possible qu'au prix d'épreuves redoutables imposées par Aphrodite, jalouse de sa belle-fille.",
     "Un jour où Apollon venait de terrasser le serpent Python, il railla le jeune Éros, jugeant son arc d'enfant indigne d'un dieu de la guerre. Vexé, Éros lui prouva le contraire : il lui décocha une flèche d'or, qui embrase le désir chez qui elle touche, et visa la nymphe Daphné d'une flèche de plomb, qui provoque au contraire un rejet total. Apollon, foudroyé de désir, se lança à la poursuite de Daphné, qui le fuyait avec la même intensité — jusqu'à ce qu'elle obtienne d'être changée en laurier plutôt que rattrapée (voir la fiche « Laurier »). Ce concours improvisé, où le plus jeune des deux prouva qu'il visait plus juste que le plus grand, resta la meilleure démonstration qu'aucune flèche, fût-elle celle d'un dieu de la lumière, ne vaut celle d'Éros.",
-    "Dans le Tarot, Éros est l'Amoureux (VI), la carte du choix qui échappe en partie à la raison : ses flèches, dorées ou de plomb, rappellent que le désir n'attend jamais la permission de la volonté — Apollon lui-même, dieu de la mesure et de la clarté, en fit les frais face à un enfant armé d'un simple arc.",
   ],
   "apollon": [
     "Fils de Zeus et de Léto (voir la fiche « Léto »), Apollon naquit avec sa sœur jumelle Artémis sur l'île flottante de Délos, seul lieu qui accepta de les accueillir après qu'Héra eut interdit à toute terre ferme de recevoir l'accouchement de sa rivale.",
@@ -1053,24 +1043,20 @@ const DEITY_LORE = {
     "Éprise de la princesse thessalienne Coronis (voir la fiche « Coronis »), il apprit d'un corbeau — blanc jusqu'alors — qu'elle lui préférait un mortel alors même qu'elle portait déjà son enfant : furieux, il la fit tuer par Artémis, mais arracha l'enfant du bûcher funéraire in extremis pour le confier à Chiron (voir la fiche « Chiron »). Cet enfant, Asclépios (voir la fiche « Asclépios »), devint un guérisseur si habile qu'il ressuscitait les morts, jusqu'à ce que Zeus, inquiet de le voir bouleverser l'ordre naturel, le foudroie. Fou de chagrin, Apollon se vengea sur les Cyclopes qui avaient forgé cette foudre — un crime qui lui valut d'être condamné à servir un an durant comme simple berger mortel auprès du roi Admète (voir la fiche « Admète »), corvée qu'il transforma en amitié si sincère qu'il obtint plus tard des Parques la grâce de prolonger sa vie. Quant au corbeau messager, resté blanc jusque-là, Apollon le noircit pour toujours en punition de sa nouvelle funeste.",
     "Il aima aussi le jeune prince spartiate Hyacinthe (voir la fiche « Hyacinthe »), avec qui il partageait le goût du disque — jusqu'à ce qu'un disque qu'il lança dévie de sa trajectoire, détourné par le vent jaloux Zéphyr (voir la fiche « Zéphyr »), et frappe mortellement le jeune homme en pleine tempe. Incapable de le sauver, Apollon changea son sang versé en une fleur nouvelle, la jacinthe, sur les pétales de laquelle on croyait pouvoir lire les lettres grecques de son deuil.",
     "Son dernier grand amour resta, lui, sans aucune réciprocité : à la princesse troyenne Cassandre (voir la fiche « Cassandre »), fille de Priam (voir la fiche « Priam »), il offrit le don de prophétie en échange de ses faveurs — mais elle refusa de tenir sa promesse une fois le don reçu. Ne pouvant le lui reprendre, Apollon la frappa d'une malédiction plus cruelle encore : ses prédictions, toujours exactes, ne seraient plus jamais crues par personne — pas même son avertissement, resté sans écho, contre le cheval de bois conçu par Ulysse (voir la fiche « Ulysse »), qui allait livrer Troie aux Grecs.",
-    "Dans le Tarot, Apollon est le Chariot (VII), qui avance en maîtrisant deux forces attelées ensemble plutôt que par la seule force brute : chaque hiver, dit-on, il quitte Delphes sur un char tiré par des cygnes pour rejoindre le pays des Hyperboréens, aux confins nordiques du monde, avant de revenir au printemps reprendre son sanctuaire — un déplacement maîtrisé et cyclique, jamais une fuite. Sa victoire, comme celle de cette carte, ne tient jamais à un seul éclat : c'est la discipline répétée, oracle après oracle, saison après saison, qui finit par ressembler à une évidence.",
   ],
   "thémis": [
     "Titanide antérieure aux dieux de l'Olympe, Thémis personnifie la loi divine et l'ordre juste du monde — non pas la justice humaine, changeante et discutée, mais un principe plus ancien que les dieux eux-mêmes.",
     "Elle rendit elle-même des oracles à Delphes avant qu'Apollon n'y installe son propre sanctuaire, et resta la conseillère de Zeus, assise à ses côtés sur l'Olympe pour veiller à ce qu'aucune décision divine ne s'écarte de l'ordre juste.",
     "Unie à Zeus, elle mit au monde les Heures (voir la fiche « Heures »), gardiennes de l'ordre saisonnier et moral du monde, et, selon une tradition parallèle à celle qui les dit plutôt filles de la Nuit, les Parques elles-mêmes (voir la fiche « Parques »), qui filent le destin de chaque mortel.",
-    "Dans le Tarot, Thémis est la Justice (VIII), balance dans une main et épée dans l'autre : une pesée qui précède toujours la sentence. Conseillère assise aux côtés de Zeus, elle incarnait la loi divine avant même l'Olympe — mère des Heures, gardiennes de l'ordre saisonnier, et selon certains des Parques elles-mêmes —, elle rappelle que la justice la plus juste n'est jamais une réaction ponctuelle, mais un ordre posé une fois pour toutes, en amont de chaque décision à prendre.",
   ],
   "déméter": [
     "Déesse des moissons, Déméter enseigna aux hommes l'art de l'agriculture — un don qu'elle retira au monde entier de rage et de chagrin lorsque sa fille Perséphone fut enlevée par Hadès (voir la fiche « Hadès »).",
     "La terre entière resta stérile jusqu'à ce que Zeus négocie un compromis : Perséphone passerait une partie de l'année aux Enfers et l'autre auprès de sa mère — un partage qui, depuis, rythme les saisons, l'hiver au deuil de Déméter et le printemps à ses retrouvailles.",
     "À Athènes et dans une grande partie de la Grèce, on la fêtait sous le nom de Thesmophoros, « celle qui apporte les lois », lors des Thesmophories réservées aux femmes mariées ; son titre le plus solennel restait Éleusinia, en l'honneur d'Éleusis et des Mystères qui portent son nom. Un mythe arcadien plus sombre, propre à la ville de Thelpusa, raconte comment Poséidon la poursuivit alors qu'elle errait à la recherche de sa fille disparue : changée en jument pour lui échapper, elle ne put empêcher le dieu de prendre lui-même la forme d'un étalon pour s'unir à elle malgré tout — de cette union naquirent le cheval Arion et une fille que la tradition plus tardive a fini par identifier à Perséphone elle-même (voir la fiche « Perséphone »), bien que son nom véritable, sur ce seul lieu, ne se révélât qu'aux initiés. L'épisode valut par ailleurs à Déméter, sur ce seul lieu, les surnoms d'Erinys, « la Furieuse », et de Lousia, « la Baigneuse », pour le bain purificateur qu'elle prit ensuite dans le fleuve Ladon.",
-    "Dans le Tarot, Déméter est l'Hermite (IX), lanterne à la main, avançant à son propre rythme sans se presser : la même patience obstinée qu'elle mit à parcourir la terre entière à la recherche de Perséphone, refusant toute récolte tant qu'elle ne l'aurait pas retrouvée. Sa légende rappelle que certaines attentes ne se contentent pas de traverser le temps — elles le façonnent directement, puisque ce deuil suspendu est devenu, depuis, l'hiver lui-même.",
   ],
   "tyché": [
     "Déesse de la fortune et du hasard, Tyché échappe à toute généalogie fixe selon les auteurs — tantôt fille de Zeus, tantôt de l'Océan — comme si le hasard lui-même refusait de se laisser enfermer dans une origine unique.",
     "Représentée portant une corne d'abondance et un gouvernail, parfois les yeux bandés, elle peut combler de richesses comme ruiner en un instant, sans qu'aucun mérite ni aucune faute n'entre en compte — la roue qu'on lui associe (voir la fiche « Roue ») tourne sans se soucier de qui elle élève ou abaisse.",
-    "Dans le Tarot, Tyché est la Roue de Fortune (X), qui tourne sans se soucier de qui elle élève ou abaisse : une image fidèle à une déesse dont la généalogie elle-même refuse de se fixer, tantôt fille de Zeus, tantôt de l'Océan. Corne d'abondance dans une main, gouvernail ou yeux bandés selon les représentations, elle rappelle qu'aucune fortune, bonne ou mauvaise, n'est jamais définitivement acquise.",
   ],
   "héraclès": [
     "Fils de Zeus et d'une mortelle, Alcmène, l'enfant fut d'abord nommé Alcide, du nom de son grand-père Alcée (voir la fiche « Alcée »). Il fut la cible de la jalousie d'Héra avant même sa naissance : elle chargea Ilithyie de retenir l'accouchement par magie, une ruse à peine déjouée (voir la fiche « Ilithyie »), puis, une fois l'enfant né, envoya deux serpents l'étrangler dans son sommeil — qu'il étrangla lui-même de ses propres mains encore enfant.",
@@ -1082,13 +1068,11 @@ const DEITY_LORE = {
     "Il obtint ensuite la ceinture d'Hippolyté, reine des Amazones (voir la fiche « Hippolyté »), d'abord prête à la lui offrir de bon cœur — jusqu'à ce qu'Héra, semant la discorde parmi les Amazones, ne transforme la rencontre en bataille. Il ramena seul le troupeau de Géryon depuis les confins du monde connu, cueillit les pommes d'or des Hespérides (voir la fiche « Hespérides ») en soulageant un temps Atlas de son fardeau céleste par la ruse — délivrant au passage Prométhée enchaîné, en abattant d'une flèche l'aigle qui lui dévorait le foie (voir la fiche « Prométhée ») —, et descendit enfin aux Enfers pour en ramener vivant, à mains nues, le chien Cerbère, avant de le rendre à Hadès.",
     "Deux travaux ayant été invalidés par Eurysthée, Héraclès dut en accomplir deux de plus pour atteindre le compte requis — quatorze épreuves au total pour douze travaux officiellement reconnus.",
     "Après sa mort, consumé par une tunique empoisonnée, il fut accueilli parmi les dieux de l'Olympe. C'est Héra elle-même, désormais réconciliée avec celui dont le nom entier célébrait sa gloire, qui lui donna pour épouse sa propre fille Hébé, déesse de la jeunesse éternelle (voir la fiche « Hébé ») — le pardon le plus complet qu'elle pouvait lui offrir, en l'accueillant dans sa propre famille.",
-    "Dans le Tarot, Héraclès est la figure de la Force (XI), où l'on voit une femme ouvrir sans effort apparent la gueule d'un lion : ses travaux racontent la même leçon à plus grande échelle — la force qui compte n'est jamais celle du combat, mais celle qui transforme une punition en victoire répétée sur soi-même, jusqu'à faire de son propre nom un acte de réconciliation.",
   ],
   "prométhée": [
     "Titan resté aux côtés de Zeus pendant la guerre contre les autres Titans, Prométhée façonna aussi, selon certains récits, les premiers hommes à partir d'argile.",
     "Voyant l'humanité livrée au froid et à l'ignorance, il déroba le feu aux dieux et l'offrit aux mortels (voir la fiche « Feu ») — un don qui lui valut d'être traîné jusqu'à un rocher du Caucase par Bia et Kratos, la Force et la Puissance (voir les fiches « Bia » et « Kratos »), sur ordre de Zeus, puis enchaîné là où un aigle venait chaque jour dévorer son foie, qui repoussait chaque nuit — un supplice qu'Héraclès, de passage lors de sa quête des pommes des Hespérides, interrompit en abattant l'aigle d'une flèche (voir la fiche « Héraclès »), avant que Chiron n'accepte à son tour de mourir à sa place pour achever sa libération, une immortalité qu'il fallait bien qu'un immortel consente à céder (voir la fiche « Chiron »).",
     "Son nom reste attaché à tout affranchissement payé au prix fort — le savoir arraché plutôt que donné.",
-    "Dans le Tarot, Prométhée est le Pendu (XII), suspendu la tête en bas mais jamais vaincu pour autant : sa punition sur le rocher du Caucase, le foie dévoré chaque jour et reformé chaque nuit, est un sacrifice assumé plutôt qu'un simple malheur subi — le prix qu'il paya sciemment pour avoir donné le feu aux hommes. Sa leçon est celle de cet arcane : la position la plus basse peut être précisément celle d'où part le plus grand basculement, pourvu qu'elle ait été choisie en connaissance de cause.",
   ],
   "hadès": [
     "Fils de Cronos et de Rhéa, Hadès hérita du monde souterrain lors du partage du cosmos entre lui et ses frères Zeus et Poséidon — un lot que la tradition présente souvent comme le moins enviable, mais qu'il gouverne avec une rigueur incorruptible plutôt qu'avec cruauté.",
@@ -1097,7 +1081,6 @@ const DEITY_LORE = {
     "Avant elle, ou selon d'autres versions alors même qu'il en était déjà l'époux, Hadès s'était épris de la naïade Menthé (voir la fiche « Menthé »), que Perséphone, découvrant cette liaison, changea de rage en la plante odorante qui porte encore son nom.",
     "Contrairement à une image tardive qui en fait un dieu maléfique, Hadès reste dans les mythes grecs un juge impartial, gardien d'un ordre auquel nul, pas même les dieux, ne peut se soustraire.",
     "Son nom le plus durable reste pourtant un autre : Plouton, « le Riche », euphémisme destiné à adoucir la crainte qu'inspirait son nom véritable, en insistant sur les richesses enfouies dans la terre plutôt que sur la mort elle-même — Euripide est le premier à l'employer comme un nom à part entière plutôt qu'un simple qualificatif. À Hermione, où l'on situait la fissure par laquelle Héraclès aurait ramené Cerbère à la surface (voir la fiche « Héraclès »), on l'honorait sous le nom de Klymenos, « le Renommé » ; Homère et les tragiques le disent aussi Polydegmon, « celui qui accueille tant de monde » — un titre qui ne laisse aucun doute sur l'unique destination que tous, tôt ou tard, finissent par emprunter.",
-    "Dans le Tarot, Hadès est l'Arcane sans nom (XIII), celui qui fauche sans jamais détruire gratuitement : son casque d'invisibilité pendant la guerre des Titans, sa discrétion presque totale hors de son royaume, jusqu'à la façon dont il vit ses amours, tout chez lui agit en silence — une transformation qui opère sans jamais chercher à se faire remarquer.",
   ],
   "perséphone": [
     "Fille de Zeus et de Déméter, Perséphone cueillait des fleurs dans un pré lorsque la terre s'ouvrit sous elle et qu'Hadès l'emporta sur son char vers son royaume souterrain.",
@@ -1106,36 +1089,30 @@ const DEITY_LORE = {
     "Un acte d'amour put pourtant fléchir cette rigueur : touchée par le sacrifice d'Alceste (voir la fiche « Alceste »), morte de son plein gré à la place de son époux, elle la renvoya elle-même auprès des vivants — une clémence rare chez une reine par ailleurs si peu encline au pardon.",
     "Son passage entre les deux mondes en fait la figure même de la transformation qui n'efface jamais totalement ce qu'on était avant.",
     "Son autre nom, Coré, « la Jeune Fille », reste si employé qu'il finit par se substituer presque entièrement au sien dans l'usage courant — Pausanias doit lui-même préciser que son vrai nom est bien Perséphone. En Arcadie, à Lycosoura, on vénérait par ailleurs une Despoina, « la Maîtresse », présentée comme la fille de Poséidon et de Déméter née de leur union à Thelpusa (voir la fiche « Déméter ») — une déesse à l'origine distincte, dont le nom véritable ne se révélait qu'aux seuls initiés de ses mystères, mais que la tradition plus tardive a fini par confondre avec Perséphone elle-même. À Andanie, enfin, on l'honorait sous le nom de Hagné, « la Pure ».",
-    "Dans le Tarot, Perséphone est la Reine de Deniers, qui tient son denier avec douceur au milieu d'une abondance discrète : cette carte est cette même alternance féconde, la certitude que la croissance a besoin de ses saisons de repli pour revenir plus sûrement encore.",
   ],
   "iris": [
     "Fille du Titan Thaumas et de l'Océanide Électre, Iris personnifie l'arc-en-ciel (voir la fiche « Arc-en-ciel »), pont visible entre le ciel et la terre qu'elle emprunte pour porter les messages des dieux aux mortels comme aux autres divinités.",
     "Contrairement à Hermès, dont les missions relèvent souvent de la ruse ou du commerce, Iris est associée à la fidélité du message transmis sans détour — une messagère de confiance, jamais rusée ni trompeuse. Son rôle ne s'arrête d'ailleurs pas au seul lien entre le ciel et la terre : lorsqu'un dieu doit prêter le serment le plus sacré qui soit, c'est elle qui va puiser, aux portes des Enfers, l'eau du Styx dans laquelle jurer un tel serment (voir la fiche « Hermès »).",
     "Ses propres sœurs, les Harpyes (voir la fiche « Harpyes »), lui durent un jour la vie sauve : poursuivies par les fils ailés de Borée (voir la fiche « Borée »), Zétès et Calaïs, décidés à les tuer pour libérer le devin Phinée de leurs tourments, elles ne durent leur salut qu'à l'intervention personnelle d'Iris, venue en plein vol obtenir des deux frères la promesse de les épargner.",
-    "Dans le Tarot, Iris est Tempérance (XIV), qui verse un liquide d'un vase à l'autre sans en perdre une goutte : l'arc-en-ciel qu'elle personnifie est justement ce pont visible entre deux mondes, le ciel et la terre, qu'aucun des deux ne suffit à combler seul. Messagère de confiance plutôt que rusée, elle va jusqu'aux portes du Styx puiser l'eau du serment le plus sacré — la preuve que l'équilibre le plus solide ne se trouve jamais dans un seul camp, mais dans le passage constant entre les deux.",
   ],
   "pan": [
     "Fils d'Hermès et de la nymphe Dryope (voir la fiche « Hermès »), Pan naquit avec des cornes, des sabots de bouc et un visage si étrange que sa propre mère fuit à sa vue — les autres dieux, eux, s'amusèrent de son apparence et l'adoptèrent comme l'un des leurs.",
     "Il règne sur les forêts et les troupeaux (voir la fiche « Forêt ») et peut, d'un simple cri, saisir les voyageurs d'une terreur irraisonnée dans les bois profonds — la « panique » lui doit d'ailleurs son nom.",
-    "Dans le Tarot, Pan est le Diable (XV), devant qui deux silhouettes restent enchaînées par des liens en réalité assez lâches pour s'en défaire : un attachement plus consenti qu'il n'y paraît. Né avec des cornes et des sabots de bouc au point d'effrayer sa propre mère, il incarne cet instinct que la raison ne policera jamais tout à fait — ni bon ni mauvais en soi, juste une part de nous qu'il vaut mieux reconnaître que nier, sous peine de la voir surgir malgré nous en pleine panique.",
   ],
   "poséidon": [
     "Frère de Zeus et d'Hadès, Poséidon reçut la mer en partage lors de la division du cosmos (voir la fiche « Mer »). D'humeur aussi changeante que les flots qu'il gouverne, il peut aussi bien porter les navires que déchaîner tempêtes et tremblements de terre d'un coup de son trident.",
     "Sa rivalité avec Athéna pour devenir le patron d'Athènes — il fit jaillir une source d'eau salée du rocher, elle offrit un olivier — illustre bien son tempérament : la force spectaculaire face à la sagesse durable, et c'est cette dernière que la ville choisit.",
     "Trois épithètes résument ses domaines mieux que tout autre : Hippios, pour son lien avec les chevaux qu'il aurait lui-même inventés ; Asphaleios, le « sécurisant », invoqué contre les tremblements de terre qu'il pouvait tout aussi bien provoquer que prévenir ; et Pélagios, pour la haute mer elle-même. Homère l'invoque aussi comme Gaieokhos et Ennosigaios, celui qui « tient » et « secoue » la terre — deux noms qui résument à eux seuls un tempérament capable de porter comme de renverser.",
-    "Dans le Tarot, Poséidon est la Maison-Dieu (XVI), où la foudre frappe une tour qui semblait pourtant solide : lui qui peut d'un coup de trident déchaîner tempêtes et tremblements de terre sait mieux que quiconque qu'aucune construction n'est jamais définitivement à l'abri. Sa défaite face à Athéna pour le patronage d'Athènes — la force spectaculaire d'une source jaillie du rocher contre la sagesse durable d'un simple olivier — rappelle que l'effondrement brutal, aussi violent soit-il, libère parfois le terrain pour bâtir autrement, et mieux.",
   ],
   "hécate": [
     "Fille de la titanide Astéria (voir la fiche « Astéria »), Hécate hérita de sa mère une proximité particulière avec le ciel nocturne. Déesse des carrefours et des passages, elle est représentée sous une triple forme, tournée à la fois vers le ciel, la terre et les Enfers — l'une des seules divinités, avec Perséphone, à circuler librement entre les trois royaumes.",
     "Lorsque Zeus renversa les Titans et redistribua les pouvoirs de l'univers, il réserva à Hécate un traitement à part : seule parmi les divinités de l'ancienne génération, elle conserva l'intégralité de ses privilèges sur la terre, la mer et le ciel. Hésiode raconte que Zeus l'honora plus qu'aucune autre, lui laissant le pouvoir d'accorder ou de refuser son aide aux marins, aux chasseurs, aux athlètes en compétition et à quiconque l'invoque — sans jamais lui retirer la moindre part de ce qu'elle possédait avant lui.",
     "Elle fut la seule à entendre les cris de Perséphone lors de son enlèvement et l'aida ensuite à retrouver sa mère Déméter ; depuis, elle veille sur les carrefours nocturnes, la magie et tout ce qui exige de choisir une direction dans l'obscurité.",
     "Trioditis, « des trois chemins », est resté son surnom le plus emblématique, en écho direct à son association avec les carrefours — les Romains la reprendront presque telle quelle sous le nom de Trivia. Phosphoros, « celle qui porte la lumière », désigne cette même torche qu'elle tient dans la nuit ; Chthonia la rattache plus largement aux puissances souterraines, aux côtés de Déméter et de Perséphone. Un titre plus tardif, Sotira, « la Salvatrice », se retrouve surtout dans les Hymnes orphiques et des textes bien postérieurs à l'époque classique — un ajout plus récent à un culte déjà ancien plutôt qu'une caractéristique d'origine.",
-    "Dans le Tarot, Hécate est l'Étoile (XVII), la carte de l'orientation silencieuse plutôt que de la certitude bruyante : le privilège que lui accorda Zeus n'est jamais un pouvoir qui s'impose — comme la torche qu'elle porte, il éclaire un chemin sans jamais choisir à la place de celui qui le suit.",
   ],
   "séléné": [
     "Déesse de la lune, Séléné traverse le ciel nocturne sur un char tiré par des chevaux ailés, tandis que son frère Hélios conduit celui du soleil le jour (voir la fiche « Lune »).",
     "Éprise du berger Endymion (voir la fiche « Endymion »), elle obtint de Zeus qu'il reste éternellement jeune et endormi, afin de pouvoir le contempler chaque nuit sans jamais le voir vieillir ni mourir.",
-    "Dans le Tarot, Séléné est la Lune (XVIII), dont l'éclat change sans cesse et déforme les distances : une lumière qui révèle autant qu'elle trompe. Éprise du berger Endymion, elle choisit de le contempler chaque nuit plongé dans un sommeil éternel plutôt que de le voir vieillir puis mourir en pleine lumière — un choix qui n'a rien d'une certitude totale, mais qui avance malgré le flou, exactement comme cet arcane invite à le faire.",
   ],
   "hélios": [
     "Dieu du soleil, Hélios traverse chaque jour le ciel sur un char de feu, de l'orient à l'occident, avant de regagner l'Océan pendant la nuit pour reprendre sa course au matin suivant (voir la fiche « Soleil »). Voyant tout depuis cette hauteur, rien ne lui échappe jamais tout à fait — c'est lui qui révélera un jour à Héphaïstos les amours cachées d'Aphrodite (voir la fiche « Aphrodite »).",
@@ -1143,24 +1120,20 @@ const DEITY_LORE = {
     "De l'Océanide Persé, Hélios eut plusieurs autres enfants restés célèbres : Aiétès, roi de Colchide, la magicienne Circé (voir la fiche « Circé »), et Pasiphaé, épouse du roi Minos et mère du Minotaure (voir les fiches « Minos » et « Pasiphaé ») — trois destins bien différents, mais tous marqués par une même maîtrise redoutable de la magie ou du pouvoir.",
     "Sa petite-fille Médée, fille d'Aiétès, hérita elle aussi de ce sang — et de bien plus qu'un simple don pour les sortilèges : lorsqu'elle dut fuir Corinthe après s'être vengée de Jason, c'est un char ailé tiré par des dragons, prêté par Hélios lui-même, qui l'emporta hors d'atteinte (voir la fiche « Médée »).",
     "Il aima aussi la mortelle Leucothoé, changée en arbuste à encens après avoir été enterrée vivante par son propre père, et la nymphe Clytie, qui se consuma de jalousie à l'idée de l'avoir perdu : restée à le fixer sans relâche, elle finit par s'enraciner et devenir cette fleur qui, encore aujourd'hui, tourne son visage vers le soleil tout au long du jour.",
-    "Dans le Tarot, Hélios est la figure du Soleil (XIX), où deux enfants jouent sous une lumière si éclatante que rien ne peut y rester dissimulé — la même clarté qui, dans ses mythes, révèle toujours ce que d'autres voudraient cacher, qu'il s'agisse d'un secret d'alcôve ou d'un chagrin transformé en fleur tournée vers la lumière.",
   ],
   "minos": [
     "Roi légendaire de Crète de son vivant, Minos devint après sa mort l'un des trois juges des Enfers, réputé pour la rigueur impartiale de ses jugements — une réputation acquise du temps où il régnait déjà avec une justice sans complaisance.",
     "Sur terre, il fit construire par Dédale le Labyrinthe pour y enfermer le Minotaure, fruit d'une union contre nature de son épouse Pasiphaé (voir la fiche « Pasiphaé ») — un épisode qui n'entacha jamais, dans les Enfers, la légitimité de son jugement sur les autres âmes. C'est sa propre fille Ariane qui, en secret, permit à Thésée d'en ressortir vivant (voir la fiche « Ariane »).",
-    "Dans le Tarot, Minos est le Jugement (XX), où une trompette rappelle chacun à son compte plutôt qu'à sa punition : lui qui régna sur la Crète avec une rigueur sans complaisance devint, une fois mort, l'un des trois juges des Enfers, réputé pour l'impartialité de ses sentences. Ni la trahison de son épouse Pasiphaé ni la fuite de sa fille Ariane n'entachèrent jamais, aux Enfers, la légitimité de son jugement sur les autres âmes — la preuve qu'un jugement juste ne dépend jamais de la perfection de celui qui le rend.",
   ],
   "gaïa": [
     "Déesse primordiale, Gaïa est la Terre elle-même, apparue au tout début du monde depuis le Chaos originel — mère de toutes choses, des Titans aux Cyclopes en passant par les monstres les plus redoutables.",
     "C'est elle qui, lassée de la tyrannie de son époux Ouranos, poussa leur fils Cronos à le renverser, puis, plus tard, encouragea Zeus à faire de même contre les Titans devenus à leur tour trop puissants — la Terre choisissant toujours, en dernier recours, l'équilibre plutôt que la démesure d'un seul.",
-    "Dans le Tarot, Gaïa est le Monde (XXI), une figure qui danse au centre d'une couronne végétale entourée des quatre créatures : l'aboutissement qui rassemble plutôt que celui qui exclut. Mère de toutes choses, des Titans aux monstres les plus redoutés, elle choisit pourtant toujours, en dernier recours, l'équilibre plutôt que la démesure d'un seul — Cronos contre Ouranos, puis Zeus contre les Titans devenus à leur tour trop puissants. Le Monde n'efface aucun de ces épisodes : il les intègre tous dans un seul cycle achevé.",
   ],
   "athéna": [
     "Née tout armée du crâne de Zeus, après qu'il eut avalé sa mère Métis enceinte (voir la fiche « Métis »), Athéna hérita à la fois de la puissance de son père et de la ruse de sa mère.",
     "Déesse de la sagesse stratégique plutôt que de la guerre brutale, elle protège les héros rusés — Ulysse, Persée, Bellérophon — en leur offrant conseils et objets plutôt qu'en combattant à leur place, et devint la patronne d'Athènes après avoir offert à la ville l'olivier, symbole de paix durable.",
     "Il lui arrive aussi d'endosser un rôle plus maternel malgré elle : lorsque Héphaïstos, épris d'elle, la poursuit et se voit repoussé, Gaïa recueille de cette rencontre manquée l'enfant Érichthonios et le confie à Athéna pour qu'elle l'élève (voir les fiches « Héphaïstos » et « Érichthonios ») — un enfant qu'elle n'a pas conçu, mais qu'elle protège avec la même rigueur qu'elle réserve à ses héros favoris.",
     "On l'honorait sous plusieurs noms selon la part de sa protection invoquée : Parthénos, « la Vierge », a donné son nom au Parthénon qui la représente sur l'Acropole ; Polias, « gardienne de la cité », désignait son rôle de protectrice d'Athènes elle-même ; et Ergané, « l'Ouvrière », présidait aux travaux des artisans et des tisserandes — un titre qui résonne particulièrement face au destin d'Arachné, changée en araignée pour son insolence (voir la fiche « Araignée »).",
-    "Dans le Tarot, Athéna est la Reine d'Épées, l'épée droite et le regard clair, un discernement qui ne se laisse jamais attendrir hors de propos : née tout armée du crâne de Zeus, elle protège les héros rusés — Ulysse, Persée, Bellérophon — par le conseil plutôt que par le seul combat. Sa chouette voit dans l'obscurité ce que d'autres manquent ; cette même lucidité, précieuse et parfois redoutée, est exactement ce que porte cette Reine.",
   ],
   "aphrodite": [
     "Déesse de l'amour et de la beauté, Aphrodite naquit, selon le récit le plus ancien, de l'écume de mer formée autour des membres tranchés d'Ouranos — un mythe plus ancien que la naissance de la plupart des autres Olympiens. Accueillie sur le rivage de Chypre par les Heures (voir la fiche « Heures »), elle en fut parée avant d'être conduite devant les autres dieux.",
@@ -1171,36 +1144,30 @@ const DEITY_LORE = {
     "Éprise plus tard du prince troyen Anchise, elle se présenta à lui déguisée en simple mortelle et lui interdit, sous peine de la foudre de Zeus, de jamais révéler qui l'avait aimé. De leur union naquit Énée (voir la fiche « Énée ») — mais Anchise, un jour ivre, se vanta malgré tout de sa conquête divine, et la foudre promise s'abattit sur lui, l'estropiant pour le reste de sa vie.",
     "Devenue mère, elle ne cessa jamais de veiller sur Énée, jusque sur le champ de bataille de Troie : le voyant blessé par le héros grec Diomède, elle se précipita pour le soustraire aux coups en l'enveloppant de son propre voile. Diomède, encouragé par Athéna à ne pas craindre une déesse étrangère à la guerre, la blessa elle-même au poignet de sa lance, faisant jaillir l'ichor, le sang immortel des dieux, plutôt que du sang mortel. Blessée, Aphrodite dut laisser son fils aux mains d'Apollon qui le soustrait aussitôt aux Grecs en l'enveloppant d'un nuage, puis l'emporte jusqu'à son propre sanctuaire de Pergame. Léto et Artémis le soignent alors, et le couvrent de gloire, tandis qu'un fantôme à son image se bat à sa place pour tromper les assaillants (voir la fiche « Apollon »).",
     "Deux épithètes résument à elles seules la tension entre ses visages : Ourania, « la Céleste », désignait selon Platon un amour plus spirituel, né d'Ouranos sans mère et honoré sans vin dans ses libations ; Pandémos, « de tout le peuple », son exact opposé, l'amour commun et partagé — un contraste que Platon développe dans son Banquet. Une autre facette, plus inattendue, l'associait directement à son amant : à Sparte, on la représentait en armes sous le nom d'Aphrodite Areia, « la Guerrière », semblable en tout point à Arès lui-même (voir la fiche « Arès »).",
-    "Dans le Tarot, Aphrodite est la Reine de Coupes, où l'amour se vit avec réceptivité plutôt qu'avec conquête : ses trois amours racontent pourtant trois visages bien différents de ce même domaine — le mariage de devoir avec Héphaïstos, la passion assumée avec Arès jusqu'au scandale, et l'amour tendre ou tragique avec Adonis et Anchise, où le désir se paie toujours d'un prix, qu'il s'agisse d'une fleur née du sang ou d'un secret trahi.",
   ],
   "nérée": [
     "Surnommé le « Vieillard de la mer », Nérée est un dieu marin plus ancien que Poséidon, réputé pour sa sagesse, sa bienveillance et son don de prophétie, contrairement à d'autres divinités marines plus tumultueuses.",
     "Père de cinquante Néréides dont Thétis (voir la fiche « Thétis »), mère d'Achille, il incarne un versant plus paisible de la mer (voir la fiche « Mer ») — la sagesse plutôt que la tempête.",
-    "Dans le Tarot, Nérée est le Roi de Coupes, stable sur une mer agitée sans jamais s'y laisser submerger : sa sagesse ne s'impose pas, elle se révèle à qui sait la retenir — exactement la maîtrise émotionnelle que ce Roi a acquise à force d'avoir traversé bien des marées.",
   ],
   "bellérophon": [
     "Héros grec, Bellérophon parvint à dompter Pégase, le cheval ailé né du sang de la Gorgone Méduse, grâce à un mors d'or offert par Athéna en songe.",
     "Monté sur Pégase, il vainquit la Chimère, monstre crachant le feu — mais voulut ensuite s'élever jusqu'à l'Olympe lui-même, un excès de démesure que Zeus punit en envoyant un taon piquer Pégase, précipitant Bellérophon à terre pour le reste de sa vie.",
-    "Dans le Tarot, Bellérophon est le Cavalier d'Épées, qui charge sans ralentir, épée haute : la même bravoure fougueuse qui lui fit dompter Pégase et terrasser la Chimère cracheuse de feu. Mais la même impétuosité qui fait ses exploits causa aussi sa perte, le jour où il voulut s'élever jusqu'à l'Olympe lui-même — la leçon de ce Cavalier est que l'élan qui gagne les plus grandes batailles doit aussi savoir où s'arrêter, sous peine de chuter aussi haut qu'il s'était élevé.",
   ],
   "éos": [
     "Déesse de l'aurore, Éos ouvre chaque matin les portes du ciel pour annoncer le passage du char d'Hélios, son frère — ses doigts de rose colorent le ciel juste avant le lever du jour (voir la fiche « Aurore »).",
     "Éprise de plusieurs mortels, dont Tithonos, elle obtint pour lui l'immortalité mais oublia de demander aussi l'éternelle jeunesse : il vieillit sans jamais pouvoir mourir, jusqu'à se réduire à une simple voix — changé, selon une tradition plus tardive, en cigale, dont le chant strident perpétue encore aujourd'hui cette plainte sans fin.",
     "Elle aima aussi le chasseur Orion, qu'elle emporta à Délos pour vivre à ses côtés, avant qu'il ne devienne le compagnon de chasse d'Artémis (voir la fiche « Orion »).",
     "Unie à Astréos, dieu des étoiles, elle mit aussi au monde les quatre vents, dont Borée, le vent du Nord (voir la fiche « Borée ») — une aurore qui n'ouvre pas seulement le ciel au soleil, mais engendre aussi les souffles qui le traversent.",
-    "Dans le Tarot, Éos est le Valet de Bâtons, bâton déjà en main mais le mouvement pas encore commencé : chaque matin, elle ouvre les portes du ciel avant même que le char de son frère Hélios ne s'y engage, sans jamais le conduire elle-même. Cette énergie encore neuve, qui rend le passage possible sans en garantir l'issue, est exactement la sienne — une promesse plutôt qu'un accomplissement déjà prouvé.",
   ],
   "niké": [
     "Déesse ailée de la victoire, Niké accompagne indifféremment les vainqueurs, sans jamais prendre elle-même part au combat — elle couronne l'issue plutôt que de la déterminer.",
     "Fille du Titan Pallas et de Styx, elle se rangea aux côtés de Zeus dès la guerre contre les Titans, et resta depuis une fidèle compagne de son char, symbole d'un triomphe qui se mérite sans jamais se garantir d'avance.",
     "Trois de ses frères et sœurs firent le même choix qu'elle et reçurent la même récompense : Kratos, la Puissance (voir la fiche « Kratos »), Bia, la Force (voir la fiche « Bia »), et Zelos, le Zèle rival (voir la fiche « Zelos »), devinrent eux aussi des compagnons permanents du trône de Zeus.",
-    "Dans le Tarot, Niké est le Cavalier de Bâtons, qui galope sans se retourner, bâton levé : une allure conquérante qui ne s'arrête jamais pour vérifier ce qu'elle a semé derrière elle. Ralliée à Zeus dès la guerre contre les Titans, elle resta depuis une fidèle compagne de son char sans jamais combattre elle-même, se contentant de couronner une issue déjà décidée ailleurs — la même certitude qui, chez ce Cavalier, avance parfois trop vite pour mesurer les obstacles.",
   ],
   "hestia": [
     "Sœur aînée de Zeus, Hestia est la déesse du foyer et gardienne de la flamme sacrée qui brûle au centre de chaque maison comme de chaque cité.",
     "Courtisée par Apollon et Poséidon, elle refusa tout mariage et obtint de Zeus de rester à jamais vierge, s'installant définitivement au cœur de l'Olympe plutôt que de suivre l'un ou l'autre — une place discrète mais essentielle, puisque aucun foyer ne peut exister sans elle.",
     "Hestia se distingue par l'absence presque totale de titres de culte qui lui soient propres : sa place n'est jamais celle d'un sanctuaire précis, mais celle, rituelle, du tout premier et du tout dernier geste — on ne pouvait, disait-on, verser dignement une libation sans l'invoquer à la fois en ouverture et en clôture de toute cérémonie. Chaque prytanée, le foyer commun de chaque cité, faisait ainsi office de temple, sans qu'elle ait jamais eu besoin d'un nom particulier pour se le voir dédié.",
-    "Dans le Tarot, Hestia est la Reine de Bâtons, assise mais jamais passive, un feu intérieur qui n'a plus besoin de se démontrer : elle qui refusa tous les prétendants de l'Olympe pour garder à jamais allumée la flamme du foyer sait qu'une présence discrète peut être la plus irremplaçable de toutes. Sans sanctuaire ni titre de culte propre, invoquée pourtant en ouverture et en clôture de chaque cérémonie, elle incarne cette même autorité tranquille — un feu qui n'éblouit jamais, mais ne s'éteint pas non plus.",
   ],
   "héphaïstos": [
     "Fils d'Héra, Héphaïstos naquit si chétif ou si laid, selon les versions, que sa mère le rejeta du haut de l'Olympe — une chute qui le laissa boiteux pour le restant de son existence.",
@@ -1208,43 +1175,35 @@ const DEITY_LORE = {
     "Parmi ses créations les plus prisées, il façonna pour sa propre épouse Aphrodite (voir la fiche « Aphrodite ») une ceinture magique capable de rendre irrésistible quiconque la porte — un bijou si redouté qu'Héra elle-même (voir la fiche « Héra ») l'emprunta un jour en secret pour mieux détourner l'attention de Zeus, le temps que Poséidon vienne en aide aux Grecs sur le champ de bataille de Troie.",
     "Épris d'Athéna (voir la fiche « Athéna »), qui refusait pourtant tout mariage, il tenta un jour de s'unir à elle de force. Elle se déroba, et sa semence tomba sur la terre lorsqu'elle l'essuya avec un morceau de laine — de ce contact naquit Érichthonios, mi-enfant mi-serpent, que Gaïa, mère de toutes choses, remit alors à Athéna elle-même pour qu'elle l'élève. N'étant fils d'Athéna que par cette adoption, Érichthonios grandit sous sa seule protection avant de devenir, une fois adulte, l'un des premiers rois légendaires d'Athènes (voir la fiche « Érichthonios »).",
     "Homère le désigne souvent par l'épithète purement descriptive d'Amphigyeis, « boiteux des deux jambes » — un surnom qui rappelle son infirmité plutôt qu'un véritable titre de culte. Un lien plus incertain le rattache aux Cabires, ces divinités mineures d'un culte à mystères sur l'île de Lemnos et à Samothrace, parfois présentées comme ses propres fils — une parenté que les sources anciennes n'établissent jamais aussi clairement qu'on pourrait le croire.",
-    "Dans le Tarot, Héphaïstos est le Roi de Bâtons, l'autorité qui se forge plutôt qu'elle ne se reçoit : rejeté par sa mère, repoussé par Athéna elle-même, il n'obtient jamais rien par simple droit de naissance — pas même une descendance, puisque Érichthonios naît de son désir déçu et grandit dans les mains d'une autre. Ce qu'il crée, en revanche, arme, palais ou enfant né malgré lui de la terre, reste par la force ce qu'il a lui-même façonné jusqu'au bout.",
   ],
   "himeros": [
     "Dieu ailé du désir soudain, Himeros accompagne Éros et Aphrodite dans leur cortège, incarnant cette part du désir qui surgit sans prévenir, avant même que la raison n'ait le temps d'intervenir.",
     "Moins connu qu'Éros, il en partage le même registre — le désir irrésistible — mais dans sa forme la plus immédiate : l'élan plutôt que la flèche qui vise.",
-    "Dans le Tarot, Himeros est le Valet de Coupes, celui qui contemple sa coupe avec un étonnement encore neuf : ce même émoi qui saisit avant qu'on ait pu le nommer, sincère mais trop récent pour se savoir encore où il mène.",
   ],
   "énée": [
     "Fils d'Aphrodite et du mortel Anchise, Énée combattit du côté troyen pendant la guerre de Troie, protégé à plusieurs reprises par sa mère au cœur des combats — jusqu'à ce qu'elle soit elle-même blessée par le héros grec Diomède en tentant de le soustraire aux coups (voir la fiche « Aphrodite »).",
     "À la chute de Troie, il porta sur son dos son père âgé et mena son fils par la main hors de la ville en flammes, fidèle jusque dans la ruine de sa cité — un périple qui, selon la légende romaine, le mènera à fonder la lignée dont naîtra Rome.",
     "Après des années d'errance en mer, sa flotte échoue à Carthage, où règne la reine Didon (voir la fiche « Didon »). Elle s'éprend de lui — un amour qu'Aphrodite favorise elle-même en secret, en envoyant son fils Éros attiser leur passion (voir la fiche « Éros ») — et Énée s'attarde à ses côtés, prêt à oublier sa mission pour y rester. Zeus, inquiet de le voir s'égarer de son destin, envoie Hermès (voir la fiche « Hermès ») lui rappeler qu'il ne lui appartient pas de choisir : il doit repartir fonder en Italie la lignée d'où naîtra Rome. Énée s'exécute et quitte Carthage sans un dernier adieu ; Didon, désespérée, se donne la mort sur un bûcher, non sans avoir maudit sa descendance — une malédiction que la tradition romaine lira plus tard comme l'origine mythique des guerres puniques entre Rome et Carthage.",
-    "Dans le Tarot, Énée est le Cavalier de Coupes, celui qui avance porté par le cœur plus que par la stratégie — mais son passage à Carthage montre la limite de cette carte : l'amour vécu avec Didon était sincère, et pourtant il n'était pas son chemin. La vraie fidélité de ce Cavalier n'est donc pas seulement celle qu'il porte à qui il aime, mais celle qu'il garde envers ce qu'il doit accomplir, même au prix d'un cœur brisé derrière lui.",
   ],
   "zéphyr": [
     "Dieu du vent d'ouest, Zéphyr est réputé le plus doux des vents, celui qui annonce le printemps et fait éclore les fleurs sur son passage.",
     "Il n'en reste pas moins capable de jalousie brutale : amoureux éconduit de Chloris (voir la fiche « Chloris »), il détourna par dépit un disque lancé par Apollon, tuant accidentellement le jeune Hyacinthe (voir la fiche « Hyacinthe ») que le dieu aimait — preuve que même le plus doux des vents peut tourner à la tempête.",
-    "Dans le Tarot, Zéphyr est le Valet d'Épées, l'esprit en alerte, vif jusqu'à l'instabilité : le plus doux des vents, celui qui fait éclore les fleurs sur son passage, reste capable d'une jalousie brutale — c'est lui qui, par dépit envers Apollon, dévia le disque qui tua le jeune Hyacinthe. Cette même vivacité changeante, brillante mais pas encore apprivoisée, est exactement ce que ce Valet porte encore à fleur de lame.",
   ],
   "éole": [
     "Gardien des vents, Éole les tient enfermés dans une outre ou une caverne selon les récits, ne les libérant qu'au compte-goutte pour ne pas déchaîner le chaos sur terre et sur mer.",
     "Il offrit un jour à Ulysse une outre contenant tous les vents contraires, ne laissant souffler que celui qui le ramènerait chez lui — un cadeau que l'équipage du héros, croyant y trouver un trésor, ouvrit par curiosité, relâchant la tempête qui les ramena au point de départ.",
-    "Dans le Tarot, Éole est le Roi d'Épées, qui gouverne des forces qui pourraient autrement tout emporter : gardien des vents qu'il enferme dans une outre ou une caverne, il n'en libère jamais qu'au compte-goutte pour éviter le chaos. Le jour où il en confia une pleine à Ulysse, son équipage crut y trouver un trésor et l'ouvrit par curiosité, relâchant la tempête qui les ramena à leur point de départ — un rappel que même le roi le plus rigoureux ne peut garantir la maîtrise que sur ses propres forces, jamais sur celles de qui l'entoure.",
   ],
   "chloris": [
     "Déesse des fleurs, Chloris transforme en jardin chaque lieu qu'elle traverse — son simple souffle suffit, dit-on, à faire éclore les plantes sur son passage.",
     "Enlevée par Zéphyr, le vent d'ouest, qui l'épousa ensuite en réparation, elle devint la déesse romaine Flora sous une autre identité — l'un des rares mythes grecs où la déesse enlevée obtient en retour un domaine et un pouvoir propres.",
-    "Dans le Tarot, Chloris est le Valet de Deniers, qui contemple un denier doré au milieu d'un jardin en pleine floraison : la même promesse de croissance qu'elle fait éclore partout où elle passe, ici concentrée dans une seule pièce qui ne demande encore qu'à porter ses fruits.",
   ],
   "triptolème": [
     "Jeune prince formé par Déméter elle-même, en reconnaissance de l'hospitalité que sa famille lui offrit alors qu'elle cherchait sa fille Perséphone à travers le monde, Triptolème reçut de la déesse l'art de cultiver le blé.",
     "Monté sur un char ailé tiré par des dragons, il parcourut la terre entière pour enseigner l'agriculture à tous les peuples, devenant ainsi le messager du plus grand don de Déméter aux hommes.",
-    "Dans le Tarot, Triptolème est le Cavalier de Deniers, qui avance sans se presser dans un champ plutôt que sur un chemin de bataille : cette carte est cette même vocation patiente, transmettre un savoir utile terre après terre, sans jamais céder à la hâte.",
   ],
   "ploutos": [
     "Dieu de la richesse et de l'abondance des récoltes, Ploutos est le fils de Déméter — un lien qui rattache la richesse à la fertilité de la terre plutôt qu'à l'or amassé.",
     "Zeus le rendit aveugle pour qu'il distribue ses faveurs sans favoritisme, sans distinguer les bons des mauvais — une richesse qui, depuis, tombe autant sur le mérite que sur le hasard.",
-    "Dans le Tarot, Ploutos est le Roi de Deniers, siégeant entouré d'une richesse tangible : cette carte est cette même prospérité installée, un sens pratique et une autorité fondés sur des résultats concrets et durables — encore à mettre au service de quelque chose.",
   ],
   "jason": [
     "Héritier légitime du trône d'Iolcos, écarté par son oncle Pélias, Jason fut confié encore enfant au centaure Chiron (voir la fiche « Chiron »), sur le mont Pélion, aux côtés d'Achille et d'Asclépios. Devenu adulte, il vint réclamer son trône ; Pélias, feignant d'accepter, lui imposa en échange une mission jugée impossible : ramener des confins du monde connu la Toison d'or, gardée en Colchide par un dragon ne dormant jamais.",
@@ -1296,7 +1255,6 @@ const DEITY_LORE = {
     "Ulysse, protégé par une plante magique offerte par Hermès, résista à son sortilège et la contraignit à rendre à ses hommes leur forme humaine. Il resta ensuite une année entière sur son île, dont naquit un fils, Télégonos (voir la fiche « Télégonos ») — qui, des années plus tard et sans le reconnaître, tuera son propre père, achevant malgré lui une prophétie qui pesait sur Ulysse depuis son retour à Ithaque. Certaines traditions plus tardives lui donnent aussi une fille de cette même union, Cassiphoné.",
     "Sa magie ne sert pas qu'à punir les intrus : par jalousie, elle change aussi la nymphe Scylla en monstre. Éprise du dieu marin Glaucos, lui-même épris de Scylla, Circé empoisonne la source où celle-ci se baigne — la nymphe en ressort affublée d'une ceinture de têtes de chiens hurlants, condamnée à hanter pour toujours un détroit périlleux de la mer, face au tourbillon de Charybde (voir la fiche « Mer »).",
     "Elle inflige un sort semblable à Picus (voir la fiche « Picus »), roi du Latium déjà marié à la nymphe Canens : le voyant refuser ses avances par fidélité, elle le change en pic — l'oiseau porte encore aujourd'hui son nom latin, picus. Deux amours contrariés, deux métamorphoses : la magie de Circé transforme aussi souvent qu'elle punit.",
-    "Dans le Tarot, Circé est la figure du 7 de Coupes, où sept coupes flottent dans les nuages, chacune montrant une image différente — trésor, serpent, couronne : ces reflets multiples et trompeurs sont exactement ce que promettent ses breuvages, séduisants mais rarement ce qu'ils semblent être.",
   ],
   "thétis": [
     "Fille de Nérée (voir la fiche « Nérée »), Thétis est une Néréide capable de se métamorphoser à volonté — feu, eau, lion, serpent — pour échapper à qui cherche à la retenir. Zeus et Poséidon la convoitèrent tous deux, jusqu'à ce qu'une prophétie annonce que le fils de Thétis surpasserait son père : par prudence, les deux dieux renoncèrent et la marièrent à un simple mortel, Pélée.",
@@ -1324,7 +1282,6 @@ const DEITY_LORE = {
   "ulysse": [
     "Roi d'Ithaque réputé pour sa ruse plus que pour sa force — une ruse qu'on dit héritée de son grand-père maternel Autolycos, fils d'Hermès et voleur incomparable (voir la fiche « Hermès ») —, Ulysse conçut le stratagème du cheval de bois qui permit enfin aux Grecs de s'emparer de Troie après dix années de siège infructueux.",
     "Son retour chez lui prit dix années supplémentaires, semées d'épreuves — le Cyclope Polyphème, les sirènes, Circé, Charybde et Scylla — durant lesquelles son intelligence lui permit chaque fois d'échapper à des périls que la seule force n'aurait pas surmontés.",
-    "Dans le Tarot, Ulysse est la figure du 8 de Coupes, où un personnage s'éloigne de nuit, laissant des coupes soigneusement empilées derrière lui : après une année entière passée sur l'île de Circé (voir la fiche « Circé »), c'est bien lui qui choisit de reprendre la mer vers Ithaque, vers son épouse Pénélope (voir la fiche « Pénélope »), plutôt que de s'installer dans un confort déjà acquis.",
   ],
   "pénélope": [
     "Fille du roi Icarios et cousine d'Hélène et de Clytemnestre (voir les fiches « Hélène » et « Clytemnestre »), Pénélope épousa Ulysse (voir la fiche « Ulysse »), roi d'Ithaque, peu avant que celui-ci ne parte combattre à Troie — laissant derrière lui une épouse enceinte de leur fils Télémaque (voir la fiche « Télémaque ») et un royaume qu'elle dut gouverner seule pendant vingt années.",
@@ -1462,7 +1419,6 @@ const DEITY_LORE = {
     "Sa colère peut se muer en pitié tout aussi soudainement : sur le point de laisser sacrifier Iphigénie à Aulis, elle la sauva au dernier instant en substituant une biche sur l'autel (voir la fiche « Iphigénie »).",
     "La chasseresse Atalante, élevée à l'écart des hommes comme elle, partage avec elle ce même mode de vie farouche et indépendant (voir la fiche « Atalante »).",
     "Ses épithètes traduisent bien ce double visage. Potnia Théron, « Maîtresse des animaux sauvages », est son titre le plus ancien, déjà présent chez Homère ; Agrotéra, « la Chasseresse », l'invoque dans son domaine le plus attendu ; et Locheia, « celle qui aide à l'accouchement », rappelle ce paradoxe assumé d'une déesse à jamais vierge devenue protectrice des naissances. À Sparte, sous le nom d'Artémis Orthia, son culte prenait un tour plus rude : selon la légende, une querelle sanglante autour de sa statue, dérobée en Tauride par Oreste, ne s'apaisa qu'après qu'un oracle eut exigé que son autel soit un jour taché de sang humain — un sacrifice que Lycurgue transforma en un rituel moins mortel, la flagellation cérémonielle de jeunes Spartiates devant elle.",
-    "Dans le Tarot, Artémis est la figure du 2 de Bâtons, où l'on tient déjà les deux bâtons d'un premier territoire conquis, le regard tourné vers ce qui reste à choisir : c'est exactement le geste de son enfance, quand elle a fixé elle-même la direction de toute son existence avant que quiconque d'autre n'ait pu la choisir à sa place.",
   ],
   "orion": [
     "Orion est un chasseur géant, réputé pour sa beauté autant que pour son habileté à la chasse — au point qu'Éos, déesse de l'aurore, tomba amoureuse de lui et l'emporta à Délos pour vivre à ses côtés (voir la fiche « Éos »).",
@@ -1596,7 +1552,6 @@ const DEITY_LORE = {
     "Thésée l'emmena avec lui en fuyant la Crète, mais l'abandonna endormie sur l'île de Naxos. C'est là que Dionysos la trouva, en tomba amoureux et l'épousa, lui offrant l'immortalité et une couronne d'or que l'on retrouve, dit-on, parmi les étoiles sous la forme d'une constellation (voir la fiche « Dionysos »).",
     "Une tradition tardive veut que ce mariage n'ait pas été sans conséquence pour tout le monde : le jeune dieu Hyménée, invité à chanter pour l'occasion avec une voix aussi belle que celle de son père Apollon, l'y aurait perdue (voir la fiche « Hyménée ») — la plus heureuse des fêtes coûtant cher à quelqu'un d'autre.",
     "Ariane est particulièrement associée à Dionysos.",
-    "Dans le Tarot, Ariane est la figure du 6 de Coupes, où deux enfants échangent des coupes fleuries dans un jardin paisible : son fil, offert à Thésée sans rien exiger en retour, est ce même geste simple et généreux, une tendresse qui donne avant même de calculer.",
   ],
   "sémélé": [
     "Fille de Cadmos, roi de Thèbes (voir la fiche « Cadmos »), Sémélé fut aimée de Zeus — une liaison qui attira aussitôt la jalousie d'Héra, toujours prompte à se venger d'une rivale mortelle.",
@@ -1608,7 +1563,6 @@ const DEITY_LORE = {
     "Fille de Zeus et d'Héra, Hébé personnifie la jeunesse éternelle qui règne sur l'Olympe. C'est elle qui, avant d'être remplacée par le jeune Ganymède, servait le nectar et l'ambroisie aux dieux lors de leurs banquets — la boisson même de l'immortalité.",
     "Lorsque Héraclès mourut de ses souffrances et fut accueilli parmi les dieux en récompense de ses travaux (voir la fiche « Héraclès »), c'est Hébé qui devint son épouse sur l'Olympe — un mariage qui scella sa victoire finale sur la mortalité elle-même.",
     "Hébé est particulièrement associée à Héraclès.",
-    "Dans le Tarot, Hébé est la figure du 9 de Coupes, où un personnage comblé se tient devant neuf coupes alignées, sans plus rien à démontrer : elle est justement celle qui verse aux dieux le nectar et l'ambroisie, la boisson même d'un contentement qui n'attend plus rien d'ailleurs.",
   ],
   "ilithyie": [
     "Fille de Zeus et d'Héra, Ilithyie préside aux accouchements : c'est elle qui, dit-on, permet à l'enfant de venir au monde — ou qui, si elle le choisit, peut retenir une naissance presque indéfiniment.",
@@ -1622,7 +1576,6 @@ const DEITY_LORE = {
     "C'est là que Léto mit au monde ses jumeaux, Apollon et Artémis (voir les fiches « Apollon » et « Artémis ») — un accouchement rendu possible, au bout du compte, par la solidarité d'une sœur devenue elle-même un refuge.",
     "Toujours poursuivie par la colère d'Héra alors même que ses jumeaux n'étaient encore que des nourrissons, elle s'arrêta un jour en Lycie pour boire à un étang et y baigner ses enfants. Des paysans du lieu, par pure méchanceté, troublèrent l'eau à coups de pied pour l'empêcher de se désaltérer et la chassèrent en l'insultant. Léto, épuisée, les changea sur-le-champ en grenouilles, condamnées depuis à barboter pour toujours dans la vase de cet étang qu'ils lui avaient interdit.",
     "Devenue mère comblée, elle ne tolère pourtant aucun outrage fait à ses enfants. Niobé (voir la fiche « Niobé »), reine de Thèbes et mère de quatorze enfants, se vanta un jour d'être plus digne d'admiration que Léto, qui n'en avait mis au monde que deux. Léto, blessée dans son orgueil de mère, envoya Apollon et Artémis venger l'insulte : l'un abattit à l'arc tous les fils de Niobé, l'autre toutes ses filles, sans qu'aucune supplication n'arrête leurs flèches. Pétrifiée de chagrin, Niobé se changea en rocher sur le mont Sipyle, d'où continue, dit-on, de suinter une eau semblable à des larmes sans fin.",
-    "Léto n'a pas de carte qui porte son nom dans ce tarot, mais son histoire précède et rend possible celle de la carte VII — Le Chariot, celle de son fils Apollon : avant la maîtrise éclatante qu'on lui reconnaît aujourd'hui, il y a l'endurance silencieuse d'une mère rejetée de toutes parts, qui doit d'abord trouver refuge avant que quiconque, chez elle, ne puisse triompher. Sa vengeance envers Niobé rappelle enfin qu'une victoire acquise dans la douleur ne pardonne jamais l'insulte faite à ce prix.",
     "Léto est particulièrement associée à Apollon, à Artémis et à Astéria.",
   ],
   "astéria": [
@@ -1643,7 +1596,6 @@ const DEITY_LORE = {
     "Son mariage avec Cadmos, fondateur de Thèbes (voir la fiche « Cadmos »), fut célébré en présence de tous les dieux de l'Olympe, venus lui offrir des présents — dont un collier forgé par Héphaïstos et une robe de noces tissée par les Charites elles-mêmes (voir la fiche « Charites »), d'une beauté si rare qu'ils restèrent légendaires pour les générations suivantes.",
     "Devenue vieille aux côtés de Cadmos, elle fut changée avec lui en serpent et rejoignit les Champs Élysées — refusant, jusque dans la métamorphose, de se séparer de celui qu'elle avait épousé.",
     "Harmonie est particulièrement associée à Cadmos.",
-    "Dans le Tarot, Harmonie est la figure du 2 de Coupes, où deux personnages échangent leurs coupes face à face, un caducée ailé suspendu entre eux (voir la fiche « Caducée ») — ses deux serpents entrelacés font écho, par un rapprochement plus tardif, à ce même couple changé en serpents à la fin de sa vie : cette carte célèbre l'union à parts égales, où chacun donne autant qu'il reçoit.",
   ],
   "atalante": [
     "Abandonnée à sa naissance par un père qui espérait un fils, Atalante fut allaitée par une ourse puis recueillie par des chasseurs — une enfance sauvage qui en fit une coureuse et une archère hors pair, proche par son mode de vie de la déesse Artémis (voir la fiche « Artémis »).",
@@ -1669,66 +1621,55 @@ const DEITY_LORE = {
     "Aletheia personnifie la Vérité elle-même. Les traditions varient sur son origine : fille de Zeus pour les uns, née de Chronos, le temps primordial, pour les autres — un lien qui a donné naissance à l'adage selon lequel le temps finit toujours par révéler ce qui a été caché.",
     "Son nom grec, alètheia, signifie littéralement « ce qui n'est plus caché » — la négation de lèthè, l'oubli, qui donne aussi son nom au fleuve Lethée (voir la fiche « Lethée »). Les deux figures se répondent ainsi comme deux pôles opposés : l'une dévoile, l'autre efface.",
     "Elle a pour rivale Apaté (voir la fiche « Apaté »), l'esprit de la tromperie. Lassée de voir sa parole détournée et travestie par les hommes, Aletheia se serait retirée au fond d'un puits, loin de la surface où la vérité se déforme si facilement — origine de l'adage antique selon lequel « la vérité est au fond du puits ».",
-    "Dans le Tarot, Aletheia est la figure de l'As d'Épées, où une lame se dresse, nette et couronnée de laurier : la lecture traditionnelle de cette carte — une idée qui perce, une décision prise sans l'ombre d'un doute — est exactement ce que personnifie Aletheia, la vérité qui ne négocie jamais avec ce qui l'entoure.",
   ],
   "ananké": [
     "Ananké personnifie la Nécessité — non pas un simple besoin, mais la contrainte absolue à laquelle rien, pas même les dieux, ne peut se soustraire.",
     "Les récits orphiques la font naître aux tout premiers instants du monde, enlacée à Chronos, le temps primordial, autour de l'œuf cosmique dont naîtra l'univers entier : ensemble, ils mettent la création en mouvement selon un ordre qu'aucune volonté ne peut ensuite défaire.",
     "De cette union naissent, selon certains récits, les Parques elles-mêmes (voir la fiche « Parques »), filant le fil de chaque destinée sur le fuseau que Platon décrit tournant sur les genoux d'Ananké — l'axe même autour duquel tourne le monde. Zeus lui-même, dit-on, s'incline devant ses décrets : la nécessité gouverne jusqu'au roi des dieux.",
-    "Dans le Tarot, Ananké est la figure du 2 d'Épées, où une silhouette aux yeux bandés retient deux épées croisées, refusant encore de trancher : cet équilibre suspendu ne dure jamais éternellement, chez elle moins que quiconque — la nécessité finit toujours par imposer un choix, qu'on y consente ou non.",
   ],
   "éris": [
     "Éris personnifie la Discorde. Homère en fait une sœur d'Arès, sa fidèle compagne sur le champ de bataille ; Hésiode, dans sa Théogonie, la dit plutôt fille de la Nuit seule, née sans père aux côtés d'Apaté et de Némésis (voir les fiches « Apaté » et « Némésis ») — deux traditions parallèles pour une même puissance de rupture qui, une fois déclenchée, ne peut plus être désamorcée.",
     "Non invitée aux noces de Thétis et Pélée (voir la fiche « Thétis »), par crainte qu'elle n'y sème le trouble, elle se présenta malgré tout et jeta parmi les déesses assemblées une pomme d'or portant une seule inscription : « à la plus belle ». Héra, Athéna et Aphrodite se la disputèrent aussitôt, jusqu'à ce que Zeus confie à Pâris (voir la fiche « Pâris ») le soin de trancher — un jugement qui déclenchera la guerre de Troie.",
     "Hésiode distingue pourtant deux Éris bien différentes : l'une pousse au conflit destructeur, l'autre à une rivalité plus saine, celle qui incite le voisin paresseux à travailler autant que celui qui prospère à côté de lui. La discorde n'est donc pas toujours la même force — seule la première porte le nom que la légende a retenu.",
-    "Dans le Tarot, Éris est la figure du 3 d'Épées, où trois lames transpercent un cœur : sa pomme d'or n'était, elle aussi, qu'un seul mot bien plus tranchant qu'il n'y paraissait — une vérité minuscule, jetée sans préméditation, mais qui blesse aussitôt trois orgueils à la fois et ne laisse plus la possibilité de revenir en arrière.",
   ],
   "lethée": [
     "Lethée est le fleuve de l'Oubli, l'un des cours d'eau qui traversent les Enfers — boire à ses eaux efface, dit-on, jusqu'au souvenir d'avoir vécu.",
     "Les âmes des morts s'y désaltéraient traditionnellement avant de renaître, pour ne rien garder de leur existence précédente. Mais une tradition plus tardive, orphique, conseillait l'inverse à ses initiés : sur des tablettes d'or déposées dans leurs tombes, on leur enjoignait d'éviter la source de Lethée et de chercher plutôt celle de Mnémosyne, la Mémoire — pour rester, même dans la mort, fidèles à ce qu'ils avaient été.",
     "Son nom même s'oppose à celui d'Aletheia, la Vérité (voir la fiche « Aletheia ») : alètheia signifie littéralement « ce qui échappe à Lethée » — l'un dévoile ce que l'autre recouvre, deux forces jumelles et contraires.",
-    "Dans le Tarot, Lethée est la figure du 4 d'Épées, où une silhouette repose, immobile, après une période de tension : son don n'est pas la perte, mais le répit — le silence nécessaire pour que l'esprit, un temps, cesse de se souvenir de ce qui l'épuisait.",
   ],
   "némésis": [
     "Némésis personnifie l'indignation légitime et la rétribution qui rétablit l'équilibre chaque fois que la démesure — l'orgueil, la chance excessive, le mépris d'autrui — dépasse une limite qu'aucun mortel ne devrait franchir.",
     "C'est elle, selon la tradition la plus répandue, qui punit Narcisse (voir la fiche « Narcisse ») pour avoir repoussé sans pitié tous ceux qui l'aimaient : elle le condamna à tomber amoureux de son propre reflet, un amour qu'il ne pourrait jamais obtenir en retour — la faute retournée contre celui qui l'avait commise.",
     "On la représente ailée, tenant parfois une roue — celle de la fortune, qui n'épargne personne indéfiniment — ou un instrument de mesure, rappelant que rien ne doit dépasser sa juste proportion, le fameux « rien de trop » gravé au temple de Delphes.",
-    "Dans le Tarot, Némésis est la figure du 5 d'Épées, où une victoire se ramasse avec un sourire ambigu tandis que d'autres s'éloignent, tête baissée : elle rappelle que tout triomphe payé au prix de l'orgueil ou de l'excès finit, tôt ou tard, par se retourner contre celui qui l'a emporté.",
   ],
   "palioxis": [
     "Palioxis personnifie la débandade — le reflux chaotique d'une armée qui rompt les rangs et fuit, à l'opposé exact de la charge conquérante.",
     "Elle appartient au cortège d'Arès, aux côtés de figures comme Phobos (voir la fiche « Phobos ») et son jumeau Deimos, la Terreur, ou Kydoimos, la Confusion du combat : une escorte de forces qui n'affrontent jamais l'ennemi elles-mêmes, mais décident souvent de l'issue d'une bataille en s'emparant d'un camp ou de l'autre.",
     "Contrairement à Ioké, sa contrepartie qui personnifie la poursuite acharnée du vainqueur, Palioxis n'est pas la défaite elle-même : elle est ce moment où continuer le combat cesserait d'avoir un sens, et où seul reculer permet de préserver ce qui peut encore l'être.",
-    "Dans le Tarot, Palioxis est la figure du 6 d'Épées, où une silhouette conduit une barque chargée de lames vers une rive plus calme : son reflux n'est jamais une honte, mais le choix, souvent le plus lucide, de quitter une eau agitée avant qu'elle n'engloutisse tout.",
   ],
   "apaté": [
     "Apaté personnifie la Tromperie. Hésiode en fait une fille de Nyx, la Nuit, née sans père — au côté d'autres forces sombres comme Éris, la Discorde (voir la fiche « Éris »), ou Géras, la Vieillesse : des puissances qui agissent sur le monde sans jamais avoir besoin d'être invoquées.",
     "Des traditions plus tardives l'associent aussi aux maux répandus sur le monde lorsque Pandore souleva le couvercle du vase qui lui avait été confié — la tromperie comptant, dans cette lecture, parmi les premières épreuves faites aux hommes.",
     "Elle a pour rivale Aletheia, la Vérité (voir la fiche « Aletheia ») : l'une dévoile ce que l'autre travestit, et aucune des deux ne l'emporte jamais tout à fait sur l'autre.",
-    "Dans le Tarot, Apaté est la figure du 7 d'Épées, où une silhouette s'éloigne en emportant plusieurs lames, en laissant sciemment les autres derrière elle : une stratégie qui n'est pas un vol pur et simple, mais qui flirte sciemment avec la limite de l'honnêteté — exactement le territoire qu'Apaté ne quitte jamais.",
   ],
   "phobos": [
     "Phobos personnifie la Peur qui saisit avant tout raisonnement — fils d'Arès (voir la fiche « Arès ») et d'Aphrodite, jumeau de Deimos, la Terreur, avec qui il escorte son père au combat, aux côtés de Palioxis, qui incarne le repli de ce même cortège (voir la fiche « Palioxis »).",
     "Homère le place, aux côtés de la tête de la Gorgone, sur le bouclier d'Agamemnon comme sur l'égide d'Athéna : son image seule, brandie face à l'ennemi, suffisait à faire vaciller des rangs entiers avant qu'une seule lame ne soit levée.",
     "Les Spartiates lui vouaient un culte à part, non pour la bannir, mais pour l'apprivoiser : une peur reconnue et maîtrisée, croyaient-ils, forge une discipline plus sûre qu'une bravoure aveugle qui ignore le danger.",
-    "Dans le Tarot, Phobos est la figure du 8 d'Épées, où une silhouette entravée et les yeux bandés se tient debout, cernée d'épées qui laissent pourtant un passage : sa peur, comme la sienne, retient bien plus l'esprit que le corps.",
   ],
   "morphée": [
     "Morphée est le dieu des songes, fils d'Hypnos, le Sommeil — il façonne dans le rêve des silhouettes humaines si parfaites qu'elles se confondent avec la réalité, message des dieux glissé dans le repos des mortels.",
     "Ovide raconte comment Junon, voulant révéler à Alcyone la mort de son époux Céyx en mer, envoya Morphée prendre les traits exacts du disparu pour la lui annoncer en songe — une vérité que la déesse jugeait trop cruelle à dire éveillée, mais qu'il fallait pourtant transmettre.",
-    "Dans le Tarot, Morphée est la figure du 9 d'Épées, où un dormeur repose sous neuf lames suspendues dans la nuit : tout ce qui visite le sommeil n'est pas apaisant — parfois l'esprit doit d'abord porter, même endormi, ce qu'il ne peut pas encore affronter éveillé.",
   ],
   "thanatos": [
     "Thanatos personnifie la mort paisible, sans violence ni souffrance — fils de Nyx comme Apaté (voir la fiche « Apaté »), et frère jumeau d'Hypnos, le Sommeil, tant les deux se ressemblent.",
     "Sisyphe parvint un jour à l'enchaîner par ruse, empêchant plus personne de mourir sur terre — jusqu'à ce qu'Arès, furieux de voir la guerre perdre tout enjeu sans la mort pour la trancher, ne vienne le libérer de force.",
     "Selon une tradition popularisée par la tragédie d'Euripide, Héraclès (voir la fiche « Héraclès ») l'aurait un jour défié corps à corps pour arracher la reine Alceste (voir la fiche « Alceste ») des Enfers — une version plus rare que celle suivie ici, où c'est Perséphone elle-même, touchée par l'amour d'Alceste pour son époux, qui la renvoya sans qu'aucun combat ne soit nécessaire.",
-    "Dans le Tarot, Thanatos est la figure du 10 d'Épées, où une silhouette gît transpercée sous un ciel qui pourtant s'éclaircit à l'horizon : sa fin n'est jamais cruelle, seulement inévitable — et c'est cette même inévitabilité qui marque, dans la carte, le point le plus bas d'où il ne reste qu'à se relever.",
   ],
   "hormos": [
     "Hormos personnifie l'élan qui précède toute action — l'impulsion brute, avant même qu'un but précis ne soit choisi.",
     "Les Athéniens lui vouaient un autel, tout près de celui dédié à Éléos, la Pitié (voir la fiche « Éléos »), comme s'il fallait honorer côte à côte la force qui pousse à agir et la retenue qui sait, parfois, la tempérer.",
     "Figure mineure et peu documentée, Hormos n'a jamais eu de mythe développé qui lui soit propre — comme si l'élan qu'il personnifie ne s'attardait jamais assez longtemps sur un seul récit pour s'y fixer.",
-    "Dans le Tarot, Hormos est la figure de l'As de Bâtons, où une main surgit des nuages tenant un bâton encore en bourgeon : une énergie brute et sans direction encore choisie, mais qui ne demande déjà plus qu'à s'exprimer.",
   ],
   "arès": [
     "Fils de Zeus et d'Héra (voir les fiches « Zeus » et « Héra »), Arès personnifie la guerre dans sa forme la plus brute — la violence du combat lui-même, plutôt que la stratégie qui l'encadre. Même ses propres parents le tenaient à distance : Zeus le qualifie, dans l'Iliade, du plus détestable de tous ses enfants.",
@@ -1738,64 +1679,53 @@ const DEITY_LORE = {
     "Sa figure inspire aussi tout un peuple : les Amazones voient dans leur première reine, Otrera (voir la fiche « Otrera »), une épouse mortelle d'Arès, qui aurait fondé en son honneur le sanctuaire d'Artémis à Éphèse — il devient ainsi, à travers elle, le père spirituel de la nation guerrière tout entière plutôt que le père littéral de chacune de ses reines, Antiope et Hippolyté parmi elles (voir les fiches « Antiope » et « Hippolyté »). Une seule d'entre elles porte pourtant, dans les textes anciens, le titre exact de « fille d'Arès » : Penthésilée (voir la fiche « Penthésilée »), venue prêter main-forte à Troie après la mort d'Hector, tuée en duel par Achille qui, dit-on, pleura en découvrant la beauté de celle qu'il venait d'abattre.",
     "Une autre de ses filles, mortelle celle-là, marqua durablement Athènes : Alcippé, née d'une liaison avec la princesse Aglauros, fut agressée par Halirrhothios, fils de Poséidon, qu'Arès tua sur-le-champ pour la défendre — un geste qui lui valut son tout premier procès, jugé par les autres dieux eux-mêmes sur une colline d'Athènes qui garda depuis son nom (voir la fiche « Alcippé »).",
     "Chez Homère, il porte aussi le nom d'Enyalios, employé comme un simple équivalent du sien — Brotoloigos, « fléau des mortels », et Miaiphonos, « souillé de sang », en résument le tempérament plus brutalement encore. Une tradition plus tardive fit toutefois d'Enyalios une figure distincte, devenue le fils d'Arès et d'Enyo (voir la fiche « Enyo »). À Tégée, en Arcadie, on l'honorait sous un nom plus surprenant, Gynaikothoinas, « celui que festoient les femmes » : les Tégéates, leur garnison masculine absente, auraient repoussé seuls un assaut spartiate mené en réalité par leurs propres femmes armées en secret — celles-ci célébrèrent leur victoire par un banquet dont les hommes furent exclus, un rite rendu depuis à Arès en souvenir du jour où la guerre échappa entièrement aux hommes.",
-    "Dans le Tarot, Arès est la figure du 3 de Bâtons, où l'on regarde déjà au loin ce qu'une décision engagée va produire : chez lui, une fois la guerre déclarée, plus rien ne l'arrête ni ne se négocie — l'élan brut, sans retour possible, jusqu'à ce que l'issue se révèle d'elle-même.",
   ],
   "thalia": [
     "Thalia, dont le nom signifie « celle qui fleurit », est l'une des trois Charites — les déesses de la grâce et de la joie que la tradition ne représente jamais seules, toujours dansant ensemble (voir la fiche « Charites »).",
     "Parmi ses deux sœurs, elle personnifie plus particulièrement la fête, l'abondance et tout ce qui s'épanouit sans nécessité — les banquets, la parure, la beauté qui n'a besoin de rien justifier d'autre qu'elle-même.",
     "Une autre Thalie existe dans la mythologie grecque, l'une des neuf Muses, protectrice de la comédie et de la poésie pastorale (voir la fiche « Thalie ») : les deux Thalia restent distinctes, même si leur nom commun — et leur joie partagée — les rapproche.",
-    "Dans le Tarot, Thalia est la figure du 4 de Bâtons, où des guirlandes de fleurs relient quatre bâtons au-dessus d'une fête déjà commencée : la stabilité heureuse et le répit mérité après l'effort sont exactement son domaine.",
   ],
   "zelos": [
     "Zelos personnifie le Zèle et l'émulation rivale — l'ardeur qui pousse à se mesurer aux autres, jusqu'à la compétition la plus âpre.",
     "Fils du Titan Pallas et de Styx, comme Niké, la Victoire (voir la fiche « Niké »), il se rangea avec ses frères et sœurs aux côtés de Zeus pendant la guerre contre les Titans, et resta depuis un compagnon permanent de son trône, en récompense de cette fidélité.",
-    "Dans le Tarot, Zelos est la figure du 5 de Bâtons, où cinq personnages croisent leurs bâtons dans un désordre où personne ne prend clairement le dessus : cette énergie de rivalité brute, ni destructrice ni pacifique, est précisément la sienne — la friction de vouloir dépasser l'autre, sans qu'aucune règle n'ait encore tranché qui l'emporte.",
   ],
   "bia": [
     "Bia personnifie la Force brute — non la force qui combat pour elle-même, mais celle qui exécute sans jamais discuter ce qu'on lui ordonne.",
     "Fille du Titan Pallas et de Styx, sœur de Niké, de Kratos (voir les fiches « Niké » et « Kratos ») et de Zelos (voir la fiche « Zelos »), elle rallia elle aussi Zeus pendant la guerre contre les Titans et fut récompensée d'une place permanente à ses côtés, jamais quittée depuis.",
     "Elle et Kratos, sur ordre de Zeus, traînèrent un jour Prométhée jusqu'au rocher du Caucase où il fut enchaîné (voir la fiche « Prométhée ») — dans le récit qui la met en scène, Bia ne prononce jamais un mot, contrairement à Kratos : sa seule fonction est d'agir, jamais de justifier.",
-    "Dans le Tarot, Bia est la figure du 6 de Bâtons, où un vainqueur couronné de laurier avance acclamé par la foule : la place qu'elle occupe aux côtés de Zeus depuis la victoire sur les Titans est exactement cette reconnaissance méritée, gagnée par une loyauté jamais remise en question.",
   ],
   "agon": [
     "Agon personnifie la Compétition elle-même — non l'affrontement guerrier, mais l'épreuve codifiée où l'on se mesure aux autres selon des règles communes à tous.",
     "Le voyageur Pausanias décrit avoir vu, à Olympie, une statue lui étant consacrée, tenant les haltères des sauteurs — Agon présidait aussi bien les concours sportifs que les concours dramatiques donnés lors des grandes fêtes religieuses.",
-    "Dans le Tarot, Agon est la figure du 7 de Bâtons, où un seul personnage, en position haute, tient tête à six autres levés vers lui : il est précisément ce terrain où il faut sans cesse défendre sa place face à qui veut la prendre, épreuve après épreuve.",
   ],
   "borée": [
     "Borée est le dieu du vent du Nord, le plus violent des quatre Anémoi — ses frères Notos (le vent du Sud), Euros (le vent d'Est) et Zéphyr (voir la fiche « Zéphyr »), le vent d'Ouest, soufflent chacun avec une force bien moindre que la sienne.",
     "Fils d'Astréos et d'Éos, l'Aurore (voir la fiche « Éos »), il s'éprit de la princesse athénienne Orithye et, après avoir essuyé un refus, l'enleva en pleine tempête pour l'emmener régner à ses côtés en Thrace — un rapt brutal que les Athéniens finirent par honorer comme une alliance : Borée devint ainsi, par ce mariage, un beau-frère de leur cité.",
     "Lors des guerres médiques, les Athéniens, se souvenant de ce lien, adressèrent des prières à Borée pour qu'il vienne à leur secours contre la flotte perse — Hérodote raconte que ses vents se levèrent alors et fracassèrent une partie des navires ennemis au large de l'Eubée, un secours que la cité lui attribua par la suite comme un dû entre parents.",
-    "Dans le Tarot, Borée est la figure du 8 de Bâtons, où huit bâtons filent dans les airs à toute vitesse vers un but encore invisible : ce même souffle brutal et soudain, capable d'enlever une princesse comme de disperser une flotte entière, est précisément ce qui porte cette carte — un mouvement qu'aucune volonté ne semble plus pouvoir ralentir une fois qu'il s'est levé.",
   ],
   "alké": [
     "Alké personnifie la Vaillance martiale — la fermeté qui tient la ligne dans l'épreuve, plus proche de l'endurance du combattant que de la fureur guerrière.",
     "C'est une figure mineure, très peu documentée dans les sources qui nous restent : ni généalogie développée ni récit propre ne lui sont attachés, seulement son nom, invoqué comme une qualité que l'on souhaite à qui affronte une épreuve longue.",
-    "Dans le Tarot, Alké est la figure du 9 de Bâtons, où un personnage blessé mais debout tient son dernier bâton, huit autres dressés derrière lui en rempart : cette vaillance qui ne cède pas, même affaiblie, est exactement la sienne — une résistance qui tient bon non par éclat, mais par simple refus de céder.",
   ],
   "kratos": [
     "Kratos personnifie la Puissance souveraine — non la force qui agit d'elle-même, comme sa sœur Bia (voir la fiche « Bia »), mais l'autorité qui commande et fait exécuter.",
     "Fils du Titan Pallas et de Styx, frère de Niké, de Bia et de Zelos (voir les fiches « Niké », « Bia » et « Zelos »), il se rangea comme eux aux côtés de Zeus pendant la guerre contre les Titans et resta depuis un compagnon permanent de son trône, chargé d'en faire respecter les volontés.",
     "Dans la pièce Prométhée enchaîné d'Eschyle, c'est lui qui ouvre la scène : sur ordre de Zeus, il escorte Héphaïstos jusqu'au rocher du Caucase et lui ordonne d'y enchaîner Prométhée, pendant que Bia, silencieuse à ses côtés, se contente d'exécuter (voir la fiche « Prométhée »). Seul parmi les quatre enfants de Styx à recevoir une réplique dans les textes qui nous restent, il incarne le pouvoir qui se justifie en parlant, là où Bia agit sans un mot.",
-    "Dans le Tarot, Kratos est la figure du 10 de Bâtons, où un personnage courbé porte à grand-peine dix bâtons vers une maison au loin : cette même puissance qui n'a de sens qu'en s'exerçant jusqu'au bout d'une charge, quel qu'en soit le poids, est précisément la sienne — la force devenue fardeau, mais jamais déposée avant le but atteint.",
   ],
   "philotès": [
     "Philotès personnifie l'affection, l'amitié et le désir partagé — la force qui rapproche. Hésiode en fait une fille de la Nuit, née sans père, aux côtés de sœurs bien plus sombres : Apaté la Tromperie, Némésis la Rétribution et Éris la Discorde (voir les fiches « Apaté », « Némésis » et « Éris ») — une même origine nocturne, mais un tempérament qui prend le chemin inverse du leur.",
     "Le philosophe Empédocle en fait l'une des deux grandes forces qui gouvernent l'univers : Philotès unit les éléments là où Éris, sa sœur, les sépare — l'amour et la discorde alternant sans fin pour façonner puis défaire le monde. Il va jusqu'à l'identifier à Aphrodite elle-même, sous son nom archaïque de Kypris.",
     "Un détail rare mais frappant lui est attaché : Empédocle la dit blessée et offensée par les sacrifices d'animaux, dont elle réclamerait l'abstention en son honneur — une divinité de l'union qui refuse jusqu'à la violence faite pour la célébrer.",
-    "Dans le Tarot, Philotès est la figure de l'As de Coupes, où une main tendue depuis les nuages offre une coupe débordante d'eau vive : ce premier élan qui donne sans calcul ni condition, avant même de savoir ce qu'il en coûtera, est exactement ce qu'elle personnifie.",
   ],
   "euphrosyne": [
     "Euphrosyne, dont le nom signifie « joie » ou « bonne humeur », est l'une des trois Charites — les déesses de la grâce que la tradition ne représente jamais seules, toujours dansant ensemble aux côtés d'Aglaé et de Thalia (voir les fiches « Charites », « Aglaé » et « Thalia »).",
     "Selon Hésiode, elle est fille de Zeus et de l'Océanide Eurynomé, même si les sources antiques varient sur le nombre exact et la généalogie des Charites. Compagnes d'Aphrodite et des Muses, les trois sœurs président aux fêtes et aux banquets de l'Olympe — tout ce qui rend la vie belle sans nécessité.",
     "Parmi ses sœurs, elle personnifie plus particulièrement la joie elle-même — non l'abondance ou la fête que représente Thalia (voir la fiche « Thalia »), mais l'allégresse qui ne naît que du partage, le plaisir simple d'être ensemble.",
-    "Dans le Tarot, Euphrosyne est la figure du 3 de Coupes, où trois femmes lèvent leurs coupes ensemble vers le ciel : cette joie-là ne se vit jamais seule — inutile de la chercher dans la solitude, elle n'existe qu'à plusieurs.",
   ],
   "hypnos": [
     "Hypnos personnifie le Sommeil, fils de la Nuit — frère jumeau de Thanatos, la Mort paisible (voir la fiche « Thanatos »), avec qui il partage une ressemblance si troublante que les Anciens les disaient inséparables, l'un menant doucement là où l'autre mène pour toujours.",
     "Il habite, dit-on, une grotte silencieuse aux confins du monde, là où naît le fleuve Lethée, l'Oubli (voir la fiche « Lethée »), et où se rencontrent le jour et la nuit : des pavots poussent à son entrée, et c'est là qu'il engendra Morphée, le dieu des songes, capable de prendre en rêve les traits de n'importe quel mortel (voir la fiche « Morphée »).",
     "Dans l'Iliade, Héra le convainc d'endormir Zeus lui-même le temps de favoriser les Grecs sur le champ de bataille de Troie — l'un des rares récits où même le maître de l'Olympe cède à un pouvoir plus discret que le sien. Une autre tradition le dit épris du berger Endymion (voir la fiche « Endymion »), à qui il laissa les yeux entrouverts durant son sommeil éternel, pour ne jamais cesser de le contempler.",
-    "Dans le Tarot, Hypnos est la figure du 4 de Coupes, où un dormeur assis sous un arbre reste indifférent aux coupes qui l'entourent, jusqu'à ce qu'une main lui tende depuis un nuage une quatrième offrande qu'il ne voit pas non plus : son sommeil n'est jamais malveillant, mais il peut, comme ici, faire manquer ce qui est pourtant offert.",
   ],
   "orphée": [
     "Orphée fut le plus grand musicien jamais né, fils du roi thrace Œagre (voir la fiche « Œagre ») et de la Muse Calliope (voir la fiche « Calliope ») — certaines traditions le disent plutôt fils d'Apollon lui-même, qui lui offrit une lyre d'or et lui enseigna à en jouer (voir la fiche « Lyre »). Son chant, dit-on, charmait aussi bien les bêtes sauvages que les arbres et les rochers, qui se déplaçaient pour venir l'entendre.",
@@ -1803,14 +1733,12 @@ const DEITY_LORE = {
     "Fou de chagrin, Orphée descendit aux Enfers avec sa seule lyre : son chant adoucit le cœur inflexible d'Hadès et de Perséphone (voir les fiches « Hadès » et « Perséphone »), qui consentirent à lui rendre Eurydice, à une condition — marcher devant elle sans se retourner avant d'avoir atteint la lumière du jour. Presque arrivé, incapable de résister au doute, il se retourna un instant trop tôt : elle disparut une seconde fois, cette fois pour toujours.",
     "Retiré du monde après cette seconde perte, Orphée se détourna de tout nouvel amour et, selon certains récits, du culte de Dionysos lui-même, ne jurant plus que par Apollon et le soleil levant — un dédain que les Ménades thraces, fidèles bacchantes du dieu qu'il négligeait, ne lui pardonnèrent pas. Elles le mirent en pièces lors de l'une de leurs transes, dispersant ses membres que les Muses, ses tantes, recueillirent ensuite pour lui offrir une sépulture (voir la fiche « Muses »).",
     "Sa tête, jetée dans le fleuve Hèbre, continua de chanter le nom d'Eurydice tout au long de sa dérive jusqu'à la mer, avant d'échouer sur l'île de Lesbos, où elle rendit, dit-on, des oracles pendant des siècles — la voix du plus grand musicien du monde restée vivante bien après la mort de son corps.",
-    "Dans le Tarot, Orphée est la figure du 5 de Coupes, où une silhouette en deuil contemple trois coupes renversées sans voir les deux qui tiennent encore debout derrière elle : son regard, comme le sien vers Eurydice au sortir des Enfers, se fixe sur la perte au moment précis où il ne fallait plus se retourner.",
   ],
   "hyménée": [
     "Hyménée personnifie le chant et le rite du mariage. La tradition la plus répandue en fait le fils d'Apollon et d'une Muse — Clio, Calliope, Uranie ou Terpsichore selon les versions —, même si d'autres récits le disent plutôt fils de Dionysos, ou de Dionysos et d'Aphrodite. On le représente jeune, une couronne de fleurs sur la tête et une torche allumée à la main, celle-là même qui éclaire, avec les autres torches du cortège nocturne, le passage de la mariée jusqu'à son nouvel époux (voir la fiche « Torches »).",
     "Les Grecs croyaient sa présence indispensable à toute noce : sans lui, le mariage était voué au malheur — on l'invoquait donc à voix haute pendant la cérémonie, dans un chant qui portait justement son nom, l'hyménée, entonné tout au long du cortège menant l'épousée à sa nouvelle maison.",
     "Sa présence, pourtant, ne garantit pas toujours un présage favorable. Ovide raconte qu'appelé aux noces d'Orphée et Eurydice, Hyménée s'y rendit bien, mais sans prononcer les paroles rituelles ni afficher son visage joyeux : sa torche ne fit que fumer sans jamais vouloir prendre, quels que soient les efforts pour l'agiter — un présage qui, dans les faits, se révéla en dessous de la vérité (voir la fiche « Orphée »).",
     "Une tradition plus tardive veut aussi qu'il ait perdu, aux noces de Dionysos et d'Ariane sur l'île de Naxos, une voix pourtant réputée aussi belle que celle de son père Apollon (voir la fiche « Ariane ») — comme si présider aux noces des autres avait, plus d'une fois, un prix pour lui-même.",
-    "Dans le Tarot, Hyménée est la figure du 10 de Coupes, où une famille réunie lève les bras vers un arc-en-ciel de dix coupes : cette carte est la fête qu'il préside dans ce qu'elle a de plus réussi, cette joie qui se transmet des mariés jusqu'aux enfants qui dansent déjà sous le même arc.",
   ],
 
   /* ----- Personnifications des cartes numérales illustrées de Deniers (voir NUMBER_CARD_DEITY) ----- */
@@ -1818,61 +1746,51 @@ const DEITY_LORE = {
     "Rhéa, fille du Ciel et de la Terre (Ouranos et Gaïa), épousa son frère Cronos et mit au monde les six premiers dieux de l'Olympe : Hestia, Déméter, Héra, Hadès, Poséidon et Zeus. Mais Cronos, averti qu'un de ses enfants le détrônerait un jour comme il avait lui-même détrôné son père, avalait chacun d'eux dès sa naissance.",
     "Lorsque vint le tour de Zeus, Rhéa refusa de le perdre comme les autres : elle se retira secrètement en Crète pour accoucher, cacha le nouveau-né dans une grotte du mont Ida, confié aux nymphes et à la chèvre Amalthée, et tendit à Cronos une pierre emmaillotée qu'il avala sans se douter de la substitution (voir la fiche « Grotte »).",
     "Zeus, une fois adulte, revint forcer son père à rendre tous les enfants qu'il avait engloutis — ses propres frères et sœurs, désormais adultes eux aussi — avant de le renverser à son tour lors de la Titanomachie. Rhéa, par cette seule ruse, avait rendu possible la naissance de l'Olympe tel qu'on le connaît.",
-    "Dans le Tarot, Rhéa est la figure de l'As de Deniers, où une main tend un unique denier doré au-dessus d'un jardin fleuri : comme elle, cette carte protège une promesse encore fragile — une graine, un commencement — le temps qu'il lui faut pour grandir sans être englouti trop tôt.",
   ],
   "kairos": [
     "Kairos personnifie l'instant favorable — non pas le temps qui s'écoule (Chronos), mais l'occasion précise qui se présente une fois et ne se répète pas.",
     "La tradition le représente jeune et ailé, souvent muni de sandales ailées et d'une balance en équilibre sur le fil d'un rasoir : une longue mèche pend sur son front, tandis que l'arrière de son crâne reste chauve — on ne peut le saisir qu'en face, au moment même où il passe, jamais après qu'il s'est éloigné.",
     "Le sculpteur Lysippe en fit l'une de ses œuvres les plus célèbres, une statue tant admirée dans l'Antiquité qu'elle inspira des épigrammes entières consacrées à en décrire l'allégorie : la fortune ne se refuse jamais, mais elle ne prévient pas non plus de son passage.",
-    "Dans le Tarot, Kairos est la figure du 2 de Deniers, où un jeune homme ailé jongle avec deux deniers au bord de vagues déchaînées : cet équilibre tenu au sommet d'un rocher n'a rien de statique — c'est un ajustement permanent, exactement la vigilance qu'exige de saisir le bon moment sans jamais le laisser filer.",
   ],
   "dédale": [
     "Dédale est l'archétype grec de l'ingéniosité technique : architecte, sculpteur et inventeur, on lui attribue tout autant des statues si vivantes qu'on les croyait animées que des outils devenus indispensables aux artisans de son temps.",
     "Sur l'ordre du roi Minos, il construisit en Crète le Labyrinthe — un dédale de couloirs si complexe que son propre créateur y aurait presque pu se perdre — pour y enfermer le Minotaure (voir la fiche « Labyrinthe »).",
     "Minos, craignant qu'il ne révèle le secret de sa construction, l'enferma lui-même dans le Labyrinthe avec son fils Icare. Dédale, refusant d'y rester prisonnier de sa propre œuvre, fabriqua pour tous deux des ailes de plumes assemblées à la cire — une évasion par les airs qui coûta la vie à Icare (voir la fiche « Icare »), monté trop près du soleil, mais que Dédale, lui, mena à son terme.",
-    "Dans le Tarot, Dédale est la figure du 3 de Deniers, où un architecte et deux collaborateurs penchés sur des plans de labyrinthe donnent forme à un projet commun : la même intelligence qui a conçu l'édifice le plus retors de la mythologie ne travaille jamais seule sur cette carte — elle a besoin de mains pour la suivre.",
   ],
   "ctésios": [
     "Zeus Ctésios (« Zeus des biens ») est l'aspect du roi des dieux tourné vers l'intérieur du foyer plutôt que vers le ciel ou l'Olympe : le gardien discret des réserves, des provisions et de tout ce qu'une maisonnée met de côté pour durer.",
     "Son culte domestique se pratiquait sans temple ni grande cérémonie : chaque maison entretenait dans son cellier une simple jarre à deux anses, remplie d'eau pure, d'huile et de fruits, couronnée de laine — un autel miniature dédié à la prospérité accumulée plutôt qu'à la richesse soudaine.",
     "Contrairement aux grandes figures de l'abondance comme Ploutos, qui incarne la richesse elle-même, Ctésios personnifie moins l'avoir que le fait de le préserver : une vigilance patiente, plus proche de l'économie domestique que de la fortune éclatante.",
-    "Dans le Tarot, Ctésios est la figure du 4 de Deniers, où un personnage serre un denier contre sa poitrine, deux autres sous ses pieds et un dernier sur sa tête : cette carte est cette même vigilance sur ce qu'on possède déjà — utile tant qu'elle protège, mais qui, comme la jarre gardée de trop près, risque de finir par n'être plus qu'un fardeau qu'on n'ose plus ouvrir.",
   ],
   "penia": [
     "Penia personnifie le dénuement — non pas la misère absolue, mais le manque permanent qui pousse sans cesse à chercher, jamais tout à fait comblé.",
     "Platon raconte, dans le Banquet, comment elle se présenta au festin donné pour la naissance d'Aphrodite, mendiant à la porte pendant que les dieux festoyaient à l'intérieur. Apercevant Poros, personnification de l'Abondance et de la Ressource, ivre du nectar servi ce soir-là, elle s'unit à lui pour concevoir un enfant : Éros, le désir amoureux.",
     "De cette union naît, selon Platon, la nature même de l'amour : toujours en quête, jamais rassasié, tenant à la fois de sa mère un dénuement perpétuel et de son père l'ingéniosité à toujours trouver un moyen d'obtenir ce qui lui manque.",
-    "Dans le Tarot, Penia est la figure du 5 de Deniers, où deux silhouettes démunies passent dans le froid devant un vitrail éclairé sans y entrer : elle est cette exclusion qui semble sans issue — et pourtant, comme le rappelle son propre mythe, c'est souvent du manque lui-même que naît la ressource pour en sortir.",
   ],
   "éléos": [
     "Éléos personnifie la Pitié et la compassion envers le malheur d'autrui — un sentiment si estimé par les Athéniens qu'ils lui élevèrent, sur l'Agora, un autel unique en son genre : dédié non à un dieu de l'Olympe, mais à cette seule vertu.",
     "Selon Pausanias, cet autel servait de refuge aux suppliants — esclaves en fuite, exilés, vaincus de toute origine — car nulle part ailleurs en Grèce une cité n'honorait ainsi la clémence elle-même plutôt qu'un dieu censé l'accorder. Hormos avait lui aussi son autel tout près, sur cette même Agora (voir la fiche « Hormos »).",
     "Contrairement à Némésis, qui rétablit un équilibre par la sanction (voir la fiche « Némésis »), Éléos agit dans l'autre sens : elle ne punit jamais, elle épargne — un geste que même les puissants pouvaient recevoir sans y perdre leur rang.",
-    "Dans le Tarot, Éléos est la figure du 6 de Deniers, où un homme richement vêtu partage ses pièces entre deux mendiants à genoux, une balance à la main : cette carte est ce même geste — mesuré, mais réel — qui redistribue sans jamais humilier celui qui reçoit.",
   ],
   "aristée": [
     "Aristée, fils d'Apollon et de la nymphe Cyrène, fut élevé par les Nymphes et les Muses, qui lui enseignèrent l'art de cultiver la terre et d'élever les abeilles — des savoirs qu'il transmit ensuite lui-même aux hommes, comme Triptolème avant lui pour le blé (voir la fiche « Triptolème »).",
     "Virgile raconte comment, ayant perdu toutes ses abeilles après la mort accidentelle d'Eurydice — la nymphe s'était noyée en le fuyant —, Aristée dut consulter le devin marin Protée pour apprendre comment en faire renaître un essaim entier de la carcasse d'un taureau sacrifié : un long rite, patient et minutieux, pour retrouver ce qu'il avait perdu.",
     "Sa légende en fait le patron discret de tous les savoirs agricoles qui demandent du temps avant de porter leurs fruits — l'olivier, l'abeille, le fromage — plutôt que les récoltes rapides que président d'autres figures.",
-    "Dans le Tarot, Aristée est la figure du 7 de Deniers, où un cultivateur s'appuie sur sa houe pour contempler ce qu'il a déjà planté, sans pouvoir encore juger si cela suffira : cette pause n'est pas de l'inaction, mais exactement le temps qu'exige tout ce qu'il a jadis appris à faire grandir.",
   ],
   "techné": [
     "Techné personnifie l'habileté manuelle et le savoir-faire acquis par la pratique — le mot grec technē a d'ailleurs donné notre propre mot « technique ».",
     "Contrairement à Athéna ou Héphaïstos (voir les fiches « Athéna » et « Héphaïstos »), dont le patronage sur les métiers et l'artisanat repose sur un mythe développé, Techné reste une figure tardive et allégorique, apparue surtout dans l'art et la littérature gréco-romaines pour représenter cette qualité elle-même plutôt qu'un personnage aux exploits racontés.",
     "Elle incarne ainsi moins un pouvoir divin qu'une valeur : la maîtrise patiente d'un geste répété, jusqu'à ce que la main sache ce que l'esprit n'a plus besoin de lui rappeler.",
-    "Dans le Tarot, Techné est la figure du 8 de Deniers, où une artisane burine un denier après l'autre dans un atelier ordonné : cette carte est exactement ce savoir-faire qui ne s'acquiert que par la répétition, geste après geste, jusqu'à devenir une seconde nature.",
   ],
   "aglaé": [
     "Aglaé, dont le nom signifie « splendeur » ou « éclat », est la plus jeune des trois Charites — les déesses de la grâce que la tradition ne représente jamais seules, toujours dansant aux côtés d'Euphrosyne et de Thalia (voir les fiches « Charites », « Euphrosyne » et « Thalia »).",
     "Homère, dans l'Iliade, en fait l'épouse d'Héphaïstos (voir la fiche « Héphaïstos ») — une union surprenante entre le dieu forgeron, boiteux et disgracié par les autres Olympiens, et celle qui personnifie justement l'éclat et la beauté rayonnante.",
     "Parmi ses sœurs, elle incarne plus particulièrement la splendeur qui couronne un accomplissement déjà réussi — non plus l'effort ou le partage, mais le rayonnement tranquille de ce qui n'a plus rien à prouver.",
-    "Dans le Tarot, Aglaé est la figure du 9 de Deniers, où une femme élégante se tient seule dans un jardin abondant, un oiseau posé sur la main : cette carte est exactement cet éclat assumé, l'aisance de celle qui profite enfin, sans plus rien devoir démontrer, de ce qu'elle a bâti seule.",
   ],
   "euthénie": [
     "Euthénie personnifie la Prospérité et l'Abondance durable — moins un personnage aux exploits racontés qu'une qualité incarnée, apparue surtout dans l'art et la pensée grecques tardives pour donner un visage au fruit visible d'une terre bien cultivée et d'une maison bien tenue.",
     "Elle appartient à cette même famille de figures allégoriques que Techné ou Éléos (voir les fiches « Techné » et « Éléos ») : des personnifications sans mythe développé, honorées pour la qualité qu'elles incarnent plutôt que pour des exploits qui leur seraient propres.",
     "Elle partage avec Ctésios, gardien du garde-manger domestique (voir la fiche « Ctésios »), ce même terrain : non la richesse conquise ou héritée d'un seul coup, mais celle qui s'accumule patiemment, génération après génération, jusqu'à devenir un bien commun plutôt qu'individuel.",
-    "Dans le Tarot, Euthénie est la figure du 10 de Deniers, où trois générations d'une même famille se retrouvent réunies dans une cour prospère, entourées de dix deniers : cette carte est cet aboutissement qui ne s'arrête jamais à une seule personne, mais se transmet et se partage.",
   ],
 
   /* ----- Figures ajoutées à la demande directe de l'utilisatrice ----- */
@@ -2766,16 +2684,23 @@ function renderHome(){
   `;
 }
 
+// Recherche insensible aux accents : "Acteon" doit trouver "Actéon" aussi bien que "acteon".
+// NFD décompose chaque lettre accentuée en lettre nue + diacritique séparé, qu'il suffit
+// ensuite de retirer (plage Unicode des marques combinantes).
+function normalizeSearch(str){
+  return String(str || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+}
+
 function figureRowHTML([id, name, note]){
-  return `<button class="list-item" data-nav="figureDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML((name + " " + note).toLowerCase())}">
+  return `<button class="list-item" data-nav="figureDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML(normalizeSearch(name + " " + note))}">
     <span class="list-item-title">${escapeHTML(name)}</span>
     <span class="list-item-note">${escapeHTML(note)}</span>
   </button>`;
 }
 
 function renderFiguresGrid(query){
-  const q = (query || "").trim().toLowerCase();
-  const list = q ? FIGURE_ENTRIES.filter(e => (e[1] + " " + e[2]).toLowerCase().includes(q)) : FIGURE_ENTRIES;
+  const q = normalizeSearch(query).trim();
+  const list = q ? FIGURE_ENTRIES.filter(e => normalizeSearch(e[1] + " " + e[2]).includes(q)) : FIGURE_ENTRIES;
   if(!list.length) return `<p class="empty">Aucune figure ne correspond à « ${escapeHTML(query)} ».</p>`;
   return `<div class="list">${list.map(figureRowHTML).join("")}</div>`;
 }
@@ -2791,15 +2716,15 @@ function renderFigures(){
 }
 
 function symbolRowHTML([id, s]){
-  return `<button class="list-item" data-nav="symbolDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML((s.label + " " + s.desc).toLowerCase())}">
+  return `<button class="list-item" data-nav="symbolDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML(normalizeSearch(s.label + " " + s.desc))}">
     <span class="list-item-title">${escapeHTML(s.label)}</span>
     <span class="list-item-note">${escapeHTML(s.desc)}</span>
   </button>`;
 }
 
 function renderSymbolsGrid(query){
-  const q = (query || "").trim().toLowerCase();
-  const list = q ? SYMBOL_ENTRIES.filter(([, s]) => (s.label + " " + s.desc).toLowerCase().includes(q)) : SYMBOL_ENTRIES;
+  const q = normalizeSearch(query).trim();
+  const list = q ? SYMBOL_ENTRIES.filter(([, s]) => normalizeSearch(s.label + " " + s.desc).includes(q)) : SYMBOL_ENTRIES;
   if(!list.length) return `<p class="empty">Aucun symbole ne correspond à « ${escapeHTML(query)} ».</p>`;
   return `<div class="list">${list.map(symbolRowHTML).join("")}</div>`;
 }
