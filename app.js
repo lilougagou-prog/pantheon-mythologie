@@ -2568,6 +2568,246 @@ const DEITY_INLINE_PORTRAITS = {
     { match: "consolées l'une par l'autre dans le camp achéen", src: "assets/deity-chryseis-briseis.jpg", alt: "Chryséis et sa cousine Briséis", wide: true },
   ],
 };
+
+/* ===================== GÉNÉALOGIE ===================== */
+
+// Une seule source de vérité, id -> [id des parents] (0, 1 ou 2 entrées ; 0 pour une figure
+// primordiale surgie sans union ni parent, 1 quand un seul parent a sa propre fiche dans ce
+// corpus — l'autre restant un nom sans id, mortel secondaire ou figure absente). Tout le
+// reste (enfants, unions, fratrie) se déduit automatiquement de cette seule table, jamais
+// saisi à la main : voir genealogyRelations(). Construite exclusivement à partir de liens de
+// parenté déjà établis en toutes lettres dans DEITY_LORE (voir la fiche « Nom » correspondante
+// pour chaque relation ci-dessous) — jamais une figure inventée pour l'occasion. Couverture
+// volontairement partielle : le socle primordial/Titans/Olympiens au complet, puis les
+// lignées héroïques les mieux documentées du corpus (Persée, les Atrides, Troie, le cycle
+// thébain, la famille d'Ulysse...), plutôt qu'une tentative hasardeuse sur les 253 figures.
+const GENEALOGY_PARENTS = {
+  // Chaos, rien avant lui ; Gaïa, Tartare, Érèbe et Nyx naissent de lui seul, "sans union ni
+  // parent" — comme Ouranos naîtra plus tard de Gaïa seule (voir la fiche « Chaos »).
+  "chaos": [],
+  "gaïa": ["chaos"],
+  "tartare": ["chaos"],
+  "érèbe": ["chaos"],
+  "nyx": ["chaos"],
+  // Première génération : les douze Titans, enfants d'Ouranos et Gaïa.
+  "ouranos": ["gaïa"],
+  "cronos": ["ouranos", "gaïa"],
+  "rhéa": ["ouranos", "gaïa"],
+  "océan": ["ouranos", "gaïa"],
+  "téthys": ["ouranos", "gaïa"],
+  "hypérion": ["ouranos", "gaïa"],
+  "théia": ["ouranos", "gaïa"],
+  "coéos": ["ouranos", "gaïa"],
+  "phoebé": ["ouranos", "gaïa"],
+  "crios": ["ouranos", "gaïa"],
+  "japet": ["ouranos", "gaïa"],
+  "mnémosyne": ["ouranos", "gaïa"],
+  "thémis": ["ouranos", "gaïa"],
+  "aphrodite": ["ouranos"],
+  // Les six premiers Olympiens, enfants de Cronos et Rhéa.
+  "zeus": ["cronos", "rhéa"],
+  "héra": ["cronos", "rhéa"],
+  "poséidon": ["cronos", "rhéa"],
+  "hadès": ["cronos", "rhéa"],
+  "déméter": ["cronos", "rhéa"],
+  "hestia": ["cronos", "rhéa"],
+  // Enfants d'Hypérion et Théia, de Coéos et Phoebé, de Japet et Clymène.
+  "hélios": ["hypérion", "théia"],
+  "séléné": ["hypérion", "théia"],
+  "éos": ["hypérion", "théia"],
+  "léto": ["coéos", "phoebé"],
+  "astéria": ["coéos", "phoebé"],
+  "hécate": ["astéria"],
+  "clymène": ["océan", "téthys"],
+  "atlas": ["japet", "clymène"],
+  "prométhée": ["japet", "clymène"],
+  "épiméthée": ["japet", "clymène"],
+  "ménétios": ["japet", "clymène"],
+  // Enfants de Nyx (tradition hésiodique, "sans union ni parent").
+  "hypnos": ["nyx"],
+  "thanatos": ["nyx"],
+  "éris": ["nyx"],
+  "apaté": ["nyx"],
+  "parques": ["nyx"],
+  "philotès": ["nyx"],
+  "némésis": ["nyx"],
+  "morphée": ["hypnos"],
+  "hespérides": ["atlas"],
+  // Les neuf Muses, filles de Zeus et Mnémosyne ; les Heures, filles de Zeus et Thémis.
+  "muses": ["zeus", "mnémosyne"],
+  "calliope": ["zeus", "mnémosyne"],
+  "clio": ["zeus", "mnémosyne"],
+  "euterpe": ["zeus", "mnémosyne"],
+  "melpomène": ["zeus", "mnémosyne"],
+  "polymnie": ["zeus", "mnémosyne"],
+  "terpsichore": ["zeus", "mnémosyne"],
+  "thalie": ["zeus", "mnémosyne"],
+  "uranie": ["zeus", "mnémosyne"],
+  "érato": ["zeus", "mnémosyne"],
+  "heures": ["zeus", "thémis"],
+  // Deuxième génération olympienne.
+  "apollon": ["zeus", "léto"],
+  "artémis": ["zeus", "léto"],
+  "perséphone": ["zeus", "déméter"],
+  "athéna": ["zeus", "métis"],
+  "arès": ["zeus", "héra"],
+  "héphaïstos": ["héra"],
+  "hébé": ["zeus", "héra"],
+  "ilithyie": ["zeus", "héra"],
+  "dionysos": ["zeus", "sémélé"],
+  "hermès": ["zeus", "pléiades"],
+  "persée": ["zeus", "danaé"],
+  "hélène": ["zeus", "léda"],
+  "pollux": ["zeus", "léda"],
+  "castor": ["léda"],
+  "héraclès": ["zeus"],
+  // Enfants d'Arès.
+  "phobos": ["arès", "aphrodite"],
+  "harmonie": ["arès", "aphrodite"],
+  "alcippé": ["arès", "aglauros"],
+  "penthésilée": ["arès"],
+  // Cécrops, premier roi d'Athènes, et sa descendance.
+  "cécrops": [],
+  "aglauros": ["cécrops"],
+  "hersé": ["cécrops"],
+  "pandrosos": ["cécrops"],
+  "érichthonios": ["gaïa"],
+  // Lignée de Persée.
+  "danaé": [],
+  "cassiopée": [],
+  "andromède": ["cassiopée"],
+  "électryon": ["persée", "andromède"],
+  "sthénélos": ["persée", "andromède"],
+  "gorgophoné": ["persée", "andromède"],
+  "alcée": ["persée", "andromède"],
+  "mestor": ["persée", "andromède"],
+  "héléos": ["persée", "andromède"],
+  "persès": ["persée", "andromède"],
+  // Danaos, Égyptos et leur descendance.
+  "libye": [],
+  "danaos": [],
+  "égyptos": [],
+  "danaïdes": ["danaos"],
+  "hypermestre": ["danaos"],
+  "lyncée": ["égyptos"],
+  "byzas": ["poséidon"],
+  // Les Atrides.
+  "agamemnon": [],
+  "ménélas": [],
+  "clytemnestre": ["léda"],
+  "oreste": ["agamemnon", "clytemnestre"],
+  "iphigénie": ["agamemnon", "clytemnestre"],
+  "électre": ["agamemnon", "clytemnestre"],
+  "chrysothémis": ["agamemnon", "clytemnestre"],
+  "hermione": ["ménélas", "hélène"],
+  "néoptolème": ["achille"],
+  // La famille royale de Troie.
+  "priam": [],
+  "hécube": [],
+  "pâris": ["priam", "hécube"],
+  "cassandre": ["priam", "hécube"],
+  "polyxène": ["priam", "hécube"],
+  "polydore": ["priam", "hécube"],
+  "hector": ["priam", "hécube"],
+  "astyanax": ["hector", "andromaque"],
+  // La Crète de Minos et Thésée.
+  "pasiphaé": ["hélios"],
+  "ariane": ["minos", "pasiphaé"],
+  "phèdre": ["minos", "pasiphaé"],
+  "hippolyte": ["thésée", "antiope"],
+  "icare": ["dédale"],
+  // La mer : Nérée et sa descendance.
+  "nérée": [],
+  "thétis": ["nérée"],
+  "amphitrite": ["nérée"],
+  "néréides": ["nérée"],
+  "achille": ["thétis"],
+  // La famille d'Ulysse.
+  "circé": ["hélios"],
+  "télégonos": ["circé", "ulysse"],
+  "télémaque": ["ulysse", "pénélope"],
+  "alceste": ["pélias"],
+  // Le cycle thébain.
+  "cadmos": [],
+  "europe": [],
+  "sémélé": ["cadmos", "harmonie"],
+  "œdipe": ["jocaste"],
+  "jocaste": [],
+  "antigone": ["œdipe", "jocaste"],
+  // Deucalion et Pyrrha, seuls survivants du déluge.
+  "deucalion": ["prométhée"],
+  "pyrrha": ["épiméthée"],
+  // Autres enfants d'Apollon.
+  "asclépios": ["apollon", "coronis"],
+  "coronis": [],
+  "aristée": ["apollon"],
+  "orphée": ["œagre", "calliope"],
+  // Énée et Ploutos.
+  "énée": ["aphrodite"],
+  "ploutos": ["déméter"],
+};
+
+// Index inverse construit une seule fois : pour un parent donné, la liste de ses enfants —
+// jamais saisi à la main, toujours déduit de GENEALOGY_PARENTS pour ne jamais désynchroniser
+// les deux sens de la relation.
+const GENEALOGY_CHILDREN = (() => {
+  const map = {};
+  for(const [id, parents] of Object.entries(GENEALOGY_PARENTS)){
+    for(const p of parents){
+      if(!map[p]) map[p] = [];
+      map[p].push(id);
+    }
+  }
+  return map;
+})();
+
+// Pour une figure donnée : ses parents (peut être vide), ses enfants (déduits de l'index
+// inverse), ses union(s) (les autres parents de ses enfants, déduits eux aussi) et sa
+// fratrie (les autres figures qui partagent au moins un même parent qu'elle).
+function genealogyRelations(id){
+  const parents = GENEALOGY_PARENTS[id] || [];
+  const children = GENEALOGY_CHILDREN[id] || [];
+  const partnerSet = new Set();
+  for(const childId of children){
+    for(const p of (GENEALOGY_PARENTS[childId] || [])){
+      if(p !== id) partnerSet.add(p);
+    }
+  }
+  // Exclut les propres parents et enfants d'id de sa fratrie : sans ce filtre, un cas comme
+  // Gaïa — mère d'Ouranos seule, puis mère des Titans avec lui — ferait apparaître Ouranos
+  // comme "frère" de Cronos alors qu'il est déjà son père (les deux partagent Gaïa comme
+  // parent commun, mais à deux générations différentes).
+  const siblingSet = new Set();
+  for(const p of parents){
+    for(const sib of (GENEALOGY_CHILDREN[p] || [])){
+      if(sib !== id && !parents.includes(sib) && !children.includes(sib)) siblingSet.add(sib);
+    }
+  }
+  return { parents, children, partners: [...partnerSet], siblings: [...siblingSet] };
+}
+
+function genealogyHasData(id){
+  const rel = genealogyRelations(id);
+  return rel.parents.length > 0 || rel.children.length > 0 || rel.partners.length > 0 || rel.siblings.length > 0;
+}
+
+// Nombre de figures reliées par au moins un lien de généalogie (parent ou enfant), tous
+// comptés une seule fois — sert au décompte affiché sur la tuile d'accueil.
+const GENEALOGY_FIGURE_COUNT = new Set([...Object.keys(GENEALOGY_PARENTS), ...Object.keys(GENEALOGY_CHILDREN)]).size;
+
+// Points d'entrée choisis pour l'écran d'accueil de la généalogie — un aperçu large plutôt
+// qu'une liste exhaustive des 253 figures, chacun menant à un pan bien documenté du corpus.
+const GENEALOGY_STARTING_POINTS = [
+  ["chaos", "Les origines du monde"],
+  ["cronos", "Les Titans"],
+  ["zeus", "Les douze Olympiens"],
+  ["persée", "La lignée de Persée"],
+  ["priam", "La guerre de Troie"],
+  ["agamemnon", "Les Atrides"],
+  ["cadmos", "Le cycle thébain"],
+  ["ulysse", "La famille d'Ulysse"],
+];
+
 // Table de résolution "nom affiché" -> cible cliquable (figure mythologique ou symbole),
 // construite une seule fois à partir des données déjà là : DEITY_NOTES (id -> nom, simple
 // majuscule initiale) et SYMBOL_LIBRARY (id -> label, qui peut différer de l'id — ex. « Enfer /
@@ -2776,11 +3016,11 @@ function renderHome(){
         <span class="tile-title">Bibliothèque symbolique</span>
         <span class="tile-count">${SYMBOL_ENTRIES.length} symboles</span>
       </button>
-      <div class="tile tile-soon" aria-disabled="true">
+      <button class="tile" data-nav="genealogyHome">
         <span class="tile-icon">🌳</span>
         <span class="tile-title">Généalogie des dieux</span>
-        <span class="tile-count tile-badge">Bientôt</span>
-      </div>
+        <span class="tile-count">${GENEALOGY_FIGURE_COUNT} figures reliées</span>
+      </button>
     </div>
   `;
 }
@@ -2859,6 +3099,38 @@ function relatedChipsHTML(entries, kind){
   `;
 }
 
+// Petit groupe de chips (une liste de figures) dans un sous-titre — brique commune à l'écran
+// de généalogie (Parents/Union(s)/Fratrie/Enfants) et à la section « Lignée » d'une fiche.
+// Contrairement aux chips de relatedChipsHTML (qui ouvrent directement une fiche), celles-ci
+// recentrent l'arbre généalogique sur la figure cliquée — c'est tout l'intérêt de l'écran.
+function genealogyChipsHTML(ids, title){
+  if(!ids.length) return "";
+  const sorted = ids.slice().sort((a, b) => (a.charAt(0).toUpperCase() + a.slice(1)).localeCompare(b.charAt(0).toUpperCase() + b.slice(1), "fr"));
+  return `
+    <div class="geneal-group">
+      <h4>${escapeHTML(title)}</h4>
+      <div class="chips">
+        ${sorted.map(gid => `<button class="chip" data-nav="genealogy" data-id="${escapeHTML(gid)}">${escapeHTML(gid.charAt(0).toUpperCase() + gid.slice(1))}</button>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
+// Aperçu « Lignée » directement sur la fiche d'une figure : ses parents et enfants les plus
+// proches, plus un lien vers l'arbre complet — sans quitter la fiche pour les cas simples.
+function genealogyLineageHTML(id){
+  if(!genealogyHasData(id)) return "";
+  const rel = genealogyRelations(id);
+  return `
+    <div class="related geneal-lineage">
+      <h3>Lignée</h3>
+      ${genealogyChipsHTML(rel.parents, "Parents")}
+      ${genealogyChipsHTML(rel.children, "Enfants")}
+      <button class="geneal-tree-link" data-nav="genealogy" data-id="${escapeHTML(id)}">🌳 Voir dans l'arbre généalogique</button>
+    </div>
+  `;
+}
+
 function renderFigureDetail(id){
   const name = id.charAt(0).toUpperCase() + id.slice(1);
   const note = DEITY_NOTES[id];
@@ -2879,6 +3151,7 @@ function renderFigureDetail(id){
         const inlineClass = inline?.wide ? "deity-portrait-inline deity-portrait-inline-wide" : "deity-portrait-inline";
         return `${inline ? `<img class="${inlineClass}" src="${escapeHTML(inline.src)}" alt="${escapeHTML(inline.alt)}" loading="lazy">` : ""}<p class="lore-text">${linkifyLore(p)}</p>`;
       }).join("")}` : ""}
+      ${genealogyLineageHTML(id)}
       ${relatedChipsHTML(related, "symbol")}
     </article>
   `;
@@ -2901,20 +3174,72 @@ function renderSymbolDetail(id){
   `;
 }
 
+// Écran d'accueil de la généalogie : quelques points d'entrée choisis (voir
+// GENEALOGY_STARTING_POINTS) plutôt qu'une liste des 253 figures — chacun ouvre l'arbre
+// recentré sur une figure bien documentée, d'où l'exploration peut ensuite se poursuivre de
+// proche en proche, un clic à la fois.
+function renderGenealogyHome(){
+  return `
+    <div class="screen-header">
+      <h2>Généalogie des dieux</h2>
+    </div>
+    <p class="note">Explorez les liens de parenté entre les figures du corpus : parents, unions, frères et sœurs, enfants. Choisissez un point de départ, puis cliquez sur n'importe quel nom pour recentrer l'arbre sur lui.</p>
+    <div class="geneal-entrypoints">
+      ${GENEALOGY_STARTING_POINTS.map(([gid, label]) => `
+        <button class="geneal-entry" data-nav="genealogy" data-id="${escapeHTML(gid)}">
+          <span class="geneal-entry-title">${escapeHTML(label)}</span>
+          <span class="geneal-entry-sub">${escapeHTML(gid.charAt(0).toUpperCase() + gid.slice(1))}</span>
+        </button>
+      `).join("")}
+    </div>
+  `;
+}
+
+// Écran d'exploration : une figure recentrée au milieu, avec ses parents, union(s), fratrie
+// et enfants tout autour — cliquer sur n'importe lequel recentre l'arbre à son tour (chaque
+// clic empile un écran, si bien que « ← Retour » redéroule l'exploration pas à pas).
+function renderGenealogy(id){
+  const name = id.charAt(0).toUpperCase() + id.slice(1);
+  const note = DEITY_NOTES[id];
+  const portrait = DEITY_PORTRAITS[id];
+  const rel = genealogyRelations(id);
+  const hasAny = rel.parents.length || rel.partners.length || rel.siblings.length || rel.children.length;
+  return `
+    <div class="screen-header">
+      <button class="back" data-nav="back">← Retour</button>
+    </div>
+    <div class="geneal-center">
+      ${portrait ? `<img class="geneal-portrait" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy">` : ""}
+      <h2>${escapeHTML(name)}</h2>
+      ${note ? `<p class="note">${escapeHTML(note)}</p>` : ""}
+      <button class="geneal-fiche-link" data-nav="figureDetail" data-id="${escapeHTML(id)}">Voir la fiche complète →</button>
+    </div>
+    ${hasAny ? `
+      ${genealogyChipsHTML(rel.parents, "Parents")}
+      ${genealogyChipsHTML(rel.partners, rel.partners.length > 1 ? "Unions" : "Union")}
+      ${genealogyChipsHTML(rel.siblings, "Frères et sœurs")}
+      ${genealogyChipsHTML(rel.children, "Enfants")}
+    ` : `<p class="empty">Aucune parenté connue pour ${escapeHTML(name)} dans ce corpus.</p>`}
+  `;
+}
+
 /* ===================== RENDU : MENU FIXE ===================== */
 
 const TABS = [
   { type: "home", icon: "🏠", label: "Accueil" },
   { type: "figures", icon: "🏛️", label: "Figures" },
   { type: "symbols", icon: "🔱", label: "Symboles" },
+  { type: "genealogyHome", icon: "🌳", label: "Généalogie" },
 ];
 
 // Un onglet du bas reste actif tant qu'on est sur une fiche de sa section (figureDetail
-// pour l'onglet Figures, symbolDetail pour l'onglet Symboles), pas seulement sur la liste
-// elle-même — sinon le menu du bas paraîtrait « éteint » dès qu'on ouvre une fiche.
+// pour l'onglet Figures, symbolDetail pour l'onglet Symboles, genealogy pour l'onglet
+// Généalogie), pas seulement sur la liste elle-même — sinon le menu du bas paraîtrait
+// « éteint » dès qu'on ouvre une fiche.
 function activeTabType(){
   if(currentScreen.type === "figureDetail") return "figures";
   if(currentScreen.type === "symbolDetail") return "symbols";
+  if(currentScreen.type === "genealogy") return "genealogyHome";
   return currentScreen.type;
 }
 
@@ -2926,10 +3251,6 @@ function renderBottomNav(){
         <span class="nav-tab-icon">${t.icon}</span>
         <span class="nav-tab-label">${t.label}</span>
       </button>`).join("")}
-      <div class="nav-tab nav-tab-soon" aria-disabled="true">
-        <span class="nav-tab-icon">🌳</span>
-        <span class="nav-tab-label">Généalogie</span>
-      </div>
     </nav>
   `;
 }
@@ -2944,6 +3265,8 @@ function render(){
     case "figureDetail": html = renderFigureDetail(currentScreen.id); break;
     case "symbols": html = renderSymbols(); break;
     case "symbolDetail": html = renderSymbolDetail(currentScreen.id); break;
+    case "genealogyHome": html = renderGenealogyHome(); break;
+    case "genealogy": html = renderGenealogy(currentScreen.id); break;
     default: html = renderHome();
   }
   app.innerHTML = html;
@@ -2964,8 +3287,10 @@ function bindAppClickDelegation(){
       if(nav === "back") back();
       else if(nav === "figures") goToTab("figures");
       else if(nav === "symbols") goToTab("symbols");
+      else if(nav === "genealogyHome") goToTab("genealogyHome");
       else if(nav === "figureDetail") go({ type: "figureDetail", id: navEl.dataset.id });
       else if(nav === "symbolDetail") go({ type: "symbolDetail", id: navEl.dataset.id });
+      else if(nav === "genealogy") go({ type: "genealogy", id: navEl.dataset.id });
       return;
     }
     const deityEl = e.target.closest("[data-deity]");
