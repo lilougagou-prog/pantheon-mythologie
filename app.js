@@ -1001,7 +1001,12 @@ function fetchOwnerPreviewContent(type, id){
   })
     .then(res => res.json())
     .then(data => {
-      OWNER_PREVIEW_CACHE[type][id] = data.locked ? { locked: true } : { content: data.content };
+      // Ne jamais traiter une réponse ambiguë comme un déverrouillage : il faut explicitement
+      // { locked: false, content } pour afficher le contenu premium, sinon repli sur le
+      // paywall — y compris pour une réponse d'erreur inattendue qui n'aurait ni l'un ni
+      // l'autre (voir le repli côté serveur dans content.js, qui ne devrait plus jamais en
+      // produire, mais ceinture et bretelles).
+      OWNER_PREVIEW_CACHE[type][id] = (data.locked === false && data.content) ? { content: data.content } : { locked: true };
       // Ne redessine que si la fiche demandée est toujours celle affichée à l'écran.
       const expectedScreen = type === "figures" ? "figureDetail" : "symbolDetail";
       if(currentScreen.type === expectedScreen && currentScreen.id === id) render();

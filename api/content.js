@@ -77,7 +77,12 @@ module.exports = async function handler(req, res){
     }
     res.status(200).json({ locked: false, content: full });
   } catch(err) {
-    console.error("Erreur /api/content:", err);
-    res.status(500).json({ error: "Impossible de vérifier le droit d'accès pour le moment." });
+    // Ne jamais laisser une panne de vérification (base de données injoignable ou pas encore
+    // configurée) faire planter la fiche pour l'utilisateur : on retombe proprement sur le
+    // paywall, comme si le droit n'était pas prouvé, plutôt que de renvoyer une erreur 500 que
+    // le client ne sait pas distinguer d'un contenu débloqué (voir fetchOwnerPreviewContent()
+    // côté app.js, qui ne traite explicitement que { locked: true } ou { content }).
+    console.error("Erreur /api/content, repli sur le paywall:", err);
+    res.status(200).json({ locked: true, preview: previewOf(type, id, full) });
   }
 };
