@@ -27,7 +27,7 @@ body{
 #app{
   max-width: 760px;
   margin: 0 auto;
-  padding: 20px 16px 60px;
+  padding: 20px 16px calc(24px + 78px + env(safe-area-inset-bottom, 0px));
 }
 
 h1, h2, h3{
@@ -57,6 +57,52 @@ h1, h2, h3{
   color: var(--ink-soft);
   font-size: 1.05rem;
   margin: 0;
+}
+
+/* ----- Figure du jour ----- */
+
+.fotd{ margin-bottom: 24px; }
+.fotd-label{
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--bronze);
+  margin: 0 0 8px;
+  text-align: center;
+}
+.fotd-card{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 4px 14px var(--shadow);
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  text-align: left;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.fotd-card:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px var(--shadow); }
+.fotd-portrait{
+  width: 72px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.fotd-text{ display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.fotd-name{ font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 1.15rem; color: var(--laurel-deep); }
+.fotd-note{
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .tiles{
@@ -139,34 +185,37 @@ h1, h2, h3{
 
 .empty{ color: var(--ink-soft); font-style: italic; }
 
-/* ----- Grille de fiches ----- */
+/* ----- Liste de fiches ----- */
 
-.grid{
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-}
-
-.card{
+.list{
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 14px;
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.list-item{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 14px 16px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border);
   cursor: pointer;
   text-align: left;
   font-family: inherit;
   color: inherit;
-  min-height: 84px;
+  width: 100%;
 }
-.card:hover{ border-color: var(--bronze-light); }
-.card-symbol{ align-items: flex-start; }
-.card-icon{ font-size: 1.4rem; }
-.card-title{ font-family: "Cinzel", Georgia, serif; font-weight: 600; color: var(--laurel-deep); font-size: 0.98rem; }
-.card-note{
-  font-size: 0.82rem;
+.list-item:last-child{ border-bottom: none; }
+.list-item:hover{ background: var(--marble-deep); }
+.list-item-title{ font-family: "Cinzel", Georgia, serif; font-weight: 600; color: var(--laurel-deep); font-size: 1rem; }
+.list-item-note{
+  font-size: 0.88rem;
+  font-style: italic;
   color: var(--ink-soft);
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -183,6 +232,9 @@ h1, h2, h3{
   font-style: italic;
   font-size: 1.02rem;
   margin: 0 0 18px;
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
 }
 .detail h3{
   font-size: 1.05rem;
@@ -194,6 +246,9 @@ h1, h2, h3{
   line-height: 1.65;
   margin: 0 0 14px;
   color: var(--ink);
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
 }
 .lore-text .clickable-deity, .lore-text .clickable-symbol{
   color: var(--bronze);
@@ -250,3 +305,38 @@ h1, h2, h3{
 }
 .chip:hover{ background: var(--border); }
 .chip-symbol{ color: var(--bronze); }
+
+/* ----- Menu fixe en bas ----- */
+
+.bottom-nav{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
+  padding: 6px max(6px, env(safe-area-inset-left, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(6px, env(safe-area-inset-right, 0px));
+  box-shadow: 0 -4px 14px var(--shadow);
+}
+.nav-tab{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 4px;
+  background: none;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.nav-tab:hover{ background: var(--marble-deep); }
+.nav-tab.active{ color: var(--laurel-deep); }
+.nav-tab-icon{ font-size: 1.3rem; line-height: 1; }
+.nav-tab-label{ font-size: 0.7rem; }
+.nav-tab-soon{ opacity: 0.5; cursor: default; }
+.nav-tab-soon:hover{ background: none; }

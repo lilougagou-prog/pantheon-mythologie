@@ -2672,6 +2672,15 @@ function back(){
   window.scrollTo(0, 0);
 }
 
+// Depuis le menu fixe : toujours repartir d'une pile vide plutôt que d'empiler sans fin —
+// chaque onglet est une racine, pas une étape de plus dans une chaîne de « ← Retour ».
+function goToTab(type){
+  navStack = [];
+  currentScreen = { type };
+  render();
+  window.scrollTo(0, 0);
+}
+
 /* ===================== DONNÉES DÉRIVÉES ===================== */
 
 // Liste triée une seule fois : [id, nom affiché, note] pour chaque figure.
@@ -2692,7 +2701,42 @@ function deityPortraitClass(id){
   return DEITY_PORTRAIT_WIDE.has(id) ? "deity-portrait deity-portrait-wide" : "deity-portrait";
 }
 
+// Hash djb2, déterministe : sert à choisir la « figure du jour » à partir de la date du
+// jour — la même figure pour tout le monde, stable toute la journée, qui change le
+// lendemain, sans jamais avoir besoin de stocker quoi que ce soit.
+function djb2Hash(str){
+  let hash = 5381;
+  for(let i = 0; i < str.length; i++){
+    hash = ((hash << 5) + hash) + str.charCodeAt(i);
+    hash = hash >>> 0;
+  }
+  return hash;
+}
+
+function figureOfTheDay(){
+  const today = new Date();
+  const key = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+  return FIGURE_ENTRIES[djb2Hash(key) % FIGURE_ENTRIES.length];
+}
+
 /* ===================== RENDU : ÉCRANS ===================== */
+
+function figureOfTheDayHTML(){
+  const [id, name, note] = figureOfTheDay();
+  const portrait = DEITY_PORTRAITS[id];
+  return `
+    <section class="fotd">
+      <h2 class="fotd-label">Figure du jour</h2>
+      <button class="fotd-card" data-nav="figureDetail" data-id="${escapeHTML(id)}">
+        ${portrait ? `<img class="fotd-portrait" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy">` : ""}
+        <span class="fotd-text">
+          <span class="fotd-name">${escapeHTML(name)}</span>
+          <span class="fotd-note">${escapeHTML(note)}</span>
+        </span>
+      </button>
+    </section>
+  `;
+}
 
 function renderHome(){
   return `
@@ -2701,6 +2745,7 @@ function renderHome(){
       <h1>Panthéon</h1>
       <p class="tagline">Apprendre la mythologie grecque — dieux, héros et symboles</p>
     </header>
+    ${figureOfTheDayHTML()}
     <div class="tiles">
       <button class="tile" data-nav="figures">
         <span class="tile-icon">🏛️</span>
@@ -2721,10 +2766,10 @@ function renderHome(){
   `;
 }
 
-function figureCardHTML([id, name, note]){
-  return `<button class="card" data-nav="figureDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML((name + " " + note).toLowerCase())}">
-    <span class="card-title">${escapeHTML(name)}</span>
-    <span class="card-note">${escapeHTML(note)}</span>
+function figureRowHTML([id, name, note]){
+  return `<button class="list-item" data-nav="figureDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML((name + " " + note).toLowerCase())}">
+    <span class="list-item-title">${escapeHTML(name)}</span>
+    <span class="list-item-note">${escapeHTML(note)}</span>
   </button>`;
 }
 
@@ -2732,13 +2777,12 @@ function renderFiguresGrid(query){
   const q = (query || "").trim().toLowerCase();
   const list = q ? FIGURE_ENTRIES.filter(e => (e[1] + " " + e[2]).toLowerCase().includes(q)) : FIGURE_ENTRIES;
   if(!list.length) return `<p class="empty">Aucune figure ne correspond à « ${escapeHTML(query)} ».</p>`;
-  return `<div class="grid">${list.map(figureCardHTML).join("")}</div>`;
+  return `<div class="list">${list.map(figureRowHTML).join("")}</div>`;
 }
 
 function renderFigures(){
   return `
     <div class="screen-header">
-      <button class="back" data-nav="back">← Retour</button>
       <h2>Figures mythologiques</h2>
     </div>
     <input type="search" class="search" id="figuresSearch" placeholder="Chercher une figure (nom, rôle...)">
@@ -2746,11 +2790,10 @@ function renderFigures(){
   `;
 }
 
-function symbolCardHTML([id, s]){
-  return `<button class="card card-symbol" data-nav="symbolDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML((s.label + " " + s.desc).toLowerCase())}">
-    <span class="card-icon">${s.icon || "✦"}</span>
-    <span class="card-title">${escapeHTML(s.label)}</span>
-    <span class="card-note">${escapeHTML(s.desc)}</span>
+function symbolRowHTML([id, s]){
+  return `<button class="list-item" data-nav="symbolDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML((s.label + " " + s.desc).toLowerCase())}">
+    <span class="list-item-title">${escapeHTML(s.label)}</span>
+    <span class="list-item-note">${escapeHTML(s.desc)}</span>
   </button>`;
 }
 
@@ -2758,13 +2801,12 @@ function renderSymbolsGrid(query){
   const q = (query || "").trim().toLowerCase();
   const list = q ? SYMBOL_ENTRIES.filter(([, s]) => (s.label + " " + s.desc).toLowerCase().includes(q)) : SYMBOL_ENTRIES;
   if(!list.length) return `<p class="empty">Aucun symbole ne correspond à « ${escapeHTML(query)} ».</p>`;
-  return `<div class="grid">${list.map(symbolCardHTML).join("")}</div>`;
+  return `<div class="list">${list.map(symbolRowHTML).join("")}</div>`;
 }
 
 function renderSymbols(){
   return `
     <div class="screen-header">
-      <button class="back" data-nav="back">← Retour</button>
       <h2>Bibliothèque symbolique</h2>
     </div>
     <input type="search" class="search" id="symbolsSearch" placeholder="Chercher un symbole">
@@ -2833,6 +2875,39 @@ function renderSymbolDetail(id){
   `;
 }
 
+/* ===================== RENDU : MENU FIXE ===================== */
+
+const TABS = [
+  { type: "home", icon: "🏠", label: "Accueil" },
+  { type: "figures", icon: "🏛️", label: "Figures" },
+  { type: "symbols", icon: "🔱", label: "Symboles" },
+];
+
+// Un onglet du bas reste actif tant qu'on est sur une fiche de sa section (figureDetail
+// pour l'onglet Figures, symbolDetail pour l'onglet Symboles), pas seulement sur la liste
+// elle-même — sinon le menu du bas paraîtrait « éteint » dès qu'on ouvre une fiche.
+function activeTabType(){
+  if(currentScreen.type === "figureDetail") return "figures";
+  if(currentScreen.type === "symbolDetail") return "symbols";
+  return currentScreen.type;
+}
+
+function renderBottomNav(){
+  const active = activeTabType();
+  return `
+    <nav class="bottom-nav">
+      ${TABS.map(t => `<button class="nav-tab${t.type===active?" active":""}" data-tab="${t.type}">
+        <span class="nav-tab-icon">${t.icon}</span>
+        <span class="nav-tab-label">${t.label}</span>
+      </button>`).join("")}
+      <div class="nav-tab nav-tab-soon" aria-disabled="true">
+        <span class="nav-tab-icon">🌳</span>
+        <span class="nav-tab-label">Généalogie</span>
+      </div>
+    </nav>
+  `;
+}
+
 /* ===================== RENDU : DISPATCH ===================== */
 
 function render(){
@@ -2846,20 +2921,23 @@ function render(){
     default: html = renderHome();
   }
   app.innerHTML = html;
+  document.getElementById("bottomNav").innerHTML = renderBottomNav();
   bindScreenEvents();
 }
 
 // Un seul écouteur, posé une fois pour toutes sur le conteneur stable #app (délégation
 // d'événements) : il continue de fonctionner quel que soit le contenu réinjecté à chaque
-// render(), sans jamais avoir besoin d'être ré-attaché.
+// render(), sans jamais avoir besoin d'être ré-attaché. Même principe pour #bottomNav, fixe
+// et jamais remplacé dans son intégralité (seul son innerHTML est rafraîchi à chaque render
+// pour mettre à jour l'onglet actif).
 function bindAppClickDelegation(){
   document.getElementById("app").addEventListener("click", e => {
     const navEl = e.target.closest("[data-nav]");
     if(navEl){
       const nav = navEl.dataset.nav;
       if(nav === "back") back();
-      else if(nav === "figures") go({ type: "figures" });
-      else if(nav === "symbols") go({ type: "symbols" });
+      else if(nav === "figures") goToTab("figures");
+      else if(nav === "symbols") goToTab("symbols");
       else if(nav === "figureDetail") go({ type: "figureDetail", id: navEl.dataset.id });
       else if(nav === "symbolDetail") go({ type: "symbolDetail", id: navEl.dataset.id });
       return;
@@ -2868,6 +2946,11 @@ function bindAppClickDelegation(){
     if(deityEl){ go({ type: "figureDetail", id: deityEl.dataset.deity }); return; }
     const symbolEl = e.target.closest("[data-symbol]");
     if(symbolEl){ go({ type: "symbolDetail", id: symbolEl.dataset.symbol }); return; }
+  });
+
+  document.getElementById("bottomNav").addEventListener("click", e => {
+    const tabEl = e.target.closest("[data-tab]");
+    if(tabEl) goToTab(tabEl.dataset.tab);
   });
 }
 

@@ -31,6 +31,36 @@ une **généalogie des dieux** navigable (pas encore construite, voir plus bas).
   Tarot-mythologie (101 fichiers, ~13 Mo). Aucune image de carte de tarot n'a été copiée —
   seuls les portraits de figures mythologiques.
 
+## Retouches demandées après la V1
+
+Premier retour de l'utilisatrice après avoir testé la V1 en ligne — quatre ajustements :
+- **Texte justifié** : les paragraphes de récit (`.lore-text`) et la note d'introduction de
+  chaque fiche (`.detail .note`) passent en `text-align: justify` (avec `hyphens: auto` et
+  `text-align-last: left` pour éviter les trous disgracieux en fin de dernière ligne).
+- **Listes plutôt que cartes à icônes** : les écrans « Figures mythologiques » et
+  « Bibliothèque symbolique » abandonnent la grille de cartes (icône + titre + résumé
+  tronqué) pour une liste verticale simple — nom en gras, résumé en italique juste en
+  dessous, aucune icône. Les icônes des symboles restent visibles uniquement sur leur
+  propre fiche détaillée (`symbol-icon-big`), pas dans la liste.
+- **Figure du jour** : nouvelle section en haut de l'accueil, tirée au hasard mais de façon
+  déterministe à partir de la date du jour (hash djb2 sur `AAAA-M-J`) — la même figure pour
+  tout le monde, stable toute la journée, qui change automatiquement le lendemain, sans
+  rien stocker ni interroger de serveur.
+- **Menu fixe en bas** (comme dans l'appli Tarot) : Accueil / Figures / Symboles, plus une
+  tuile Généalogie non cliquable marquée « Bientôt », en écho à la tuile du même nom sur
+  l'accueil. Reste visible sur tous les écrans, y compris les fiches détaillées, et met en
+  évidence l'onglet actif (une fiche de figure garde l'onglet « Figures » actif, etc.).
+  Les onglets Figures/Symboles réinitialisent la pile de navigation (`goToTab()`) plutôt que
+  de l'empiler indéfiniment — chaque onglet est une racine, pas une étape de plus dans une
+  chaîne de « ← Retour », qui ne reste utile que pour naviguer *à l'intérieur* d'une section
+  (d'une fiche à l'autre via une citation, par exemple).
+
+Testé par un script dédié (27 vérifications) : décompte des lignes de liste (235/90, sans
+icônes), présence et déterminisme de la figure du jour, menu fixe rendu et onglet actif
+correct sur tous les écrans, justification effective en CSS, plus les garanties déjà en
+place (0 citation résiduelle sur les 235 figures + 90 symboles, tous les fichiers d'images
+référencés existent). Vérifié aussi visuellement par captures d'écran.
+
 ## Ce qui n'est PAS encore construit
 
 - **Généalogie des dieux** : la fonctionnalité phare annoncée pour Panthéon, pas encore
