@@ -66,6 +66,12 @@ h1, h2, h3{
   font-size: 1.05rem;
   margin: 0;
 }
+.tagline-olive{
+  display: block;
+  width: 140px;
+  margin: 10px auto 0;
+  opacity: 0.9;
+}
 
 /* ----- Figure du jour ----- */
 
@@ -79,11 +85,12 @@ h1, h2, h3{
   text-align: center;
 }
 .fotd-card{
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -92,25 +99,51 @@ h1, h2, h3{
   font-family: inherit;
   color: inherit;
   text-align: left;
+  overflow: hidden;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .fotd-card:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px var(--shadow); }
 .fotd-portrait{
-  width: 72px;
-  height: 90px;
+  width: 112px;
+  height: 140px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
-.fotd-text{ display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.fotd-name{ font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 1.15rem; color: var(--laurel-deep); }
+.fotd-text{ position: relative; z-index: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.fotd-name{ font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 1.3rem; color: var(--laurel-deep); }
 .fotd-note{
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--ink-soft);
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Petites étoiles scintillantes dispersées sur la carte, purement décoratives (aria-hidden) —
+   positions et durées pseudo-aléatoires mais fixes (FOTD_STAR_SEEDS), pour ne jamais sauter
+   d'un rendu à l'autre. */
+.fotd-stars{ position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.fotd-star{
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--bronze);
+  box-shadow: 0 0 4px 1px var(--bronze);
+  animation-name: fotd-twinkle;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+@keyframes fotd-twinkle{
+  0%, 100%{ opacity: 0.15; transform: scale(0.7); }
+  50%{ opacity: 1; transform: scale(1.3); }
+}
+@media (prefers-reduced-motion: reduce){
+  .fotd-star{ animation: none; opacity: 0.5; }
 }
 
 .tiles{
@@ -142,6 +175,7 @@ h1, h2, h3{
 .tile-badge{ width: 52px; height: 52px; border-radius: 50%; object-fit: cover; }
 .tile-title{ font-family: "Cinzel", Georgia, serif; font-size: 1.1rem; color: var(--laurel-deep); }
 .tile-count{ font-size: 0.85rem; color: var(--bronze); font-weight: 600; }
+.tile-desc{ font-size: 0.82rem; color: var(--ink-soft); font-style: italic; line-height: 1.3; }
 
 /* ----- Généalogie ----- */
 
@@ -327,6 +361,20 @@ h1, h2, h3{
   box-shadow: 0 0 0 3px rgba(168, 120, 60, 0.22), 0 4px 14px var(--shadow);
 }
 .ft-card-self:hover{ transform: none; }
+
+/* Les douze Olympiens (OLYMPIAN_IDS) ressortent en teinte laurier dans n'importe quel arbre —
+   distincte du contour bronze réservé à la carte « self » — pour repérer d'un coup d'œil qui,
+   parmi les cartes affichées, appartient au cercle des douze. Cumulable avec .ft-card-self
+   (ex. Zeus au centre de son propre arbre). */
+.ft-card-olympian{
+  background: rgba(74, 93, 58, 0.14);
+  border-color: var(--laurel);
+}
+.ft-card-olympian .ft-card-name{ color: var(--laurel-deep); }
+.ft-card-olympian.ft-card-self{
+  background: rgba(74, 93, 58, 0.14);
+  box-shadow: 0 0 0 3px rgba(74, 93, 58, 0.28), 0 4px 14px var(--shadow);
+}
 
 /* Vignette de portrait insérée devant un nom, quand la figure en a un (DEITY_PORTRAITS) — rend
    l'arbre plus visuel qu'une suite de noms nus. */
@@ -745,6 +793,23 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
   font-size: 0.85rem;
 }
 .place-marker-pin > *{ transform: rotate(-45deg); }
+.place-marker-icon{ width: 18px; height: 18px; object-fit: cover; border-radius: 50%; display: block; }
+.place-marker-icon-emoji{ font-style: normal; font-size: 0.85rem; }
+
+/* Illustration de catégorie (MAP_CATEGORY_ILLUSTRATIONS), déclinée en petit dans les filtres,
+   les lignes de liste et le badge de fiche lieu — même logique que .chip-symbol-icon. */
+.place-filter-icon, .place-row-icon, .place-badge-icon{
+  width: 18px;
+  height: 18px;
+  object-fit: cover;
+  border-radius: 50%;
+  vertical-align: middle;
+  display: inline-block;
+}
+.place-filter-icon-emoji, .place-row-icon-emoji, .place-badge-icon-emoji{
+  font-style: normal;
+  display: inline;
+}
 .place-popup{ font-family: "Source Serif 4", Georgia, serif; min-width: 160px; }
 .place-popup strong{ font-family: "Cinzel", Georgia, serif; color: var(--laurel-deep); }
 .place-popup p{ margin: 6px 0; font-size: 0.88rem; color: var(--ink); }

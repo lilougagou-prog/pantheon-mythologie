@@ -853,3 +853,104 @@ d'écran (bouton bien visible sur le paywall, entre « Restaurer mon achat » et
 **Rappel important pour l'utilisatrice** : c'est bien un mécanisme *par contexte de stockage*,
 pas par appareil — Safari et l'icône d'écran d'accueil sur le même iPhone comptent comme deux
 contextes distincts, chacun nécessitant sa propre saisie une fois.
+
+## Round « backlog nocturne » — symboles, généalogie, lieux, accueil
+
+Long round mené de façon autonome sur une liste de retours envoyée d'un coup par l'utilisatrice
+avant de se coucher (« relance tout ce que je t'ai demandé »). Sept chantiers distincts.
+
+**Bibliothèque symbolique — retrait et dé-répétition.** Les quatre enseignes du Tarot Marseille
+(bâton, coupe, épée, denier) — vestiges de la séparation d'avec Tarot-mythologie, sans rapport
+avec la mythologie grecque — retirées de `SYMBOL_LIBRARY` et de `content.json` : 98 → 94
+symboles. Signalement séparé : plusieurs fiches répétaient la même information deux ou trois
+fois entre `atGlance`, `why` et `lore` (l'exemple donné, Aurore, répétait « aux doigts de rose »
+trois fois) — un script de détection (n-grammes de 5 mots partagés entre champs d'une même
+fiche, `scratchpad`, jamais commité) a fait ressortir 22 fiches nettement au-dessus du reste
+(crocus, rose, aurore, pavot, abeille, feu, graine, torche, eau, éclipse, monde souterrain,
+myrte, noix, temple, sceptre, voile, poisson, lierre, olive, lune, char solaire, arc-en-ciel) :
+chacune retouchée à la main pour ne garder l'information qu'une fois, sans rien retirer au fond
+(la phrase la plus vivante reste dans `atGlance`, le paragraphe de `lore` qui la répétait
+verbatim est coupé ou recentré sur ce qu'il ajoutait de propre). Au passage, un bug de données
+corrigé : `relatedSymbols` de l'abeille se citait elle-même.
+
+**Vingt-six nouvelles illustrations détourées.** Même mécanisme que les badges/Abeille/Aigle
+précédents, appliqué à dix-huit symboles (ailes, air, araignée, arc, arc-en-ciel, aurore,
+balance, bélier, blé, caducée, carrefour, cerf, chaîne, char, char solaire, chemin, chêne,
+cheval — `SYMBOL_ILLUSTRATIONS`), sept icônes de catégorie de la carte (sanctuaire, montagne,
+cité, île, détroit/mers, source, monde souterrain — nouvelle table `MAP_CATEGORY_ILLUSTRATIONS`
++ helper `mapCategoryIconHTML()`, remplace l'emoji dans le marqueur Leaflet, les filtres, les
+lignes de liste et le badge de fiche lieu), et un rameau d'olivier sous le slogan d'accueil.
+Détourage par un script générique (`scratchpad`, jamais commité) plutôt que par la méthode
+ad hoc de l'Aigle : palette des teintes du pourtour de l'image (dédupliquées après
+quantification, pas seulement les plus fréquentes — un damier de transparence anti-aliasé forme
+un dégradé continu entre ses deux teintes, un simple « top-k » laissait des trous non couverts),
+recherche du plus proche voisin (`scipy.spatial.cKDTree`) plutôt qu'une distance à quelques
+couleurs fixes, ne retenant que les régions connectées au bord de l'image. Un second garde-fou
+ajouté en cours de route : exiger en plus une neutralité de teinte (R≈G≈B) avant d'effacer,
+sans quoi un sujet peu saturé (la main enchaînée, peau et or ternes) se faisait effacer aux
+trois quarts, sa luminosité étant proche de celle du damier malgré une teinte bien différente.
+
+**Généalogie — un vrai défaut de conception corrigé partout.** Signalement : « tu aurais pu
+mettre Persée à côté d'Andromède directement, pour pas avoir à remettre Andromède ». En cause,
+`ftPersonBranchHTML()` : une figure avec une seule union était systématiquement dessinée deux
+fois de suite (une fois seule comme « hub », une fois de plus à côté de son conjoint juste en
+dessous) — un choix pertinent seulement quand il faut départager *plusieurs* conjoints (Zeus).
+Corrigé pour ne garder le hub séparé qu'à partir de deux unions ; avec une seule, le couple
+devient directement la branche. Comme cette fonction sert toutes les fiches familiales, le
+correctif s'applique partout, pas seulement à Andromède (vérifié aussi sur Zeus : le cas
+multi-union reste identique).
+
+**Trois écrans de généalogie reconstruits, cinq points de départ réécrits en explication
+globale.** « Il ne faut pas faire un focus sur un seul [...] Actuellement focus sur Chaos,
+Ouranos, Persée, Priam, etc. » :
+- **Les douze Titans** (`renderTitansOverview()`) : Ouranos et Gaïa en tête, leurs douze
+  enfants (`TITAN_IDS`, vérifiés contre `GENEALOGY_PARENTS`) en rangée — même moteur que l'écran
+  des Olympiens, remplace l'ancien focus sur Ouranos seul.
+- **Les douze Olympiens** : Héphaïstos (enfant d'Héra seule) et Dionysos (avec Zeus et Sémélé)
+  ajoutés au diagramme, qui ne montrait jusque-là que dix des douze. Les cartes des douze
+  Olympiens (`OLYMPIAN_IDS`) ressortent désormais en teinte laurier distincte partout où elles
+  apparaissent dans un arbre (`ftCardMarkup()`), pas seulement sur cet écran — demande explicite
+  d'une couleur différente pour les repérer d'un coup d'œil.
+- **La lignée de Persée** (`renderPerseeLineage()`) : nouvel écran par défaut dessiné à la main
+  d'après le croquis fourni — Zeus/Danaé d'un côté, Cassiopée de l'autre, convergeant directement
+  vers le couple Persée/Andromède et leurs sept enfants, sans jamais dessiner Persée ou Andromède
+  deux fois (réutilise `ftAncestorBranchHTML()` pour faire pointer chaque ascendance vers la
+  carte réelle du couple). Cliquer sur un nom retombe sur sa fiche familiale complète, toujours
+  déroulable plus loin, comme demandé.
+- **Origines du monde, cycle thébain, guerre de Troie, Atrides, famille d'Ulysse**
+  (`renderGenealogyOverview()` + table `GENEALOGY_OVERVIEWS`) : un texte de deux à trois
+  paragraphes qui raconte toute la lignée plutôt qu'une fiche centrée sur une seule figure
+  (Chaos, Cadmos, Priam, Agamemnon, Ulysse), suivi de chips vers chaque figure citée pour
+  continuer à explorer — chacune ouvre sa propre fiche familiale complète, comme avant. Textes
+  liés via `linkifyLore()`, comme partout ailleurs dans l'appli.
+- Les huit tuiles de l'écran d'accueil de la généalogie portent désormais les sous-titres exacts
+  fournis par l'utilisatrice (« Découvrez la naissance du monde et des premières puissances »,
+  etc.), remplaçant les anciens sous-titres qui nommaient une seule figure (« Ouranos, Gaïa et
+  toute leur descendance »).
+
+**Lieux — tuiles en graphie latine, deux lieux ajoutés.** La carte OpenStreetMap standard
+affiche chaque lieu dans sa langue locale — en grec ici, illisible sans le connaître. Passage
+aux tuiles Wikimedia « osm-intl » (`mapTileLayer()`, factorisé entre la carte principale et la
+mini-carte de fiche lieu), qui appliquent une transcription internationale proche de l'anglais
+(« Athens », « Delphi »...) sans nécessiter de clé d'API — une vraie traduction française des
+libellés natifs demanderait un service payant (MapTiler et consorts) non configuré ici, mais au
+moins la carte devient lisible sans connaître le grec. Deux lieux ajoutés à `MAP_PLACES` (34 →
+36) : **Carthage** (fondation de Didon, où elle aima puis perdit Énée) et **Lavinium** (la cité
+que fonde Énée en Italie après son départ de Carthage, berceau légendaire de Rome).
+
+**Écran d'accueil.** Nouveau slogan sous le titre (« Apprends la mythologie grecque à travers
+ses dieux, héros et symboles. ») avec un rameau d'olivier illustré juste en dessous. « Figure du
+jour » renommée « À découvrir aujourd'hui » ; son portrait agrandi (72×90 → 112×140) ; quelques
+étoiles scintillantes ajoutées en surimpression de la carte (`fotdStarsHTML()`, positions et
+durées pseudo-aléatoires mais déterministes, `prefers-reduced-motion` respecté). Les quatre
+tuiles de l'accueil portent désormais, sous leur décompte, la phrase descriptive exacte fournie
+par l'utilisatrice (nouvelle classe `.tile-desc`).
+
+Testé par un script dédié (`scratchpad`, 89 vérifications : décomptes 94 symboles/36 lieux,
+absence des quatre enseignes tarot partout, non-répétition de l'épithète d'Aurore, existence de
+tous les nouveaux fichiers d'assets référencés, structure des huit points de départ de
+généalogie, présence des nouvelles fonctions et du correctif de dédoublonnage, version et
+contenu du service worker, nouveaux textes d'accueil) et vérifié visuellement par captures
+d'écran Playwright sur chaque écran touché (accueil, bibliothèque symbolique — dont un symbole
+premium pour confirmer l'illustration sur l'écran payant —, les huit écrans de généalogie,
+recherche et fiche « Carthage »). `service-worker.js` : `pantheon-v17` → `pantheon-v18`.
