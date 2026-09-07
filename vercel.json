@@ -3,6 +3,10 @@
     "api/verify-purchase.js": { "maxDuration": 10 },
     "api/entitlement.js": { "maxDuration": 10 },
     "api/apple-notifications.js": { "maxDuration": 10 },
-    "api/content.js": { "maxDuration": 10 }
-  }
+    "api/content.js": { "maxDuration": 10 },
+    "api/cleanup-rate-limits.js": { "maxDuration": 10 }
+  },
+  "crons": [
+    { "path": "/api/cleanup-rate-limits", "schedule": "0 3 * * *" }
+  ]
 }

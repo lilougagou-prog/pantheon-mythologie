@@ -791,3 +791,11 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
   color: var(--ink-soft);
   font-style: italic;
 }
+.paywall-fineprint a{ color: var(--ink-soft); }
+
+.home-footer-link{
+  text-align: center;
+  margin-top: 28px;
+  font-size: 0.82rem;
+}
+.home-footer-link a{ color: var(--ink-soft); text-decoration: underline; }

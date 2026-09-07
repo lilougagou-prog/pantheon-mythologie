@@ -661,3 +661,45 @@ côté client) — 53 nouvelles vérifications, toutes au vert, en plus des onze
 (remises au vert : le paywall est contourné dans les tests qui vérifient le moteur de rendu de
 l'arbre généalogique ou la structure d'une fiche, pas la frontière Premium elle-même — voir les
 commentaires ajoutés dans ces fichiers).
+
+## Préparation App Store — ce qui ne dépend pas d'un Mac
+
+Suite du chantier Premium : tout ce qui peut être préparé sans Xcode, en attendant l'accès à un
+Mac pour la partie native (Capacitor, StoreKit, protections capture d'écran/multitâche — voir le
+rapport de sécurité).
+
+- **`politique-confidentialite.html`** — nouvelle page, même sobriété que celle de
+  Tarot-mythologie (décrit ce que fait l'app *aujourd'hui*, pas une promesse pour plus tard) :
+  absence de compte/IA/tracker, explique honnêtement la seule vraie nouveauté du modèle
+  Premium (l'identifiant de transaction Apple et le statut d'achat conservés en base pour
+  reconnaître le Premium), et la purge automatique des IP de rate-limiting sous une heure.
+  Deux champs `[placeholder]` (identité de l'exploitant, e-mail de contact) restent à compléter
+  avant soumission. Liée depuis le paywall et le pied de page de l'accueil ; précachée par le
+  service worker.
+- **`APP_STORE_CONNECT.md`** — document de préparation complet : nom/sous-titre/description/
+  mots-clés proposés, configuration du produit In-App Purchase (`premium_full_access`,
+  Non-Consumable, 39,99 €), réponses proposées au questionnaire App Privacy (achats, non liés à
+  l'identité), avertissement sur la classification par âge (thèmes mythologiques adultes),
+  notes aux relecteurs Apple, checklist des Guidelines déjà respectées (jamais le mot
+  « abonnement », restauration visible, politique de confidentialité accessible) et de celles à
+  garder en tête pour la suite native (4.2, apps qui ne sont qu'un habillage web).
+- **`icon-1024-appstore.png`** — icône carrée 1024×1024 sans coins arrondis ni canal alpha
+  (contrairement à `icon.svg`/`icon-512.png`, pensés pour le web et donc arrondis) : Apple
+  rejette une icône pré-arrondie ou transparente, l'OS applique lui-même l'arrondi à
+  l'affichage. Régénérée à l'identique du design existant (fond `--laurel-deep`, Pi grec en
+  `--bronze-light`) avec Pillow plutôt qu'un rasterizer SVG, absent de l'environnement.
+- **`app-store-screenshots/`** — 12 captures (6 écrans × iPhone 6.9"/iPad 13"), prises depuis
+  l'app web elle-même à la taille logique réelle des appareils (pas directement à la résolution
+  du fichier exporté, qui laisserait presque tout l'écran vide) puis mises à l'échelle au
+  facteur attendu. Une limite connue est documentée dans le README du dossier : la capture de la
+  carte des lieux n'affiche pas les tuiles (CDN externe inaccessible depuis cet environnement de
+  développement) et doit être reprise depuis un navigateur avec un accès Internet normal.
+- **`api/cleanup-rate-limits.js`** — nouvelle fonction, déclenchée quotidiennement par un Cron
+  Vercel (`vercel.json`), qui purge les lignes `rate_limits` de plus d'une heure : sans ça, les
+  adresses IP utilisées pour la limitation de débit resteraient en base indéfiniment, ce que la
+  politique de confidentialité promet désormais explicitement de ne pas faire.
+
+Tests : nouveau `smoke_pantheon_appstore_prep.js` (21 vérifications), plus deux vérifications
+ajoutées à `smoke_pantheon_backend.js` (purge protégée par secret) et `smoke_pantheon_premium.js`
+(vercel.json à jour) — 74 vérifications au total pour ce round, en plus des quatorze suites
+précédentes, toutes au vert. `service-worker.js` : `pantheon-v12` → `pantheon-v13`.

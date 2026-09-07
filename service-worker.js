@@ -1,5 +1,5 @@
-const CACHE="pantheon-v12";
-const ASSETS=["./","./index.html","./styles.css","./app.js","./manifest.json","./icon.svg","./icon-192.png","./icon-512.png","./icon-180.png"];
+const CACHE="pantheon-v13";
+const ASSETS=["./","./index.html","./styles.css","./app.js","./manifest.json","./icon.svg","./icon-192.png","./icon-512.png","./icon-180.png","./politique-confidentialite.html"];
 
 self.addEventListener("install",event=>{
   event.waitUntil(

@@ -957,6 +957,7 @@ function renderPaywall({ icon, portrait, name, note }){
         <button type="button" class="paywall-cta" data-action="unlock-premium">Débloquer Premium</button>
         <button type="button" class="paywall-restore" data-action="restore-purchase">Restaurer mon achat</button>
         <p class="paywall-fineprint">Achat unique via l'App Store, sans abonnement ni renouvellement automatique.</p>
+        <p class="paywall-fineprint"><a href="./politique-confidentialite.html" target="_blank" rel="noopener">Politique de confidentialité</a></p>
       </section>
     </article>
   `;
@@ -1237,6 +1238,7 @@ function renderHome(){
         <span class="tile-count">${MAP_PLACES.length} lieux sur la carte</span>
       </button>
     </div>
+    <p class="home-footer-link"><a href="./politique-confidentialite.html" target="_blank" rel="noopener">Politique de confidentialité</a></p>
   `;
 }
 
