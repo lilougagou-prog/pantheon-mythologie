@@ -987,6 +987,25 @@ function initOwnerPreviewFromUrl(){
   } catch(e){}
 }
 
+// Deuxième point d'entrée pour la même clé, cette fois via une invite plutôt qu'un paramètre
+// d'URL — indispensable dès que l'app tourne en mode « ajouté à l'écran d'accueil » sur iOS :
+// ce mode s'exécute dans un contexte de stockage totalement séparé de Safari (son propre
+// localStorage) et s'ouvre toujours sur le `start_url` fixe de manifest.json, sans jamais
+// reprendre l'URL affichée au moment de l'ajout à l'écran d'accueil — ?preview=<clé> n'a donc
+// aucun moyen d'y arriver. Bouton visible sur le paywall (data-action="owner-preview") : même
+// effet exact que le paramètre d'URL, aucune vérification côté client, à refaire une fois par
+// contexte de stockage (Safari, écran d'accueil... chacun le sien).
+function promptOwnerPreviewKey(){
+  try {
+    const input = window.prompt("Clé d'aperçu propriétaire (laisser vide pour l'oublier) :", ownerPreviewKey() || "");
+    if(input === null) return; // invite annulée, rien ne change
+    const trimmed = input.trim();
+    if(trimmed) localStorage.setItem("pantheon-owner-preview-key", trimmed);
+    else localStorage.removeItem("pantheon-owner-preview-key");
+    render();
+  } catch(e){}
+}
+
 // Cache mémoire (perdu au rechargement, volontairement — rien de plus à gérer) : { loading },
 // { locked: true } (mauvaise clé ou clé absente côté serveur) ou { content } (fiche complète).
 const OWNER_PREVIEW_CACHE = { figures: {}, symbols: {} };
@@ -1062,6 +1081,7 @@ function renderPaywall({ icon, portrait, illustration, name, note }){
         <p class="paywall-price" id="paywallPrice">39,99 €</p>
         <button type="button" class="paywall-cta" data-action="unlock-premium">Débloquer Premium</button>
         <button type="button" class="paywall-restore" data-action="restore-purchase">Restaurer mon achat</button>
+        <button type="button" class="paywall-restore" data-action="owner-preview">Propriétaire : entrer la clé d'aperçu</button>
         <p class="paywall-fineprint">Achat unique via l'App Store, sans abonnement ni renouvellement automatique.</p>
         <p class="paywall-fineprint"><a href="./politique-confidentialite.html" target="_blank" rel="noopener">Politique de confidentialité</a></p>
       </section>
@@ -2322,6 +2342,7 @@ function bindAppClickDelegation(){
     if(actionEl){
       if(actionEl.dataset.action === "unlock-premium") attemptPurchase();
       else if(actionEl.dataset.action === "restore-purchase") attemptRestore();
+      else if(actionEl.dataset.action === "owner-preview") promptOwnerPreviewKey();
       return;
     }
   });

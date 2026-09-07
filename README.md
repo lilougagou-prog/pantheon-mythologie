@@ -815,3 +815,41 @@ fichiers, références correctes dans `app.js` et `styles.css`, précache et ver
 worker, syntaxe JS valide) et vérifié visuellement par captures d'écran Playwright (fiche
 « Abeille », fiche « Aigle », chip illustrée « Aigle » sur la fiche « Foudre »). `service-worker.js` :
 `pantheon-v16` → `pantheon-v17`.
+
+## Aperçu propriétaire — repli sûr, et deuxième point d'entrée pour l'écran d'accueil iOS
+
+Signalement de l'utilisatrice : l'aperçu propriétaire (voir plus haut) fonctionnait de nouveau
+après avoir rouvert `?preview=<clé>` dans Safari — mais restait bloqué sur le paywall dès
+qu'elle ouvrait l'icône ajoutée à son écran d'accueil, alors même que celle-ci venait d'être
+réinstallée. Deux problèmes distincts, l'un déjà corrigé en creusant le premier signalement, le
+second propre à iOS :
+
+- **Repli sûr côté serveur et client** (déjà en place avant ce round) : `api/content.js`
+  renvoie désormais `{ locked: true }` plutôt qu'une erreur 500 brute quand la vérification
+  échoue (ex. `DATABASE_URL` absente), et `fetchOwnerPreviewContent()` exige explicitement
+  `{ locked: false, content }` avant d'afficher quoi que ce soit — toute réponse ambiguë retombe
+  sur le paywall plutôt que d'être prise à tort pour un déverrouillage.
+- **La vraie cause du blocage sur l'écran d'accueil** : une app ajoutée à l'écran d'accueil iOS
+  (mode standalone) s'exécute dans un contexte de stockage **totalement séparé** de Safari — son
+  propre `localStorage`, indépendant de celui du navigateur, même s'il s'agit exactement de la
+  même origine. Elle s'ouvre en plus toujours sur le `start_url` fixe de `manifest.json` (`./`,
+  sans paramètre), jamais sur l'URL affichée au moment de l'ajout à l'écran d'accueil : `?preview=`
+  n'a donc structurellement aucun moyen d'atteindre ce contexte-là, quelle que soit la manière
+  dont l'icône a été (ré)installée.
+
+**Deuxième point d'entrée, indépendant de l'URL** (`promptOwnerPreviewKey()`) : un bouton
+« Propriétaire : entrer la clé d'aperçu » sur l'écran paywall (`data-action="owner-preview"`,
+même style discret que « Restaurer mon achat ») ouvre une invite native (`window.prompt()`,
+fonctionne aussi bien en standalone que dans Safari) pré-remplie avec la clé déjà mémorisée s'il
+y en a une, et l'enregistre dans le `localStorage` du contexte courant — exactement le même
+effet que le paramètre d'URL, à faire une fois par contexte de stockage (une fois dans Safari,
+une fois sur l'écran d'accueil, une fois par appareil si plusieurs sont utilisés). Une valeur
+vide efface la clé mémorisée plutôt que d'enregistrer une chaîne vide.
+
+Vérifié avec un script Playwright dédié (`scratchpad`) : clic sur le bouton, saisie simulée dans
+l'invite, clé effectivement posée en `localStorage`. Vérifié aussi visuellement par capture
+d'écran (bouton bien visible sur le paywall, entre « Restaurer mon achat » et le texte légal).
+
+**Rappel important pour l'utilisatrice** : c'est bien un mécanisme *par contexte de stockage*,
+pas par appareil — Safari et l'icône d'écran d'accueil sur le même iPhone comptent comme deux
+contextes distincts, chacun nécessitant sa propre saisie une fois.
