@@ -16,9 +16,10 @@ une **généalogie des dieux** navigable (pas encore construite, voir plus bas).
 
 ## Contenu
 
-- **235 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — portées telles quelles
-  depuis Tarot-mythologie (mêmes textes, mêmes portraits, même mécanisme de citations
-  croisées `(voir la fiche « Nom »)` résolu par `linkifyLore()`). Contrairement à l'appli
+- **253 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
+  quelles depuis Tarot-mythologie (mêmes textes, mêmes portraits, même mécanisme de
+  citations croisées `(voir la fiche « Nom »)` résolu par `linkifyLore()`), complétées par
+  18 figures primordiales et Titans créées directement dans Panthéon (voir plus bas). Contrairement à l'appli
   Tarot, qui ne garde localement que les 78 figures directement incarnées par une carte,
   Panthéon garde l'intégralité du corpus : c'est la collection complète, du premier Titan
   au dernier héros mineur.
@@ -87,14 +88,51 @@ référencés existent). Vérifié aussi visuellement par captures d'écran.
   vérifications) : tout au vert.
 - `service-worker.js` : `pantheon-v2` → `pantheon-v3`.
 
+## Fiches des Titans et figures primordiales (préalable à la généalogie)
+
+Avant de construire l'écran de généalogie proprement dit, l'utilisatrice a demandé de
+d'abord compléter le corpus : « il faut que toutes les figures concernées soient citées ».
+Or la racine même de la généalogie grecque manquait — la plupart des figures primordiales
+et des Titans de la première génération n'avaient jamais eu de fiche dans le corpus porté
+depuis Tarot-mythologie (celui-ci partait directement des douze Olympiens).
+
+- **18 nouvelles figures créées** (235 → 253) : Chaos, Ouranos, Nyx, Érèbe, Tartare, Cronos,
+  Océan, Téthys, Hypérion, Théia, Coéos, Phoebé, Crios, Japet, Mnémosyne, Épiméthée,
+  Ménétios et Clymène — les primordiaux et les douze Titans de la première génération
+  (Rhéa avait déjà sa fiche). Chacune reçoit une note biographique et 2 à 4 paragraphes de
+  récit, systématiquement reliés à leurs parents/enfants/unions déjà présents dans le
+  corpus via le mécanisme de citations `(voir la fiche « Nom »)`.
+- **Une trentaine de citations rétro-ajoutées** dans des fiches déjà existantes, pour que la
+  chaîne de parenté remonte sans interruption jusqu'à Chaos : les six premiers Olympiens
+  (Zeus, Héra, Poséidon, Hadès, Déméter, Hestia) citent désormais Cronos et Rhéa ; Hélios,
+  Séléné et Éos citent Hypérion et Théia ; Léto et Astéria citent Coéos et Phoebé ; Atlas et
+  Prométhée citent Japet ; Rhéa, Gaïa, Aphrodite et Thémis citent leurs propres parents ;
+  les Muses, Calliope, Clio, Hypnos, Thanatos, Éris, Apaté, les Hespérides, les Parques et
+  Lethée citent Mnémosyne ou Nyx selon le cas.
+- **Deux pièges d'homonymie traités sans créer de doublon** : le Titan marin Persès (fils de
+  Crios) est mentionné en texte simple dans la fiche de Crios, sans être lié à la fiche
+  existante « Persès » (le mortel, fils de Persée) — une phrase explicite lève l'ambiguïté.
+  Même traitement pour l'Océanide Électre (mère d'Iris), mentionnée sans lien dans la fiche
+  d'Océan pour ne pas se confondre avec la fiche existante « Électre » (fille d'Agamemnon).
+- Testé par un script dédié (88 vérifications : présence des 18 figures, intégrité de la
+  chaîne primordiale Chaos → Ouranos/Gaïa → Cronos/Rhéa → Olympiens, sécurité des deux
+  pièges d'homonymie, chacune des rétro-citations, 0 citation résiduelle sur l'ensemble du
+  corpus) + les deux suites précédentes (27 + 14 vérifications, remises au vert après mise à
+  jour de leurs décomptes 235 → 253) : tout au vert.
+- `service-worker.js` : `pantheon-v3` → `pantheon-v4`.
+
 ## Ce qui n'est PAS encore construit
 
 - **Généalogie des dieux** : la fonctionnalité phare annoncée pour Panthéon, pas encore
-  développée. La page d'accueil affiche déjà la tuile correspondante, marquée « Bientôt »
-  et non cliquable, pour poser le repère sans survendre une fonctionnalité absente.
-  Nécessitera de modéliser les relations de parenté (parent/enfant, fratrie, union) pour les
-  235 figures — un chantier de données à part entière, distinct du simple portage de
-  contenu effectué dans cette première version.
+  développée dans l'interface — mais son préalable de données vient d'être posé (voir
+  ci-dessus : les 253 figures couvrent désormais la totalité de la lignée depuis les
+  primordiaux jusqu'aux Olympiens et héros). La page d'accueil affiche déjà la tuile
+  correspondante, marquée « Bientôt » et non cliquable, pour poser le repère sans survendre
+  une fonctionnalité absente. Reste à construire l'écran lui-même : modéliser une structure
+  de relations de parenté exploitable par l'interface (au-delà des citations en texte libre
+  déjà en place) et concevoir la navigation (fiche recentrée, chips « Lignée » sur chaque
+  fiche, points d'entrée choisis) — un chantier d'interface à part entière, distinct du
+  travail de contenu effectué dans cette étape.
 - Pas de suivi de progression, pas de compte, pas de mode hors-ligne au-delà du cache
   navigateur basique du service worker — volontairement minimal pour cette V1.
 - Pas d'appel IA, pas de backend (`api/`) : contrairement à Tarot-mythologie, Panthéon est
@@ -102,7 +140,7 @@ référencés existent). Vérifié aussi visuellement par captures d'écran.
 
 ## Architecture
 
-Un seul fichier `app.js` (~2900 lignes), sur le même principe que l'appli Tarot : les
+Un seul fichier `app.js` (~3000 lignes), sur le même principe que l'appli Tarot : les
 données mythologiques d'abord (`SYMBOL_LIBRARY`, `DEITY_NOTES`, `DEITY_LORE`,
 `DEITY_PORTRAITS`, `DEITY_PORTRAIT_WIDE`, `DEITY_INLINE_PORTRAITS`), puis le mécanisme de
 citations (`LORE_LINK_TARGETS`, `linkifyLore()` — code strictement identique à celui de

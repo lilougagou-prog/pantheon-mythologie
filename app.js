@@ -769,6 +769,24 @@ const DEITY_NOTES = {
   "hélios":"Dieu du soleil, conducteur du char céleste.",
   "minos":"Juge des morts aux Enfers, connu pour son impartialité.",
   "gaïa":"Déesse primordiale de la Terre, mère de toutes choses.",
+  "chaos":"Le vide originel d'où émergèrent les toutes premières puissances du monde, avant même les dieux.",
+  "ouranos":"Le Ciel primordial, époux de Gaïa et père des douze Titans, castré et détrôné par son propre fils Cronos.",
+  "nyx":"La Nuit primordiale, mère redoutée d'une lignée de forces sombres — dont le Sommeil, la Mort et la Discorde.",
+  "érèbe":"Les Ténèbres primordiales, frère et époux de Nyx, avec qui il engendra le Jour et la lumière céleste.",
+  "tartare":"L'abîme le plus profond du monde, aussi loin sous la terre que le ciel l'est d'elle — prison des Titans vaincus.",
+  "cronos":"Le plus jeune des Titans, qui détrôna son père Ouranos avant d'être à son tour détrôné par son fils Zeus.",
+  "océan":"Titan du fleuve qui encercle le monde entier, père de trois mille fleuves et d'autant d'Océanides.",
+  "téthys":"Titanide des eaux douces, épouse d'Océan et mère des fleuves et des Océanides.",
+  "hypérion":"Titan de la lumière céleste, père d'Hélios, Séléné et Éos — le Soleil, la Lune et l'Aurore.",
+  "théia":"Titanide de l'éclat lumineux, mère d'Hélios, Séléné et Éos.",
+  "coéos":"Titan de l'intelligence et de l'axe céleste, père de Léto et d'Astéria.",
+  "phoebé":"Titanide de l'éclat prophétique, mère de Léto et d'Astéria.",
+  "crios":"Le plus effacé des douze Titans, père d'Astréos, de Pallas et d'un troisième fils resté dans son ombre.",
+  "japet":"Titan père d'Atlas, de Prométhée, d'Épiméthée et de Ménétios — une lignée à la mesure toujours excessive.",
+  "mnémosyne":"Titanide de la Mémoire, unie neuf nuits de suite à Zeus pour donner naissance aux neuf Muses.",
+  "épiméthée":"Titan étourdi, frère de Prométhée, qui accepta malgré les mises en garde le présent empoisonné de Pandore.",
+  "ménétios":"Titan à la démesure orgueilleuse, foudroyé par Zeus et précipité au loin lors de la guerre contre les Titans.",
+  "clymène":"Océanide, épouse du Titan Japet et mère d'Atlas, de Prométhée, d'Épiméthée et de Ménétios.",
   "athéna":"Déesse de la sagesse stratégique.",
   "aphrodite":"Déesse de l'amour et de la beauté.",
   "nérée":"Vieillard de la mer, dieu marin sage et bienveillant.",
@@ -1013,13 +1031,13 @@ const DEITY_LORE = {
     "Loin de disparaître, Métis continua d'agir depuis l'intérieur de Zeus, forgeant en secret l'armure de leur fille : le moment venu, Athéna jaillit tout armée du crâne de son père, portant en elle la ruse de sa mère autant que la puissance de Zeus.",
   ],
   "héra": [
-    "Sœur et épouse de Zeus, Héra règne sur l'Olympe comme protectrice du mariage et garante de l'ordre légitime — un rôle qu'elle défend avec une fermeté que la mythologie associe souvent à la jalousie, tant les infidélités de son époux sont nombreuses.",
+    "Fille de Cronos et de Rhéa (voir les fiches « Cronos » et « Rhéa »), sœur et épouse de Zeus, Héra règne sur l'Olympe comme protectrice du mariage et garante de l'ordre légitime — un rôle qu'elle défend avec une fermeté que la mythologie associe souvent à la jalousie, tant les infidélités de son époux sont nombreuses.",
     "Elle ne se contente jamais d'observer : elle pousse Sémélé à sa perte par ruse (voir la fiche « Sémélé »), poursuit Héraclès de sa colère toute sa vie durant simplement parce qu'il est le fruit d'une liaison de Zeus (voir la fiche « Héraclès »), et impose à Léto l'interdiction de mettre au monde ses enfants sur la moindre terre ferme, retardant ainsi la naissance d'Apollon et d'Artémis (voir la fiche « Léto »).",
     "Reine avant d'être épouse, elle incarne la légitimité et l'autorité plus que la douceur.",
     "À Argos, son principal foyer de culte, on l'honorait comme Héra Argienne ; mais c'est à Stymphale qu'elle recevait l'hommage le plus original, avec trois sanctuaires distincts dédiés à Héra Pais (l'enfant), Héra Teleia (l'épouse accomplie) et Héra Khéra (la veuve), comme les trois âges d'un même mariage. Une légende argienne ajoutait qu'elle retrouvait chaque année sa virginité en se baignant dans la source de Canathos à Nauplie — un secret réservé à ses mystères, et un renouveau que sa propre réputation de jalousie perpétuelle semble pourtant démentir sans cesse.",
   ],
   "zeus": [
-    "Plus jeune fils de Cronos et de Rhéa, Zeus échappa au sort de ses frères et sœurs — avalés à la naissance par un père craignant d'être détrôné — grâce à sa mère, qui le cacha dans une grotte du mont Ida en Crète et fit avaler à Cronos une pierre emmaillotée à sa place.",
+    "Plus jeune fils de Cronos et de Rhéa (voir les fiches « Cronos » et « Rhéa »), Zeus échappa au sort de ses frères et sœurs — avalés à la naissance par un père craignant d'être détrôné — grâce à sa mère, qui le cacha dans une grotte du mont Ida en Crète et fit avaler à Cronos une pierre emmaillotée à sa place.",
     "Devenu adulte, il libéra ses frères et sœurs et mena la guerre contre les Titans, dont il sortit vainqueur pour établir un nouvel ordre cosmique sur l'Olympe, dont il devint le souverain incontesté, maître de la foudre.",
     "Garant de l'ordre du monde, il reste pourtant l'un des dieux aux liaisons et aux colères les plus nombreuses de toute la mythologie.",
     "On l'invoquait aussi sous des noms précis, selon la part de sa protection sollicitée : Xénios veillait sur les hôtes et les étrangers, vengeant lui-même toute entorse aux devoirs de l'hospitalité ; Herkeios protégeait l'autel dressé dans la cour de chaque maison, marque d'une famille reconnue comme telle ; et Horkios, le plus redouté, gardait la sincérité des serments — sa statue à Olympie, brandissant la foudre, était si terrifiante qu'aucun athlète ni juge ne s'y serait parjuré de sang-froid. Une facette plus modeste, Zeus Ctésios, veillait quant à elle sur les provisions de chaque foyer (voir la fiche « Ctésios »).",
@@ -1045,12 +1063,12 @@ const DEITY_LORE = {
     "Son dernier grand amour resta, lui, sans aucune réciprocité : à la princesse troyenne Cassandre (voir la fiche « Cassandre »), fille de Priam (voir la fiche « Priam »), il offrit le don de prophétie en échange de ses faveurs — mais elle refusa de tenir sa promesse une fois le don reçu. Ne pouvant le lui reprendre, Apollon la frappa d'une malédiction plus cruelle encore : ses prédictions, toujours exactes, ne seraient plus jamais crues par personne — pas même son avertissement, resté sans écho, contre le cheval de bois conçu par Ulysse (voir la fiche « Ulysse »), qui allait livrer Troie aux Grecs.",
   ],
   "thémis": [
-    "Titanide antérieure aux dieux de l'Olympe, Thémis personnifie la loi divine et l'ordre juste du monde — non pas la justice humaine, changeante et discutée, mais un principe plus ancien que les dieux eux-mêmes.",
+    "Titanide fille d'Ouranos et de Gaïa (voir les fiches « Ouranos » et « Gaïa »), antérieure aux dieux de l'Olympe, Thémis personnifie la loi divine et l'ordre juste du monde — non pas la justice humaine, changeante et discutée, mais un principe plus ancien que les dieux eux-mêmes.",
     "Elle rendit elle-même des oracles à Delphes avant qu'Apollon n'y installe son propre sanctuaire, et resta la conseillère de Zeus, assise à ses côtés sur l'Olympe pour veiller à ce qu'aucune décision divine ne s'écarte de l'ordre juste.",
-    "Unie à Zeus, elle mit au monde les Heures (voir la fiche « Heures »), gardiennes de l'ordre saisonnier et moral du monde, et, selon une tradition parallèle à celle qui les dit plutôt filles de la Nuit, les Parques elles-mêmes (voir la fiche « Parques »), qui filent le destin de chaque mortel.",
+    "Unie à Zeus, elle mit au monde les Heures (voir la fiche « Heures »), gardiennes de l'ordre saisonnier et moral du monde, et, selon une tradition parallèle à celle qui les dit plutôt filles de Nyx, la Nuit (voir la fiche « Nyx »), les Parques elles-mêmes (voir la fiche « Parques »), qui filent le destin de chaque mortel.",
   ],
   "déméter": [
-    "Déesse des moissons, Déméter enseigna aux hommes l'art de l'agriculture — un don qu'elle retira au monde entier de rage et de chagrin lorsque sa fille Perséphone fut enlevée par Hadès (voir la fiche « Hadès »).",
+    "Fille de Cronos et de Rhéa (voir les fiches « Cronos » et « Rhéa »), Déméter, déesse des moissons, enseigna aux hommes l'art de l'agriculture — un don qu'elle retira au monde entier de rage et de chagrin lorsque sa fille Perséphone fut enlevée par Hadès (voir la fiche « Hadès »).",
     "La terre entière resta stérile jusqu'à ce que Zeus négocie un compromis : Perséphone passerait une partie de l'année aux Enfers et l'autre auprès de sa mère — un partage qui, depuis, rythme les saisons, l'hiver au deuil de Déméter et le printemps à ses retrouvailles.",
     "À Athènes et dans une grande partie de la Grèce, on la fêtait sous le nom de Thesmophoros, « celle qui apporte les lois », lors des Thesmophories réservées aux femmes mariées ; son titre le plus solennel restait Éleusinia, en l'honneur d'Éleusis et des Mystères qui portent son nom. Un mythe arcadien plus sombre, propre à la ville de Thelpusa, raconte comment Poséidon la poursuivit alors qu'elle errait à la recherche de sa fille disparue : changée en jument pour lui échapper, elle ne put empêcher le dieu de prendre lui-même la forme d'un étalon pour s'unir à elle malgré tout — de cette union naquirent le cheval Arion et une fille que la tradition plus tardive a fini par identifier à Perséphone elle-même (voir la fiche « Perséphone »), bien que son nom véritable, sur ce seul lieu, ne se révélât qu'aux initiés. L'épisode valut par ailleurs à Déméter, sur ce seul lieu, les surnoms d'Erinys, « la Furieuse », et de Lousia, « la Baigneuse », pour le bain purificateur qu'elle prit ensuite dans le fleuve Ladon.",
   ],
@@ -1070,12 +1088,12 @@ const DEITY_LORE = {
     "Après sa mort, consumé par une tunique empoisonnée, il fut accueilli parmi les dieux de l'Olympe. C'est Héra elle-même, désormais réconciliée avec celui dont le nom entier célébrait sa gloire, qui lui donna pour épouse sa propre fille Hébé, déesse de la jeunesse éternelle (voir la fiche « Hébé ») — le pardon le plus complet qu'elle pouvait lui offrir, en l'accueillant dans sa propre famille.",
   ],
   "prométhée": [
-    "Titan resté aux côtés de Zeus pendant la guerre contre les autres Titans, Prométhée façonna aussi, selon certains récits, les premiers hommes à partir d'argile.",
+    "Fils du Titan Japet (voir la fiche « Japet »), Prométhée resta aux côtés de Zeus pendant la guerre contre les autres Titans, et façonna aussi, selon certains récits, les premiers hommes à partir d'argile.",
     "Voyant l'humanité livrée au froid et à l'ignorance, il déroba le feu aux dieux et l'offrit aux mortels (voir la fiche « Feu ») — un don qui lui valut d'être traîné jusqu'à un rocher du Caucase par Bia et Kratos, la Force et la Puissance (voir les fiches « Bia » et « Kratos »), sur ordre de Zeus, puis enchaîné là où un aigle venait chaque jour dévorer son foie, qui repoussait chaque nuit — un supplice qu'Héraclès, de passage lors de sa quête des pommes des Hespérides, interrompit en abattant l'aigle d'une flèche (voir la fiche « Héraclès »), avant que Chiron n'accepte à son tour de mourir à sa place pour achever sa libération, une immortalité qu'il fallait bien qu'un immortel consente à céder (voir la fiche « Chiron »).",
     "Son nom reste attaché à tout affranchissement payé au prix fort — le savoir arraché plutôt que donné.",
   ],
   "hadès": [
-    "Fils de Cronos et de Rhéa, Hadès hérita du monde souterrain lors du partage du cosmos entre lui et ses frères Zeus et Poséidon — un lot que la tradition présente souvent comme le moins enviable, mais qu'il gouverne avec une rigueur incorruptible plutôt qu'avec cruauté.",
+    "Fils de Cronos et de Rhéa (voir les fiches « Cronos » et « Rhéa »), Hadès hérita du monde souterrain lors du partage du cosmos entre lui et ses frères Zeus et Poséidon — un lot que la tradition présente souvent comme le moins enviable, mais qu'il gouverne avec une rigueur incorruptible plutôt qu'avec cruauté.",
     "Sa part dans la victoire des Olympiens sur les Titans fut pourtant décisive : les Cyclopes, libérés du Tartare par Zeus en échange de leur aide, forgèrent à chacun des trois frères un présent capable de renverser le combat — la foudre pour Zeus, le trident pour Poséidon, et pour Hadès un casque qui rend invisible celui qui le porte. Coiffé de ce casque, il put s'approcher sans être vu pour dérober les armes des Titans ou frapper sans jamais être repéré — une contribution aussi discrète que déterminante.",
     "Il quitte rarement son royaume, à l'exception notable de l'enlèvement de Perséphone (voir la fiche « Perséphone »), dont il tombe amoureux et qu'il installe à ses côtés comme reine des Enfers.",
     "Avant elle, ou selon d'autres versions alors même qu'il en était déjà l'époux, Hadès s'était épris de la naïade Menthé (voir la fiche « Menthé »), que Perséphone, découvrant cette liaison, changea de rage en la plante odorante qui porte encore son nom.",
@@ -1100,7 +1118,7 @@ const DEITY_LORE = {
     "Il règne sur les forêts et les troupeaux (voir la fiche « Forêt ») et peut, d'un simple cri, saisir les voyageurs d'une terreur irraisonnée dans les bois profonds — la « panique » lui doit d'ailleurs son nom.",
   ],
   "poséidon": [
-    "Frère de Zeus et d'Hadès, Poséidon reçut la mer en partage lors de la division du cosmos (voir la fiche « Mer »). D'humeur aussi changeante que les flots qu'il gouverne, il peut aussi bien porter les navires que déchaîner tempêtes et tremblements de terre d'un coup de son trident.",
+    "Fils de Cronos et de Rhéa (voir les fiches « Cronos » et « Rhéa »), frère de Zeus et d'Hadès, Poséidon reçut la mer en partage lors de la division du cosmos (voir la fiche « Mer »). D'humeur aussi changeante que les flots qu'il gouverne, il peut aussi bien porter les navires que déchaîner tempêtes et tremblements de terre d'un coup de son trident.",
     "Sa rivalité avec Athéna pour devenir le patron d'Athènes — il fit jaillir une source d'eau salée du rocher, elle offrit un olivier — illustre bien son tempérament : la force spectaculaire face à la sagesse durable, et c'est cette dernière que la ville choisit.",
     "Trois épithètes résument ses domaines mieux que tout autre : Hippios, pour son lien avec les chevaux qu'il aurait lui-même inventés ; Asphaleios, le « sécurisant », invoqué contre les tremblements de terre qu'il pouvait tout aussi bien provoquer que prévenir ; et Pélagios, pour la haute mer elle-même. Homère l'invoque aussi comme Gaieokhos et Ennosigaios, celui qui « tient » et « secoue » la terre — deux noms qui résument à eux seuls un tempérament capable de porter comme de renverser.",
   ],
@@ -1111,11 +1129,11 @@ const DEITY_LORE = {
     "Trioditis, « des trois chemins », est resté son surnom le plus emblématique, en écho direct à son association avec les carrefours — les Romains la reprendront presque telle quelle sous le nom de Trivia. Phosphoros, « celle qui porte la lumière », désigne cette même torche qu'elle tient dans la nuit ; Chthonia la rattache plus largement aux puissances souterraines, aux côtés de Déméter et de Perséphone. Un titre plus tardif, Sotira, « la Salvatrice », se retrouve surtout dans les Hymnes orphiques et des textes bien postérieurs à l'époque classique — un ajout plus récent à un culte déjà ancien plutôt qu'une caractéristique d'origine.",
   ],
   "séléné": [
-    "Déesse de la lune, Séléné traverse le ciel nocturne sur un char tiré par des chevaux ailés, tandis que son frère Hélios conduit celui du soleil le jour (voir la fiche « Lune »).",
+    "Fille des Titans Hypérion et Théia (voir les fiches « Hypérion » et « Théia »), Séléné, déesse de la lune, traverse le ciel nocturne sur un char tiré par des chevaux ailés, tandis que son frère Hélios conduit celui du soleil le jour (voir la fiche « Lune »).",
     "Éprise du berger Endymion (voir la fiche « Endymion »), elle obtint de Zeus qu'il reste éternellement jeune et endormi, afin de pouvoir le contempler chaque nuit sans jamais le voir vieillir ni mourir.",
   ],
   "hélios": [
-    "Dieu du soleil, Hélios traverse chaque jour le ciel sur un char de feu, de l'orient à l'occident, avant de regagner l'Océan pendant la nuit pour reprendre sa course au matin suivant (voir la fiche « Soleil »). Voyant tout depuis cette hauteur, rien ne lui échappe jamais tout à fait — c'est lui qui révélera un jour à Héphaïstos les amours cachées d'Aphrodite (voir la fiche « Aphrodite »).",
+    "Fils des Titans Hypérion et Théia (voir les fiches « Hypérion » et « Théia »), Hélios, dieu du soleil, traverse chaque jour le ciel sur un char de feu, de l'orient à l'occident, avant de regagner l'Océan pendant la nuit pour reprendre sa course au matin suivant (voir la fiche « Soleil »). Voyant tout depuis cette hauteur, rien ne lui échappe jamais tout à fait — c'est lui qui révélera un jour à Héphaïstos les amours cachées d'Aphrodite (voir la fiche « Aphrodite »).",
     "Son fils Phaéton, voulant prouver sa filiation, obtint un jour de conduire le char à sa place — incapable d'en maîtriser les chevaux, il faillit embraser la terre entière avant que Zeus ne le foudroie pour l'arrêter. Ses sœurs, les Héliades, le pleurèrent si longtemps sur les rives du fleuve où il était tombé qu'elles furent changées en peupliers, leurs larmes durcissant en gouttes d'ambre.",
     "De l'Océanide Persé, Hélios eut plusieurs autres enfants restés célèbres : Aiétès, roi de Colchide, la magicienne Circé (voir la fiche « Circé »), et Pasiphaé, épouse du roi Minos et mère du Minotaure (voir les fiches « Minos » et « Pasiphaé ») — trois destins bien différents, mais tous marqués par une même maîtrise redoutable de la magie ou du pouvoir.",
     "Sa petite-fille Médée, fille d'Aiétès, hérita elle aussi de ce sang — et de bien plus qu'un simple don pour les sortilèges : lorsqu'elle dut fuir Corinthe après s'être vengée de Jason, c'est un char ailé tiré par des dragons, prêté par Hélios lui-même, qui l'emporta hors d'atteinte (voir la fiche « Médée »).",
@@ -1126,8 +1144,91 @@ const DEITY_LORE = {
     "Sur terre, il fit construire par Dédale le Labyrinthe pour y enfermer le Minotaure, fruit d'une union contre nature de son épouse Pasiphaé (voir la fiche « Pasiphaé ») — un épisode qui n'entacha jamais, dans les Enfers, la légitimité de son jugement sur les autres âmes. C'est sa propre fille Ariane qui, en secret, permit à Thésée d'en ressortir vivant (voir la fiche « Ariane »).",
   ],
   "gaïa": [
-    "Déesse primordiale, Gaïa est la Terre elle-même, apparue au tout début du monde depuis le Chaos originel — mère de toutes choses, des Titans aux Cyclopes en passant par les monstres les plus redoutables.",
-    "C'est elle qui, lassée de la tyrannie de son époux Ouranos, poussa leur fils Cronos à le renverser, puis, plus tard, encouragea Zeus à faire de même contre les Titans devenus à leur tour trop puissants — la Terre choisissant toujours, en dernier recours, l'équilibre plutôt que la démesure d'un seul.",
+    "Déesse primordiale, Gaïa est la Terre elle-même, apparue au tout début du monde depuis le Chaos originel (voir la fiche « Chaos ») — mère de toutes choses, des Titans aux Cyclopes en passant par les monstres les plus redoutables.",
+    "C'est elle qui, lassée de la tyrannie de son époux Ouranos (voir la fiche « Ouranos »), poussa leur fils Cronos (voir la fiche « Cronos ») à le renverser, puis, plus tard, encouragea Zeus à faire de même contre les Titans devenus à leur tour trop puissants — la Terre choisissant toujours, en dernier recours, l'équilibre plutôt que la démesure d'un seul.",
+  ],
+  "chaos": [
+    "Avant toute chose, avant même les dieux, il y eut Chaos — non pas le désordre au sens moderne, mais un vide béant, un abîme originel d'où tout allait naître. Aucun culte ne lui fut jamais rendu : Chaos n'est pas une divinité qu'on prie, mais l'origine même à partir de laquelle toute prière devient possible.",
+    "De lui naquirent, sans union ni parent, les toutes premières puissances du monde : Gaïa, la Terre (voir la fiche « Gaïa »), Tartare, l'abîme le plus profond (voir la fiche « Tartare »), Érèbe, les Ténèbres (voir la fiche « Érèbe »), et Nyx, la Nuit (voir la fiche « Nyx ») — quatre forces surgies du vide, à partir desquelles s'engendra ensuite tout le reste de la généalogie divine.",
+    "Chaos reste ainsi le point zéro de toute généalogie grecque : ni mâle ni femelle, ni bon ni mauvais, simplement l'espace nécessaire pour que quelque chose, un jour, commence à exister.",
+  ],
+  "ouranos": [
+    "Fils et époux de Gaïa, la Terre (voir la fiche « Gaïa »), Ouranos est le Ciel lui-même, qui s'unit à elle pour engendrer les douze Titans, les trois Cyclopes aux yeux uniques, et les trois Hécatonchires aux cent bras — une descendance si redoutable qu'il refusa de la laisser naître, repoussant chacun de ses enfants dans les profondeurs de Gaïa dès leur venue au monde.",
+    "Excédée par ce poids et par cette tyrannie, Gaïa forgea une faucille de silex et convainquit son plus jeune fils Cronos (voir la fiche « Cronos ») de l'aider à se venger. Caché en embuscade, Cronos surprit son père et le mutila au moment où celui-ci s'unissait de nouveau à la Terre, le séparant à jamais de son pouvoir.",
+    "Du sang qui tomba sur la Terre naquirent les Érinyes, les Géants et les Nymphes des frênes ; jeté à la mer, le membre tranché fit naître, dans l'écume qui se forma autour de lui, la déesse Aphrodite elle-même (voir la fiche « Aphrodite »). Ouranos, détrôné, laissa place à ses fils les Titans — jusqu'à ce que l'un d'eux, à son tour, subisse le même sort.",
+  ],
+  "nyx": [
+    "Née de Chaos (voir la fiche « Chaos »), Nyx, la Nuit, est l'une des toutes premières puissances du monde — si redoutable qu'Hésiode raconte que Zeus lui-même hésite à la contrarier (voir la fiche « Zeus »).",
+    "Unie à son frère Érèbe, les Ténèbres (voir la fiche « Érèbe »), elle engendra Éther, la lumière céleste, et Héméra, le Jour — la lumière naissant ainsi, paradoxalement, de l'union de la nuit et de l'ombre.",
+    "Seule, sans aucun compagnon, elle mit aussi au monde une lignée entière de forces redoutées : Thanatos, la Mort, et son frère jumeau Hypnos, le Sommeil (voir les fiches « Thanatos » et « Hypnos »), Apaté, la Tromperie (voir la fiche « Apaté »), Némésis, la vengeance qui rétablit la juste mesure (voir la fiche « Némésis »), et Éris, la Discorde (voir la fiche « Éris »).",
+  ],
+  "érèbe": [
+    "Né de Chaos (voir la fiche « Chaos ») comme sa sœur Nyx (voir la fiche « Nyx »), Érèbe personnifie les Ténèbres — l'obscurité la plus profonde, celle qui règne sous la terre autant que dans le ciel avant l'aube.",
+    "Uni à Nyx, il engendra Éther, la lumière pure qui baigne les hauteurs du ciel, et Héméra, le Jour lui-même — un couple de ténèbres dont naît, paradoxalement, la lumière du monde.",
+    "Son nom finit par désigner, chez les auteurs plus tardifs, une région des Enfers à part entière : un passage obscur que les âmes devaient traverser avant d'atteindre le royaume d'Hadès (voir la fiche « Hadès »).",
+  ],
+  "tartare": [
+    "Né de Chaos (voir la fiche « Chaos ») aux tout premiers instants du monde, Tartare est à la fois un lieu et une puissance : le gouffre le plus profond de l'univers, si loin sous la terre qu'une enclume de bronze mettrait, dit Hésiode, neuf jours entiers à y tomber depuis la surface.",
+    "C'est là que Zeus enferma les Titans vaincus après la Titanomachie (voir la fiche « Zeus »), gardés par les redoutables Hécatonchires aux cent bras — un cachot d'où nul ne peut s'échapper sans l'accord du maître de l'Olympe.",
+    "Uni à Gaïa (voir la fiche « Gaïa »), Tartare engendra aussi Typhon, le monstre aux cent têtes de serpent que Zeus ne put vaincre qu'au prix du combat le plus terrible de tout son règne.",
+  ],
+  "cronos": [
+    "Plus jeune fils d'Ouranos et de Gaïa (voir les fiches « Ouranos » et « Gaïa »), Cronos répondit à l'appel de sa mère et mutila son père d'un coup de faucille pour mettre fin à sa tyrannie — devenant ainsi le maître du monde à la tête des Titans.",
+    "Uni à sa sœur Rhéa (voir la fiche « Rhéa »), il engendra les six premiers Olympiens : Hestia, Déméter, Héra, Hadès, Poséidon et Zeus (voir les fiches correspondantes). Mais averti qu'un de ses propres enfants le détrônerait à son tour, comme il avait lui-même détrôné son père, il avala chacun d'eux dès la naissance.",
+    "Rhéa parvint à soustraire Zeus à ce sort en lui substituant une pierre emmaillotée. Devenu adulte, celui-ci contraignit son père à rendre tous les enfants engloutis, puis le vainquit à la tête des Olympiens lors de la Titanomachie, mettant fin au règne des Titans.",
+    "Une tradition plus douce, surtout répandue chez les Romains sous le nom de Saturne, en fait aussi le souverain d'un Âge d'or révolu — un temps d'abondance et de paix, avant même la naissance de la démesure qui causera sa propre chute.",
+  ],
+  "océan": [
+    "Fils d'Ouranos et de Gaïa (voir les fiches « Ouranos » et « Gaïa »), Océan n'est pas la mer telle qu'on l'entend aujourd'hui, mais un fleuve immense qui encercle le disque du monde tout entier, source de toutes les eaux douces de la terre.",
+    "Uni à sa sœur Téthys (voir la fiche « Téthys »), il engendra trois mille fils, les dieux-fleuves, et autant de filles, les Océanides — parmi elles Clymène, épouse du Titan Japet (voir la fiche « Clymène »), et Électre, mère d'Iris (voir la fiche « Iris »).",
+    "Resté en retrait pendant la guerre des Titans, il ne prit jamais les armes contre Zeus — une neutralité qui lui valut de conserver son domaine intact quand la plupart de ses frères furent enfermés au Tartare (voir la fiche « Tartare »).",
+  ],
+  "téthys": [
+    "Fille d'Ouranos et de Gaïa (voir les fiches « Ouranos » et « Gaïa »), Téthys épousa son frère Océan (voir la fiche « Océan ») et mit au monde avec lui l'ensemble des fleuves et des Océanides — une descendance si nombreuse qu'Hésiode renonce lui-même à toutes les nommer.",
+    "Selon une tradition rapportée par Homère, elle éleva Héra en secret durant la guerre contre les Titans (voir la fiche « Héra »), la mettant à l'abri du conflit qui opposait alors leurs deux générations.",
+  ],
+  "hypérion": [
+    "Fils d'Ouranos et de Gaïa (voir les fiches « Ouranos » et « Gaïa »), Hypérion personnifie la lumière qui vient d'en haut — son nom signifie littéralement « celui qui va au-dessus ».",
+    "Uni à sa sœur Théia (voir la fiche « Théia »), il engendra trois enfants qui, à eux seuls, rythment le ciel tout entier : Hélios, le Soleil, Séléné, la Lune, et Éos, l'Aurore (voir les fiches « Hélios », « Séléné » et « Éos ») — une lignée entièrement vouée à la lumière, comme en écho direct au nom de leur père.",
+  ],
+  "théia": [
+    "Fille d'Ouranos et de Gaïa (voir les fiches « Ouranos » et « Gaïa »), Théia personnifie l'éclat lumineux qui permet de voir — selon certains auteurs, c'est elle qui donne à l'or, à l'argent et aux pierres précieuses leur éclat particulier, comme si sa propre nature rejaillissait sur tout ce qu'elle touche.",
+    "Unie à son frère Hypérion (voir la fiche « Hypérion »), elle mit au monde Hélios, Séléné et Éos (voir les fiches « Hélios », « Séléné » et « Éos ») — le Soleil, la Lune et l'Aurore, trois enfants qui portent chacun à leur manière l'éclat de leur mère à travers le ciel.",
+  ],
+  "coéos": [
+    "Fils d'Ouranos et de Gaïa (voir les fiches « Ouranos » et « Gaïa »), Coéos personnifie, selon certains auteurs, l'intelligence questionneuse ou l'axe autour duquel tourne la voûte céleste — un domaine resté flou, Hésiode ne lui prêtant aucun exploit propre.",
+    "Uni à sa sœur Phoebé (voir la fiche « Phoebé »), il engendra deux filles restées bien plus célèbres que lui : Léto, future mère d'Apollon et d'Artémis, et Astéria, mère d'Hécate (voir les fiches « Léto » et « Astéria »).",
+  ],
+  "phoebé": [
+    "Fille d'Ouranos et de Gaïa (voir les fiches « Ouranos » et « Gaïa »), Phoebé personnifie un éclat radieux souvent associé à la lune et au don de prophétie — un héritage qu'elle transmet à sa petite-fille Hécate (voir la fiche « Hécate »), et jusqu'au nom même d'Apollon Phoebos, son propre petit-fils.",
+    "Unie à son frère Coéos (voir la fiche « Coéos »), elle mit au monde Léto et Astéria (voir les fiches « Léto » et « Astéria ») — devenant ainsi, par leurs descendants, l'arrière-grand-mère d'Apollon, d'Artémis et d'Hécate.",
+  ],
+  "crios": [
+    "Fils d'Ouranos et de Gaïa (voir les fiches « Ouranos » et « Gaïa »), Crios reste le plus effacé des douze Titans : Hésiode ne lui prête aucun domaine ni aucun exploit propre, seulement une descendance.",
+    "Uni à l'Océanide Eurybie, il engendra Astréos, dieu des étoiles et père des Vents avec Éos (voir la fiche « Éos »), Pallas, dont l'union avec Styx donna Niké, Kratos, Bia et Zelos (voir les fiches « Niké », « Kratos », « Bia » et « Zelos »), et un troisième fils, Persès, un Titan marin resté largement en retrait des grands récits — à ne pas confondre avec l'homonyme mortel, fils de Persée et d'Andromède, déjà présent dans cette bibliothèque sous ce même nom.",
+  ],
+  "japet": [
+    "Fils d'Ouranos et de Gaïa (voir les fiches « Ouranos » et « Gaïa »), Japet est, selon Hésiode, l'ancêtre de l'humanité tout entière à travers ses fils — une lignée de Titans à la mesure toujours excessive, que ce soit dans la force, la ruse, l'étourderie ou l'orgueil.",
+    "Uni à l'Océanide Clymène (voir la fiche « Clymène »), il engendra quatre fils aux destins bien distincts : Atlas, condamné à porter le ciel, Prométhée, le bienfaiteur rusé de l'humanité, Épiméthée, son frère étourdi, et Ménétios, foudroyé par Zeus pour son orgueil démesuré (voir les fiches « Atlas », « Prométhée », « Épiméthée » et « Ménétios »).",
+    "Aucun de ses fils ne prit le parti de Zeus lors de la Titanomachie — Atlas y combattit même en première ligne contre lui — de sorte que la lignée entière de Japet paya, d'une manière ou d'une autre, le prix de cette défaite.",
+  ],
+  "mnémosyne": [
+    "Fille d'Ouranos et de Gaïa (voir les fiches « Ouranos » et « Gaïa »), Mnémosyne personnifie la Mémoire — une puissance essentielle dans une civilisation où la poésie et le savoir se transmettaient d'abord de bouche à oreille, sans jamais s'écrire.",
+    "Unie à Zeus (voir la fiche « Zeus ») neuf nuits consécutives, elle mit au monde les neuf Muses (voir la fiche « Muses »), chacune présidant à un art différent — comme si chaque nuit passée avec elle avait fait naître une façon distincte de se souvenir.",
+    "Dans les Enfers, une source portant son nom offre aux initiés des mystères orphiques de quoi contrer l'oubli de la source de Lethée (voir la fiche « Lethée ») — boire à la fontaine de Mnémosyne, disait-on, permettait à l'âme de rester fidèle à ce qu'elle avait été, même après la mort.",
+  ],
+  "épiméthée": [
+    "Fils du Titan Japet (voir la fiche « Japet ») et frère de Prométhée, d'Atlas et de Ménétios (voir les fiches « Prométhée », « Atlas » et « Ménétios »), Épiméthée — dont le nom signifie littéralement « celui qui réfléchit après coup » — incarne à lui seul l'inverse de son frère Prométhée, « celui qui réfléchit avant ».",
+    "Prométhée l'avait pourtant averti de ne jamais accepter le moindre présent venu de Zeus. Mais lorsque Pandore, la première femme, lui fut offerte en épouse par les dieux pour punir l'humanité du feu dérobé par son frère, Épiméthée l'accueillit sans méfiance — et avec elle, la jarre scellée qu'elle portait, dont Pandore finit par soulever le couvercle malgré l'interdit, répandant sur le monde tous les maux qu'elle contenait.",
+    "Seul l'Espoir resta prisonnier au fond de la jarre, refermée juste à temps — la seule consolation qu'Épiméthée, par sa confiance mal placée, ait malgré lui laissée à l'humanité.",
+  ],
+  "ménétios": [
+    "Fils du Titan Japet (voir la fiche « Japet ») et frère d'Atlas, de Prométhée et d'Épiméthée (voir les fiches « Atlas », « Prométhée » et « Épiméthée »), Ménétios personnifie, selon Hésiode, une violence orgueilleuse et sans mesure.",
+    "Lors de la guerre contre les Titans, sa démesure lui valut d'être frappé par la foudre de Zeus et précipité dans l'Érèbe, aux confins du monde (voir la fiche « Érèbe ») — le seul de la lignée de Japet à subir un châtiment aussi direct, plutôt qu'une peine éternelle comme celle réservée à son frère Atlas.",
+  ],
+  "clymène": [
+    "Fille d'Océan et de Téthys (voir les fiches « Océan » et « Téthys »), Clymène épousa le Titan Japet (voir la fiche « Japet ») et mit au monde avec lui quatre fils aux destins hors du commun : Atlas, Prométhée, Épiméthée et Ménétios (voir les fiches « Atlas », « Prométhée », « Épiméthée » et « Ménétios »).",
+    "Son nom, qui signifie « la Renommée », se retrouve porté par plusieurs autres figures de la mythologie grecque — dont l'Océanide qui donna à Hélios plusieurs enfants prestigieux (voir la fiche « Hélios ») — sans qu'aucun lien de parenté ne les unisse.",
   ],
   "athéna": [
     "Née tout armée du crâne de Zeus, après qu'il eut avalé sa mère Métis enceinte (voir la fiche « Métis »), Athéna hérita à la fois de la puissance de son père et de la ruse de sa mère.",
@@ -1136,7 +1237,7 @@ const DEITY_LORE = {
     "On l'honorait sous plusieurs noms selon la part de sa protection invoquée : Parthénos, « la Vierge », a donné son nom au Parthénon qui la représente sur l'Acropole ; Polias, « gardienne de la cité », désignait son rôle de protectrice d'Athènes elle-même ; et Ergané, « l'Ouvrière », présidait aux travaux des artisans et des tisserandes — un titre qui résonne particulièrement face au destin d'Arachné, changée en araignée pour son insolence (voir la fiche « Araignée »).",
   ],
   "aphrodite": [
-    "Déesse de l'amour et de la beauté, Aphrodite naquit, selon le récit le plus ancien, de l'écume de mer formée autour des membres tranchés d'Ouranos — un mythe plus ancien que la naissance de la plupart des autres Olympiens. Accueillie sur le rivage de Chypre par les Heures (voir la fiche « Heures »), elle en fut parée avant d'être conduite devant les autres dieux.",
+    "Déesse de l'amour et de la beauté, Aphrodite naquit, selon le récit le plus ancien, de l'écume de mer formée autour des membres tranchés d'Ouranos (voir la fiche « Ouranos ») — un mythe plus ancien que la naissance de la plupart des autres Olympiens. Accueillie sur le rivage de Chypre par les Heures (voir la fiche « Heures »), elle en fut parée avant d'être conduite devant les autres dieux.",
     "Sa beauté suscite jalousies et rivalités jusque parmi les dieux : c'est elle qui remporte le jugement de Pâris (voir la fiche « Pâris ») en lui promettant l'amour de la plus belle femme du monde, Hélène (voir la fiche « Hélène ») — une promesse qui déclenchera la guerre de Troie.",
     "Mariée par Zeus à Héphaïstos, le forgeron boiteux de l'Olympe, elle ne l'aima jamais vraiment : son cœur allait à Arès, dieu de la guerre (voir la fiche « Arès »). Hélios, qui voit tout depuis son char (voir la fiche « Hélios »), surprit leur liaison et la révéla à Héphaïstos, qui tendit à sa femme et son amant un filet d'or invisible et incassable, les piégeant nus devant tous les dieux assemblés, plus amusés que scandalisés. De cette union naquirent Harmonie (voir la fiche « Harmonie ») et, selon les récits les plus tardifs, Éros lui-même (voir la fiche « Éros »).",
     "Elle aima aussi le jeune Adonis, né d'un arbre à myrrhe après une naissance elle-même née d'une faute funeste. Confié encore enfant à Perséphone pour être élevé en secret, il grandit si beau que les deux déesses se le disputèrent, jusqu'à ce que Zeus tranche : Adonis partagerait son temps entre l'une et l'autre. Il choisit de passer le plus clair de ses jours auprès d'Aphrodite — jusqu'à ce qu'un sanglier, lancé sur ses traces par la jalousie d'Arès selon certains récits, le blesse mortellement à la chasse. Accourue trop tard, Aphrodite se blessa elle-même à une épine en se précipitant vers lui ; là où leurs sangs mêlés touchèrent la terre, des anémones rouges jaillirent aussitôt.",
@@ -1154,7 +1255,7 @@ const DEITY_LORE = {
     "Monté sur Pégase, il vainquit la Chimère, monstre crachant le feu — mais voulut ensuite s'élever jusqu'à l'Olympe lui-même, un excès de démesure que Zeus punit en envoyant un taon piquer Pégase, précipitant Bellérophon à terre pour le reste de sa vie.",
   ],
   "éos": [
-    "Déesse de l'aurore, Éos ouvre chaque matin les portes du ciel pour annoncer le passage du char d'Hélios, son frère — ses doigts de rose colorent le ciel juste avant le lever du jour (voir la fiche « Aurore »).",
+    "Fille des Titans Hypérion et Théia (voir les fiches « Hypérion » et « Théia »), Éos, déesse de l'aurore, ouvre chaque matin les portes du ciel pour annoncer le passage du char d'Hélios, son frère — ses doigts de rose colorent le ciel juste avant le lever du jour (voir la fiche « Aurore »).",
     "Éprise de plusieurs mortels, dont Tithonos, elle obtint pour lui l'immortalité mais oublia de demander aussi l'éternelle jeunesse : il vieillit sans jamais pouvoir mourir, jusqu'à se réduire à une simple voix — changé, selon une tradition plus tardive, en cigale, dont le chant strident perpétue encore aujourd'hui cette plainte sans fin.",
     "Elle aima aussi le chasseur Orion, qu'elle emporta à Délos pour vivre à ses côtés, avant qu'il ne devienne le compagnon de chasse d'Artémis (voir la fiche « Orion »).",
     "Unie à Astréos, dieu des étoiles, elle mit aussi au monde les quatre vents, dont Borée, le vent du Nord (voir la fiche « Borée ») — une aurore qui n'ouvre pas seulement le ciel au soleil, mais engendre aussi les souffles qui le traversent.",
@@ -1165,7 +1266,7 @@ const DEITY_LORE = {
     "Trois de ses frères et sœurs firent le même choix qu'elle et reçurent la même récompense : Kratos, la Puissance (voir la fiche « Kratos »), Bia, la Force (voir la fiche « Bia »), et Zelos, le Zèle rival (voir la fiche « Zelos »), devinrent eux aussi des compagnons permanents du trône de Zeus.",
   ],
   "hestia": [
-    "Sœur aînée de Zeus, Hestia est la déesse du foyer et gardienne de la flamme sacrée qui brûle au centre de chaque maison comme de chaque cité.",
+    "Fille de Cronos et de Rhéa (voir les fiches « Cronos » et « Rhéa »), sœur aînée de Zeus, Hestia est la déesse du foyer et gardienne de la flamme sacrée qui brûle au centre de chaque maison comme de chaque cité.",
     "Courtisée par Apollon et Poséidon, elle refusa tout mariage et obtint de Zeus de rester à jamais vierge, s'installant définitivement au cœur de l'Olympe plutôt que de suivre l'un ou l'autre — une place discrète mais essentielle, puisque aucun foyer ne peut exister sans elle.",
     "Hestia se distingue par l'absence presque totale de titres de culte qui lui soient propres : sa place n'est jamais celle d'un sanctuaire précis, mais celle, rituelle, du tout premier et du tout dernier geste — on ne pouvait, disait-on, verser dignement une libation sans l'invoquer à la fois en ouverture et en clôture de toute cérémonie. Chaque prytanée, le foyer commun de chaque cité, faisait ainsi office de temple, sans qu'elle ait jamais eu besoin d'un nom particulier pour se le voir dédié.",
   ],
@@ -1222,7 +1323,7 @@ const DEITY_LORE = {
     "Invincible en apparence, Achille tombe pourtant devant cette même porte Scée, tué d'une flèche que Pâris (voir la fiche « Pâris ») décoche mais qu'Apollon guide lui-même jusqu'à son unique point faible, le talon. Son fils Néoptolème (voir la fiche « Néoptolème »), resté caché sur Skyros pendant toute la guerre, est appelé à Troie après cette mort — un oracle affirme que la ville ne peut tomber sans lui —, où il se révèle aussi impitoyable que farouche, jusqu'à tuer le vieux Priam (voir la fiche « Priam ») au pied même d'un autel lors de la prise de la ville.",
   ],
   "atlas": [
-    "Titan ayant combattu aux côtés de ses frères contre Zeus, Atlas fut condamné, à leur défaite, à porter la voûte céleste sur ses épaules pour l'éternité — non la Terre, comme on le croit souvent, mais le ciel lui-même.",
+    "Fils du Titan Japet (voir la fiche « Japet »), Atlas combattit aux côtés de ses frères contre Zeus et fut condamné, à leur défaite, à porter la voûte céleste sur ses épaules pour l'éternité — non la Terre, comme on le croit souvent, mais le ciel lui-même.",
     "Héraclès, venu chercher les pommes d'or du jardin des Hespérides (voir la fiche « Hespérides »), proposa un temps de porter le ciel à sa place pendant qu'Atlas allait chercher les pommes — un répit que le Titan dut abandonner, ruse d'Héraclès à l'appui, pour reprendre son fardeau.",
     "Une tradition plus tardive raconte aussi comment Atlas devint la chaîne de montagnes qui porte aujourd'hui son nom : ayant refusé l'hospitalité à Persée de passage, il fut pétrifié d'un seul regard par la tête de la Gorgone Méduse que le héros rapportait (voir la fiche « Persée »).",
   ],
@@ -1571,7 +1672,7 @@ const DEITY_LORE = {
     "Ilithyie est particulièrement associée à Héraclès et à Héra.",
   ],
   "léto": [
-    "Titanide, fille de Coéos et de Phoebé, Léto est la sœur d'Astéria (voir la fiche « Astéria »). Aimée de Zeus, elle devint aussitôt la cible de la jalousie d'Héra, qui interdit à toute terre ferme de l'accueillir pour son accouchement (voir la fiche « Héra »).",
+    "Titanide, fille de Coéos et de Phoebé (voir les fiches « Coéos » et « Phoebé »), Léto est la sœur d'Astéria (voir la fiche « Astéria »). Aimée de Zeus, elle devint aussitôt la cible de la jalousie d'Héra, qui interdit à toute terre ferme de l'accueillir pour son accouchement (voir la fiche « Héra »).",
     "Léto erra ainsi de rivage en rivage, refusée partout, jusqu'à atteindre Délos — l'île errante en laquelle sa propre sœur Astéria s'était autrefois changée pour échapper à Zeus. N'étant plus à proprement parler une « terre ferme » ancrée nulle part, Délos put l'accueillir sans enfreindre l'interdit d'Héra.",
     "C'est là que Léto mit au monde ses jumeaux, Apollon et Artémis (voir les fiches « Apollon » et « Artémis ») — un accouchement rendu possible, au bout du compte, par la solidarité d'une sœur devenue elle-même un refuge.",
     "Toujours poursuivie par la colère d'Héra alors même que ses jumeaux n'étaient encore que des nourrissons, elle s'arrêta un jour en Lycie pour boire à un étang et y baigner ses enfants. Des paysans du lieu, par pure méchanceté, troublèrent l'eau à coups de pied pour l'empêcher de se désaltérer et la chassèrent en l'insultant. Léto, épuisée, les changea sur-le-champ en grenouilles, condamnées depuis à barboter pour toujours dans la vase de cet étang qu'ils lui avaient interdit.",
@@ -1579,7 +1680,7 @@ const DEITY_LORE = {
     "Léto est particulièrement associée à Apollon, à Artémis et à Astéria.",
   ],
   "astéria": [
-    "Titanide, fille de Coéos et de Phoebé, Astéria — dont le nom signifie littéralement « étoilée », en écho au mot étoile lui-même (voir la fiche « Étoile ») — est la sœur de Léto (voir la fiche « Léto »).",
+    "Titanide, fille de Coéos et de Phoebé (voir les fiches « Coéos » et « Phoebé »), Astéria — dont le nom signifie littéralement « étoilée », en écho au mot étoile lui-même (voir la fiche « Étoile ») — est la sœur de Léto (voir la fiche « Léto »).",
     "Poursuivie par les avances de Zeus, elle refusa de se laisser posséder et se jeta dans la mer plutôt que de céder, se changeant en île errante, un temps assimilée aux étoiles filantes avant de se fixer sous le nom de Délos.",
     "C'est sur cette même île qu'elle offrit, sans le savoir encore, un refuge à sa sœur Léto, venue y accoucher d'Apollon et d'Artémis après avoir été rejetée de partout ailleurs. Avec le dieu marin Persès, Astéria est aussi mère d'Hécate (voir la fiche « Hécate »), qui hérita de sa proximité avec le ciel nocturne.",
     "Astéria est particulièrement associée à Léto et à Hécate.",
@@ -1628,13 +1729,13 @@ const DEITY_LORE = {
     "De cette union naissent, selon certains récits, les Parques elles-mêmes (voir la fiche « Parques »), filant le fil de chaque destinée sur le fuseau que Platon décrit tournant sur les genoux d'Ananké — l'axe même autour duquel tourne le monde. Zeus lui-même, dit-on, s'incline devant ses décrets : la nécessité gouverne jusqu'au roi des dieux.",
   ],
   "éris": [
-    "Éris personnifie la Discorde. Homère en fait une sœur d'Arès, sa fidèle compagne sur le champ de bataille ; Hésiode, dans sa Théogonie, la dit plutôt fille de la Nuit seule, née sans père aux côtés d'Apaté et de Némésis (voir les fiches « Apaté » et « Némésis ») — deux traditions parallèles pour une même puissance de rupture qui, une fois déclenchée, ne peut plus être désamorcée.",
+    "Éris personnifie la Discorde. Homère en fait une sœur d'Arès, sa fidèle compagne sur le champ de bataille ; Hésiode, dans sa Théogonie, la dit plutôt fille de Nyx, la Nuit, seule (voir la fiche « Nyx »), née sans père aux côtés d'Apaté et de Némésis (voir les fiches « Apaté » et « Némésis ») — deux traditions parallèles pour une même puissance de rupture qui, une fois déclenchée, ne peut plus être désamorcée.",
     "Non invitée aux noces de Thétis et Pélée (voir la fiche « Thétis »), par crainte qu'elle n'y sème le trouble, elle se présenta malgré tout et jeta parmi les déesses assemblées une pomme d'or portant une seule inscription : « à la plus belle ». Héra, Athéna et Aphrodite se la disputèrent aussitôt, jusqu'à ce que Zeus confie à Pâris (voir la fiche « Pâris ») le soin de trancher — un jugement qui déclenchera la guerre de Troie.",
     "Hésiode distingue pourtant deux Éris bien différentes : l'une pousse au conflit destructeur, l'autre à une rivalité plus saine, celle qui incite le voisin paresseux à travailler autant que celui qui prospère à côté de lui. La discorde n'est donc pas toujours la même force — seule la première porte le nom que la légende a retenu.",
   ],
   "lethée": [
     "Lethée est le fleuve de l'Oubli, l'un des cours d'eau qui traversent les Enfers — boire à ses eaux efface, dit-on, jusqu'au souvenir d'avoir vécu.",
-    "Les âmes des morts s'y désaltéraient traditionnellement avant de renaître, pour ne rien garder de leur existence précédente. Mais une tradition plus tardive, orphique, conseillait l'inverse à ses initiés : sur des tablettes d'or déposées dans leurs tombes, on leur enjoignait d'éviter la source de Lethée et de chercher plutôt celle de Mnémosyne, la Mémoire — pour rester, même dans la mort, fidèles à ce qu'ils avaient été.",
+    "Les âmes des morts s'y désaltéraient traditionnellement avant de renaître, pour ne rien garder de leur existence précédente. Mais une tradition plus tardive, orphique, conseillait l'inverse à ses initiés : sur des tablettes d'or déposées dans leurs tombes, on leur enjoignait d'éviter la source de Lethée et de chercher plutôt celle de Mnémosyne, la Mémoire (voir la fiche « Mnémosyne ») — pour rester, même dans la mort, fidèles à ce qu'ils avaient été.",
     "Son nom même s'oppose à celui d'Aletheia, la Vérité (voir la fiche « Aletheia ») : alètheia signifie littéralement « ce qui échappe à Lethée » — l'un dévoile ce que l'autre recouvre, deux forces jumelles et contraires.",
   ],
   "némésis": [
@@ -1648,7 +1749,7 @@ const DEITY_LORE = {
     "Contrairement à Ioké, sa contrepartie qui personnifie la poursuite acharnée du vainqueur, Palioxis n'est pas la défaite elle-même : elle est ce moment où continuer le combat cesserait d'avoir un sens, et où seul reculer permet de préserver ce qui peut encore l'être.",
   ],
   "apaté": [
-    "Apaté personnifie la Tromperie. Hésiode en fait une fille de Nyx, la Nuit, née sans père — au côté d'autres forces sombres comme Éris, la Discorde (voir la fiche « Éris »), ou Géras, la Vieillesse : des puissances qui agissent sur le monde sans jamais avoir besoin d'être invoquées.",
+    "Apaté personnifie la Tromperie. Hésiode en fait une fille de Nyx, la Nuit (voir la fiche « Nyx »), née sans père — au côté d'autres forces sombres comme Éris, la Discorde (voir la fiche « Éris »), ou Géras, la Vieillesse : des puissances qui agissent sur le monde sans jamais avoir besoin d'être invoquées.",
     "Des traditions plus tardives l'associent aussi aux maux répandus sur le monde lorsque Pandore souleva le couvercle du vase qui lui avait été confié — la tromperie comptant, dans cette lecture, parmi les premières épreuves faites aux hommes.",
     "Elle a pour rivale Aletheia, la Vérité (voir la fiche « Aletheia ») : l'une dévoile ce que l'autre travestit, et aucune des deux ne l'emporte jamais tout à fait sur l'autre.",
   ],
@@ -1662,7 +1763,7 @@ const DEITY_LORE = {
     "Ovide raconte comment Junon, voulant révéler à Alcyone la mort de son époux Céyx en mer, envoya Morphée prendre les traits exacts du disparu pour la lui annoncer en songe — une vérité que la déesse jugeait trop cruelle à dire éveillée, mais qu'il fallait pourtant transmettre.",
   ],
   "thanatos": [
-    "Thanatos personnifie la mort paisible, sans violence ni souffrance — fils de Nyx comme Apaté (voir la fiche « Apaté »), et frère jumeau d'Hypnos, le Sommeil, tant les deux se ressemblent.",
+    "Thanatos personnifie la mort paisible, sans violence ni souffrance — fils de Nyx (voir la fiche « Nyx ») comme Apaté (voir la fiche « Apaté »), et frère jumeau d'Hypnos, le Sommeil, tant les deux se ressemblent.",
     "Sisyphe parvint un jour à l'enchaîner par ruse, empêchant plus personne de mourir sur terre — jusqu'à ce qu'Arès, furieux de voir la guerre perdre tout enjeu sans la mort pour la trancher, ne vienne le libérer de force.",
     "Selon une tradition popularisée par la tragédie d'Euripide, Héraclès (voir la fiche « Héraclès ») l'aurait un jour défié corps à corps pour arracher la reine Alceste (voir la fiche « Alceste ») des Enfers — une version plus rare que celle suivie ici, où c'est Perséphone elle-même, touchée par l'amour d'Alceste pour son époux, qui la renvoya sans qu'aucun combat ne soit nécessaire.",
   ],
@@ -1723,7 +1824,7 @@ const DEITY_LORE = {
     "Parmi ses sœurs, elle personnifie plus particulièrement la joie elle-même — non l'abondance ou la fête que représente Thalia (voir la fiche « Thalia »), mais l'allégresse qui ne naît que du partage, le plaisir simple d'être ensemble.",
   ],
   "hypnos": [
-    "Hypnos personnifie le Sommeil, fils de la Nuit — frère jumeau de Thanatos, la Mort paisible (voir la fiche « Thanatos »), avec qui il partage une ressemblance si troublante que les Anciens les disaient inséparables, l'un menant doucement là où l'autre mène pour toujours.",
+    "Hypnos personnifie le Sommeil, fils de Nyx, la Nuit (voir la fiche « Nyx ») — frère jumeau de Thanatos, la Mort paisible (voir la fiche « Thanatos »), avec qui il partage une ressemblance si troublante que les Anciens les disaient inséparables, l'un menant doucement là où l'autre mène pour toujours.",
     "Il habite, dit-on, une grotte silencieuse aux confins du monde, là où naît le fleuve Lethée, l'Oubli (voir la fiche « Lethée »), et où se rencontrent le jour et la nuit : des pavots poussent à son entrée, et c'est là qu'il engendra Morphée, le dieu des songes, capable de prendre en rêve les traits de n'importe quel mortel (voir la fiche « Morphée »).",
     "Dans l'Iliade, Héra le convainc d'endormir Zeus lui-même le temps de favoriser les Grecs sur le champ de bataille de Troie — l'un des rares récits où même le maître de l'Olympe cède à un pouvoir plus discret que le sien. Une autre tradition le dit épris du berger Endymion (voir la fiche « Endymion »), à qui il laissa les yeux entrouverts durant son sommeil éternel, pour ne jamais cesser de le contempler.",
   ],
@@ -1743,7 +1844,7 @@ const DEITY_LORE = {
 
   /* ----- Personnifications des cartes numérales illustrées de Deniers (voir NUMBER_CARD_DEITY) ----- */
   "rhéa": [
-    "Rhéa, fille du Ciel et de la Terre (Ouranos et Gaïa), épousa son frère Cronos et mit au monde les six premiers dieux de l'Olympe : Hestia, Déméter, Héra, Hadès, Poséidon et Zeus. Mais Cronos, averti qu'un de ses enfants le détrônerait un jour comme il avait lui-même détrôné son père, avalait chacun d'eux dès sa naissance.",
+    "Rhéa, fille du Ciel et de la Terre (Ouranos et Gaïa, voir les fiches « Ouranos » et « Gaïa »), épousa son frère Cronos (voir la fiche « Cronos ») et mit au monde les six premiers dieux de l'Olympe : Hestia, Déméter, Héra, Hadès, Poséidon et Zeus. Mais Cronos, averti qu'un de ses enfants le détrônerait un jour comme il avait lui-même détrôné son père, avalait chacun d'eux dès sa naissance.",
     "Lorsque vint le tour de Zeus, Rhéa refusa de le perdre comme les autres : elle se retira secrètement en Crète pour accoucher, cacha le nouveau-né dans une grotte du mont Ida, confié aux nymphes et à la chèvre Amalthée, et tendit à Cronos une pierre emmaillotée qu'il avala sans se douter de la substitution (voir la fiche « Grotte »).",
     "Zeus, une fois adulte, revint forcer son père à rendre tous les enfants qu'il avait engloutis — ses propres frères et sœurs, désormais adultes eux aussi — avant de le renverser à son tour lors de la Titanomachie. Rhéa, par cette seule ruse, avait rendu possible la naissance de l'Olympe tel qu'on le connaît.",
   ],
@@ -1807,7 +1908,7 @@ const DEITY_LORE = {
     "Elle s'échappa de Corinthe sur un char ailé tiré par des dragons, prêté par son grand-père Hélios (voir la fiche « Hélios ») — le même astre qui, chaque jour, traverse le ciel sans jamais se soucier de ce qui se passe en dessous.",
   ],
   "calliope": [
-    "Fille de Zeus et de la Titanide Mnémosyne, la Mémoire elle-même, Calliope est l'aînée et la plus vénérée des neuf Muses : celle qui préside à la poésie épique, le grand récit des exploits héroïques que les aèdes chantaient de génération en génération.",
+    "Fille de Zeus et de la Titanide Mnémosyne (voir les fiches « Zeus » et « Mnémosyne »), la Mémoire elle-même, Calliope est l'aînée et la plus vénérée des neuf Muses : celle qui préside à la poésie épique, le grand récit des exploits héroïques que les aèdes chantaient de génération en génération.",
     "On la représente une tablette et un stylet à la main, prête à consigner ce qui mérite de ne jamais être oublié — un rôle qui prolonge directement l'origine de sa mère, la Mémoire.",
     "Unie à Apollon ou, selon d'autres traditions, au roi thrace Œagre, elle mit au monde Orphée, dont le chant devait plus tard surpasser celui de tous les mortels (voir la fiche « Orphée »).",
     "Lorsque les neuf filles de Piéros osèrent défier les Muses en un concours de chant, ce fut Calliope qui répondit en leur nom par le récit du rapt de Perséphone par Hadès — un chant qui l'emporta sans appel et valut aux Piérides d'être changées en pies bavardes pour avoir refusé leur défaite (voir la fiche « Muses »).",
@@ -1891,7 +1992,7 @@ const DEITY_LORE = {
     "Une tout autre Enyo existe par ailleurs dans la mythologie grecque : l'une des trois Grées, filles de Phorcys et de Céto, nées déjà vieilles et ne partageant à elles trois qu'un seul œil et une seule dent, qu'elles se passent à tour de rôle — une créature marine archaïque sans aucun rapport avec la guerre, que seul le nom partagé relie à la compagne d'Arès.",
   ],
   "hespérides": [
-    "Selon Hésiode, la source la plus ancienne à leur sujet, les Hespérides sont filles de la Nuit seule — « qui ne s'unit à personne » —, nées sans père comme plusieurs des figures les plus anciennes et les plus sombres de sa Théogonie. Une tradition plus tardive, aujourd'hui la plus répandue, en fait plutôt les filles du Titan Atlas (voir la fiche « Atlas ») : un lien qui doit sans doute davantage à la géographie qu'à un mythe précis, puisque leur jardin se situe justement aux confins occidentaux du monde, près des montagnes qui portent son nom.",
+    "Selon Hésiode, la source la plus ancienne à leur sujet, les Hespérides sont filles de Nyx, la Nuit, seule (voir la fiche « Nyx ») — « qui ne s'unit à personne » —, nées sans père comme plusieurs des figures les plus anciennes et les plus sombres de sa Théogonie. Une tradition plus tardive, aujourd'hui la plus répandue, en fait plutôt les filles du Titan Atlas (voir la fiche « Atlas ») : un lien qui doit sans doute davantage à la géographie qu'à un mythe précis, puisque leur jardin se situe justement aux confins occidentaux du monde, près des montagnes qui portent son nom.",
     "Aux côtés du dragon Ladon, né de Typhon et d'Échidna, elles gardent un pommier d'or planté au bout du monde connu — un cadeau de noces que Gaïa avait offert à Héra le jour de son mariage avec Zeus. Leur nombre même reste incertain selon les auteurs, tantôt trois, tantôt quatre, parfois sept, et leurs noms varient tout autant : Aiglé, Érythie et Hespéréthuse comptent parmi les plus souvent cités.",
     "C'est ce jardin qu'Héraclès dut atteindre pour son onzième travail (voir la fiche « Héraclès ») : plutôt que d'affronter lui-même le dragon, il chargea Atlas d'aller cueillir les pommes à sa place, le temps de porter le ciel sur ses propres épaules — un répit que le Titan tenta de prolonger indéfiniment, avant qu'Héraclès ne le pousse par ruse à reprendre son fardeau.",
     "Une lecture évhémériste bien plus tardive, rapportée par l'historien grec Diodore de Sicile, rationalise entièrement ce mythe : les « pommes d'or », dit-il, désignaient en réalité des moutons — le mot grec mêlon signifiant à la fois « pomme » et « brebis » —, et le jardin merveilleux n'était autre qu'un domaine bien réel, appartenant à un roi libyen historique, que le onzième travail d'Héraclès se serait borné à visiter sans le moindre prodige. Une explication qui, en dépouillant le mythe de tout son merveilleux, n'a jamais réellement supplanté le récit qu'elle prétendait éclaircir.",
@@ -2220,14 +2321,14 @@ const DEITY_LORE = {
     "Son nom reste depuis attaché à ce malentendu tragique né d'un simple voile ensanglanté : un amour empêché par des familles ennemies, une méprise fatale, une mort partagée — le schéma même que Shakespeare reprendra pour Roméo et Juliette, des siècles plus tard.",
   ],
   "muses": [
-    "Filles de Zeus et de la Titanide Mnémosyne, la Mémoire elle-même, les neuf Muses naquirent au terme de neuf nuits consécutives où le roi des dieux s'unit à elle. Hésiode, la source la plus ancienne à les nommer toutes ensemble, se contente de les énumérer sans leur attribuer de domaine particulier — la répartition en neuf arts bien distincts, aujourd'hui la plus connue, ne s'est fixée que plus tard, à l'époque hellénistique et romaine (voir les fiches consacrées à chacune).",
+    "Filles de Zeus et de la Titanide Mnémosyne (voir les fiches « Zeus » et « Mnémosyne »), la Mémoire elle-même, les neuf Muses naquirent au terme de neuf nuits consécutives où le roi des dieux s'unit à elle. Hésiode, la source la plus ancienne à les nommer toutes ensemble, se contente de les énumérer sans leur attribuer de domaine particulier — la répartition en neuf arts bien distincts, aujourd'hui la plus connue, ne s'est fixée que plus tard, à l'époque hellénistique et romaine (voir les fiches consacrées à chacune).",
     "Elles résident traditionnellement sur le mont Hélicon, en Béotie, près de la source Hippocrène, née dit-on du sabot de Pégase frappant le rocher, ou sur le Parnasse, près de la source Castalie non loin de Delphes — deux lieux également associés à Apollon (voir la fiche « Apollon »), qui les conduit alors sous le nom d'Apollon Musagète, « guide des Muses ».",
     "Leur talent leur valut un jour un défi : les neuf filles de Piéros, roi de Macédoine, se crurent leurs égales et les provoquèrent en un concours de chant, jugé par des nymphes. Les Piérides chantèrent un hymne impie glorifiant les Géants contre les dieux de l'Olympe ; Calliope (voir la fiche « Calliope »), au nom des Muses, leur répondit par le récit du rapt de Perséphone par Hadès. Les nymphes tranchèrent sans appel en faveur des Muses — et les Piérides, refusant leur défaite et multipliant les insultes, furent changées en pies bavardes, condamnées à conserver dans ce nouveau corps le seul don qu'elles n'avaient jamais su maîtriser : parler sans savoir se taire.",
     "Chacune des neuf incarne aujourd'hui un art précis — l'épopée, l'histoire, la musique, la comédie, la tragédie, la danse, la poésie amoureuse, les hymnes sacrés et l'astronomie (voir les fiches individuelles) — mais leur légende commune reste celle d'un groupe inséparable, jamais représenté l'une sans les autres.",
   ],
   "clio": [
     "Clio préside à l'Histoire — son nom, dérivé du verbe grec « kleiein », célébrer, désigne celle qui proclame la gloire des actes dignes d'être retenus. On la représente tenant un rouleau ou un livre ouvert, parfois une trompette à la main, comme pour annoncer ce qui mérite de traverser le temps.",
-    "Elle appartient aux neuf Muses, filles de Zeus et de Mnémosyne, la Mémoire elle-même (voir la fiche « Muses ») — une parenté qui prend tout son sens pour elle en particulier : que serait l'Histoire sans la mémoire qui la précède ?",
+    "Elle appartient aux neuf Muses (voir la fiche « Muses »), filles de Zeus et de Mnémosyne, la Mémoire elle-même (voir les fiches « Zeus » et « Mnémosyne ») — une parenté qui prend tout son sens pour elle en particulier : que serait l'Histoire sans la mémoire qui la précède ?",
   ],
   "euterpe": [
     "Euterpe préside à la musique, en particulier au son de l'aulos, une flûte double dont elle passe pour l'inventrice. Son nom signifie « celle qui réjouit », en écho au plaisir que procure son art.",
@@ -2265,7 +2366,7 @@ const DEITY_LORE = {
   ],
   "parques": [
     "Les Moires — en français plus couramment les Parques, du nom latin qui leur est resté — sont trois : Clotho, qui file le fil de chaque existence sur son fuseau ; Lachésis, qui en mesure la longueur et fixe la part de destin échue à chacun ; et Atropos, « celle qu'on ne peut détourner », qui tranche ce même fil au moment de la mort.",
-    "Hésiode lui-même les fait naître deux fois dans sa Théogonie, sans jamais harmoniser les deux versions : la plus ancienne les dit filles de la Nuit seule, nées aux côtés de la Mort et du Sommeil ; un passage plus tardif du même poème en fait plutôt les filles de Zeus et de Thémis (voir la fiche « Thémis »), sœurs des Heures (voir la fiche « Heures »).",
+    "Hésiode lui-même les fait naître deux fois dans sa Théogonie, sans jamais harmoniser les deux versions : la plus ancienne les dit filles de Nyx, la Nuit, seule (voir la fiche « Nyx »), nées aux côtés de la Mort et du Sommeil ; un passage plus tardif du même poème en fait plutôt les filles de Zeus et de Thémis (voir la fiche « Thémis »), sœurs des Heures (voir la fiche « Heures »).",
     "Une tradition orphique en fait plutôt les filles d'Ananké, la Nécessité elle-même (voir la fiche « Ananké ») — Platon décrit leur fuseau tournant sur les genoux de leur mère, axe autour duquel le monde entier accomplit sa course. Même Zeus s'incline devant leurs décrets dans la tradition la plus ancienne ; une épiclèse plus tardive, Zeus Moiragète, « guide des Moires », suggère pourtant une relation plus nuancée qu'une simple soumission.",
   ],
 };
