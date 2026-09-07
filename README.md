@@ -534,3 +534,64 @@ honnête d'absence d'association sur l'ouroboros, classes CSS, et intégrité to
 sur l'ensemble du corpus — 0 résiduelle) + les neuf suites précédentes, remises au vert
 (quelques décomptes obsolètes de « 90 symboles » mis à jour vers 98).
 - `service-worker.js` : `pantheon-v9` → `pantheon-v10`.
+
+## Lieux mythologiques (nouvel onglet — carte Leaflet et tuiles réelles)
+
+Nouveau cinquième onglet, « Lieux » : une carte géographique réelle (Leaflet + tuiles
+OpenStreetMap, chargées depuis cdnjs avec intégrité SRI) plutôt qu'une simple liste de noms —
+chaque lieu correspond à un site réel, aux coordonnées géographiques véritables, auquel une
+tradition antique attache un épisode mythologique précis.
+
+**34 lieux curatés**, dans `MAP_PLACES` (`app.js`), volontairement pas un compte rond arbitraire :
+sanctuaires (Delphes, Olympie, Éleusis, Dodone, Délos, Épidaure), montagnes (Olympe, Ida en
+Crète, Parnasse, Hélicon), cités et palais (Athènes/Acropole, Mycènes, Thèbes, Troie, Sparte,
+Argos, Corinthe, Cnossos, Aulis, Éphèse), îles (Ithaque, Naxos, Lemnos, Samothrace, Rhodes,
+Samos), détroits et passages maritimes (Hellespont, détroit de Messine, Colonnes d'Héraclès,
+Bosphore), sources et fleuves (Castalie, Alphée), entrées du monde souterrain (Nekromanteion de
+l'Achéron, cap Ténare). Chaque entrée porte `id`, `name`, `category`, `coords` (latitude/
+longitude réelles), `desc`, `lore[]` (récit sourcé, avec citations antiques précises — Homère,
+Hésiode, Apollodore, Pindare, Hérodote, Pausanias, Euripide, Ovide, Plutarque...), `links[]`
+(figures associées) et `symbolLinks[]` (symboles associés, réutilisant la Bibliothèque
+symbolique). Volontairement exclus : les lieux à la géographie mythique trop incertaine pour une
+carte sérieuse (Atlantide, Jardin des Hespérides) — jamais de géographie inventée pour remplir
+une case.
+
+**Écran carte** (`renderPlaces()`) : carte Leaflet avec marqueurs stylés (disque de couleur +
+icône de catégorie, cohérent avec la palette marbre/bronze/laurier plutôt que les épingles
+bleues par défaut), chips de filtre par catégorie qui font aussi office de légende, recherche en
+direct, liste complète en dessous (jamais uniquement la carte, pour rester utilisable sans JS
+cartographique ou hors-ligne). Cliquer un marqueur ouvre un popup (nom, description, bouton
+« Voir la fiche ») ; cliquer une ligne de la liste ouvre directement la fiche.
+
+**Fiche lieu** (`renderPlaceDetail()`) : badge de catégorie, description, mini-carte centrée sur
+le lieu (`#placeDetailMap`), récit complet (citations inter-fiches actives via `linkifyLore()`,
+comme partout ailleurs), figures associées et symboles associés en chips — filtrés pour ne
+jamais pointer vers une fiche inexistante (ex. Pélops et Pégase, cités dans le récit d'Olympie
+et de l'Hélicon mais pas encore des fiches figure à part entière : simplement absents des chips,
+jamais un lien mort).
+
+**Cycle de vie de la carte** : comme `#ftTree` pour l'arbre généalogique, `#placesMap` et
+`#placeDetailMap` ne sont jamais le même nœud DOM d'un `render()` à l'autre — l'instance Leaflet
+précédente est donc toujours détruite (`.remove()`) avant d'en recréer une neuve, jamais
+empilée. Un seul écouteur de redimensionnement, posé une fois pour toutes, appelle
+`invalidateSize()` sur la carte effectivement présente. Si Leaflet n'a pas pu se charger (hors
+ligne au tout premier chargement, CDN inaccessible), le reste de l'écran — recherche, filtres,
+liste, fiches — continue de fonctionner normalement ; seul le conteneur de carte garde son
+message de repli « Chargement de la carte… ».
+
+**Textes mis à jour** : les décomptes de `index.html` (balise `<meta description>`) et
+`manifest.json`, restés à « 235 figures et 90 symboles » depuis avant le round généalogie et le
+round symboles de cette session, corrigés vers les chiffres réels (274 figures, 98 symboles) et
+complétés avec les 34 lieux.
+
+Testé par un script dédié (`smoke_pantheon_places.js`, 27 vérifications : décompte et unicité
+des lieux, structure complète de chaque entrée, cohérence des catégories avec
+`MAP_CATEGORY_META`, validité des coordonnées, absence de lien mort vers un symbole, présence du
+nouvel onglet et de la tuile d'accueil, rendu de l'écran Lieux et d'une fiche complète, gestion
+propre d'un lien vers une figure pas encore documentée, message honnête pour un lieu inconnu,
+navigation, classes CSS) + la suite complète des dix scripts précédents, remise au vert (un
+décompte d'onglets du menu fixe mis à jour de 4 à 5). Vérifié aussi visuellement par capture
+d'écran (liste complète, fiche détaillée, recherche et filtres actifs, repli propre sans
+Leaflet) : aucune erreur JavaScript, dégradation transparente lorsque le CDN Leaflet n'est pas
+joignable.
+- `service-worker.js` : `pantheon-v10` → `pantheon-v11`.

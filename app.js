@@ -4649,6 +4649,284 @@ function linkifyLore(text){
   return out;
 }
 
+/* ===================== LIEUX & CARTE ===================== */
+
+// Sélection volontairement curatée (34 lieux) plutôt qu'une liste exhaustive : chaque entrée
+// correspond à un site réel (coordonnées géographiques véritables, archéologiques ou
+// géographiques) auquel une tradition antique attache un épisode mythologique précis — jamais
+// l'inverse (pas de géographie mythique pure sans ancrage réel, comme l'Atlantide ou le Jardin
+// des Hespérides, dont la localisation reste trop incertaine pour figurer sur une carte
+// sérieuse). `links` renvoie vers des figures parfois non encore présentes dans DEITY_NOTES
+// (ex. Pélops, Scylla) : le rendu les affiche alors en chip non cliquable plutôt que de les
+// omettre, exactement comme pour la Bibliothèque symbolique — l'information reste honnête sans
+// jamais pointer vers un lien mort.
+const MAP_PLACES = [
+  // Sanctuaires
+  { id:"delphes", name:"Delphes", category:"sanctuaire", coords:[38.4824,22.5010],
+    desc:"Sanctuaire panhellénique d'Apollon, siège de l'oracle le plus consulté du monde grec.",
+    lore:[
+      "Niché sur les pentes du mont Parnasse, Delphes fut considéré par les Grecs comme l'omphalos, le « nombril du monde » : selon la légende rapportée par Pindare, Zeus y aurait fait se rejoindre deux aigles lâchés aux deux extrémités opposées de la terre. Le sanctuaire abritait la Pythie, prêtresse d'Apollon qui rendait ses oracles depuis l'adyton du temple, en un lieu que le dieu avait conquis en tuant le serpent Python qui le gardait.",
+      "Consultée par les cités grecques comme par des rois étrangers avant toute décision importante — fondation de colonie, déclaration de guerre, réforme politique —, l'oracle exerça une influence considérable pendant près de mille ans, jusqu'à sa fermeture définitive sur ordre de l'empereur chrétien Théodose Ier en 391 apr. J.-C.",
+    ],
+    links:["apollon","pythie","artémis","dionysos"], symbolLinks:["laurier","serpent"] },
+  { id:"olympie", name:"Olympie", category:"sanctuaire", coords:[37.6382,21.6296],
+    desc:"Sanctuaire de Zeus en Élide, où se tenaient tous les quatre ans les Jeux olympiques.",
+    lore:[
+      "Olympie abritait le plus grand temple de Zeus du monde grec, qui renfermait la statue chryséléphantine (or et ivoire) du dieu sculptée par Phidias au Ve siècle av. J.-C. — l'une des Sept Merveilles du monde antique, aujourd'hui disparue.",
+      "Les Jeux olympiques, célébrés en l'honneur de Zeus à partir d'une date traditionnelle de 776 av. J.-C., rassemblaient des athlètes de toutes les cités grecques ; une trêve sacrée (l'ekecheiria) suspendait en théorie les conflits en cours pour permettre à chacun de s'y rendre en sécurité. La tradition en attribuait la fondation à Pélops, vainqueur d'une course de chars truquée contre le roi Oinomaos.",
+    ],
+    links:["zeus","héra","pélops"], symbolLinks:[] },
+  { id:"éleusis", name:"Éleusis", category:"sanctuaire", coords:[38.0450,23.5450],
+    desc:"Sanctuaire de Déméter et Perséphone, siège des Mystères d'Éleusis.",
+    lore:[
+      "Selon l'Hymne homérique à Déméter, c'est à Éleusis que la déesse, errant à la recherche de sa fille Perséphone enlevée par Hadès, fut accueillie par la famille du roi Céléos — et qu'elle institua elle-même les rites secrets appelés Mystères en récompense de cet accueil, confiant à Triptolème le char ailé qui lui permit de répandre l'art de l'agriculture à travers le monde.",
+      "Célébrés chaque année pendant près de deux millénaires, les Mystères d'Éleusis promettaient à leurs initiés un sort plus heureux après la mort ; leur contenu précis reste largement inconnu aujourd'hui, les initiés ayant gardé un silence absolu sur ce qu'ils y voyaient, sous peine de mort.",
+    ],
+    links:["déméter","perséphone","hadès","triptolème"], symbolLinks:["épis"] },
+  { id:"dodone", name:"Dodone", category:"sanctuaire", coords:[39.5460,20.7880],
+    desc:"Plus ancien sanctuaire oraculaire de Grèce, où Zeus parlait par le bruissement d'un chêne sacré.",
+    lore:[
+      "Selon Hérodote, l'oracle de Dodone aurait été fondé par une prêtresse égyptienne de Thèbes enlevée par des marchands phéniciens ; les prêtresses locales, les Péléiades, interprétaient la volonté de Zeus dans le bruissement des feuilles d'un chêne sacré planté au cœur du sanctuaire, dans les montagnes reculées d'Épire.",
+      "Moins prestigieux que Delphes mais plus ancien — déjà cité dans l'Iliade d'Homère —, le site est resté actif jusqu'à sa destruction lors des invasions du IIIe siècle apr. J.-C.",
+    ],
+    links:["zeus"], symbolLinks:["chêne"] },
+  { id:"délos", name:"Délos", category:"sanctuaire", coords:[37.3960,25.2690],
+    desc:"Île sacrée où naquirent Apollon et Artémis, centre religieux majeur des Cyclades.",
+    lore:[
+      "Selon l'Hymne homérique à Apollon, l'île flottante de Délos fut la seule à accepter d'accueillir Léto, poursuivie par la jalousie d'Héra, pour y mettre au monde ses jumeaux Apollon et Artémis — fixée aux fonds marins par quatre colonnes au moment même de la naissance.",
+      "Si sacrée qu'aucune naissance ni aucune mort n'y était autorisée — les habitants sur le point de mourir ou d'accoucher devaient être transportés sur l'île voisine de Rhénée —, Délos devint le centre religieux, puis commercial, le plus important des Cyclades.",
+    ],
+    links:["apollon","artémis","léto"], symbolLinks:[] },
+  { id:"épidaure", name:"Épidaure", category:"sanctuaire", coords:[37.5959,23.0778],
+    desc:"Principal sanctuaire de guérison du monde grec, dédié à Asclépios.",
+    lore:[
+      "Les malades venus consulter Asclépios à Épidaure pratiquaient l'incubation : ils dormaient dans l'abaton du sanctuaire dans l'espoir que le dieu leur apparaisse en rêve et leur révèle un remède, parfois en léchant leurs plaies sous la forme d'un serpent, animal qui lui reste associé.",
+      "Le théâtre d'Épidaure, l'un des mieux conservés du monde antique et réputé pour son acoustique exceptionnelle, faisait partie intégrante du sanctuaire : représentations théâtrales et jeux sportifs participaient au processus thérapeutique autant qu'au culte.",
+    ],
+    links:["asclépios","apollon"], symbolLinks:["serpent"] },
+
+  // Montagnes
+  { id:"mont-olympe", name:"Mont Olympe", category:"montagne", coords:[40.0855,22.3583],
+    desc:"La plus haute montagne de Grèce, séjour légendaire des douze dieux olympiens.",
+    lore:[
+      "Séparé du mont Ossa par la vallée de Tempé, l'Olympe (2917 m) était pour les Grecs le palais des dieux, un lieu au-dessus des nuages, à l'abri du vent, de la pluie et de la neige — selon la description qu'en donne Homère dans l'Odyssée, une demeure de lumière permanente.",
+      "C'est sur ses pentes que les dieux vainquirent les Titans puis les Géants, avant de s'y établir durablement comme maîtres du monde — l'origine même du nom « Olympiens » donné à la nouvelle génération divine dirigée par Zeus.",
+    ],
+    links:["zeus","héra","poséidon","athéna","apollon","artémis","arès","aphrodite","héphaïstos","hermès","déméter","dionysos"], symbolLinks:[] },
+  { id:"mont-ida-crète", name:"Mont Ida (Crète)", category:"montagne", coords:[35.2500,24.7500],
+    desc:"Montagne de Crète où Zeus enfant fut caché et élevé, loin de son père Cronos.",
+    lore:[
+      "Selon la tradition rapportée par Hésiode, Rhée cacha son fils Zeus nouveau-né dans une grotte du mont Ida pour le soustraire à Cronos, qui dévorait ses enfants par crainte d'être détrôné ; le bébé y fut nourri par la chèvre Amalthée, tandis que les Curètes, ses gardiens armés, couvraient ses cris du choc de leurs armes.",
+    ],
+    links:["zeus","cronos"], symbolLinks:["chèvre"] },
+  { id:"mont-parnasse", name:"Mont Parnasse", category:"montagne", coords:[38.5300,22.5900],
+    desc:"Montagne sacrée d'Apollon et des Muses, surplombant Delphes.",
+    lore:[
+      "Le Parnasse abrite, outre le sanctuaire de Delphes sur ses contreforts, la source Castalie où les poètes venaient traditionnellement chercher l'inspiration, et passait pour un refuge des Muses aux côtés de l'Hélicon voisin.",
+      "C'est aussi sur ses pentes que, selon Ovide, Deucalion et Pyrrha trouvèrent refuge lors du grand déluge envoyé par Zeus pour anéantir l'humanité corrompue de l'âge de bronze — les deux seuls survivants, à l'origine d'une humanité nouvelle.",
+    ],
+    links:["apollon","deucalion","pyrrha"], symbolLinks:[] },
+  { id:"mont-hélicon", name:"Mont Hélicon", category:"montagne", coords:[38.3167,22.8500],
+    desc:"Montagne de Béotie consacrée aux Muses, où jaillit la source Hippocrène.",
+    lore:[
+      "Selon Hésiode, qui affirme y avoir lui-même reçu le don de la poésie de la bouche des Muses alors qu'il gardait ses troupeaux sur ses pentes, l'Hélicon était leur résidence favorite avec le Parnasse.",
+      "La source Hippocrène (« la fontaine du cheval ») y aurait jailli, dit-on, sous le sabot du cheval ailé Pégase, et ses eaux passaient pour inspirer quiconque en buvait.",
+    ],
+    links:["pégase"], symbolLinks:[] },
+
+  // Cités & palais
+  { id:"athènes-acropole", name:"Athènes (Acropole)", category:"cité", coords:[37.9715,23.7267],
+    desc:"Citadelle sacrée d'Athènes, consacrée à Athéna après sa victoire sur Poséidon.",
+    lore:[
+      "Selon la tradition rapportée par Apollodore, Athéna et Poséidon se disputèrent la protection de la ville naissante : Poséidon en fit jaillir une source d'eau salée en frappant le rocher de son trident, tandis qu'Athéna y fit pousser le premier olivier ; jugée plus utile aux habitants, l'offrande d'Athéna lui valut la victoire et donna son nom à la cité.",
+      "Le Parthénon, temple dédié à Athéna Parthénos (« la Vierge »), y fut construit au Ve siècle av. J.-C. sous Périclès pour abriter une statue chryséléphantine monumentale de la déesse, également sculptée par Phidias.",
+    ],
+    links:["athéna","poséidon"], symbolLinks:["olivier","chouette"] },
+  { id:"mycènes", name:"Mycènes", category:"cité", coords:[37.7307,22.7563],
+    desc:"Citadelle légendaire d'Agamemnon, chef de l'expédition grecque contre Troie.",
+    lore:[
+      "Décrite par Homère comme « riche en or », Mycènes fut, selon la tradition, la cité d'où Agamemnon partit à la tête de la coalition grecque pour venger l'enlèvement d'Hélène — et celle où, à son retour victorieux, il fut assassiné par son épouse Clytemnestre et l'amant de celle-ci, Égisthe.",
+      "La Porte des Lionnes, monumentale entrée de la citadelle datée du XIIIe siècle av. J.-C., et les tombes à coupole attribuées par la tradition postérieure à Agamemnon lui-même comptent parmi les vestiges les mieux conservés de cette civilisation aujourd'hui appelée « mycénienne » en son honneur.",
+    ],
+    links:["agamemnon","clytemnestre"], symbolLinks:[] },
+  { id:"thèbes", name:"Thèbes", category:"cité", coords:[38.3200,23.3200],
+    desc:"Cité fondée par Cadmos, théâtre du cycle mythologique d'Œdipe et de sa descendance.",
+    lore:[
+      "Selon Apollodore, Cadmos, envoyé par son père à la recherche de sa sœur Europe enlevée par Zeus, renonça à la retrouver sur les conseils de l'oracle de Delphes et fonda Thèbes à l'endroit où une génisse, guide envoyée par le dieu, s'arrêta d'épuisement ; il y sema les dents d'un dragon tué, dont naquirent des guerriers armés, ancêtres de la noblesse thébaine.",
+      "Thèbes reste surtout associée au sombre destin d'Œdipe, qui y tua son père sans le savoir et en épousa la veuve, sa propre mère Jocaste — et à la guerre fratricide de ses fils, Étéocle et Polynice, connue sous le nom des Sept contre Thèbes.",
+    ],
+    links:["cadmos","œdipe","dionysos"], symbolLinks:[] },
+  { id:"troie", name:"Troie", category:"cité", coords:[39.9576,26.2386],
+    desc:"Cité assiégée dix ans par les Grecs, théâtre de l'Iliade d'Homère.",
+    lore:[
+      "Identifiée depuis les fouilles de Heinrich Schliemann au XIXe siècle au site archéologique d'Hisarlik, en Turquie actuelle, Troie fut selon la légende assiégée pendant dix ans par une coalition grecque venue venger l'enlèvement d'Hélène par le prince troyen Pâris.",
+      "La ville tomba finalement grâce à la ruse du cheval de bois conçue par Ulysse — un épisode que l'Iliade elle-même ne raconte pas directement, s'achevant avant la chute de la cité, mais que rapportent l'Odyssée puis, plus tard, l'Énéide de Virgile.",
+    ],
+    links:["hélène","pâris","ulysse","hector","priam","achille"], symbolLinks:[] },
+  { id:"sparte", name:"Sparte", category:"cité", coords:[37.0755,22.4238],
+    desc:"Cité de Ménélas et d'Hélène, en Laconie.",
+    lore:[
+      "Selon l'Iliade, c'est à Sparte que Pâris, reçu comme hôte par le roi Ménélas, séduisit ou enleva son épouse Hélène — un affront qui déclencha la guerre de Troie.",
+      "Sparte fut aussi, dans les récits les plus tardifs, associée à Castor et Pollux, les Dioscures, frères d'Hélène et fils de Léda, honorés dans toute la région comme protecteurs de la cité et des marins.",
+    ],
+    links:["ménélas","hélène","castor","pollux"], symbolLinks:[] },
+  { id:"argos", name:"Argos", category:"cité", coords:[37.6333,22.7333],
+    desc:"L'une des plus anciennes cités de Grèce, particulièrement consacrée au culte d'Héra.",
+    lore:[
+      "Argos abritait l'Héraion, l'un des plus importants sanctuaires d'Héra du monde grec, où la déesse était honorée comme protectrice du mariage et de la cité elle-même — un culte si central que la région tout entière, l'Argolide, lui était traditionnellement associée.",
+      "La cité fut aussi, selon Apollodore, le lieu de naissance de Persée, né de l'union de Zeus et de Danaé alors que celle-ci était enfermée par son père Acrisios dans une chambre souterraine de bronze, pour tenter d'échapper à une prophétie qui annonçait sa propre mort par la main de son petit-fils.",
+    ],
+    links:["héra","persée","danaé","acrisios"], symbolLinks:[] },
+  { id:"corinthe", name:"Corinthe", category:"cité", coords:[37.9061,22.8781],
+    desc:"Cité isthmique associée à Sisyphe et à l'épisode grec de Médée.",
+    lore:[
+      "Fondée, selon la légende, par le rusé Sisyphe, Corinthe doit à ce roi son châtiment le plus célèbre des Enfers : condamné à rouler éternellement un rocher jusqu'au sommet d'une colline d'où il retombe aussitôt, pour avoir par deux fois trompé la mort elle-même.",
+      "C'est également à Corinthe qu'Euripide situe l'épisode le plus tragique de Médée : abandonnée par Jason pour la fille du roi local Créon, elle s'y venge en tuant sa rivale puis ses propres enfants, avant de fuir sur un char attelé de dragons ailés offert par son grand-père Hélios.",
+    ],
+    links:["médée","jason","hélios"], symbolLinks:[] },
+  { id:"cnossos", name:"Cnossos", category:"cité", coords:[35.2977,25.1633],
+    desc:"Palais crétois du roi Minos, siège légendaire du Labyrinthe et du Minotaure.",
+    lore:[
+      "Le palais monumental de Cnossos, mis au jour par l'archéologue Arthur Evans au début du XXe siècle, a longtemps été identifié à la demeure du roi Minos et au Labyrinthe construit par l'artisan Dédale pour y enfermer le Minotaure, fruit de l'union contre nature de la reine Pasiphaé et d'un taureau envoyé par Poséidon.",
+      "Chaque année (ou tous les neuf ans, selon les versions), sept jeunes gens et sept jeunes filles athéniens y étaient envoyés en tribut pour être dévorés par le monstre, jusqu'à ce que Thésée, aidé du fil offert par Ariane, parvienne à le tuer et à ressortir du dédale.",
+    ],
+    links:["minos","pasiphaé","dédale","thésée","ariane"], symbolLinks:["labyrinthe","taureau","fil"] },
+
+  // Îles
+  { id:"ithaque", name:"Ithaque", category:"île", coords:[38.4200,20.7100],
+    desc:"Île-royaume d'Ulysse, dans les îles Ioniennes.",
+    lore:[
+      "Patrie d'Ulysse, Ithaque est le but du voyage de dix années que raconte l'Odyssée d'Homère — un retour sans cesse retardé par la colère de Poséidon, dont le héros avait aveuglé le fils, le cyclope Polyphème.",
+      "À son retour, déguisé en mendiant pour ne pas être reconnu, Ulysse y retrouve son épouse Pénélope, qui a tenu à distance ses prétendants pendant des années grâce à la ruse du linceul tissé le jour et défait chaque nuit.",
+    ],
+    links:["ulysse","pénélope","poséidon"], symbolLinks:["fil"] },
+  { id:"naxos", name:"Naxos", category:"île", coords:[37.1036,25.4761],
+    desc:"Île où Ariane, abandonnée par Thésée, fut trouvée par Dionysos.",
+    lore:[
+      "Selon la version la plus répandue de la légende, Thésée, après avoir tué le Minotaure grâce à l'aide d'Ariane, l'abandonna endormie sur l'île de Naxos lors de leur fuite commune de Crète — un épisode dont les raisons varient selon les auteurs antiques.",
+      "C'est là que Dionysos, découvrant Ariane en pleurs, en tomba amoureux et l'épousa, lui offrant selon certaines versions une couronne qui devint plus tard la constellation de la Couronne boréale.",
+    ],
+    links:["ariane","thésée","dionysos"], symbolLinks:["couronne"] },
+  { id:"lemnos", name:"Lemnos", category:"île", coords:[39.9170,25.1370],
+    desc:"Île où Héphaïstos, rejeté de l'Olympe, retomba et établit sa forge.",
+    lore:[
+      "Selon l'Iliade, Héphaïstos, jeté du haut de l'Olympe par son père Zeus (ou, selon une autre version, par sa mère Héra honteuse de sa difformité), tomba toute une journée avant de s'écraser sur l'île de Lemnos, où les habitants le recueillirent.",
+      "L'île resta associée au culte du dieu forgeron et à ses forges volcaniques ; elle est aussi connue pour le mythe des femmes de Lemnos, qui massacrèrent tous leurs hommes après que ceux-ci les eurent délaissées, un épisode que croisent plus tard les Argonautes lors de leur escale sur l'île.",
+    ],
+    links:["héphaïstos","héra","zeus"], symbolLinks:[] },
+  { id:"samothrace", name:"Samothrace", category:"île", coords:[40.5000,25.5280],
+    desc:"Île du nord de l'Égée, siège des mystères des Grands Dieux (Cabires).",
+    lore:[
+      "Samothrace abritait un sanctuaire consacré à des divinités préhelléniques mystérieuses, les Cabires (ou Grands Dieux), dont les mystères, réputés protéger notamment les marins des naufrages, attirèrent des initiés de tout le monde grec, dont certains rois macédoniens.",
+      "La statue de la Victoire de Samothrace, aujourd'hui conservée au musée du Louvre, fut découverte sur ce site en 1863.",
+    ],
+    links:[], symbolLinks:[] },
+  { id:"rhodes", name:"Rhodes", category:"île", coords:[36.4341,28.2176],
+    desc:"Île consacrée au dieu solaire Hélios, qui érigea le Colosse à son entrée de port.",
+    lore:[
+      "Selon la tradition, Rhodes fut offerte à Hélios par Zeus lors du partage du monde entre les dieux, au moment où le dieu solaire, absent ce jour-là, réclama en compensation cette île tout juste sortie des flots.",
+      "Le Colosse de Rhodes, statue monumentale d'Hélios haute d'une trentaine de mètres élevée à l'entrée du port au IIIe siècle av. J.-C. et comptée parmi les Sept Merveilles du monde antique, s'effondra lors d'un tremblement de terre moins d'un siècle après son érection.",
+    ],
+    links:["hélios","zeus"], symbolLinks:[] },
+  { id:"samos", name:"Samos", category:"île", coords:[37.7500,26.9833],
+    desc:"Île égéenne où se trouvait l'un des plus grands sanctuaires d'Héra du monde grec.",
+    lore:[
+      "Samos revendiquait être le lieu de naissance d'Héra elle-même, née selon la tradition locale au bord du fleuve Imbrasos ; son sanctuaire, l'Héraion de Samos, comptait parmi les plus vastes temples jamais construits en Grèce archaïque.",
+    ],
+    links:["héra"], symbolLinks:[] },
+
+  // Détroits & passages maritimes
+  { id:"hellespont", name:"Hellespont (Dardanelles)", category:"détroit", coords:[40.2000,26.4000],
+    desc:"Détroit des Dardanelles, nommé d'après Hellé, tombée dans ses eaux.",
+    lore:[
+      "Selon la légende du bélier à la Toison d'or, Hellé, fuyant avec son frère Phrixos la persécution de leur belle-mère sur le dos d'un bélier ailé envoyé par Zeus, glissa et tomba dans le détroit qui sépare l'Europe de l'Asie — lequel prit dès lors le nom d'Hellespont, « la mer d'Hellé ».",
+      "Le détroit est aussi le théâtre du mythe plus tardif de Léandre, qui le traversait chaque nuit à la nage depuis Abydos pour rejoindre sa bien-aimée Héro, prêtresse d'Aphrodite à Sestos, jusqu'à ce qu'il s'y noie par une nuit de tempête.",
+    ],
+    links:["aphrodite"], symbolLinks:[] },
+  { id:"détroit-de-messine", name:"Détroit de Messine", category:"détroit", coords:[38.2300,15.6300],
+    desc:"Détroit séparant l'Italie de la Sicile, repaire mythique de Charybde et Scylla.",
+    lore:[
+      "Selon l'Odyssée, ce passage resserré entre l'Italie et la Sicile était gardé de part et d'autre par deux monstres : Charybde, un tourbillon dévorant qui engloutissait trois fois par jour toutes les eaux environnantes, et Scylla, créature à six têtes de chien nichée dans une grotte de la rive opposée — un passage si dangereux qu'Ulysse dut sacrifier une partie de son équipage à Scylla pour éviter l'anéantissement total dans le gouffre de Charybde.",
+    ],
+    links:["ulysse"], symbolLinks:[] },
+  { id:"colonnes-d-héraclès", name:"Colonnes d'Héraclès (Gibraltar)", category:"détroit", coords:[36.1408,-5.3536],
+    desc:"Détroit de Gibraltar, limite occidentale du monde connu des Grecs anciens.",
+    lore:[
+      "Selon la tradition, Héraclès aurait dressé deux colonnes de part et d'autre du détroit séparant l'Europe de l'Afrique lors de son dixième travail, la capture des bœufs du géant Géryon — un geste marquant symboliquement la limite du monde habité connu des Grecs, au-delà de laquelle s'étendait l'Océan primordial.",
+      "L'expression « ne pas dépasser les Colonnes d'Hercule » est ainsi restée, jusque dans l'Antiquité tardive, une façon de désigner l'extrême limite de ce qu'il est raisonnable d'entreprendre.",
+    ],
+    links:["héraclès"], symbolLinks:[] },
+  { id:"bosphore", name:"Bosphore", category:"détroit", coords:[41.1200,29.0700],
+    desc:"Détroit séparant l'Europe de l'Asie, nommé d'après le passage de la génisse Io.",
+    lore:[
+      "Le nom du Bosphore (« le passage de la vache ») viendrait, selon la tradition, du passage en cet endroit d'Io, la prêtresse aimée de Zeus transformée en génisse blanche pour la soustraire à la jalousie d'Héra, durant son errance tourmentée par un taon envoyé par la déesse à travers le monde.",
+      "À l'entrée du détroit, du côté du Pont-Euxin (la mer Noire), la tradition situait les Symplégades, deux rochers mobiles qui s'entrechoquaient pour broyer les navires de passage — un obstacle que les Argonautes ne franchirent, selon Apollonios de Rhodes, qu'en y lâchant d'abord une colombe pour tester le passage.",
+    ],
+    links:["io","héra","zeus"], symbolLinks:[] },
+
+  // Sources & fleuves
+  { id:"source-castalie", name:"Source Castalie", category:"source", coords:[38.4841,22.5029],
+    desc:"Source sacrée de Delphes où les pèlerins et la Pythie devaient se purifier.",
+    lore:[
+      "Jaillissant entre les Phédriades, les deux parois rocheuses qui dominent Delphes, la source Castalie servait à la purification rituelle obligatoire de tout visiteur du sanctuaire, prêtres compris, avant toute consultation de l'oracle.",
+      "Elle passait également pour une source d'inspiration poétique, les eaux « castaliennes » devenant, dans la littérature antique puis dans la tradition occidentale qui en hérite, une métaphore courante de l'inspiration des poètes.",
+    ],
+    links:["apollon","pythie"], symbolLinks:["source"] },
+  { id:"fleuve-alphée", name:"Fleuve Alphée", category:"source", coords:[37.6400,21.6500],
+    desc:"Principal fleuve d'Élide, qui traverse le sanctuaire d'Olympie.",
+    lore:[
+      "Le dieu-fleuve Alphée, selon la légende rapportée par Pausanias, poursuivit de son amour la nymphe Aréthuse jusque sous la mer, où elle fut changée en source par Artémis pour lui échapper — une légende que les Grecs de Sicile, où se trouve la source d'Aréthuse près de Syracuse, expliquaient en imaginant que les eaux du fleuve grec continuaient leur course sous la Méditerranée.",
+      "C'est aussi ce fleuve qu'Héraclès dérive, selon une version de son cinquième travail, pour nettoyer en un seul jour les écuries du roi Augias, jamais nettoyées depuis des années.",
+    ],
+    links:["héraclès","artémis"], symbolLinks:["source"] },
+
+  // Entrées du monde souterrain
+  { id:"achéron-nekromanteion", name:"Nekromanteion de l'Achéron", category:"monde souterrain", coords:[39.2270,20.4700],
+    desc:"Site d'Épire identifié dans l'Antiquité à une entrée des Enfers, sur les rives de l'Achéron.",
+    lore:[
+      "Le Nekromanteion, sanctuaire oraculaire construit sur les rives du fleuve Achéron en Épire, était consacré à la consultation des morts (nekromanteia) : les pèlerins y descendaient dans des chambres souterraines dans l'espoir d'entrer en contact avec les esprits des défunts.",
+      "L'Achéron lui-même comptait, avec le Styx, parmi les fleuves des Enfers que les âmes devaient franchir sous la conduite du nocher Charon — un site que la tradition locale, rapportée notamment par Hérodote, associait directement au royaume d'Hadès.",
+    ],
+    links:["hadès","charon"], symbolLinks:["monde souterrain"] },
+  { id:"cap-ténare", name:"Cap Ténare", category:"monde souterrain", coords:[36.3833,22.4833],
+    desc:"Pointe la plus méridionale du Péloponnèse, où s'ouvrait, selon la tradition, une entrée des Enfers.",
+    lore:[
+      "Une grotte du cap Ténare passait dans l'Antiquité pour l'une des entrées du royaume d'Hadès sur la terre ferme ; c'est par là, selon certaines versions rapportées par Apollodore, qu'Héraclès serait descendu pour accomplir son douzième et dernier travail, la capture du chien Cerbère.",
+      "La tradition y situe également la descente d'Orphée aux Enfers pour tenter de ramener son épouse Eurydice, morte prématurément d'une morsure de serpent.",
+    ],
+    links:["héraclès","orphée","hadès"], symbolLinks:["monde souterrain","serpent"] },
+
+  // Autres lieux marquants
+  { id:"aulis", name:"Aulis", category:"cité", coords:[38.4000,23.5967],
+    desc:"Port de Béotie d'où la flotte grecque appareilla pour Troie, après le sacrifice d'Iphigénie.",
+    lore:[
+      "Selon la tragédie d'Euripide, la flotte grecque réunie à Aulis pour partir vers Troie resta bloquée par l'absence de vent, punition d'Artémis contre Agamemnon pour une offense qu'il avait commise contre elle ; le devin Calchas révéla que seul le sacrifice de sa fille Iphigénie apaiserait la déesse.",
+      "Selon la version la plus répandue, la jeune fille fut effectivement immolée sur l'autel — mais une tradition parallèle, déjà présente chez Euripide dans sa pièce Iphigénie en Tauride, veut qu'Artémis l'ait substituée au dernier moment par une biche et l'ait transportée en Tauride pour en faire sa prêtresse.",
+    ],
+    links:["agamemnon","artémis","calchas"], symbolLinks:[] },
+  { id:"éphèse", name:"Éphèse", category:"sanctuaire", coords:[37.9395,27.3417],
+    desc:"Cité d'Ionie abritant le célèbre temple d'Artémis, l'une des Sept Merveilles du monde antique.",
+    lore:[
+      "Le temple d'Artémis à Éphèse, reconstruit à plusieurs reprises après incendies et séismes, comptait parmi les Sept Merveilles du monde antique par ses dimensions colossales pour l'époque ; il abritait un culte d'Artémis aux traits particuliers, mêlant la déesse grecque de la chasse à des éléments d'une divinité-mère anatolienne plus ancienne.",
+      "Selon une légende rapportée par Plutarque, le temple aurait été incendié par un certain Érostrate, en 356 av. J.-C., dans le seul but de rendre son nom immortel — épisode qui a donné naissance à l'expression « complexe d'Érostrate ».",
+    ],
+    links:["artémis"], symbolLinks:[] },
+];
+
+// Icône, libellé pluriel et couleur (variable CSS déjà définie dans styles.css) pour chaque
+// catégorie de lieu — sert à la fois aux marqueurs sur la carte et à la légende/aux filtres.
+const MAP_CATEGORY_META = {
+  "sanctuaire":        { icon:"🏛", label:"Sanctuaires",   color:"var(--bronze)" },
+  "montagne":          { icon:"⛰",  label:"Montagnes",     color:"var(--laurel)" },
+  "cité":              { icon:"🏺", label:"Cités",         color:"var(--ink-soft)" },
+  "île":               { icon:"🏝", label:"Îles",          color:"#3d7a8c" },
+  "détroit":           { icon:"🌊", label:"Mers & détroits", color:"#1f5c74" },
+  "source":            { icon:"💧", label:"Sources & fleuves", color:"#2f7ba3" },
+  "monde souterrain":  { icon:"💀", label:"Monde souterrain", color:"#5a3a2e" },
+};
+
+const MAP_PLACE_ENTRIES = MAP_PLACES.slice().sort((a, b) => a.name.localeCompare(b.name, "fr"));
+
 /* ===================== NAVIGATION ===================== */
 
 let navStack = [];
@@ -4775,6 +5053,11 @@ function renderHome(){
         <span class="tile-icon">🌳</span>
         <span class="tile-title">Généalogie des dieux</span>
         <span class="tile-count">${GENEALOGY_FIGURE_COUNT} figures reliées</span>
+      </button>
+      <button class="tile" data-nav="places">
+        <span class="tile-icon">🗺️</span>
+        <span class="tile-title">Lieux mythologiques</span>
+        <span class="tile-count">${MAP_PLACES.length} lieux sur la carte</span>
       </button>
     </div>
   `;
@@ -5433,6 +5716,199 @@ function renderGenealogy(id){
   `;
 }
 
+/* ===================== RENDU : LIEUX & CARTE ===================== */
+
+// État de filtrage in-memory (toutes les catégories actives par défaut) : volontairement pas
+// persisté d'une session à l'autre, un filtre reste secondaire par rapport au contenu lui-même.
+let activePlaceCategories = new Set(Object.keys(MAP_CATEGORY_META));
+
+function placesFilteredList(){
+  const searchEl = document.getElementById("placesSearch");
+  const q = normalizeSearch(searchEl ? searchEl.value : "").trim();
+  return MAP_PLACE_ENTRIES.filter(p =>
+    activePlaceCategories.has(p.category) &&
+    (!q || normalizeSearch(p.name + " " + p.desc).includes(q))
+  );
+}
+
+function placeMarkerIcon(place){
+  const meta = MAP_CATEGORY_META[place.category] || { icon: "📍", color: "var(--bronze)" };
+  return L.divIcon({
+    className: "place-marker",
+    html: `<span class="place-marker-pin" style="background:${meta.color}"><i>${meta.icon}</i></span>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 26],
+    popupAnchor: [0, -24],
+  });
+}
+
+// Contenu de popup construit comme un vrai nœud DOM (plutôt qu'une chaîne confiée à Leaflet) :
+// le bouton qu'il contient reçoit son propre écouteur direct, Leaflet interceptant lui-même la
+// propagation des clics à l'intérieur d'un popup avant qu'elle n'atteigne la délégation posée
+// une fois pour toutes sur #app (voir bindAppClickDelegation) — sans ça, « Voir la fiche »
+// resterait sans effet.
+function placePopupContent(place){
+  const el = document.createElement("div");
+  el.className = "place-popup";
+  el.innerHTML = `
+    <strong>${escapeHTML(place.name)}</strong>
+    <p>${escapeHTML(place.desc)}</p>
+    <button type="button" class="chip">Voir la fiche</button>
+  `;
+  el.querySelector("button").addEventListener("click", () => {
+    if(placesMapInstance) placesMapInstance.closePopup();
+    go({ type: "placeDetail", id: place.id });
+  });
+  return el;
+}
+
+let placesMapInstance = null;
+let placesMarkersLayer = null;
+function destroyPlacesMap(){
+  if(placesMapInstance){ placesMapInstance.remove(); placesMapInstance = null; placesMarkersLayer = null; }
+}
+
+function renderPlacesMarkers(){
+  if(!placesMapInstance || !placesMarkersLayer) return;
+  placesMarkersLayer.clearLayers();
+  for(const p of placesFilteredList()){
+    L.marker(p.coords, { icon: placeMarkerIcon(p) })
+      .bindPopup(placePopupContent(p))
+      .addTo(placesMarkersLayer);
+  }
+}
+
+// Carte reconstruite entièrement à chaque passage sur l'écran : #placesMap n'est jamais le même
+// nœud DOM d'un render() à l'autre (comme #ftTree pour l'arbre généalogique), donc l'ancienne
+// instance Leaflet est toujours détruite avant, jamais empilée. Si Leaflet n'a pas pu se charger
+// (hors-ligne au tout premier chargement, CDN inaccessible...), la recherche et la liste
+// continuent de fonctionner normalement sans carte — le conteneur garde alors simplement son
+// message de repli (voir renderPlaces()).
+function initPlacesMap(){
+  const container = document.getElementById("placesMap");
+  if(!container){ destroyPlacesMap(); return; }
+  if(typeof L === "undefined") return;
+  destroyPlacesMap();
+  placesMapInstance = L.map(container, { scrollWheelZoom: false }).setView([38.2, 23.5], 6);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>',
+  }).addTo(placesMapInstance);
+  placesMarkersLayer = L.layerGroup().addTo(placesMapInstance);
+  renderPlacesMarkers();
+  if(typeof requestAnimationFrame === "function"){
+    requestAnimationFrame(() => { if(placesMapInstance) placesMapInstance.invalidateSize(); });
+  }
+}
+
+let placeDetailMapInstance = null;
+function destroyPlaceDetailMap(){
+  if(placeDetailMapInstance){ placeDetailMapInstance.remove(); placeDetailMapInstance = null; }
+}
+
+function initPlaceDetailMap(){
+  const container = document.getElementById("placeDetailMap");
+  if(!container){ destroyPlaceDetailMap(); return; }
+  if(typeof L === "undefined") return;
+  const place = MAP_PLACES.find(p => p.id === container.dataset.placeId);
+  destroyPlaceDetailMap();
+  if(!place) return;
+  placeDetailMapInstance = L.map(container, { scrollWheelZoom: false }).setView(place.coords, 8);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>',
+  }).addTo(placeDetailMapInstance);
+  L.marker(place.coords, { icon: placeMarkerIcon(place) }).addTo(placeDetailMapInstance);
+  if(typeof requestAnimationFrame === "function"){
+    requestAnimationFrame(() => { if(placeDetailMapInstance) placeDetailMapInstance.invalidateSize(); });
+  }
+}
+
+// Un seul écouteur, posé une seule fois (voir bindAppClickDelegation) : ne redessine que la
+// carte effectivement présente sur l'écran courant, sans jamais rien recréer.
+function handlePlacesMapWindowResize(){
+  if(placesMapInstance) placesMapInstance.invalidateSize();
+  if(placeDetailMapInstance) placeDetailMapInstance.invalidateSize();
+}
+
+function togglePlaceCategory(cat){
+  if(activePlaceCategories.has(cat)) activePlaceCategories.delete(cat);
+  else activePlaceCategories.add(cat);
+  const grid = document.getElementById("placesGrid");
+  if(grid) grid.innerHTML = renderPlacesGrid();
+  const filters = document.querySelector(".place-filters");
+  if(filters) filters.outerHTML = placeFilterChipsHTML();
+  renderPlacesMarkers();
+}
+
+// Chips de filtre : fonctionnent aussi de légende, chaque catégorie affichant déjà son icône
+// et sa couleur — inutile d'ajouter un second bloc de légende séparé rien que pour ça.
+function placeFilterChipsHTML(){
+  return `
+    <div class="place-filters">
+      ${Object.entries(MAP_CATEGORY_META).map(([cat, meta]) => `
+        <button type="button" class="place-filter-chip${activePlaceCategories.has(cat) ? " active" : ""}" data-place-cat="${escapeHTML(cat)}" style="--place-color:${meta.color}">
+          <span class="place-filter-dot"></span>${meta.icon} ${escapeHTML(meta.label)}
+        </button>
+      `).join("")}
+    </div>
+  `;
+}
+
+function placeRowHTML(p){
+  const meta = MAP_CATEGORY_META[p.category];
+  return `<button class="list-item" data-nav="placeDetail" data-id="${escapeHTML(p.id)}">
+    <span class="list-item-title">${meta.icon} ${escapeHTML(p.name)}</span>
+    <span class="list-item-note">${escapeHTML(p.desc)}</span>
+  </button>`;
+}
+
+function renderPlacesGrid(){
+  const list = placesFilteredList();
+  if(!list.length) return `<p class="empty">Aucun lieu ne correspond à ces critères.</p>`;
+  return `<div class="list">${list.map(placeRowHTML).join("")}</div>`;
+}
+
+function renderPlaces(){
+  return `
+    <div class="screen-header">
+      <h2>Lieux mythologiques</h2>
+    </div>
+    <p class="note">${MAP_PLACES.length} lieux réels — sanctuaires, montagnes, cités, îles, détroits, sources et entrées des Enfers — où la tradition antique situait ses mythes.</p>
+    <div id="placesMap" class="places-map"><p class="map-fallback">Chargement de la carte…</p></div>
+    ${placeFilterChipsHTML()}
+    <input type="search" class="search" id="placesSearch" placeholder="Chercher un lieu (nom, mythe...)">
+    <div id="placesGrid">${renderPlacesGrid()}</div>
+  `;
+}
+
+function renderPlaceDetail(id){
+  const p = MAP_PLACES.find(x => x.id === id);
+  if(!p){
+    return `
+      <div class="screen-header"><button class="back" data-nav="back">← Retour</button></div>
+      <p class="empty">Ce lieu est introuvable.</p>
+    `;
+  }
+  const meta = MAP_CATEGORY_META[p.category];
+  const relatedFigures = (p.links || []).filter(fid => fid in DEITY_NOTES).map(fid => [fid, DEITY_NOTES[fid]]);
+  const relatedSymbols = (p.symbolLinks || []).filter(sid => sid in SYMBOL_LIBRARY).map(sid => [sid, SYMBOL_LIBRARY[sid]]);
+  return `
+    <div class="screen-header">
+      <button class="back" data-nav="back">← Retour</button>
+    </div>
+    <article class="detail place-detail">
+      <span class="place-category-badge" style="--place-color:${meta.color}">${meta.icon} ${escapeHTML(meta.label)}</span>
+      <h2>${escapeHTML(p.name)}</h2>
+      <p class="note">${escapeHTML(p.desc)}</p>
+      <div id="placeDetailMap" class="place-detail-map" data-place-id="${escapeHTML(p.id)}"><p class="map-fallback">Chargement de la carte…</p></div>
+      ${p.lore.map(par => `<p class="lore-text">${linkifyLore(par)}</p>`).join("")}
+      ${relatedChipsHTML(relatedFigures, "deity")}
+      ${relatedChipsHTML(relatedSymbols, "symbol")}
+    </article>
+  `;
+}
+
 /* ===================== RENDU : MENU FIXE ===================== */
 
 const TABS = [
@@ -5440,16 +5916,18 @@ const TABS = [
   { type: "figures", icon: "🏛️", label: "Figures" },
   { type: "symbols", icon: "🔱", label: "Symboles" },
   { type: "genealogyHome", icon: "🌳", label: "Généalogie" },
+  { type: "places", icon: "🗺️", label: "Lieux" },
 ];
 
 // Un onglet du bas reste actif tant qu'on est sur une fiche de sa section (figureDetail
 // pour l'onglet Figures, symbolDetail pour l'onglet Symboles, genealogy pour l'onglet
-// Généalogie), pas seulement sur la liste elle-même — sinon le menu du bas paraîtrait
-// « éteint » dès qu'on ouvre une fiche.
+// Généalogie, placeDetail pour l'onglet Lieux), pas seulement sur la liste elle-même — sinon
+// le menu du bas paraîtrait « éteint » dès qu'on ouvre une fiche.
 function activeTabType(){
   if(currentScreen.type === "figureDetail") return "figures";
   if(currentScreen.type === "symbolDetail") return "symbols";
   if(currentScreen.type === "genealogy" || currentScreen.type === "olympiansOverview") return "genealogyHome";
+  if(currentScreen.type === "placeDetail") return "places";
   return currentScreen.type;
 }
 
@@ -5478,6 +5956,8 @@ function render(){
     case "genealogyHome": html = renderGenealogyHome(); break;
     case "olympiansOverview": html = renderOlympiansOverview(); break;
     case "genealogy": html = renderGenealogy(currentScreen.id); break;
+    case "places": html = renderPlaces(); break;
+    case "placeDetail": html = renderPlaceDetail(currentScreen.id); break;
     default: html = renderHome();
   }
   app.innerHTML = html;
@@ -5509,12 +5989,16 @@ function bindAppClickDelegation(){
       else if(nav === "symbolDetail") go({ type: "symbolDetail", id: navEl.dataset.id });
       else if(nav === "genealogy") go({ type: "genealogy", id: navEl.dataset.id });
       else if(nav === "olympiansOverview") go({ type: "olympiansOverview" });
+      else if(nav === "places") goToTab("places");
+      else if(nav === "placeDetail") go({ type: "placeDetail", id: navEl.dataset.id });
       return;
     }
     const deityEl = e.target.closest("[data-deity]");
     if(deityEl){ go({ type: "figureDetail", id: deityEl.dataset.deity }); return; }
     const symbolEl = e.target.closest("[data-symbol]");
     if(symbolEl){ go({ type: "symbolDetail", id: symbolEl.dataset.symbol }); return; }
+    const placeCatEl = e.target.closest("[data-place-cat]");
+    if(placeCatEl){ togglePlaceCategory(placeCatEl.dataset.placeCat); return; }
   });
 
   document.getElementById("bottomNav").addEventListener("click", e => {
@@ -5538,16 +6022,29 @@ function bindScreenEvents(){
       document.getElementById("symbolsGrid").innerHTML = renderSymbolsGrid(symbolsSearch.value);
     });
   }
+  const placesSearch = document.getElementById("placesSearch");
+  if(placesSearch){
+    placesSearch.addEventListener("input", () => {
+      document.getElementById("placesGrid").innerHTML = renderPlacesGrid();
+      renderPlacesMarkers();
+    });
+  }
   // Les écrans d'arbre généalogique (fiche familiale, douze Olympiens) recréent #ftTree à
   // chaque render() — jamais le même nœud persistant — donc l'observateur de redimensionnement
   // doit être reconnecté (et les connecteurs redessinés une première fois) à chaque passage ici.
   initFamTree();
+  // Même principe pour la carte des lieux (#placesMap) et la mini-carte de fiche lieu
+  // (#placeDetailMap) : chacune vérifie elle-même la présence de son conteneur et ne fait rien
+  // si l'écran courant n'est pas le sien.
+  initPlacesMap();
+  initPlaceDetailMap();
 }
 
 /* ===================== INIT ===================== */
 
 bindAppClickDelegation();
 window.addEventListener("resize", handleFamTreeWindowResize);
+window.addEventListener("resize", handlePlacesMapWindowResize);
 render();
 
 if("serviceWorker" in navigator){

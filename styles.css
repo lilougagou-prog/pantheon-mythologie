@@ -629,3 +629,102 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 .nav-tab.active{ color: var(--laurel-deep); }
 .nav-tab-icon{ font-size: 1.3rem; line-height: 1; }
 .nav-tab-label{ font-size: 0.7rem; }
+
+/* ----- Lieux mythologiques & carte ----- */
+
+.places-map{
+  width: 100%;
+  height: 320px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--marble-deep);
+  margin-bottom: 14px;
+  overflow: hidden;
+  /* Le message de repli (Leaflet non chargé) reste centré tant que la carte ne l'a pas
+     remplacé — dès que Leaflet prend possession du conteneur, ce style n'a plus d'effet. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.place-detail-map{
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--marble-deep);
+  margin: 4px 0 18px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.map-fallback{ color: var(--ink-soft); font-style: italic; font-size: 0.9rem; margin: 0; }
+
+.place-filters{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.place-filter-chip{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 12px 5px 8px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  opacity: 0.55;
+}
+.place-filter-chip.active{ opacity: 1; color: var(--ink); background: var(--marble-deep); border-color: var(--place-color); }
+.place-filter-chip:hover{ opacity: 1; }
+.place-filter-dot{
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--place-color);
+  flex-shrink: 0;
+}
+
+.place-category-badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--marble-deep);
+  border: 1px solid var(--place-color, var(--border));
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+
+/* Marqueurs Leaflet : un simple disque de couleur portant l'icône de la catégorie, cohérent
+   avec le reste de l'identité visuelle (marbre/bronze/laurier) plutôt que les épingles bleues
+   par défaut de Leaflet — voir placeMarkerIcon() dans app.js. */
+.place-marker-pin{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 6px var(--shadow);
+  border: 2px solid var(--card-bg);
+  font-size: 0.85rem;
+}
+.place-marker-pin > *{ transform: rotate(-45deg); }
+.place-popup{ font-family: "Source Serif 4", Georgia, serif; min-width: 160px; }
+.place-popup strong{ font-family: "Cinzel", Georgia, serif; color: var(--laurel-deep); }
+.place-popup p{ margin: 6px 0; font-size: 0.88rem; color: var(--ink); }
+.place-popup .chip{ margin: 0; }
+.leaflet-popup-content-wrapper{ background: var(--card-bg); color: var(--ink); border-radius: 10px; }
+.leaflet-popup-tip{ background: var(--card-bg); }
+
+@media (max-width: 480px){
+  .places-map{ height: 260px; }
+  .place-detail-map{ height: 170px; }
+}
