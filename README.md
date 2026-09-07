@@ -334,6 +334,73 @@ pendant 24 heures. »
   tout au vert. Vérifié aussi visuellement par captures d'écran, à largeur mobile et large.
 - `service-worker.js` : `pantheon-v7` → `pantheon-v8`.
 
+## Généalogie des dieux (V5 — refonte en vrai pedigree avec connecteurs SVG)
+
+Quatrième retour, portant cette fois uniquement sur la façon dont les liens de parenté sont
+*dessinés*, pas sur leur contenu : « tes arbres ne sont pas intuitifs [...] Le principe
+fondamental est : CONJOINT ─── CONJOINT, puis une ligne verticale, puis une ligne de fratrie
+horizontale, puis une petite branche vers chaque enfant [...] Les lignes doivent être
+calculées à partir de la position réelle des nodes (getBoundingClientRect()), pas approximées
+avec des bordures CSS [...] Crée un système générique du type Person / Union / Children [...]
+Ne code pas les lignes spécifiquement pour Cronos/Rhéa ou Zeus/Héra. »
+
+Toute la mise en page en rangées (`.fam-*`, `.olytree-*`) construite pour la V4 a été retirée
+et remplacée par un moteur générique unique, utilisé aussi bien par la fiche familiale que par
+l'écran des douze Olympiens :
+
+- **Personnes → Unions → Enfants → Connecteurs SVG** (`ftCardMarkup()`, `ftBranchHTML()`,
+  `ftLeaf()`, `ftPersonBranchHTML()`, `ftAncestorBranchHTML()`) : chaque figure devient une
+  carte (`.ft-card`) portant un identifiant de position unique (`data-slot`) ; chaque union,
+  un couple (`.ft-couple`, une ou deux cartes) suivi, si elle a des enfants, d'une rangée de
+  branches filles imbriquées récursivement — exactement le schéma demandé, sans jamais coder
+  en dur la moindre relation Cronos/Rhéa ou Zeus/Héra dans le moteur lui-même : celui-ci ne
+  sait dessiner qu'« un couple, puis ses enfants », rien de plus spécifique. Une figure ayant
+  plusieurs unions (Zeus, Persée...) est dupliquée une fois par union plutôt que reliée par une
+  ligne ambiguë vers plusieurs conjoints à la fois — la même carte, avec exactement la même
+  apparence à chaque occurrence, comme demandé.
+- **`drawFamTree()`** lit, après l'injection du HTML, la position RÉELLE de chaque carte
+  (`getBoundingClientRect()`) dans le `<svg id="ftLinks">` superposé à `#ftTree`, et trace des
+  connecteurs strictement orthogonaux (jamais de diagonale) : une ligne de mariage horizontale
+  entre les deux conjoints avec un petit point de jonction en son milieu, une chute verticale
+  depuis ce point, un bus de fratrie horizontal, puis une petite chute verticale vers chaque
+  enfant. Recalculé automatiquement — jamais posé une fois pour toutes — à chaque
+  redimensionnement de la fenêtre, à la fin du chargement des polices (`document.fonts.ready`,
+  la police Cinzel décalant légèrement la largeur des cartes une fois chargée), et sur deux
+  frames supplémentaires après le montage via un `ResizeObserver` posé sur `#ftTree` (qui ne
+  réagit qu'aux changements de *taille* du conteneur, pas à un simple recentrage interne de ses
+  rangées — d'où les frames de rattrapage).
+- **Écran des douze Olympiens** reconstruit sur ce moteur : Cronos et Rhéa au centre, une
+  vraie ligne de mariage entre eux, un bus de fratrie vers leurs six enfants ; Zeus, en plus
+  d'apparaître dans cette fratrie, ouvre sa propre sous-rangée de branches
+  (`OLYMPIANS_ZEUS_UNIONS`, chaque enfant vérifié contre `GENEALOGY_PARENTS`/`GENEALOGY_CHILDREN`
+  — Zeus+Héra donne bien Arès, Hébé et Ilithyie, vérifiés au passage et non plus seulement
+  mentionnés) ; Ouranos et « la mer », à part, mènent à Aphrodite.
+- **Fiche familiale reconstruite en vrai pedigree** : les grands-parents paternels et maternels
+  forment désormais deux branches ascendantes indépendantes, chacune reliée par sa propre ligne
+  de mariage jusqu'au bon parent (celui qui est réellement le sien, jamais mélangé) ; les
+  parents forment le couple central, relié par un bus à la fratrie et à la figure centrale
+  elle-même (mise en évidence par un contour doré) ; celle-ci ouvre à son tour sa propre
+  branche vers son ou ses conjoints et leurs enfants. Le texte descriptif (portrait, note,
+  lien vers la fiche complète) vit désormais sous l'arbre plutôt que dans une carte à part —
+  l'arbre reste un pur diagramme de parenté.
+- **Défilement horizontal sur mobile** (`.ft-scroll`) sans jamais faire déborder la page
+  elle-même (vérifié : 0px de débordement horizontal du document), les connecteurs restant
+  toujours exactement rattachés à leurs cartes après défilement puisque tout est calculé en
+  coordonnées relatives au conteneur de l'arbre, qui défile avec eux. L'arbre s'ouvre
+  automatiquement centré sur la figure la plus pertinente (`centerFamTreeScroll()`) — la
+  figure centrale sur une fiche familiale, la racine sur l'écran des Olympiens — plutôt que sur
+  le bord gauche brut d'un arbre qui peut être bien plus large que l'écran.
+- Testé par un script dédié (34 vérifications : structure HTML des deux écrans, unicité de
+  tous les `data-slot`, `OLYMPIANS_ZEUS_UNIONS` vérifié contre les données réelles, pedigree de
+  Persée avec ses deux branches ascendantes distinctes, cas racine sans parent (Chaos), cas
+  d'une figure à parent unique, absence de tout texte de section, disparition complète des
+  anciennes classes `.fam-*`/`.olytree-*`) + les huit suites précédentes, toutes remises au
+  vert (quelques assertions structurelles obsolètes, propres à l'ancienne mise en page en
+  rangées, corrigées ou remplacées par une note renvoyant à ce nouveau script). Vérifié aussi
+  visuellement par captures d'écran (bureau et mobile) : lignes de mariage, bus de fratrie et
+  chutes vers chaque enfant correctement rattachés aux bonnes cartes dans les deux cas.
+- `service-worker.js` : `pantheon-v8` → `pantheon-v9`.
+
 ## Ce qui n'est PAS encore construit
 
 - Pas de suivi de progression, pas de compte, pas de mode hors-ligne au-delà du cache
@@ -346,7 +413,7 @@ pendant 24 heures. »
 
 ## Architecture
 
-Un seul fichier `app.js` (~3600 lignes), sur le même principe que l'appli Tarot : les
+Un seul fichier `app.js` (~3950 lignes), sur le même principe que l'appli Tarot : les
 données mythologiques d'abord (`SYMBOL_LIBRARY`, `DEITY_NOTES`, `DEITY_LORE`,
 `DEITY_PORTRAITS`, `DEITY_PORTRAIT_WIDE`, `DEITY_INLINE_PORTRAITS`, `GENEALOGY_PARENTS`), puis
 le mécanisme de citations (`LORE_LINK_TARGETS`, `linkifyLore()` — code strictement identique à

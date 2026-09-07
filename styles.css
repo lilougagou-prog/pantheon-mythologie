@@ -240,27 +240,64 @@ h1, h2, h3{
   margin-bottom: 5px;
 }
 
-/* ----- Fiche familiale (grands-parents / parents / fratrie+conjoint / enfants) -----
-   Toujours seulement deux générations en amont, une en aval, sans texte de section — la
-   disposition en rangées empilées, chacune centrée et large, se lit d'elle-même. Les écrans de
-   généalogie (#app.wide, voir plus haut) ont toute la largeur de la page pour respirer, plutôt
-   que la colonne de lecture étroite du reste de l'appli. */
+/* ----- Arbre généalogique (moteur générique Personnes/Unions/Connecteurs SVG) -----
+   Un vrai pedigree : conjoints reliés par une ligne de mariage horizontale, descendance tracée
+   depuis son milieu, fratrie sur un bus horizontal partagé — jamais une diagonale, jamais une
+   bordure CSS approximative. Les lignes elles-mêmes sont dessinées par drawFamTree() dans le
+   <svg id="ftLinks"> superposé, à partir de la position réelle de chaque carte. Les écrans de
+   généalogie (#app.wide, voir plus haut) ont toute la largeur de la page pour respirer. */
 
-.fam-card{ padding-top: 8px; }
-.fam-row{
+.ft-wrap{ margin: 4px 0 18px; }
+.ft-scroll{
+  position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+.ft-tree{
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 20px 28px 6px;
+}
+.ft-tree-stack{ gap: 40px; }
+.ft-tree-side{ padding-top: 14px; border-top: 1px dashed var(--border); }
+
+.ft-links{ position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
+.ft-line{ stroke: var(--bronze); stroke-width: 1.5px; fill: none; }
+.ft-joint{ fill: var(--bronze); }
+
+.ft-ancestors-row{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 28px;
+  gap: 56px;
+  margin-bottom: 40px;
+  opacity: 0.88;
 }
-.fam-row:last-child{ margin-bottom: 0; }
-.fam-grandparents{ opacity: 0.88; }
-.fam-grandparents .fam-node, .fam-parents .fam-node{ font-size: 0.92rem; }
-.fam-grandparents .fam-node{ font-size: 0.85rem; opacity: 0.85; }
+.ft-ancestors-row .ft-card{ font-size: 0.85rem; padding: 8px 12px; }
 
-.fam-node{
+.ft-branch{ display: flex; flex-direction: column; align-items: center; }
+.ft-children-row{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 26px;
+  margin-top: 40px;
+}
+.ft-couple{
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  position: relative;
+  z-index: 1;
+}
+
+.ft-card{
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -271,101 +308,44 @@ h1, h2, h3{
   padding: 10px 14px;
   font-family: "Cinzel", Georgia, serif;
   font-weight: 600;
+  font-size: 0.92rem;
   color: var(--laurel-deep);
   cursor: pointer;
   box-shadow: 0 3px 10px var(--shadow);
   text-align: center;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
 }
-.fam-node:hover{ transform: translateY(-2px); box-shadow: 0 6px 16px var(--shadow); }
-.fam-node-minor{
-  font-size: 0.85rem;
-  padding: 7px 12px;
-  box-shadow: none;
-  background: var(--marble-deep);
+.ft-card:hover{ transform: translateY(-2px); box-shadow: 0 6px 16px var(--shadow); }
+.ft-card-self{
+  cursor: default;
+  border-color: var(--bronze);
+  box-shadow: 0 0 0 3px rgba(168, 120, 60, 0.22), 0 4px 14px var(--shadow);
 }
-
-.fam-self-row{ align-items: center; gap: 24px; }
-.fam-self{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 360px;
-}
-.fam-self h2{ margin: 4px 0; }
-.fam-self .note{ text-align: center; text-align-last: center; }
-.fam-spouses{ display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; align-self: center; }
-
-.fam-children-groups{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 28px;
-  align-items: flex-start;
-}
-.fam-child-group{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-.fam-group-children{ display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-.fam-group-label{
-  background: none;
-  border: none;
-  padding: 0;
-  font-family: inherit;
-  font-style: italic;
-  font-size: 0.85rem;
-  color: var(--bronze);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-.fam-group-label:hover{ color: var(--laurel-deep); }
-.fam-group-unknown{ color: var(--ink-soft); cursor: default; }
+.ft-card-self:hover{ transform: none; }
 
 /* Vignette de portrait insérée devant un nom, quand la figure en a un (DEITY_PORTRAITS) — rend
    l'arbre plus visuel qu'une suite de noms nus. */
 .tree-portrait{
   display: block;
-  width: 44px;
-  height: 54px;
+  width: 40px;
+  height: 50px;
   object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 2px 6px var(--shadow);
 }
-.fam-group-label .tree-portrait{ width: 20px; height: 24px; border-radius: 4px; }
 
-/* ----- Arbre des douze Olympiens : une génération par rangée ----- */
-
-.olytree{ padding-top: 8px; }
-.olytree-row{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 22px;
-  position: relative;
+/* Portrait, nom et courte notice de la figure centrale, sous l'arbre — l'arbre reste un pur
+   diagramme de parenté, ce complément textuel vit à part plutôt que d'alourdir une carte. */
+.ft-self-meta{
+  text-align: center;
+  padding: 8px 0 4px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
 }
-.olytree-row::before{
-  content: "";
-  display: block;
-  width: 100%;
-  flex-basis: 100%;
-  height: 18px;
-  border-bottom: 2px solid var(--border);
-  margin-bottom: -4px;
-}
-.olytree-couple::before, .olytree-branches::before{ display: none; }
-.olytree-plus{ align-self: center; color: var(--bronze); font-size: 1.1rem; }
-.olytree-branches{ gap: 30px; margin-top: -8px; }
-.olytree-branch{ display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.olytree-branch-children{ display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-.olytree-side{ margin-top: 12px; padding-top: 18px; border-top: 1px dashed var(--border); }
-.olytree-side::before{ display: none; }
+.ft-self-meta h2{ margin: 0 0 6px; }
+.ft-self-meta .note{ text-align: center; text-align-last: center; max-width: 480px; margin: 0 auto 14px; }
 
 /* ----- En-têtes d'écran ----- */
 

@@ -3407,19 +3407,216 @@ function genealogyChipsHTML(ids, title){
   `;
 }
 
-// Un nœud de la fiche familiale (grand-parent, parent, frère/sœur, conjoint, enfant) : un
-// simple bouton avec son portrait s'il en a un, cliquable pour recentrer l'écran sur lui.
-// Brique commune à renderGenealogy() et à l'écran dédié des douze Olympiens.
-function familyCardNodeHTML(nid, extraClass){
-  return `<button class="fam-node${extraClass ? " " + extraClass : ""}" data-nav="genealogy" data-id="${escapeHTML(nid)}">${genealogyPortraitHTML(nid)}<span>${escapeHTML(genealogyDisplayName(nid))}</span></button>`;
+/* ===================== ARBRE GÉNÉALOGIQUE : MOTEUR GÉNÉRIQUE =====================
+   Personnes -> Unions -> Enfants -> Connecteurs SVG. Aucune ligne n'est plus approximée avec
+   des bordures CSS : chaque carte (.ft-card) et chaque couple (.ft-couple) porte un data-slot
+   unique, et après l'injection du HTML, drawFamTree() lit la position RÉELLE de chaque nœud
+   (getBoundingClientRect()) pour tracer, dans un <svg> superposé, des connecteurs strictement
+   orthogonaux (jamais de diagonale) : une ligne de mariage entre les deux conjoints, une ligne
+   descendante depuis son milieu, une ligne de fratrie horizontale, puis une petite chute
+   verticale vers chaque enfant. Entièrement générique : ni Cronos, ni Zeus, ni aucune autre
+   figure n'est câblée en dur dans ce moteur — seules les données (qui est l'enfant de qui,
+   voir GENEALOGY_PARENTS/GENEALOGY_CHILDREN) pilotent la forme de l'arbre, ce qui le rend
+   extensible à autant de figures qu'on voudra plus tard sans toucher au moteur lui-même. */
+
+let FT_SEQ = 0;
+let FT_CONNECTORS = []; // [{ unionSlot, childSlots: [...] }] — posé par le dernier écran d'arbre rendu, consommé par drawFamTree() juste après l'injection du HTML.
+
+// Une carte-personne (ou, pour "la mer", une carte-symbole — seule exception, Ouranos + la mer
+// n'étant pas une union entre deux figures du corpus). `self: true` la rend non cliquable (on
+// est déjà sur cette fiche) et lui donne un contour distinct ; sinon elle ouvre l'arbre de la
+// figure cliquée. Chaque appel produit une instance indépendante avec son propre data-slot,
+// même pour la même figure (un même conjoint qui revient dans plusieurs unions, par exemple) —
+// une duplication assumée et strictement identique visuellement à chaque fois.
+function ftCardMarkup(id, opts){
+  opts = opts || {};
+  const slot = `p${FT_SEQ++}`;
+  const isSymbol = !!opts.symbol;
+  const name = isSymbol ? (SYMBOL_LIBRARY[id] ? SYMBOL_LIBRARY[id].label : genealogyDisplayName(id)) : genealogyDisplayName(id);
+  const portrait = isSymbol ? "" : genealogyPortraitHTML(id);
+  if(opts.self){
+    return { slot, html: `<div class="ft-card ft-card-self" data-slot="${slot}">${portrait}<span class="ft-card-name">${escapeHTML(name)}</span></div>` };
+  }
+  const nav = isSymbol ? "symbolDetail" : "genealogy";
+  return { slot, html: `<button class="ft-card" data-slot="${slot}" data-nav="${nav}" data-id="${escapeHTML(id)}">${portrait}<span class="ft-card-name">${escapeHTML(name)}</span></button>` };
 }
 
-// L'étiquette d'une union ("avec {conjoint}"), cliquable — placée au-dessus du groupe
-// d'enfants qu'elle a eus avec la figure centrale, pour toujours identifier qui est la mère
-// (ou le père) de chacun plutôt que de mélanger tous les enfants en un seul bloc.
-function familyUnionLabelHTML(partnerId){
-  if(!partnerId) return `<span class="fam-group-label fam-group-unknown">union non précisée</span>`;
-  return `<button class="fam-group-label" data-nav="genealogy" data-id="${escapeHTML(partnerId)}">avec ${genealogyPortraitHTML(partnerId)}${escapeHTML(genealogyDisplayName(partnerId))}</button>`;
+// Une branche : un couple (une ou deux cartes, réunies dans un .ft-couple qui porte son propre
+// data-slot) suivi, le cas échéant, d'une rangée d'enfants — chaque enfant étant lui-même soit
+// une simple feuille, soit une branche complète imbriquée (voir ftLeaf/récursivité de Zeus dans
+// les Olympiens). Si des enfants sont fournis, le connecteur correspondant est enregistré ici :
+// il sera tracé plus tard, une fois les positions réelles connues.
+function ftBranchHTML(connectors, spec){
+  const unionSlot = `u${FT_SEQ++}`;
+  if(spec.childSlots && spec.childSlots.length){
+    connectors.push({ unionSlot, childSlots: spec.childSlots });
+  }
+  return {
+    slot: unionSlot,
+    html: `<div class="ft-branch">
+      <div class="ft-couple" data-slot="${unionSlot}">${spec.cardA.html}${spec.cardB ? spec.cardB.html : ""}</div>
+      ${spec.childrenHTML ? `<div class="ft-children-row">${spec.childrenHTML}</div>` : ""}
+    </div>`
+  };
+}
+
+// Une feuille : une branche à une seule carte, sans descendance affichée à cet endroit.
+function ftLeaf(connectors, id, opts){
+  return ftBranchHTML(connectors, { cardA: ftCardMarkup(id, opts) });
+}
+
+// Une branche ascendante : les parents connus d'`personId` (0, 1 ou 2), reliés par une ligne
+// de mariage jusqu'à `childCard` — qui est la carte RÉELLE de cette personne telle qu'affichée
+// plus bas dans l'arbre (jamais une nouvelle instance dupliquée), pour que le connecteur
+// aboutisse exactement à la bonne carte. Renvoie une chaîne vide s'il n'y a aucun parent connu
+// à afficher (jamais de case vide pour autant).
+function ftAncestorBranchHTML(connectors, childCard, personId){
+  const gps = GENEALOGY_PARENTS[personId] || [];
+  if(!gps.length) return "";
+  const a = ftCardMarkup(gps[0]);
+  const b = gps[1] ? ftCardMarkup(gps[1]) : null;
+  const unionSlot = `u${FT_SEQ++}`;
+  connectors.push({ unionSlot, childSlots: [childCard.slot] });
+  return `<div class="ft-branch ft-branch-ancestor"><div class="ft-couple" data-slot="${unionSlot}">${a.html}${b ? b.html : ""}</div></div>`;
+}
+
+// La branche complète d'une figure et de sa propre descendance : sa carte, puis — si elle a un
+// ou plusieurs unions documentées — une sous-rangée avec, pour chacune, un couple {figure +
+// conjoint} menant à ses enfants (groupés par union, jamais mélangés). La figure centrale est
+// donc dupliquée une fois par union (voir la remarque sur Zeus plus haut) : c'est le prix d'un
+// arbre lisible plutôt qu'une unique ligne ambiguë reliant un seul nœud à tous ses conjoints.
+function ftPersonBranchHTML(connectors, id, childUnions, opts){
+  if(!childUnions.length) return ftLeaf(connectors, id, opts);
+  const subNodes = childUnions.map(u => {
+    const kids = u.children.map(cid => ftLeaf(connectors, cid));
+    return ftBranchHTML(connectors, {
+      cardA: ftCardMarkup(id, opts),
+      cardB: u.partner ? ftCardMarkup(u.partner) : null,
+      childrenHTML: kids.map(k => k.html).join(""),
+      childSlots: kids.map(k => k.slot),
+    });
+  });
+  return ftBranchHTML(connectors, {
+    cardA: ftCardMarkup(id, opts),
+    childrenHTML: subNodes.map(n => n.html).join(""),
+    childSlots: subNodes.map(n => n.slot),
+  });
+}
+
+// Trace, dans le <svg id="ftLinks"> superposé à #ftTree, tous les connecteurs enregistrés dans
+// FT_CONNECTORS — à partir des positions RÉELLES des cartes (getBoundingClientRect()), jamais
+// de coordonnées devinées à l'avance. Toujours strictement orthogonal : une ligne de mariage
+// horizontale, une chute verticale depuis son milieu, un bus de fratrie horizontal, puis une
+// petite chute verticale vers chaque enfant — recalculé à chaque appel, donc valable après un
+// redimensionnement, un changement de contenu ou un défilement (les coordonnées sont relatives
+// au conteneur de l'arbre, qui défile avec le SVG : le défilement ne les fait jamais dériver).
+function drawFamTree(){
+  const tree = document.getElementById("ftTree");
+  const svg = document.getElementById("ftLinks");
+  if(!tree || !svg || typeof tree.getBoundingClientRect !== "function") return;
+  const treeRect = tree.getBoundingClientRect();
+  if(!treeRect.width || !treeRect.height) return;
+  svg.setAttribute("viewBox", `0 0 ${treeRect.width} ${treeRect.height}`);
+  let out = "";
+  for(const conn of FT_CONNECTORS){
+    const originEl = tree.querySelector(`[data-slot="${conn.unionSlot}"]`);
+    if(!originEl) continue;
+    const cards = originEl.classList.contains("ft-couple") ? Array.from(originEl.querySelectorAll(":scope > .ft-card")) : [originEl];
+    let trunkX, trunkY;
+    if(cards.length === 2){
+      const ra = cards[0].getBoundingClientRect(), rb = cards[1].getBoundingClientRect();
+      const y = (Math.max(ra.top, rb.top) + Math.min(ra.bottom, rb.bottom)) / 2 - treeRect.top;
+      const x1 = ra.right - treeRect.left, x2 = rb.left - treeRect.left;
+      if(x2 > x1){
+        out += `<line class="ft-line" x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" />`;
+        out += `<circle class="ft-joint" cx="${(x1 + x2) / 2}" cy="${y}" r="3.5" />`;
+      }
+      trunkX = (x1 + x2) / 2;
+      trunkY = y;
+    } else {
+      const r = cards[0].getBoundingClientRect();
+      trunkX = r.left + r.width / 2 - treeRect.left;
+      trunkY = r.bottom - treeRect.top;
+    }
+    if(!conn.childSlots || !conn.childSlots.length) continue;
+    const childRects = conn.childSlots
+      .map(slot => tree.querySelector(`[data-slot="${slot}"]`))
+      .filter(Boolean)
+      .map(el => el.getBoundingClientRect());
+    if(!childRects.length) continue;
+    const childTopYs = childRects.map(r => r.top - treeRect.top);
+    const childCenterXs = childRects.map(r => r.left + r.width / 2 - treeRect.left);
+    const rowTopY = Math.min(...childTopYs);
+    const busY = trunkY + Math.max(18, (rowTopY - trunkY) / 2);
+    out += `<line class="ft-line" x1="${trunkX}" y1="${trunkY}" x2="${trunkX}" y2="${busY}" />`;
+    const busX1 = Math.min(trunkX, ...childCenterXs), busX2 = Math.max(trunkX, ...childCenterXs);
+    if(busX2 > busX1) out += `<line class="ft-line" x1="${busX1}" y1="${busY}" x2="${busX2}" y2="${busY}" />`;
+    childCenterXs.forEach((cx, i) => {
+      out += `<line class="ft-line" x1="${cx}" y1="${busY}" x2="${cx}" y2="${childTopYs[i]}" />`;
+    });
+  }
+  svg.innerHTML = out;
+}
+
+// Centre le défilement horizontal de l'arbre sur sa figure la plus pertinente au premier
+// affichage — la figure centrale (.ft-card-self) sur une fiche familiale, ou à défaut la
+// première carte du tout premier couple (la racine de l'arbre, ex. Cronos + Rhéa) — plutôt que
+// de laisser l'écran s'ouvrir sur le bord gauche brut d'un arbre qui peut être bien plus large
+// que l'écran (un enfant très prolifique, comme Zeus, pousse toute la largeur totale très loin
+// vers la droite). Appelé une seule fois au montage, jamais lors des redessins ultérieurs — on
+// ne doit jamais reprendre la main sur un défilement que la lectrice a fait elle-même depuis.
+function centerFamTreeScroll(){
+  if(typeof document.querySelector !== "function") return;
+  const scrollEl = document.querySelector(".ft-scroll");
+  const tree = document.getElementById("ftTree");
+  if(!scrollEl || !tree || typeof scrollEl.getBoundingClientRect !== "function" || typeof tree.querySelector !== "function") return;
+  const target = tree.querySelector(".ft-card-self") || tree.querySelector(".ft-couple, .ft-card");
+  if(!target || typeof target.getBoundingClientRect !== "function") return;
+  const scrollRect = scrollEl.getBoundingClientRect();
+  const targetRect = target.getBoundingClientRect();
+  const targetCenterX = targetRect.left + targetRect.width / 2 - scrollRect.left + scrollEl.scrollLeft;
+  scrollEl.scrollLeft = Math.max(0, targetCenterX - scrollRect.width / 2);
+}
+
+// Recalcule les connecteurs chaque fois que la taille de l'arbre change pour une raison
+// quelconque — redimensionnement de la fenêtre, contenu qui se charge, disposition responsive —
+// plutôt que de ne réagir qu'à l'un de ces cas précis. Un seul ResizeObserver réutilisé (jamais
+// empilé) : reconnecté au nouveau #ftTree après chaque render(), déconnecté du précédent avant.
+let ftResizeObserver = null;
+function initFamTree(){
+  const tree = document.getElementById("ftTree");
+  if(ftResizeObserver) ftResizeObserver.disconnect();
+  if(!tree) return;
+  drawFamTree();
+  centerFamTreeScroll();
+  // Un ResizeObserver sur #ftTree ne réagit qu'aux changements de TAILLE du conteneur — pas à
+  // un simple recentrage interne de ses rangées (ex. la rangée des grands-parents, plus étroite
+  // que celle des enfants, dont le centrage horizontal dépend de la largeur totale de l'arbre :
+  // elle peut se décaler sans que #ftTree change lui-même de taille). Quelques passages
+  // supplémentaires sur les deux prochaines frames rattrapent ce cas (et recentrent une
+  // dernière fois, une fois la mise en page définitivement stabilisée) — et, plus généralement,
+  // toute police qui finit de charger ou tout réajustement de mise en page qui suivrait le
+  // premier rendu — à un coût négligeable (drawFamTree() ne fait que lire des rectangles et
+  // réécrire un <svg>).
+  if(typeof requestAnimationFrame === "function"){
+    requestAnimationFrame(() => {
+      drawFamTree();
+      requestAnimationFrame(() => { drawFamTree(); centerFamTreeScroll(); });
+    });
+  }
+  if(typeof ResizeObserver !== "undefined"){
+    ftResizeObserver = new ResizeObserver(() => drawFamTree());
+    ftResizeObserver.observe(tree);
+  }
+  if(document.fonts && document.fonts.ready && document.fonts.ready.then){
+    document.fonts.ready.then(() => drawFamTree()).catch(() => {});
+  }
+}
+
+// Écouteur unique, posé une seule fois (voir bindAppClickDelegation) : ne redessine que si un
+// arbre est actuellement affiché, pour ne rien faire sur les autres écrans.
+function handleFamTreeWindowResize(){
+  if(document.getElementById("ftTree")) drawFamTree();
 }
 
 // Aperçu « Lignée » directement sur la fiche d'une figure : ses parents et ses enfants (groupés
@@ -3516,105 +3713,126 @@ function renderGenealogyHome(){
   `;
 }
 
-// Regroupe les douze Olympiens (voir OLYMPIAN_IDS) par couple de parents — plusieurs Olympiens
-// partagent souvent les mêmes (Cronos et Rhéa pour Zeus/Héra/Poséidon/Déméter, par exemple) —
-// pour l'écran dédié ci-dessous : un vrai arbre montrant les douze d'un coup, un seul niveau
-// de parenté (pas plus, pour ne pas surcharger), plutôt qu'une liste de cartes séparées.
-// Les branches partant spécifiquement de Zeus qui complètent le tableau des Olympiens avec le
-// reste du grand panthéon (Hermès, Artémis, Apollon, Athéna) sans afficher tous ses 36 enfants
-// recensés — un choix éditorial pour cet écran précis, pas une règle générale de collapse
-// (voir GENEALOGY_PARENTS pour vérifier que chaque lien ci-dessous est bien réel).
-const OLYMPIANS_ZEUS_BRANCHES = [
-  ["pléiades", ["hermès"]],
-  ["léto", ["artémis", "apollon"]],
-  ["métis", ["athéna"]],
+// Les unions de Zeus retenues pour l'écran des douze Olympiens : un choix éditorial pour cet
+// écran précis (afficher ses 36 enfants recensés le rendrait illisible), mais chaque lien
+// ci-dessous reste réel — enfants vérifiés directement contre GENEALOGY_PARENTS/CHILDREN
+// (Zeus + Héra -> Arès, Hébé, Ilithyie ; Zeus + Pléiade Maïa -> Hermès ; Zeus + Léto -> Artémis
+// et Apollon ; Zeus + Métis -> Athéna), pas une invention pour la mise en page.
+const OLYMPIANS_ZEUS_UNIONS = [
+  { partner: "héra", children: ["arès", "hébé", "ilithyie"] },
+  { partner: "pléiades", children: ["hermès"] },
+  { partner: "léto", children: ["artémis", "apollon"] },
+  { partner: "métis", children: ["athéna"] },
 ];
 
-// Écran dédié aux douze Olympiens : un vrai arbre généalogique par génération plutôt qu'une
-// liste — Cronos et Rhéa en tête, leurs six enfants juste en dessous (les Olympiens ET Hadès,
-// leur frère resté hors de l'Olympe mais bien de la même fratrie), puis, partant de Zeus,
-// quelques-uns de ses propres enfants qui complètent le panthéon (voir
-// OLYMPIANS_ZEUS_BRANCHES), et enfin Aphrodite, dans sa branche à part issue d'Ouranos seul.
-// Cliquer sur n'importe quel nom ouvre sa propre fiche familiale complète (renderGenealogy()).
+// Écran dédié aux douze Olympiens : Cronos et Rhéa en tête, leurs six enfants juste en dessous
+// (les Olympiens ET Hadès, resté hors de l'Olympe mais bien de la même fratrie), puis, partant
+// de Zeus, ses unions retenues pour ce tableau (voir OLYMPIANS_ZEUS_UNIONS), et enfin, dans une
+// branche à part issue d'Ouranos seul, Aphrodite. Toutes les lignes de parenté sont tracées par
+// le moteur générique ci-dessus (voir drawFamTree()) à partir des positions réelles des cartes,
+// jamais approximées avec des bordures CSS.
 function renderOlympiansOverview(){
-  const row2 = ["déméter", "hestia", "héra", "poséidon", "zeus", "hadès"];
+  const connectors = [];
+  FT_SEQ = 0;
+  const row2Ids = ["déméter", "hestia", "héra", "poséidon", "zeus", "hadès"];
+  const row2Nodes = row2Ids.map(cid => cid === "zeus"
+    ? ftPersonBranchHTML(connectors, "zeus", OLYMPIANS_ZEUS_UNIONS)
+    : ftLeaf(connectors, cid));
+  const cronosRhea = ftBranchHTML(connectors, {
+    cardA: ftCardMarkup("cronos"),
+    cardB: ftCardMarkup("rhéa"),
+    childrenHTML: row2Nodes.map(n => n.html).join(""),
+    childSlots: row2Nodes.map(n => n.slot),
+  });
+  const aphroditeLeaf = ftLeaf(connectors, "aphrodite");
+  const ouranosMer = ftBranchHTML(connectors, {
+    cardA: ftCardMarkup("ouranos"),
+    cardB: ftCardMarkup("mer", { symbol: true }),
+    childrenHTML: aphroditeLeaf.html,
+    childSlots: [aphroditeLeaf.slot],
+  });
+  FT_CONNECTORS = connectors;
   return `
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
       <h2>Les douze Olympiens</h2>
     </div>
-    <div class="olytree">
-      <div class="olytree-row olytree-couple">
-        ${familyCardNodeHTML("cronos")}
-        <span class="olytree-plus">+</span>
-        ${familyCardNodeHTML("rhéa")}
-      </div>
-      <div class="olytree-row olytree-children">
-        ${row2.map(cid => familyCardNodeHTML(cid)).join("")}
-      </div>
-      <div class="olytree-row olytree-branches">
-        ${OLYMPIANS_ZEUS_BRANCHES.map(([partner, kids]) => `
-          <div class="olytree-branch">
-            ${familyUnionLabelHTML(partner)}
-            <div class="olytree-branch-children">${kids.map(cid => familyCardNodeHTML(cid)).join("")}</div>
-          </div>
-        `).join("")}
-      </div>
-      <div class="olytree-row olytree-couple olytree-side">
-        ${familyCardNodeHTML("ouranos")}
-        <span class="olytree-plus">+</span>
-        <button class="fam-node" data-nav="symbolDetail" data-id="mer"><span>la mer</span></button>
-      </div>
-      <div class="olytree-row olytree-children">
-        ${familyCardNodeHTML("aphrodite")}
+    <div class="ft-wrap">
+      <div class="ft-scroll">
+        <div class="ft-tree ft-tree-stack" id="ftTree">
+          ${cronosRhea.html}
+          <div class="ft-tree-side">${ouranosMer.html}</div>
+          <svg class="ft-links" id="ftLinks"></svg>
+        </div>
       </div>
     </div>
   `;
 }
 
-// Fiche familiale d'une figure : ses grands-parents et parents au-dessus, ses frères et sœurs
-// (les vrais, ou ceux qui comptent vraiment — voir SIBLING_PARENT_MAX_PARTNERS) et son ou ses
-// conjoint(s) à ses côtés, ses enfants juste en dessous (groupés par union, pour toujours
-// identifier leur mère ou leur père) — et rien de plus : jamais les grands-parents au-delà,
-// jamais les petits-enfants. Aucun texte de section ("Ascendance", "Descendance"...), l'arbre
-// lui-même suffit à se faire comprendre. Cliquer sur n'importe quel nom recentre l'écran sur
-// lui (chaque clic empile un écran, si bien que « ← Retour » redéroule l'exploration pas à
-// pas) ; pour aller plus loin qu'une génération, il suffit de cliquer à nouveau.
+// Fiche familiale d'une figure : ses grands-parents paternels et maternels (chacun dans sa
+// propre branche, reliés à leur enfant respectif — jamais mélangés en une seule rangée plate),
+// ses parents réunis en couple, sa fratrie et elle-même juste en dessous (les vrais frères et
+// sœurs, ou ceux qui comptent vraiment — voir SIBLING_PARENT_MAX_PARTNERS), puis sa ou ses
+// propres unions et leurs enfants — et rien de plus : jamais au-delà des grands-parents, jamais
+// les petits-enfants. Aucun texte de section ("Ascendance", "Descendance"...), l'arbre lui-même
+// suffit à se faire comprendre. Cliquer sur n'importe quel nom recentre l'écran sur lui (chaque
+// clic empile un écran, si bien que « ← Retour » redéroule l'exploration pas à pas).
 function renderGenealogy(id){
   const name = genealogyDisplayName(id);
   const note = DEITY_NOTES[id];
   const portrait = DEITY_PORTRAITS[id];
   const card = buildFamilyCard(id);
-  const hasAny = card.parents.length || card.grandparents.length || card.partners.length || card.siblings.length || card.childUnions.length;
+  const hasAny = card.parents.length || card.partners.length || card.siblings.length || card.childUnions.length;
+  const connectors = [];
+  FT_SEQ = 0;
+  let treeHTML;
+  if(card.parents.length){
+    const fatherCard = ftCardMarkup(card.parents[0]);
+    const motherCard = card.parents[1] ? ftCardMarkup(card.parents[1]) : null;
+    const ancestorsHTML = [ftAncestorBranchHTML(connectors, fatherCard, card.parents[0])];
+    if(motherCard) ancestorsHTML.push(ftAncestorBranchHTML(connectors, motherCard, card.parents[1]));
+    const filteredAncestorsHTML = ancestorsHTML.filter(Boolean);
+    const combinedIds = [...card.siblings, id].sort(byGenealogyDisplayName);
+    const combinedNodes = combinedIds.map(pid => pid === id
+      ? ftPersonBranchHTML(connectors, id, card.childUnions, { self: true })
+      : ftLeaf(connectors, pid));
+    const parentsUnion = ftBranchHTML(connectors, {
+      cardA: fatherCard,
+      cardB: motherCard,
+      childrenHTML: combinedNodes.map(n => n.html).join(""),
+      childSlots: combinedNodes.map(n => n.slot),
+    });
+    treeHTML = `
+      ${filteredAncestorsHTML.length ? `<div class="ft-ancestors-row">${filteredAncestorsHTML.join("")}</div>` : ""}
+      ${parentsUnion.html}
+    `;
+  } else {
+    // Aucun parent connu (figure primordiale, ou lignée non documentée) : la figure elle-même,
+    // avec ses propres unions et enfants s'il y en a, devient la racine de l'arbre.
+    treeHTML = ftPersonBranchHTML(connectors, id, card.childUnions, { self: true }).html;
+  }
+  FT_CONNECTORS = connectors;
   return `
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
     </div>
-    <div class="fam-card">
-      ${card.grandparents.length ? `<div class="fam-row fam-grandparents">${card.grandparents.map(gp => familyCardNodeHTML(gp)).join("")}</div>` : ""}
-      ${card.parents.length ? `<div class="fam-row fam-parents">${card.parents.map(p => familyCardNodeHTML(p)).join("")}</div>` : ""}
-      ${card.siblings.length ? `<div class="fam-row fam-siblings">${card.siblings.map(s => familyCardNodeHTML(s, "fam-node-minor")).join("")}</div>` : ""}
-      <div class="fam-row fam-self-row">
-        <div class="fam-self">
-          ${portrait ? `<img class="geneal-portrait" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy">` : ""}
-          <h2>${escapeHTML(name)}</h2>
-          ${note ? `<p class="note">${escapeHTML(note)}</p>` : ""}
-          <button class="geneal-fiche-link" data-nav="figureDetail" data-id="${escapeHTML(id)}">Voir la fiche complète →</button>
+    ${hasAny ? `
+      <div class="ft-wrap">
+        <div class="ft-scroll">
+          <div class="ft-tree" id="ftTree">
+            ${treeHTML}
+            <svg class="ft-links" id="ftLinks"></svg>
+          </div>
         </div>
-        ${card.partners.length ? `<div class="fam-spouses">${card.partners.map(p => familyCardNodeHTML(p, "fam-node-minor")).join("")}</div>` : ""}
       </div>
-      ${card.childUnions.length ? `
-        <div class="fam-row fam-children-groups">
-          ${card.childUnions.map(u => `
-            <div class="fam-child-group">
-              ${familyUnionLabelHTML(u.partner)}
-              <div class="fam-group-children">${u.children.map(c => familyCardNodeHTML(c)).join("")}</div>
-            </div>
-          `).join("")}
-        </div>
-      ` : ""}
-      ${!hasAny ? `<p class="empty">Aucune parenté connue pour ${escapeHTML(name)} dans ce corpus.</p>` : ""}
+    ` : ""}
+    <div class="ft-self-meta">
+      ${portrait ? `<img class="geneal-portrait" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy">` : ""}
+      <h2>${escapeHTML(name)}</h2>
+      ${note ? `<p class="note">${escapeHTML(note)}</p>` : ""}
+      <button class="geneal-fiche-link" data-nav="figureDetail" data-id="${escapeHTML(id)}">Voir la fiche complète →</button>
     </div>
+    ${!hasAny ? `<p class="empty">Aucune parenté connue pour ${escapeHTML(name)} dans ce corpus.</p>` : ""}
   `;
 }
 
@@ -3723,11 +3941,16 @@ function bindScreenEvents(){
       document.getElementById("symbolsGrid").innerHTML = renderSymbolsGrid(symbolsSearch.value);
     });
   }
+  // Les écrans d'arbre généalogique (fiche familiale, douze Olympiens) recréent #ftTree à
+  // chaque render() — jamais le même nœud persistant — donc l'observateur de redimensionnement
+  // doit être reconnecté (et les connecteurs redessinés une première fois) à chaque passage ici.
+  initFamTree();
 }
 
 /* ===================== INIT ===================== */
 
 bindAppClickDelegation();
+window.addEventListener("resize", handleFamTreeWindowResize);
 render();
 
 if("serviceWorker" in navigator){
