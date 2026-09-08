@@ -1056,3 +1056,29 @@ visuellement par captures d'écran Playwright sur une fiche symbole premium (« 
 clé d'aperçu propriétaire) et une fiche figure gratuite (« Zeus ») : les deux boutons retour
 s'affichent bien, en haut et en bas, aucun texte de certitude résiduel.
 `service-worker.js` : `pantheon-v19` → `pantheon-v20`.
+
+## Étoiles à 6 branches autour du titre, tuiles d'accueil sans compteurs
+
+Deux retours sur l'écran d'accueil :
+
+- **Étoiles.** Les petites étoiles rondes scintillant en fond de la carte « À découvrir
+  aujourd'hui » (`fotdStarsHTML`, dispersées aléatoirement derrière le portrait) ne
+  plaisaient pas. Retirées, et remplacées par une demande précise : des étoiles à 6 branches
+  scintillantes de part et d'autre du titre « Panthéon », 3 de chaque côté. Nouvelle fonction
+  `heroStarsHTML(side)`, un seul tracé SVG partagé (`HERO_STAR_PATH`, un dodécagone à rayons
+  alternés — la forme classique de l'étincelle à 6 pointes) rejoué à des tailles, délais et
+  durées pseudo-aléatoires mais déterministes (`HERO_STAR_SEEDS`), pour un scintillement qui
+  ne se resynchronise jamais tout à fait. `<h1>` passe en flex pour aligner les deux groupes
+  d'étoiles et le texte sur une même ligne.
+- **Tuiles d'accueil.** Les compteurs (« 210 fiches », « 94 lieux »... `tile-count`)
+  disparaissent des quatre tuiles, au profit du seul texte descriptif déjà présent
+  (`tile-desc`, donné plus tôt dans le projet), qui perd son italique et prend la couleur
+  terracotta (`--terracotta`, nouvelle variable) pour rester visible à la place du chiffre
+  retiré.
+
+Testé par un script dédié (`scratchpad`, 16 vérifications) + la suite complète de la veille
+remise à jour et repassée au vert (99 + 17 vérifications). Vérifié aussi visuellement par
+capture d'écran Playwright de l'écran d'accueil : les deux groupes de 3 étoiles encadrent bien
+« Panthéon », les quatre tuiles n'affichent plus aucun chiffre, le texte descriptif est en
+terracotta.
+`service-worker.js` : `pantheon-v20` → `pantheon-v21`.

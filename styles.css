@@ -9,6 +9,7 @@
   --laurel-deep: #34432a;
   --bronze: #a8783c;
   --bronze-light: #c99a5c;
+  --terracotta: #b5542f;
   --card-bg: #fffdf8;
   --border: #ddd0b3;
   --shadow: rgba(44, 36, 22, 0.12);
@@ -58,8 +59,29 @@ h1, h2, h3{
   box-shadow: 0 6px 20px var(--shadow);
 }
 .hero h1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   font-size: 2.6rem;
   margin: 0 0 8px;
+}
+/* Étoiles à 6 branches scintillantes de part et d'autre de « Panthéon » (3 de chaque côté) —
+   tracé SVG partagé (HERO_STAR_PATH), délais/durées/tailles pseudo-aléatoires mais fixes
+   (HERO_STAR_SEEDS) pour un scintillement qui ne se resynchronise jamais tout à fait. */
+.hero-stars{ display: inline-flex; align-items: center; gap: 4px; }
+.hero-star{
+  fill: var(--bronze);
+  animation-name: hero-twinkle;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+@keyframes hero-twinkle{
+  0%, 100%{ opacity: 0.3; transform: scale(0.75); }
+  50%{ opacity: 1; transform: scale(1.15); }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-star{ animation: none; opacity: 0.8; }
 }
 .hero .tagline{
   color: var(--ink-soft);
@@ -115,10 +137,8 @@ h1, h2, h3{
   max-height: 220px;
   object-fit: contain;
   border-radius: 10px;
-  position: relative;
-  z-index: 1;
 }
-.fotd-text{ position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
+.fotd-text{ display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
 .fotd-name{ font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 1.3rem; color: var(--laurel-deep); }
 .fotd-note{
   font-size: 0.92rem;
@@ -127,29 +147,6 @@ h1, h2, h3{
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-/* Petites étoiles scintillantes dispersées sur la carte, purement décoratives (aria-hidden) —
-   positions et durées pseudo-aléatoires mais fixes (FOTD_STAR_SEEDS), pour ne jamais sauter
-   d'un rendu à l'autre. */
-.fotd-stars{ position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.fotd-star{
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--bronze);
-  box-shadow: 0 0 4px 1px var(--bronze);
-  animation-name: fotd-twinkle;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-}
-@keyframes fotd-twinkle{
-  0%, 100%{ opacity: 0.15; transform: scale(0.7); }
-  50%{ opacity: 1; transform: scale(1.3); }
-}
-@media (prefers-reduced-motion: reduce){
-  .fotd-star{ animation: none; opacity: 0.5; }
 }
 
 .tiles{
@@ -180,8 +177,7 @@ h1, h2, h3{
 .tile:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px var(--shadow); }
 .tile-badge{ width: 52px; height: 52px; border-radius: 50%; object-fit: cover; }
 .tile-title{ font-family: "Cinzel", Georgia, serif; font-size: 1.1rem; color: var(--laurel-deep); }
-.tile-count{ font-size: 0.85rem; color: var(--bronze); font-weight: 600; }
-.tile-desc{ font-size: 0.82rem; color: var(--ink-soft); font-style: italic; line-height: 1.3; }
+.tile-desc{ font-size: 0.88rem; color: var(--terracotta); line-height: 1.35; }
 
 /* ----- Généalogie ----- */
 

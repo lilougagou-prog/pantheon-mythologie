@@ -1378,16 +1378,18 @@ function figureOfTheDay(){
 
 /* ===================== RENDU : ÉCRANS ===================== */
 
-// Quelques étoiles à positions/durées pseudo-aléatoires mais déterministes (même hasard à
-// chaque rendu, pour ne pas les voir sauter partout à chaque re-render de l'écran d'accueil).
-const FOTD_STAR_SEEDS = [11, 47, 83, 19, 61, 29];
-function fotdStarsHTML(){
-  return FOTD_STAR_SEEDS.map(seed => {
-    const left = (seed * 37) % 100;
-    const top = (seed * 53) % 100;
-    const delay = (seed % 7) * 0.4;
-    const duration = 2.2 + (seed % 5) * 0.3;
-    return `<span class="fotd-star" style="left:${left}%; top:${top}%; animation-delay:${delay}s; animation-duration:${duration}s;"></span>`;
+// Étoiles à 6 branches scintillantes, encadrant « Panthéon » dans l'en-tête (3 de chaque
+// côté) — un seul tracé SVG partagé (dodécagone à rayons alternés, la forme classique de
+// l'étincelle à 6 pointes), rejoué à des délais/durées/tailles pseudo-aléatoires mais
+// déterministes (même écran à chaque rendu, pas de saut visuel).
+const HERO_STAR_PATH = "M12 2 L14 8.536 L20.66 7 L16 12 L20.66 17 L14 15.464 L12 22 L10 15.464 L3.34 17 L8 12 L3.34 7 L10 8.536 Z";
+const HERO_STAR_SEEDS = { left: [5, 13, 29], right: [41, 17, 53] };
+function heroStarsHTML(side){
+  return HERO_STAR_SEEDS[side].map(seed => {
+    const size = 8 + (seed % 5);
+    const delay = (seed % 7) * 0.3;
+    const duration = 1.8 + (seed % 4) * 0.3;
+    return `<svg class="hero-star" width="${size}" height="${size}" viewBox="0 0 24 24" style="animation-delay:${delay}s; animation-duration:${duration}s;"><path d="${HERO_STAR_PATH}"/></svg>`;
   }).join("");
 }
 
@@ -1402,7 +1404,6 @@ function figureOfTheDayHTML(){
     <section class="fotd">
       <h2 class="fotd-label">À découvrir aujourd'hui</h2>
       <button class="fotd-card" data-nav="figureDetail" data-id="${escapeHTML(id)}">
-        <span class="fotd-stars" aria-hidden="true">${fotdStarsHTML()}</span>
         ${portrait ? `<img class="fotd-portrait" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy">` : ""}
         <span class="fotd-text">
           <span class="fotd-name">${escapeHTML(name)}</span>
@@ -1417,7 +1418,11 @@ function renderHome(){
   return `
     <header class="hero">
       <img class="hero-banner" src="assets/hero-olympians.jpg" alt="Les douze dieux de l'Olympe : Hestia, Déméter, Héra, Zeus, Poséidon, Apollon, Artémis, Athéna, Arès, Aphrodite, Héphaïstos et Hermès">
-      <h1>Panthéon</h1>
+      <h1>
+        <span class="hero-stars" aria-hidden="true">${heroStarsHTML("left")}</span>
+        Panthéon
+        <span class="hero-stars" aria-hidden="true">${heroStarsHTML("right")}</span>
+      </h1>
       <p class="tagline">Apprends la mythologie grecque à travers ses dieux, héros et symboles.</p>
       <img class="tagline-olive" src="assets/home-olive-branch.webp" alt="">
     </header>
@@ -1426,25 +1431,21 @@ function renderHome(){
       <button class="tile" data-nav="figures">
         <img class="tile-badge" src="assets/badge-figures-portrait.webp" alt="">
         <span class="tile-title">Figures mythologiques</span>
-        <span class="tile-count">${FIGURE_ENTRIES.length} fiches</span>
         <span class="tile-desc">Découvrez les dieux, héros et créatures des mythes grecs.</span>
       </button>
       <button class="tile" data-nav="symbols">
         <img class="tile-badge" src="assets/badge-symbols-lyre.webp" alt="">
         <span class="tile-title">Bibliothèque symbolique</span>
-        <span class="tile-count">${SYMBOL_ENTRIES.length} symboles</span>
         <span class="tile-desc">Explorez les objets, animaux et attributs qui peuplent les mythes.</span>
       </button>
       <button class="tile" data-nav="genealogyHome">
         <img class="tile-badge" src="assets/badge-genealogy-mother.webp" alt="">
         <span class="tile-title">Généalogie des dieux</span>
-        <span class="tile-count">${GENEALOGY_FIGURE_COUNT} figures reliées</span>
         <span class="tile-desc">Suivez les liens de parenté entre les grandes figures mythologiques.</span>
       </button>
       <button class="tile" data-nav="places">
         <img class="tile-badge" src="assets/badge-places-map.webp" alt="">
         <span class="tile-title">Lieux mythologiques</span>
-        <span class="tile-count">${MAP_PLACES.length} lieux sur la carte</span>
         <span class="tile-desc">Parcourez les lieux où se déroulent les grands récits mythologiques.</span>
       </button>
     </div>
