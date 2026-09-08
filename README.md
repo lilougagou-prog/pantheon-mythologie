@@ -1855,3 +1855,22 @@ nouveau décompte à 64 illustrations et l'existence de chacun des 5 nouveaux fi
 aussi visuellement par Playwright sur les cinq nouvelles fiches, en clair et en sombre : aucun
 cadre ni fond parasite, le dégradé de la page transparaît bien à travers chaque détourage.
 `service-worker.js` : `pantheon-v41` → `pantheon-v42`.
+
+## Cinq nouvelles illustrations : Myrte, Noix, Olive, Olivier, Ouroboros
+
+Cinq images de plus fournies par l'utilisatrice, avec une ambiguïté à lever avant intégration :
+la première était légendée « Myrrhe », mais ni la fiche ni l'image ne correspondaient — « Myrrhe »
+n'existe pas dans `SYMBOL_LIBRARY` (seul « Myrte » y figure, sans illustration jusqu'ici), et
+l'image elle-même montre une branche fleurie blanche caractéristique du myrte, pas la résine
+d'arbre qu'est la myrrhe. Signalé à l'utilisatrice plutôt que deviné : elle confirme qu'il
+s'agit bien du myrte.
+
+Les cinq images (Myrte, Noix, Olive, Olivier, Ouroboros) rejoignent `SYMBOL_ILLUSTRATIONS`
+(64 → 69) — même traitement que d'habitude : transparence vérifiée par le canal alpha plutôt que
+par l'aperçu miniature (Olivier semblait lui aussi sur fond sombre flouté, transparence réelle
+confirmée avant intégration), retaillées à 520px de long côté maximum, converties en WebP.
+
+Testé par la suite complète remise à jour et repassée au vert (188 vérifications, dont le
+nouveau décompte à 69 illustrations). Vérifié aussi visuellement par Playwright sur les cinq
+nouvelles fiches, en clair et en sombre.
+`service-worker.js` : `pantheon-v42` → `pantheon-v43`.
