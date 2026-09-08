@@ -461,6 +461,16 @@ const SYMBOL_ILLUSTRATIONS = {
   "chemin": "assets/symbol-chemin.webp",
   "chêne": "assets/symbol-chene.webp",
   "cheval": "assets/symbol-cheval.webp",
+  // Les cinq entrées suivantes réutilisent telles quelles les illustrations déjà fournies pour
+  // les icônes de catégorie de la carte (MAP_CATEGORY_ILLUSTRATIONS) — même sujet, pas besoin
+  // d'un second détourage : sanctuaire → temple, montagne → montagne, détroit/mers → mer,
+  // source → source, monde souterrain → monde souterrain (demande explicite : « monde
+  // souterrain = enfers », le même dessin sert les deux endroits).
+  "temple": "assets/map-icon-sanctuaire.webp",
+  "montagne": "assets/map-icon-montagne.webp",
+  "mer": "assets/map-icon-detroit.webp",
+  "source": "assets/map-icon-source.webp",
+  "monde souterrain": "assets/map-icon-souterrain.webp",
 };
 const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux"]);
 const DEITY_INLINE_PORTRAITS = {
@@ -1373,6 +1383,10 @@ function fotdStarsHTML(){
 function figureOfTheDayHTML(){
   const [id, name, note] = figureOfTheDay();
   const portrait = DEITY_PORTRAITS[id];
+  // object-fit: contain plutôt que cover — un portrait « large » (portrait de groupe, voir
+  // DEITY_PORTRAIT_WIDE, ex. le jugement de Pâris) se faisait rogner ses bords, parfois jusqu'à
+  // couper la figure elle-même, quand on le forçait dans le cadre étroit 4/5 habituel. contain
+  // garantit que l'image entière reste toujours visible, quel que soit son format d'origine.
   return `
     <section class="fotd">
       <h2 class="fotd-label">À découvrir aujourd'hui</h2>
@@ -2359,17 +2373,19 @@ function renderPlacesMarkers(){
 // continuent de fonctionner normalement sans carte — le conteneur garde alors simplement son
 // message de repli (voir renderPlaces()).
 //
-// Tuiles avec noms de lieux en graphie latine/internationale plutôt qu'en grec : le rendu OSM
-// standard affiche chaque lieu dans sa langue locale (donc en grec ici), illisible sans la
-// connaître — signalé par l'utilisatrice. Wikimedia "osm-intl" applique la transcription
-// internationale (proche de l'anglais : « Athens », « Delphi »...) sans nécessiter de clé
-// d'API, contrairement aux styles réellement multilingues (MapTiler et consorts) qui en
-// réclament une — la vraie traduction française des libellés natifs de la carte n'est donc pas
-// possible sans ce genre de service payant, mais au moins lisible sans connaître le grec.
+// Fond de carte : OpenStreetMap standard, le seul relevé fiable et gratuit sans clé d'API parmi
+// ceux essayés. Deux alternatives tentées pour des libellés en graphie latine plutôt qu'en grec
+// (signalé par l'utilisatrice) ont échoué à l'usage : Wikimedia "osm-intl" renvoie une 403
+// (accès réservé aux domaines Wikimedia, pas ouvert à un site tiers) et CARTO Voyager exige
+// désormais une clé d'API sur ses tuiles rasters gratuites (filigrane « API KEY REQUIRED » sans
+// elle). Aucune tuile multilingue gratuite et sans clé n'existe donc actuellement — seul un
+// service payant (MapTiler et consorts) le permettrait. Les noms des lieux CURATÉS par l'appli
+// (marqueurs, popups, liste, fiches) restent de toute façon intégralement en français quelle
+// que soit la langue des libellés génériques du fond de carte lui-même (pays, grandes villes).
 function mapTileLayer(){
-  return L.tileLayer("https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png", {
+  return L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors, tuiles <a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use" target="_blank" rel="noopener">Wikimedia</a>',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>',
   });
 }
 

@@ -954,3 +954,56 @@ contenu du service worker, nouveaux textes d'accueil) et vérifié visuellement 
 d'écran Playwright sur chaque écran touché (accueil, bibliothèque symbolique — dont un symbole
 premium pour confirmer l'illustration sur l'écran payant —, les huit écrans de généalogie,
 recherche et fiche « Carthage »). `service-worker.js` : `pantheon-v17` → `pantheon-v18`.
+
+## Quatre retours du lendemain matin
+
+Retours de l'utilisatrice après avoir essayé le round précédent en conditions réelles.
+
+**« Figure du jour » : image coupée.** Le portrait s'affichait à côté du texte dans un cadre
+fixe 112×140 en `object-fit: cover` — correct pour un portrait individuel, mais un portrait
+« large » (`DEITY_PORTRAIT_WIDE`, une scène de groupe comme le jugement de Pâris, tombé
+justement le jour du signalement) se faisait rogner par ce cadre étroit, parfois au point de
+couper une des figures de la scène. Corrigé sur les deux points signalés : l'image passe
+au-dessus du texte (`.fotd-card` en colonne plutôt qu'en ligne) et en `object-fit: contain`
+plutôt que `cover`, pour ne plus jamais rogner quoi que ce soit, quel que soit le format
+d'origine de l'image.
+
+**Généalogie : les portraits chevauchaient les lignes.** Cause réelle : `.ft-couple` centrait
+verticalement les deux cartes d'un mariage (`align-items: center`) — sans conséquence quand les
+deux ont la même hauteur, mais quand une seule des deux a un portrait (donc une carte plus
+haute), la ligne de mariage, calculée au milieu de la zone de recouvrement des deux cartes (voir
+`drawFamTree()`), retombait alors en plein milieu du portrait plutôt qu'au niveau des noms.
+Corrigé en alignant les cartes sur leur bas (`align-items: flex-end`) plutôt que sur leur
+centre : les deux noms partagent désormais la même ligne de base, le portrait s'élève simplement
+au-dessus, et la ligne de mariage retombe naturellement au niveau des textes. Comme `.ft-couple`
+est une classe partagée par tous les arbres, le correctif s'applique partout d'un coup — vérifié
+sur les douze Olympiens (Zeus/Héra) et la lignée de Persée (Persée/Andromède).
+
+**La carte ne se chargeait plus.** Cause : le passage aux tuiles Wikimedia « osm-intl » du round
+précédent, censé afficher les lieux en graphie latine plutôt qu'en grec, renvoie en réalité une
+erreur 403 dès qu'on l'interroge depuis un domaine tiers — Wikimedia réserve ce service aux
+domaines Wikimedia eux-mêmes, ce qui n'était pas apparu lors du test initial. Une seconde
+alternative essayée avant de trancher, CARTO Voyager, affiche elle aussi des libellés en
+graphie latine mais exige désormais une clé d'API sur ses tuiles gratuites (filigrane « API KEY
+REQUIRED » sans elle). Aucune tuile multilingue gratuite et sans clé n'existe donc actuellement ;
+retour aux tuiles OpenStreetMap standard (`mapTileLayer()`), le seul choix fiable et gratuit
+vérifié à l'usage — les lieux de l'appli elle-même (marqueurs, popups, liste, fiches) restent de
+toute façon intégralement en français, seuls les libellés génériques du fond de carte
+(pays, grandes villes) redeviennent en grec.
+
+**Cinq illustrations de symboles réutilisées depuis les icônes de carte.** Demande explicite :
+« monde souterrain = enfers », c'est-à-dire réutiliser telles quelles les illustrations déjà
+fournies pour les icônes de catégorie de la carte, plutôt que d'en redemander de nouvelles, pour
+les symboles qui désignent le même sujet. Cinq correspondances directes ajoutées à
+`SYMBOL_ILLUSTRATIONS` : sanctuaire → temple, montagne → montagne, détroit/mers → mer, source →
+source, monde souterrain → monde souterrain — aucun nouveau détourage nécessaire, les fichiers
+`map-icon-*.webp` existaient déjà, seulement cinq nouvelles entrées de table (20 → 25
+illustrations de symboles au total).
+
+Testé par un script dédié (`scratchpad`, 17 vérifications) + la suite de la veille remise à jour
+et repassée au vert (99 vérifications, décompte des illustrations 20 → 25, tuiles de carte
+osm-intl → OSM standard). Vérifié aussi visuellement par captures d'écran Playwright : la fiche
+« Enfer / monde souterrain » affiche bien le château illustré, l'arbre des douze Olympiens et
+celui de la lignée de Persée n'ont plus de ligne traversant un portrait, la figure du jour
+(tombée sur Pâris) affiche l'intégralité de la scène du jugement au-dessus du texte.
+`service-worker.js` : `pantheon-v18` → `pantheon-v19`.

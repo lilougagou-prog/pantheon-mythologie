@@ -87,8 +87,9 @@ h1, h2, h3{
 .fotd-card{
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
   padding: 14px;
   background: var(--card-bg);
@@ -98,21 +99,26 @@ h1, h2, h3{
   cursor: pointer;
   font-family: inherit;
   color: inherit;
-  text-align: left;
+  text-align: center;
   overflow: hidden;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .fotd-card:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px var(--shadow); }
+/* object-fit: contain plutôt que cover — un portrait « large » (portrait de groupe, voir
+   DEITY_PORTRAIT_WIDE, ex. le jugement de Pâris) se faisait rogner, parfois jusqu'à couper la
+   figure elle-même, quand il était forcé dans un cadre étroit ; contain garde toujours l'image
+   entière visible, quel que soit son format d'origine (lettrboxée au besoin sur le fond de la
+   carte, donc invisible en pratique). */
 .fotd-portrait{
-  width: 112px;
-  height: 140px;
-  object-fit: cover;
+  width: 100%;
+  max-width: 260px;
+  max-height: 220px;
+  object-fit: contain;
   border-radius: 10px;
-  flex-shrink: 0;
   position: relative;
   z-index: 1;
 }
-.fotd-text{ position: relative; z-index: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.fotd-text{ position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
 .fotd-name{ font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 1.3rem; color: var(--laurel-deep); }
 .fotd-note{
   font-size: 0.92rem;
@@ -326,9 +332,15 @@ h1, h2, h3{
   gap: 26px;
   margin-top: 40px;
 }
+/* flex-end plutôt que center : quand un seul des deux conjoints a un portrait (donc une carte
+   plus haute), centrer verticalement plaçait la ligne de mariage — calculée au milieu de la
+   zone de recouvrement des deux cartes, voir drawFamTree() — en plein milieu du portrait
+   (chevauchement signalé). Aligner les cartes sur leur bas fait au contraire coïncider les deux
+   noms sur une même ligne de base, le portrait s'élevant simplement au-dessus : la ligne de
+   mariage retombe alors naturellement au niveau des noms, jamais au travers d'une image. */
 .ft-couple{
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 34px;
   position: relative;
   z-index: 1;
