@@ -587,6 +587,11 @@ const SYMBOL_ILLUSTRATIONS = {
   "porte": "assets/symbol-porte.webp",
   "raisin": "assets/symbol-raisin.webp",
   "rivière": "assets/symbol-riviere.webp",
+  "rose": "assets/symbol-rose.webp",
+  "roue": "assets/symbol-roue.webp",
+  "sanglier": "assets/symbol-sanglier.webp",
+  "sceptre": "assets/symbol-sceptre.webp",
+  "scorpion": "assets/symbol-scorpion.webp",
   // Les cinq entrées suivantes réutilisent telles quelles les illustrations déjà fournies pour
   // les icônes de catégorie de la carte (MAP_CATEGORY_ILLUSTRATIONS) — même sujet, pas besoin
   // d'un second détourage : sanctuaire → temple, montagne → montagne, détroit/mers → mer,

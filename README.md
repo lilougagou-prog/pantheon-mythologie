@@ -1916,3 +1916,20 @@ nouveau décompte à 79 illustrations). Vérifié aussi visuellement par Playwri
 nouvelles fiches, en clair et en sombre — Rivière en particulier, pour confirmer que son
 nouveau fondu se fond bien dans les deux thèmes sans bord visible.
 `service-worker.js` : `pantheon-v44` → `pantheon-v45`.
+
+## Cinq nouvelles illustrations : Rose, Roue, Sanglier, Sceptre, Scorpion
+
+Encore une coquille sans ambiguïté à corriger : « Septre » n'existe pas comme symbole, l'image
+montre sans détour le sceptre déjà présent dans la bibliothèque (« Pouvoir stable, commandement
+exercé avec constance plutôt qu'imposé par la force »). Corrigé directement, même logique que
+Raisin/Raison au round précédent.
+
+Les cinq images (Rose, Roue, Sanglier, Sceptre, Scorpion) sont toutes des détourages classiques
+sur fond transparent — aucune n'avait le problème de Rivière (bords durs), donc aucun
+retraitement nécessaire cette fois. Rejoignent `SYMBOL_ILLUSTRATIONS` (79 → 84), retaillées à
+520px de long côté maximum, converties en WebP.
+
+Testé par la suite complète remise à jour et repassée au vert (218 vérifications, dont le
+nouveau décompte à 84 illustrations). Vérifié aussi visuellement par Playwright sur les cinq
+nouvelles fiches, en clair et en sombre.
+`service-worker.js` : `pantheon-v45` → `pantheon-v46`.
