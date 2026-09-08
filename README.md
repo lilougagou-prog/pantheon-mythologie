@@ -1282,3 +1282,16 @@ repassée au vert (148 + 17 + 16 + 7 + 23 + 25 + 25 + 14 + 12 vérifications, do
 décompte à 49 illustrations). Vérifié aussi visuellement par capture d'écran Playwright sur les
 cinq nouvelles fiches.
 `service-worker.js` : `pantheon-v27` → `pantheon-v28`.
+
+## Cinq nouvelles illustrations : Forêt, Graine, Grenade, Grotte, Labyrinthe
+
+Forêt, Graine, Grenade, Grotte et Labyrinthe rejoignent `SYMBOL_ILLUSTRATIONS` (49 → 54).
+Forêt et Grotte, fournies en vignettes de scène (pas de simples objets détourés), suivent le
+même traitement que les illustrations « Lieux & passages » déjà réutilisées depuis les icônes
+de carte (temple, montagne, monde souterrain) — cohérent avec leur propre catégorie.
+
+Testé par un script dédié (`scratchpad`, 12 vérifications) + la suite complète remise à jour et
+repassée au vert (158 + 17 + 16 + 7 + 23 + 25 + 25 + 14 + 12 + 12 vérifications, dont le
+nouveau décompte à 54 illustrations). Vérifié aussi visuellement par capture d'écran Playwright
+sur les cinq nouvelles fiches.
+`service-worker.js` : `pantheon-v28` → `pantheon-v29`.
