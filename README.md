@@ -1196,3 +1196,37 @@ même recherche et la même position (au lieu de remonter en haut) ; les quatre 
 illustrations s'affichent sur leurs fiches respectives ; l'image de Cerbère apparaît bien
 au-dessus du paragraphe qui le mentionne sur la fiche « Chien ».
 `service-worker.js` : `pantheon-v23` → `pantheon-v24`.
+
+## Fusion du doublon « Épis de blé »/« Blé », cinq nouvelles illustrations
+
+**Doublon retiré.** Signalement : « Épis de blé » et « Blé » faisaient doublon — les deux
+fiches partageaient déjà mot pour mot cinq de leurs sept paragraphes de lore, et « Blé »
+renvoyait explicitement vers « Épis de blé » dans son propre texte (« voir la fiche « Épis de
+blé » »). Plutôt qu'une simple suppression, fusion du contenu propre à chacune dans une seule
+fiche « Blé » : le paragraphe sur le point culminant silencieux des Mystères d'Éleusis (unique
+à « Épis de blé ») rejoint le paragraphe sur Triptolème ; le champ `cult` (anecdote sourcée
+d'Hippolyte de Rome sur le rite éleusinien, absent de « Blé ») est repris tel quel ; une
+dimension « initiation » et une source s'ajoutent ; la phrase de clôture des divinités
+associées, qui ne citait que Déméter, est corrigée pour inclure Triptolème (déjà présent dans
+`deities`, jamais cité dans le texte — même type d'incohérence que lors de l'audit précédent).
+Le `why`, qui reposait sur l'opposition entre les deux fiches, est réécrit pour porter cette
+même opposition (diffusion collective de Triptolème / révélation individuelle des Mystères) à
+l'intérieur d'un seul texte, sans plus jamais renvoyer vers une fiche qui n'existe plus. Les
+deux autres fiches qui citaient « épis » dans leurs symboles associés (Grenade, Graine)
+pointent désormais vers « Blé » ; le lieu Éleusis, qui la citait dans sa carte, aussi.
+93 symboles au lieu de 94.
+
+**Cinq nouvelles illustrations.** Colombe, Corbeau, Couronne, Crabe et Cygne rejoignent
+`SYMBOL_ILLUSTRATIONS` (29 → 34). Images fournies déjà détourées (transparence réelle) sauf
+« Cygne », fournie sur un damier simulé plutôt qu'une vraie transparence — traitée par la
+branche de détection de fond de `bg_remove.py` (déjà conçue pour ce cas précis) plutôt que par
+le simple recadrage utilisé pour les quatre autres.
+
+Testé par un script dédié (`scratchpad`, 25 vérifications) + la suite complète remise à jour et
+repassée au vert (118 + 17 + 16 + 7 + 23 + 25 vérifications, dont les nouveaux décomptes à 93
+symboles et 34 illustrations). Vérifié aussi visuellement par capture d'écran Playwright : la
+recherche « épis » ne renvoie plus aucun résultat, la fiche « Blé » fusionnée affiche bien le
+paragraphe des Mystères d'Éleusis et une nouvelle section « Culte et religion », les cinq
+nouvelles illustrations s'affichent sur leurs fiches respectives (dont « Couronne », vérifiée
+spécifiquement pour l'absence de halo résiduel autour du fond dégradé de l'image source).
+`service-worker.js` : `pantheon-v24` → `pantheon-v25`.
