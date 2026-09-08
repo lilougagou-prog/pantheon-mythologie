@@ -16,12 +16,13 @@ une **généalogie des dieux** navigable (pas encore construite, voir plus bas).
 
 ## Contenu
 
-- **274 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
+- **277 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
   quelles depuis Tarot-mythologie (mêmes textes, mêmes portraits, même mécanisme de
   citations croisées `(voir la fiche « Nom »)` résolu par `linkifyLore()`), complétées par
-  39 figures créées directement dans Panthéon (18 primordiales et Titans, 11 pour étoffer les
+  42 figures créées directement dans Panthéon (18 primordiales et Titans, 11 pour étoffer les
   lignées de Cadmos et de Zeus/Europe, 10 pour affilier tous les enfants déjà recensés à leur
-  mère ou leur père — voir plus bas). Contrairement à l'appli
+  mère ou leur père, 3 pour combler des lacunes de parenté repérées par l'utilisatrice — voir
+  plus bas). Contrairement à l'appli
   Tarot, qui ne garde localement que les 78 figures directement incarnées par une carte,
   Panthéon garde l'intégralité du corpus : c'est la collection complète, du premier Titan
   au dernier héros mineur.
@@ -1309,3 +1310,49 @@ repassée au vert (168 + 17 + 16 + 7 + 23 + 25 + 25 + 14 + 12 + 12 + 12 vérific
 nouveau décompte à 59 illustrations). Vérifié aussi visuellement par capture d'écran Playwright
 sur les cinq nouvelles fiches.
 `service-worker.js` : `pantheon-v29` → `pantheon-v30`.
+
+## « Union non précisée » corrigée quand le second parent est en fait connu
+
+Signalement de l'utilisatrice : sur certaines fiches, l'arbre affiche « union non précisée »
+alors qu'on connaît bien le second parent — exemple donné, Achille et son fils Néoptolème
+(la mère, Déidamie, n'apparaissait nulle part dans `GENEALOGY_PARENTS`).
+
+Audit complet des 70 enfants de `GENEALOGY_PARENTS` n'ayant qu'un seul parent renseigné, cas
+par cas plutôt qu'en masse, pour distinguer trois familles très différentes :
+- **naissances solo canoniques** (Hésiode) : les enfants de Chaos et de Nyx, Ouranos né de
+  Gaïa seule, Aphrodite née d'Ouranos, Héphaïstos né d'Héra seule — laissés tels quels, ce
+  n'est pas un bug, juste le mythe.
+- **traditions concurrentes ou homonymies déjà documentées** : Amphion/Zéthos et la Antiope
+  thébaine (déjà expliqué en commentaire, la fiche « antiope » unique de ce corpus désigne la
+  reine amazone — les relier ferait de faux demi-frères d'Hippolyte) ; même logique appliquée
+  ici à Hécate, dont le père mythologique s'appelle aussi Persès, mais un Persès différent de
+  l'unique fiche « persès » du corpus (arrière-petit-fils de Persée) — les relier aurait créé
+  un lien généalogique erroné entre deux homonymes sans rapport. Repéré aussi une fausse piste
+  à ne *pas* corriger : la Clymène de ce corpus est déjà la mère de Prométhée, pas celle de son
+  fils Deucalion (générations différentes selon les traditions) — l'ajouter aurait introduit
+  une erreur généalogique plutôt que de la corriger.
+- **vraies lacunes, corrigées** : cinq liens ajoutés à des figures déjà existantes sans le
+  moindre risque d'homonymie — Poséidon comme second père d'Agénor et de Bélos (à côté de
+  Libye, déjà présente), et Otrera comme seconde mère de Penthésilée (à côté d'Arès). Pour la
+  lignée d'Achille elle-même, exemple donné par l'utilisatrice, trois figures manquaient
+  purement et simplement du corpus malgré des mentions déjà nombreuses dans les fiches
+  existantes (Pélée cité 5 fois dans la fiche « Thétis » et la fiche symbole « Lance », Anchise
+  cité 3 fois dans la fiche « Aphrodite », Déidamie citée dans les fiches « Achille » et
+  « Néoptolème ») : créées comme trois nouvelles fiches complètes (`DEITY_NOTES` +
+  `DEITY_LORE` + entrée premium `content.json`, même gabarit que les fiches secondaires
+  existantes), puis reliées — Achille ↔ Thétis + Pélée, Néoptolème ↔ Achille + Déidamie,
+  Énée ↔ Aphrodite + Anchise.
+
+277 figures désormais (274 + 3), 272 fiches premium dans `content.json` (269 + 3). Invariant du
+corpus toujours respecté : chaque id référencé dans `GENEALOGY_PARENTS` (parent ou enfant)
+possède une fiche `DEITY_NOTES` complète — vérifié explicitement par le script de test.
+
+Testé par un script dédié (`scratchpad`, 40 vérifications : les six liens corrigés, les trois
+cas volontairement laissés tels quels avec leur commentaire explicatif toujours présent, les
+trois nouvelles fiches présentes partout où requises, l'invariant généalogie/fiches, et une
+reproduction fidèle de `genealogyChildUnions()` confirmant qu'aucun des cas corrigés ne produit
+plus de groupe à partenaire `null`) + la suite complète repassée au vert. Vérifié aussi
+visuellement par capture d'écran Playwright sur les arbres de Thétis, Achille, Aphrodite,
+Libye et Arès (déblocage via la clé d'aperçu propriétaire, seul moyen d'atteindre l'écran
+généalogie en local) : « union non précisée » n'apparaît plus sur aucun des cas corrigés.
+`service-worker.js` : `pantheon-v30` → `pantheon-v31`.
