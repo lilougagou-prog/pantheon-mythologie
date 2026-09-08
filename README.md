@@ -1598,3 +1598,41 @@ Testé par un script dédié (`scratchpad`, 15 vérifications) + la suite compl�
 Vérifié aussi visuellement par Playwright : l'arbre de Priam affiche désormais Hélénos aux côtés
 de Créüse, Hector et Pâris.
 `service-worker.js` : `pantheon-v35` → `pantheon-v36`.
+
+## Noms cités mais non cliquables : le lieu Mycènes, et un audit du reste du corpus
+
+Retour sur la demande précédente : « j'étais sur une fiche où les deux noms [Clytemnestre et
+Électre] n'étaient pas cliquables ». Retrouvé : ce n'était pas une fiche de figure mais la fiche
+du **lieu** Mycènes, dont le texte mentionnait Agamemnon, Clytemnestre et Égisthe en toutes
+lettres sans jamais les envelopper dans la syntaxe `(voir la fiche « Nom »)` que `linkifyLore()`
+exige pour les rendre cliquables — un simple oubli lors de la rédaction de cette fiche-lieu,
+jamais reproduit lors des citations internes aux fiches de figures elles-mêmes (Clytemnestre et
+Électre y sont, elles, déjà correctement citées dès leur première apparition). Corrigé, et
+Égisthe ajouté à la liste des figures associées du lieu.
+
+Audit plus large pour vérifier la même règle sur l'ensemble du corpus (312 figures, 90 symboles,
+36 lieux) : un script dédié recherche, pour chaque texte, tout nom déjà doté d'une fiche mais
+qui n'y est cité nulle part. Deux vraies anomalies de plus, d'une autre nature — une citation
+présente mais mal formée, avec du texte parasite entre la parenthèse ouvrante et « voir la
+fiche », que l'expression régulière de `linkifyLore()` ne reconnaît pas :
+- **Rhéa** : « fille du Ciel et de la Terre (Ouranos et Gaïa, voir les fiches « Ouranos » et
+  « Gaïa ») » — ni Ouranos ni Gaïa n'étaient cliquables malgré la citation apparente.
+- **Rhéa Silvia** : « le dieu Arès (Mars pour les Romains, voir la fiche « Arès ») » — même
+  défaut, introduit par mégarde lors de la création de sa fiche au round précédent.
+
+Toutes deux réécrites pour placer la citation immédiatement après la parenthèse ouvrante. Profité
+du passage pour ajouter, sur la fiche de Ctésios, la citation manquante vers Zeus (« Zeus
+Ctésios » n'était jusqu'ici jamais lié à sa propre fiche).
+
+L'audit a aussi révélé environ 140 mentions de figures secondaires jamais citées ailleurs dans
+leur propre fiche (ex. « Fils de Zeus et de X » ne relie presque jamais Zeus lui-même) : en
+grande partie un choix éditorial assumé plutôt qu'un bug — les figures les plus centrales
+(les douze Olympiens, Héraclès...) ne sont citées que là où cela apporte quelque chose, jamais
+systématiquement, pour ne pas surcharger chaque paragraphe qui les mentionne en passant. Non
+traité ici pour rester sur le périmètre du signalement ; à rouvrir sur demande si une passe plus
+large sur ces mentions secondaires est souhaitée.
+
+Testé par un script dédié (`scratchpad`, 9 vérifications) + la suite complète repassée au vert.
+Vérifié aussi visuellement par Playwright sur la fiche du lieu Mycènes, jusqu'au clic effectif
+sur « Égisthe » menant bien à sa propre fiche.
+`service-worker.js` : `pantheon-v36` → `pantheon-v37`.
