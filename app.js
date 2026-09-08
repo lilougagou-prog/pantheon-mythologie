@@ -1704,6 +1704,7 @@ function renderHome(){
       <div id="homeSearchResults" class="home-search-results"></div>
     </div>
     ${figureOfTheDayHTML()}
+    ${quizTileHTML()}
     ${recentlyViewedHTML()}
     <div class="tiles">
       <button class="tile" data-nav="figures">
@@ -2182,6 +2183,7 @@ function renderFigureDetail(id){
       }).join("")}` : ""}
       ${genealogyLineageHTML(id)}
       ${relatedChipsHTML(related, "symbol")}
+      ${quizFigureButtonHTML(id)}
     </article>
     ${backButtonFooterHTML()}
   `;
@@ -2980,6 +2982,668 @@ const GENEALOGY_SPECIAL_SCREENS = {
 };
 const GENEALOGY_WIDE_SCREENS = new Set(["genealogy", "olympiansOverview", "titansOverview", "perseeLineage", "troyOverview", "atridesOverview", "thebanOverview", "ulysseOverview"]);
 
+/* ===================== QUIZ ===================== */
+// Questions générées à la volée à partir des données déjà chargées côté client (DEITY_NOTES,
+// GENEALOGY_PARENTS/CHILDREN, SYMBOL_LIBRARY, MAP_PLACES) — jamais de contenu premium ni
+// d'appel réseau, pour que le quiz reste utilisable hors-ligne comme le reste de l'appli, et
+// toujours synchronisé avec le corpus (pas de banque de questions à maintenir à la main).
+
+function quizShuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function quizSample(arr, n){ return quizShuffle(arr).slice(0, n); }
+function quizPick(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+
+// --- Thèmes : mêmes regroupements déjà curés ailleurs dans l'appli (GENEALOGY_OVERVIEWS,
+// TITAN_IDS, OLYMPIAN_IDS), jamais réinventés.
+const QUIZ_THEMES = [
+  { id: "melange", label: "Mélange de tout", icon: "🎲" },
+  { id: "origines", label: "Les origines du monde", icon: "🌑", figureIds: GENEALOGY_OVERVIEWS.origins.chips },
+  { id: "titans", label: "Les douze Titans", icon: "🗻", figureIds: TITAN_IDS },
+  { id: "olympiens", label: "Les douze Olympiens", icon: "⚡", figureIds: OLYMPIAN_IDS },
+  { id: "troie", label: "La guerre de Troie", icon: "🐎", figureIds: GENEALOGY_OVERVIEWS.troy.chips },
+  { id: "atrides", label: "Les Atrides", icon: "🗡", figureIds: GENEALOGY_OVERVIEWS.atrides.chips },
+  { id: "thebain", label: "Le cycle thébain", icon: "🐍", figureIds: GENEALOGY_OVERVIEWS.theban.chips },
+  { id: "ulysse", label: "La famille d'Ulysse", icon: "🌊", figureIds: GENEALOGY_OVERVIEWS.ulysseFamily.chips },
+  { id: "symboles", label: "Symboles", icon: "✦", symbolsOnly: true },
+  { id: "lieux", label: "Lieux mythologiques", icon: "📍", placesOnly: true },
+];
+
+function quizThemeFigureIds(theme){
+  if(theme.figureIds) return theme.figureIds.filter(id => id in DEITY_NOTES);
+  return Object.keys(DEITY_NOTES);
+}
+
+// Repère grossier de notoriété pour le niveau Débutant : les figures dotées d'un portrait
+// (DEITY_PORTRAITS) sont, de fait, celles que l'appli a jugé assez centrales pour illustrer.
+function quizPreferMajor(ids){
+  const withPortrait = ids.filter(id => DEITY_PORTRAITS[id]);
+  return withPortrait.length >= 6 ? withPortrait : ids;
+}
+
+// --- Générateurs : figures. Le "scope" ne détermine que le SUJET de la question (quelle
+// figure est interrogée) ; les distracteurs sont toujours piochés dans tout le corpus pour ne
+// jamais manquer de choix plausibles, même sur un thème étroit (ex. quiz contextuel d'une
+// seule fiche).
+
+function quizGenNoteMatch(scopeIds){
+  const candidates = scopeIds.filter(id => DEITY_NOTES[id]);
+  if(!candidates.length) return null;
+  const subject = quizPick(candidates);
+  const pool = Object.keys(DEITY_NOTES).filter(id => id !== subject);
+  const distractors = quizSample(pool, 3);
+  if(distractors.length < 3) return null;
+  const choiceIds = quizShuffle([subject, ...distractors]);
+  return {
+    kind: "qcm",
+    prompt: `Qui correspond à cette description : « ${DEITY_NOTES[subject]} » ?`,
+    choices: choiceIds.map(id => genealogyDisplayName(id)),
+    correctIndex: choiceIds.indexOf(subject),
+  };
+}
+
+function quizGenParent(scopeIds){
+  const candidates = scopeIds.filter(id => (GENEALOGY_PARENTS[id] || []).length > 0);
+  if(!candidates.length) return null;
+  const childId = quizPick(candidates);
+  const parents = GENEALOGY_PARENTS[childId];
+  const correct = quizPick(parents);
+  const pool = Object.keys(DEITY_NOTES).filter(id => id !== childId && !parents.includes(id));
+  const distractors = quizSample(pool, 3);
+  if(distractors.length < 3) return null;
+  const choiceIds = quizShuffle([correct, ...distractors]);
+  return {
+    kind: "qcm",
+    prompt: `Qui est le parent de ${genealogyDisplayName(childId)} ?`,
+    choices: choiceIds.map(id => genealogyDisplayName(id)),
+    correctIndex: choiceIds.indexOf(correct),
+  };
+}
+
+function quizGenChild(scopeIds){
+  const candidates = scopeIds.filter(id => (GENEALOGY_CHILDREN[id] || []).length > 0);
+  if(!candidates.length) return null;
+  const parentId = quizPick(candidates);
+  const children = GENEALOGY_CHILDREN[parentId];
+  const correct = quizPick(children);
+  const pool = Object.keys(DEITY_NOTES).filter(id => id !== parentId && !children.includes(id));
+  const distractors = quizSample(pool, 3);
+  if(distractors.length < 3) return null;
+  const choiceIds = quizShuffle([correct, ...distractors]);
+  return {
+    kind: "qcm",
+    prompt: `Qui est l'enfant de ${genealogyDisplayName(parentId)} ?`,
+    choices: choiceIds.map(id => genealogyDisplayName(id)),
+    correctIndex: choiceIds.indexOf(correct),
+  };
+}
+
+function quizGenGrandparent(scopeIds){
+  const candidates = scopeIds.filter(id => (GENEALOGY_PARENTS[id] || []).some(p => (GENEALOGY_PARENTS[p] || []).length > 0));
+  if(!candidates.length) return null;
+  const grandchildId = quizPick(candidates);
+  const parents = GENEALOGY_PARENTS[grandchildId] || [];
+  const grandparents = [];
+  for(const p of parents) for(const gp of (GENEALOGY_PARENTS[p] || [])) if(!grandparents.includes(gp)) grandparents.push(gp);
+  if(!grandparents.length) return null;
+  const correct = quizPick(grandparents);
+  const pool = Object.keys(DEITY_NOTES).filter(id => id !== grandchildId && !parents.includes(id) && !grandparents.includes(id));
+  const distractors = quizSample(pool, 3);
+  if(distractors.length < 3) return null;
+  const choiceIds = quizShuffle([correct, ...distractors]);
+  return {
+    kind: "qcm",
+    prompt: `Qui est le grand-parent de ${genealogyDisplayName(grandchildId)} ?`,
+    choices: choiceIds.map(id => genealogyDisplayName(id)),
+    correctIndex: choiceIds.indexOf(correct),
+  };
+}
+
+function quizGenTrueFalse(scopeIds){
+  const candidates = scopeIds.filter(id => (GENEALOGY_PARENTS[id] || []).length > 0);
+  if(!candidates.length) return null;
+  const childId = quizPick(candidates);
+  const parents = GENEALOGY_PARENTS[childId];
+  const isTrue = Math.random() < 0.5;
+  let statedParent;
+  if(isTrue){
+    statedParent = quizPick(parents);
+  } else {
+    const pool = Object.keys(DEITY_NOTES).filter(id => id !== childId && !parents.includes(id));
+    if(!pool.length) return null;
+    statedParent = quizPick(pool);
+  }
+  return {
+    kind: "qcm",
+    prompt: `Vrai ou faux : ${genealogyDisplayName(statedParent)} est le parent de ${genealogyDisplayName(childId)}.`,
+    choices: ["Vrai", "Faux"],
+    correctIndex: isTrue ? 0 : 1,
+  };
+}
+
+function quizGenTypeAnswer(scopeIds){
+  const candidates = scopeIds.filter(id => (GENEALOGY_PARENTS[id] || []).length > 0);
+  if(!candidates.length) return null;
+  const childId = quizPick(candidates);
+  const correct = quizPick(GENEALOGY_PARENTS[childId]);
+  return {
+    kind: "text",
+    prompt: `Tape le nom d'un parent de ${genealogyDisplayName(childId)}.`,
+    answer: genealogyDisplayName(correct),
+  };
+}
+
+// --- Générateurs : symboles (desc/category couvrent les 93 symboles, links seulement
+// quelques-uns — voir SYMBOL_LIBRARY).
+
+function quizGenSymbolDesc(){
+  const entries = SYMBOL_ENTRIES.filter(([, s]) => s.desc);
+  if(entries.length < 4) return null;
+  const subject = quizPick(entries);
+  const pool = entries.filter(([id]) => id !== subject[0]);
+  const distractors = quizSample(pool, 3);
+  if(distractors.length < 3) return null;
+  const choices = quizShuffle([subject, ...distractors]);
+  return {
+    kind: "qcm",
+    prompt: `Quel symbole correspond à : « ${subject[1].desc} » ?`,
+    choices: choices.map(([, s]) => s.label),
+    correctIndex: choices.findIndex(([id]) => id === subject[0]),
+  };
+}
+
+function quizGenSymbolCategory(){
+  const entries = SYMBOL_ENTRIES.filter(([, s]) => s.category);
+  if(!entries.length) return null;
+  const subject = quizPick(entries);
+  const categories = [...new Set(SYMBOL_ENTRIES.map(([, s]) => s.category))];
+  const pool = categories.filter(c => c !== subject[1].category);
+  const distractors = quizSample(pool, 3);
+  if(distractors.length < 3) return null;
+  const choices = quizShuffle([subject[1].category, ...distractors]);
+  return {
+    kind: "qcm",
+    prompt: `À quelle catégorie appartient le symbole « ${subject[1].label} » ?`,
+    choices,
+    correctIndex: choices.indexOf(subject[1].category),
+  };
+}
+
+// --- Générateurs : lieux (desc/category/links couvrent les 36 lieux).
+
+function quizGenPlaceDesc(){
+  const entries = MAP_PLACE_ENTRIES.filter(p => p.desc);
+  if(entries.length < 4) return null;
+  const subject = quizPick(entries);
+  const pool = entries.filter(p => p.id !== subject.id);
+  const distractors = quizSample(pool, 3);
+  if(distractors.length < 3) return null;
+  const choices = quizShuffle([subject, ...distractors]);
+  return {
+    kind: "qcm",
+    prompt: `Quel lieu correspond à : « ${subject.desc} » ?`,
+    choices: choices.map(p => p.name),
+    correctIndex: choices.findIndex(p => p.id === subject.id),
+  };
+}
+
+function quizGenPlaceCategory(){
+  const entries = MAP_PLACE_ENTRIES.filter(p => p.category);
+  if(!entries.length) return null;
+  const subject = quizPick(entries);
+  const categories = [...new Set(MAP_PLACE_ENTRIES.map(p => p.category))];
+  const pool = categories.filter(c => c !== subject.category);
+  const distractors = quizSample(pool, 3);
+  if(distractors.length < 3) return null;
+  const choices = quizShuffle([subject.category, ...distractors]);
+  return {
+    kind: "qcm",
+    prompt: `À quelle catégorie appartient ${subject.name} ?`,
+    choices,
+    correctIndex: choices.indexOf(subject.category),
+  };
+}
+
+function quizGenPlaceFigure(){
+  const entries = MAP_PLACE_ENTRIES.filter(p => (p.links || []).length > 0);
+  if(!entries.length) return null;
+  const subject = quizPick(entries);
+  const correct = quizPick(subject.links);
+  const pool = Object.keys(DEITY_NOTES).filter(id => !subject.links.includes(id));
+  const distractors = quizSample(pool, 3);
+  if(distractors.length < 3) return null;
+  const choiceIds = quizShuffle([correct, ...distractors]);
+  return {
+    kind: "qcm",
+    prompt: `Quelle figure est associée à ${subject.name} ?`,
+    choices: choiceIds.map(id => genealogyDisplayName(id)),
+    correctIndex: choiceIds.indexOf(correct),
+  };
+}
+
+// --- Ronde « relie les paires » : réservée aux thèmes assez riches en liens de parenté (au
+// moins 4 figures avec un parent connu, tous reliés à des parents DISTINCTS pour qu'aucune
+// paire ne soit ambiguë).
+function quizGenMatch(scopeIds){
+  const candidates = scopeIds.filter(id => (GENEALOGY_PARENTS[id] || []).length > 0);
+  if(candidates.length < 4) return null;
+  for(let attempt = 0; attempt < 6; attempt++){
+    const chosen = quizSample(candidates, 4);
+    const pairs = chosen.map(childId => ({ childId, parentId: quizPick(GENEALOGY_PARENTS[childId]) }));
+    const parentIds = pairs.map(p => p.parentId);
+    if(new Set(parentIds).size === parentIds.length){
+      return {
+        kind: "match",
+        prompt: "Relie chaque figure à l'un de ses parents.",
+        pairs: pairs.map(p => ({
+          childId: p.childId, childName: genealogyDisplayName(p.childId),
+          parentId: p.parentId, parentName: genealogyDisplayName(p.parentId),
+        })),
+      };
+    }
+  }
+  return null;
+}
+
+// --- Sélection du générateur selon le niveau et le thème.
+function quizGenerateQuestion(levelId, theme, figureIds){
+  if(theme.symbolsOnly) return quizPick([quizGenSymbolDesc, quizGenSymbolCategory])();
+  if(theme.placesOnly) return quizPick([quizGenPlaceDesc, quizGenPlaceCategory, quizGenPlaceFigure])();
+  const scope = levelId === "débutant" ? quizPreferMajor(figureIds) : figureIds;
+  // "Mélange de tout" pioche aussi, de temps à autre, une question symbole ou lieu — pour
+  // varier au-delà des seules figures.
+  if(theme.id === "melange" && Math.random() < 0.25){
+    const extra = Math.random() < 0.5
+      ? quizPick([quizGenSymbolDesc, quizGenSymbolCategory])()
+      : quizPick([quizGenPlaceDesc, quizGenPlaceCategory, quizGenPlaceFigure])();
+    if(extra) return extra;
+  }
+  const pools = {
+    "débutant": [() => quizGenNoteMatch(scope), () => quizGenParent(scope)],
+    "intermédiaire": [() => quizGenNoteMatch(scope), () => quizGenParent(scope), () => quizGenChild(scope), () => quizGenTrueFalse(scope)],
+    "expert": [() => quizGenParent(scope), () => quizGenChild(scope), () => quizGenTrueFalse(scope), () => quizGenGrandparent(scope), () => quizGenTypeAnswer(scope)],
+  };
+  const generators = pools[levelId] || pools["débutant"];
+  return quizPick(generators)();
+}
+
+// --- Niveaux, progression (localStorage), session en cours.
+
+const QUIZ_LEVELS = [
+  { id: "débutant", label: "Débutant", desc: "Les grandes figures, questions directes.", icon: "🌱" },
+  { id: "intermédiaire", label: "Intermédiaire", desc: "Relations de famille, vrai ou faux.", icon: "⚔️", lockedHint: "Termine une session en Débutant pour débloquer ce niveau." },
+  { id: "expert", label: "Expert", desc: "Généalogie sur plusieurs générations, réponses à taper.", icon: "🏆", lockedHint: "Réservé au contenu premium." },
+];
+const QUIZ_SESSION_LENGTH = 8;
+const QUIZ_PROGRESS_KEY = "pantheon-quiz-progress";
+
+function getQuizProgress(){
+  try {
+    const raw = JSON.parse(localStorage.getItem(QUIZ_PROGRESS_KEY) || "{}");
+    return { intermediaireUnlocked: !!raw.intermediaireUnlocked, themes: raw.themes || {} };
+  } catch(e){ return { intermediaireUnlocked: false, themes: {} }; }
+}
+function saveQuizProgress(progress){
+  try { localStorage.setItem(QUIZ_PROGRESS_KEY, JSON.stringify(progress)); } catch(e){}
+}
+function quizLevelUnlocked(levelId, progress){
+  if(levelId === "débutant") return true;
+  if(levelId === "intermédiaire") return progress.intermediaireUnlocked;
+  if(levelId === "expert") return isPremiumUnlocked() || hasOwnerPreview();
+  return false;
+}
+// Termine une session en Débutant (quel que soit le score : l'essai compte, pas la
+// performance) débloque Intermédiaire ; Expert reste indépendamment réservé au contenu
+// premium (voir quizLevelUnlocked). Un compteur par thème (meilleur score, nombre de parties)
+// plutôt qu'un score global unique — incite à rejouer sur un thème précis.
+function recordQuizResult(level, themeId, correct, total){
+  const progress = getQuizProgress();
+  if(level === "débutant") progress.intermediaireUnlocked = true;
+  const cur = progress.themes[themeId] || { played: 0, bestCorrect: 0, bestTotal: total };
+  cur.played += 1;
+  if(cur.bestTotal === 0 || correct > cur.bestCorrect){ cur.bestCorrect = correct; cur.bestTotal = total; }
+  progress.themes[themeId] = cur;
+  saveQuizProgress(progress);
+}
+
+let quizSelection = { level: "débutant", themeId: null };
+let quizSession = null;
+
+function quizBuildSession(levelId, theme, opts){
+  opts = opts || {};
+  const figureIds = opts.figureIds || quizThemeFigureIds(theme);
+  const length = opts.length || QUIZ_SESSION_LENGTH;
+  const questions = [];
+  const usedPrompts = new Set();
+  // Une ronde "relie les paires" en Intermédiaire/Expert, quand le thème s'y prête (jamais en
+  // Débutant, ni sur les thèmes symboles/lieux qui n'ont pas de parenté à relier).
+  if(levelId !== "débutant" && !theme.symbolsOnly && !theme.placesOnly){
+    const matchQ = quizGenMatch(figureIds);
+    if(matchQ){ questions.push(matchQ); usedPrompts.add(matchQ.prompt); }
+  }
+  let guard = 0;
+  while(questions.length < length && guard < 300){
+    guard++;
+    const q = quizGenerateQuestion(levelId, theme, figureIds);
+    if(!q || usedPrompts.has(q.prompt)) continue;
+    usedPrompts.add(q.prompt);
+    questions.push(q);
+  }
+  return {
+    level: levelId, themeId: theme.id, themeLabel: theme.label,
+    questions: questions.slice(0, length),
+    index: 0, correct: 0, selected: null, revealed: false, textCorrect: null, matchState: null,
+    finished: questions.length === 0,
+    recordProgress: !theme.adHoc,
+  };
+}
+
+function quizCurrentQuestion(){
+  return quizSession && quizSession.questions[quizSession.index];
+}
+
+function quizEnsureMatchState(){
+  const q = quizCurrentQuestion();
+  if(!q || q.kind !== "match" || quizSession.matchState) return;
+  quizSession.matchState = {
+    matchedChildIds: [],
+    selectedLeft: null,
+    wrong: null,
+    leftOrder: quizShuffle(q.pairs.map(p => p.childId)),
+    rightOrder: quizShuffle(q.pairs.map(p => p.parentId)),
+  };
+}
+
+function quizStart(levelId, themeId){
+  const progress = getQuizProgress();
+  if(!quizLevelUnlocked(levelId, progress)) return;
+  const theme = QUIZ_THEMES.find(t => t.id === themeId);
+  if(!theme) return;
+  quizSession = quizBuildSession(levelId, theme);
+  quizSession.intermediaireWasLockedBefore = !progress.intermediaireUnlocked;
+  quizEnsureMatchState();
+  go({ type: "quiz" });
+}
+
+// Mini-quiz contextuel depuis une fiche figure : portée réduite à la figure elle-même, ses
+// parents, ses enfants et sa fratrie — jamais comptabilisé dans les statistiques par thème
+// (theme.adHoc), pour ne pas polluer la liste des thèmes d'une entrée par figure visitée.
+function quizStartForFigure(id){
+  const rel = genealogyRelations(id);
+  const scopeIds = [...new Set([id, ...rel.parents, ...rel.children, ...rel.siblings])];
+  const theme = { id: `figure:${id}`, label: genealogyDisplayName(id), adHoc: true };
+  quizSession = quizBuildSession("intermédiaire", theme, { figureIds: scopeIds, length: 5 });
+  quizEnsureMatchState();
+  go({ type: "quiz" });
+}
+
+// Bouton affiché en bas d'une fiche figure, seulement quand sa famille proche (parents +
+// enfants) compte au moins deux figures — sous ce seuil, le mini-quiz manquerait trop de
+// matière pour varier ses questions.
+function quizFigureButtonHTML(id){
+  const rel = genealogyRelations(id);
+  if(rel.parents.length + rel.children.length < 2) return "";
+  return `<button class="quiz-figure-btn" data-action="quiz-figure" data-id="${escapeHTML(id)}">🧠 Teste tes connaissances sur ${escapeHTML(genealogyDisplayName(id))}</button>`;
+}
+
+function quizAnswerQcm(choiceIndex){
+  if(!quizSession || quizSession.selected !== null) return;
+  const q = quizCurrentQuestion();
+  if(!q || q.kind !== "qcm") return;
+  quizSession.selected = choiceIndex;
+  quizSession.revealed = true;
+  if(choiceIndex === q.correctIndex) quizSession.correct++;
+  render();
+}
+
+function quizAnswerText(){
+  if(!quizSession || quizSession.revealed) return;
+  const q = quizCurrentQuestion();
+  if(!q || q.kind !== "text") return;
+  const input = document.getElementById("quizTextInput");
+  const value = input ? input.value : "";
+  const ok = value.trim().length > 0 && normalizeSearch(value).trim() === normalizeSearch(q.answer).trim();
+  quizSession.revealed = true;
+  quizSession.textCorrect = ok;
+  if(ok) quizSession.correct++;
+  render();
+}
+
+function quizMatchTapLeft(childId){
+  const state = quizSession && quizSession.matchState;
+  if(!state || state.matchedChildIds.includes(childId)) return;
+  state.selectedLeft = childId;
+  state.wrong = null;
+  render();
+}
+
+function quizMatchTapRight(parentId){
+  const state = quizSession && quizSession.matchState;
+  if(!state || !state.selectedLeft) return;
+  const q = quizCurrentQuestion();
+  const pair = q.pairs.find(p => p.childId === state.selectedLeft);
+  if(pair && pair.parentId === parentId){
+    state.matchedChildIds.push(state.selectedLeft);
+    state.selectedLeft = null;
+    state.wrong = null;
+    if(state.matchedChildIds.length === q.pairs.length){
+      quizSession.revealed = true;
+      quizSession.correct++; // une ronde entièrement complétée compte comme une bonne réponse
+    }
+  } else {
+    state.wrong = { childId: state.selectedLeft, parentId };
+    state.selectedLeft = null;
+  }
+  render();
+}
+
+function quizNext(){
+  if(!quizSession) return;
+  if(quizSession.index >= quizSession.questions.length - 1){
+    quizSession.finished = true;
+    if(quizSession.recordProgress) recordQuizResult(quizSession.level, quizSession.themeId, quizSession.correct, quizSession.questions.length);
+    render();
+    return;
+  }
+  quizSession.index++;
+  quizSession.selected = null;
+  quizSession.revealed = false;
+  quizSession.textCorrect = null;
+  quizSession.matchState = null;
+  quizEnsureMatchState();
+  render();
+}
+
+function quizReplay(){
+  if(!quizSession) return;
+  const theme = QUIZ_THEMES.find(t => t.id === quizSession.themeId);
+  if(theme){
+    const progress = getQuizProgress();
+    quizSession = quizBuildSession(quizSession.level, theme);
+    quizSession.intermediaireWasLockedBefore = !progress.intermediaireUnlocked;
+  } else if(quizSession.themeId.startsWith("figure:")){
+    quizStartForFigure(quizSession.themeId.slice(7));
+    return;
+  }
+  quizEnsureMatchState();
+  render();
+}
+
+// --- Rendu.
+
+function quizTileHTML(){
+  const progress = getQuizProgress();
+  const played = Object.values(progress.themes).reduce((sum, t) => sum + t.played, 0);
+  return `
+    <section class="quiz-tile-wrap">
+      <button class="quiz-tile" data-nav="quizHome">
+        <span class="quiz-tile-icon">🧠</span>
+        <span class="quiz-tile-text">
+          <span class="quiz-tile-title">Quiz mythologique</span>
+          <span class="quiz-tile-desc">${played ? "Continue à tester tes connaissances." : "Trois niveaux, des questions générées à partir de toute la bibliothèque."}</span>
+        </span>
+        <span class="quiz-tile-arrow">→</span>
+      </button>
+    </section>
+  `;
+}
+
+function renderQuizHome(){
+  const progress = getQuizProgress();
+  const levelsHTML = QUIZ_LEVELS.map(lvl => {
+    const unlocked = quizLevelUnlocked(lvl.id, progress);
+    const active = quizSelection.level === lvl.id;
+    return `
+      <button class="quiz-level-card${active ? " active" : ""}${unlocked ? "" : " locked"}" data-action="quiz-pick-level" data-level="${lvl.id}"${unlocked ? "" : " disabled"}>
+        <span class="quiz-level-icon">${lvl.icon}</span>
+        <span class="quiz-level-title">${escapeHTML(lvl.label)}${unlocked ? "" : " 🔒"}</span>
+        <span class="quiz-level-desc">${escapeHTML(unlocked ? lvl.desc : lvl.lockedHint)}</span>
+      </button>
+    `;
+  }).join("");
+  const themesHTML = QUIZ_THEMES.map(theme => {
+    const stats = progress.themes[theme.id];
+    const active = quizSelection.themeId === theme.id;
+    return `
+      <button class="quiz-theme-card${active ? " active" : ""}" data-action="quiz-pick-theme" data-theme="${theme.id}">
+        <span class="quiz-theme-icon">${theme.icon}</span>
+        <span class="quiz-theme-title">${escapeHTML(theme.label)}</span>
+        ${stats ? `<span class="quiz-theme-stats">Record : ${stats.bestCorrect}/${stats.bestTotal}</span>` : ""}
+      </button>
+    `;
+  }).join("");
+  const canStart = !!quizSelection.themeId && quizLevelUnlocked(quizSelection.level, progress);
+  return `
+    <div class="screen-header">
+      <button class="back" data-nav="back">← Retour</button>
+      <h2>Quiz mythologique</h2>
+    </div>
+    <p class="note">Choisis un niveau puis un thème pour commencer.</p>
+    <h3 class="quiz-section-title">Niveau</h3>
+    <div class="quiz-levels">${levelsHTML}</div>
+    <h3 class="quiz-section-title">Thème</h3>
+    <div class="quiz-themes">${themesHTML}</div>
+    <button class="quiz-start-btn" data-action="quiz-start"${canStart ? "" : " disabled"}>Commencer</button>
+  `;
+}
+
+function quizNextButtonHTML(){
+  const isLast = quizSession.index >= quizSession.questions.length - 1;
+  return `<button class="quiz-next-btn" data-action="quiz-next">${isLast ? "Voir le résultat" : "Suivant →"}</button>`;
+}
+
+function quizQcmHTML(q){
+  const answered = quizSession.selected !== null;
+  const choicesHTML = q.choices.map((choice, i) => {
+    let cls = "quiz-choice";
+    if(answered){
+      if(i === q.correctIndex) cls += " correct";
+      else if(i === quizSession.selected) cls += " incorrect";
+    }
+    return `<button class="${cls}" data-action="quiz-answer" data-index="${i}"${answered ? " disabled" : ""}>${escapeHTML(choice)}</button>`;
+  }).join("");
+  return `<div class="quiz-choices">${choicesHTML}</div>${answered ? quizNextButtonHTML() : ""}`;
+}
+
+function quizTextHTML(q){
+  if(quizSession.revealed){
+    const ok = quizSession.textCorrect;
+    return `
+      <p class="quiz-text-feedback ${ok ? "correct" : "incorrect"}">${ok ? "✔ Bonne réponse !" : `✘ La bonne réponse était : ${escapeHTML(q.answer)}`}</p>
+      ${quizNextButtonHTML()}
+    `;
+  }
+  return `
+    <input type="text" id="quizTextInput" class="quiz-text-input" placeholder="Ta réponse…" autocomplete="off">
+    <button class="quiz-submit-btn" data-action="quiz-text-submit">Valider</button>
+  `;
+}
+
+function quizMatchHTML(q){
+  const state = quizSession.matchState;
+  const leftHTML = state.leftOrder.map(childId => {
+    const pair = q.pairs.find(p => p.childId === childId);
+    const matched = state.matchedChildIds.includes(childId);
+    const selected = state.selectedLeft === childId;
+    const wrong = state.wrong && state.wrong.childId === childId;
+    let cls = "quiz-match-item";
+    if(matched) cls += " matched"; else if(selected) cls += " selected"; else if(wrong) cls += " wrong";
+    return `<button class="${cls}" data-action="quiz-match-left" data-id="${escapeHTML(childId)}"${matched ? " disabled" : ""}>${escapeHTML(pair.childName)}</button>`;
+  }).join("");
+  const rightHTML = state.rightOrder.map(parentId => {
+    const pair = q.pairs.find(p => p.parentId === parentId);
+    const matched = state.matchedChildIds.includes(pair.childId);
+    const wrong = state.wrong && state.wrong.parentId === parentId;
+    let cls = "quiz-match-item";
+    if(matched) cls += " matched"; else if(wrong) cls += " wrong";
+    return `<button class="${cls}" data-action="quiz-match-right" data-id="${escapeHTML(parentId)}"${matched ? " disabled" : ""}>${escapeHTML(pair.parentName)}</button>`;
+  }).join("");
+  const allMatched = state.matchedChildIds.length === q.pairs.length;
+  return `
+    <div class="quiz-match-grid">
+      <div class="quiz-match-col">${leftHTML}</div>
+      <div class="quiz-match-col">${rightHTML}</div>
+    </div>
+    ${allMatched ? quizNextButtonHTML() : ""}
+  `;
+}
+
+function quizQuestionBodyHTML(q){
+  if(q.kind === "qcm") return quizQcmHTML(q);
+  if(q.kind === "text") return quizTextHTML(q);
+  if(q.kind === "match") return quizMatchHTML(q);
+  return "";
+}
+
+function renderQuizResult(){
+  const total = quizSession.questions.length;
+  const pct = total ? Math.round((quizSession.correct / total) * 100) : 0;
+  const unlockedNow = quizSession.level === "débutant" && quizSession.intermediaireWasLockedBefore;
+  const message = pct >= 80 ? "Excellent !" : pct >= 50 ? "Bien joué !" : "Continue à explorer le corpus pour progresser.";
+  return `
+    <div class="screen-header">
+      <button class="back" data-nav="back">← Retour</button>
+      <h2>${escapeHTML(quizSession.themeLabel)}</h2>
+    </div>
+    <div class="quiz-result">
+      <p class="quiz-result-score">${quizSession.correct}/${total}</p>
+      <p class="quiz-result-message">${escapeHTML(message)}</p>
+      ${unlockedNow ? `<p class="quiz-result-unlock">🔓 Niveau Intermédiaire débloqué !</p>` : ""}
+      <div class="quiz-result-actions">
+        <button class="quiz-replay-btn" data-action="quiz-replay">Rejouer</button>
+        <button class="quiz-home-btn" data-nav="back">Autre thème</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderQuiz(){
+  if(!quizSession) return renderQuizHome();
+  if(quizSession.finished) return renderQuizResult();
+  const q = quizCurrentQuestion();
+  const total = quizSession.questions.length;
+  const dots = quizSession.questions.map((_, i) => `<span class="quiz-dot${i < quizSession.index ? " done" : ""}${i === quizSession.index ? " current" : ""}"></span>`).join("");
+  return `
+    <div class="screen-header">
+      <button class="back" data-nav="back">← Retour</button>
+      <h2>${escapeHTML(quizSession.themeLabel)}</h2>
+    </div>
+    <div class="quiz-progress-row">
+      <div class="quiz-dots">${dots}</div>
+      <span class="quiz-progress-count">${quizSession.index + 1}/${total}</span>
+    </div>
+    <div class="quiz-question">
+      <p class="quiz-prompt">${escapeHTML(q.prompt)}</p>
+      ${quizQuestionBodyHTML(q)}
+    </div>
+  `;
+}
+
 function activeTabType(){
   if(currentScreen.type === "figureDetail") return "figures";
   if(currentScreen.type === "symbolDetail") return "symbols";
@@ -3018,6 +3682,8 @@ function render(){
       break;
     case "places": html = renderPlaces(currentScreen.query || ""); break;
     case "placeDetail": html = renderPlaceDetail(currentScreen.id); break;
+    case "quizHome": html = renderQuizHome(); break;
+    case "quiz": html = renderQuiz(); break;
     default: html = renderHome();
   }
   app.innerHTML = html;
@@ -3051,6 +3717,7 @@ function bindAppClickDelegation(){
       else if(nav in GENEALOGY_SPECIAL_SCREENS) go({ type: nav });
       else if(nav === "places") goToTab("places");
       else if(nav === "placeDetail") go({ type: "placeDetail", id: navEl.dataset.id });
+      else if(nav === "quizHome") go({ type: "quizHome" });
       return;
     }
     const deityEl = e.target.closest("[data-deity]");
@@ -3061,9 +3728,20 @@ function bindAppClickDelegation(){
     if(placeCatEl){ togglePlaceCategory(placeCatEl.dataset.placeCat); return; }
     const actionEl = e.target.closest("[data-action]");
     if(actionEl){
-      if(actionEl.dataset.action === "unlock-premium") attemptPurchase();
-      else if(actionEl.dataset.action === "restore-purchase") attemptRestore();
-      else if(actionEl.dataset.action === "owner-preview") promptOwnerPreviewKey();
+      const action = actionEl.dataset.action;
+      if(action === "unlock-premium") attemptPurchase();
+      else if(action === "restore-purchase") attemptRestore();
+      else if(action === "owner-preview") promptOwnerPreviewKey();
+      else if(action === "quiz-pick-level") { quizSelection.level = actionEl.dataset.level; render(); }
+      else if(action === "quiz-pick-theme") { quizSelection.themeId = actionEl.dataset.theme; render(); }
+      else if(action === "quiz-start") quizStart(quizSelection.level, quizSelection.themeId);
+      else if(action === "quiz-figure") quizStartForFigure(actionEl.dataset.id);
+      else if(action === "quiz-answer") quizAnswerQcm(Number(actionEl.dataset.index));
+      else if(action === "quiz-text-submit") quizAnswerText();
+      else if(action === "quiz-match-left") quizMatchTapLeft(actionEl.dataset.id);
+      else if(action === "quiz-match-right") quizMatchTapRight(actionEl.dataset.id);
+      else if(action === "quiz-next") quizNext();
+      else if(action === "quiz-replay") quizReplay();
       return;
     }
   });

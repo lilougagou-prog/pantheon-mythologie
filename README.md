@@ -1777,3 +1777,66 @@ Testé : suite complète repassée au vert (168 vérifications) + vérification 
 confirmant que la carte d'Hestia porte désormais la classe `.ft-card-olympian` et que celle
 d'Héphaïstos ne la porte plus.
 `service-worker.js` : `pantheon-v39` → `pantheon-v40`.
+
+## Mode Quiz : trois niveaux, généré à la volée depuis le corpus
+
+Demande explicite, suite à un échange de brainstorm sur les idées possibles : « C'est parti tu
+peux appliquer tout ce que tu as proposé », avec un point de placement précis (« On le met en
+tuile sur l'écran d'accueil, entre à découvrir aujourd'hui et récemment consulté ») et une
+confirmation de ne pas ajouter de 6ᵉ onglet.
+
+**Génération plutôt qu'une banque de questions.** Douze générateurs produisent des questions à
+la volée à partir des données déjà chargées côté client (`DEITY_NOTES`, `GENEALOGY_PARENTS`/
+`GENEALOGY_CHILDREN`, `SYMBOL_LIBRARY`, `MAP_PLACES`) — jamais de contenu premium ni d'appel
+réseau, pour que le quiz reste utilisable hors-ligne et toujours synchronisé avec le corpus
+sans banque de questions à maintenir à la main :
+- **Figures** : qui est le parent/l'enfant de X (QCM), qui correspond à cette description
+  (QCM à partir de `DEITY_NOTES`), qui est le grand-parent de X (Expert, deux sauts de
+  généalogie), vrai ou faux sur un lien de parenté, taper le nom d'un parent (Expert, réponse
+  libre comparée via `normalizeSearch()` — insensible aux accents et à la casse).
+  Les distracteurs des QCM sont toujours piochés dans tout le corpus, jamais seulement dans le
+  thème choisi, pour ne jamais manquer de choix plausibles même sur une portée étroite (le
+  mini-quiz d'une seule fiche, par exemple).
+- **Symboles** : quel symbole correspond à cette description (les 93 ont un `desc`), à quelle
+  catégorie appartient-il (9 catégories).
+- **Lieux** : mêmes principes à partir de `MAP_PLACES` (36 lieux, `desc`/`category`/`links`).
+- **« Relie les paires »** : une ronde tactile (tap-to-match plutôt qu'un vrai glisser-déposer,
+  cohérent avec le reste de l'appli qui ne fait que des boutons cliquables) — quatre figures à
+  relier chacune à l'un de ses parents, ajoutée une fois par session en Intermédiaire/Expert
+  quand le thème s'y prête.
+
+**Trois niveaux.** Débutant (reconnaissance directe, figures dotées d'un portrait
+préférées — repère grossier de notoriété) ; Intermédiaire (relations de famille, vrai/faux,
+ronde d'appariement) ; Expert (grands-parents, réponse à taper, réservé au contenu premium —
+même mécanisme `isPremiumUnlocked()`/`hasOwnerPreview()` que le reste de l'appli, cohérent avec
+le modèle payant déjà en place). Terminer une session en Débutant débloque Intermédiaire, quel
+que soit le score — l'essai compte, pas la performance, pour ne pas décourager. Progression
+stockée en `localStorage` (même mécanisme que « Récemment consulté ») : record par thème
+(meilleur score, nombre de parties), affiché sur l'écran de sélection.
+
+**Dix thèmes**, réutilisant les regroupements déjà curés ailleurs dans l'appli plutôt que d'en
+réinventer (`GENEALOGY_OVERVIEWS`, `TITAN_IDS`, `OLYMPIAN_IDS`) : Mélange de tout (pioche aussi
+occasionnellement une question symbole/lieu), Origines du monde, les douze Titans, les douze
+Olympiens, la guerre de Troie, les Atrides, le cycle thébain, la famille d'Ulysse, Symboles,
+Lieux mythologiques.
+
+**Intégration.** Tuile sur l'écran d'accueil, entre « À découvrir aujourd'hui » et « Récemment
+consulté » — pas de 6ᵉ onglet, `TABS` reste à 5 entrées. Depuis n'importe quelle fiche figure
+dont la famille proche compte au moins deux liens (parents + enfants), un bouton « 🧠 Teste tes
+connaissances sur [Nom] » lance un mini-quiz contextuel de 5 questions limité à la figure, ses
+parents, ses enfants et sa fratrie — jamais comptabilisé dans les statistiques par thème, pour
+ne pas polluer la liste d'une entrée par figure visitée.
+
+Testé par deux scripts dédiés : `smoke_round23.js` (64 vérifications statiques — présence des
+générateurs, du routage, de la délégation de clics, des classes CSS) + un script Monte Carlo
+exécuté dans un vrai navigateur via Playwright (800+ vérifications à chaque passage : chaque
+thème × chaque niveau produit une session complète de 8 questions sans prompt dupliqué, chaque
+générateur rejoué 200 fois sans jamais lever d'exception ni manquer de distracteurs, la
+progression/déverrouillage se comporte comme attendu). Vérifié aussi de bout en bout par
+Playwright : parcours complet d'une session (réponses toujours justes via l'index réel de la
+bonne réponse, jamais un clic au hasard) confirmant un score de 8/8 en Débutant puis en
+Intermédiaire (ronde d'appariement comprise), déverrouillage effectif d'Intermédiaire,
+déverrouillage d'Expert avec la clé d'aperçu propriétaire, retour visuel correct/incorrect sur
+les QCM et la ronde d'appariement, écran de saisie libre (bonne/mauvaise réponse, tolérance
+accents/casse), bouton contextuel sur la fiche de Zeus. Vérifié aussi en mode sombre.
+`service-worker.js` : `pantheon-v40` → `pantheon-v41`.

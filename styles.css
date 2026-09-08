@@ -1013,3 +1013,225 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
   font-size: 0.82rem;
 }
 .home-footer-link a{ color: var(--ink-soft); text-decoration: underline; }
+
+/* ===================== QUIZ ===================== */
+
+/* ----- Tuile d'accueil ----- */
+
+.quiz-tile-wrap{ margin-bottom: 24px; }
+.quiz-tile{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 4px 14px var(--shadow);
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  text-align: left;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.quiz-tile:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px var(--shadow); }
+.quiz-tile-icon{ font-size: 1.8rem; line-height: 1; flex: 0 0 auto; }
+.quiz-tile-text{ display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.quiz-tile-title{ font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 1.05rem; color: var(--laurel-deep); }
+.quiz-tile-desc{ font-size: 0.85rem; color: var(--ink-soft); }
+.quiz-tile-arrow{ font-size: 1.2rem; color: var(--bronze); flex: 0 0 auto; }
+
+/* ----- Écran de sélection (niveau + thème) ----- */
+
+.quiz-section-title{
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--bronze);
+  margin: 22px 0 10px;
+}
+.quiz-levels{ display: grid; gap: 10px; grid-template-columns: 1fr; }
+@media (min-width: 520px){ .quiz-levels{ grid-template-columns: 1fr 1fr 1fr; } }
+.quiz-level-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 14px;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.quiz-level-card:hover:not(:disabled){ transform: translateY(-2px); box-shadow: 0 6px 16px var(--shadow); }
+.quiz-level-card.active{ border-color: var(--bronze); box-shadow: 0 0 0 3px rgba(168, 120, 60, 0.18); }
+.quiz-level-card.locked{ opacity: 0.6; cursor: not-allowed; }
+.quiz-level-icon{ font-size: 1.6rem; line-height: 1; }
+.quiz-level-title{ font-family: "Cinzel", Georgia, serif; font-weight: 600; color: var(--laurel-deep); font-size: 0.95rem; }
+.quiz-level-desc{ font-size: 0.78rem; color: var(--ink-soft); line-height: 1.3; }
+
+.quiz-themes{ display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+@media (min-width: 520px){ .quiz-themes{ grid-template-columns: 1fr 1fr 1fr; } }
+.quiz-theme-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 10px;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.quiz-theme-card:hover{ transform: translateY(-2px); box-shadow: 0 6px 16px var(--shadow); }
+.quiz-theme-card.active{ border-color: var(--bronze); box-shadow: 0 0 0 3px rgba(168, 120, 60, 0.18); }
+.quiz-theme-icon{ font-size: 1.4rem; line-height: 1; }
+.quiz-theme-title{ font-family: "Cinzel", Georgia, serif; font-weight: 600; color: var(--laurel-deep); font-size: 0.85rem; line-height: 1.25; }
+.quiz-theme-stats{ font-size: 0.72rem; color: var(--bronze); }
+
+.quiz-start-btn{
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: var(--laurel-deep);
+  color: var(--marble);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 24px;
+}
+.quiz-start-btn:hover:not(:disabled){ background: var(--laurel); }
+.quiz-start-btn:disabled{ opacity: 0.5; cursor: not-allowed; }
+
+/* ----- Session en cours ----- */
+
+.quiz-progress-row{ display: flex; align-items: center; justify-content: center; gap: 10px; margin: 6px 0 22px; }
+.quiz-dots{ display: flex; gap: 6px; }
+.quiz-dot{ width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+.quiz-dot.done{ background: var(--bronze); }
+.quiz-dot.current{ background: var(--laurel-deep); }
+.quiz-progress-count{ font-size: 0.82rem; color: var(--bronze); }
+
+.quiz-question{ max-width: 560px; margin: 0 auto; }
+.quiz-prompt{
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 1.15rem;
+  color: var(--laurel-deep);
+  text-align: center;
+  line-height: 1.4;
+  margin-bottom: 22px;
+}
+
+.quiz-choices{ display: flex; flex-direction: column; gap: 10px; }
+.quiz-choice{
+  display: block;
+  width: 100%;
+  padding: 13px 16px;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.1s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.quiz-choice:hover:not(:disabled){ transform: translateY(-1px); border-color: var(--bronze); }
+.quiz-choice:disabled{ cursor: default; }
+/* Vert (--laurel) / rouge-terracotta (--terracotta) : mêmes jetons de couleur déjà adaptés au
+   mode sombre ailleurs dans l'appli, jamais de nouvelle couleur à décliner séparément. */
+.quiz-choice.correct{ border-color: var(--laurel); background: rgba(74, 93, 58, 0.14); color: var(--laurel-deep); font-weight: 600; }
+.quiz-choice.incorrect{ border-color: var(--terracotta); background: rgba(181, 84, 47, 0.14); color: var(--terracotta); }
+
+.quiz-text-input{
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: inherit;
+  margin-bottom: 12px;
+}
+.quiz-submit-btn, .quiz-next-btn, .quiz-replay-btn, .quiz-home-btn{
+  display: block;
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 10px;
+  background: var(--laurel-deep);
+  color: var(--marble);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 6px;
+}
+.quiz-submit-btn:hover, .quiz-next-btn:hover, .quiz-replay-btn:hover{ background: var(--laurel); }
+.quiz-text-feedback{ text-align: center; font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+.quiz-text-feedback.correct{ color: var(--laurel-deep); }
+.quiz-text-feedback.incorrect{ color: var(--terracotta); }
+
+/* ----- Ronde "relie les paires" ----- */
+
+.quiz-match-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.quiz-match-col{ display: flex; flex-direction: column; gap: 10px; }
+.quiz-match-item{
+  padding: 12px 10px;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  color: inherit;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.quiz-match-item:hover:not(:disabled){ border-color: var(--bronze); }
+.quiz-match-item.selected{ border-color: var(--bronze); background: rgba(168, 120, 60, 0.14); }
+.quiz-match-item.matched{ border-color: var(--laurel); background: rgba(74, 93, 58, 0.14); color: var(--laurel-deep); cursor: default; opacity: 0.85; }
+.quiz-match-item.wrong{ border-color: var(--terracotta); background: rgba(181, 84, 47, 0.14); }
+
+/* ----- Résultat ----- */
+
+.quiz-result{ max-width: 420px; margin: 20px auto 0; text-align: center; }
+.quiz-result-score{ font-family: "Cinzel", Georgia, serif; font-size: 2.6rem; color: var(--laurel-deep); margin: 0 0 6px; }
+.quiz-result-message{ font-size: 1rem; color: var(--ink-soft); margin-bottom: 10px; }
+.quiz-result-unlock{ font-size: 0.95rem; color: var(--bronze); font-weight: 600; margin-bottom: 18px; }
+.quiz-result-actions{ display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+.quiz-home-btn{ background: var(--marble-deep); color: var(--laurel-deep); border: 1px solid var(--border); }
+.quiz-home-btn:hover{ background: var(--border); }
+
+/* ----- Bouton contextuel sur une fiche figure ----- */
+
+.quiz-figure-btn{
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 22px;
+  background: var(--marble-deep);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--laurel-deep);
+  cursor: pointer;
+}
+.quiz-figure-btn:hover{ background: var(--border); }
