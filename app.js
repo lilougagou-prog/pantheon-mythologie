@@ -1297,9 +1297,33 @@ const MAP_PLACE_ENTRIES = MAP_PLACES.slice().sort((a, b) => a.name.localeCompare
 let navStack = [];
 let currentScreen = { type: "home" };
 
+// Historique des fiches consultées (figure/symbole/lieu), pour la section « Récemment
+// consulté » de l'accueil — voir recentlyViewedHTML() ci-dessous. Volontairement minimal :
+// seulement { type, id }, jamais le nom ni la note, pour toujours refléter les données
+// actuelles au moment de l'affichage plutôt qu'un instantané qui pourrait se périmer.
+const RECENTLY_VIEWED_KEY = "pantheon-recently-viewed";
+const RECENTLY_VIEWED_MAX = 8;
+const RECENTLY_VIEWED_TYPES = new Set(["figureDetail", "symbolDetail", "placeDetail"]);
+
+function recordRecentlyViewed(type, id){
+  if(!RECENTLY_VIEWED_TYPES.has(type) || !id) return;
+  try {
+    let list = JSON.parse(localStorage.getItem(RECENTLY_VIEWED_KEY) || "[]");
+    list = list.filter(e => !(e.type === type && e.id === id));
+    list.unshift({ type, id });
+    localStorage.setItem(RECENTLY_VIEWED_KEY, JSON.stringify(list.slice(0, RECENTLY_VIEWED_MAX)));
+  } catch(e){}
+}
+
+function getRecentlyViewed(){
+  try { return JSON.parse(localStorage.getItem(RECENTLY_VIEWED_KEY) || "[]"); }
+  catch(e){ return []; }
+}
+
 function go(screen){
   navStack.push(currentScreen);
   currentScreen = screen;
+  recordRecentlyViewed(screen.type, screen.id);
   render();
   window.scrollTo(0, 0);
 }
@@ -1414,6 +1438,72 @@ function figureOfTheDayHTML(){
   `;
 }
 
+// Section « Récemment consulté » : une rangée de courtes cartes défilable horizontalement,
+// alimentée par RECENTLY_VIEWED_KEY (voir recordRecentlyViewed()). Les données affichées sont
+// résolues à chaque rendu à partir des tables actuelles (SYMBOL_LIBRARY, MAP_PLACES...) plutôt
+// que mémorisées au moment de la visite — une entrée devenue invalide (contenu retiré depuis)
+// disparaît donc simplement au lieu de planter ou d'afficher une fiche vide.
+function recentlyViewedHTML(){
+  const resolved = getRecentlyViewed().map(({ type, id }) => {
+    if(type === "figureDetail"){
+      const note = DEITY_NOTES[id];
+      if(note === undefined) return null;
+      const name = id.charAt(0).toUpperCase() + id.slice(1);
+      return { type, id, label: name, portrait: DEITY_PORTRAITS[id], icon: "" };
+    }
+    if(type === "symbolDetail"){
+      const s = SYMBOL_LIBRARY[id];
+      if(!s) return null;
+      return { type, id, label: s.label, portrait: null, icon: s.icon };
+    }
+    if(type === "placeDetail"){
+      const p = MAP_PLACES.find(pl => pl.id === id);
+      if(!p) return null;
+      return { type, id, label: p.name, portrait: null, icon: "📍" };
+    }
+    return null;
+  }).filter(Boolean).slice(0, 6);
+  if(!resolved.length) return "";
+  return `
+    <section class="recent">
+      <h2 class="recent-label">Récemment consulté</h2>
+      <div class="recent-row">
+        ${resolved.map(r => `
+          <button class="recent-card" data-nav="${r.type}" data-id="${escapeHTML(r.id)}">
+            ${r.portrait ? `<img class="recent-portrait" src="${escapeHTML(r.portrait)}" alt="" loading="lazy">` : `<span class="recent-icon">${r.icon}</span>`}
+            <span class="recent-title">${escapeHTML(r.label)}</span>
+          </button>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+// Recherche unique depuis l'accueil : interroge figures, symboles et lieux à la fois plutôt
+// que d'obliger à deviner dans quelle section chercher un nom. Réutilise telles quelles les
+// mêmes lignes de résultat (figureRowHTML/symbolRowHTML/placeRowHTML) que les listes de
+// chaque section — même style, même pastille 🔒 pour le contenu premium.
+function searchGroupHTML(label, rows){
+  if(!rows.length) return "";
+  return `<h4 class="search-group-label">${escapeHTML(label)}</h4><div class="list">${rows.join("")}</div>`;
+}
+
+function renderHomeSearchResults(query){
+  const q = normalizeSearch(query).trim();
+  if(!q) return "";
+  const figures = rankedSearch(FIGURE_ENTRIES, e => e[1], e => e[2], q, 5).map(figureRowHTML);
+  const symbols = rankedSearch(SYMBOL_ENTRIES, ([, s]) => s.label, ([, s]) => s.desc, q, 5).map(symbolRowHTML);
+  const places = rankedSearch(MAP_PLACE_ENTRIES, p => p.name, p => p.desc, q, 5).map(placeRowHTML);
+  if(!figures.length && !symbols.length && !places.length){
+    return `<p class="empty">Aucun résultat pour « ${escapeHTML(query)} ».</p>`;
+  }
+  return `
+    ${searchGroupHTML("Figures", figures)}
+    ${searchGroupHTML("Symboles", symbols)}
+    ${searchGroupHTML("Lieux", places)}
+  `;
+}
+
 function renderHome(){
   return `
     <header class="hero">
@@ -1426,7 +1516,12 @@ function renderHome(){
       <p class="tagline">Apprends la mythologie grecque à travers ses dieux, héros et symboles.</p>
       <img class="tagline-olive" src="assets/home-olive-branch.webp" alt="">
     </header>
+    <div class="home-search-wrap">
+      <input type="search" class="search" id="homeSearch" placeholder="Rechercher une figure, un symbole, un lieu…">
+      <div id="homeSearchResults" class="home-search-results"></div>
+    </div>
     ${figureOfTheDayHTML()}
+    ${recentlyViewedHTML()}
     <div class="tiles">
       <button class="tile" data-nav="figures">
         <img class="tile-badge" src="assets/badge-figures-portrait.webp" alt="">
@@ -1458,6 +1553,30 @@ function renderHome(){
 // ensuite de retirer (plage Unicode des marques combinantes).
 function normalizeSearch(str){
   return String(str || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+}
+
+// Classe une correspondance : nom identique à la requête d'abord, puis nom qui commence par
+// elle, puis nom qui la contient, puis note/description qui la contient seulement (-1 = pas
+// de correspondance du tout). Sans ce classement, une liste de résultats plafonnée (recherche
+// unique de l'accueil, recherche généalogie) pourrait noyer un nom cherché — « Persée » — sous
+// des figures alphabétiquement antérieures qui ne font que le MENTIONNER dans leur note (ses
+// nombreux ancêtres et descendants).
+function searchRank(name, note, q){
+  const n = normalizeSearch(name);
+  if(n === q) return 0;
+  if(n.startsWith(q)) return 1;
+  if(n.includes(q)) return 2;
+  if(normalizeSearch(note).includes(q)) return 3;
+  return -1;
+}
+
+function rankedSearch(entries, nameOf, noteOf, q, limit){
+  return entries
+    .map(e => [e, searchRank(nameOf(e), noteOf(e), q)])
+    .filter(([, r]) => r >= 0)
+    .sort((a, b) => a[1] - b[1])
+    .slice(0, limit)
+    .map(([e]) => e);
 }
 
 function figureRowHTML([id, name, note]){
@@ -2002,12 +2121,31 @@ function renderSymbolDetail(id){
 // l'arbre complet à partir de sa racine (branches et sous-branches sur plusieurs générations,
 // jamais une seule figure isolée), d'où l'exploration peut ensuite se poursuivre de proche en
 // proche, un clic à la fois.
+// Recherche directe vers l'arbre d'une figure précise, sans passer par les 8 points de
+// départ fixes ci-dessous — utile dès qu'on connaît déjà le nom cherché plutôt que de
+// remonter un arbre entier pour l'atteindre. Réutilise le même écran que le lien « Voir dans
+// l'arbre généalogique » de chaque fiche figure (data-nav="genealogy").
+function renderGenealogySearchResults(query){
+  const q = normalizeSearch(query).trim();
+  if(!q) return "";
+  const matches = rankedSearch(FIGURE_ENTRIES, e => e[1], e => e[2], q, 8);
+  if(!matches.length) return `<p class="empty">Aucune figure ne correspond à « ${escapeHTML(query)} ».</p>`;
+  return `<div class="list">${matches.map(([id, name, note]) => `
+    <button class="list-item" data-nav="genealogy" data-id="${escapeHTML(id)}">
+      <span class="list-item-title">${escapeHTML(name)}</span>
+      <span class="list-item-note">${escapeHTML(note)}</span>
+    </button>
+  `).join("")}</div>`;
+}
+
 function renderGenealogyHome(){
   return `
     <div class="screen-header">
       <h2>Généalogie des dieux</h2>
     </div>
     <p class="note">Explorez les liens de parenté entre les figures du corpus sur plusieurs générations : parents, unions, frères et sœurs, enfants. Choisissez un point de départ, puis cliquez sur n'importe quel nom pour poursuivre l'exploration de proche en proche.</p>
+    <input type="search" class="search" id="genealogySearch" placeholder="Ou cherchez directement une figure pour aller à son arbre">
+    <div id="genealogySearchResults" class="geneal-search-results"></div>
     <div class="geneal-entrypoints">
       ${GENEALOGY_STARTING_POINTS.map(pt => `
         <button class="geneal-entry" data-nav="${pt.special ? escapeHTML(pt.special) : "genealogy"}"${pt.special ? "" : ` data-id="${escapeHTML(pt.id)}"`}>
@@ -2646,6 +2784,18 @@ function bindAppClickDelegation(){
 // Ré-attaché après chaque render() : les champs de recherche, eux, sont recréés à chaque
 // fois (innerHTML remplacé), donc leurs écouteurs doivent l'être aussi.
 function bindScreenEvents(){
+  const homeSearch = document.getElementById("homeSearch");
+  if(homeSearch){
+    homeSearch.addEventListener("input", () => {
+      document.getElementById("homeSearchResults").innerHTML = renderHomeSearchResults(homeSearch.value);
+    });
+  }
+  const genealogySearch = document.getElementById("genealogySearch");
+  if(genealogySearch){
+    genealogySearch.addEventListener("input", () => {
+      document.getElementById("genealogySearchResults").innerHTML = renderGenealogySearchResults(genealogySearch.value);
+    });
+  }
   const figuresSearch = document.getElementById("figuresSearch");
   if(figuresSearch){
     figuresSearch.addEventListener("input", () => {

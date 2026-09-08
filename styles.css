@@ -1,5 +1,9 @@
 /* Panthéon — palette marbre/laurier/bronze, distincte de l'identité nocturne "Delphes" du
-   Tarot : ici on est dans la lumière d'un musée, pas dans la pénombre d'un oracle. */
+   Tarot : ici on est dans la lumière d'un musée, pas dans la pénombre d'un oracle — de jour.
+   La nuit (prefers-color-scheme: dark, ci-dessous), le musée ferme ses volets plutôt que
+   d'imposer son plein jour à un système déjà passé en sombre : même palette laurier/bronze,
+   simplement inversée, jamais de noir pur. Tout le reste du fichier n'utilise que ces
+   variables (aucune couleur en dur), donc les redéfinir ici suffit à basculer l'appli entière. */
 :root{
   --marble: #f6f1e7;
   --marble-deep: #ece3d0;
@@ -13,6 +17,29 @@
   --card-bg: #fffdf8;
   --border: #ddd0b3;
   --shadow: rgba(44, 36, 22, 0.12);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --marble: #1b1811;
+    --marble-deep: #14120d;
+    --ink: #ece3d0;
+    --ink-soft: #b7ab8c;
+    --laurel: #7fa06a;
+    --laurel-deep: #a3c48a;
+    --bronze: #d3a262;
+    --bronze-light: #e8c58c;
+    --terracotta: #e08a5c;
+    --card-bg: #241f17;
+    --border: #423a29;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+  /* Les tuiles OSM restent des images claires côté serveur (pas de variante sombre gratuite,
+     voir le round précédent sur la carte) : un filtre CSS inverse leurs couleurs pour rester
+     dans la palette sombre, appliqué seulement aux tuiles (pas aux marqueurs ni aux popups,
+     qui suivent déjà --card-bg/--ink via leurs propres règles). */
+  .places-map .leaflet-tile-pane, .place-detail-map .leaflet-tile-pane{
+    filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.9);
+  }
 }
 
 *{ box-sizing: border-box; }
@@ -145,6 +172,54 @@ h1, h2, h3{
   color: var(--ink-soft);
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ----- Récemment consulté ----- */
+
+.recent{ margin-bottom: 24px; }
+.recent-label{
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--bronze);
+  margin: 0 0 8px;
+  text-align: center;
+}
+.recent-row{
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.recent-card{
+  flex: 0 0 auto;
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 6px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.recent-card:hover{ transform: translateY(-2px); box-shadow: 0 4px 12px var(--shadow); }
+.recent-portrait{ width: 46px; height: 46px; border-radius: 50%; object-fit: cover; }
+.recent-icon{ font-size: 1.6rem; line-height: 1; }
+.recent-title{
+  font-size: 0.76rem;
+  font-family: "Cinzel", Georgia, serif;
+  color: var(--laurel-deep);
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -442,6 +517,23 @@ h1, h2, h3{
   margin-bottom: 16px;
 }
 .search:focus{ outline: 2px solid var(--bronze-light); outline-offset: 1px; }
+
+/* Petite étiquette en capitales (« Figures », « Symboles », « Lieux »...) au-dessus d'un
+   groupe de résultats de recherche — même style que .symbol-glance h4, réutilisé ici pour
+   distinguer les groupes sans surcharger visuellement. */
+.search-group-label{
+  margin: 16px 0 6px;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--bronze);
+}
+.search-group-label:first-child{ margin-top: 0; }
+
+.home-search-wrap{ margin-bottom: 24px; }
+.home-search-results:not(:empty){ margin-bottom: 8px; }
+.geneal-search-results:not(:empty){ margin-bottom: 16px; }
 
 .empty{ color: var(--ink-soft); font-style: italic; }
 

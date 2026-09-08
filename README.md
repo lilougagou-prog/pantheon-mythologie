@@ -1110,3 +1110,53 @@ Playwright sur une fiche à recouvrement exact (« Chouette » : une seule secti
 Athéna) et une fiche avec noms supplémentaires (« Torche » : Prométhée/Héphaïstos/Athéna avec
 rôle, Hécate/Déméter en simples chips, aucune section « Figures associées » séparée).
 `service-worker.js` : `pantheon-v21` → `pantheon-v22`.
+
+## Mode sombre, recherche unifiée, récemment consulté, recherche généalogie
+
+Quatre des pistes d'amélioration proposées à l'utilisatrice (voir l'analyse globale de
+l'application), validées telles quelles — la cinquième, un mode quiz, est explicitement
+reportée à plus tard (« il faut déjà que je fasse les quiz »).
+
+- **Mode sombre.** Tout `styles.css` n'utilisant que des variables CSS (aucune couleur en
+  dur ailleurs qu'en `:root`), un bloc `@media (prefers-color-scheme: dark)` qui les redéfinit
+  suffit à basculer l'appli entière : même palette marbre/laurier/bronze, inversée plutôt que
+  vers un noir pur. `index.html` gagne deux balises `theme-color` (une par préférence système)
+  pour que la barre du navigateur suive. Seule exception : les tuiles de carte OpenStreetMap,
+  des images claires servies telles quelles (pas de variante sombre gratuite disponible, voir
+  le round précédent sur la carte) — un filtre CSS (`invert(1) hue-rotate(180deg)`) appliqué
+  uniquement à `.leaflet-tile-pane` (jamais aux marqueurs ni aux popups, qui suivent déjà les
+  variables) les fait rentrer dans la palette sombre.
+- **Recherche unifiée sur l'accueil.** Jusqu'ici, chercher un nom obligeait à deviner dans
+  quelle section chercher (figures / symboles / lieux, chacune avec son propre champ).
+  Nouveau champ `#homeSearch` sur l'écran d'accueil, qui interroge les trois listes à la fois
+  (`renderHomeSearchResults`) et regroupe les résultats sous trois petits titres (Figures /
+  Symboles / Lieux), en réutilisant telles quelles les lignes de résultat déjà existantes
+  (`figureRowHTML`/`symbolRowHTML`/`placeRowHTML` — même style, même pastille 🔒 pour le
+  contenu premium).
+- **Récemment consulté.** Chaque visite d'une fiche (figure, symbole ou lieu) est
+  discrètement enregistrée dans `localStorage` (`recordRecentlyViewed`, 8 entrées max, la plus
+  récente en tête) et affichée sur l'accueil sous forme d'une rangée de cartes défilable
+  (masquée tant qu'aucune fiche n'a été visitée). Les données affichées sont résolues à chaque
+  rendu depuis les tables actuelles plutôt que mémorisées au moment de la visite, pour qu'un
+  contenu retiré depuis disparaisse simplement de la liste au lieu de planter.
+- **Recherche directe en généalogie.** Jusqu'ici, on ne pouvait entrer dans un arbre que par
+  les 8 points de départ fixes (Origines, Titans, Olympiens...). Nouveau champ de recherche
+  sur l'écran d'accueil de la généalogie, qui renvoie directement vers l'arbre de la figure
+  choisie (même écran que le lien « Voir dans l'arbre généalogique » de chaque fiche figure).
+
+**Bug trouvé et corrigé en cours de route** : les deux nouvelles recherches plafonnaient leurs
+résultats (5 ou 8 lignes) après un simple filtre par sous-chaîne sur nom + note — sur une
+recherche comme « Persée », les entrées alphabétiquement antérieures qui ne font que le
+*mentionner* dans leur note (ses nombreux ancêtres et descendants : Acrisios, Alcée,
+Andromède...) remplissaient le plafond avant même d'atteindre « Persée » lui-même, qui
+disparaissait purement et simplement des résultats. Corrigé par un classement
+(`searchRank`/`rankedSearch`) : nom identique à la requête d'abord, puis nom qui commence par
+elle, puis nom qui la contient, puis note qui la contient seulement en dernier recours —
+appliqué aux deux nouvelles recherches (accueil et généalogie).
+
+Testé par un script dédié (`scratchpad`, 23 vérifications) + la suite complète remise à jour et
+repassée au vert (99 + 17 + 16 + 7 vérifications). Vérifié aussi visuellement par capture
+d'écran Playwright : accueil en clair et en sombre, recherche « zeus » (Zeus en tête des
+figures, plus symboles et lieux liés), recherche généalogie « persée » (Persée en tête, clic
+qui atterrit bien sur son arbre), carte des lieux en mode sombre.
+`service-worker.js` : `pantheon-v22` → `pantheon-v23`.
