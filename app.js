@@ -600,6 +600,11 @@ const SYMBOL_ILLUSTRATIONS = {
   // suivants.
   "temple": "assets/symbol-temple.webp",
   "terre": "assets/symbol-terre.webp",
+  "torche": "assets/symbol-torche.webp",
+  "torches": "assets/symbol-torches.webp",
+  "trident": "assets/symbol-trident.webp",
+  "vigne": "assets/symbol-vigne.webp",
+  "voile": "assets/symbol-voile.webp",
   // Les quatre entrées suivantes réutilisent telles quelles les illustrations déjà fournies pour
   // les icônes de catégorie de la carte (MAP_CATEGORY_ILLUSTRATIONS) — même sujet, pas besoin
   // d'un second détourage : montagne → montagne, détroit/mers → mer, source → source, monde

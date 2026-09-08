@@ -1963,3 +1963,24 @@ illustration propre). Vérifié aussi visuellement par Playwright sur les cinq n
 fiches, en clair et en sombre — Temple en particulier, pour confirmer que la nouvelle
 illustration dédiée s'intègre mieux que l'ancienne icône de carte réutilisée.
 `service-worker.js` : `pantheon-v46` → `pantheon-v47`.
+
+## Cinq nouvelles illustrations : Torche, Torches, Trident, Vigne, Voile
+
+Cinq symboles supplémentaires rejoignent `SYMBOL_ILLUSTRATIONS` (88 → 93), sans aucune
+ambiguïté de légende ni bord dur à corriger cette fois — les cinq images sont des détourages
+classiques sur fond transparent.
+
+À noter : « Torche » et « Torches » sont deux entrées distinctes déjà présentes dans
+`SYMBOL_LIBRARY` (la torche simple, dans « Objets mythologiques », et les torches jumelles,
+attribut d'Hécate, dans « Mythologie ») — les deux images fournies correspondent
+respectivement à l'une et à l'autre sans hésitation possible : une torche seule pour la
+première, une tête à trois torches (motif à trois têtes de chien, évocation d'Hécate
+triple) pour la seconde. Aucune fusion ni confusion entre les deux fiches.
+
+Les cinq images sont retaillées à 520px de long côté maximum et converties en WebP.
+
+Testé par la suite complète remise à jour et repassée au vert (237 vérifications, dont le
+nouveau décompte à 93 illustrations). Vérifié aussi visuellement par Playwright sur les cinq
+nouvelles fiches, en clair et en sombre — Torche et Torches en particulier, pour confirmer
+que les deux illustrations restent visuellement bien distinctes l'une de l'autre.
+`service-worker.js` : `pantheon-v47` → `pantheon-v48`.
