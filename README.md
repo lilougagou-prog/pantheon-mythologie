@@ -1887,3 +1887,32 @@ Testé par la suite complète remise à jour et repassée au vert (198 vérifica
 nouveau décompte à 74 illustrations). Vérifié aussi visuellement par Playwright sur les cinq
 nouvelles fiches, en clair et en sombre.
 `service-worker.js` : `pantheon-v43` → `pantheon-v44`.
+
+## Cinq nouvelles illustrations : Pomme, Pont, Porte, Raisin, Rivière (+ un retraitement)
+
+Cinq images de plus, avec deux ajustements avant intégration :
+
+- **« Raison » → Raisin.** La légende de l'utilisatrice contenait une coquille (« raison »,
+  qui n'existe pas comme symbole) ; l'image montre sans ambiguïté une grappe de raisin, qui
+  correspond exactement au symbole « Raisin » déjà présent (« Abondance, plaisir partagé,
+  transformation par la fermentation »). Corrigé silencieusement, aucune question nécessaire
+  contrairement au cas Myrrhe/Myrte d'un round précédent — là il y avait un vrai choix entre
+  deux symboles distincts, ici une seule lecture est possible.
+- **Rivière retravaillée.** Contrairement aux quatre autres (des objets détourés sur fond
+  transparent, comme d'habitude), l'image de Rivière était un paysage complet à bords durs —
+  transparente seulement dans le ciel, opaque et rectangulaire partout ailleurs, ce qui
+  aurait affiché un bloc net et disgracieux sur le fond de la page (surtout en sombre). Or le
+  corpus a déjà un précédent pour ce cas : les symboles « Lieux & passages » à scène complète
+  (Grotte, Forêt) utilisent un fondu ovale doux vers la transparence sur tout le pourtour,
+  jamais un cadre net. Reproduit ce traitement ici avec un masque elliptique flouté
+  (Pillow/`ImageFilter.GaussianBlur`) plutôt que d'intégrer l'image telle quelle ou de
+  redemander une nouvelle version.
+
+Les cinq images rejoignent `SYMBOL_ILLUSTRATIONS` (74 → 79), retaillées à 520px de long côté
+maximum et converties en WebP.
+
+Testé par la suite complète remise à jour et repassée au vert (208 vérifications, dont le
+nouveau décompte à 79 illustrations). Vérifié aussi visuellement par Playwright sur les cinq
+nouvelles fiches, en clair et en sombre — Rivière en particulier, pour confirmer que son
+nouveau fondu se fond bien dans les deux thèmes sans bord visible.
+`service-worker.js` : `pantheon-v44` → `pantheon-v45`.
