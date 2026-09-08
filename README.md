@@ -1984,3 +1984,16 @@ nouveau décompte à 93 illustrations). Vérifié aussi visuellement par Playwri
 nouvelles fiches, en clair et en sombre — Torche et Torches en particulier, pour confirmer
 que les deux illustrations restent visuellement bien distinctes l'une de l'autre.
 `service-worker.js` : `pantheon-v47` → `pantheon-v48`.
+
+## Dix nouveaux portraits de figures : Abaris, Abas, Acrisios, Agamemnon, Agavé, Agénor, Agon, Alcée, Alcmène, Amphion
+
+Premier round de portraits (`DEITY_PORTRAITS`) plutôt que d'illustrations de symboles : même principe que les rounds précédents (transparence en moins, puisqu'un portrait de figure est une photo pleine page recadrée par CSS via `object-fit:cover`, pas un détourage) — dix figures qui existaient déjà dans `DEITY_NOTES` sans portrait en reçoivent un. `DEITY_PORTRAITS` passe de 86 à 96 entrées.
+
+Aucune ambiguïté de légende sur les deux lots de cinq noms fournis. Deux correspondances image/figure valent d'être notées : Agon (« personnification de la Compétition codifiée, honoré à Olympie ») est photographié en pleine course avec des haltères, l'équipement d'athlétisme antique — et Amphion (« il bâtit avec son frère jumeau Zéthos les murailles de Thèbes au son de sa lyre ») est représenté lyre en main, des blocs de pierre en lévitation rejoignant un mur en construction derrière lui — deux images qui illustrent directement le trait mythologique propre à la figure plutôt qu'un simple portrait générique.
+
+Les dix images sont retaillées à 700px de large (même largeur que les portraits existants) et converties en JPEG qualité 88 — même format que le reste de `DEITY_PORTRAITS` (contrairement aux illustrations de symboles, en WebP). Noms de fichiers sans accent (`deity-agave.jpg`, `deity-agenor.jpg`, `deity-alcee.jpg`, `deity-alcmene.jpg`), clés de l'objet avec l'accent d'origine — même convention que partout ailleurs dans l'app.
+
+Comme le reste de `DEITY_PORTRAITS`, ces dix images ne sont pas ajoutées à `ASSETS` (le service worker ne précache que les illustrations de symboles, jamais les portraits de figures — convention déjà en place avant ce round). Seule la version du cache est incrémentée.
+
+Testé par la suite complète remise à jour et repassée au vert (430 vérifications, dont un nouveau bloc dédié aux portraits : décompte à 96, existence de chaque fichier sur disque, et correspondance de chaque clé avec une figure réelle de `DEITY_NOTES`). Vérifié aussi visuellement par Playwright sur les dix nouvelles fiches, en clair et en sombre.
+`service-worker.js` : `pantheon-v48` → `pantheon-v49`.

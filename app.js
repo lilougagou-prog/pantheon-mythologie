@@ -506,6 +506,16 @@ const DEITY_PORTRAITS = {
   "télégonos": "assets/deity-telegonos.jpg",
   "ulysse": "assets/deity-ulysse.jpg",
   "télémaque": "assets/deity-telemaque.jpg",
+  "abaris": "assets/deity-abaris.jpg",
+  "abas": "assets/deity-abas.jpg",
+  "acrisios": "assets/deity-acrisios.jpg",
+  "agamemnon": "assets/deity-agamemnon.jpg",
+  "agavé": "assets/deity-agave.jpg",
+  "agénor": "assets/deity-agenor.jpg",
+  "agon": "assets/deity-agon.jpg",
+  "alcée": "assets/deity-alcee.jpg",
+  "alcmène": "assets/deity-alcmene.jpg",
+  "amphion": "assets/deity-amphion.jpg",
 };
 // Même principe que DEITY_PORTRAITS, mais pour la bibliothèque symbolique : une illustration
 // dédiée (fournie par l'utilisatrice, fond détouré) qui remplace l'emoji d'un symbole partout où
