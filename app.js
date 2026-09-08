@@ -1105,10 +1105,11 @@ function buildFamilyCard(id){
 // comptés une seule fois — sert au décompte affiché sur la tuile d'accueil.
 const GENEALOGY_FIGURE_COUNT = new Set([...Object.keys(GENEALOGY_PARENTS), ...Object.keys(GENEALOGY_CHILDREN)]).size;
 
-// Les douze Olympiens (place traditionnellement disputée entre Hestia et Dionysos — on
-// retient ici la liste la plus courante, Hestia cédant sa place). Chacun devient un point
-// d'entrée vers sa propre fiche familiale complète, plutôt que de se concentrer sur Zeus seul.
-const OLYMPIAN_IDS = ["zeus", "héra", "poséidon", "déméter", "athéna", "apollon", "artémis", "arès", "aphrodite", "héphaïstos", "hermès", "dionysos"];
+// Les douze Olympiens (place traditionnellement disputée entre Hestia et Dionysos — choix
+// éditorial retenu ici : Hestia inclue, Héphaïstos laissé hors de la liste). Chacun devient un
+// point d'entrée vers sa propre fiche familiale complète, plutôt que de se concentrer sur Zeus
+// seul.
+const OLYMPIAN_IDS = ["zeus", "héra", "poséidon", "déméter", "athéna", "apollon", "artémis", "arès", "aphrodite", "hestia", "hermès", "dionysos"];
 
 // Points d'entrée choisis pour l'écran d'accueil de la généalogie — un aperçu large plutôt
 // qu'une liste exhaustive des 264 figures. Chaque point de départ ouvre désormais l'arbre

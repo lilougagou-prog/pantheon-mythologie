@@ -1760,3 +1760,20 @@ bien au-dessus du texte, avec un défilement horizontal pour les branches les pl
 défilement complet) ; l'écran des Olympiens ne montre plus qu'une seule carte Zeus, avec ses huit
 enfants listés une seule fois.
 `service-worker.js` : `pantheon-v38` → `pantheon-v39`.
+
+## Hestia et Héphaïstos échangés dans la liste des douze Olympiens
+
+Signalement bref : « tu as exclu Hestia et mis Héphaïstos, fais le contraire. » `OLYMPIAN_IDS` —
+la liste qui détermine, partout dans l'appli, quelle carte reçoit la mise en valeur dorée
+réservée aux douze Olympiens (pas seulement sur l'écran qui leur est dédié) — incluait
+Héphaïstos et laissait Hestia de côté, un choix éditorial déjà documenté en commentaire vu la
+place traditionnellement disputée entre Hestia et Dionysos (jamais entre Hestia et Héphaïstos,
+mais peu importe : c'est la préférence de l'utilisatrice pour sa propre bibliothèque qui
+tranche). Inversé : Hestia rejoint la liste, Héphaïstos en sort. Les deux restent bien sûr
+visibles dans l'arbre des Olympiens comme avant (Hestia comme sœur de Zeus, Héphaïstos comme
+fils d'Héra) — seule la mise en valeur dorée change de figure.
+
+Testé : suite complète repassée au vert (168 vérifications) + vérification visuelle Playwright
+confirmant que la carte d'Hestia porte désormais la classe `.ft-card-olympian` et que celle
+d'Héphaïstos ne la porte plus.
+`service-worker.js` : `pantheon-v39` → `pantheon-v40`.
