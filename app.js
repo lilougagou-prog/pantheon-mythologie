@@ -491,6 +491,11 @@ const SYMBOL_ILLUSTRATIONS = {
   "étoiles": "assets/symbol-etoile.webp",
   "feu": "assets/symbol-feu.webp",
   "figue": "assets/symbol-figue.webp",
+  "fil": "assets/symbol-fil.webp",
+  "flèche": "assets/symbol-fleche.webp",
+  "crocus": "assets/symbol-crocus.webp",
+  "narcisse-fleur": "assets/symbol-narcisse-fleur.webp",
+  "flûte": "assets/symbol-flute.webp",
   // Les cinq entrées suivantes réutilisent telles quelles les illustrations déjà fournies pour
   // les icônes de catégorie de la carte (MAP_CATEGORY_ILLUSTRATIONS) — même sujet, pas besoin
   // d'un second détourage : sanctuaire → temple, montagne → montagne, détroit/mers → mer,

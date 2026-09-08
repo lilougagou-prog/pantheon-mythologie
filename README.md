@@ -1269,3 +1269,16 @@ repassée au vert (138 + 17 + 16 + 7 + 23 + 25 + 25 + 14 vérifications, dont le
 à 44 illustrations). Vérifié aussi visuellement par capture d'écran Playwright sur les cinq
 nouvelles fiches.
 `service-worker.js` : `pantheon-v26` → `pantheon-v27`.
+
+## Cinq nouvelles illustrations : Fil, Flèche, Crocus, Fleur de narcisse, Flûte
+
+Fil, Flèche, Crocus, Fleur de narcisse (`narcisse-fleur`) et Flûte rejoignent
+`SYMBOL_ILLUSTRATIONS` (44 → 49). Une image (Fil) arrivait sur un fond sombre en dégradé —
+vérifiée après traitement : aucun résidu visible une fois replacée sur le fond de l'appli,
+même schéma que les cas précédents (Couronne, Eau, Cyprès).
+
+Testé par un script dédié (`scratchpad`, 12 vérifications) + la suite complète remise à jour et
+repassée au vert (148 + 17 + 16 + 7 + 23 + 25 + 25 + 14 + 12 vérifications, dont le nouveau
+décompte à 49 illustrations). Vérifié aussi visuellement par capture d'écran Playwright sur les
+cinq nouvelles fiches.
+`service-worker.js` : `pantheon-v27` → `pantheon-v28`.
