@@ -1472,3 +1472,44 @@ comme parents ; l'arbre d'Énée montre Créüse et Ascagne ; une carte « Réce
 pointant vers un symbole illustré affiche l'image réelle plutôt que l'icône générique ; et 7
 visites successives ne laissent que 5 cartes affichées.
 `service-worker.js` : `pantheon-v32` → `pantheon-v33`.
+
+## Relecture de cohérence : notes de figures mal construites
+
+« Relis la cohérence de chaque texte et leur compréhension. Par exemple petit texte descriptif
+d'Anchise très mal construit et du coup incompréhensible. » Exemple exact : la note d'Anchise
+disait « père d'Énée qu'il traversa la chute de Troie porté sur son dos » — grammaticalement,
+cette phrase fait porter Anchise sur son propre dos plutôt que sur celui de son fils, un
+participe mal rattaché qui rend la phrase absurde à la relecture.
+
+Relecture complète des 289 notes (`DEITY_NOTES`), phrase par phrase, à la recherche du même
+type de défaut — pronom ambigu, participe mal rattaché, causalité inversée — plutôt que de
+simplement raccourcir ce qui est déjà clair. Huit notes corrigées :
+- **Anchise** (le signalement) : scindée en deux phrases courtes, le porteur est nommé sans
+  ambiguïté possible.
+- **Crios** : « resté dans son ombre » devenait ambigu depuis l'ajout de Persès (le Titan) à sa
+  suite — remplacé par une formule qui ne dépend d'aucun pronom.
+- **Eurysthée** : deux « lui » consécutifs désignaient deux personnes différentes (« lui valut
+  de lui imposer ») — récrite en deux phrases aux référents désormais clairs.
+- **Alcée** : « dont le nom fut donné à Héraclès » pouvait grammaticalement renvoyer à
+  Amphitryon, mentionné juste avant, plutôt qu'à Alcée lui-même — récrite sans pronom relatif
+  ambigu, et complétée du nom réel (Alcide).
+- **Chryséis** : la note inversait la causalité du mythe (elle faisait du retour forcé la cause
+  de la colère d'Apollon, alors que c'est l'inverse : le refus d'Agamemnon déclenche la colère,
+  qui impose ensuite le retour) — corrigée.
+- **Lyncée** : « seul époux des cinquante fils d'Égyptos » se lisait comme si les cinquante fils
+  n'avaient qu'un seul mari collectif — récrite en construction partitive standard.
+- **Pélops** et **Nil** : deux phrases trop chargées, scindées en deux phrases plus courtes
+  chacune, sans perte d'information.
+
+Bonus détecté au passage : trois notes déjà corrigées lors du round précédent (Hécate, Clito,
+Amphion) avaient bien leur `DEITY_NOTES` mis à jour dans `app.js`, mais le champ `note`
+correspondant dans `content.json` n'avait jamais été répercuté — un désync silencieux entre les
+deux sources, invisible à l'écran gratuit mais visible une fois le contenu premium chargé.
+Corrigé, et vérifié qu'aucun autre désync ne subsiste sur l'ensemble des 284 figures partagées
+entre les deux fichiers.
+
+Testé par un script dédié (`scratchpad`, 12 vérifications : les 8 notes corrigées + l'absence de
+tout désync `DEITY_NOTES`/`content.json`) + la suite complète repassée au vert. Vérifié aussi
+visuellement par Playwright sur la fiche d'Anchise : la note s'affiche désormais en deux phrases
+claires, sans plus aucune trace de la construction signalée.
+`service-worker.js` : `pantheon-v33` → `pantheon-v34`.
