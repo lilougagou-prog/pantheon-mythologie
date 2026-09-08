@@ -16,12 +16,12 @@ une **généalogie des dieux** navigable (pas encore construite, voir plus bas).
 
 ## Contenu
 
-- **311 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
+- **312 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
   quelles depuis Tarot-mythologie (mêmes textes, mêmes portraits, même mécanisme de
   citations croisées `(voir la fiche « Nom »)` résolu par `linkifyLore()`), complétées par
-  76 figures créées directement dans Panthéon (18 primordiales et Titans, 11 pour étoffer les
+  77 figures créées directement dans Panthéon (18 primordiales et Titans, 11 pour étoffer les
   lignées de Cadmos et de Zeus/Europe, 10 pour affilier tous les enfants déjà recensés à leur
-  mère ou leur père, 37 pour combler des lacunes de parenté, des homonymies et une lignée
+  mère ou leur père, 38 pour combler des lacunes de parenté, des homonymies et une lignée
   complète jusqu'à Rome repérées par l'utilisatrice — voir plus bas). Contrairement à l'appli
   Tarot, qui ne garde localement que les 78 figures directement incarnées par une carte,
   Panthéon garde l'intégralité du corpus : c'est la collection complète, du premier Titan
@@ -1565,3 +1565,36 @@ l'arbre de Tros montre ses deux branches, Assaracus et Ilos, côte à côte ; l'
 Silvia montre Numitor au-dessus et Romulus/Remus en dessous, la lignée complète tenant dans un
 seul écran.
 `service-worker.js` : `pantheon-v34` → `pantheon-v35`.
+
+## Nouvelle fiche : Hélénos, fils de Priam et Hécube
+
+Demande directe : une fiche pour Hélénos, à ajouter à l'arbre de Priam et Hécube. Il était déjà
+cité par son nom à quatre reprises dans le corpus existant (la fiche « Andromaque », qui raconte
+comment Néoptolème la lui cède après avoir épousé Hermione, et la fiche « Molossos ») sans
+jamais avoir sa propre fiche — exactement le type de lacune déjà comblé pour Pélée, Anchise ou
+Nil dans les rounds précédents.
+
+Devin troyen au don crédible — contrairement à sa sœur Cassandre (voir la fiche « Cassandre »),
+malédiction d'Apollon oblige, ses propres prophéties étaient crues —, Hélénos fut capturé par
+Ulysse après une querelle avec son frère Déiphobe pour la main d'Hélène, et révéla sous la
+contrainte les conditions secrètes de la chute de Troie. Épargné pour cette raison, il devint
+plus tard roi d'une part de l'Épire et époux d'Andromaque, veuve de son propre frère Hector —
+et, dans l'Énéide de Virgile, l'hôte d'Énée lors d'une escale sur sa route vers l'Italie, à qui
+il révèle à son tour la suite du voyage. Relié à Priam et Hécube dans `GENEALOGY_PARENTS`, et la
+citation existante dans la fiche « Andromaque » redirigée vers sa propre fiche plutôt que vers
+celle de Priam.
+
+Second sujet du message : une fiche pour Clytemnestre et pour sa fille Électre. Vérification
+faite, les deux existent déjà — fiche complète, note et généalogie en place depuis l'origine du
+corpus (`clytemnestre`: reliée à Léda et Tyndare, mère d'Iphigénie, Oreste, Électre et
+Chrysothémis ; `électre`: reliée à Agamemnon et Clytemnestre, sa propre histoire de la vengeance
+d'Oreste jusqu'à son mariage avec Pylade) — rien à ajouter, seulement vérifié qu'aucune des deux
+n'a été altérée par erreur au passage.
+
+312 figures désormais (311 + 1), 307 fiches premium dans `content.json` (306 + 1). Invariant du
+corpus toujours respecté.
+
+Testé par un script dédié (`scratchpad`, 15 vérifications) + la suite complète repassée au vert.
+Vérifié aussi visuellement par Playwright : l'arbre de Priam affiche désormais Hélénos aux côtés
+de Créüse, Hector et Pâris.
+`service-worker.js` : `pantheon-v35` → `pantheon-v36`.
