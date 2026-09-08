@@ -16,12 +16,12 @@ une **généalogie des dieux** navigable (pas encore construite, voir plus bas).
 
 ## Contenu
 
-- **277 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
+- **283 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
   quelles depuis Tarot-mythologie (mêmes textes, mêmes portraits, même mécanisme de
   citations croisées `(voir la fiche « Nom »)` résolu par `linkifyLore()`), complétées par
-  42 figures créées directement dans Panthéon (18 primordiales et Titans, 11 pour étoffer les
+  48 figures créées directement dans Panthéon (18 primordiales et Titans, 11 pour étoffer les
   lignées de Cadmos et de Zeus/Europe, 10 pour affilier tous les enfants déjà recensés à leur
-  mère ou leur père, 3 pour combler des lacunes de parenté repérées par l'utilisatrice — voir
+  mère ou leur père, 9 pour combler des lacunes de parenté repérées par l'utilisatrice — voir
   plus bas). Contrairement à l'appli
   Tarot, qui ne garde localement que les 78 figures directement incarnées par une carte,
   Panthéon garde l'intégralité du corpus : c'est la collection complète, du premier Titan
@@ -1356,3 +1356,59 @@ visuellement par capture d'écran Playwright sur les arbres de Thétis, Achille,
 Libye et Arès (déblocage via la clé d'aperçu propriétaire, seul moyen d'atteindre l'écran
 généalogie en local) : « union non précisée » n'apparaît plus sur aucun des cas corrigés.
 `service-worker.js` : `pantheon-v30` → `pantheon-v31`.
+
+## Enfants manquants dans les arbres (Aphrodite : Éros et Deimos, et d'autres)
+
+Nouveau signalement de l'utilisatrice, cette fois sur un défaut différent du précédent : pas
+une union mal renseignée, mais des enfants tout simplement absents de l'arbre d'un parent —
+exemple donné, Aphrodite sans Éros ni Deimos.
+
+Audit systématique en deux passes, plus précises que celle du round précédent pour éviter les
+faux positifs (repérés a posteriori dans cette même passe : la plupart des « (voir la fiche) »
+trouvés à proximité d'un verbe de naissance ne désignaient en réalité ni un parent ni un
+enfant, juste un nom cité dans la même phrase) :
+- recherche du schéma d'ouverture « Fils/Fille de X (et de Y) » utilisé systématiquement en
+  tête de chaque fiche du corpus, comparé au parent réellement enregistré dans
+  `GENEALOGY_PARENTS` ;
+- recherche de toute occurrence de « jumeau/jumelle/jumeaux » dans les textes, pour repérer les
+  fratries à demi complètes.
+
+Résultat, six vrais trous corrigés :
+- **Éros** existait déjà comme fiche à part entière (l'ambivalence Chaos primordial/fils
+  tardif d'Aphrodite est déjà expliquée dans son propre texte), mais n'apparaissait dans
+  `GENEALOGY_PARENTS` d'aucun parent — lien ajouté vers Arès + Aphrodite, exactement comme le
+  texte de la fiche « Aphrodite » le raconte déjà (« De cette union naquirent Harmonie et,
+  selon les récits les plus tardifs, Éros lui-même »).
+- **Hygie**, dont la note commence déjà par « fille d'Asclépios », n'avait pourtant aucun
+  parent enregistré — lien ajouté.
+- **Bélos et Agénor** : correction d'une erreur introduite par le round précédent. J'avais
+  ajouté Poséidon comme second père, une tradition alternative attestée chez Apollodore — mais
+  le corpus lui-même désigne déjà, explicitement et dans trois fiches distinctes (Libye, Bélos,
+  Agénor), « le dieu-fleuve Nil » comme père. Poséidon contredisait donc un choix déjà fait par
+  ce corpus plutôt que de combler un vrai trou ; remplacé par une nouvelle fiche Nil.
+
+Et quatre nouvelles fiches créées pour des figures déjà nommées, parfois plusieurs fois, dans
+le corpus existant sans jamais avoir leur propre carte :
+- **Deimos**, jumeau de Phobos (déjà présent), fils d'Arès et d'Aphrodite — exactement
+  l'exemple donné par l'utilisatrice.
+- **Nil**, dieu-fleuve déjà cité nommément dans 3 fiches (voir plus haut), père de Bélos et
+  Agénor.
+- **Pélops**, déjà cité comme père dans les fiches « Atrée » et « Thyeste », et même déjà
+  attendu comme référence orpheline dans la fiche symbole « Char » (`deities: [{id: "pélops"}]`
+  sans fiche correspondante — un second bug de référence cassée, corrigé du même geste).
+- **Eurysthée** (le roi qui impose ses douze travaux à Héraclès, déjà cité 9 fois dans le
+  corpus, y compris dans la note de Sthénélos lui-même : « père d'Eurysthée ») et **Molossos**
+  (fils de Néoptolème et Andromaque, cité 3 fois) et **Proétos** (frère jumeau d'Acrisios déjà
+  présent, cité dans la fiche « Abas »).
+
+283 figures désormais (277 + 6), 278 fiches premium dans `content.json` (272 + 6). Invariant du
+corpus toujours respecté.
+
+Testé par un script dédié (`scratchpad`, 61 vérifications : les 6 liens ajoutés/corrigés, la
+correction Bélos/Agénor, les 6 nouvelles fiches présentes partout où requises, l'invariant
+généalogie/fiches, et une reproduction de la logique de regroupement par enfants confirmant que
+chaque parent concerné liste bien son nouvel enfant) + la suite complète repassée au vert.
+Vérifié aussi visuellement par capture d'écran Playwright sur les arbres d'Arès (Deimos, Éros,
+Harmonie et Phobos tous présents comme enfants d'Arès + Aphrodite), de Nil, de Pélops et de
+Sthénélos.
+`service-worker.js` : `pantheon-v31` → `pantheon-v32`.
