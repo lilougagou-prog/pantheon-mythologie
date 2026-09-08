@@ -16,13 +16,13 @@ une **généalogie des dieux** navigable (pas encore construite, voir plus bas).
 
 ## Contenu
 
-- **283 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
+- **289 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
   quelles depuis Tarot-mythologie (mêmes textes, mêmes portraits, même mécanisme de
   citations croisées `(voir la fiche « Nom »)` résolu par `linkifyLore()`), complétées par
-  48 figures créées directement dans Panthéon (18 primordiales et Titans, 11 pour étoffer les
+  54 figures créées directement dans Panthéon (18 primordiales et Titans, 11 pour étoffer les
   lignées de Cadmos et de Zeus/Europe, 10 pour affilier tous les enfants déjà recensés à leur
-  mère ou leur père, 9 pour combler des lacunes de parenté repérées par l'utilisatrice — voir
-  plus bas). Contrairement à l'appli
+  mère ou leur père, 15 pour combler des lacunes de parenté et des homonymies repérées par
+  l'utilisatrice — voir plus bas). Contrairement à l'appli
   Tarot, qui ne garde localement que les 78 figures directement incarnées par une carte,
   Panthéon garde l'intégralité du corpus : c'est la collection complète, du premier Titan
   au dernier héros mineur.
@@ -1412,3 +1412,63 @@ Vérifié aussi visuellement par capture d'écran Playwright sur les arbres d'Ar
 Harmonie et Phobos tous présents comme enfants d'Arès + Aphrodite), de Nil, de Pélops et de
 Sthénélos.
 `service-worker.js` : `pantheon-v31` → `pantheon-v32`.
+
+## Désambiguïsation des homonymes, illustrations réelles dans « Récemment consulté », fils et épouse d'Énée
+
+Trois retours de l'utilisatrice en une seule session.
+
+**Homonymes** : « Quand deux personnages ont exactement le même nom (ex Persès), fais deux
+fiches distinctes et mets une distinction entre parenthèses au menu principal. » Trois cas déjà
+identifiés dans ce corpus (documentés en commentaire depuis les rounds précédents, faute de
+pouvoir les corriger avant aujourd'hui) :
+- **Persès** : le Titan marin, père d'Hécate, contre l'arrière-petit-fils mortel de Persée déjà
+  présent sous cet id.
+- **Antiope** : la princesse thébaine, mère d'Amphion et Zéthos, contre la reine amazone déjà
+  présente sous cet id (épouse de Thésée).
+- **Atlas** : le roi légendaire d'Atlantide, fils de Poséidon et Clito, contre le Titan porteur
+  du ciel déjà présent sous cet id — la note de Clito elle-même laissait jusqu'ici entendre à
+  tort qu'elle était la mère du Titan.
+
+Comme un id ne peut pas être dupliqué, chaque second homonyme reçoit son propre id
+(`persès-titan`, `antiope-thébaine`, `atlas-atlantide`) tandis que celui déjà présent garde le
+sien inchangé. Nouvelle table `DEITY_NAME_OVERRIDES` : quand un id y figure, son nom affiché
+devient la version parenthésée (« Persès (le Titan) », etc.) plutôt que la simple majuscule
+initiale — appliquée uniformément partout où un nom de figure s'affichait jusqu'ici via
+`id.charAt(0).toUpperCase()+id.slice(1)` (7 emplacements distincts, tous remplacés par un seul
+appel à `genealogyDisplayName()`, y compris le générateur de `LORE_LINK_TARGETS` qui aurait
+sinon silencieusement fait pointer les citations existantes « (voir la fiche « Persès ») » vers
+le mauvais des deux homonymes). Une figure de soutien, Eurybie (mère de Persès le Titan, déjà
+nommée dans la fiche de Crios sans jamais avoir la sienne), complète le lot.
+
+**« Récemment consulté »** : deux défauts distincts signalés ensemble.
+- Les symboles y affichaient toujours leur icône générique (`SYMBOL_LIBRARY[id].icon`) même
+  quand une illustration dédiée existe (`SYMBOL_ILLUSTRATIONS[id]`) — `portrait` était câblé en
+  dur à `null` pour ce type d'entrée, sans jamais consulter cette table. Corrigé : l'illustration
+  réelle est utilisée dès qu'elle existe, l'icône générique ne reste qu'un repli.
+- La liste affichait jusqu'à 6 entrées alors que le stockage local en gardait 8 — ramenés tous
+  les deux à 5, la limite désormais demandée.
+
+**Énée** : « tu dis qu'il a un enfant, mais ne le nomme pas, tu ne le mets pas dans sa
+filiation et tu ne dis pas qui est sa mère. » Exact : le texte existant racontait « il mena son
+fils par la main hors de la ville en flammes » sans jamais le nommer, et `GENEALOGY_PARENTS` ne
+comptait aucun enfant pour Énée. Les deux figures manquantes, bien attestées dans l'Énéide de
+Virgile, sont désormais créées et reliées : **Créüse**, fille de Priam et Hécube, première
+épouse d'Énée, perdue puis disparue dans la fuite de Troie ; et **Ascagne** (Iule dans la
+tradition romaine), leur fils, qui fondera plus tard Albe la Longue, à l'origine de la lignée
+de Romulus et Remus. Le texte de la fiche « Énée » nomme désormais les deux et raconte
+l'épisode du fantôme de Créüse. Corrigé aussi, en passant, un raccourci ambigu dans la fiche du
+lieu « Lavinium » qui laissait entendre à tort qu'Ascagne serait le fils de Lavinia (sa
+seconde épouse italienne) plutôt que de Créüse.
+
+289 figures désormais (283 + 6), 284 fiches premium dans `content.json` (278 + 6). Invariant du
+corpus toujours respecté : tout id référencé dans `GENEALOGY_PARENTS` a une fiche `DEITY_NOTES`
+complète.
+
+Testé par un script dédié (`scratchpad`, 51 vérifications couvrant les trois sujets) + la suite
+complète repassée au vert. Vérifié aussi visuellement par Playwright : la recherche « persès »
+dans l'onglet Figures affiche bien deux entrées distinctes (« Persès » et « Persès (le Titan) »,
+idem pour Antiope et Atlas) ; l'arbre d'Hécate montre désormais Astéria et Persès (le Titan)
+comme parents ; l'arbre d'Énée montre Créüse et Ascagne ; une carte « Récemment consulté »
+pointant vers un symbole illustré affiche l'image réelle plutôt que l'icône générique ; et 7
+visites successives ne laissent que 5 cartes affichées.
+`service-worker.js` : `pantheon-v32` → `pantheon-v33`.
