@@ -1694,3 +1694,69 @@ sans chevauchement, l'arbre de Niké affiche bien Crios+Eurybie → Pallas+Styx 
 enfants, et la fiche d'Éos affiche désormais Astréos, Borée, Euros, Notos et Zéphyr comme noms
 cliquables dans le texte et dans son bloc « Lignée ».
 `service-worker.js` : `pantheon-v37` → `pantheon-v38`.
+
+## Demi-fratrie mal dessinée, arbres manquants sur 4 écrans, Zeus répété
+
+Trois signalements distincts dans le même message, avec une capture d'écran pour le premier.
+
+**1. Astyanax affiché comme fils de Néoptolème.** Sur l'arbre de Molossos, le fils de Néoptolème
+et d'Andromaque, la carte d'Astyanax apparaissait accrochée au couple Néoptolème + Andromaque,
+côte à côte avec Molossos — alors qu'Astyanax est le fils d'**Hector** et d'Andromaque
+(`GENEALOGY_PARENTS` le confirmait déjà correctement : aucune erreur de donnée, seulement de
+rendu). En cause : `renderGenealogy()` calcule la fratrie d'une figure en remontant, pour
+chacun de ses parents, tous les enfants nés de ce parent — y compris ceux nés d'une **autre**
+union (les demi-frères et sœurs, comme Astyanax et Molossos, tous deux fils d'Andromaque mais
+de pères différents). Ce calcul est correct pour la LISTE de fratrie, mais le rendu plaçait
+ensuite systématiquement toute cette fratrie sous le couple de parents actuellement affiché —
+juste sous le couple de Molossos, Astyanax se retrouvait donc visuellement fils de Néoptolème,
+qui n'est pourtant pas son père.
+
+Corrigé en distinguant, au moment du dessin seulement, la fratrie de sang complet (les mêmes
+deux parents que la figure centrale) de la demi-fratrie (un seul parent commun) : seule la
+première reste accrochée au couple ; chaque demi-frère ou demi-sœur est désormais relié par son
+propre petit connecteur, exclusivement à la carte du parent réellement commun — jamais au
+couple entier. Une bordure en pointillés (`.ft-card-half`) distingue en un coup d'œil ces
+cartes-là. Le même défaut touchait potentiellement tout autre cas de demi-fratrie du corpus
+(ex. Castor et Pollux, demi-frères par leur mère Léda mais de pères différents) : la correction
+est générale, pas un correctif ponctuel pour Astyanax seul.
+
+**2. Arbres manquants sur 4 écrans.** Les écrans « explication globale » (La guerre de Troie,
+Les Atrides, Le cycle thébain, La famille d'Ulysse) ne montraient plus qu'un texte et une liste
+de figures cliquables, sans le moindre diagramme — un choix assumé lors d'un round antérieur à
+cette session (remplacer un arbre centré sur une seule figure, jugé trop étroit pour raconter
+toute une lignée, par un texte qui embrasse toute la famille). Le signalement demandait de
+remettre un arbre, au-dessus du texte. Plutôt que de réintroduire l'ancien arbre centré sur une
+seule figure (ce que le choix antérieur écartait à raison), une nouvelle fonction
+`buildScopedBranch()` construit un arbre à plusieurs branches et plusieurs générations, limité à
+un ensemble de figures pertinentes pour cet écran précis (`treeScope`) à partir d'une racine
+unique (`treeRoot`) — jamais la totalité de la descendance d'une figure, seulement celle citée
+par le texte. Résultat pour chacun des 4 écrans :
+- **Troie** : Priam + Hécube → Hector, Pâris, Cassandre.
+- **Atrides** : Pélops → Atrée (→ Agamemnon + Clytemnestre → Iphigénie, Oreste, Électre ;
+  Ménélas) et Thyeste (→ Égisthe).
+- **Cycle thébain** : Cadmos + Harmonie → Sémélé, Ino, Autonoë, Agavé, Polydoros → Labdacos →
+  Laïos + Jocaste → Œdipe (+ Jocaste, remariage involontaire fidèle au mythe) → Antigone.
+- **Famille d'Ulysse** : Ulysse + Pénélope → Télémaque ; Ulysse + Circé → Télégonos.
+
+Les 4 écrans rejoignent aussi `GENEALOGY_WIDE_SCREENS` pour profiter de toute la largeur de page,
+comme les autres écrans à diagramme.
+
+**3. Zeus répété cinq fois sur l'écran des douze Olympiens.** Signalé comme inutile et distrayant
+(« ne fais pas de répétitions comme ça alors que ce n'est pas nécessaire »). En cause :
+`OLYMPIANS_ZEUS_UNIONS` listait cinq unions distinctes (Héra, Maïa, Léto, Métis, Sémélé), et le
+moteur d'arbre redessine la carte d'une figure une fois par union quand elle en a plusieurs — un
+mécanisme utile pour une fiche familiale complète, mais superflu sur cet écran-ci, déjà chargé de
+onze autres cartes. Remplacé par `OLYMPIANS_ZEUS_CHILDREN`, une liste plate de ses huit enfants
+retenus pour ce tableau, rendue comme une seule union sans conjoint affiché : Zeus n'apparaît
+donc plus qu'une fois, avec ses huit enfants en une seule rangée. La mère de chacun reste
+consultable en un clic sur la fiche familiale complète de l'enfant.
+
+Testé par un script dédié (`scratchpad`, 21 vérifications) + la suite complète repassée au vert.
+Vérifié aussi visuellement par Playwright, toujours avec le petit serveur local simulant
+`/api/content` : l'arbre de Molossos montre bien Astyanax en pointillés, relié uniquement à la
+carte d'Andromaque ; les 4 arbres d'écran (Troie, Atrides, cycle thébain, Ulysse) s'affichent
+bien au-dessus du texte, avec un défilement horizontal pour les branches les plus larges
+(Thyeste/Égisthe côté Atrides, Agavé côté cycle thébain, toutes deux vérifiées visibles par un
+défilement complet) ; l'écran des Olympiens ne montre plus qu'une seule carte Zeus, avec ses huit
+enfants listés une seule fois.
+`service-worker.js` : `pantheon-v38` → `pantheon-v39`.

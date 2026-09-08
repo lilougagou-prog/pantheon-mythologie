@@ -465,6 +465,13 @@ h1, h2, h3{
   box-shadow: 0 0 0 3px rgba(74, 93, 58, 0.28), 0 4px 14px var(--shadow);
 }
 
+/* Demi-frère/demi-sœur (voir renderGenealogy) : bordure en pointillés, jamais pleine — rappelle
+   que le lien passe par un seul parent commun, pas par le couple affiché juste au-dessus. */
+.ft-card-half{
+  border-style: dashed;
+  opacity: 0.85;
+}
+
 /* Vignette de portrait insérée devant un nom, quand la figure en a un (DEITY_PORTRAITS) — rend
    l'arbre plus visuel qu'une suite de noms nus. */
 .tree-portrait{

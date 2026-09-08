@@ -1879,11 +1879,15 @@ function ftCardMarkup(id, opts){
   // carte apparaît dans un arbre — pas seulement sur l'écran qui leur est dédié — pour repérer
   // en un coup d'œil qui, parmi parents/conjoints/enfants, en fait partie.
   const olympianCls = (!isSymbol && OLYMPIAN_IDS.includes(id)) ? " ft-card-olympian" : "";
+  // Bordure en pointillés pour un demi-frère/une demi-sœur (voir renderGenealogy) : rattaché à
+  // un seul parent commun plutôt qu'au couple complet, ce style rappelle en un coup d'œil que
+  // le lien n'est que partiel.
+  const halfCls = opts.half ? " ft-card-half" : "";
   if(opts.self){
     return { slot, html: `<div class="ft-card ft-card-self${olympianCls}" data-slot="${slot}">${portrait}<span class="ft-card-name">${escapeHTML(name)}</span></div>` };
   }
   const nav = isSymbol ? "symbolDetail" : "genealogy";
-  return { slot, html: `<button class="ft-card${olympianCls}" data-slot="${slot}" data-nav="${nav}" data-id="${escapeHTML(id)}">${portrait}<span class="ft-card-name">${escapeHTML(name)}</span></button>` };
+  return { slot, html: `<button class="ft-card${olympianCls}${halfCls}" data-slot="${slot}" data-nav="${nav}" data-id="${escapeHTML(id)}">${portrait}<span class="ft-card-name">${escapeHTML(name)}</span></button>` };
 }
 
 // Une branche : un couple (une ou deux cartes, réunies dans un .ft-couple qui porte son propre
@@ -1958,6 +1962,43 @@ function ftPersonBranchHTML(connectors, id, childUnions, opts){
   });
   return ftBranchHTML(connectors, {
     cardA: ftCardMarkup(id, opts),
+    childrenHTML: subNodes.map(n => n.html).join(""),
+    childSlots: subNodes.map(n => n.slot),
+  });
+}
+
+// Même principe que ftPersonBranchHTML, mais limité à un ensemble donné de figures
+// (allowedIds) plutôt qu'à la descendance complète d'une personne — utilisé par les écrans
+// « explication globale » (Troie, Atrides, cycle thébain, famille d'Ulysse) pour dessiner un
+// vrai arbre à plusieurs branches à partir d'une racine unique, sans jamais déborder sur le
+// reste du corpus (les enfants non cités par le texte, ex. tous les autres fils de Priam,
+// restent hors champ). Un conjoint n'apparaît que s'il fait lui-même partie d'allowedIds.
+function buildScopedBranch(connectors, id, allowedIds){
+  const unions = genealogyChildUnions(id)
+    .map(u => ({ partner: u.partner, children: u.children.filter(c => allowedIds.has(c)) }))
+    .filter(u => u.children.length);
+  if(!unions.length) return ftLeaf(connectors, id);
+  if(unions.length === 1){
+    const u = unions[0];
+    const kids = u.children.map(cid => buildScopedBranch(connectors, cid, allowedIds));
+    return ftBranchHTML(connectors, {
+      cardA: ftCardMarkup(id),
+      cardB: u.partner && allowedIds.has(u.partner) ? ftCardMarkup(u.partner) : null,
+      childrenHTML: kids.map(k => k.html).join(""),
+      childSlots: kids.map(k => k.slot),
+    });
+  }
+  const subNodes = unions.map(u => {
+    const kids = u.children.map(cid => buildScopedBranch(connectors, cid, allowedIds));
+    return ftBranchHTML(connectors, {
+      cardA: ftCardMarkup(id),
+      cardB: u.partner && allowedIds.has(u.partner) ? ftCardMarkup(u.partner) : null,
+      childrenHTML: kids.map(k => k.html).join(""),
+      childSlots: kids.map(k => k.slot),
+    });
+  });
+  return ftBranchHTML(connectors, {
+    cardA: ftCardMarkup(id),
     childrenHTML: subNodes.map(n => n.html).join(""),
     childSlots: subNodes.map(n => n.slot),
   });
@@ -2346,31 +2387,30 @@ function renderGenealogyHome(){
   `;
 }
 
-// Les unions de Zeus retenues pour l'écran des douze Olympiens : un choix éditorial pour cet
+// Les enfants de Zeus retenus pour l'écran des douze Olympiens : un choix éditorial pour cet
 // écran précis (afficher ses 36 enfants recensés le rendrait illisible), mais chaque lien
 // ci-dessous reste réel — enfants vérifiés directement contre GENEALOGY_PARENTS/CHILDREN
 // (Zeus + Héra -> Arès, Hébé, Ilithyie ; Zeus + Pléiade Maïa -> Hermès ; Zeus + Léto -> Artémis
-// et Apollon ; Zeus + Métis -> Athéna), pas une invention pour la mise en page.
-const OLYMPIANS_ZEUS_UNIONS = [
-  { partner: "héra", children: ["arès", "hébé", "ilithyie"] },
-  { partner: "pléiades", children: ["hermès"] },
-  { partner: "léto", children: ["artémis", "apollon"] },
-  { partner: "métis", children: ["athéna"] },
-  { partner: "sémélé", children: ["dionysos"] },
-];
+// et Apollon ; Zeus + Métis -> Athéna ; Zeus + Sémélé -> Dionysos), pas une invention pour la
+// mise en page. Regroupés en une seule liste plutôt qu'une union par mère : Zeus n'a donc besoin
+// d'apparaître qu'une seule fois sur cet écran (demande explicite : « tu répètes trop de fois
+// Zeus alors que ça ne sert à rien [...] ne fais pas de répétitions comme ça »). Qui est la mère
+// de chacun reste consultable sur la fiche familiale complète de l'enfant concerné, à un clic.
+const OLYMPIANS_ZEUS_CHILDREN = ["arès", "hébé", "ilithyie", "hermès", "artémis", "apollon", "athéna", "dionysos"];
 
 // Écran dédié aux douze Olympiens : Cronos et Rhéa en tête, leurs six enfants juste en dessous
 // (les Olympiens ET Hadès, resté hors de l'Olympe mais bien de la même fratrie), puis, partant
-// de Zeus, ses unions retenues pour ce tableau (voir OLYMPIANS_ZEUS_UNIONS), et enfin, dans une
-// branche à part issue d'Ouranos seul, Aphrodite. Toutes les lignes de parenté sont tracées par
-// le moteur générique ci-dessus (voir drawFamTree()) à partir des positions réelles des cartes,
-// jamais approximées avec des bordures CSS.
+// de Zeus, sa carte unique suivie de ses enfants retenus pour ce tableau (voir
+// OLYMPIANS_ZEUS_CHILDREN), et enfin, dans une branche à part issue d'Ouranos seul, Aphrodite.
+// Toutes les lignes de parenté sont tracées par le moteur générique ci-dessus (voir
+// drawFamTree()) à partir des positions réelles des cartes, jamais approximées avec des
+// bordures CSS.
 function renderOlympiansOverview(){
   const connectors = [];
   FT_SEQ = 0;
   const row2Ids = ["déméter", "hestia", "héra", "poséidon", "zeus", "hadès"];
   const row2Nodes = row2Ids.map(cid => {
-    if(cid === "zeus") return ftPersonBranchHTML(connectors, "zeus", OLYMPIANS_ZEUS_UNIONS);
+    if(cid === "zeus") return ftPersonBranchHTML(connectors, "zeus", [{ partner: null, children: OLYMPIANS_ZEUS_CHILDREN }]);
     // Héphaïstos, enfant d'Héra seule (sans Zeus) selon la tradition la plus répandue : même
     // mécanisme de branche à union unique que Zeus, mais sans conjoint à afficher à côté d'elle.
     if(cid === "héra") return ftPersonBranchHTML(connectors, "héra", [{ partner: null, children: ["héphaïstos"] }]);
@@ -2508,7 +2548,9 @@ const GENEALOGY_OVERVIEWS = {
       "Seul Polydoros transmet la lignée royale jusqu'à Laïos, son petit-fils. Averti par un oracle que son propre fils le tuerait un jour, Laïos fait exposer son enfant Œdipe (voir la fiche « Œdipe ») dès sa naissance — en vain : la prophétie s'accomplit malgré tout, et Œdipe, sans le savoir, tue son père et épouse sa mère Jocaste.",
       "Leurs enfants — Étéocle, Polynice, Antigone et Ismène — héritent d'une malédiction familiale qui déchire Thèbes jusqu'à la génération suivante, les deux frères s'entretuant pour le trône et Antigone (voir la fiche « Antigone ») payant de sa vie le simple droit d'enterrer les siens.",
     ],
-    chips: ["cadmos", "harmonie", "sémélé", "autonoë", "agavé", "polydoros", "laïos", "œdipe", "antigone"],
+    chips: ["cadmos", "harmonie", "sémélé", "ino", "autonoë", "agavé", "polydoros", "laïos", "œdipe", "antigone"],
+    treeRoot: "cadmos",
+    treeScope: ["cadmos", "harmonie", "sémélé", "ino", "autonoë", "agavé", "polydoros", "labdacos", "laïos", "jocaste", "œdipe", "antigone"],
   },
   troy: {
     title: "La guerre de Troie",
@@ -2518,6 +2560,8 @@ const GENEALOGY_OVERVIEWS = {
       "La guerre décime la lignée royale : Hector tombe sous les coups d'Achille, Pâris meurt peu après, et Troie, livrée par la ruse du cheval de bois, est détruite — Priam lui-même est tué durant le sac de la ville, mettant fin à sa dynastie.",
     ],
     chips: ["priam", "hécube", "hector", "pâris", "cassandre", "hélène", "achille"],
+    treeRoot: "priam",
+    treeScope: ["priam", "hécube", "hector", "pâris", "cassandre"],
   },
   atrides: {
     title: "Les Atrides",
@@ -2526,7 +2570,9 @@ const GENEALOGY_OVERVIEWS = {
       "L'enlèvement d'Hélène par Pâris pousse Agamemnon à mener la coalition grecque contre Troie — mais pour obtenir des vents favorables, il sacrifie sa propre fille Iphigénie (voir la fiche « Iphigénie »), un crime que Clytemnestre ne lui pardonne jamais : à son retour de Troie, elle l'assassine avec son amant Égisthe, fils de Thyeste.",
       "Leur fils Oreste (voir la fiche « Oreste »), poussé par sa sœur Électre, venge alors son père en tuant sa propre mère — un matricide qui le poursuit à son tour, jusqu'à ce qu'un tribunal athénien, dans une version tardive du mythe, l'acquitte enfin et brise la malédiction familiale.",
     ],
-    chips: ["atrée", "thyeste", "agamemnon", "clytemnestre", "ménélas", "hélène", "iphigénie", "oreste", "électre"],
+    chips: ["pélops", "atrée", "thyeste", "agamemnon", "clytemnestre", "ménélas", "hélène", "iphigénie", "oreste", "électre", "égisthe"],
+    treeRoot: "pélops",
+    treeScope: ["pélops", "atrée", "thyeste", "agamemnon", "clytemnestre", "ménélas", "iphigénie", "oreste", "électre", "égisthe"],
   },
   ulysseFamily: {
     title: "La famille d'Ulysse",
@@ -2536,6 +2582,8 @@ const GENEALOGY_OVERVIEWS = {
       "À son retour, Ulysse doit reconquérir sa propre maison en éliminant les prétendants — et, selon une tradition plus tardive, périt des années plus tard de la main de Télégonos, qui ne le reconnaît pas.",
     ],
     chips: ["ulysse", "pénélope", "télémaque", "circé", "télégonos"],
+    treeRoot: "ulysse",
+    treeScope: ["ulysse", "pénélope", "télémaque", "circé", "télégonos"],
   },
 };
 
@@ -2545,11 +2593,37 @@ function renderGenealogyOverview(key){
     return renderPaywall({ name: data.title, note: data.paragraphs[0] });
   }
   const chips = data.chips.filter(cid => cid in DEITY_NOTES);
+  // Arbre multi-branches, limité à treeScope, placé au-dessus du texte explicatif quand cet
+  // écran en définit un (Troie, Atrides, cycle thébain, famille d'Ulysse) — demande explicite :
+  // « tu as enlevé l'arbre de Troie [...] à mettre au-dessus du texte explicatif ». Reste
+  // distinct de la fiche familiale générique centrée sur une seule figure (jamais réintroduite
+  // ici : voir le commentaire plus haut sur ces écrans « explication globale »), puisque
+  // buildScopedBranch part d'une racine mais suit toutes les unions et enfants pertinents au
+  // fil du texte, sur plusieurs générations.
+  let treeHTML = "";
+  if(data.treeRoot){
+    const connectors = [];
+    FT_SEQ = 0;
+    const scope = new Set(data.treeScope || []);
+    const branch = buildScopedBranch(connectors, data.treeRoot, scope);
+    FT_CONNECTORS = connectors;
+    treeHTML = `
+      <div class="ft-wrap">
+        <div class="ft-scroll">
+          <div class="ft-tree" id="ftTree">
+            ${branch.html}
+            <svg class="ft-links" id="ftLinks"></svg>
+          </div>
+        </div>
+      </div>
+    `;
+  }
   return `
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
       <h2>${escapeHTML(data.title)}</h2>
     </div>
+    ${treeHTML}
     ${data.paragraphs.map(p => `<p class="lore-text">${linkifyLore(p)}</p>`).join("")}
     ${chips.length ? `
       <div class="related">
@@ -2594,15 +2668,38 @@ function renderGenealogy(id){
     const ancestorsHTML = [ftAncestorBranchHTML(connectors, fatherCard, card.parents[0])];
     if(motherCard) ancestorsHTML.push(ftAncestorBranchHTML(connectors, motherCard, card.parents[1]));
     const filteredAncestorsHTML = ancestorsHTML.filter(Boolean);
-    const combinedIds = [...card.siblings, id].sort(byGenealogyDisplayName);
+
+    // Ne placer sous le couple de parents que la fratrie de sang complet (mêmes deux parents) —
+    // un demi-frère ou une demi-sœur (un seul parent partagé, l'autre différent) n'appartient
+    // pas à cette union-là et ne doit jamais être dessiné comme s'il en descendait (signalé :
+    // Astyanax, fils d'Hector et d'Andromaque, affiché à tort comme fils de Néoptolème sous
+    // prétexte qu'il partage Andromaque avec Molossos). Chaque demi-frère/sœur est relié plus
+    // bas uniquement à la carte du parent réellement commun.
+    const parentSet = new Set(card.parents);
+    const fullSiblings = [];
+    const halfSiblings = [];
+    for(const sib of card.siblings){
+      const sibParents = GENEALOGY_PARENTS[sib] || [];
+      const sameParents = sibParents.length === card.parents.length && sibParents.every(p => parentSet.has(p));
+      (sameParents ? fullSiblings : halfSiblings).push(sib);
+    }
+
+    const combinedIds = [...fullSiblings, id].sort(byGenealogyDisplayName);
     const combinedNodes = combinedIds.map(pid => pid === id
       ? ftPersonBranchHTML(connectors, id, card.childUnions, { self: true })
       : ftLeaf(connectors, pid));
+    const halfSiblingNodes = halfSiblings.map(pid => ftLeaf(connectors, pid, { half: true }));
     const parentsUnion = ftBranchHTML(connectors, {
       cardA: fatherCard,
       cardB: motherCard,
-      childrenHTML: combinedNodes.map(n => n.html).join(""),
-      childSlots: combinedNodes.map(n => n.slot),
+      childrenHTML: combinedNodes.map(n => n.html).join("") + halfSiblingNodes.map(n => n.html).join(""),
+      childSlots: combinedNodes.map(n => n.slot), // les demi-frères/sœurs sont exclus d'ici : leur connecteur est posé séparément ci-dessous, jamais depuis ce couple.
+    });
+    halfSiblings.forEach((sib, i) => {
+      const sibParents = GENEALOGY_PARENTS[sib] || [];
+      const sharedParent = card.parents.find(p => sibParents.includes(p));
+      const anchorSlot = sharedParent === card.parents[0] ? fatherCard.slot : (motherCard ? motherCard.slot : fatherCard.slot);
+      connectors.push({ unionSlot: anchorSlot, childSlots: [halfSiblingNodes[i].slot] });
     });
     treeHTML = `
       ${filteredAncestorsHTML.length ? `<div class="ft-ancestors-row">${filteredAncestorsHTML.join("")}</div>` : ""}
@@ -2880,7 +2977,7 @@ const GENEALOGY_SPECIAL_SCREENS = {
   thebanOverview: () => renderGenealogyOverview("theban"),
   ulysseOverview: () => renderGenealogyOverview("ulysseFamily"),
 };
-const GENEALOGY_WIDE_SCREENS = new Set(["genealogy", "olympiansOverview", "titansOverview", "perseeLineage"]);
+const GENEALOGY_WIDE_SCREENS = new Set(["genealogy", "olympiansOverview", "titansOverview", "perseeLineage", "troyOverview", "atridesOverview", "thebanOverview", "ulysseOverview"]);
 
 function activeTabType(){
   if(currentScreen.type === "figureDetail") return "figures";
