@@ -1230,3 +1230,29 @@ paragraphe des Mystères d'Éleusis et une nouvelle section « Culte et religion
 nouvelles illustrations s'affichent sur leurs fiches respectives (dont « Couronne », vérifiée
 spécifiquement pour l'absence de halo résiduel autour du fond dégradé de l'image source).
 `service-worker.js` : `pantheon-v24` → `pantheon-v25`.
+
+## Éclair/Foudre : examinés, gardés séparés — cinq nouvelles illustrations
+
+**« Éclair » et « Foudre » : pas un doublon.** Demande explicite d'étudier si une fusion,
+comme celle de « Blé »/« Épis de blé », serait pertinente ici aussi. Comparaison faite avant
+toute décision : contrairement au cas précédent (cinq paragraphes de lore partagés mot pour
+mot), les deux fiches ne partagent aucun paragraphe identique — seulement une origine commune
+mentionnée en une phrase (« L'éclair partage son origine avec la foudre »). Elles racontent
+deux mythes distincts (le sacrifice de Sémélé pour « Foudre », l'hybris punie de Salmonée pour
+« Éclair »), la seconde introduit une association à part entière avec Poséidon (absente de
+« Foudre »), et les deux restent dans des catégories différentes (Mythologie / Astres &
+phénomènes) — exactement le même schéma que « Char »/« Char solaire » ou « Torche »/« Torches »,
+déjà conservés séparés ailleurs dans le corpus pour la même raison : des angles distincts sur
+un motif apparenté, pas une redite. Décision : aucune fusion, aucun changement de contenu.
+
+**Cinq nouvelles illustrations.** Corne d'abondance, Eau, Dauphin, Cyprès et Égide rejoignent
+`SYMBOL_ILLUSTRATIONS` (34 → 39). Deux images (Eau, Cyprès) arrivaient sur un fond sombre en
+dégradé plutôt qu'un simple détourage net — vérifiées individuellement après traitement :
+aucun halo résiduel une fois replacées sur le fond ivoire de l'appli.
+
+Testé par un script dédié (`scratchpad`, 14 vérifications) + la suite complète remise à jour et
+repassée au vert (128 + 17 + 16 + 7 + 23 + 25 + 25 vérifications, dont le nouveau décompte à 39
+illustrations). Vérifié aussi visuellement par capture d'écran Playwright sur les cinq
+nouvelles fiches, dont « Égide » et « Eau » contrôlées spécifiquement pour l'absence de tout
+résidu de fond.
+`service-worker.js` : `pantheon-v25` → `pantheon-v26`.

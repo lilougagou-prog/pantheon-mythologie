@@ -481,6 +481,11 @@ const SYMBOL_ILLUSTRATIONS = {
   "couronne": "assets/symbol-couronne.webp",
   "crabe": "assets/symbol-crabe.webp",
   "cygne": "assets/symbol-cygne.webp",
+  "corne d'abondance": "assets/symbol-corne-abondance.webp",
+  "eau": "assets/symbol-eau.webp",
+  "dauphin": "assets/symbol-dauphin.webp",
+  "cyprès": "assets/symbol-cypres.webp",
+  "égide": "assets/symbol-egide.webp",
   // Les cinq entrées suivantes réutilisent telles quelles les illustrations déjà fournies pour
   // les icônes de catégorie de la carte (MAP_CATEGORY_ILLUSTRATIONS) — même sujet, pas besoin
   // d'un second détourage : sanctuaire → temple, montagne → montagne, détroit/mers → mer,
