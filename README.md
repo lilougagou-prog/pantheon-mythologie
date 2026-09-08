@@ -16,13 +16,13 @@ une **généalogie des dieux** navigable (pas encore construite, voir plus bas).
 
 ## Contenu
 
-- **289 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
+- **311 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
   quelles depuis Tarot-mythologie (mêmes textes, mêmes portraits, même mécanisme de
   citations croisées `(voir la fiche « Nom »)` résolu par `linkifyLore()`), complétées par
-  54 figures créées directement dans Panthéon (18 primordiales et Titans, 11 pour étoffer les
+  76 figures créées directement dans Panthéon (18 primordiales et Titans, 11 pour étoffer les
   lignées de Cadmos et de Zeus/Europe, 10 pour affilier tous les enfants déjà recensés à leur
-  mère ou leur père, 15 pour combler des lacunes de parenté et des homonymies repérées par
-  l'utilisatrice — voir plus bas). Contrairement à l'appli
+  mère ou leur père, 37 pour combler des lacunes de parenté, des homonymies et une lignée
+  complète jusqu'à Rome repérées par l'utilisatrice — voir plus bas). Contrairement à l'appli
   Tarot, qui ne garde localement que les 78 figures directement incarnées par une carte,
   Panthéon garde l'intégralité du corpus : c'est la collection complète, du premier Titan
   au dernier héros mineur.
@@ -1513,3 +1513,55 @@ tout désync `DEITY_NOTES`/`content.json`) + la suite complète repassée au ver
 visuellement par Playwright sur la fiche d'Anchise : la note s'affiche désormais en deux phrases
 claires, sans plus aucune trace de la construction signalée.
 `service-worker.js` : `pantheon-v33` → `pantheon-v34`.
+
+## Arbre d'Énée : chevauchement corrigé, parents d'Anchise, lignée jusqu'à Romulus et Remus
+
+Trois retours sur l'arbre généalogique d'Énée/Ascagne, capture d'écran à l'appui.
+
+**Chevauchement des connecteurs** : sur l'arbre d'Ascagne, la ligne reliant Aphrodite/Anchise
+traversait la carte de Priam au lieu de rester à côté. Cause : `.ft-ancestors-row` (la rangée
+qui affiche les deux lignées de grands-parents côte à côte) acceptait un retour à la ligne
+(`flex-wrap: wrap`) — sur un écran étroit, la seconde branche (Priam/Hécube) tombait sous la
+première au lieu de rester alignée avec Créüse, cassant la géométrie que `drawFamTree()`
+suppose pour tracer ses lignes. Premier cas où une figure a ses deux lignées de grands-parents
+documentées des deux côtés à la fois (Ascagne, via Énée et via Créüse) — le bug ne pouvait pas
+apparaître avant. Corrigé en `nowrap`, comme le fait déjà `.ft-children-row` juste en dessous :
+le débordement est géré par le défilement horizontal existant (`.ft-scroll`), jamais par un
+retour à la ligne.
+
+**Parents d'Anchise** : « il me semble qu'ils sont reliés à Priam » — exact. Anchise et Priam
+sont cousins au second degré, tous deux arrière-petits-fils de Tros (roi légendaire de Troade,
+qui lui donne son nom) par deux de ses fils : Ilos, puis Laomédon, puis Priam d'un côté ;
+Assaracus, puis Capys, puis Anchise de l'autre. Cinq nouvelles fiches (Tros, Assaracus, Capys,
+Ilos, Laomédon) rendent cette parenté visible et cliquable dans l'arbre plutôt que simplement
+racontée dans un texte.
+
+**Lignée d'Ascagne jusqu'à Romulus et Remus** : la note d'Ascagne affirmait « sa lignée mènera
+aux jumeaux Romulus et Remus » sans que l'arbre ne le montre nulle part. Corrigé en ajoutant la
+liste royale traditionnelle d'Albe la Longue rapportée par Tite-Live (Histoire romaine, I, 3) :
+Silvius, Énée Silvius, Latinus Silvius, Alba, Atys, Capys (roi d'Albe — homonyme sans rapport
+avec le Capys troyen ajouté ci-dessus), Capétus, Tiberinus (qui donne son nom au Tibre),
+Agrippa, Romulus Silvius (foudroyé par Zeus), Aventinus (qui donne son nom à la colline),
+Proca, puis ses deux fils Numitor (détrôné) et Amulius (l'usurpateur), et enfin Rhéa Silvia,
+mère de Romulus et Remus par Arès. Dix-sept nouvelles fiches, chacune reliée à la suivante, qui
+rendent désormais possible de partir d'Ascagne et de cliquer de génération en génération
+jusqu'aux jumeaux fondateurs de Rome.
+
+Deux nouvelles entrées dans `DEITY_NAME_OVERRIDES` servaient déjà à désambiguïser des homonymes
+(voir plus haut, round Persès/Antiope/Atlas) ; ce round leur trouve un second usage : afficher
+proprement un nom composé dont l'id, à tiret, ne doit jamais apparaître tel quel à l'écran
+(« Énée Silvius », « Latinus Silvius », « Romulus Silvius », « Rhéa Silvia », et le nouvel
+homonyme « Capys (roi d'Albe) »).
+
+Vingt-deux figures ajoutées au total. 311 entrées `DEITY_NOTES` désormais (289 + 22), 306
+fiches premium `content.json` (284 + 22). Invariant du corpus toujours respecté.
+
+Testé par un script dédié (`scratchpad`, 115 vérifications : la CSS `nowrap`, chaque maillon des
+deux lignées vérifié un par un plutôt que globalement, la remontée effective jusqu'à l'ancêtre
+commun Tros depuis Anchise et depuis Priam, la redescente effective jusqu'à Ascagne depuis
+Romulus, et l'affichage correct de tous les noms composés) + la suite complète repassée au
+vert. Vérifié aussi visuellement par Playwright : l'arbre d'Ascagne ne chevauche plus rien ;
+l'arbre de Tros montre ses deux branches, Assaracus et Ilos, côte à côte ; l'arbre de Rhéa
+Silvia montre Numitor au-dessus et Romulus/Remus en dessous, la lignée complète tenant dans un
+seul écran.
+`service-worker.js` : `pantheon-v34` → `pantheon-v35`.

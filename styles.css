@@ -384,9 +384,15 @@ h1, h2, h3{
 .ft-line{ stroke: var(--bronze); stroke-width: 1.5px; fill: none; }
 .ft-joint{ fill: var(--bronze); }
 
+/* nowrap, jamais wrap : quand une figure a ses deux lignées de grands-parents documentées (ex.
+   Ascagne, via Énée et via Créüse), un retour à la ligne ferait tomber la seconde branche sous
+   la première au lieu de la garder à côté — cassant la géométrie que drawFamTree() suppose pour
+   tracer ses lignes, qui se mettaient alors à traverser des cartes sans rapport (signalé : la
+   carte de Priam traversée par le connecteur d'Aphrodite/Anchise). .ft-scroll (défilement
+   horizontal) gère déjà le débordement, exactement comme .ft-children-row plus bas. */
 .ft-ancestors-row{
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   gap: 56px;
   margin-bottom: 40px;
