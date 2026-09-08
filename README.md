@@ -1840,3 +1840,18 @@ déverrouillage d'Expert avec la clé d'aperçu propriétaire, retour visuel cor
 les QCM et la ronde d'appariement, écran de saisie libre (bonne/mauvaise réponse, tolérance
 accents/casse), bouton contextuel sur la fiche de Zeus. Vérifié aussi en mode sombre.
 `service-worker.js` : `pantheon-v40` → `pantheon-v41`.
+
+## Cinq nouvelles illustrations : Lion, Lotus, Lune, Lyre, Miroir
+
+Lion, Lotus, Lune, Lyre et Miroir rejoignent `SYMBOL_ILLUSTRATIONS` (59 → 64) — cinq images
+fournies directement par l'utilisatrice, détourées (fond transparent, vérifié par le canal
+alpha avant intégration plutôt que de faire confiance à l'aperçu miniature, qui affichait à tort
+Lotus et Miroir sur un fond sombre alors que leur transparence réelle est intacte), retaillées à
+520 px de long côté maximum et converties en WebP — même traitement que toutes les illustrations
+précédentes.
+
+Testé par la suite complète remise à jour et repassée au vert (178 vérifications, dont le
+nouveau décompte à 64 illustrations et l'existence de chacun des 5 nouveaux fichiers). Vérifié
+aussi visuellement par Playwright sur les cinq nouvelles fiches, en clair et en sombre : aucun
+cadre ni fond parasite, le dégradé de la page transparaît bien à travers chaque détourage.
+`service-worker.js` : `pantheon-v41` → `pantheon-v42`.
