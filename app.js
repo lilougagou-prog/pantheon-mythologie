@@ -592,12 +592,19 @@ const SYMBOL_ILLUSTRATIONS = {
   "sanglier": "assets/symbol-sanglier.webp",
   "sceptre": "assets/symbol-sceptre.webp",
   "scorpion": "assets/symbol-scorpion.webp",
-  // Les cinq entrées suivantes réutilisent telles quelles les illustrations déjà fournies pour
+  "serpent": "assets/symbol-serpent.webp",
+  "soleil": "assets/symbol-soleil.webp",
+  "taureau": "assets/symbol-taureau.webp",
+  // Temple a rejoint sa propre illustration dédiée (assets/symbol-temple.webp, fournie par
+  // l'utilisatrice) — ne réutilise donc plus l'icône de catégorie de carte comme les quatre
+  // suivants.
+  "temple": "assets/symbol-temple.webp",
+  "terre": "assets/symbol-terre.webp",
+  // Les quatre entrées suivantes réutilisent telles quelles les illustrations déjà fournies pour
   // les icônes de catégorie de la carte (MAP_CATEGORY_ILLUSTRATIONS) — même sujet, pas besoin
-  // d'un second détourage : sanctuaire → temple, montagne → montagne, détroit/mers → mer,
-  // source → source, monde souterrain → monde souterrain (demande explicite : « monde
-  // souterrain = enfers », le même dessin sert les deux endroits).
-  "temple": "assets/map-icon-sanctuaire.webp",
+  // d'un second détourage : montagne → montagne, détroit/mers → mer, source → source, monde
+  // souterrain → monde souterrain (demande explicite : « monde souterrain = enfers », le même
+  // dessin sert les deux endroits).
   "montagne": "assets/map-icon-montagne.webp",
   "mer": "assets/map-icon-detroit.webp",
   "source": "assets/map-icon-source.webp",

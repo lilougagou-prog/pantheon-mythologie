@@ -1933,3 +1933,33 @@ Testé par la suite complète remise à jour et repassée au vert (218 vérifica
 nouveau décompte à 84 illustrations). Vérifié aussi visuellement par Playwright sur les cinq
 nouvelles fiches, en clair et en sombre.
 `service-worker.js` : `pantheon-v45` → `pantheon-v46`.
+
+## Cinq nouvelles illustrations : Serpent, Soleil, Taureau, Temple, Terre
+
+Quatre symboles rejoignent `SYMBOL_ILLUSTRATIONS` pour la première fois (Serpent, Soleil,
+Taureau, Terre), et un cinquième change de traitement plutôt que d'être ajouté :
+
+- **Temple passe d'une icône réutilisée à sa propre illustration dédiée.** Depuis un round
+  précédent, l'entrée « temple » pointait vers `map-icon-sanctuaire.webp`, l'icône de
+  catégorie de la carte, faute d'un détourage propre au symbole. L'utilisatrice a fourni une
+  image dédiée cette fois : l'entrée est donc sortie du bloc de réutilisation (qui passe de
+  cinq à quatre entrées : montagne, mer/détroit, source, monde souterrain restent
+  inchangées) et pointe maintenant vers `assets/symbol-temple.webp`. L'icône de carte
+  d'origine (`map-icon-sanctuaire.webp`) reste utilisée telle quelle par
+  `MAP_CATEGORY_ILLUSTRATIONS`, qui ne dépend pas de ce changement.
+- Aucune coquille de légende à corriger cette fois (« Serpent soleil taureau temple terre »
+  sans ambiguïté), et aucune des cinq images n'avait le problème de bords durs de Rivière —
+  toutes sont des détourages classiques sur fond transparent, y compris le nouveau Temple.
+
+Les cinq images sont retaillées à 520px de long côté maximum et converties en WebP.
+`SYMBOL_ILLUSTRATIONS` compte désormais 88 clés (84 + les 4 nouvelles ; Temple existait déjà).
+À noter : Serpent fait partie des cinq symboles gratuits dont le contenu complet est déjà
+intégré directement dans `SYMBOL_LIBRARY` (`FREE_SYMBOL_IDS`), donc sans entrée dans
+`content.json` — comportement attendu, pas un oubli.
+
+Testé par la suite complète remise à jour et repassée au vert (227 vérifications, dont le
+nouveau décompte à 88 illustrations et une vérification dédiée que Temple utilise bien son
+illustration propre). Vérifié aussi visuellement par Playwright sur les cinq nouvelles
+fiches, en clair et en sombre — Temple en particulier, pour confirmer que la nouvelle
+illustration dédiée s'intègre mieux que l'ancienne icône de carte réutilisée.
+`service-worker.js` : `pantheon-v46` → `pantheon-v47`.
