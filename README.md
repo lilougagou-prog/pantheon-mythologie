@@ -1007,3 +1007,52 @@ osm-intl → OSM standard). Vérifié aussi visuellement par captures d'écran P
 celui de la lignée de Persée n'ont plus de ligne traversant un portrait, la figure du jour
 (tombée sur Pâris) affiche l'intégralité de la scène du jugement au-dessus du texte.
 `service-worker.js` : `pantheon-v18` → `pantheon-v19`.
+
+## Incohérence « ailes », audit complet des divinités associées, second bouton retour
+
+Signalement précis : la fiche « Ailes » évoque Niké, Éros et Hermès dans son texte
+(desc/atGlance/lore), mais sa section « Divinités associées » ne listait plus que Hermès, Éros
+et Dédale — Niké, pourtant citée en premier, avait disparu de la liste. Corrigée directement,
+puis demande explicite d'étendre la vérification à toute la bibliothèque : « Fais un point sur
+toutes les fiches pour bien vérifier que chaque divinité citée dans le texte se retrouve bien en
+divinité associée. »
+
+Un script d'audit (`scratchpad`) fusionne, pour chacun des 94 symboles, le texte (`desc` +
+`atGlance` + `why` + les phrases de `lore` contenant « associé·e(s) ») et détecte tout nom de
+figure connue (présente dans `DEITY_NOTES`) qui apparaît dans ce texte sans figurer dans le
+tableau `deities` de la fiche. Premier passage : 47 fiches signalées. Chacune relue
+individuellement plutôt que corrigée mécaniquement — un nom cité en exemple secondaire, en
+contraste (« contrairement à Hermès... ») ou dans un mythe d'une fiche voisine ne justifie pas
+un ajout, contrairement à un nom présenté comme un rôle propre au symbole ou explicitement
+inclus dans sa phrase de clôture « associé(e) à ». Résultat : 29 fiches complétées (dont
+« Ailes » + Icare, « Pomme » + Pâris — cité dans le titre même de sa description et pourtant
+absent —, « Sanglier » + Adonis, « Narcisse (fleur) » + Déméter/Gaïa/Hadès/Zeus, le mythe fondateur
+complet de la fleur) et une coquille corrigée dans « Chaîne », dont la phrase de clôture citait
+« Pan » — jamais mentionné ailleurs dans la fiche — alors que le texte ne parle que de Prométhée
+et d'Andromède. 17 signalements restants examinés et volontairement laissés en l'état : noms
+cités en repoussoir ou en alternative (le pont « plutôt que » Charon/Hermès/Iris), exemples
+incidents d'une liste plus large (les Danaïdes parmi « Tantale, Sisyphe... »), ou faux positifs
+du détecteur de noms (« harmonie » employé comme nom commun, pas comme la déesse Harmonie).
+
+Deux autres demandes traitées dans la foulée :
+
+- **Second bouton « ← Retour » en bas de fiche.** Jusqu'ici, seul le haut de chaque fiche
+  (figure, symbole, lieu) portait un bouton retour — sur une fiche longue, il fallait remonter
+  tout en haut pour revenir en arrière. Nouvelle fonction partagée `backButtonFooterHTML()`,
+  ajoutée en fin d'`<article>` dans les trois fonctions de rendu détail ; même comportement
+  (`data-nav="back"`), capté par la délégation d'événements déjà en place — aucune logique de
+  navigation nouvelle.
+- **Suppression des mentions de certitude.** Chaque divinité associée affichait un texte en
+  italique du type « attesté par les sources antiques », « interprétation », etc.
+  (`SYMBOL_CERTAINTY_LABELS`). Jugé superflu et surchargeant la fiche sans réel intérêt pour la
+  lecture : constante et rendu retirés (le champ `certainty` reste dans les données, simplement
+  plus affiché).
+
+Testé par un script dédié (`scratchpad`, 17 vérifications : boutons retour présents dans les
+trois fonctions de rendu détail, constante et classe de certitude bien supprimées, Niké/Icare
+présents dans « ailes », coquille « Chaîne » corrigée, échantillon des nouvelles associations) +
+la suite de la veille remise à jour et repassée au vert (99 vérifications). Vérifié aussi
+visuellement par captures d'écran Playwright sur une fiche symbole premium (« Ailes », avec
+clé d'aperçu propriétaire) et une fiche figure gratuite (« Zeus ») : les deux boutons retour
+s'affichent bien, en haut et en bas, aucun texte de certitude résiduel.
+`service-worker.js` : `pantheon-v19` → `pantheon-v20`.
