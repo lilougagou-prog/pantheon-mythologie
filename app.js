@@ -486,6 +486,11 @@ const SYMBOL_ILLUSTRATIONS = {
   "dauphin": "assets/symbol-dauphin.webp",
   "cyprès": "assets/symbol-cypres.webp",
   "égide": "assets/symbol-egide.webp",
+  "éclair": "assets/symbol-eclair.webp",
+  "éclipse": "assets/symbol-eclipse.webp",
+  "étoiles": "assets/symbol-etoile.webp",
+  "feu": "assets/symbol-feu.webp",
+  "figue": "assets/symbol-figue.webp",
   // Les cinq entrées suivantes réutilisent telles quelles les illustrations déjà fournies pour
   // les icônes de catégorie de la carte (MAP_CATEGORY_ILLUSTRATIONS) — même sujet, pas besoin
   // d'un second détourage : sanctuaire → temple, montagne → montagne, détroit/mers → mer,

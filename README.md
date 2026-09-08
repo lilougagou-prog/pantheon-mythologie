@@ -1256,3 +1256,16 @@ illustrations). Vérifié aussi visuellement par capture d'écran Playwright sur
 nouvelles fiches, dont « Égide » et « Eau » contrôlées spécifiquement pour l'absence de tout
 résidu de fond.
 `service-worker.js` : `pantheon-v25` → `pantheon-v26`.
+
+## Cinq nouvelles illustrations : Éclair, Éclipse, Étoile, Feu, Figue
+
+Éclair, Éclipse, Étoile, Feu et Figue rejoignent `SYMBOL_ILLUSTRATIONS` (39 → 44). Images déjà
+détourées (transparence réelle), traitées par simple recadrage + réduction (`bg_remove.py`,
+520px max) ; vérifiées individuellement — Éclair et Étoile portaient un halo lumineux dans
+leur image source, sans laisser de résidu visible une fois replacées sur le fond de l'appli.
+
+Testé par un script dédié (`scratchpad`, 12 vérifications) + la suite complète remise à jour et
+repassée au vert (138 + 17 + 16 + 7 + 23 + 25 + 25 + 14 vérifications, dont le nouveau décompte
+à 44 illustrations). Vérifié aussi visuellement par capture d'écran Playwright sur les cinq
+nouvelles fiches.
+`service-worker.js` : `pantheon-v26` → `pantheon-v27`.
