@@ -472,6 +472,10 @@ const SYMBOL_ILLUSTRATIONS = {
   "chemin": "assets/symbol-chemin.webp",
   "chêne": "assets/symbol-chene.webp",
   "cheval": "assets/symbol-cheval.webp",
+  "chèvre": "assets/symbol-chevre.webp",
+  "chien": "assets/symbol-chien.webp",
+  "chouette": "assets/symbol-chouette.webp",
+  "clé": "assets/symbol-cle.webp",
   // Les cinq entrées suivantes réutilisent telles quelles les illustrations déjà fournies pour
   // les icônes de catégorie de la carte (MAP_CATEGORY_ILLUSTRATIONS) — même sujet, pas besoin
   // d'un second détourage : sanctuaire → temple, montagne → montagne, détroit/mers → mer,
@@ -482,6 +486,15 @@ const SYMBOL_ILLUSTRATIONS = {
   "mer": "assets/map-icon-detroit.webp",
   "source": "assets/map-icon-source.webp",
   "monde souterrain": "assets/map-icon-souterrain.webp",
+};
+// Même principe que DEITY_INLINE_PORTRAITS (ci-dessous), mais pour une fiche symbole plutôt
+// qu'une fiche figure : une illustration insérée juste avant le paragraphe de lore qui
+// contient cfg.match — voir son utilisation dans renderSymbolDetail(). Ex. Cerbère, mentionné
+// dans la fiche « Chien » sans avoir sa propre fiche figure.
+const SYMBOL_INLINE_ILLUSTRATIONS = {
+  "chien": [
+    { match: "Cerbère", src: "assets/deity-cerbere.webp", alt: "Cerbère, le chien à trois têtes qui garde l'entrée des Enfers" },
+  ],
 };
 const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux"]);
 const DEITY_INLINE_PORTRAITS = {
@@ -1320,7 +1333,14 @@ function getRecentlyViewed(){
   catch(e){ return []; }
 }
 
+// Avant de quitter l'écran courant, on mémorise sa position de défilement directement sur
+// l'objet écran qui va rejoindre navStack — « ← Retour » restaure ensuite cette position
+// (voir back() ci-dessous) plutôt que de toujours remonter en haut de la liste. Pour les
+// trois écrans de liste (figures/symboles/lieux), le texte de recherche en cours est mémorisé
+// de la même façon (voir bindScreenEvents()) et repasse au rendu de l'écran, pour que la
+// position restaurée corresponde bien à la même liste (filtrée ou non) qu'au moment du départ.
 function go(screen){
+  currentScreen.scrollY = window.scrollY;
   navStack.push(currentScreen);
   currentScreen = screen;
   recordRecentlyViewed(screen.type, screen.id);
@@ -1331,7 +1351,7 @@ function go(screen){
 function back(){
   currentScreen = navStack.pop() || { type: "home" };
   render();
-  window.scrollTo(0, 0);
+  window.scrollTo(0, currentScreen.scrollY || 0);
 }
 
 // Depuis le menu fixe : toujours repartir d'une pile vide plutôt que d'empiler sans fin —
@@ -1593,13 +1613,16 @@ function renderFiguresGrid(query){
   return `<div class="list">${list.map(figureRowHTML).join("")}</div>`;
 }
 
-function renderFigures(){
+// query : texte de recherche à restaurer (voir currentScreen.query dans bindScreenEvents()),
+// pour qu'un retour en arrière retrouve la même liste filtrée qu'au moment du départ, pas la
+// liste complète.
+function renderFigures(query = ""){
   return `
     <div class="screen-header">
       <h2>Figures mythologiques</h2>
     </div>
-    <input type="search" class="search" id="figuresSearch" placeholder="Chercher une figure (nom, rôle...)">
-    <div id="figuresGrid">${renderFiguresGrid("")}</div>
+    <input type="search" class="search" id="figuresSearch" placeholder="Chercher une figure (nom, rôle...)" value="${escapeHTML(query)}">
+    <div id="figuresGrid">${renderFiguresGrid(query)}</div>
   `;
 }
 
@@ -1617,13 +1640,13 @@ function renderSymbolsGrid(query){
   return `<div class="list">${list.map(symbolRowHTML).join("")}</div>`;
 }
 
-function renderSymbols(){
+function renderSymbols(query = ""){
   return `
     <div class="screen-header">
       <h2>Bibliothèque symbolique</h2>
     </div>
-    <input type="search" class="search" id="symbolsSearch" placeholder="Chercher un symbole">
-    <div id="symbolsGrid">${renderSymbolsGrid("")}</div>
+    <input type="search" class="search" id="symbolsSearch" placeholder="Chercher un symbole" value="${escapeHTML(query)}">
+    <div id="symbolsGrid">${renderSymbolsGrid(query)}</div>
   `;
 }
 
@@ -2054,6 +2077,7 @@ function renderSymbolDetail(id){
     // suffit, s redevient l'équivalent de la fiche complète d'avant la séparation du bundle.
     s = { ...s, ...cached.content };
   }
+  const inlineIllustrations = SYMBOL_INLINE_ILLUSTRATIONS[id] || [];
   return `
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
@@ -2077,7 +2101,10 @@ function renderSymbolDetail(id){
         </section>
       ` : ""}
 
-      ${(s.lore || []).length ? `<h3>Dans la mythologie</h3>${s.lore.map(p => `<p class="lore-text">${linkifyLore(p)}</p>`).join("")}` : ""}
+      ${(s.lore || []).length ? `<h3>Dans la mythologie</h3>${s.lore.map(p => {
+        const inline = inlineIllustrations.find(cfg => p.includes(cfg.match));
+        return `${inline ? `<img class="symbol-illustration-inline" src="${escapeHTML(inline.src)}" alt="${escapeHTML(inline.alt)}" loading="lazy">` : ""}<p class="lore-text">${linkifyLore(p)}</p>`;
+      }).join("")}` : ""}
 
       <h3>Divinités associées</h3>
       ${symbolDeitiesHTML(mergedSymbolDeities(s))}
@@ -2455,9 +2482,15 @@ function renderGenealogy(id){
 // persisté d'une session à l'autre, un filtre reste secondaire par rapport au contenu lui-même.
 let activePlaceCategories = new Set(Object.keys(MAP_CATEGORY_META));
 
-function placesFilteredList(){
+// queryOverride : utilisé au tout premier rendu de l'écran (restauration depuis
+// currentScreen.query, voir renderPlaces()) — à ce moment-là #placesSearch n'existe pas
+// encore dans le DOM (il fait partie du même gabarit en cours de construction), donc lire sa
+// valeur ne marcherait pas. Les appels suivants (écouteur "input", carte) omettent l'argument
+// et relisent alors la valeur réelle du champ, déjà présent.
+function placesFilteredList(queryOverride){
   const searchEl = document.getElementById("placesSearch");
-  const q = normalizeSearch(searchEl ? searchEl.value : "").trim();
+  const raw = queryOverride !== undefined ? queryOverride : (searchEl ? searchEl.value : "");
+  const q = normalizeSearch(raw).trim();
   return MAP_PLACE_ENTRIES.filter(p =>
     activePlaceCategories.has(p.category) &&
     (!q || normalizeSearch(p.name + " " + p.desc).includes(q))
@@ -2606,13 +2639,13 @@ function placeRowHTML(p){
   </button>`;
 }
 
-function renderPlacesGrid(){
-  const list = placesFilteredList();
+function renderPlacesGrid(queryOverride){
+  const list = placesFilteredList(queryOverride);
   if(!list.length) return `<p class="empty">Aucun lieu ne correspond à ces critères.</p>`;
   return `<div class="list">${list.map(placeRowHTML).join("")}</div>`;
 }
 
-function renderPlaces(){
+function renderPlaces(query = ""){
   return `
     <div class="screen-header">
       <h2>Lieux mythologiques</h2>
@@ -2620,8 +2653,8 @@ function renderPlaces(){
     <p class="note">${MAP_PLACES.length} lieux réels — sanctuaires, montagnes, cités, îles, détroits, sources et entrées des Enfers — où la tradition antique situait ses mythes.</p>
     <div id="placesMap" class="places-map"><p class="map-fallback">Chargement de la carte…</p></div>
     ${placeFilterChipsHTML()}
-    <input type="search" class="search" id="placesSearch" placeholder="Chercher un lieu (nom, mythe...)">
-    <div id="placesGrid">${renderPlacesGrid()}</div>
+    <input type="search" class="search" id="placesSearch" placeholder="Chercher un lieu (nom, mythe...)" value="${escapeHTML(query)}">
+    <div id="placesGrid">${renderPlacesGrid(query)}</div>
   `;
 }
 
@@ -2713,9 +2746,9 @@ function render(){
   const app = document.getElementById("app");
   let html;
   switch(currentScreen.type){
-    case "figures": html = renderFigures(); break;
+    case "figures": html = renderFigures(currentScreen.query || ""); break;
     case "figureDetail": html = renderFigureDetail(currentScreen.id); break;
-    case "symbols": html = renderSymbols(); break;
+    case "symbols": html = renderSymbols(currentScreen.query || ""); break;
     case "symbolDetail": html = renderSymbolDetail(currentScreen.id); break;
     case "genealogyHome": html = renderGenealogyHome(); break;
     case "genealogy": html = renderGenealogy(currentScreen.id); break;
@@ -2723,7 +2756,7 @@ function render(){
     case "troyOverview": case "atridesOverview": case "thebanOverview": case "ulysseOverview":
       html = GENEALOGY_SPECIAL_SCREENS[currentScreen.type]();
       break;
-    case "places": html = renderPlaces(); break;
+    case "places": html = renderPlaces(currentScreen.query || ""); break;
     case "placeDetail": html = renderPlaceDetail(currentScreen.id); break;
     default: html = renderHome();
   }
@@ -2796,16 +2829,21 @@ function bindScreenEvents(){
       document.getElementById("genealogySearchResults").innerHTML = renderGenealogySearchResults(genealogySearch.value);
     });
   }
+  // Le texte tapé est aussi recopié sur currentScreen.query au fil de la frappe — ni plus ni
+  // moins que la position de défilement mémorisée dans go() — pour qu'un retour en arrière
+  // (voir back()) retrouve la même liste filtrée, pas la liste complète.
   const figuresSearch = document.getElementById("figuresSearch");
   if(figuresSearch){
     figuresSearch.addEventListener("input", () => {
       document.getElementById("figuresGrid").innerHTML = renderFiguresGrid(figuresSearch.value);
+      currentScreen.query = figuresSearch.value;
     });
   }
   const symbolsSearch = document.getElementById("symbolsSearch");
   if(symbolsSearch){
     symbolsSearch.addEventListener("input", () => {
       document.getElementById("symbolsGrid").innerHTML = renderSymbolsGrid(symbolsSearch.value);
+      currentScreen.query = symbolsSearch.value;
     });
   }
   const placesSearch = document.getElementById("placesSearch");
@@ -2813,6 +2851,7 @@ function bindScreenEvents(){
     placesSearch.addEventListener("input", () => {
       document.getElementById("placesGrid").innerHTML = renderPlacesGrid();
       renderPlacesMarkers();
+      currentScreen.query = placesSearch.value;
     });
   }
   // Les écrans d'arbre généalogique (fiche familiale, douze Olympiens) recréent #ftTree à

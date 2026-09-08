@@ -1160,3 +1160,39 @@ d'écran Playwright : accueil en clair et en sombre, recherche « zeus » (Zeus 
 figures, plus symboles et lieux liés), recherche généalogie « persée » (Persée en tête, clic
 qui atterrit bien sur son arbre), carte des lieux en mode sombre.
 `service-worker.js` : `pantheon-v22` → `pantheon-v23`.
+
+## Retour à la position dans la liste, cinq nouvelles illustrations
+
+**« ← Retour » retrouve la position exacte dans la liste.** Jusqu'ici, revenir en arrière
+remontait systématiquement en haut de l'écran quitté, recherche active comprise — sur une
+longue liste (274 figures), retrouver l'endroit précédent demandait de rescroller et parfois
+retaper sa recherche. `go()` mémorise désormais `window.scrollY` directement sur l'objet écran
+qui rejoint `navStack` juste avant de le quitter ; `back()` restaure cette position après avoir
+redessiné l'écran. Pour les trois écrans de liste (figures/symboles/lieux), le texte de
+recherche en cours est mémorisé de la même façon au fil de la frappe
+(`currentScreen.query`), et repasse au rendu de l'écran (`renderFigures(query)`,
+`renderSymbols(query)`, `renderPlaces(query)`) — sans quoi la position restaurée
+correspondrait à une liste complète différente de la liste filtrée quittée. Le mécanisme est
+générique (posé dans `go()`/`back()` eux-mêmes) : il vaut pour n'importe quel écran, pas
+seulement les trois listes.
+
+**Cinq nouvelles illustrations.** Chèvre, Chien, Chouette et Clé rejoignent
+`SYMBOL_ILLUSTRATIONS` (20 → 29 avec les précédentes, dont 5 réutilisées des icônes de carte) —
+« Chouette », bien que gratuite et déjà riche en contenu, n'avait encore aucune illustration.
+Cerbère, qui n'a pas de fiche figure propre, est intégré directement dans la fiche symbole
+« Chien », au-dessus du paragraphe qui le mentionne : nouveau mécanisme
+`SYMBOL_INLINE_ILLUSTRATIONS`, symétrique de `DEITY_INLINE_PORTRAITS` (déjà utilisé sur les
+fiches figure) mais appliqué aux fiches symbole, absent jusqu'ici. Nouvelle classe
+`.symbol-illustration-inline` (même traitement que l'illustration de tête — détourée, `contain`,
+ombre portée plutôt qu'un cadre — mais plus petite et insérée au fil du texte). Images
+fournies déjà détourées, recadrées et converties en WebP par le script `bg_remove.py` déjà
+utilisé pour les lots précédents.
+
+Testé par un script dédié (`scratchpad`, 25 vérifications) + la suite complète remise à jour et
+repassée au vert (107 + 17 + 16 + 7 + 23 vérifications, dont le nouveau décompte à 29
+illustrations). Vérifié aussi visuellement par capture d'écran Playwright : retour en arrière
+depuis une fiche figure, avec une recherche active et un défilement de 600px, restaure bien la
+même recherche et la même position (au lieu de remonter en haut) ; les quatre nouvelles
+illustrations s'affichent sur leurs fiches respectives ; l'image de Cerbère apparaît bien
+au-dessus du paragraphe qui le mentionne sur la fiche « Chien ».
+`service-worker.js` : `pantheon-v23` → `pantheon-v24`.

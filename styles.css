@@ -656,6 +656,19 @@ h1, h2, h3{
   filter: drop-shadow(0 6px 10px var(--shadow));
 }
 
+/* Même traitement que .symbol-illustration-big (détourée, contain, ombre portée plutôt
+   qu'un cadre), mais plus petite et insérée au fil d'un paragraphe de lore plutôt qu'en tête
+   de fiche — voir SYMBOL_INLINE_ILLUSTRATIONS (ex. Cerbère dans la fiche « Chien »). */
+.symbol-illustration-inline{
+  display: block;
+  max-width: 200px;
+  max-height: 200px;
+  width: 65%;
+  object-fit: contain;
+  margin: 10px auto;
+  filter: drop-shadow(0 4px 10px var(--shadow));
+}
+
 /* Vignette d'illustration devant le nom d'un symbole dans une chip (SYMBOL_ILLUSTRATIONS),
    pendant symbolique de .tree-portrait pour les figures. */
 .chip-symbol-icon{
