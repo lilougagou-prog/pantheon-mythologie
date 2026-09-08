@@ -577,6 +577,11 @@ const SYMBOL_ILLUSTRATIONS = {
   "olive": "assets/symbol-olive.webp",
   "olivier": "assets/symbol-olivier.webp",
   "ouroboros": "assets/symbol-ouroboros.webp",
+  "paon": "assets/symbol-paon.webp",
+  "papillon": "assets/symbol-papillon.webp",
+  "pavot": "assets/symbol-pavot.webp",
+  "pégase": "assets/symbol-pegase.webp",
+  "poisson": "assets/symbol-poisson.webp",
   // Les cinq entrées suivantes réutilisent telles quelles les illustrations déjà fournies pour
   // les icônes de catégorie de la carte (MAP_CATEGORY_ILLUSTRATIONS) — même sujet, pas besoin
   // d'un second détourage : sanctuaire → temple, montagne → montagne, détroit/mers → mer,

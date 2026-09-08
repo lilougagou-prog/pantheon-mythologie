@@ -1874,3 +1874,16 @@ Testé par la suite complète remise à jour et repassée au vert (188 vérifica
 nouveau décompte à 69 illustrations). Vérifié aussi visuellement par Playwright sur les cinq
 nouvelles fiches, en clair et en sombre.
 `service-worker.js` : `pantheon-v42` → `pantheon-v43`.
+
+## Cinq nouvelles illustrations : Paon, Papillon, Pavot, Pégase, Poisson
+
+Paon, Papillon, Pavot, Pégase et Poisson rejoignent `SYMBOL_ILLUSTRATIONS` (69 → 74) — même
+traitement que les rounds précédents : transparence vérifiée par le canal alpha avant
+intégration (Pavot affichait lui aussi un fond rouge/sombre flouté en aperçu, transparence
+réelle confirmée), retaillées à 520px de long côté maximum, converties en WebP. Les cinq
+symboles existaient déjà dans `SYMBOL_LIBRARY` sans illustration.
+
+Testé par la suite complète remise à jour et repassée au vert (198 vérifications, dont le
+nouveau décompte à 74 illustrations). Vérifié aussi visuellement par Playwright sur les cinq
+nouvelles fiches, en clair et en sombre.
+`service-worker.js` : `pantheon-v43` → `pantheon-v44`.
