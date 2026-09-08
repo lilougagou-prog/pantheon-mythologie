@@ -1997,3 +1997,14 @@ Comme le reste de `DEITY_PORTRAITS`, ces dix images ne sont pas ajoutées à `AS
 
 Testé par la suite complète remise à jour et repassée au vert (430 vérifications, dont un nouveau bloc dédié aux portraits : décompte à 96, existence de chaque fichier sur disque, et correspondance de chaque clé avec une figure réelle de `DEITY_NOTES`). Vérifié aussi visuellement par Playwright sur les dix nouvelles fiches, en clair et en sombre.
 `service-worker.js` : `pantheon-v48` → `pantheon-v49`.
+
+## Portrait de Zéthos + première illustration inline partagée entre deux fiches figures
+
+Zéthos (frère jumeau d'Amphion) reçoit son propre portrait — `DEITY_PORTRAITS` passe de 96 à 97. Une deuxième image, fournie dans le même lot, montre Amphion et Zéthos ensemble en train de bâtir les murailles de Thèbes (la lyre d'Amphion faisant venir les pierres, Zéthos les assemblant à la force des bras) : demande explicite de l'utilisatrice de la placer « dans chacune des fiches au-dessus du paragraphe mentionnant ce passage ».
+
+Mécanisme utilisé : `DEITY_INLINE_PORTRAITS`, déjà existant (même principe que `SYMBOL_INLINE_ILLUSTRATIONS` — une image insérée juste avant le paragraphe de lore qui contient une chaîne de repérage donnée) mais jusqu'ici jamais utilisé pour une scène partagée entre deux fiches figures plutôt qu'une seule. Chaque fiche (`amphion` et `zéthos`) reçoit sa propre entrée pointant vers le même fichier `assets/deity-amphion-zethos-murailles.jpg`, avec une chaîne de repérage différente puisque chaque fiche raconte le même épisode avec des mots différents — « les blocs des murailles de Thèbes se mirent en place » côté Amphion, « la construction des murailles de Thèbes » côté Zéthos. Marquée `wide: true` (comme le duo Chryséis/Briséis, précédent le plus proche) : l'image, une scène complète plutôt qu'un portrait resserré, aurait perdu Hermès en haut du cadre avec le recadrage 4:5 par défaut.
+
+Les deux images sont retaillées à 700px de large, JPEG qualité 88 — même format que le reste de `DEITY_PORTRAITS`/`DEITY_INLINE_PORTRAITS`. Non ajoutées à `ASSETS`, seule la version du cache est incrémentée, même logique que le round précédent.
+
+Testé par la suite complète remise à jour et repassée au vert (437 vérifications, dont un nouveau bloc vérifiant que les deux chaînes de repérage existent réellement dans le texte de `content.json`, pas seulement dans le code — pour ne jamais se retrouver avec une image qui ne s'affiche jamais faute de correspondance). Vérifié aussi visuellement par Playwright sur les deux fiches, en clair et en sombre : l'image apparaît bien au-dessus du bon paragraphe dans chacune.
+`service-worker.js` : `pantheon-v49` → `pantheon-v50`.

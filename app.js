@@ -516,6 +516,7 @@ const DEITY_PORTRAITS = {
   "alcée": "assets/deity-alcee.jpg",
   "alcmène": "assets/deity-alcmene.jpg",
   "amphion": "assets/deity-amphion.jpg",
+  "zéthos": "assets/deity-zethos.jpg",
 };
 // Même principe que DEITY_PORTRAITS, mais pour la bibliothèque symbolique : une illustration
 // dédiée (fournie par l'utilisatrice, fond détouré) qui remplace l'emoji d'un symbole partout où
@@ -707,6 +708,12 @@ const DEITY_INLINE_PORTRAITS = {
   ],
   "briséis": [
     { match: "consolées l'une par l'autre dans le camp achéen", src: "assets/deity-chryseis-briseis.jpg", alt: "Chryséis et sa cousine Briséis", wide: true },
+  ],
+  "amphion": [
+    { match: "les blocs des murailles de Thèbes se mirent en place", src: "assets/deity-amphion-zethos-murailles.jpg", alt: "Amphion et Zéthos bâtissant les murailles de Thèbes", wide: true },
+  ],
+  "zéthos": [
+    { match: "la construction des murailles de Thèbes", src: "assets/deity-amphion-zethos-murailles.jpg", alt: "Amphion et Zéthos bâtissant les murailles de Thèbes", wide: true },
   ],
 };
 
