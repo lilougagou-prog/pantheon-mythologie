@@ -16,14 +16,16 @@ une **généalogie des dieux** navigable (pas encore construite, voir plus bas).
 
 ## Contenu
 
-- **312 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
+- **317 figures mythologiques** (`DEITY_NOTES` + `DEITY_LORE`) — les 235 portées telles
   quelles depuis Tarot-mythologie (mêmes textes, mêmes portraits, même mécanisme de
   citations croisées `(voir la fiche « Nom »)` résolu par `linkifyLore()`), complétées par
-  77 figures créées directement dans Panthéon (18 primordiales et Titans, 11 pour étoffer les
+  82 figures créées directement dans Panthéon (18 primordiales et Titans, 11 pour étoffer les
   lignées de Cadmos et de Zeus/Europe, 10 pour affilier tous les enfants déjà recensés à leur
   mère ou leur père, 38 pour combler des lacunes de parenté, des homonymies et une lignée
-  complète jusqu'à Rome repérées par l'utilisatrice — voir plus bas). Contrairement à l'appli
-  Tarot, qui ne garde localement que les 78 figures directement incarnées par une carte,
+  complète jusqu'à Rome repérées par l'utilisatrice, et 5 pour matérialiser la filiation
+  d'Astréos, Pallas et Styx déjà racontée en toutes lettres dans les fiches de Crios et d'Éos
+  — voir plus bas). Contrairement à l'appli Tarot, qui ne garde localement que les 78 figures
+  directement incarnées par une carte,
   Panthéon garde l'intégralité du corpus : c'est la collection complète, du premier Titan
   au dernier héros mineur.
 - **90 symboles** (`SYMBOL_LIBRARY`) — bibliothèque complète, également dupliquée à
@@ -1636,3 +1638,59 @@ Testé par un script dédié (`scratchpad`, 9 vérifications) + la suite complè
 Vérifié aussi visuellement par Playwright sur la fiche du lieu Mycènes, jusqu'au clic effectif
 sur « Égisthe » menant bien à sa propre fiche.
 `service-worker.js` : `pantheon-v36` → `pantheon-v37`.
+
+## Enfants manquants dans les arbres (suite) : Éos, Astréos et les quatre vents
+
+« Il manque vraiment des enfants encore. Je viens de voir la fiche Éos, et le texte parle de ses
+enfants mais ce n'est pas concrétisé dans la filiation » — même classe de bug que la fiche
+d'Aphrodite plus haut (texte affirmant une filiation que `GENEALOGY_PARENTS` ne reflétait pas),
+retrouvée cette fois sur Éos.
+
+La fiche d'Éos raconte déjà, depuis sa création, qu'« unie à Astréos, dieu des étoiles, elle mit
+aussi au monde les quatre vents, dont Borée » — mais Astréos, bien que déjà nommé et décrit dans
+la fiche de Crios (« il engendra Astréos, dieu des étoiles et père des Vents avec Éos, Pallas...
+et un troisième fils, Persès »), n'existait encore comme fiche nulle part dans le corpus : ni
+notes, ni généalogie, ni contenu premium. Borée, lui, existait bel et bien comme fiche complète,
+avec une note qui affirmait déjà « fils d'Astréos et d'Éos » — mais sans qu'aucun lien
+`GENEALOGY_PARENTS` ne matérialise cette filiation, exactement le même défaut que celui déjà
+signalé sur Aphrodite/Éros au round correspondant.
+
+En creusant la fiche de Crios plus loin, la même situation se répétait une seconde fois : le
+texte y affirme aussi que Pallas (l'un des trois fils de Crios et Eurybie, comme Astréos) « uni à
+Styx » engendra Niké, Kratos, Bia et Zelos — quatre figures déjà présentes dans le corpus, avec
+des notes qui les décrivaient déjà comme « fille/fils du Titan Pallas et de Styx », mais là
+encore sans le moindre lien `GENEALOGY_PARENTS`, ni Pallas ni Styx n'existant eux-mêmes comme
+fiches.
+
+Cinq nouvelles fiches créées, chacune déjà nommée et décrite dans le texte existant d'une autre
+fiche avant cette création (même discipline que pour Astréos/Éros/Deimos plus haut : jamais rien
+inventé, seulement matérialisé) :
+- **Astréos**, dieu des étoiles, fils de Crios et d'Eurybie — relié à ses parents et présenté
+  comme le père des quatre Anémoi.
+- **Pallas**, Titan fils de Crios et d'Eurybie — à ne pas confondre ni avec l'épithète d'Athéna
+  ni avec le Géant homonyme, précision ajoutée dans sa fiche.
+- **Styx**, Océanide fille d'Océan et de Téthys, dont le fleuve scelle les serments divins —
+  épouse de Pallas, mère de Niké, Kratos, Bia et Zelos.
+- **Notos** et **Euros**, les deux vents (Sud et Est) que le texte d'Éos annonçait déjà (« les
+  quatre vents ») sans qu'ils existent encore comme fiches — complétant ainsi les quatre Anémoi
+  aux côtés de Borée et Zéphyr, déjà présents.
+
+Tous les liens de filiation qui en découlent ajoutés à `GENEALOGY_PARENTS` : Astréos et Pallas
+rattachés à Crios et Eurybie ; Borée, Zéphyr, Notos et Euros rattachés à Astréos et Éos ; Niké,
+Kratos, Bia et Zelos rattachés à Pallas et Styx. Citations `(voir la fiche « Nom »)` ajoutées ou
+complétées dans les textes premium déjà existants de Crios, Éos, Borée, Zéphyr et des quatre
+enfants de Pallas et Styx, pour que chaque nom nouvellement doté d'une fiche devienne cliquable
+dès sa première apparition — même règle que le round précédent.
+
+317 figures désormais (312 + 5), toutes avec note synchronisée entre `DEITY_NOTES` et
+`content.json`. Invariant du corpus toujours respecté (chaque id de `GENEALOGY_PARENTS` existe
+bien dans `DEITY_NOTES`).
+
+Testé par un script dédié (`scratchpad`, 39 vérifications) + la suite complète repassée au vert.
+Vérifié aussi visuellement par Playwright, avec un petit serveur local supplémentaire simulant
+`/api/content` (le paywall premium dépendant normalement d'une base de données non disponible en
+local) : l'arbre d'Astréos affiche bien Ouranos → Crios+Eurybie → Astréos+Éos → les quatre vents
+sans chevauchement, l'arbre de Niké affiche bien Crios+Eurybie → Pallas+Styx → les quatre
+enfants, et la fiche d'Éos affiche désormais Astréos, Borée, Euros, Notos et Zéphyr comme noms
+cliquables dans le texte et dans son bloc « Lignée ».
+`service-worker.js` : `pantheon-v37` → `pantheon-v38`.
