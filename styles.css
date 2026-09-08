@@ -516,6 +516,32 @@ h1, h2, h3{
 .screen-header h2{ margin: 0; font-size: 1.4rem; }
 .screen-footer{ margin-top: 24px; }
 
+/* Navigation « ◀ Précédent / Suivant ▶ » en pied de fiche détail (figure ou symbole) — voir
+   siblingNavHTML() dans app.js : feuilleter toute la bibliothèque dans l'ordre alphabétique
+   sans repasser par le menu à chaque fiche. */
+.sibling-nav{
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+.sibling-nav-btn{
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  color: var(--laurel-deep);
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sibling-nav-btn:hover{ background: var(--marble-deep); }
+.sibling-next{ text-align: right; }
+
 /* ----- Recherche ----- */
 
 .search{
