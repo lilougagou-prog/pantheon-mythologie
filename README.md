@@ -1082,3 +1082,31 @@ capture d'écran Playwright de l'écran d'accueil : les deux groupes de 3 étoil
 « Panthéon », les quatre tuiles n'affichent plus aucun chiffre, le texte descriptif est en
 terracotta.
 `service-worker.js` : `pantheon-v20` → `pantheon-v21`.
+
+## Fusion "Figures associées" / "Divinités associées" sur les fiches symbole
+
+Constat : sur la plupart des fiches symbole, la section « Figures associées » (chips simples,
+issus de `s.links`) et « Divinités associées » (chips + rôle, issus de `s.deities`) affichaient
+la même liste de noms sous deux formes différentes — un doublon pur sur 33 des 94 fiches
+(`links` strictement égal à l'ensemble des `deities`), et un sous-ensemble sur 83 d'entre elles.
+
+Fusionnées en une seule section, « Divinités associées » : nouvelle fonction
+`mergedSymbolDeities(s)`, qui part de `s.deities` (avec leur rôle) et n'y ajoute que les
+figures de `s.links` qui n'y figurent pas déjà, sous forme de chip sans texte de rôle
+(`symbolDeitiesHTML` n'affiche plus la ligne de rôle quand elle est vide). Sur les 11 fiches où
+`links` contenait un nom absent de `deities` (torche/hécate+déméter, laurier/éros, blé/perséphone,
+air/borée+zéphyr...), ce nom rejoint désormais la liste unique plutôt que de doubler
+l'information ailleurs. L'appel `relatedChipsHTML(related, "deity")` disparaît de
+`renderSymbolDetail` (la fonction reste utilisée telle quelle pour "Symboles associés" et sur
+les fiches figure/lieu).
+
+Au passage, une coquille restée après la correction précédente : `chaîne.links` citait encore
+« Pan » (déjà corrigé dans le texte de la fiche, mais pas dans ce champ séparé) — remplacé par
+Andromède, la seconde figure réellement présente dans cette fiche.
+
+Testé par un script dédié (`scratchpad`, 7 vérifications) + la suite complète remise à jour et
+repassée au vert (99 + 17 + 16 vérifications). Vérifié aussi visuellement par capture d'écran
+Playwright sur une fiche à recouvrement exact (« Chouette » : une seule section, un seul chip
+Athéna) et une fiche avec noms supplémentaires (« Torche » : Prométhée/Héphaïstos/Athéna avec
+rôle, Hécate/Déméter en simples chips, aucune section « Figures associées » séparée).
+`service-worker.js` : `pantheon-v21` → `pantheon-v22`.

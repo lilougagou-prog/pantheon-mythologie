@@ -1846,6 +1846,17 @@ function renderFigureDetail(id){
 // Le degré de certitude (d.certainty) reste dans les données pour qui voudrait l'exploiter plus
 // tard, mais n'est plus affiché ici — l'étiquette textuelle qui l'accompagnait (« attesté dans
 // les sources antiques »...) surchargeait la fiche sans vraiment aider à la lecture.
+// Fusionne s.deities (rôle détaillé) et les figures de s.links qui n'y figurent pas déjà —
+// « Figures associées » et « Divinités associées » faisaient doublon sur la plupart des
+// fiches (même liste de noms, simplement affichée deux fois sous deux formes), voir
+// symbolDeitiesHTML() ci-dessous pour le rendu unique qui en résulte.
+function mergedSymbolDeities(s){
+  const deities = s.deities || [];
+  const seen = new Set(deities.map(d => d.id));
+  const extra = (s.links || []).filter(id => id in DEITY_NOTES && !seen.has(id)).map(id => ({ id, role: "" }));
+  return [...deities, ...extra];
+}
+
 function symbolDeitiesHTML(deities){
   if(!deities || !deities.length) return `<p class="empty">Aucune association divine clairement attestée n'a été identifiée pour ce symbole.</p>`;
   return `
@@ -1858,7 +1869,7 @@ function symbolDeitiesHTML(deities){
             ${known
               ? `<button class="chip" data-nav="figureDetail" data-id="${escapeHTML(d.id)}">${escapeHTML(name)}</button>`
               : `<span class="chip chip-inactive">${escapeHTML(name)}</span>`}
-            <span class="symbol-deity-role">${escapeHTML(d.role)}</span>
+            ${d.role ? `<span class="symbol-deity-role">${escapeHTML(d.role)}</span>` : ""}
           </div>
         `;
       }).join("")}
@@ -1924,7 +1935,6 @@ function renderSymbolDetail(id){
     // suffit, s redevient l'équivalent de la fiche complète d'avant la séparation du bundle.
     s = { ...s, ...cached.content };
   }
-  const related = (s.links || []).map(dId => [dId, dId]).filter(([dId]) => dId in DEITY_NOTES);
   return `
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
@@ -1951,7 +1961,7 @@ function renderSymbolDetail(id){
       ${(s.lore || []).length ? `<h3>Dans la mythologie</h3>${s.lore.map(p => `<p class="lore-text">${linkifyLore(p)}</p>`).join("")}` : ""}
 
       <h3>Divinités associées</h3>
-      ${symbolDeitiesHTML(s.deities)}
+      ${symbolDeitiesHTML(mergedSymbolDeities(s))}
 
       ${symbolDimensionsHTML(s.dimensions)}
 
@@ -1981,7 +1991,6 @@ function renderSymbolDetail(id){
         ${symbolSourcesHTML(s.sources)}
       </details>
 
-      ${relatedChipsHTML(related, "deity")}
       ${symbolRelatedHTML(s.relatedSymbols)}
     </article>
     ${backButtonFooterHTML()}
