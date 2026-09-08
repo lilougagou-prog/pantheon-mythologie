@@ -501,6 +501,11 @@ const SYMBOL_ILLUSTRATIONS = {
   "grenade": "assets/symbol-grenade.webp",
   "grotte": "assets/symbol-grotte.webp",
   "labyrinthe": "assets/symbol-labyrinthe.webp",
+  "lance": "assets/symbol-lance.webp",
+  "lanterne": "assets/symbol-lanterne.webp",
+  "foudre": "assets/symbol-foudre.webp",
+  "laurier": "assets/symbol-laurier.webp",
+  "lierre": "assets/symbol-lierre.webp",
   // Les cinq entrées suivantes réutilisent telles quelles les illustrations déjà fournies pour
   // les icônes de catégorie de la carte (MAP_CATEGORY_ILLUSTRATIONS) — même sujet, pas besoin
   // d'un second détourage : sanctuaire → temple, montagne → montagne, détroit/mers → mer,

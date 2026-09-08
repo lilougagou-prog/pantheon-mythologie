@@ -1295,3 +1295,17 @@ repassée au vert (158 + 17 + 16 + 7 + 23 + 25 + 25 + 14 + 12 + 12 vérification
 nouveau décompte à 54 illustrations). Vérifié aussi visuellement par capture d'écran Playwright
 sur les cinq nouvelles fiches.
 `service-worker.js` : `pantheon-v28` → `pantheon-v29`.
+
+## Cinq nouvelles illustrations : Lance, Lanterne, Foudre, Laurier, Lierre
+
+Lance, Lanterne, Foudre, Laurier et Lierre rejoignent `SYMBOL_ILLUSTRATIONS` (54 → 59). Foudre
+et Laurier sont deux des cinq symboles gratuits (`FREE_SYMBOL_IDS`, contenu déjà présent en
+entier dans `app.js`) : `SYMBOL_ILLUSTRATIONS` reste une table unique, partagée par les
+symboles gratuits et premium, donc aucun traitement particulier n'était nécessaire — vérifié
+explicitement à l'affichage, sans déblocage premium requis.
+
+Testé par un script dédié (`scratchpad`, 12 vérifications) + la suite complète remise à jour et
+repassée au vert (168 + 17 + 16 + 7 + 23 + 25 + 25 + 14 + 12 + 12 + 12 vérifications, dont le
+nouveau décompte à 59 illustrations). Vérifié aussi visuellement par capture d'écran Playwright
+sur les cinq nouvelles fiches.
+`service-worker.js` : `pantheon-v29` → `pantheon-v30`.
