@@ -2422,3 +2422,33 @@ nouvelles pour ce round). Vérifié aussi visuellement par Playwright sur les 9 
 les fiches Nausicaa/Alcinoos.
 
 `service-worker.js` (Panthéon) : `pantheon-v62` → `pantheon-v63`.
+
+## Fiche Circé enrichie (Tirésias) + nouvelle fiche Tirésias
+
+Signalé par l'utilisatrice : deux passages manquaient dans la fiche de Circé, sa déesse
+préférée. Précision apportée au passage : selon Homère, c'est bien **Circé qui envoie Ulysse**
+consulter le devin Tirésias aux Enfers — pas l'inverse (Tirésias ne prédit rien à Circé dans
+aucune source classique) — c'est cette version, correctement sourcée, qui a été ajoutée plutôt
+qu'un passage inventé.
+
+Deux paragraphes ajoutés à la fiche Circé (entre celui sur Ulysse/Télégonos et celui sur
+Scylla), à leur place chronologique exacte :
+1. Circé révèle à Ulysse qu'aucun retour n'est possible sans consulter d'abord l'ombre du devin
+   Tirésias aux Enfers, et lui indique elle-même le rite pour y parvenir.
+2. À son retour du voyage aux Enfers, Circé l'avertit en détail des dangers encore à venir : le
+   chant des Sirènes, le choix entre Charybde et Scylla, l'interdiction de toucher aux bœufs
+   sacrés d'Hélios — le passage manquant sur les indications pratiques du retour.
+
+**Nouvelle fiche Tirésias** : le devin thébain aveugle, dont les deux traditions sur l'origine de
+sa cécité (avoir surpris Athéna au bain, ou avoir été changé en femme sept ans pour avoir frappé
+des serpents enlacés) sont racontées, avant son rôle central dans Œdipe roi de Sophocle et sa
+réapparition posthume dans l'Odyssée. Relie déjà 6 figures existantes (Athéna, Zeus, Héra,
+Œdipe, Ulysse, Circé) — bonne occasion de vérifier que toutes les citations d'un nouveau texte
+se résolvent bien avant de le considérer fini : un premier passage sans aucune citation avait
+d'abord été écrit par erreur (script de vérification + relecture visuelle l'ont montré), corrigé
+avant tout commit.
+
+Testé par la suite complète remise à jour et repassée au vert (742 vérifications, dont 20
+nouvelles pour ce round).
+
+`service-worker.js` (Panthéon) : `pantheon-v63` → `pantheon-v64`.
