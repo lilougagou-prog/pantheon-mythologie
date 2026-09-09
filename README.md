@@ -2568,3 +2568,29 @@ Testé par la suite complète remise à jour et repassée au vert (853 vérifica
 nouvelles pour ce round), citation vérifiée.
 
 `service-worker.js` (Panthéon) : `pantheon-v67` → `pantheon-v68`.
+
+## Doublons de désambiguïsation retirés des fiches d'homonymes
+
+Retour utilisateur : dans la fiche Atlas (roi d'Atlantide), la précision "ce n'est pas le Titan
+porteur du ciel" apparaissait deux fois — une fois dans la note toujours visible, une fois
+répétée dans le premier paragraphe du mythe — alors que c'est précisément le rôle du titre
+("Atlas (roi d'Atlantide)") et de la note d'écarter toute confusion : pas besoin de le redire
+dans le corps du texte.
+
+En vérifiant les deux autres fiches d'homonymes du même type, le même doublon est apparu :
+
+- **Atlas (roi d'Atlantide)** : la clause "homonyme du Titan porteur du ciel, mais sans aucun
+  lien de parenté avec lui" retirée du premier paragraphe, qui va désormais droit à la
+  généalogie.
+- **Persès (le Titan)** : le dernier paragraphe ne servait plus qu'à répéter "sans lien avec son
+  homonyme mortel" sans aucun autre contenu mythologique — supprimé entièrement (la fiche passe
+  de 3 à 2 paragraphes).
+- **Antiope (princesse thébaine)** : la clause "n'a aucun lien avec la reine amazone du même nom"
+  retirée du début du premier paragraphe, qui enchaîne directement sur le vrai récit (Zeus,
+  naissance des jumeaux Amphion et Zéthos, abandon sur le mont Cithéron).
+
+Testé par la suite complète remise à jour et repassée au vert (866 vérifications, dont 13
+nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuellement sur les trois
+fiches.
+
+`service-worker.js` (Panthéon) : `pantheon-v68` → `pantheon-v69`.
