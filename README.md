@@ -2154,3 +2154,22 @@ par Playwright, en clair et en sombre, sur les quatre fiches : chignon d'Arachn�
 d'Artémis intacts, cadrages d'Aristée et Ascagne corrects.
 
 `service-worker.js` (Panthéon) : `pantheon-v55` → `pantheon-v56`.
+
+## Deux nouveaux portraits : Asclépios, Ascalaphos
+
+Troisième série de portraits fournis par l'utilisatrice, même traitement que les deux précédentes.
+
+- **Asclépios** : nouveau portrait, soignant un patient auprès de son bâton au serpent enroulé.
+- **Ascalaphos** : nouveau portrait, épiant Perséphone cueillant une grenade aux Enfers.
+
+Les deux sources sont au format 5:6, comme Aristée et Ascagne précédemment : lignes de
+délimitation vérifiées aux deux bords (gauche/droite) pour chacune. Chez Asclépios, le bâton au
+serpent (à gauche) reste entièrement dans le cadre — seul un fond de feuillage est rogné. Chez
+Ascalaphos, la chouette (à gauche) garde sa tête intacte et Perséphone (à droite) n'est pas
+concernée par le recadrage — seules des branches de grenadier en arrière-plan sont rognées. Les
+deux gardent donc le recadrage 4:5 standard, sans passer par `DEITY_PORTRAIT_WIDE`.
+
+Testé par la suite complète remise à jour et repassée au vert (534 vérifications). Vérifié aussi
+visuellement par Playwright, en clair et en sombre, sur les deux fiches.
+
+`service-worker.js` (Panthéon) : `pantheon-v56` → `pantheon-v57`.
