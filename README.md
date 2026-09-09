@@ -2694,3 +2694,47 @@ nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuell
 fiches et sur la nouvelle fiche-lieu Byzance.
 
 `service-worker.js` (Panthéon) : `pantheon-v73` → `pantheon-v74`.
+
+## Audit nocturne : citations, généalogie, symboles-lieux — et une fiche manquante trouvée
+
+Round lancé sur ma propre initiative (l'utilisatrice partait dormir et m'a demandé de choisir
+un travail utile pour la nuit) : un audit complet et objectif de l'intégrité des données,
+plutôt que du contenu créatif qui aurait demandé son avis.
+
+**Audit des citations sur toute l'appli** (331 figures, gratuites et premium confondues, + 63
+lieux — pas seulement les fiches touchées récemment) : 0 vrai bug de citation cassée trouvé. 3
+faux positifs identifiés et laissés tels quels (des mentions volontairement non cliquables du
+type « voir les fiches correspondantes » pour 6 à 9 noms d'un coup, sur les fiches Cronos et
+Muses — cluttering un citation dump aurait nui à la lecture).
+
+**Deux doublons de désambiguïsation supplémentaires** trouvés et corrigés (même défaut que
+celui signalé par l'utilisatrice sur Atlas la veille, jamais vérifié ailleurs jusqu'ici) :
+- **Capys (roi d'Albe)** : la phrase "ne doit pas être confondu... sans aucun lien de parenté"
+  répétait la note ; trimée en gardant le seul vrai ajout (sept générations d'écart avec son
+  homonyme troyen).
+- **Uranie** : le paragraphe d'ouverture répétait "homonyme d'une épiclèse d'Aphrodite, sans
+  lien de parenté" déjà dans la note ; trimé en gardant l'étymologie de son propre nom et sa
+  description visuelle.
+- **Hippolyte**, vérifié pour le même défaut, mais laissé tel quel : sa mention d'Hippolyté
+  ajoute un vrai fait nouveau (la ceinture qu'Héraclès lui prend), pas une simple redite.
+
+**Bug de données trouvé et corrigé** : le lieu **Mont Hélicon** citait le symbole "pégase" dans
+son champ `links` (réservé aux figures) au lieu de `symbolLinks` — le chip correspondant
+disparaissait donc silencieusement de sa fiche, sans que rien ne le signale. Déplacé au bon
+endroit ; le symbole Pégase apparaît maintenant bien dans "Symboles associés".
+
+**Fiche manquante trouvée et créée : Daphné.** Le symbole Laurier listait "daphné" dans ses
+divinités associées, mais elle n'avait jamais eu sa propre fiche — elle apparaissait en chip
+grisée, non cliquable, malgré son rôle central (c'est littéralement l'arbre du symbole). Nouvelle
+fiche créée (4 paragraphes : sa vie de naïade vouée à la chasse, la poursuite d'Apollon frappé
+par la flèche d'Éros, sa métamorphose en laurier racontée d'après Ovide, la consécration de
+l'arbre par Apollon), reliée depuis les fiches Apollon et Laurier où elle était jusqu'ici
+mentionnée sans lien.
+
+Testé par la suite complète, considérablement étoffée pour ce round avec des garde-fous
+permanents contre ces classes de bugs (toute référence généalogique pointe vers une vraie
+figure, tout lieu distingue bien figures et symboles, toute divinité associée à un symbole a
+une vraie fiche) — remise à zéro et repassée au vert (1771 vérifications, contre 929 avant ce
+round), rendu contrôlé visuellement sur toutes les fiches touchées.
+
+`service-worker.js` (Panthéon) : `pantheon-v74` → `pantheon-v75`.
