@@ -2347,3 +2347,37 @@ précédent — aucune citation cassée cette fois, la vérification en amont a 
 visuellement par Playwright sur les 8 nouveaux lieux.
 
 `service-worker.js` (Panthéon) : `pantheon-v60` → `pantheon-v61`.
+
+## Ascendance d'Ulysse : Laërte, Anticlée, et sa sœur Ctimène
+
+Signalé par l'utilisatrice : Ulysse n'avait aucun parent renseigné (`GENEALOGY_PARENTS["ulysse"]`
+était vide), et sa sœur n'apparaissait nulle part. Quatre nouvelles fiches :
+
+- **Laërte** — roi d'Ithaque, père d'Ulysse, retrouvé vieilli dans son verger à son retour.
+- **Anticlée** — mère d'Ulysse, morte de chagrin durant son absence ; son ombre, croisée aux
+  Enfers, tente en vain de se laisser étreindre trois fois par son fils.
+- **Ctimène** — la sœur d'Ulysse, jusqu'ici totalement absente. Mariée et envoyée à Samé avant le
+  départ de son frère pour Troie, l'Odyssée ne la fait plus jamais reparaître ensuite.
+- **Autolycos** — déjà mentionné en toutes lettres dans le texte d'Ulysse depuis le début
+  ("son grand-père maternel Autolycos, fils d'Hermès et voleur incomparable") mais sans fiche
+  propre ; ajouté pour compléter la chaîne généalogique jusqu'à Hermès, déjà présent.
+
+`GENEALOGY_PARENTS` : `ulysse` → `[laërte, anticlée]`, `ctimène` → `[laërte, anticlée]`,
+`anticlée` → `[autolycos]`, `autolycos` → `[hermès]`.
+
+**Piège rencontré et corrigé avant tout commit** : `GENEALOGY_PARENTS` n'est pas l'objet compact
+en une ligne qu'on repère par un simple `"id":[]` — une bonne partie de son contenu (dont tout
+le cluster Ulysse/Télémaque/Pénélope) vit en réalité dans une section multi-lignes, commentée,
+plus loin dans le même objet (`// La famille d'Ulysse.`). Une première édition, cherchant
+`"ulysse":[]`, a atterri par erreur dans un tout autre objet (`DEITY_LORE`, qui a lui aussi une
+entrée `"ulysse":[]`, pour une raison complètement différente — l'aperçu premium vide) : le
+script de vérification a immédiatement montré des relations de parenté toujours vides malgré
+l'édition, ce qui a permis de repérer et corriger l'erreur avant tout commit.
+
+Testé par la suite complète remise à jour et repassée au vert (681 vérifications, dont 16
+nouvelles pour ce round). Vérifié aussi visuellement par Playwright sur les 5 fiches concernées :
+Ulysse affiche désormais Anticlée et Laërte comme parents (et Ctimène comme sœur, déduite
+automatiquement) ; Laërte et Anticlée affichent Ulysse et Ctimène comme enfants ; Autolycos
+affiche Hermès comme parent et Anticlée comme enfant.
+
+`service-worker.js` (Panthéon) : `pantheon-v61` → `pantheon-v62`.
