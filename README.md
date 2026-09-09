@@ -2594,3 +2594,24 @@ nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuell
 fiches.
 
 `service-worker.js` (Panthéon) : `pantheon-v68` → `pantheon-v69`.
+
+## Cinq nouveaux portraits : Astréos, Astréos/Éos, Atlas (le Titan), Atlas (roi d'Atlantide), Atrée
+
+Images envoyées par l'utilisatrice pour cinq fiches qui n'avaient encore aucun portrait :
+
+- **Astréos** : portrait principal (couronne d'étoiles, aigle, ciel nocturne).
+- **Astréos et Éos** : portrait de couple partagé entre les deux fiches, inséré juste au-dessus
+  du paragraphe qui raconte leur union — même mécanisme que les autres couples de l'appli
+  (Éros/Psyché, Harmonie/Cadmos, Pyrame/Thisbé, Séléné/Endymion).
+- **Atlas (le Titan)** : portrait principal (la voûte céleste portée sur ses épaules).
+- **Atlas (roi d'Atlantide)** : portrait principal distinct (trône, trident, cité engloutie en
+  arrière-plan) — bien différent du Titan, cohérent avec le travail de désambiguïsation du
+  round précédent.
+- **Atrée** : portrait principal (roi sur son trône, l'Acropole en arrière-plan).
+
+Testé par la suite complète remise à jour et repassée au vert (882 vérifications, dont 9
+nouvelles pour ce round), chargement des 5 images vérifié sans erreur, rendu contrôlé
+visuellement sur les cinq fiches — l'image de couple s'affiche bien au bon endroit dans les
+deux fiches concernées.
+
+`service-worker.js` (Panthéon) : `pantheon-v69` → `pantheon-v70`.

@@ -541,6 +541,10 @@ const DEITY_PORTRAITS = {
   "ascalaphos": "assets/deity-ascalaphos.jpg",
   "assaracus": "assets/deity-assaracus.jpg",
   "astéria": "assets/deity-asteria.jpg",
+  "astréos": "assets/deity-astreos.jpg",
+  "atlas": "assets/deity-atlas-titan.jpg",
+  "atlas-atlantide": "assets/deity-atlas-atlantide.jpg",
+  "atrée": "assets/deity-atree.jpg",
 };
 // Même principe que DEITY_PORTRAITS, mais pour la bibliothèque symbolique : une illustration
 // dédiée (fournie par l'utilisatrice, fond détouré) qui remplace l'emoji d'un symbole partout où
@@ -702,6 +706,15 @@ const DEITY_INLINE_PORTRAITS = {
   ],
   "orion": [
     { match: "l'emporta à Délos", src: "assets/deity-eos-orion.jpg", alt: "Éos et Orion" },
+  ],
+  // Astréos et Éos : même portrait de couple partagé entre les deux fiches, comme pour
+  // Éros/Psyché, Harmonie/Cadmos, Pyrame/Thisbé et Séléné/Endymion plus haut — inséré juste
+  // au-dessus du paragraphe qui raconte leur union (demande explicite).
+  "astréos": [
+    { match: "Uni à Éos, l'Aurore", src: "assets/deity-astreos-eos.jpg", alt: "Astréos et Éos" },
+  ],
+  "éos": [
+    { match: "Unie à Astréos, dieu des étoiles", src: "assets/deity-astreos-eos.jpg", alt: "Astréos et Éos" },
   ],
   "héphaïstos": [
     { match: "un bijou si redouté qu'Héra elle-même", src: "assets/deity-hephaistos-ceinture.jpg", alt: "Héphaïstos forgeant la ceinture magique d'Aphrodite" },
