@@ -2738,3 +2738,25 @@ une vraie fiche) — remise à zéro et repassée au vert (1771 vérifications, 
 round), rendu contrôlé visuellement sur toutes les fiches touchées.
 
 `service-worker.js` (Panthéon) : `pantheon-v74` → `pantheon-v75`.
+
+## Ulysse, arrière-petit-fils d'Hermès : le fil de la ruse rendu explicite
+
+Demande de l'utilisatrice : préciser qu'Hermès est un ancêtre d'Ulysse, pour expliquer à la
+fois son don pour la ruse et pourquoi Hermès l'aide chez Circé. Le lien existait déjà dans les
+données (Ulysse → Anticlée → Autolycos → Hermès, établi lors du round sur l'ascendance
+d'Ulysse), et la fiche mentionnait bien Autolycos "fils d'Hermès" — mais sans jamais relier
+explicitement les deux scènes.
+
+Deux ajouts dans la fiche Ulysse :
+- Le premier paragraphe précise désormais que cette filiation fait d'Ulysse "l'arrière-petit-fils
+  du dieu rusé par excellence" — le don pour la ruse n'est plus seulement hérité du grand-père,
+  il remonte jusqu'à Hermès lui-même.
+- Le paragraphe sur Circé rappelle, au moment où Hermès lui offre l'herbe magique qui le
+  protège, qu'il s'agit là de son "propre arrière-petit-fils par Autolycos, un lien de sang qui
+  n'est peut-être pas pour rien dans ce geste" — reliant enfin les deux scènes qui restaient
+  jusqu'ici disjointes.
+
+Testé par la suite complète remise à jour et repassée au vert (1785 vérifications, dont 14
+nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuellement.
+
+`service-worker.js` (Panthéon) : `pantheon-v75` → `pantheon-v76`.
