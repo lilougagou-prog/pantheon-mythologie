@@ -2173,3 +2173,21 @@ Testé par la suite complète remise à jour et repassée au vert (534 vérifica
 visuellement par Playwright, en clair et en sombre, sur les deux fiches.
 
 `service-worker.js` (Panthéon) : `pantheon-v56` → `pantheon-v57`.
+
+## Deux nouveaux portraits : Assaracus, Astéria
+
+Quatrième série de portraits fournis par l'utilisatrice, même traitement que les précédentes.
+
+- **Assaracus** : nouveau portrait, roi troyen assis sur son trône dominant la baie.
+- **Astéria** : nouveau portrait, titanide étoilée au coucher de soleil, entourée de cailles.
+
+Sources au format 5:6, comme les séries précédentes du même format. Lignes de délimitation
+vérifiées aux deux bords : chez Assaracus, seul un garde et sa lance en arrière-plan (figure
+secondaire, pas le sujet de la fiche) sont rognés à gauche ; chez Astéria, une des trois cailles
+à gauche reste entièrement dans le cadre, seul le feuillage alentour est rogné. Les deux gardent
+donc le recadrage 4:5 standard.
+
+Testé par la suite complète remise à jour et repassée au vert (545 vérifications). Vérifié aussi
+visuellement par Playwright, en clair et en sombre, sur les deux fiches.
+
+`service-worker.js` (Panthéon) : `pantheon-v57` → `pantheon-v58`.

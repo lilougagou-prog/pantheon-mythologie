@@ -529,6 +529,8 @@ const DEITY_PORTRAITS = {
   "ascagne": "assets/deity-ascagne.jpg",
   "asclépios": "assets/deity-asclepios.jpg",
   "ascalaphos": "assets/deity-ascalaphos.jpg",
+  "assaracus": "assets/deity-assaracus.jpg",
+  "astéria": "assets/deity-asteria.jpg",
 };
 // Même principe que DEITY_PORTRAITS, mais pour la bibliothèque symbolique : une illustration
 // dédiée (fournie par l'utilisatrice, fond détouré) qui remplace l'emoji d'un symbole partout où
