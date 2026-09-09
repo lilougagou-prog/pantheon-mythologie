@@ -2105,3 +2105,24 @@ Les quatre images sont retaillées à 700px de large, JPEG qualité 88 — même
 
 Testé par la suite complète remise à jour et repassée au vert (505 vérifications, dont un nouveau bloc dédié : les quatre portraits présents avec leurs fichiers, le trio en format large confirmé, Amphitryon confirmé à l'inverse absent de ce même ensemble, l'illustration partagée bien déclarée côté Œdipe avec sa chaîne de repérage vérifiée dans le texte réel de `content.json`). Vérifié aussi visuellement par Playwright, en clair et en sombre, sur les cinq fiches concernées (Aphrodite, Antiope thébaine, Antigone, Amphitryon, Œdipe) : couronne et colombes d'Aphrodite intactes, bandeau d'Antiope thébaine intact, duo Antigone/Œdipe entièrement visible sur les deux fiches, portrait d'Amphitryon correctement cadré.
 `service-worker.js` (Panthéon) : `pantheon-v53` → `pantheon-v54`.
+
+## Accès propriétaire depuis l'écran Profil
+
+Le seul moyen d'entrer la clé d'aperçu propriétaire était jusqu'ici un lien bouton discret sur
+l'écran de paywall lui-même, qui n'apparaît que sur une fiche premium verrouillée. Problème sur
+un appareil ajouté à l'écran d'accueil (iOS) : ce mode « standalone » a son propre stockage,
+totalement séparé de Safari (même raison que pour `admin-messages.html`, voir plus haut) — tant
+que la clé n'y a jamais été saisie une seule fois, cet appareil-là reste verrouillé en
+permanence, quoi que l'on fasse ailleurs.
+
+Ajoute donc le même bouton (même fonction `promptOwnerPreviewKey()`, même action
+`data-action="owner-preview"`, déjà existante) directement en bas de l'écran Profil — accessible
+sans avoir à retomber sur une fiche premium verrouillée au préalable. Le libellé indique l'état
+courant sur cet appareil (« entrer la clé d'aperçu » si absente, « modifier la clé d'aperçu
+(actuellement active sur cet appareil) » si déjà posée), pour qu'on sache en un coup d'œil si
+c'est déjà fait sans avoir à retester une fiche premium.
+
+Vérifié par Playwright : bouton présent avec le bon libellé dans les deux états (clé absente,
+clé posée en localStorage).
+
+`service-worker.js` (Panthéon) : `pantheon-v54` → `pantheon-v55`.

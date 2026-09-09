@@ -3153,6 +3153,7 @@ function renderProfile(){
       <span class="quiz-tile-arrow">→</span>
     </button>
     ${profile ? `<button class="profile-remove-link" data-action="profile-remove-data">Retirer mes données de cet appareil</button>` : ""}
+    <button type="button" class="paywall-restore" data-action="owner-preview">${hasOwnerPreview() ? "Propriétaire : modifier la clé d'aperçu (actuellement active sur cet appareil)" : "Propriétaire : entrer la clé d'aperçu"}</button>
     ${backButtonFooterHTML()}
   `;
 }
