@@ -2517,3 +2517,36 @@ exact des 14 paragraphes, présence de chacun des 5 nouveaux passages, absence d
 et citations toutes résolues sur circé/perséis/aiétès).
 
 `service-worker.js` (Panthéon) : `pantheon-v65` → `pantheon-v66`.
+
+## Clarté sur la prophétie de Tirésias : ce qu'il dit vraiment à Ulysse
+
+Retour utilisateur après le round précédent : le "cette prophétie s'accomplit des années plus
+tard" du paragraphe sur la fin de la Télégonie était devenu ambigu — un paragraphe entier
+(Elpénor) s'était glissé entre la phrase qui annonçait la prophétie (à la naissance de
+Télégonos) et celle qui la réalise, et rien n'expliquait pourquoi Circé envoyait justement
+Ulysse voir Tirésias, ni ce que ce dernier lui disait réellement.
+
+**Trois corrections dans la fiche Circé** :
+- La référence devenue ambiguë est explicitée : « la prophétie liée à la naissance de
+  Télégonos s'accomplit des années plus tard », au lieu du vague « cette prophétie ».
+- Le paragraphe sur l'envoi vers Tirésias précise désormais *pourquoi* lui : Perséphone lui
+  avait laissé, à lui seul parmi les ombres, l'esprit et le jugement intacts — les autres morts
+  n'étant plus que de vaines apparences sans mémoire.
+
+**Deux nouveaux paragraphes dans la fiche Tirésias** (jusque-là muette sur le contenu réel de
+sa prophétie), sourcés à l'Odyssée, chant XI :
+1. L'avertissement sur la colère de Poséidon (pour l'aveuglement de Polyphème, son fils), puis
+   la mise en garde décisive sur les bœufs sacrés d'Hélios à Thrinacie — les toucher signifie
+   perdre navire et équipage.
+2. L'annonce des prétendants à abattre à son retour, puis l'épisode moins connu de la rame :
+   Ulysse devra marcher à l'intérieur des terres jusqu'à un peuple ignorant la mer au point de
+   prendre sa rame pour un van, l'y planter et sacrifier à Poséidon. Tirésias referme sa
+   prophétie sur la mort d'Ulysse « venant de la mer » — une formule restée célèbre pour son
+   ambiguïté, rapprochée ici de l'arme à pointe de raie de la Télégonie, qui boucle la boucle
+   entre les deux fiches.
+
+Testé par la suite complète remise à jour et repassée au vert (832 vérifications, dont 39
+nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuellement sur les
+deux fiches.
+
+`service-worker.js` (Panthéon) : `pantheon-v66` → `pantheon-v67`.
