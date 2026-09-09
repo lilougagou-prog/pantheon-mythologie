@@ -2646,3 +2646,24 @@ nouvelles pour ce round), chargement des 5 images vérifié sans erreur, rendu c
 visuellement sur les cinq fiches.
 
 `service-worker.js` (Panthéon) : `pantheon-v71` → `pantheon-v72`.
+
+## Éos et Orion : clarification qu'elle ne l'accompagne pas chez Artémis
+
+Question de l'utilisatrice : le texte enchaînait "elle l'emporta à Délos... avant qu'il ne
+devienne le compagnon de chasse d'Artémis" sans jamais dire qu'Éos sortait du tableau — de quoi
+laisser croire qu'elle restait présente une fois Orion devenu le compagnon d'Artémis. En
+réalité ce sont deux amours distincts et successifs dans la vie d'Orion, pas une continuité :
+Éos disparaît complètement du récit dès qu'il la quitte.
+
+Reformulé dans les deux fiches concernées pour lever toute ambiguïté :
+- **Éos** : « une liaison qui prit fin quand il la quitta pour devenir, bien plus tard, le
+  compagnon de chasse d'Artémis ».
+- **Orion** : « Il quitta ensuite Éos pour devenir, bien plus tard, le compagnon de chasse
+  d'Artémis ».
+
+Testé par la suite complète remise à jour et repassée au vert (913 vérifications, dont 14
+nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuellement sur les deux
+fiches — les illustrations existantes (Éos/Orion, Astréos/Éos) restent bien placées après la
+reformulation.
+
+`service-worker.js` (Panthéon) : `pantheon-v72` → `pantheon-v73`.
