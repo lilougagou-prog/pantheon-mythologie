@@ -1261,3 +1261,167 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
   cursor: pointer;
 }
 .quiz-figure-btn:hover{ background: var(--border); }
+
+/* ----- Bouton Profil flottant -----
+   Persistant sur tous les écrans (élément séparé de #app, jamais réinjecté par render() — voir
+   index.html), position fixe par rapport à la fenêtre plutôt qu'à #app, comme .bottom-nav (qui
+   ignore déjà #app.wide et sa max-width). Coin haut-droit, au-dessus de la frise de l'accueil :
+   .hero a déjà 40px de padding-top au-dessus de son contenu, en plus des 20px de #app — largement
+   assez pour que ce bouton (40px, posé à 10px du haut) ne recouvre jamais l'image. */
+.profile-fab{
+  position: fixed;
+  top: calc(10px + env(safe-area-inset-top, 0px));
+  right: max(16px, env(safe-area-inset-right, 0px));
+  z-index: 15;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 14px var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bronze);
+  cursor: pointer;
+}
+.profile-fab:hover{ background: var(--marble-deep); }
+.profile-fab.active{ color: var(--laurel-deep); border-color: var(--bronze); }
+
+/* ----- Profil ----- */
+
+.profile-card{
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 4px 14px var(--shadow);
+}
+.profile-card + .profile-card{ margin-top: 16px; }
+.profile-label{
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--bronze);
+  margin: 0 0 12px;
+}
+.profile-card-title{ font-size: 1.05rem; margin: 0 0 4px; }
+.profile-note{ font-size: 0.85rem; color: var(--ink-soft); line-height: 1.45; margin: 8px 0 0; }
+
+.profile-account-row{ display: flex; align-items: center; gap: 12px; }
+.profile-avatar{
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--marble-deep);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: var(--bronze);
+}
+.profile-account-text{ flex: 1; min-width: 0; }
+.profile-email{
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.profile-sub{ font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px; }
+.profile-edit-link{
+  background: none;
+  border: none;
+  color: var(--bronze);
+  text-decoration: underline;
+  text-decoration-color: var(--bronze-light);
+  text-underline-offset: 2px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  flex: 0 0 auto;
+  padding: 4px;
+}
+.profile-remove-link{
+  display: block;
+  margin: 22px auto 0;
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  font-family: inherit;
+  font-size: 0.78rem;
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  cursor: pointer;
+}
+
+.profile-empty{ display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 4px 0 2px; }
+.profile-avatar-lg{ width: 54px; height: 54px; margin-top: 6px; }
+.profile-empty h3{ font-size: 1.05rem; margin-top: 4px; }
+.profile-empty .profile-note{ max-width: 280px; text-align: center; }
+.profile-empty .search{ margin-top: 8px; text-align: center; }
+.profile-empty .quiz-start-btn{ margin-top: 10px; }
+.profile-empty .profile-remove-link{ margin-top: 2px; }
+
+.profile-results{ margin-top: 10px; }
+.profile-result-row{ display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.profile-result-row:last-child{ border-bottom: none; padding-bottom: 0; }
+.profile-result-icon{ font-size: 1.25rem; flex: 0 0 auto; width: 22px; text-align: center; }
+.profile-result-theme{ font-family: "Cinzel", Georgia, serif; font-weight: 600; color: var(--ink); font-size: 0.9rem; flex: 1; min-width: 0; }
+.profile-result-score{ font-size: 0.82rem; font-weight: 600; color: var(--bronze); white-space: nowrap; }
+.profile-result-meta{ font-weight: 400; color: var(--ink-soft); }
+
+/* ----- Nous contacter ----- */
+
+.intro-note{ font-size: 0.9rem; color: var(--ink-soft); margin: 0 0 18px; }
+.form-label{
+  display: block;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--bronze);
+  margin: 0 0 8px;
+}
+.type-grid{ display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 22px; }
+.type-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 6px;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  text-align: center;
+}
+.type-card:hover{ background: var(--marble-deep); }
+.type-card.active{ border-color: var(--bronze); box-shadow: 0 0 0 3px rgba(168, 120, 60, 0.18); }
+.type-icon{ font-size: 1.4rem; line-height: 1; }
+.type-title{ font-family: "Cinzel", Georgia, serif; font-weight: 600; color: var(--laurel-deep); font-size: 0.82rem; }
+
+.form-textarea{ min-height: 120px; resize: vertical; line-height: 1.5; font-family: inherit; margin-bottom: 6px; }
+.field-note{ font-size: 0.8rem; color: var(--ink-soft); margin: -2px 0 20px; }
+.form-error{ font-size: 0.85rem; color: var(--terracotta); margin: -8px 0 16px; }
+
+.confirm-wrap{ display: flex; flex-direction: column; align-items: center; text-align: center; padding: 40px 0 20px; }
+.confirm-icon{
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: var(--marble-deep);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--laurel-deep);
+}
+.confirm-wrap h3{ font-size: 1.3rem; margin: 20px 0 10px; }
+.confirm-text{ font-size: 0.95rem; color: var(--ink-soft); line-height: 1.5; max-width: 300px; margin: 0; }
+.confirm-text strong{ color: var(--ink); font-weight: 600; }

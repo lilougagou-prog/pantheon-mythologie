@@ -3030,6 +3030,257 @@ function renderPlaceDetail(id){
   `;
 }
 
+/* ===================== PROFIL & CONTACT ===================== */
+
+// Email optionnel, stocké en local uniquement (comme la progression du quiz) — jamais envoyé
+// nulle part sauf quand l'utilisatrice envoie elle-même le formulaire de contact, où il sert à
+// pouvoir lui répondre. { email, addedAt } plutôt qu'une simple chaîne, pour afficher "Ajoutée
+// le ..." sans avoir à deviner une date.
+const PROFILE_EMAIL_KEY = "pantheon-user-email";
+
+function getUserProfile(){
+  try { return JSON.parse(localStorage.getItem(PROFILE_EMAIL_KEY) || "null"); }
+  catch(e){ return null; }
+}
+function setUserEmail(email){
+  try { localStorage.setItem(PROFILE_EMAIL_KEY, JSON.stringify({ email, addedAt: new Date().toISOString() })); }
+  catch(e){}
+}
+function clearUserEmail(){
+  try { localStorage.removeItem(PROFILE_EMAIL_KEY); } catch(e){}
+}
+function formatProfileDate(iso){
+  try { return new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long" }).format(new Date(iso)); }
+  catch(e){ return ""; }
+}
+function isValidEmail(value){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function profileEmailFilledHTML(profile){
+  const dateLabel = formatProfileDate(profile.addedAt);
+  return `
+    <div class="profile-label">Compte</div>
+    <div class="profile-account-row">
+      <div class="profile-avatar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.2" r="3.6"></circle><path d="M4.8 19.5c0-3.9 3.2-7 7.2-7s7.2 3.1 7.2 7"></path></svg>
+      </div>
+      <div class="profile-account-text">
+        <div class="profile-email">${escapeHTML(profile.email)}</div>
+        ${dateLabel ? `<div class="profile-sub">Ajoutée le ${escapeHTML(dateLabel)}</div>` : ""}
+      </div>
+      <button class="profile-edit-link" data-action="profile-edit-email">Modifier</button>
+    </div>
+  `;
+}
+
+// isEditingExisting distingue "on modifie un email déjà enregistré" (bouton Annuler, qui
+// revient à l'affichage) de "aucun email pour l'instant" (bouton Continuer sans email, qui ne
+// fait que masquer la carte pour cette visite — voir currentScreen.dismissedEmailPrompt).
+function profileEmailEmptyHTML(currentValue, isEditingExisting){
+  return `
+    <div class="profile-empty">
+      <div class="profile-label">Compte</div>
+      <div class="profile-avatar profile-avatar-lg">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.2"></rect><path d="M3.8 7l8.2 6.1L20.2 7"></path></svg>
+      </div>
+      <h3>Ajoutez votre email</h3>
+      <p class="profile-note">Vous pourrez retrouver vos résultats de quiz et recevoir une réponse si vous nous écrivez.</p>
+      <input class="search" type="email" id="profileEmailInput" placeholder="vous@exemple.fr" value="${escapeHTML(currentValue || "")}">
+      <p class="form-error" id="profileEmailError" ${currentScreen.emailError ? "" : "hidden"}>${escapeHTML(currentScreen.emailError || "")}</p>
+      <button class="quiz-start-btn" data-action="profile-save-email">Enregistrer mon email</button>
+      ${isEditingExisting
+        ? `<button class="profile-remove-link" data-action="profile-cancel-edit">Annuler</button>`
+        : `<button class="profile-remove-link" data-action="profile-skip-email">Continuer sans email</button>`}
+    </div>
+  `;
+}
+
+function profileResultsBodyHTML(){
+  const progress = getQuizProgress();
+  const played = QUIZ_THEMES.filter(t => progress.themes[t.id] && progress.themes[t.id].played > 0);
+  if(!played.length){
+    return `
+      <p class="profile-note">Aucune partie jouée pour l'instant.</p>
+      <button class="quiz-start-btn" data-nav="quizHome" style="margin-top: 12px;">Lancer un quiz</button>
+    `;
+  }
+  const summary = `${played.length} thème${played.length > 1 ? "s" : ""} commencé${played.length > 1 ? "s" : ""} sur ${QUIZ_THEMES.length}` +
+    (progress.intermediaireUnlocked ? " · niveau Intermédiaire débloqué" : "");
+  const rows = played.map(t => {
+    const s = progress.themes[t.id];
+    return `
+      <div class="profile-result-row">
+        <span class="profile-result-icon">${t.icon}</span>
+        <span class="profile-result-theme">${escapeHTML(t.label)}</span>
+        <span class="profile-result-score">${s.bestCorrect}/${s.bestTotal}<span class="profile-result-meta"> · ${s.played} partie${s.played > 1 ? "s" : ""}</span></span>
+      </div>
+    `;
+  }).join("");
+  return `
+    <p class="profile-note" style="margin-top: 2px;">${summary}</p>
+    <div class="profile-results">${rows}</div>
+  `;
+}
+
+function renderProfile(){
+  const profile = getUserProfile();
+  const editing = !!currentScreen.editingEmail || (!profile && !currentScreen.dismissedEmailPrompt);
+  return `
+    <div class="screen-header">
+      <button class="back" data-nav="back">← Retour</button>
+      <h2>Profil</h2>
+    </div>
+    <div class="profile-card">
+      ${editing ? profileEmailEmptyHTML(profile ? profile.email : "", !!profile) : profileEmailFilledHTML(profile)}
+    </div>
+    <div class="profile-card">
+      <h3 class="profile-card-title">Mes résultats</h3>
+      ${profileResultsBodyHTML()}
+    </div>
+    <button class="quiz-tile" data-nav="contact" style="margin-top: 16px;">
+      <span class="quiz-tile-icon">✉</span>
+      <span class="quiz-tile-text">
+        <span class="quiz-tile-title">Nous contacter</span>
+        <span class="quiz-tile-desc">Une question, un bug à signaler, une idée ?</span>
+      </span>
+      <span class="quiz-tile-arrow">→</span>
+    </button>
+    ${profile ? `<button class="profile-remove-link" data-action="profile-remove-data">Retirer mes données de cet appareil</button>` : ""}
+    ${backButtonFooterHTML()}
+  `;
+}
+
+function profileSaveEmail(){
+  const input = document.getElementById("profileEmailInput");
+  const value = (input && input.value || "").trim();
+  if(!isValidEmail(value)){
+    currentScreen.emailError = "Adresse email invalide.";
+    render();
+    return;
+  }
+  setUserEmail(value);
+  currentScreen.emailError = null;
+  currentScreen.editingEmail = false;
+  render();
+}
+
+function profileRemoveData(){
+  if(!confirm("Retirer votre email et vos résultats de quiz enregistrés sur cet appareil ?")) return;
+  clearUserEmail();
+  try { localStorage.removeItem(QUIZ_PROGRESS_KEY); } catch(e){}
+  currentScreen = { type: "profile" };
+  render();
+}
+
+// ----- Nous contacter -----
+
+const CONTACT_TYPES = [
+  { id: "question", icon: "❓", label: "Question" },
+  { id: "bug", icon: "🐞", label: "Bug" },
+  { id: "autre", icon: "💬", label: "Autre" },
+];
+
+// Recopie la saisie en cours (message, email) depuis le DOM vers currentScreen avant tout
+// render() déclenché depuis l'écran de contact (changement de type, envoi) — sinon un
+// textarea déjà rempli se retrouverait vidé au prochain rendu, qui repart toujours de
+// currentScreen plutôt que de lire le DOM existant.
+function captureContactDraft(){
+  const msgEl = document.getElementById("contactMessage");
+  const emailEl = document.getElementById("contactEmail");
+  if(msgEl) currentScreen.draftMessage = msgEl.value;
+  if(emailEl) currentScreen.draftEmail = emailEl.value;
+}
+
+function renderContact(){
+  if(currentScreen.sent) return renderContactSent();
+  const profile = getUserProfile();
+  const selectedType = currentScreen.contactType || "question";
+  const emailValue = currentScreen.draftEmail != null ? currentScreen.draftEmail : (profile ? profile.email : "");
+  return `
+    <div class="screen-header">
+      <button class="back" data-nav="back">← Retour</button>
+      <h2>Nous contacter</h2>
+    </div>
+    <p class="intro-note">On lit tout, on répond du mieux qu'on peut.</p>
+    <label class="form-label">Type de demande</label>
+    <div class="type-grid">
+      ${CONTACT_TYPES.map(t => `
+        <button class="type-card${t.id === selectedType ? " active" : ""}" data-action="contact-pick-type" data-type="${t.id}">
+          <span class="type-icon">${t.icon}</span>
+          <span class="type-title">${escapeHTML(t.label)}</span>
+        </button>
+      `).join("")}
+    </div>
+    <label class="form-label">Votre message</label>
+    <textarea class="search form-textarea" id="contactMessage" placeholder="Décrivez votre question ou le problème rencontré…">${escapeHTML(currentScreen.draftMessage || "")}</textarea>
+    <label class="form-label">Email de réponse</label>
+    <input class="search" type="email" id="contactEmail" placeholder="vous@exemple.fr" value="${escapeHTML(emailValue || "")}">
+    <p class="field-note">${profile ? "Pré-rempli depuis votre profil — modifiable." : "Optionnel, mais on ne peut pas te répondre sans."}</p>
+    ${currentScreen.error ? `<p class="form-error">${escapeHTML(currentScreen.error)}</p>` : ""}
+    <button class="quiz-start-btn" data-action="contact-submit"${currentScreen.sending ? " disabled" : ""}>${currentScreen.sending ? "Envoi…" : "Envoyer"}</button>
+  `;
+}
+
+function renderContactSent(){
+  return `
+    <div class="confirm-wrap">
+      <div class="confirm-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.3"></circle><path d="M7.8 12.4l2.7 2.7 5.7-6.1"></path></svg>
+      </div>
+      <h3>Message envoyé</h3>
+      <p class="confirm-text">Merci ! On vous répond dès que possible${currentScreen.sentEmail ? ` à <strong>${escapeHTML(currentScreen.sentEmail)}</strong>` : ""}.</p>
+      <button class="back" data-nav="back" style="margin-top: 22px;">← Retour au profil</button>
+    </div>
+  `;
+}
+
+function contactSubmit(){
+  captureContactDraft();
+  const message = (currentScreen.draftMessage || "").trim();
+  const email = (currentScreen.draftEmail || "").trim();
+  const type = currentScreen.contactType || "question";
+
+  if(!message){
+    currentScreen.error = "Écris un message avant d'envoyer.";
+    render();
+    return;
+  }
+  if(email && !isValidEmail(email)){
+    currentScreen.error = "Adresse email invalide.";
+    render();
+    return;
+  }
+
+  currentScreen.error = null;
+  currentScreen.sending = true;
+  render();
+
+  fetch("api/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ type, message, email: email || null }),
+  })
+    .then(res => res.json().catch(() => ({})).then(data => ({ ok: res.ok, data })))
+    .then(({ ok, data }) => {
+      currentScreen.sending = false;
+      if(!ok){
+        currentScreen.error = (data && data.error) || "Envoi impossible pour le moment, réessaie plus tard.";
+        render();
+        return;
+      }
+      if(email) setUserEmail(email);
+      currentScreen.sent = true;
+      currentScreen.sentEmail = email || null;
+      render();
+    })
+    .catch(() => {
+      currentScreen.sending = false;
+      currentScreen.error = "Envoi impossible : vérifie ta connexion et réessaie.";
+      render();
+    });
+}
+
 /* ===================== RENDU : MENU FIXE ===================== */
 
 // Les icônes des cinq onglets sont des badges illustrés (voir assets/badge-*.webp) plutôt que
@@ -3766,6 +4017,8 @@ function render(){
     case "placeDetail": html = renderPlaceDetail(currentScreen.id); break;
     case "quizHome": html = renderQuizHome(); break;
     case "quiz": html = renderQuiz(); break;
+    case "profile": html = renderProfile(); break;
+    case "contact": html = renderContact(); break;
     default: html = renderHome();
   }
   app.innerHTML = html;
@@ -3776,6 +4029,12 @@ function render(){
     app.classList.toggle("wide", GENEALOGY_WIDE_SCREENS.has(currentScreen.type));
   }
   document.getElementById("bottomNav").innerHTML = renderBottomNav();
+  // Bouton Profil flottant : jamais réinjecté (voir index.html, élément persistant hors #app),
+  // seul son état actif suit l'écran courant — même logique que .nav-tab.active.
+  const profileFab = document.getElementById("profileFab");
+  if(profileFab){
+    profileFab.classList.toggle("active", currentScreen.type === "profile" || currentScreen.type === "contact");
+  }
   bindScreenEvents();
 }
 
@@ -3800,6 +4059,7 @@ function bindAppClickDelegation(){
       else if(nav === "places") goToTab("places");
       else if(nav === "placeDetail") go({ type: "placeDetail", id: navEl.dataset.id });
       else if(nav === "quizHome") go({ type: "quizHome" });
+      else if(nav === "contact") go({ type: "contact" });
       return;
     }
     const deityEl = e.target.closest("[data-deity]");
@@ -3824,6 +4084,13 @@ function bindAppClickDelegation(){
       else if(action === "quiz-match-right") quizMatchTapRight(actionEl.dataset.id);
       else if(action === "quiz-next") quizNext();
       else if(action === "quiz-replay") quizReplay();
+      else if(action === "profile-edit-email"){ currentScreen.editingEmail = true; currentScreen.emailError = null; render(); }
+      else if(action === "profile-cancel-edit"){ currentScreen.editingEmail = false; currentScreen.emailError = null; render(); }
+      else if(action === "profile-skip-email"){ currentScreen.dismissedEmailPrompt = true; render(); }
+      else if(action === "profile-save-email") profileSaveEmail();
+      else if(action === "profile-remove-data") profileRemoveData();
+      else if(action === "contact-pick-type"){ captureContactDraft(); currentScreen.contactType = actionEl.dataset.type; render(); }
+      else if(action === "contact-submit") contactSubmit();
       return;
     }
   });
@@ -3832,6 +4099,11 @@ function bindAppClickDelegation(){
     const tabEl = e.target.closest("[data-tab]");
     if(tabEl) goToTab(tabEl.dataset.tab);
   });
+
+  // Bouton Profil flottant : persistant hors #app (voir index.html), jamais réinjecté par
+  // render() — son écouteur n'a donc besoin d'être posé qu'une seule fois ici, comme #bottomNav.
+  const profileFab = document.getElementById("profileFab");
+  if(profileFab) profileFab.addEventListener("click", () => go({ type: "profile" }));
 }
 
 // Ré-attaché après chaque render() : les champs de recherche, eux, sont recréés à chaque

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panthéon — Messages reçus</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* Page utilitaire, jamais liée depuis la nav de l'app ni précachée par le service worker
+     (voir README) — juste un accès direct pour la propriétaire, protégé par la même clé
+     d'aperçu propriétaire que le reste (voir api/contact.js). */
+  #app{ max-width: 640px; }
+  .msg-card{ background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; }
+  .msg-top{ display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+  .msg-type{ font-family: "Cinzel", Georgia, serif; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--bronze); }
+  .msg-date{ font-size: 0.78rem; color: var(--ink-soft); }
+  .msg-text{ white-space: pre-wrap; line-height: 1.5; margin: 0 0 8px; }
+  .msg-email{ font-size: 0.85rem; }
+  .msg-email a{ color: var(--bronze); }
+  .key-prompt{ text-align: center; padding: 60px 16px; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="screen-header"><h2>Messages reçus</h2></div>
+  <div id="content" class="key-prompt">Chargement…</div>
+</div>
+<script>
+function ownerKey(){
+  try { return localStorage.getItem("pantheon-owner-preview-key") || null; } catch(e){ return null; }
+}
+function setOwnerKey(k){
+  try {
+    if(k) localStorage.setItem("pantheon-owner-preview-key", k);
+    else localStorage.removeItem("pantheon-owner-preview-key");
+  } catch(e){}
+}
+function initFromUrl(){
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const k = params.get("preview");
+    if(!k) return;
+    setOwnerKey(k);
+    window.history.replaceState({}, "", window.location.pathname);
+  } catch(e){}
+}
+function escapeHTML(s){
+  return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+}
+const TYPE_LABELS = { question: "❓ Question", bug: "🐞 Bug", autre: "💬 Autre" };
+
+function renderMessages(list){
+  const content = document.getElementById("content");
+  content.className = "";
+  if(!list.length){
+    content.innerHTML = '<p class="empty">Aucun message pour l\'instant.</p>';
+    return;
+  }
+  content.innerHTML = list.map(m => `
+    <div class="msg-card">
+      <div class="msg-top">
+        <span class="msg-type">${TYPE_LABELS[m.message_type] || escapeHTML(m.message_type)}</span>
+        <span class="msg-date">${new Date(m.created_at).toLocaleString("fr-FR")}</span>
+      </div>
+      <p class="msg-text">${escapeHTML(m.message)}</p>
+      ${m.email ? `<div class="msg-email"><a href="mailto:${encodeURIComponent(m.email)}">${escapeHTML(m.email)}</a></div>` : ""}
+    </div>
+  `).join("");
+}
+
+function load(){
+  const key = ownerKey();
+  const content = document.getElementById("content");
+  if(!key){
+    content.className = "key-prompt";
+    content.innerHTML = '<p>Aucune clé enregistrée.</p><button class="back" id="askKeyBtn">Entrer la clé</button>';
+    document.getElementById("askKeyBtn").addEventListener("click", () => {
+      const input = window.prompt("Clé d'aperçu propriétaire :", "");
+      if(input === null) return;
+      setOwnerKey(input.trim());
+      load();
+    });
+    return;
+  }
+  content.className = "key-prompt";
+  content.textContent = "Chargement…";
+  fetch("api/contact", { headers: { "x-owner-preview-key": key } })
+    .then(res => res.json().then(data => ({ ok: res.ok, data })))
+    .then(({ ok, data }) => {
+      if(!ok){
+        content.innerHTML = `<p>${escapeHTML((data && data.error) || "Erreur.")}</p><button class="back" id="retryKeyBtn">Changer de clé</button>`;
+        document.getElementById("retryKeyBtn").addEventListener("click", () => { setOwnerKey(null); load(); });
+        return;
+      }
+      renderMessages(data.messages || []);
+    })
+    .catch(() => {
+      content.innerHTML = "<p>Impossible de charger les messages. Vérifie ta connexion.</p>";
+    });
+}
+
+initFromUrl();
+load();
+</script>
+</body>
+</html>

@@ -39,6 +39,36 @@ async function ensureSchema(){
       request_count INT NOT NULL
     );
   `;
+  await db`
+    CREATE TABLE IF NOT EXISTS contact_messages (
+      id SERIAL PRIMARY KEY,
+      message_type TEXT NOT NULL,
+      message TEXT NOT NULL,
+      email TEXT,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    );
+  `;
+}
+
+// Formulaire "Nous contacter" (voir api/contact.js) — stockage simple, jamais d'envoi
+// automatique : consulté par la propriétaire elle-même via GET /api/contact (clé
+// OWNER_PREVIEW_KEY, même mécanisme que l'aperçu propriétaire du contenu premium).
+async function insertContactMessage({ type, message, email }){
+  const db = sql();
+  await db`
+    INSERT INTO contact_messages (message_type, message, email)
+    VALUES (${type}, ${message}, ${email})
+  `;
+}
+
+async function listContactMessages(limit){
+  const db = sql();
+  return await db`
+    SELECT id, message_type, message, email, created_at
+    FROM contact_messages
+    ORDER BY created_at DESC
+    LIMIT ${limit}
+  `;
 }
 
 // Upsert : ne fait jamais régresser un achat déjà validé en cas de rappel en double (Apple
@@ -80,4 +110,4 @@ async function isEntitled(originalTransactionId){
   return rows.length > 0 && rows[0].revoked_at === null;
 }
 
-module.exports = { ensureSchema, upsertEntitlement, markRevoked, isEntitled };
+module.exports = { ensureSchema, upsertEntitlement, markRevoked, isEntitled, insertContactMessage, listContactMessages };
