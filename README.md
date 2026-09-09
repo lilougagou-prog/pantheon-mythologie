@@ -2478,3 +2478,42 @@ précédent + ces 2 nouveaux). Testé par la suite complète remise à jour et r
 vérifications, dont 3 nouvelles pour ce round).
 
 `service-worker.js` (Panthéon) : `pantheon-v64` → `pantheon-v65`.
+
+## Circé approfondie : Perséis, Aiétès, généalogie corrigée, cinq nouveaux passages
+
+Suite à une recherche demandée ("Cherche tout ce que tu peux sur Circé que tu n'aurais pas déjà
+dit dans sa fiche"), plusieurs manques ont été comblés :
+
+**Deux nouvelles fiches, découvertes en creusant la généalogie de Circé elle-même** :
+- **Perséis** : Océanide, fille d'Océan et Téthys, unie au soleil Hélios ; mère de Circé, Aiétès
+  et Pasiphaé — jusque-là absente alors qu'elle est citée comme mère de Circé.
+- **Aiétès** : roi de Colchide, fils d'Hélios et Perséis, gardien de la Toison d'or, père de
+  Médée — le frère de Circé n'avait pas encore sa fiche.
+
+**Généalogie corrigée** : Perséis manquait comme mère commune à trois figures déjà présentes.
+Ajout de `perséis` → parents Océan/Téthys ; `aiétès` → parents Hélios/Perséis ; `médée` →
+parent Aiétès ; et ajout de Perséis comme second parent de **Circé** et de **Pasiphaé** (qui
+n'étaient reliées à Hélios que d'un côté). Bonus : le moteur de généalogie déduit désormais
+automatiquement Clymène comme sœur de Perséis.
+
+**Cinq nouveaux passages dans la fiche Circé** (désormais 14 paragraphes), tous vérifiés dans
+les sources antiques (Apollonios de Rhodes, Homère, Proclos/le résumé de la *Télégonie*
+perdue, Virgile) :
+1. Étymologie de son nom (*Kírkē*, apparentée à *kírkos*, « le faucon »).
+2. La purification de Jason et Médée : le détail du porcelet nouveau-né égorgé au-dessus de
+   leurs mains suppliantes.
+3. La mort d'Elpénor, tombé ivre du toit du palais de Circé la nuit du départ.
+4. La fin de la *Télégonie* : Télégonos, fils de Circé et Ulysse, tue accidentellement son père
+   sans le reconnaître avec une lance à pointe de raie venimeuse, puis ramène le corps, Pénélope
+   et Télémaque sur l'île de Circé ; celle-ci leur accorde l'immortalité, et deux mariages
+   croisés scellent l'histoire : elle épouse Télémaque, Télégonos épouse Pénélope.
+5. Un passage de l'Énéide : la flotte d'Énée longe de nuit le promontoire de Circé, et
+   **Poséidon** (et non Neptune, pour rester cohérent avec le parti pris "mythologie grecque"
+   de l'appli, malgré la source latine) lui envoie un vent favorable pour l'éloigner du danger.
+
+Testé par la suite complète remise à jour et repassée au vert (793 vérifications, dont 42
+nouvelles pour ce round : présence des deux nouvelles fiches, liens de généalogie, décompte
+exact des 14 paragraphes, présence de chacun des 5 nouveaux passages, absence de « Neptune »,
+et citations toutes résolues sur circé/perséis/aiétès).
+
+`service-worker.js` (Panthéon) : `pantheon-v65` → `pantheon-v66`.
