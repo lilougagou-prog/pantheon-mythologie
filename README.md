@@ -2253,3 +2253,63 @@ distinction "commencé"/"maîtrisé", ligne des mini-quiz de fiche et grille de 
 grisés) — vérifié en clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v58` → `pantheon-v59`.
+
+## Neuf nouveaux lieux sur la carte + fiche Méléagre
+
+Demande de l'utilisatrice : enrichir la carte avec le rocher d'Andromède, le repaire de Méduse,
+l'Atlantide, la Libye, et d'autres propositions. Discussion préalable avant intégration (comme
+pour la refonte du quiz), puis validation avec deux ajustements : créer la fiche de Méléagre
+(pour que Calydon ait un sens), et réfléchir à des marqueurs séparés pour les enfants de Libye.
+
+**Les 9 nouveaux lieux :**
+- **Joppé (rocher d'Andromède)** — le royaume du récit reste l'Éthiopie, mais plusieurs auteurs
+  antiques (Strabon, Pline l'Ancien, Pausanias, Flavius Josèphe) situent le rocher physique
+  montré aux voyageurs sur le rivage de Joppé (Jaffa) ; les deux traditions sont mentionnées
+  plutôt que tranchées arbitrairement.
+- **Repaire des Gorgones et jardin des Hespérides** — une seule entrée plutôt que deux
+  redondantes : Hésiode place déjà les deux au même endroit, « aux confins occidentaux, près de
+  la Nuit, là où chantent les Hespérides », près du Titan Atlas.
+- **Atlantide** — présentée explicitement comme le récit philosophique de Platon (Timée/Critias),
+  jamais comme un site archéologique attesté ; reliée à la fiche homonyme « Atlas (roi
+  d'Atlantide) », distincte du Titan.
+- **Libye (région)** — comble un vrai trou : toute une branche généalogique (Libye, Nil, Bélos,
+  Agénor, et par eux Danaos/Danaïdes/Cadmos) n'avait jusqu'ici aucun ancrage sur la carte.
+- **Colchide, Tirynthe, Colone** — proposées spontanément : le royaume de la Toison d'or
+  (Jason/Médée), la cité d'Héraclès (via Amphitryon/Alcmène, dont le portrait vient d'être
+  ajouté), et le lieu de la mort d'Œdipe (Sophocle) — un rappel direct de l'illustration ajoutée
+  récemment dans sa fiche.
+- **Calydon** — la chasse au sanglier envoyée par Artémis, désormais possible grâce à la nouvelle
+  fiche Méléagre (voir plus bas).
+
+**Réponse à la question sur les enfants de Libye** ("tu leur ferais pas chacun un marqueur ?") :
+non pour tous, un seul nouveau lieu suffit. Bélos et Égyptos se contentent de régner sur l'Égypte
+sans fonder de nouvelle cité — exactement le même profil "contenu trop mince" qui a justifié
+d'exclure les rois d'Albe la Longue du quiz cette semaine, donc pas de marqueur dédié pour eux.
+Danaos, lui, fuit vers Argos — déjà une fiche existante : plutôt qu'un doublon, son arrivée et
+celle des Danaïdes sont ajoutées comme un troisième paragraphe à la fiche Argos existante (avec
+Danaos et Danaïdes ajoutés à ses figures associées). Agénor, en revanche, fonde vraiment sa
+propre cité (Tyr, avec Sidon) — et c'est aussi là, selon la tradition, que Zeus enleva Europe :
+assez de matière pour une **nouvelle** fiche à part entière, ajoutée en réponse à la question.
+
+**Fiche Méléagre** (nouvelle, même procédé que Hélénos) : prince de Calydon, tison fatal confié à
+sa mère Althée par les Moires, chasse du sanglier de Calydon aux côtés d'Atalante, mort de sa
+propre main maternelle après le meurtre de ses oncles. Note + entrée vide dans `DEITY_LORE`
+côté `app.js` (comme toute fiche premium), contenu réel dans `content.json`. Volontairement pas
+d'entrée dans `GENEALOGY_PARENTS` : ses parents Œnée et Althée n'ont pas leur propre fiche,
+mentionnés en texte libre sans lien fabriqué vers nulle part.
+
+**Bug trouvé et corrigé en cours de route** : deux citations `(voir la fiche « X »)` pointaient
+par erreur vers des LIEUX (Colonnes d'Héraclès dans le texte d'Atlantide, Thèbes dans celui de
+Tyr, Mycènes dans celui de Tirynthe) — `LORE_LINK_TARGETS` ne connaît que les figures et les
+symboles, jamais les lieux, donc ces citations restaient affichées telles quelles au lieu de
+disparaître proprement. Repéré par un script de vérification automatique qui simule
+`linkifyLore()` sur tout nouveau texte avant intégration (ajouté aussi à la suite de tests, pour
+ne plus jamais laisser passer ce genre d'erreur) — même famille de bug que la tâche « Fix
+uncited clickable-name bugs » d'une session précédente.
+
+Testé par la suite complète remise à jour et repassée au vert (633 vérifications, dont 25
+nouvelles pour ce round). Vérifié aussi visuellement par Playwright sur les 9 nouveaux lieux, la
+fiche Argos enrichie, la fiche Méléagre, la liste complète des lieux (45) et la recherche
+unifiée.
+
+`service-worker.js` (Panthéon) : `pantheon-v59` → `pantheon-v60`.
