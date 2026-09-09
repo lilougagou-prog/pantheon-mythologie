@@ -2630,3 +2630,19 @@ nouvelles pour ce round), rendu contrôlé visuellement : la fiche d'Éos affich
 deux illustrations (Orion, puis Astréos), chacune au bon endroit.
 
 `service-worker.js` (Panthéon) : `pantheon-v70` → `pantheon-v71`.
+
+## Cinq nouveaux portraits : Autolycos, Autonoë, Bélos, Bellérophon, Bia
+
+Images envoyées par l'utilisatrice pour cinq fiches qui n'avaient encore aucun portrait :
+
+- **Autolycos** : portrait principal (le voleur en pleine action de nuit, butin à la main).
+- **Autonoë** : portrait principal (reine thébaine sur son trône).
+- **Bélos** : portrait principal (roi d'Égypte, décor du Nil).
+- **Bellérophon** : portrait principal (avec Pégase).
+- **Bia** : portrait principal (personnification de la Force, devant la statue de Zeus).
+
+Testé par la suite complète remise à jour et repassée au vert (899 vérifications, dont 6
+nouvelles pour ce round), chargement des 5 images vérifié sans erreur, rendu contrôlé
+visuellement sur les cinq fiches.
+
+`service-worker.js` (Panthéon) : `pantheon-v71` → `pantheon-v72`.

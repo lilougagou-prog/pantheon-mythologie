@@ -545,6 +545,11 @@ const DEITY_PORTRAITS = {
   "atlas": "assets/deity-atlas-titan.jpg",
   "atlas-atlantide": "assets/deity-atlas-atlantide.jpg",
   "atrée": "assets/deity-atree.jpg",
+  "autolycos": "assets/deity-autolycos.jpg",
+  "autonoë": "assets/deity-autonoe.jpg",
+  "bélos": "assets/deity-belos.jpg",
+  "bellérophon": "assets/deity-bellerophon.jpg",
+  "bia": "assets/deity-bia.jpg",
 };
 // Même principe que DEITY_PORTRAITS, mais pour la bibliothèque symbolique : une illustration
 // dédiée (fournie par l'utilisatrice, fond détouré) qui remplace l'emoji d'un symbole partout où
