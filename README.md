@@ -2550,3 +2550,21 @@ nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuell
 deux fiches.
 
 `service-worker.js` (Panthéon) : `pantheon-v66` → `pantheon-v67`.
+
+## Double avertissement sur les bœufs d'Hélios : Tirésias ET Circé, un choix voulu par Homère
+
+Question de l'utilisatrice après le round précédent : Tirésias ET Circé avertissent-ils
+vraiment tous les deux Ulysse sur l'interdiction de toucher aux bœufs sacrés d'Hélios ? Oui —
+c'est fidèle à l'Odyssée, qui fait bien répéter cet avertissement deux fois (chant XI par
+Tirésias aux Enfers, puis chant XII par Circé à son retour), pour souligner l'importance
+capitale de cet interdit. Mais la fiche Circé ne le signalait pas comme volontaire, et pouvait
+donner l'impression d'un doublon de contenu.
+
+Le paragraphe de Circé sur les indications du retour renvoie désormais explicitement à
+l'avertissement déjà donné par Tirésias aux Enfers, avec une citation croisée vers sa fiche et
+une précision sur le sens de cette répétition dans le texte antique.
+
+Testé par la suite complète remise à jour et repassée au vert (853 vérifications, dont 21
+nouvelles pour ce round), citation vérifiée.
+
+`service-worker.js` (Panthéon) : `pantheon-v67` → `pantheon-v68`.
