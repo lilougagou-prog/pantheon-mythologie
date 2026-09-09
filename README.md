@@ -2191,3 +2191,65 @@ Testé par la suite complète remise à jour et repassée au vert (545 vérifica
 visuellement par Playwright, en clair et en sombre, sur les deux fiches.
 
 `service-worker.js` (Panthéon) : `pantheon-v57` → `pantheon-v58`.
+
+## Refonte du quiz mythologique
+
+Quatre chantiers demandés par l'utilisatrice après un état des lieux détaillé du système de
+quiz existant.
+
+**1. Fiches trop légères pour un quiz.** Le bouton "Teste tes connaissances" en bas d'une fiche
+ne se fiait jusqu'ici qu'à la richesse généalogique (≥ 2 liens de parenté), ce qui laissait passer
+les fiches "liste de succession" (les rois d'Albe la Longue : Agrippa, Capétus, Atys, Alba,
+Latinus-Silvius, Aventinus, Capys-Albain, Proca, Tibérinus, Énée-Silvius), dont le texte réel
+("X succéda à Y, eut pour fils Z") est trop mince pour justifier un quiz alors qu'elles ont
+justement un parent ET un enfant. Ajoute un second critère, vérifié sur le contenu réel : au
+moins 2 paragraphes de mythe. Ce sont précisément et uniquement les 10 fiches ci-dessus qui ont
+1 seul paragraphe dans tout le corpus (274 figures) — aucun effet de bord sur une fiche
+légitimement courte mais dense (ex. Bellérophon).
+
+**2. Niveau Intermédiaire.** Débloqué jusqu'ici par une seule session Débutant terminée, quel
+que soit le score. Remplacé par un vrai jalon : 5 thèmes "maîtrisés" (meilleure partie à plus de
+50% de bonnes réponses, strictement — un score pile à la moyenne ne compte pas), sur les 10
+thèmes existants. Le calcul est désormais dynamique (`quizMasteredThemeCount`) plutôt qu'un
+booléen figé une fois pour toutes — l'écran d'accueil du quiz affiche la progression réelle
+("3/5 thèmes maîtrisés") au lieu d'un simple rappel de la règle, et chaque carte de thème
+distingue visuellement "commencé" de "✓ maîtrisé".
+
+**3. Niveau Expert trop dur — deux vrais bugs corrigés**, pas seulement des questions difficiles.
+La question "réponse à taper" (Tape le nom d'un parent de X) ne validait qu'UNE seule bonne
+réponse tirée au sort, alors que le prompt invite à taper "un parent" quelconque : taper un autre
+parent tout aussi vrai (ex. "Thétis" quand "Pélée" avait été tiré comme parent d'Achille) était
+compté faux à tort. Deuxième bug : pour les figures homonymes désambiguïsées (ex.
+"Antiope (princesse thébaine)", "Persès (le Titan)"), il fallait taper la précision entre
+parenthèses mot pour mot pour être accepté. Les deux sont corrigés : toute réponse vraie est
+acceptée, avec ou sans la désambiguïsation entre parenthèses.
+
+**4. Améliorations générales :**
+- **Explication après chaque réponse** (💡), tirée de `DEITY_NOTES`/les liens de parenté (bundlés
+  pour toutes les figures, contrairement au mythe complet qui reste premium) — un quiz doit faire
+  apprendre, pas seulement noter.
+- **Distracteurs piochés dans le même thème en priorité** (`quizDistractorPool`), avec repli sur
+  tout le corpus seulement si le thème n'a pas assez de candidats (thèmes étroits, mini-quiz
+  contextuel d'une fiche à la famille réduite) — un distracteur du même cycle mythologique est
+  plus difficile à écarter par élimination qu'un nom totalement hors sujet.
+- **Badges** : 6 badges (Premier quiz, Sans-faute, Sur le terrain, Niveau Intermédiaire,
+  Polymathe, Niveau Expert), grisés/transparents tant que non gagnés, colorés avec un halo animé
+  une fois débloqués — calculés à la volée depuis la progression, jamais stockés.
+- **Points cumulés**, pondérés par niveau (Débutant ×1, Intermédiaire ×2, Expert ×3) — prépare un
+  futur classement entre utilisatrices sans tout retravailler.
+- **Mini-quiz depuis une fiche enfin valorisés** : jusqu'ici ces parties n'étaient comptabilisées
+  nulle part (ni points, ni statistiques) alors qu'elles demandent un vrai effort. Comptées à
+  part sur le profil ("Mini-quiz depuis les fiches : X/Y · N fiches testées"), sans polluer la
+  liste des thèmes.
+
+Testé par la suite complète remise à jour et repassée au vert (580 vérifications, dont 35
+nouvelles pour ce round). Comportement réel vérifié par Playwright au-delà des vérifications
+statiques : bouton absent sur Agrippa / présent sur Achille, question "réponse à taper" qui
+accepte bien plusieurs bonnes réponses (Thétis ET Pélée pour Achille) et le nom nu d'un parent
+homonyme (Antiope), déblocage effectif du niveau Intermédiaire à 5 thèmes maîtrisés (et pas à
+4, ni à une note pile à 50%), explication affichée après une réponse QCM et une réponse texte,
+distracteurs de la ronde "Titans" tous piochés parmi les Titans, écran Profil avec points,
+distinction "commencé"/"maîtrisé", ligne des mini-quiz de fiche et grille de badges (colorés vs
+grisés) — vérifié en clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v58` → `pantheon-v59`.

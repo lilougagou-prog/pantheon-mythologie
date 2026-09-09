@@ -1124,6 +1124,7 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 .quiz-theme-icon{ font-size: 1.4rem; line-height: 1; }
 .quiz-theme-title{ font-family: "Cinzel", Georgia, serif; font-weight: 600; color: var(--laurel-deep); font-size: 0.85rem; line-height: 1.25; }
 .quiz-theme-stats{ font-size: 0.72rem; color: var(--bronze); }
+.quiz-theme-stats.mastered{ color: var(--laurel-deep); font-weight: 600; }
 
 .quiz-start-btn{
   display: block;
@@ -1183,6 +1184,17 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 .quiz-choice.correct{ border-color: var(--laurel); background: rgba(74, 93, 58, 0.14); color: var(--laurel-deep); font-weight: 600; }
 .quiz-choice.incorrect{ border-color: var(--terracotta); background: rgba(181, 84, 47, 0.14); color: var(--terracotta); }
 
+.quiz-explain{
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  background: var(--marble-deep);
+  border-left: 3px solid var(--bronze);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
 .quiz-text-input{
   display: block;
   width: 100%;
@@ -1240,6 +1252,7 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 .quiz-result{ max-width: 420px; margin: 20px auto 0; text-align: center; }
 .quiz-result-score{ font-family: "Cinzel", Georgia, serif; font-size: 2.6rem; color: var(--laurel-deep); margin: 0 0 6px; }
 .quiz-result-message{ font-size: 1rem; color: var(--ink-soft); margin-bottom: 10px; }
+.quiz-result-points{ font-size: 0.9rem; color: var(--bronze); font-weight: 600; margin-bottom: 6px; }
 .quiz-result-unlock{ font-size: 0.95rem; color: var(--bronze); font-weight: 600; margin-bottom: 18px; }
 .quiz-result-actions{ display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
 .quiz-home-btn{ background: var(--marble-deep); color: var(--laurel-deep); border: 1px solid var(--border); }
@@ -1373,6 +1386,48 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 .profile-result-theme{ font-family: "Cinzel", Georgia, serif; font-weight: 600; color: var(--ink); font-size: 0.9rem; flex: 1; min-width: 0; }
 .profile-result-score{ font-size: 0.82rem; font-weight: 600; color: var(--bronze); white-space: nowrap; }
 .profile-result-meta{ font-weight: 400; color: var(--ink-soft); }
+.profile-result-mastered{ font-family: inherit; font-weight: 600; font-size: 0.72rem; color: var(--laurel-deep); }
+
+.profile-points{ font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 1.1rem; color: var(--bronze); margin: 0; }
+
+/* ----- Badges : grisés/transparents tant que non gagnés, colorés + halo une fois débloqués -----
+   Calculés à la volée (voir QUIZ_BADGES/quizBadgesHTML dans app.js), jamais stockés. */
+.quiz-badges{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 18px;
+}
+@media (min-width: 420px){ .quiz-badges{ grid-template-columns: repeat(4, 1fr); } }
+.quiz-badge{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 6px;
+  border-radius: 10px;
+  background: var(--marble-deep);
+  border: 1px solid var(--border);
+  opacity: 0.4;
+  filter: grayscale(1);
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+.quiz-badge-icon{ font-size: 1.5rem; line-height: 1; }
+.quiz-badge-label{ font-size: 0.68rem; text-align: center; color: var(--ink-soft); line-height: 1.25; }
+.quiz-badge.earned{
+  opacity: 1;
+  filter: none;
+  border-color: var(--bronze);
+  background: linear-gradient(160deg, rgba(168, 120, 60, 0.16), var(--marble-deep));
+  box-shadow: 0 0 0 1px rgba(168, 120, 60, 0.25), 0 0 14px rgba(168, 120, 60, 0.35);
+  animation: quiz-badge-glow 2.6s ease-in-out infinite;
+}
+.quiz-badge.earned .quiz-badge-label{ color: var(--laurel-deep); font-weight: 600; }
+@keyframes quiz-badge-glow{
+  0%, 100% { box-shadow: 0 0 0 1px rgba(168, 120, 60, 0.25), 0 0 10px rgba(168, 120, 60, 0.28); }
+  50% { box-shadow: 0 0 0 1px rgba(168, 120, 60, 0.4), 0 0 18px rgba(168, 120, 60, 0.55); }
+}
+@media (prefers-reduced-motion: reduce){ .quiz-badge.earned{ animation: none; } }
 
 /* ----- Nous contacter ----- */
 

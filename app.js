@@ -2276,7 +2276,7 @@ function renderFigureDetail(id){
       }).join("")}` : ""}
       ${genealogyLineageHTML(id)}
       ${relatedChipsHTML(related, "symbol")}
-      ${quizFigureButtonHTML(id)}
+      ${quizFigureButtonHTML(id, paragraphs)}
       ${siblingNavHTML(FIGURE_ENTRIES, id, "figureDetail", e => e[1])}
     </article>
     ${backButtonFooterHTML()}
@@ -3112,27 +3112,46 @@ function profileEmailEmptyHTML(currentValue, isEditingExisting){
 function profileResultsBodyHTML(){
   const progress = getQuizProgress();
   const played = QUIZ_THEMES.filter(t => progress.themes[t.id] && progress.themes[t.id].played > 0);
-  if(!played.length){
+  const fq = progress.figureQuizzes;
+  if(!played.length && !fq.played){
     return `
       <p class="profile-note">Aucune partie jouée pour l'instant.</p>
       <button class="quiz-start-btn" data-nav="quizHome" style="margin-top: 12px;">Lancer un quiz</button>
+      ${quizBadgesHTML(progress)}
     `;
   }
+  const masteredCount = quizMasteredThemeCount(progress);
+  // "Commencé" et "maîtrisé" (note au-dessus de la moyenne) sont deux choses différentes — la
+  // ligne de résumé distingue les deux plutôt que de ne compter que la participation.
   const summary = `${played.length} thème${played.length > 1 ? "s" : ""} commencé${played.length > 1 ? "s" : ""} sur ${QUIZ_THEMES.length}` +
-    (progress.intermediaireUnlocked ? " · niveau Intermédiaire débloqué" : "");
+    ` · ${masteredCount} maîtrisé${masteredCount > 1 ? "s" : ""}`;
   const rows = played.map(t => {
     const s = progress.themes[t.id];
+    const mastered = quizThemeMastered(t.id, progress);
     return `
       <div class="profile-result-row">
         <span class="profile-result-icon">${t.icon}</span>
-        <span class="profile-result-theme">${escapeHTML(t.label)}</span>
+        <span class="profile-result-theme">${escapeHTML(t.label)}${mastered ? ` <span class="profile-result-mastered">✓ maîtrisé</span>` : ""}</span>
         <span class="profile-result-score">${s.bestCorrect}/${s.bestTotal}<span class="profile-result-meta"> · ${s.played} partie${s.played > 1 ? "s" : ""}</span></span>
       </div>
     `;
   }).join("");
+  // Les mini-quiz lancés depuis une fiche n'étaient jusqu'ici comptabilisés NULLE PART — un
+  // vrai effort de la visitrice (répondre à des questions sur une figure qu'elle vient de lire)
+  // qui ne ressortait jamais sur son profil. Une ligne à part plutôt que mêlée aux thèmes : ce
+  // n'est pas un thème, c'est une pratique différente (agrégée sur toutes les fiches testées).
+  const figureRow = fq.played ? `
+    <div class="profile-result-row">
+      <span class="profile-result-icon">🧭</span>
+      <span class="profile-result-theme">Mini-quiz depuis les fiches</span>
+      <span class="profile-result-score">${fq.correct}/${fq.total}<span class="profile-result-meta"> · ${fq.played} fiche${fq.played > 1 ? "s" : ""} testée${fq.played > 1 ? "s" : ""}</span></span>
+    </div>
+  ` : "";
   return `
+    <p class="profile-points">⭐ ${progress.totalPoints} point${progress.totalPoints > 1 ? "s" : ""} cumulé${progress.totalPoints > 1 ? "s" : ""}</p>
     <p class="profile-note" style="margin-top: 2px;">${summary}</p>
-    <div class="profile-results">${rows}</div>
+    <div class="profile-results">${rows}${figureRow}</div>
+    ${quizBadgesHTML(progress)}
   `;
 }
 
@@ -3346,6 +3365,29 @@ function quizShuffle(arr){
 function quizSample(arr, n){ return quizShuffle(arr).slice(0, n); }
 function quizPick(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
 
+// Piège plausible plutôt que hors-sujet : les mauvais choix sont d'abord piochés dans le même
+// thème (scopeIds) — sur "Guerre de Troie", des distracteurs qui sont aussi des figures
+// troyennes/grecques sont plus difficiles à écarter par élimination qu'un nom totalement
+// étranger au sujet. On complète avec tout le corpus seulement si le thème n'a pas assez de
+// candidats valides (thèmes étroits, ou mini-quiz contextuel d'une fiche à la famille réduite) —
+// jamais moins de `n` distracteurs faute de quoi la question resterait sans réponse possible.
+function quizDistractorPool(scopeIds, excludeIds, n){
+  n = n || 3;
+  const inScope = quizShuffle((scopeIds || []).filter(id => !excludeIds.includes(id)));
+  if(inScope.length >= n) return inScope.slice(0, n);
+  const wide = quizShuffle(Object.keys(DEITY_NOTES).filter(id => !excludeIds.includes(id) && !inScope.includes(id)));
+  return [...inScope, ...wide].slice(0, n);
+}
+
+// Petit rappel affiché après la réponse (💡), même sur une bonne réponse — un quiz doit faire
+// apprendre, pas seulement noter. DEITY_NOTES et les liens de parenté sont bundlés pour TOUTES
+// les figures (contrairement au mythe complet, premium), donc toujours disponibles ici sans
+// dépendre de ce que cette visiteuse a débloqué.
+function quizExplainNote(id){
+  const note = DEITY_NOTES[id];
+  return note ? `${genealogyDisplayName(id)} : ${note}` : null;
+}
+
 // --- Thèmes : mêmes regroupements déjà curés ailleurs dans l'appli (GENEALOGY_OVERVIEWS,
 // TITAN_IDS, OLYMPIAN_IDS), jamais réinventés.
 const QUIZ_THEMES = [
@@ -3373,17 +3415,15 @@ function quizPreferMajor(ids){
   return withPortrait.length >= 6 ? withPortrait : ids;
 }
 
-// --- Générateurs : figures. Le "scope" ne détermine que le SUJET de la question (quelle
-// figure est interrogée) ; les distracteurs sont toujours piochés dans tout le corpus pour ne
-// jamais manquer de choix plausibles, même sur un thème étroit (ex. quiz contextuel d'une
-// seule fiche).
+// --- Générateurs : figures. Le "scope" détermine le SUJET de la question (quelle figure est
+// interrogée) ET, en priorité, le vivier des distracteurs (voir quizDistractorPool) — avec
+// repli sur tout le corpus seulement si le thème n'a pas assez de candidats.
 
 function quizGenNoteMatch(scopeIds){
   const candidates = scopeIds.filter(id => DEITY_NOTES[id]);
   if(!candidates.length) return null;
   const subject = quizPick(candidates);
-  const pool = Object.keys(DEITY_NOTES).filter(id => id !== subject);
-  const distractors = quizSample(pool, 3);
+  const distractors = quizDistractorPool(scopeIds, [subject], 3);
   if(distractors.length < 3) return null;
   const choiceIds = quizShuffle([subject, ...distractors]);
   return {
@@ -3391,6 +3431,7 @@ function quizGenNoteMatch(scopeIds){
     prompt: `Qui correspond à cette description : « ${DEITY_NOTES[subject]} » ?`,
     choices: choiceIds.map(id => genealogyDisplayName(id)),
     correctIndex: choiceIds.indexOf(subject),
+    // Pas d'explication ici : le prompt EST déjà la note, une explication serait circulaire.
   };
 }
 
@@ -3400,8 +3441,7 @@ function quizGenParent(scopeIds){
   const childId = quizPick(candidates);
   const parents = GENEALOGY_PARENTS[childId];
   const correct = quizPick(parents);
-  const pool = Object.keys(DEITY_NOTES).filter(id => id !== childId && !parents.includes(id));
-  const distractors = quizSample(pool, 3);
+  const distractors = quizDistractorPool(scopeIds, [childId, ...parents], 3);
   if(distractors.length < 3) return null;
   const choiceIds = quizShuffle([correct, ...distractors]);
   return {
@@ -3409,6 +3449,7 @@ function quizGenParent(scopeIds){
     prompt: `Qui est le parent de ${genealogyDisplayName(childId)} ?`,
     choices: choiceIds.map(id => genealogyDisplayName(id)),
     correctIndex: choiceIds.indexOf(correct),
+    explain: quizExplainNote(correct),
   };
 }
 
@@ -3418,8 +3459,7 @@ function quizGenChild(scopeIds){
   const parentId = quizPick(candidates);
   const children = GENEALOGY_CHILDREN[parentId];
   const correct = quizPick(children);
-  const pool = Object.keys(DEITY_NOTES).filter(id => id !== parentId && !children.includes(id));
-  const distractors = quizSample(pool, 3);
+  const distractors = quizDistractorPool(scopeIds, [parentId, ...children], 3);
   if(distractors.length < 3) return null;
   const choiceIds = quizShuffle([correct, ...distractors]);
   return {
@@ -3427,6 +3467,7 @@ function quizGenChild(scopeIds){
     prompt: `Qui est l'enfant de ${genealogyDisplayName(parentId)} ?`,
     choices: choiceIds.map(id => genealogyDisplayName(id)),
     correctIndex: choiceIds.indexOf(correct),
+    explain: quizExplainNote(correct),
   };
 }
 
@@ -3439,8 +3480,7 @@ function quizGenGrandparent(scopeIds){
   for(const p of parents) for(const gp of (GENEALOGY_PARENTS[p] || [])) if(!grandparents.includes(gp)) grandparents.push(gp);
   if(!grandparents.length) return null;
   const correct = quizPick(grandparents);
-  const pool = Object.keys(DEITY_NOTES).filter(id => id !== grandchildId && !parents.includes(id) && !grandparents.includes(id));
-  const distractors = quizSample(pool, 3);
+  const distractors = quizDistractorPool(scopeIds, [grandchildId, ...parents, ...grandparents], 3);
   if(distractors.length < 3) return null;
   const choiceIds = quizShuffle([correct, ...distractors]);
   return {
@@ -3448,6 +3488,7 @@ function quizGenGrandparent(scopeIds){
     prompt: `Qui est le grand-parent de ${genealogyDisplayName(grandchildId)} ?`,
     choices: choiceIds.map(id => genealogyDisplayName(id)),
     correctIndex: choiceIds.indexOf(correct),
+    explain: quizExplainNote(correct),
   };
 }
 
@@ -3461,27 +3502,44 @@ function quizGenTrueFalse(scopeIds){
   if(isTrue){
     statedParent = quizPick(parents);
   } else {
-    const pool = Object.keys(DEITY_NOTES).filter(id => id !== childId && !parents.includes(id));
+    const pool = quizDistractorPool(scopeIds, [childId, ...parents], 1);
     if(!pool.length) return null;
-    statedParent = quizPick(pool);
+    statedParent = pool[0];
   }
   return {
     kind: "qcm",
     prompt: `Vrai ou faux : ${genealogyDisplayName(statedParent)} est le parent de ${genealogyDisplayName(childId)}.`,
     choices: ["Vrai", "Faux"],
     correctIndex: isTrue ? 0 : 1,
+    explain: `Les parents connus de ${genealogyDisplayName(childId)} : ${parents.map(genealogyDisplayName).join(", ")}.`,
   };
 }
 
+// Le prompt dit "un parent" — n'importe laquelle des figures réellement parentes doit donc
+// compter comme bonne réponse, pas seulement celle tirée au sort pour l'affichage de secours
+// (q.answer). Bug corrigé : avant, taper un AUTRE parent tout aussi vrai (ex. "Thétis" quand
+// "Pélée" avait été tiré comme parent d'Achille) était compté faux. Accepte aussi le nom "nu"
+// sans la précision entre parenthèses des figures homonymes désambiguïsées (ex. "Antiope" pour
+// "Antiope (princesse thébaine)") — personne ne devine qu'il faut la taper mot pour mot.
 function quizGenTypeAnswer(scopeIds){
   const candidates = scopeIds.filter(id => (GENEALOGY_PARENTS[id] || []).length > 0);
   if(!candidates.length) return null;
   const childId = quizPick(candidates);
-  const correct = quizPick(GENEALOGY_PARENTS[childId]);
+  const parents = GENEALOGY_PARENTS[childId];
+  const correct = quizPick(parents);
+  const acceptedAnswers = new Set();
+  for(const pid of parents){
+    const display = genealogyDisplayName(pid);
+    acceptedAnswers.add(normalizeSearch(display));
+    const bare = display.replace(/\s*\([^)]*\)\s*$/, "").trim();
+    if(bare) acceptedAnswers.add(normalizeSearch(bare));
+  }
   return {
     kind: "text",
     prompt: `Tape le nom d'un parent de ${genealogyDisplayName(childId)}.`,
     answer: genealogyDisplayName(correct),
+    acceptedAnswers,
+    explain: quizExplainNote(correct),
   };
 }
 
@@ -3501,6 +3559,7 @@ function quizGenSymbolDesc(){
     prompt: `Quel symbole correspond à : « ${subject[1].desc} » ?`,
     choices: choices.map(([, s]) => s.label),
     correctIndex: choices.findIndex(([id]) => id === subject[0]),
+    explain: subject[1].category ? `Catégorie : ${subject[1].category}.` : null,
   };
 }
 
@@ -3518,6 +3577,7 @@ function quizGenSymbolCategory(){
     prompt: `À quelle catégorie appartient le symbole « ${subject[1].label} » ?`,
     choices,
     correctIndex: choices.indexOf(subject[1].category),
+    explain: subject[1].desc ? `${subject[1].label} : ${subject[1].desc}` : null,
   };
 }
 
@@ -3536,6 +3596,7 @@ function quizGenPlaceDesc(){
     prompt: `Quel lieu correspond à : « ${subject.desc} » ?`,
     choices: choices.map(p => p.name),
     correctIndex: choices.findIndex(p => p.id === subject.id),
+    explain: subject.category ? `Catégorie : ${subject.category}.` : null,
   };
 }
 
@@ -3553,6 +3614,7 @@ function quizGenPlaceCategory(){
     prompt: `À quelle catégorie appartient ${subject.name} ?`,
     choices,
     correctIndex: choices.indexOf(subject.category),
+    explain: subject.desc ? `${subject.name} : ${subject.desc}` : null,
   };
 }
 
@@ -3570,6 +3632,7 @@ function quizGenPlaceFigure(){
     prompt: `Quelle figure est associée à ${subject.name} ?`,
     choices: choiceIds.map(id => genealogyDisplayName(id)),
     correctIndex: choiceIds.indexOf(correct),
+    explain: quizExplainNote(correct),
   };
 }
 
@@ -3623,39 +3686,108 @@ function quizGenerateQuestion(levelId, theme, figureIds){
 
 const QUIZ_LEVELS = [
   { id: "débutant", label: "Débutant", desc: "Les grandes figures, questions directes.", icon: "🌱" },
-  { id: "intermédiaire", label: "Intermédiaire", desc: "Relations de famille, vrai ou faux.", icon: "⚔️", lockedHint: "Termine une session en Débutant pour débloquer ce niveau." },
+  { id: "intermédiaire", label: "Intermédiaire", desc: "Relations de famille, vrai ou faux.", icon: "⚔️", lockedHint: "Maîtrise 5 thèmes (note au-dessus de la moyenne) pour débloquer ce niveau." },
   { id: "expert", label: "Expert", desc: "Généalogie sur plusieurs générations, réponses à taper.", icon: "🏆", lockedHint: "Réservé au contenu premium." },
 ];
 const QUIZ_SESSION_LENGTH = 8;
 const QUIZ_PROGRESS_KEY = "pantheon-quiz-progress";
+// Un thème est "maîtrisé" à plus de la moitié de bonnes réponses sur sa MEILLEURE partie
+// (bestCorrect/bestTotal) — pas seulement "commencé" (played > 0), pour que ça reste un vrai
+// jalon plutôt qu'un simple compteur de participation.
+const QUIZ_MASTERY_RATIO = 0.5;
+const QUIZ_INTERMEDIATE_THEMES_REQUIRED = 5;
+// Points par bonne réponse, pondérés par niveau — valorise l'Intermédiaire et l'Expert plutôt
+// que de ne compter que le nombre de bonnes réponses, et prépare un futur classement entre
+// utilisatrices sans avoir à tout retravailler plus tard.
+const QUIZ_LEVEL_POINTS = { "débutant": 1, "intermédiaire": 2, "expert": 3 };
 
 function getQuizProgress(){
   try {
     const raw = JSON.parse(localStorage.getItem(QUIZ_PROGRESS_KEY) || "{}");
-    return { intermediaireUnlocked: !!raw.intermediaireUnlocked, themes: raw.themes || {} };
-  } catch(e){ return { intermediaireUnlocked: false, themes: {} }; }
+    return {
+      themes: raw.themes || {},
+      figureQuizzes: raw.figureQuizzes || { played: 0, correct: 0, total: 0 },
+      totalPoints: raw.totalPoints || 0,
+    };
+  } catch(e){ return { themes: {}, figureQuizzes: { played: 0, correct: 0, total: 0 }, totalPoints: 0 }; }
 }
 function saveQuizProgress(progress){
   try { localStorage.setItem(QUIZ_PROGRESS_KEY, JSON.stringify(progress)); } catch(e){}
 }
+function quizThemeMastered(themeId, progress){
+  const s = progress.themes[themeId];
+  return !!s && s.bestTotal > 0 && (s.bestCorrect / s.bestTotal) > QUIZ_MASTERY_RATIO;
+}
+function quizMasteredThemeCount(progress){
+  return QUIZ_THEMES.filter(t => quizThemeMastered(t.id, progress)).length;
+}
 function quizLevelUnlocked(levelId, progress){
   if(levelId === "débutant") return true;
-  if(levelId === "intermédiaire") return progress.intermediaireUnlocked;
+  if(levelId === "intermédiaire") return quizMasteredThemeCount(progress) >= QUIZ_INTERMEDIATE_THEMES_REQUIRED;
   if(levelId === "expert") return isPremiumUnlocked() || hasOwnerPreview();
   return false;
 }
-// Termine une session en Débutant (quel que soit le score : l'essai compte, pas la
-// performance) débloque Intermédiaire ; Expert reste indépendamment réservé au contenu
-// premium (voir quizLevelUnlocked). Un compteur par thème (meilleur score, nombre de parties)
-// plutôt qu'un score global unique — incite à rejouer sur un thème précis.
-function recordQuizResult(level, themeId, correct, total){
+// Enregistre le résultat d'une partie : les quiz par thème (progress.themes, meilleur score +
+// nombre de parties par thème — incite à rejouer un thème précis) ET les mini-quiz contextuels
+// depuis une fiche (progress.figureQuizzes, un total agrégé plutôt qu'une entrée par figure —
+// lister 274 clés individuelles n'aiderait personne), qui jusqu'ici n'étaient tout simplement
+// jamais comptabilisés nulle part. Les deux alimentent aussi le total de points cumulé, pondéré
+// par niveau (QUIZ_LEVEL_POINTS) — un mini-quiz Intermédiaire compte donc plus qu'une question
+// Débutant, cohérent avec la difficulté réelle. Renvoie les points gagnés cette partie, pour
+// l'afficher sur l'écran de résultat.
+function recordQuizResult(level, themeId, correct, total, opts){
+  opts = opts || {};
   const progress = getQuizProgress();
-  if(level === "débutant") progress.intermediaireUnlocked = true;
-  const cur = progress.themes[themeId] || { played: 0, bestCorrect: 0, bestTotal: total };
-  cur.played += 1;
-  if(cur.bestTotal === 0 || correct > cur.bestCorrect){ cur.bestCorrect = correct; cur.bestTotal = total; }
-  progress.themes[themeId] = cur;
+  const points = correct * (QUIZ_LEVEL_POINTS[level] || 1);
+  progress.totalPoints = (progress.totalPoints || 0) + points;
+  if(opts.isFigureQuiz){
+    const fq = progress.figureQuizzes || { played: 0, correct: 0, total: 0 };
+    fq.played += 1;
+    fq.correct += correct;
+    fq.total += total;
+    progress.figureQuizzes = fq;
+  } else {
+    const cur = progress.themes[themeId] || { played: 0, bestCorrect: 0, bestTotal: total };
+    cur.played += 1;
+    if(cur.bestTotal === 0 || correct > cur.bestCorrect){ cur.bestCorrect = correct; cur.bestTotal = total; }
+    progress.themes[themeId] = cur;
+  }
   saveQuizProgress(progress);
+  return points;
+}
+
+// --- Badges : affichés en transparence/grisé tant qu'ils ne sont pas gagnés (voir
+// .quiz-badge/.quiz-badge.earned dans styles.css pour le halo à l'obtention), calculés à la
+// volée depuis progress plutôt que stockés — pas de risque de badge qui reste bloqué "non
+// gagné" après coup si la règle change.
+const QUIZ_BADGES = [
+  { id: "premier-quiz", icon: "🌱", label: "Premier quiz", desc: "Termine ta première partie.",
+    earned: p => Object.values(p.themes).some(t => t.played > 0) || p.figureQuizzes.played > 0 },
+  { id: "sans-faute", icon: "🎯", label: "Sans-faute", desc: "Termine une partie avec un score parfait.",
+    earned: p => Object.values(p.themes).some(t => t.bestTotal > 0 && t.bestCorrect === t.bestTotal) },
+  { id: "sur-le-terrain", icon: "🔍", label: "Sur le terrain", desc: "Teste tes connaissances depuis 10 fiches différentes.",
+    earned: p => p.figureQuizzes.played >= 10 },
+  { id: "intermediaire", icon: "⚔️", label: "Niveau Intermédiaire", desc: "Maîtrise 5 thèmes (note au-dessus de la moyenne).",
+    earned: p => quizMasteredThemeCount(p) >= QUIZ_INTERMEDIATE_THEMES_REQUIRED },
+  { id: "polymathe", icon: "📚", label: "Polymathe", desc: "Maîtrise les 10 thèmes.",
+    earned: p => quizMasteredThemeCount(p) >= QUIZ_THEMES.length },
+  { id: "expert", icon: "🏆", label: "Niveau Expert", desc: "Débloque le contenu premium.",
+    earned: () => isPremiumUnlocked() || hasOwnerPreview() },
+];
+function quizBadgesHTML(progress){
+  return `
+    <div class="quiz-badges">
+      ${QUIZ_BADGES.map(b => {
+        const earned = b.earned(progress);
+        return `
+          <div class="quiz-badge${earned ? " earned" : ""}" title="${escapeHTML(b.desc)}">
+            <span class="quiz-badge-icon">${b.icon}</span>
+            <span class="quiz-badge-label">${escapeHTML(b.label)}</span>
+          </div>
+        `;
+      }).join("")}
+    </div>
+  `;
 }
 
 let quizSelection = { level: "débutant", themeId: null };
@@ -3686,7 +3818,7 @@ function quizBuildSession(levelId, theme, opts){
     questions: questions.slice(0, length),
     index: 0, correct: 0, selected: null, revealed: false, textCorrect: null, matchState: null,
     finished: questions.length === 0,
-    recordProgress: !theme.adHoc,
+    isFigureQuiz: !!theme.adHoc,
   };
 }
 
@@ -3712,29 +3844,39 @@ function quizStart(levelId, themeId){
   const theme = QUIZ_THEMES.find(t => t.id === themeId);
   if(!theme) return;
   quizSession = quizBuildSession(levelId, theme);
-  quizSession.intermediaireWasLockedBefore = !progress.intermediaireUnlocked;
+  quizSession.intermediaireWasLockedBefore = !quizLevelUnlocked("intermédiaire", progress);
   quizEnsureMatchState();
   go({ type: "quiz" });
 }
 
 // Mini-quiz contextuel depuis une fiche figure : portée réduite à la figure elle-même, ses
-// parents, ses enfants et sa fratrie — jamais comptabilisé dans les statistiques par thème
-// (theme.adHoc), pour ne pas polluer la liste des thèmes d'une entrée par figure visitée.
+// parents, ses enfants et sa fratrie. Ne compte pas dans les statistiques PAR THÈME (theme.adHoc)
+// pour ne pas polluer la liste des thèmes d'une entrée par figure visitée, mais est bien
+// comptabilisé à part (progress.figureQuizzes) et alimente le total de points — voir
+// recordQuizResult.
 function quizStartForFigure(id){
+  const progress = getQuizProgress();
   const rel = genealogyRelations(id);
   const scopeIds = [...new Set([id, ...rel.parents, ...rel.children, ...rel.siblings])];
   const theme = { id: `figure:${id}`, label: genealogyDisplayName(id), adHoc: true };
   quizSession = quizBuildSession("intermédiaire", theme, { figureIds: scopeIds, length: 5 });
+  quizSession.intermediaireWasLockedBefore = !quizLevelUnlocked("intermédiaire", progress);
   quizEnsureMatchState();
   go({ type: "quiz" });
 }
 
-// Bouton affiché en bas d'une fiche figure, seulement quand sa famille proche (parents +
-// enfants) compte au moins deux figures — sous ce seuil, le mini-quiz manquerait trop de
-// matière pour varier ses questions.
-function quizFigureButtonHTML(id){
+// Bouton affiché en bas d'une fiche figure, seulement quand la fiche a assez de matière pour
+// un mini-quiz qui ait un sens : sa famille proche (parents + enfants) doit compter au moins
+// deux figures (sous ce seuil, pas assez de relations à varier), ET son mythe doit compter au
+// moins deux paragraphes — ce second critère exclut spécifiquement les fiches "liste de
+// succession" (ex. les rois d'Albe la Longue : Agrippa, Capétus, Atys...) qui ont pourtant assez
+// de liens familiaux pour passer le premier filtre, mais dont le texte réel ("X succéda à Y,
+// eut pour fils Z") est trop mince pour justifier un quiz. Vérifié sur le vrai contenu : ce sont
+// précisément et uniquement les 10 fiches à un seul paragraphe de tout le corpus.
+function quizFigureButtonHTML(id, paragraphs){
   const rel = genealogyRelations(id);
   if(rel.parents.length + rel.children.length < 2) return "";
+  if((paragraphs || []).length < 2) return "";
   return `<button class="quiz-figure-btn" data-action="quiz-figure" data-id="${escapeHTML(id)}">🧠 Teste tes connaissances sur ${escapeHTML(genealogyDisplayName(id))}</button>`;
 }
 
@@ -3754,7 +3896,11 @@ function quizAnswerText(){
   if(!q || q.kind !== "text") return;
   const input = document.getElementById("quizTextInput");
   const value = input ? input.value : "";
-  const ok = value.trim().length > 0 && normalizeSearch(value).trim() === normalizeSearch(q.answer).trim();
+  const normalized = normalizeSearch(value).trim();
+  // Accepte n'importe laquelle des réponses valides (q.acceptedAnswers, déjà normalisées) quand
+  // le générateur en fournit — voir quizGenTypeAnswer — sinon repli sur l'ancienne comparaison
+  // à une seule valeur.
+  const ok = normalized.length > 0 && (q.acceptedAnswers ? q.acceptedAnswers.has(normalized) : normalized === normalizeSearch(q.answer).trim());
   quizSession.revealed = true;
   quizSession.textCorrect = ok;
   if(ok) quizSession.correct++;
@@ -3793,7 +3939,7 @@ function quizNext(){
   if(!quizSession) return;
   if(quizSession.index >= quizSession.questions.length - 1){
     quizSession.finished = true;
-    if(quizSession.recordProgress) recordQuizResult(quizSession.level, quizSession.themeId, quizSession.correct, quizSession.questions.length);
+    quizSession.pointsEarned = recordQuizResult(quizSession.level, quizSession.themeId, quizSession.correct, quizSession.questions.length, { isFigureQuiz: quizSession.isFigureQuiz });
     render();
     return;
   }
@@ -3812,7 +3958,7 @@ function quizReplay(){
   if(theme){
     const progress = getQuizProgress();
     quizSession = quizBuildSession(quizSession.level, theme);
-    quizSession.intermediaireWasLockedBefore = !progress.intermediaireUnlocked;
+    quizSession.intermediaireWasLockedBefore = !quizLevelUnlocked("intermédiaire", progress);
   } else if(quizSession.themeId.startsWith("figure:")){
     quizStartForFigure(quizSession.themeId.slice(7));
     return;
@@ -3825,14 +3971,17 @@ function quizReplay(){
 
 function quizTileHTML(){
   const progress = getQuizProgress();
-  const played = Object.values(progress.themes).reduce((sum, t) => sum + t.played, 0);
+  const played = Object.values(progress.themes).reduce((sum, t) => sum + t.played, 0) + progress.figureQuizzes.played;
+  const desc = played
+    ? `Continue à tester tes connaissances${progress.totalPoints ? ` · ${progress.totalPoints} pts` : ""}.`
+    : "Trois niveaux, des questions générées à partir de toute la bibliothèque.";
   return `
     <section class="quiz-tile-wrap">
       <button class="quiz-tile" data-nav="quizHome">
         <span class="quiz-tile-icon">🧠</span>
         <span class="quiz-tile-text">
           <span class="quiz-tile-title">Quiz mythologique</span>
-          <span class="quiz-tile-desc">${played ? "Continue à tester tes connaissances." : "Trois niveaux, des questions générées à partir de toute la bibliothèque."}</span>
+          <span class="quiz-tile-desc">${escapeHTML(desc)}</span>
         </span>
         <span class="quiz-tile-arrow">→</span>
       </button>
@@ -3842,25 +3991,37 @@ function quizTileHTML(){
 
 function renderQuizHome(){
   const progress = getQuizProgress();
+  const masteredCount = quizMasteredThemeCount(progress);
   const levelsHTML = QUIZ_LEVELS.map(lvl => {
     const unlocked = quizLevelUnlocked(lvl.id, progress);
     const active = quizSelection.level === lvl.id;
+    // L'indice sous "Intermédiaire" verrouillé montre la progression réelle (X/5) plutôt qu'un
+    // simple rappel de la règle — plus motivant, et ça évite de se demander où on en est.
+    const hint = lvl.id === "intermédiaire" && !unlocked
+      ? `${masteredCount}/${QUIZ_INTERMEDIATE_THEMES_REQUIRED} thèmes maîtrisés (note au-dessus de la moyenne) pour débloquer ce niveau.`
+      : lvl.lockedHint;
     return `
       <button class="quiz-level-card${active ? " active" : ""}${unlocked ? "" : " locked"}" data-action="quiz-pick-level" data-level="${lvl.id}"${unlocked ? "" : " disabled"}>
         <span class="quiz-level-icon">${lvl.icon}</span>
         <span class="quiz-level-title">${escapeHTML(lvl.label)}${unlocked ? "" : " 🔒"}</span>
-        <span class="quiz-level-desc">${escapeHTML(unlocked ? lvl.desc : lvl.lockedHint)}</span>
+        <span class="quiz-level-desc">${escapeHTML(unlocked ? lvl.desc : hint)}</span>
       </button>
     `;
   }).join("");
   const themesHTML = QUIZ_THEMES.map(theme => {
     const stats = progress.themes[theme.id];
+    const mastered = quizThemeMastered(theme.id, progress);
     const active = quizSelection.themeId === theme.id;
+    // "Maîtrisé" (note > 50%) reste visuellement distinct d'un thème simplement "commencé" —
+    // sinon rien ne distingue une partie ratée d'une partie réussie dans ce choix de thème.
+    const statsHTML = stats
+      ? `<span class="quiz-theme-stats${mastered ? " mastered" : ""}">${mastered ? "✓ Maîtrisé — " : ""}Record : ${stats.bestCorrect}/${stats.bestTotal}</span>`
+      : "";
     return `
       <button class="quiz-theme-card${active ? " active" : ""}" data-action="quiz-pick-theme" data-theme="${theme.id}">
         <span class="quiz-theme-icon">${theme.icon}</span>
         <span class="quiz-theme-title">${escapeHTML(theme.label)}</span>
-        ${stats ? `<span class="quiz-theme-stats">Record : ${stats.bestCorrect}/${stats.bestTotal}</span>` : ""}
+        ${statsHTML}
       </button>
     `;
   }).join("");
@@ -3884,6 +4045,13 @@ function quizNextButtonHTML(){
   return `<button class="quiz-next-btn" data-action="quiz-next">${isLast ? "Voir le résultat" : "Suivant →"}</button>`;
 }
 
+// Petit rappel affiché après réponse (bonne ou mauvaise) — le champ q.explain, quand présent,
+// vient des générateurs (voir quizExplainNote et consorts) : un quiz doit faire apprendre, pas
+// seulement noter.
+function quizExplainHTML(q){
+  return q.explain ? `<p class="quiz-explain">💡 ${escapeHTML(q.explain)}</p>` : "";
+}
+
 function quizQcmHTML(q){
   const answered = quizSession.selected !== null;
   const choicesHTML = q.choices.map((choice, i) => {
@@ -3894,7 +4062,7 @@ function quizQcmHTML(q){
     }
     return `<button class="${cls}" data-action="quiz-answer" data-index="${i}"${answered ? " disabled" : ""}>${escapeHTML(choice)}</button>`;
   }).join("");
-  return `<div class="quiz-choices">${choicesHTML}</div>${answered ? quizNextButtonHTML() : ""}`;
+  return `<div class="quiz-choices">${choicesHTML}</div>${answered ? `${quizExplainHTML(q)}${quizNextButtonHTML()}` : ""}`;
 }
 
 function quizTextHTML(q){
@@ -3902,6 +4070,7 @@ function quizTextHTML(q){
     const ok = quizSession.textCorrect;
     return `
       <p class="quiz-text-feedback ${ok ? "correct" : "incorrect"}">${ok ? "✔ Bonne réponse !" : `✘ La bonne réponse était : ${escapeHTML(q.answer)}`}</p>
+      ${quizExplainHTML(q)}
       ${quizNextButtonHTML()}
     `;
   }
@@ -3950,7 +4119,10 @@ function quizQuestionBodyHTML(q){
 function renderQuizResult(){
   const total = quizSession.questions.length;
   const pct = total ? Math.round((quizSession.correct / total) * 100) : 0;
-  const unlockedNow = quizSession.level === "débutant" && quizSession.intermediaireWasLockedBefore;
+  // Recalculé après coup (recordQuizResult a déjà tourné, voir quizNext) plutôt que figé au
+  // niveau Débutant : mastered depend désormais du score par thème, donc franchir le seuil de
+  // 5 thèmes maîtrisés peut en théorie arriver sur n'importe quel niveau déjà accessible.
+  const unlockedNow = quizSession.intermediaireWasLockedBefore && quizLevelUnlocked("intermédiaire", getQuizProgress());
   const message = pct >= 80 ? "Excellent !" : pct >= 50 ? "Bien joué !" : "Continue à explorer le corpus pour progresser.";
   return `
     <div class="screen-header">
@@ -3960,6 +4132,7 @@ function renderQuizResult(){
     <div class="quiz-result">
       <p class="quiz-result-score">${quizSession.correct}/${total}</p>
       <p class="quiz-result-message">${escapeHTML(message)}</p>
+      ${quizSession.pointsEarned ? `<p class="quiz-result-points">⭐ +${quizSession.pointsEarned} points</p>` : ""}
       ${unlockedNow ? `<p class="quiz-result-unlock">🔓 Niveau Intermédiaire débloqué !</p>` : ""}
       <div class="quiz-result-actions">
         <button class="quiz-replay-btn" data-action="quiz-replay">Rejouer</button>
