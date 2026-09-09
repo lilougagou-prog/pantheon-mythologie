@@ -2452,3 +2452,29 @@ Testé par la suite complète remise à jour et repassée au vert (742 vérifica
 nouvelles pour ce round).
 
 `service-worker.js` (Panthéon) : `pantheon-v63` → `pantheon-v64`.
+
+## Scène Ulysse/Circé détaillée : le moly, la reconnaissance grâce à la prophétie d'Hermès
+
+Demande de l'utilisatrice après un aller-retour sur une possible scène "Circé reçoit une vision
+d'un oracle" : source introuvable dans les textes antiques (probablement un souvenir d'un
+reportage télé, ou une confusion avec le roman *Circé* de Madeline Miller) — non ajoutée, comme
+convenu. En creusant l'Odyssée pour étoffer la scène de la confrontation elle-même comme
+demandé, un vrai détail antique est ressorti, qui rejoint d'ailleurs l'intuition de départ :
+Circé reconnaît Ulysse parce qu'**Hermès l'avait prévenue par le passé** qu'un « homme fertile en
+ruses » viendrait un jour braver ses charmes — c'est ce passage-là, correctement sourcé à
+Homère, qui a été ajouté.
+
+L'ancien paragraphe unique et sec ("Ulysse, protégé par une plante magique offerte par Hermès,
+résista à son sortilège...") est remplacé par deux paragraphes détaillés :
+1. Hermès rencontre Ulysse en chemin, lui offre en contrepoison le **moly** — nommé, décrit
+   (racine noire, fleur blanche comme le lait, introuvable sans l'aide d'un dieu) — puis Ulysse
+   boit sans crainte le breuvage de Circé et se jette sur elle l'épée à la main.
+2. Circé, stupéfaite qu'un mortel ait déjoué son sortilège, recule en larmes et le reconnaît
+   aussitôt grâce à cette ancienne prophétie d'Hermès ; rassurée, elle lui propose sa couche
+   plutôt que le combat et rend leur forme humaine à ses compagnons.
+
+La fiche Circé compte désormais 9 paragraphes (5 d'origine + 2 sur Tirésias/le retour du round
+précédent + ces 2 nouveaux). Testé par la suite complète remise à jour et repassée au vert (745
+vérifications, dont 3 nouvelles pour ce round).
+
+`service-worker.js` (Panthéon) : `pantheon-v64` → `pantheon-v65`.
