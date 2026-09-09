@@ -2092,3 +2092,16 @@ Consultation : toujours uniquement depuis `admin-messages.html` (Panthéon) — 
 
 Testé : suite de vérifications complète repassée au vert côté Panthéon (484 passées, nouveau bloc sur la colonne `app` et son affichage), et côté Tarot (dépôt cloné localement pour l'occasion, jamais via `add_repo` — indisponible dans cette session, contourné avec les outils GitHub directs) : vérification visuelle Playwright sur un scénario complet — tuile « Nous contacter » sur l'onglet Astro, formulaire dans le style propre à l'app, sélection de type, état « Envoi… », confirmation, retour sur le bon onglet.
 `service-worker.js` (Tarot) : `delphes-v187` → `delphes-v188`.
+
+## Quatre portraits : Aphrodite (remplacé), Antiope thébaine, Antigone, Amphitryon
+
+Photo de remplacement pour Aphrodite, et trois nouveaux portraits (`DEITY_PORTRAITS` passe de 97 à 100 entrées) : Antiope (princesse thébaine — l'homonyme de la reine amazone, déjà distinguée dans un round précédent), Antigone et Amphitryon.
+
+**Cadrage vérifié un par un avant intégration**, même méthode que pour Amphion/Zéthos : simulation exacte du recadrage `object-fit:cover` 4:5 par défaut, comparée à l'image d'origine. Trois des quatre perdaient un élément important au recadrage standard — la couronne de fleurs et les deux colombes d'Aphrodite, le haut du bandeau doré d'Antiope thébaine, la tête d'Œdipe dans la scène partagée avec Antigone — et rejoignent donc `DEITY_PORTRAIT_WIDE` (aspect ratio naturel, sans recadrage). Le portrait d'Amphitryon, à l'inverse, a été vérifié et gardait une marge suffisante : recadrage standard conservé, aucun besoin du format large.
+
+**Antigone et Œdipe partagent une même image** (Antigone guidant son père aveugle vers Colone, l'Acropole en arrière-plan) — retour direct d'utilisatrice : celle-ci sert de portrait sur la fiche d'Antigone, et est réutilisée en illustration inline dans la fiche d'Œdipe, juste au-dessus du paragraphe qui raconte cette scène (« *[...] avant de partir en exil, accompagné de sa fille Antigone.* »). Même mécanisme que le round Amphion/Zéthos : une entrée par fiche dans `DEITY_INLINE_PORTRAITS`, chacune avec sa propre chaîne de repérage puisque chaque fiche mentionne la scène avec des mots différents (ici, une seule fiche — Œdipe — cite le passage ; Antigone porte déjà l'image en portrait, pas besoin d'une deuxième occurrence dans son propre texte).
+
+Les quatre images sont retaillées à 700px de large, JPEG qualité 88 — même format que le reste de `DEITY_PORTRAITS`.
+
+Testé par la suite complète remise à jour et repassée au vert (505 vérifications, dont un nouveau bloc dédié : les quatre portraits présents avec leurs fichiers, le trio en format large confirmé, Amphitryon confirmé à l'inverse absent de ce même ensemble, l'illustration partagée bien déclarée côté Œdipe avec sa chaîne de repérage vérifiée dans le texte réel de `content.json`). Vérifié aussi visuellement par Playwright, en clair et en sombre, sur les cinq fiches concernées (Aphrodite, Antiope thébaine, Antigone, Amphitryon, Œdipe) : couronne et colombes d'Aphrodite intactes, bandeau d'Antiope thébaine intact, duo Antigone/Œdipe entièrement visible sur les deux fiches, portrait d'Amphitryon correctement cadré.
+`service-worker.js` (Panthéon) : `pantheon-v53` → `pantheon-v54`.

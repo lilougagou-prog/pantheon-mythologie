@@ -521,6 +521,9 @@ const DEITY_PORTRAITS = {
   "alcmène": "assets/deity-alcmene.jpg",
   "amphion": "assets/deity-amphion.jpg",
   "zéthos": "assets/deity-zethos.jpg",
+  "antiope-thébaine": "assets/deity-antiope-thebaine.jpg",
+  "antigone": "assets/deity-antigone-oedipe-colone.jpg",
+  "amphitryon": "assets/deity-amphitryon.jpg",
 };
 // Même principe que DEITY_PORTRAITS, mais pour la bibliothèque symbolique : une illustration
 // dédiée (fournie par l'utilisatrice, fond détouré) qui remplace l'emoji d'un symbole partout où
@@ -639,7 +642,7 @@ const SYMBOL_INLINE_ILLUSTRATIONS = {
     { match: "Cerbère", src: "assets/deity-cerbere.webp", alt: "Cerbère, le chien à trois têtes qui garde l'entrée des Enfers" },
   ],
 };
-const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux", "amphion", "zéthos"]);
+const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux", "amphion", "zéthos", "aphrodite", "antiope-thébaine", "antigone"]);
 const DEITY_INLINE_PORTRAITS = {
   "dionysos": [
     { match: "Ménades", src: "assets/deity-dionysos-cortege.jpg", alt: "Le cortège de Dionysos" },
@@ -718,6 +721,9 @@ const DEITY_INLINE_PORTRAITS = {
   ],
   "zéthos": [
     { match: "la construction des murailles de Thèbes", src: "assets/deity-amphion-zethos-murailles.jpg", alt: "Amphion et Zéthos bâtissant les murailles de Thèbes", wide: true },
+  ],
+  "œdipe": [
+    { match: "avant de partir en exil, accompagné de sa fille Antigone", src: "assets/deity-antigone-oedipe-colone.jpg", alt: "Antigone guidant Œdipe aveugle vers Colone", wide: true },
   ],
 };
 
