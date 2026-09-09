@@ -2313,3 +2313,37 @@ fiche Argos enrichie, la fiche Méléagre, la liste complète des lieux (45) et 
 unifiée.
 
 `service-worker.js` (Panthéon) : `pantheon-v59` → `pantheon-v60`.
+
+## Huit nouveaux lieux : sources & fleuves, monde souterrain
+
+Deuxième vague de lieux, même méthode que la précédente (discussion préalable, sélection
+validée, script de vérification systématique des citations avant intégration).
+
+**5 sources & fleuves** (catégorie qui n'en comptait que 2 : Castalie, Alphée) :
+- **Le Styx** — demande explicite. Le vrai site que Pausanias décrit : une chute d'eau
+  impressionnante près de Nonacris en Arcadie, dont l'eau aurait selon une rumeur antique servi à
+  empoisonner Alexandre le Grand.
+- **Le Lethée** — fleuve infernal de l'Oubli, présenté avec la même prudence que l'Atlantide
+  (image littéraire plutôt que site attesté, contrairement au Styx).
+- **Source Salmacis** (Halicarnasse/Bodrum) — où la naïade Salmacis fusionna à jamais avec
+  Hermaphrodite.
+- **Fleuve Inachos** (Argolide) — dieu-fleuve, père d'Io, changée en génisse pour fuir Héra.
+- **Fleuve Céphise** (Phocide) — père de Narcisse selon la tradition la plus répandue.
+
+**3 entrées du monde souterrain** (catégorie qui n'en comptait que 2 : Nekromanteion de
+l'Achéron, Cap Ténare) :
+- **Plaine d'Enna** (Sicile) — demande explicite ("où Hadès a enlevé Perséphone") : le site le
+  plus solidement attesté (Cicéron, Diodore de Sicile, les Fastes d'Ovide).
+- **Lac Averne** (Campanie) — lac volcanique réel que Virgile fait franchir à Énée pour descendre
+  aux Enfers dans l'Énéide ; belle continuité avec les fiches Énée déjà présentes.
+- **Plutonium de Hiérapolis** (Pamukkale, Turquie) — le seul des 8 à avoir un ancrage scientifique
+  réel en plus du mythe : les fouilles archéologiques ont confirmé que la grotte émet encore
+  aujourd'hui des concentrations mortelles de CO2 volcanique, exactement ce que Strabon décrivait
+  comme une porte des Enfers.
+
+Testé par la suite complète remise à jour et repassée au vert (665 vérifications, dont 33
+nouvelles pour ce round, y compris le même garde-fou anti-citation-de-lieu ajouté au round
+précédent — aucune citation cassée cette fois, la vérification en amont a payé). Vérifié aussi
+visuellement par Playwright sur les 8 nouveaux lieux.
+
+`service-worker.js` (Panthéon) : `pantheon-v60` → `pantheon-v61`.
