@@ -524,6 +524,9 @@ const DEITY_PORTRAITS = {
   "antiope-thébaine": "assets/deity-antiope-thebaine.jpg",
   "antigone": "assets/deity-antigone-oedipe-colone.jpg",
   "amphitryon": "assets/deity-amphitryon.jpg",
+  "arachné": "assets/deity-arachne.jpg",
+  "aristée": "assets/deity-aristee.jpg",
+  "ascagne": "assets/deity-ascagne.jpg",
 };
 // Même principe que DEITY_PORTRAITS, mais pour la bibliothèque symbolique : une illustration
 // dédiée (fournie par l'utilisatrice, fond détouré) qui remplace l'emoji d'un symbole partout où
@@ -642,7 +645,7 @@ const SYMBOL_INLINE_ILLUSTRATIONS = {
     { match: "Cerbère", src: "assets/deity-cerbere.webp", alt: "Cerbère, le chien à trois têtes qui garde l'entrée des Enfers" },
   ],
 };
-const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux", "amphion", "zéthos", "aphrodite", "antiope-thébaine", "antigone"]);
+const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux", "amphion", "zéthos", "aphrodite", "antiope-thébaine", "antigone", "artémis", "arachné"]);
 const DEITY_INLINE_PORTRAITS = {
   "dionysos": [
     { match: "Ménades", src: "assets/deity-dionysos-cortege.jpg", alt: "Le cortège de Dionysos" },

@@ -2126,3 +2126,31 @@ Vérifié par Playwright : bouton présent avec le bon libellé dans les deux é
 clé posée en localStorage).
 
 `service-worker.js` (Panthéon) : `pantheon-v54` → `pantheon-v55`.
+
+## Quatre nouveaux portraits : Arachné, Aristée, Artémis (remplacé), Ascagne
+
+Deuxième série de portraits fournis par l'utilisatrice, même traitement que la série précédente
+(Aphrodite, Antiope thébaine, Antigone, Amphitryon).
+
+- **Arachné** : nouveau portrait, tisserande à son métier avec la chouette d'Athéna en arrière-plan.
+- **Aristée** : nouveau portrait, sous un olivier avec ses abeilles, ses olives et son fromage.
+- **Artémis** : portrait remplacé (chasseresse à l'arc, bandeau doré, avec un cerf).
+- **Ascagne** : nouveau portrait, sur les hauteurs surplombant Albe la Longue.
+
+Même analyse de recadrage que la série précédente, par lignes de délimitation dessinées sur les
+originaux aux offsets exacts du recadrage 4:5 (`object-fit: cover`) : Arachné et Artémis perdent
+le sommet de leur coiffure (chignon tressé, bandeau doré en laurier) au recadrage standard — les
+deux passent donc en `DEITY_PORTRAIT_WIDE` (aspect-ratio auto, aucun recadrage). Aristée et
+Ascagne, au format source plus proche du 4:5 cible, gardent une marge suffisante au recadrage
+standard une fois vérifié visuellement.
+
+Les quatre images sont retaillées à 700px de large, JPEG qualité 88 — même format que le reste
+de `DEITY_PORTRAITS` (700×1050 pour les deux en format large, 700×875 pour les deux recadrées).
+
+Testé par la suite complète remise à jour et repassée au vert (523 vérifications, dont un nouveau
+bloc dédié : les quatre portraits présents avec leurs fichiers, le duo en format large confirmé,
+Aristée et Ascagne confirmés à l'inverse absents de ce même ensemble). Vérifié aussi visuellement
+par Playwright, en clair et en sombre, sur les quatre fiches : chignon d'Arachné et bandeau doré
+d'Artémis intacts, cadrages d'Aristée et Ascagne corrects.
+
+`service-worker.js` (Panthéon) : `pantheon-v55` → `pantheon-v56`.
