@@ -45,26 +45,34 @@ async function ensureSchema(){
       message_type TEXT NOT NULL,
       message TEXT NOT NULL,
       email TEXT,
+      app TEXT NOT NULL DEFAULT 'pantheon',
       created_at TIMESTAMPTZ NOT NULL DEFAULT now()
     );
   `;
+  // Table partagée avec l'app sœur Tarot de Delphes (voir CONTACT_DATABASE_URL dans son
+  // .env.example) : ses messages tombent dans cette même table, distingués par `app` — d'où
+  // cette migration défensive pour une table qui existait déjà avant l'ajout de la colonne.
+  await db`ALTER TABLE contact_messages ADD COLUMN IF NOT EXISTS app TEXT NOT NULL DEFAULT 'pantheon';`;
 }
 
 // Formulaire "Nous contacter" (voir api/contact.js) — stockage simple, jamais d'envoi
 // automatique : consulté par la propriétaire elle-même via GET /api/contact (clé
-// OWNER_PREVIEW_KEY, même mécanisme que l'aperçu propriétaire du contenu premium).
-async function insertContactMessage({ type, message, email }){
+// OWNER_PREVIEW_KEY, même mécanisme que l'aperçu propriétaire du contenu premium). Table
+// également écrite par l'app sœur Tarot de Delphes (son propre endpoint, sa propre connexion
+// CONTACT_DATABASE_URL vers CETTE base) — `app` distingue l'origine de chaque message ; jamais
+// une valeur envoyée par le client, toujours fixée par l'appelant serveur.
+async function insertContactMessage({ type, message, email, app }){
   const db = sql();
   await db`
-    INSERT INTO contact_messages (message_type, message, email)
-    VALUES (${type}, ${message}, ${email})
+    INSERT INTO contact_messages (message_type, message, email, app)
+    VALUES (${type}, ${message}, ${email}, ${app || "pantheon"})
   `;
 }
 
 async function listContactMessages(limit){
   const db = sql();
   return await db`
-    SELECT id, message_type, message, email, created_at
+    SELECT id, message_type, message, email, app, created_at
     FROM contact_messages
     ORDER BY created_at DESC
     LIMIT ${limit}

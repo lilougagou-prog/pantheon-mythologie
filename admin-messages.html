@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Panthéon — Messages reçus</title>
+<title>Messages reçus — Panthéon &amp; Tarot de Delphes</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,19 +14,33 @@
      (voir README) — juste un accès direct pour la propriétaire, protégé par la même clé
      d'aperçu propriétaire que le reste (voir api/contact.js). */
   #app{ max-width: 640px; }
-  .msg-card{ background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; }
-  .msg-top{ display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+  .msg-card{ background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; border-left: 4px solid var(--border); }
+  .msg-card[data-app="pantheon"]{ border-left-color: var(--laurel-deep); }
+  .msg-card[data-app="tarot"]{ border-left-color: var(--terracotta); }
+  .msg-top{ display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+  .msg-top-left{ display: flex; align-items: center; gap: 8px; }
   .msg-type{ font-family: "Cinzel", Georgia, serif; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--bronze); }
+  .msg-app{ font-size: 0.72rem; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+  .msg-app[data-app="pantheon"]{ background: var(--marble-deep); color: var(--laurel-deep); }
+  .msg-app[data-app="tarot"]{ background: var(--marble-deep); color: var(--terracotta); }
   .msg-date{ font-size: 0.78rem; color: var(--ink-soft); }
-  .msg-text{ white-space: pre-wrap; line-height: 1.5; margin: 0 0 8px; }
+  .msg-text{ white-space: pre-wrap; line-height: 1.5; margin: 8px 0; }
   .msg-email{ font-size: 0.85rem; }
   .msg-email a{ color: var(--bronze); }
   .key-prompt{ text-align: center; padding: 60px 16px; color: var(--ink-soft); }
+  .msg-filters{ display: flex; gap: 8px; margin-bottom: 16px; }
+  .msg-filter{ background: none; border: 1px solid var(--border); border-radius: 999px; padding: 6px 14px; font-family: inherit; font-size: 0.85rem; color: var(--laurel-deep); cursor: pointer; }
+  .msg-filter.active{ background: var(--laurel-deep); color: var(--marble); border-color: var(--laurel-deep); }
 </style>
 </head>
 <body>
 <div id="app">
   <div class="screen-header"><h2>Messages reçus</h2></div>
+  <div class="msg-filters" id="msgFilters" hidden>
+    <button class="msg-filter active" data-filter="all">Toutes</button>
+    <button class="msg-filter" data-filter="pantheon">Panthéon</button>
+    <button class="msg-filter" data-filter="tarot">Tarot de Delphes</button>
+  </div>
   <div id="content" class="key-prompt">Chargement…</div>
 </div>
 <script>
@@ -52,18 +66,26 @@ function escapeHTML(s){
   return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
 }
 const TYPE_LABELS = { question: "❓ Question", bug: "🐞 Bug", autre: "💬 Autre" };
+const APP_LABELS = { pantheon: "Panthéon", tarot: "Tarot de Delphes" };
 
-function renderMessages(list){
+let allMessages = [];
+let currentFilter = "all";
+
+function renderMessages(){
   const content = document.getElementById("content");
   content.className = "";
+  const list = currentFilter === "all" ? allMessages : allMessages.filter(m => m.app === currentFilter);
   if(!list.length){
     content.innerHTML = '<p class="empty">Aucun message pour l\'instant.</p>';
     return;
   }
   content.innerHTML = list.map(m => `
-    <div class="msg-card">
+    <div class="msg-card" data-app="${escapeHTML(m.app || "pantheon")}">
       <div class="msg-top">
-        <span class="msg-type">${TYPE_LABELS[m.message_type] || escapeHTML(m.message_type)}</span>
+        <div class="msg-top-left">
+          <span class="msg-type">${TYPE_LABELS[m.message_type] || escapeHTML(m.message_type)}</span>
+          <span class="msg-app" data-app="${escapeHTML(m.app || "pantheon")}">${escapeHTML(APP_LABELS[m.app] || m.app || "Panthéon")}</span>
+        </div>
         <span class="msg-date">${new Date(m.created_at).toLocaleString("fr-FR")}</span>
       </div>
       <p class="msg-text">${escapeHTML(m.message)}</p>
@@ -71,6 +93,14 @@ function renderMessages(list){
     </div>
   `).join("");
 }
+
+document.querySelectorAll(".msg-filter").forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentFilter = btn.dataset.filter;
+    document.querySelectorAll(".msg-filter").forEach(b => b.classList.toggle("active", b === btn));
+    renderMessages();
+  });
+});
 
 function load(){
   const key = ownerKey();
@@ -96,7 +126,9 @@ function load(){
         document.getElementById("retryKeyBtn").addEventListener("click", () => { setOwnerKey(null); load(); });
         return;
       }
-      renderMessages(data.messages || []);
+      allMessages = data.messages || [];
+      document.getElementById("msgFilters").hidden = false;
+      renderMessages();
     })
     .catch(() => {
       content.innerHTML = "<p>Impossible de charger les messages. Vérifie ta connexion.</p>";

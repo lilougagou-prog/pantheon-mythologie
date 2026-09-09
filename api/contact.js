@@ -70,7 +70,7 @@ module.exports = async function handler(req, res){
 
   try {
     await ensureSchema();
-    await insertContactMessage({ type, message: trimmedMessage, email: trimmedEmail });
+    await insertContactMessage({ type, message: trimmedMessage, email: trimmedEmail, app: "pantheon" });
     res.status(200).json({ ok: true });
   } catch(err) {
     console.error("Erreur /api/contact (écriture):", err);
