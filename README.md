@@ -2381,3 +2381,44 @@ automatiquement) ; Laërte et Anticlée affichent Ulysse et Ctimène comme enfan
 affiche Hermès comme parent et Anticlée comme enfant.
 
 `service-worker.js` (Panthéon) : `pantheon-v61` → `pantheon-v62`.
+
+## Neuf étapes de l'Odyssée et de l'Énéide + fiches Nausicaa et Alcinoos
+
+Signalé par l'utilisatrice : aucune étape du voyage d'Ulysse (à part Ithaque et le détroit de
+Messine pour Charybde/Scylla) ne figurait sur la carte, et plusieurs lieux de l'Énéide
+manquaient aussi — notamment Buthrote, déjà cité dans la fiche d'Hélénos mais sans marqueur.
+
+**6 étapes de l'Odyssée :**
+- **Île de Circé (Aiaié)** — demande explicite ("ma déesse préférée"). Site réel identifiable :
+  les Romains eux-mêmes situaient déjà l'île sur le promontoire du mont Circé, sur la côte du
+  Latium (aujourd'hui rattaché au continent par les marais Pontins).
+- **Ogygie** (Calypso) — aucun site attesté avec certitude dans l'Antiquité, présentée avec la
+  même prudence que l'Atlantide ; la tradition la plus reprise, y compris touristique
+  aujourd'hui, l'identifie à l'île de Gozo (Malte).
+- **Île des Cyclopes** (Polyphème) — tradition tardive (déjà chez Virgile) la situant en Sicile,
+  près de l'Etna ; les îlots au large d'Aci Trezza s'appellent encore aujourd'hui Isole dei
+  Ciclopi.
+- **Île d'Éole** — les îles Éoliennes (Lipari), au nord de la Sicile, portent encore son nom.
+- **Schérie** (Phéaciens) — identifiée à Corfou dès l'Antiquité, déjà chez Thucydide. Deux
+  nouvelles fiches pour que le lieu ait des figures cliquables plutôt que des noms secs :
+  **Nausicaa**, qui découvre Ulysse naufragé, et son père **Alcinoos**, qui l'accueille et le
+  fait reconduire à Ithaque.
+- **Île des Lotophages** — Hérodote l'identifiait déjà à Djerba (Tunisie).
+
+**3 étapes de l'Énéide :**
+- **Buthrote** (Épire) — le royaume d'Hélénos et Andromaque, déjà cité dans la fiche d'Hélénos
+  mais sans aucun marqueur jusqu'ici ; site archéologique aujourd'hui classé à l'UNESCO (Butrint,
+  Albanie). Relie Hélénos, Andromaque ET Énée — l'Odyssée et l'Énéide enfin connectées sur la
+  carte.
+- **Drépane (Eryx)** — où meurt Anchise et où Énée célèbre en son honneur des jeux funèbres
+  (chant V), en Sicile occidentale.
+- **Strophades** — îlots où les Harpyes (déjà une fiche) maudissent Énée et ses compagnons.
+
+Même garde-fou anti-citation-de-lieu que les rounds précédents, vérifié systématiquement avant
+intégration — aucune citation cassée cette fois non plus.
+
+Testé par la suite complète remise à jour et repassée au vert (722 vérifications, dont 41
+nouvelles pour ce round). Vérifié aussi visuellement par Playwright sur les 9 nouveaux lieux et
+les fiches Nausicaa/Alcinoos.
+
+`service-worker.js` (Panthéon) : `pantheon-v62` → `pantheon-v63`.
