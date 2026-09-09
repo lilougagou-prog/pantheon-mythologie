@@ -2667,3 +2667,30 @@ fiches — les illustrations existantes (Éos/Orion, Astréos/Éos) restent bien
 reformulation.
 
 `service-worker.js` (Panthéon) : `pantheon-v72` → `pantheon-v73`.
+
+## Trois nouveaux portraits (Borée, Byzas, Calchas) + Byzance sur la carte
+
+Images envoyées par l'utilisatrice pour trois fiches qui n'avaient encore aucun portrait :
+
+- **Borée** : portrait principal (tempête, cheveux au vent — cohérent avec le dieu du vent du
+  Nord le plus violent des quatre Anémoi).
+- **Byzas** : portrait principal, avec en arrière-plan la silhouette de la ville qu'il fonde,
+  jusqu'à son visage actuel (Istanbul) — un clin d'œil visuel au « trois noms pour une seule
+  ville » que raconte déjà sa fiche.
+- **Calchas** : portrait principal qui illustre précisément l'épisode le plus connu de sa fiche,
+  le présage d'Aulis (moineaux dévorés par un serpent devant un autel).
+
+**Byzance ajoutée sur la carte** (demande explicite, en lien avec la fiche Byzas) : nouveau lieu
+« cité », 3 paragraphes (la fondation sur ordre de l'oracle de Delphes, la position défensive
+exceptionnelle et le devenir Constantinople/Istanbul, puis la tradition tardive sur une
+occupation antérieure liée à Phidaléia), relié aux fiches Byzas, Poséidon et Phidaléia.
+
+Un bug de citation a été repéré et corrigé au passage : le premier paragraphe citait « Temple »
+juste après « l'oracle de Delphes » au lieu de juste après le mot « temple » lui-même — la
+citation restait donc non cliquable. Corrigé en reformulant « l'oracle du temple de Delphes ».
+
+Testé par la suite complète remise à jour et repassée au vert (929 vérifications, dont 16
+nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuellement sur les trois
+fiches et sur la nouvelle fiche-lieu Byzance.
+
+`service-worker.js` (Panthéon) : `pantheon-v73` → `pantheon-v74`.
