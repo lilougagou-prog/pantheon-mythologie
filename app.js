@@ -714,6 +714,9 @@ const DEITY_INLINE_PORTRAITS = {
     { match: "Uni à Éos, l'Aurore", src: "assets/deity-astreos-eos.jpg", alt: "Astréos et Éos" },
   ],
   "éos": [
+    // Cette même image « Éos et Orion » n'existait jusqu'ici que sur la fiche d'Orion (ci-dessus)
+    // — ajoutée ici aussi sur son propre paragraphe, sur le même principe que le couple partagé.
+    { match: "qu'elle emporta à Délos", src: "assets/deity-eos-orion.jpg", alt: "Éos et Orion" },
     { match: "Unie à Astréos, dieu des étoiles", src: "assets/deity-astreos-eos.jpg", alt: "Astréos et Éos" },
   ],
   "héphaïstos": [

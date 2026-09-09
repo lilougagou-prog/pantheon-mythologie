@@ -2615,3 +2615,18 @@ visuellement sur les cinq fiches — l'image de couple s'affiche bien au bon end
 deux fiches concernées.
 
 `service-worker.js` (Panthéon) : `pantheon-v69` → `pantheon-v70`.
+
+## Image « Éos et Orion » ajoutée aussi sur la fiche d'Éos elle-même
+
+Retour utilisateur : l'image d'Éos et Orion existait déjà dans l'appli, mais uniquement sur la
+fiche d'Orion (au-dessus du paragraphe qui raconte l'épisode) — jamais sur la fiche d'Éos
+elle-même, qui n'avait donc pas cette illustration au-dessus de son propre paragraphe sur
+Orion. Corrigé sur le même principe que les portraits de couple partagés (Éros/Psyché,
+Astréos/Éos...) : la même image apparaît désormais aussi sur la fiche d'Éos, juste au-dessus du
+paragraphe où elle l'emporte à Délos.
+
+Testé par la suite complète remise à jour et repassée au vert (884 vérifications, dont 2
+nouvelles pour ce round), rendu contrôlé visuellement : la fiche d'Éos affiche maintenant ses
+deux illustrations (Orion, puis Astréos), chacune au bon endroit.
+
+`service-worker.js` (Panthéon) : `pantheon-v70` → `pantheon-v71`.
