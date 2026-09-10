@@ -2933,3 +2933,65 @@ nouvelles pour ce round), citations toutes vérifiées (Céphale, Procris, Céph
 Éos), rendu contrôlé visuellement sur les cinq fiches touchées.
 
 `service-worker.js` (Panthéon) : `pantheon-v82` → `pantheon-v83`.
+
+## Origine des dieux : Titanomachie et Gigantomachie
+
+Demande de l'utilisatrice : « Je ne vois pas trop parler de l'origine des dieux et surtout des
+combats entre olympiens et titans. Parle en dans les fiches de dieux concernés, pour expliquer
+le rôle de chacun (ex: Hermes à bien combattu !) Fais attention de raconter l'histoire de
+chaque figure dans l'ordre chronologique. »
+
+Point de clarification mythologique important : « Titans » et « Géants » désignent deux guerres
+bien distinctes, à deux générations d'écart. La **Titanomachie** oppose Cronos et les Titans à
+Zeus, Héra, Poséidon, Hadès, Déméter et Hestia — la toute première génération de dieux
+olympiens, avant même la naissance d'aucun autre dieu. La **Gigantomachie**, plus tardive, voit
+Gaïa envoyer une nouvelle race de géants venger ses fils titans vaincus ; elle oppose cette fois
+les dieux de la génération suivante (Apollon, Artémis, Athéna, Hermès, Dionysos, Héphaïstos) à
+ces géants, avec l'aide indispensable d'un mortel selon la prophétie : Héraclès. L'exemple donné
+par l'utilisatrice elle-même, « Hermès a bien combattu », appartient en réalité à cette seconde
+guerre, pas à la première — Hermès n'existait pas encore lors de la Titanomachie.
+
+**Titanomachie** (avant la naissance des dieux de la seconde génération) :
+- **Zeus** : le paragraphe existant, déjà correct mais vague, est précisé — libération des
+  Cyclopes et des Hécatonchires, la foudre forgée en échange de leur aide, dix années de guerre,
+  les Titans précipités dans le Tartare gardé par les Hécatonchires.
+- **Héra** : son origine est ajoutée (avalée à la naissance par Cronos comme tous ses frères et
+  sœurs sauf Zeus, puis libérée) — sans lui inventer de rôle de combat qu'aucune source antique
+  ne lui attribue, à la différence de ses frères.
+- **Poséidon** : jusqu'ici totalement silencieux sur le sujet, sa fiche raconte désormais
+  comment le trident, son arme et son emblème, lui fut forgé par les Cyclopes pour cette guerre.
+- **Déméter** et **Hestia** : leur origine (avalées puis libérées par Zeus) est ajoutée en tête
+  de fiche — celle d'Hestia explique au passage pourquoi elle est « l'aînée » : la première
+  avalée fut, selon la logique inversée du procédé, la dernière rendue au jour.
+- **Hadès** : déjà excellent (rôle du casque d'invisibilité emprunté aux Cyclopes), non
+  retouché.
+
+**Gigantomachie** (génération suivante, avec Héraclès comme mortel indispensable) :
+- **Apollon** : géant Éphialte, œil visé aux côtés d'Héraclès qui vise l'autre.
+- **Athéna** : géant Encelade écrasé sous la Sicile ; tradition alternative du géant Pallas
+  flayé pour en faire son égide.
+- **Artémis** : géant Gration abattu de ses flèches.
+- **Hermès** : géant Hippolytos, achevé grâce au casque d'invisibilité emprunté à Hadès —
+  l'exemple même cité par l'utilisatrice.
+- **Dionysos** : géant Eurytos, achevé au thyrse — ajouté avec une réserve honnête sur
+  l'anachronisme (sa propre naissance, mortelle à l'origine, est généralement racontée bien après
+  l'installation de l'Olympe), plutôt qu'une fausse certitude chronologique.
+- **Héphaïstos** : géant Mimas, ébouillanté au métal en fusion de sa propre forge.
+- **Héraclès** : son propre rôle décisif est raconté dans sa fiche, chronologiquement avant ses
+  douze travaux — la prophétie du mortel indispensable, et le géant Éphialtès en écho à la
+  fiche Apollon.
+
+**Arès et Aphrodite** sont volontairement laissés de côté : aucune source (Apollodore,
+*Bibliothèque*, I, 6, 1-2, qui sert de référence pour l'ensemble de ce round) ne leur attribue de
+rôle individuel précis dans la Gigantomachie, contrairement aux autres — pas de combat inventé
+pour combler ce silence.
+
+Chaque paragraphe est inséré à sa place chronologique réelle dans chaque fiche (après la
+naissance ou la libération, avant les épisodes ultérieurs), jamais ajouté en fin de liste.
+
+Testé par la suite complète remise à jour et repassée au vert (2325 vérifications, dont 94
+nouvelles pour ce round), citations toutes vérifiées sur les douze fiches touchées (Zeus, Héra,
+Poséidon, Apollon, Athéna, Déméter, Hestia, Artémis, Hermès, Dionysos, Héphaïstos, Héraclès),
+rendu contrôlé visuellement sur chacune d'elles.
+
+`service-worker.js` (Panthéon) : `pantheon-v83` → `pantheon-v84`.
