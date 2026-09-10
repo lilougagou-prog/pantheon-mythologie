@@ -2995,3 +2995,28 @@ Poséidon, Apollon, Athéna, Déméter, Hestia, Artémis, Hermès, Dionysos, Hé
 rendu contrôlé visuellement sur chacune d'elles.
 
 `service-worker.js` (Panthéon) : `pantheon-v83` → `pantheon-v84`.
+
+## Recherche par liste : classement par pertinence manquant
+
+Bug relevé par l'utilisatrice (capture d'écran à l'appui) : sur l'onglet « Figures », chercher
+« Aphrodi » faisait apparaître Adonis et Anchise **avant** Aphrodite elle-même — alors qu'elle
+seule correspond exactement au début de la recherche.
+
+La recherche d'accueil (et celle de l'arbre généalogique) classe déjà correctement ses résultats
+grâce à `searchRank`/`rankedSearch` : correspondance exacte du nom, puis nom qui commence par la
+requête, puis nom qui la contient, puis note qui la contient seulement. Mais les trois recherches
+par liste complète — `renderFiguresGrid` (Figures), `renderSymbolsGrid` (Symboles) et
+`placesFilteredList` (Lieux) — utilisaient chacune un simple `.filter(...includes(q))`, qui ne
+change rien à l'ordre d'origine (alphabétique) : une figure qui ne fait que *mentionner* le
+terme cherché dans sa note pouvait ainsi passer devant celle qui s'appelle exactement comme la
+recherche.
+
+Corrigé en réutilisant `rankedSearch` dans les trois cas (avec une limite infinie plutôt que le
+plafond à 5/8 résultats de l'accueil, puisqu'il s'agit ici de listes complètes) ; pour les Lieux,
+le filtre par catégorie active reste appliqué avant le classement par pertinence.
+
+Testé par la suite complète remise à jour et repassée au vert (2328 vérifications, dont 3
+nouvelles pour ce round), rendu contrôlé visuellement : « Aphrodi » place désormais bien
+Aphrodite en tête sur l'onglet Figures.
+
+`service-worker.js` (Panthéon) : `pantheon-v84` → `pantheon-v85`.

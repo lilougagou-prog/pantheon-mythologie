@@ -1940,7 +1940,7 @@ function figureRowHTML([id, name, note]){
 
 function renderFiguresGrid(query){
   const q = normalizeSearch(query).trim();
-  const list = q ? FIGURE_ENTRIES.filter(e => normalizeSearch(e[1] + " " + e[2]).includes(q)) : FIGURE_ENTRIES;
+  const list = q ? rankedSearch(FIGURE_ENTRIES, e => e[1], e => e[2], q, Infinity) : FIGURE_ENTRIES;
   if(!list.length) return `<p class="empty">Aucune figure ne correspond à « ${escapeHTML(query)} ».</p>`;
   return `<div class="list">${list.map(figureRowHTML).join("")}</div>`;
 }
@@ -1967,7 +1967,7 @@ function symbolRowHTML([id, s]){
 
 function renderSymbolsGrid(query){
   const q = normalizeSearch(query).trim();
-  const list = q ? SYMBOL_ENTRIES.filter(([, s]) => normalizeSearch(s.label + " " + s.desc).includes(q)) : SYMBOL_ENTRIES;
+  const list = q ? rankedSearch(SYMBOL_ENTRIES, ([, s]) => s.label, ([, s]) => s.desc, q, Infinity) : SYMBOL_ENTRIES;
   if(!list.length) return `<p class="empty">Aucun symbole ne correspond à « ${escapeHTML(query)} ».</p>`;
   return `<div class="list">${list.map(symbolRowHTML).join("")}</div>`;
 }
@@ -2926,10 +2926,8 @@ function placesFilteredList(queryOverride){
   const searchEl = document.getElementById("placesSearch");
   const raw = queryOverride !== undefined ? queryOverride : (searchEl ? searchEl.value : "");
   const q = normalizeSearch(raw).trim();
-  return MAP_PLACE_ENTRIES.filter(p =>
-    activePlaceCategories.has(p.category) &&
-    (!q || normalizeSearch(p.name + " " + p.desc).includes(q))
-  );
+  const byCategory = MAP_PLACE_ENTRIES.filter(p => activePlaceCategories.has(p.category));
+  return q ? rankedSearch(byCategory, p => p.name, p => p.desc, q, Infinity) : byCategory;
 }
 
 function placeMarkerIcon(place){
