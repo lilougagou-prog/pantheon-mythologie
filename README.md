@@ -2813,3 +2813,22 @@ Testé par la suite complète remise à jour et repassée au vert (2140 vérific
 nouvelles pour ce round), citation vérifiée, rendu contrôlé visuellement.
 
 `service-worker.js` (Panthéon) : `pantheon-v77` → `pantheon-v78`.
+
+## Ino : contradiction corrigée sur le sort de Mélicerte
+
+Signalement de l'utilisatrice : la fiche disait que Mélicerte avait échappé à la mort ("plutôt
+que de périr, la mère et l'enfant furent changés en divinités marines"), tout en attribuant à
+son culte des "jeux funèbres" en sa mémoire — contradictoire, puisque des jeux funèbres
+supposent une mort.
+
+En vérifiant la tradition antique réelle, elle se déroule bel et bien en deux temps distincts,
+que le texte ne racontait pas : le corps de Mélicerte est repêché sur le rivage de l'Isthme de
+Corinthe et honoré de funérailles par le roi Sisyphe (l'origine légendaire des Jeux
+isthmiques) — et c'est seulement après cette mort bien réelle qu'il est élevé au rang de
+divinité marine, sous le nom de Palémon (distinct de celui de sa mère, Leucothéa). Réécrit pour
+raconter cette double étape, ce qui résout la contradiction sans rien inventer.
+
+Testé par la suite complète remise à jour et repassée au vert (2149 vérifications, dont 9
+nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuellement.
+
+`service-worker.js` (Panthéon) : `pantheon-v78` → `pantheon-v79`.
