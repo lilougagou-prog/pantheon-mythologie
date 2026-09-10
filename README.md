@@ -2760,3 +2760,40 @@ Testé par la suite complète remise à jour et repassée au vert (1785 vérific
 nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuellement.
 
 `service-worker.js` (Panthéon) : `pantheon-v75` → `pantheon-v76`.
+
+## Nouvelle section « Culte », sur les 332 fiches de figures
+
+Demande de l'utilisatrice : une section « Culte » juste avant « Lignée », expliquant comment
+les Grecs rendaient hommage à chaque figure — lieux de culte, offrandes, calendrier — avec
+distinction explicite entre grand culte d'État (temples, jeux panhelléniques), culte
+domestique modeste (les statuettes de jardin de Priape, exemple donné par l'utilisatrice
+elle-même) et absence de culte réel pour la majorité des personnages, qui sont avant tout des
+figures de récit plutôt que des objets de dévotion.
+
+**Décisions prises avant de coder** (les deux questions posées à l'utilisatrice) :
+- La section fait partie du contenu **Premium**, comme le reste du mythe — sauf pour les 5
+  figures déjà intégralement gratuites (Zeus, Héra, Apollon, Poséidon, Athéna), dont le culte
+  reste visible pour la même raison que leur mythe.
+- Traitement en une seule fois plutôt que par lots, sur l'ensemble des 332 figures.
+
+**Répartition du contenu**, chacune vérifiée plutôt qu'attribuée par défaut : 116 figures (111
+premium + les 5 gratuites) reçoivent un vrai paragraphe de culte documenté — les grands
+Olympiens bien sûr (temples, jeux, offrandes précises : les statuettes de char jetées à la mer
+pour Hélios à Rhodes, les ex-voto anatomiques d'Épidaure pour Asclépios, les Adonies sur les
+toits pour Adonis...), mais aussi des figures plus modestes à culte réel et bien attesté
+(Priape et ses statuettes de jardin, les Charites à Orchomène, l'autel de la Pitié à Athènes
+pour Éléos, l'oracle de Tirésias à Orchomène...). Les 216 autres figures (la majorité —
+nymphes, personnifications abstraites, figures secondaires de récit) reçoivent honnêtement
+« Pas de culte particulier. », faute de tout culte antique réellement attesté.
+
+Un bug de citation a été détecté et corrigé au passage sur la fiche Zeus (« Zeus Ktésios » au
+lieu de « Zeus Ctésios », empêchant la résolution du lien vers sa propre fiche) et une erreur
+de copier-coller sur Dionysos (une citation vers « Himeros » accolée par erreur au mot
+« Ménades », qui n'a pourtant pas de fiche).
+
+Testé par un audit dédié des 332 nouveaux paragraphes de culte via `linkifyLore()` en
+conditions réelles (0 citation cassée restante après corrections) puis par la suite complète
+remise à jour et repassée au vert (2135 vérifications, dont 350 nouvelles pour ce round), rendu
+contrôlé visuellement sur plusieurs cas représentatifs (Zeus, Asclépios, Priape, Chaos).
+
+`service-worker.js` (Panthéon) : `pantheon-v76` → `pantheon-v77`.
