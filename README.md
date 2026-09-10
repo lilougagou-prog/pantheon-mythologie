@@ -2846,3 +2846,39 @@ Testé par la suite complète remise à jour et repassée au vert (2157 vérific
 nouvelles pour ce round), citation vérifiée, rendu contrôlé visuellement.
 
 `service-worker.js` (Panthéon) : `pantheon-v79` → `pantheon-v80`.
+
+## Audit de clarté ciblé (demande explicite : "sans tomber dans la justification de tout")
+
+Après les deux rounds précédents (Agavé, Ino), demande de l'utilisatrice : vérifier qu'il ne
+reste pas d'autres paragraphes pas assez clairs ailleurs, sans pour autant forcer une
+justification partout où ce n'est pas nécessaire. Recherche ciblée plutôt que relecture
+générique : les deux mêmes défauts déjà repérés (pronom ambigu juste après une citation, mort
+ou transformation racontée sans assez de netteté), en priorité sur les 327 nouveaux paragraphes
+« Culte » de la veille (jamais relus un par un pour la clarté) et via un grep dédié sur
+l'ensemble des paragraphes « Le mythe ».
+
+**Trois vrais problèmes trouvés et corrigés** (plusieurs autres candidats examinés et laissés
+tels quels, parce qu'ils se lisaient en réalité très bien une fois le contexte complet relu) :
+- **Endymion** : son culte parlait de « sa tombe », alors que sa propre fiche dit clairement
+  qu'il ne meurt jamais (plongé dans un sommeil éternel par Séléné) — précisé qu'il s'agit
+  d'une grotte, pas d'une tombe.
+- **Alcmène** : « elle avait elle aussi rejoint les dieux » pouvait se lire comme une
+  contradiction de son propre refus de l'immortalité, raconté juste au-dessus dans sa fiche —
+  clarifié comme une tradition tardive et distincte, portant sur un au-delà privilégié plutôt
+  que sur une divinisation en bonne et due forme.
+- **Iphigénie** : une phrase utilisait « leur propre mère » avant même d'avoir nommé son frère
+  Oreste, le sujet réel de la phrase — pronom placé avant son antécédent, une construction
+  du type jardin syntaxique. Restructurée pour nommer Oreste dès le début.
+
+**Candidats examinés mais non modifiés**, pour ne pas tomber dans l'excès inverse : Hécube (la
+liste de ses proches tués suit une structure énumérative claire, "elle vit X, Y, Z", même si
+chaque "son/sa" suit une citation), Persée et Hypermestre (l'apposition "X (fiche), son/sa
+[lien de parenté]," est une construction très fréquente et déjà bien intégrée dans l'appli, pas
+intrinsèquement ambiguë), Sémélé et Pélops (leur "résurrection" respective est bien celle
+décrite dans leur propre fiche, sans contradiction avec un autre paragraphe).
+
+Testé par la suite complète remise à jour et repassée au vert (2171 vérifications, dont 22
+nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuellement sur les trois
+fiches corrigées.
+
+`service-worker.js` (Panthéon) : `pantheon-v80` → `pantheon-v81`.
