@@ -2899,3 +2899,37 @@ Testé par la suite complète remise à jour et repassée au vert (2183 vérific
 nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuellement.
 
 `service-worker.js` (Panthéon) : `pantheon-v81` → `pantheon-v82`.
+
+## Création des fiches Céphale, Procris et Céphale (fils d'Hermès)
+
+Demande de l'utilisatrice : « Tu parles de deux Céphale mais aucun n'a de fiche. Fais les. »
+La seule mention de « Céphale » dans toute l'appli se trouvait dans le lore de Hersé, qui
+nommait déjà les deux sans qu'aucun des deux n'ait sa propre fiche : son propre fils avec
+Hermès, et « l'autre Céphale, plus connu, fils de Déion et époux de Procris ».
+
+Trois fiches créées :
+- **Céphale** (id nu, le plus connu) : prince de Phocide, fidèle époux de Procris malgré
+  l'enlèvement dont Éos le rend victime ; l'épreuve de fidélité déguisée qu'il impose ensuite à
+  sa propre femme ; les deux présents merveilleux de Minos (le chien Lélaps et le javelot
+  infaillible) ; et le meurtre involontaire de Procris par ce même javelot, point culminant de
+  la tragédie. Un dernier paragraphe le relie à Amphitryon (le paradoxe insoluble de Lélaps et
+  du renard invulnérable de Thèbes, tranché par Zeus en changeant les deux animaux en pierre).
+- **Procris** (fille d'Érechthée, épouse de Céphale) : le même récit raconté de son point de
+  vue, coprotagoniste essentielle plutôt que simple victime en arrière-plan.
+- **Céphale (fils d'Hermès)** (id qualifié `céphale-hersé`) : le second Céphale, fils d'Hermès
+  et de Hersé, une figure discrète que la tradition antique elle-même confond avec son
+  homonyme plus célèbre — ajouté à GENEALOGY_PARENTS (Hermès et Hersé ont chacun leur fiche,
+  contrairement à Déion et Érechthée, restés sans fiche : aucun lien fabriqué pour Céphale ou
+  Procris).
+
+Par cohérence, le lore de Hersé (jusqu'ici sans aucune citation) cite désormais les deux
+nouvelles fiches, et un nouveau paragraphe est inséré dans le lore d'Éos — à sa place
+chronologique, entre l'épisode de Tithonos et celui d'Orion — pour raconter l'enlèvement du
+Céphale le plus connu, cohérent avec ce que sa propre fiche raconte déjà. Aucun culte réel
+attesté pour ces trois figures : « Pas de culte particulier. »
+
+Testé par la suite complète remise à jour et repassée au vert (2231 vérifications, dont 48
+nouvelles pour ce round), citations toutes vérifiées (Céphale, Procris, Céphale-Hersé, Hersé,
+Éos), rendu contrôlé visuellement sur les cinq fiches touchées.
+
+`service-worker.js` (Panthéon) : `pantheon-v82` → `pantheon-v83`.
