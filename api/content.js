@@ -1,4 +1,4 @@
-// GET /api/content?type=figures|symbols&id=... — sert le contenu premium COMPLET, uniquement
+// GET /api/content?type=figures|symbols|places&id=... — sert le contenu premium COMPLET, uniquement
 // après vérification côté serveur du droit d'accès (jamais une confiance dans ce que le client
 // prétend). Le contenu gratuit n'a jamais besoin de cet endpoint : il est déjà entièrement dans
 // app.js. Voir l'audit de sécurité, section 12/13 : ceci est justement l'endpoint dont
@@ -17,6 +17,7 @@ const CONTENT = JSON.parse(fs.readFileSync(path.join(__dirname, "_data", "conten
 
 function previewOf(type, id, full){
   if(type === "figures") return { name: full.name, note: full.note };
+  if(type === "places") return { name: full.name, desc: full.desc, category: full.category };
   return { icon: full.icon, label: full.label, category: full.category, desc: full.desc };
 }
 
@@ -27,8 +28,8 @@ module.exports = async function handler(req, res){
   }
 
   const type = req.query && req.query.type;
-  if(type !== "figures" && type !== "symbols"){
-    res.status(400).json({ error: "Requête invalide : ?type=figures ou ?type=symbols attendu." });
+  if(type !== "figures" && type !== "symbols" && type !== "places"){
+    res.status(400).json({ error: "Requête invalide : ?type=figures, ?type=symbols ou ?type=places attendu." });
     return;
   }
 

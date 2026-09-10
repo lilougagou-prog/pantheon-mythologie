@@ -3020,3 +3020,36 @@ nouvelles pour ce round), rendu contrôlé visuellement : « Aphrodi » place d�
 Aphrodite en tête sur l'onglet Figures.
 
 `service-worker.js` (Panthéon) : `pantheon-v84` → `pantheon-v85`.
+
+## Carte premium : Argos, Athènes et Atlantide gratuits, le reste verrouillé
+
+Demande de l'utilisatrice : « La carte : argos, Athènes et Atlantide gratuit, tout le reste en
+premium. »
+
+Jusqu'ici, l'onglet Lieux était le seul des quatre grands onglets (Figures, Symboles,
+Généalogie, Lieux) à n'avoir aucune notion de contenu gratuit/premium : les 63 lieux affichaient
+toujours leur récit complet. L'architecture était pourtant déjà à moitié prête —
+`content.json` avait une clé `"places"` réservée mais jamais peuplée.
+
+Ajouté, sur le même modèle exact que `figureAccess()`/`symbolAccess()`/`genealogyAccess()` :
+- `FREE_PLACE_IDS` (Argos, Athènes-Acropole, Atlantide) et `placeAccess(id)`.
+- Le récit détaillé des 60 autres lieux a été déplacé de `MAP_PLACES` (app.js, toujours livré
+  intégralement au client) vers `content.json["places"]`. Nom, description, catégorie et
+  coordonnées restent visibles partout (liste, carte, popups, fiches liées) — seul le texte
+  mythologique complet est désormais verrouillé, exactement comme pour une fiche figure ou
+  symbole premium.
+- `renderPlaceDetail()` suit désormais le même flux que `renderFigureDetail()`/
+  `renderSymbolDetail()` : paywall si non débloqué, écran de chargement puis fusion du contenu
+  une fois la clé d'aperçu propriétaire vérifiée côté serveur.
+- `api/content.js` accepte désormais `?type=places` en plus de `figures`/`symbols`, avec sa
+  propre prévisualisation (`name`/`desc`/`category`, pas `icon`/`label` comme les symboles).
+- Cadenas ajouté sur les lignes de liste et sur les popups de la carte pour les lieux premium,
+  comme pour les figures et symboles verrouillés.
+
+Testé par la suite complète remise à jour et repassée au vert (2427 vérifications, dont 99
+nouvelles pour ce round — y compris la vérification systématique des citations sur les 60 lieux
+premium déplacés), rendu contrôlé visuellement : Argos s'affiche toujours en clair, Delphes
+affiche le paywall sans rien dévoiler, et se débloque correctement avec la clé d'aperçu
+propriétaire.
+
+`service-worker.js` (Panthéon) : `pantheon-v85` → `pantheon-v86`.
