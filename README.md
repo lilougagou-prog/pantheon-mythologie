@@ -2882,3 +2882,20 @@ nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuell
 fiches corrigées.
 
 `service-worker.js` (Panthéon) : `pantheon-v80` → `pantheon-v81`.
+
+## Héraclès délivre Thésée aux Enfers
+
+Demande de l'utilisatrice : préciser que lors de sa descente aux Enfers pour capturer Cerbère,
+Héraclès délivre au passage Thésée — un épisode déjà raconté en détail côté Thésée (piégé sur
+un banc de pierre avec Pirithoos après leur tentative d'enlever Perséphone, lui seul libéré des
+années plus tard par Héraclès de passage), mais jamais mentionné dans la fiche Héraclès
+elle-même.
+
+Ajouté dans le même paragraphe que la libération de Prométhée, sur le même principe (« délivrant
+au passage... ») : Héraclès libère Thésée mais laisse Pirithoos à son sort, cohérent avec ce que
+raconte déjà sa propre fiche.
+
+Testé par la suite complète remise à jour et repassée au vert (2183 vérifications, dont 12
+nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuellement.
+
+`service-worker.js` (Panthéon) : `pantheon-v81` → `pantheon-v82`.
