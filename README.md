@@ -3053,3 +3053,29 @@ affiche le paywall sans rien dévoiler, et se débloque correctement avec la cl�
 propriétaire.
 
 `service-worker.js` (Panthéon) : `pantheon-v85` → `pantheon-v86`.
+
+## Filtre Gratuit / Payant / Tous sur Figures et Symboles
+
+Demande de l'utilisatrice : « Pour figure et symbole ; tu peux faire un petit bouton
+« gratuit/payant/tous » (surtout pour les profils gratuits, ils pourront directement voir les
+fiches dont ils ont accès) ».
+
+Petite barre de trois choix mutuellement exclusifs ajoutée en haut des listes Figures et
+Symboles, juste au-dessus du champ de recherche — même architecture que le filtre par catégorie
+des Lieux (`activePlaceCategories`) : un état global persistant (`figuresAccessFilter`,
+`symbolsAccessFilter`), lu directement par `renderFiguresGrid()`/`renderSymbolsGrid()` plutôt
+que passé en paramètre à travers toute la chaîne d'appels, et qui reste actif tant que
+l'utilisatrice ne le change pas — y compris après avoir quitté puis retrouvé l'onglet.
+
+Le filtre se combine naturellement avec la recherche déjà en place (recherche d'abord, filtre
+gratuit/payant ensuite) : chercher un nom avec « Gratuit » actif ne montre que les résultats
+parmi les 5 figures ou 5 symboles gratuits. Sélectionner « Gratuit » d'entrée, sans rien taper,
+donne exactement ce que demandait l'utilisatrice : un profil gratuit voit d'un coup les quelques
+fiches auxquelles il a déjà accès, sans avoir à les repérer une à une dans la liste complète
+via le cadenas.
+
+Testé par la suite complète remise à jour et repassée au vert (2438 vérifications, dont 11
+nouvelles pour ce round), rendu contrôlé visuellement en clair et en sombre, y compris la
+combinaison filtre + recherche.
+
+`service-worker.js` (Panthéon) : `pantheon-v86` → `pantheon-v87`.

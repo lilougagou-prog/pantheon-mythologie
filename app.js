@@ -1693,6 +1693,41 @@ const SYMBOL_ENTRIES = Object.entries(SYMBOL_LIBRARY)
   .map(([id, s]) => [id, s])
   .sort((a, b) => a[1].label.localeCompare(b[1].label, "fr"));
 
+// Filtre gratuit/payant/tous sur les listes Figures et Symboles — surtout utile aux profils
+// gratuits, qui peuvent ainsi voir d'un coup les quelques fiches auxquelles ils ont déjà accès
+// plutôt que de les chercher une à une dans la liste complète. État global persistant plutôt que
+// rattaché à currentScreen, même logique qu'activePlaceCategories pour les lieux : le choix de
+// l'utilisatrice reste actif tant qu'elle ne le change pas, y compris après avoir quitté puis
+// retrouvé l'onglet.
+let figuresAccessFilter = "all";
+let symbolsAccessFilter = "all";
+
+// Barre de filtre partagée par Figures et Symboles (même structure que placeFilterChipsHTML,
+// en plus simple : pas de couleur par catégorie, seulement trois choix mutuellement exclusifs).
+function accessFilterBarHTML(type, current){
+  const options = [["all", "Tous"], ["free", "Gratuit"], ["premium", "Payant"]];
+  return `
+    <div class="access-filter-bar" data-access-type="${type}">
+      ${options.map(([value, label]) => `
+        <button type="button" class="access-filter-chip${current === value ? " active" : ""}" data-access-type="${type}" data-access-filter="${value}">${label}</button>
+      `).join("")}
+    </div>
+  `;
+}
+
+function setAccessFilter(type, value){
+  if(type === "figures") figuresAccessFilter = value;
+  else if(type === "symbols") symbolsAccessFilter = value;
+  const gridId = type === "figures" ? "figuresGrid" : "symbolsGrid";
+  const searchId = type === "figures" ? "figuresSearch" : "symbolsSearch";
+  const renderGrid = type === "figures" ? renderFiguresGrid : renderSymbolsGrid;
+  const searchEl = document.getElementById(searchId);
+  const grid = document.getElementById(gridId);
+  if(grid) grid.innerHTML = renderGrid(searchEl ? searchEl.value : "");
+  const bar = document.querySelector(`.access-filter-bar[data-access-type="${type}"]`);
+  if(bar) bar.outerHTML = accessFilterBarHTML(type, value);
+}
+
 // Barre « ◀ Précédent / Suivant ▶ » en bas d'une fiche détail (figure ou symbole) : retour
 // direct d'utilisatrice, pour feuilleter toute la bibliothèque dans l'ordre alphabétique déjà
 // utilisé par la liste (FIGURE_ENTRIES/SYMBOL_ENTRIES) sans repasser par le menu à chaque
@@ -1946,8 +1981,9 @@ function figureRowHTML([id, name, note]){
 
 function renderFiguresGrid(query){
   const q = normalizeSearch(query).trim();
-  const list = q ? rankedSearch(FIGURE_ENTRIES, e => e[1], e => e[2], q, Infinity) : FIGURE_ENTRIES;
-  if(!list.length) return `<p class="empty">Aucune figure ne correspond à « ${escapeHTML(query)} ».</p>`;
+  let list = q ? rankedSearch(FIGURE_ENTRIES, e => e[1], e => e[2], q, Infinity) : FIGURE_ENTRIES;
+  if(figuresAccessFilter !== "all") list = list.filter(e => figureAccess(e[0]) === figuresAccessFilter);
+  if(!list.length) return `<p class="empty">Aucune figure ne correspond à ${q ? `« ${escapeHTML(query)} »` : "ces critères"}.</p>`;
   return `<div class="list">${list.map(figureRowHTML).join("")}</div>`;
 }
 
@@ -1959,6 +1995,7 @@ function renderFigures(query = ""){
     <div class="screen-header">
       <h2>Figures mythologiques</h2>
     </div>
+    ${accessFilterBarHTML("figures", figuresAccessFilter)}
     <input type="search" class="search" id="figuresSearch" placeholder="Chercher une figure (nom, rôle...)" value="${escapeHTML(query)}">
     <div id="figuresGrid">${renderFiguresGrid(query)}</div>
   `;
@@ -1973,8 +2010,9 @@ function symbolRowHTML([id, s]){
 
 function renderSymbolsGrid(query){
   const q = normalizeSearch(query).trim();
-  const list = q ? rankedSearch(SYMBOL_ENTRIES, ([, s]) => s.label, ([, s]) => s.desc, q, Infinity) : SYMBOL_ENTRIES;
-  if(!list.length) return `<p class="empty">Aucun symbole ne correspond à « ${escapeHTML(query)} ».</p>`;
+  let list = q ? rankedSearch(SYMBOL_ENTRIES, ([, s]) => s.label, ([, s]) => s.desc, q, Infinity) : SYMBOL_ENTRIES;
+  if(symbolsAccessFilter !== "all") list = list.filter(([id]) => symbolAccess(id) === symbolsAccessFilter);
+  if(!list.length) return `<p class="empty">Aucun symbole ne correspond à ${q ? `« ${escapeHTML(query)} »` : "ces critères"}.</p>`;
   return `<div class="list">${list.map(symbolRowHTML).join("")}</div>`;
 }
 
@@ -1983,6 +2021,7 @@ function renderSymbols(query = ""){
     <div class="screen-header">
       <h2>Bibliothèque symbolique</h2>
     </div>
+    ${accessFilterBarHTML("symbols", symbolsAccessFilter)}
     <input type="search" class="search" id="symbolsSearch" placeholder="Chercher un symbole" value="${escapeHTML(query)}">
     <div id="symbolsGrid">${renderSymbolsGrid(query)}</div>
   `;
@@ -4348,6 +4387,8 @@ function bindAppClickDelegation(){
     if(symbolEl){ go({ type: "symbolDetail", id: symbolEl.dataset.symbol }); return; }
     const placeCatEl = e.target.closest("[data-place-cat]");
     if(placeCatEl){ togglePlaceCategory(placeCatEl.dataset.placeCat); return; }
+    const accessFilterEl = e.target.closest("[data-access-filter]");
+    if(accessFilterEl){ setAccessFilter(accessFilterEl.dataset.accessType, accessFilterEl.dataset.accessFilter); return; }
     const actionEl = e.target.closest("[data-action]");
     if(actionEl){
       const action = actionEl.dataset.action;

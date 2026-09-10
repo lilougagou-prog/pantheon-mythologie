@@ -883,6 +883,29 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 }
 .map-fallback{ color: var(--ink-soft); font-style: italic; font-size: 0.9rem; margin: 0; }
 
+/* Barre de filtre gratuit/payant/tous, partagée par les listes Figures et Symboles — même
+   esprit que .place-filters, mais un seul choix actif à la fois plutôt que des chips à cocher
+   indépendamment. */
+.access-filter-bar{
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.access-filter-chip{
+  flex: 1;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  text-align: center;
+}
+.access-filter-chip.active{ color: var(--ink); background: var(--marble-deep); border-color: var(--bronze); font-weight: 600; }
+.access-filter-chip:hover{ border-color: var(--bronze-light); }
+
 .place-filters{
   display: flex;
   flex-wrap: wrap;
