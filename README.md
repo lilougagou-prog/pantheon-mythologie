@@ -3079,3 +3079,19 @@ nouvelles pour ce round), rendu contrôlé visuellement en clair et en sombre, y
 combinaison filtre + recherche.
 
 `service-worker.js` (Panthéon) : `pantheon-v86` → `pantheon-v87`.
+
+## Cinq nouveaux portraits : Calypso, Capys, Cassandre, Cassiopée, Cécrops
+
+Cinq portraits envoyés par l'utilisatrice, intégrés selon le même procédé que les rounds
+précédents (Borée/Byzas/Calchas, etc.) : conversion en JPEG réel (les fichiers reçus étaient des
+PNG simplement renommés `.jpg`), ajout à `DEITY_PORTRAITS`.
+
+« Capys » sans précision correspond bien à l'id nu — le prince troyen, père d'Anchise et
+ancêtre d'Énée — et non à son homonyme sans lien `capys-albain` (roi d'Albe la Longue), qui
+reste sans portrait.
+
+Testé par la suite complète remise à jour et repassée au vert (2459 vérifications, dont 12
+nouvelles pour ce round, y compris un contrôle que chaque fichier est un vrai JPEG et pas un PNG
+renommé), rendu contrôlé visuellement sur les cinq fiches.
+
+`service-worker.js` (Panthéon) : `pantheon-v87` → `pantheon-v88`.
