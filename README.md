@@ -2797,3 +2797,19 @@ remise à jour et repassée au vert (2135 vérifications, dont 350 nouvelles pou
 contrôlé visuellement sur plusieurs cas représentatifs (Zeus, Asclépios, Priape, Chaos).
 
 `service-worker.js` (Panthéon) : `pantheon-v76` → `pantheon-v77`.
+
+## Agavé : lien de parenté avec Dionysos clarifié (cousin de Penthée, pas d'Agavé)
+
+Signalement de l'utilisatrice : sur la fiche Agavé, "Dionysos, son cousin divin" pouvait se
+lire comme s'il s'agissait du cousin d'Agavé elle-même — ce qui serait faux, puisqu'il est le
+fils de sa sœur Sémélé, donc son neveu. Grammaticalement "son" renvoyait bien à Penthée (dont
+Dionysos est effectivement le cousin, fils de sa tante), mais la phrase, sur la fiche d'Agavé
+elle-même où le sujet passe sans cesse d'elle à son fils, prêtait facilement à confusion.
+
+Reformulé pour lever toute ambiguïté : "Dionysos [...] fils de sa tante Sémélé, et donc cousin
+de Penthée lui-même, mais neveu d'Agavé".
+
+Testé par la suite complète remise à jour et repassée au vert (2140 vérifications, dont 5
+nouvelles pour ce round), citation vérifiée, rendu contrôlé visuellement.
+
+`service-worker.js` (Panthéon) : `pantheon-v77` → `pantheon-v78`.
