@@ -2832,3 +2832,17 @@ Testé par la suite complète remise à jour et repassée au vert (2149 vérific
 nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuellement.
 
 `service-worker.js` (Panthéon) : `pantheon-v78` → `pantheon-v79`.
+
+## Ino : apothéose vs résurrection, la distinction rendue explicite
+
+Question de suivi de l'utilisatrice après le round précédent : "il est ressuscité donc ?" — la
+fiche corrigée ne distinguait pas assez clairement l'apothéose (transfiguration en dieu après
+une mort bien réelle) d'une résurrection (retour à la même vie mortelle). Précisé : Mélicerte
+ne revient pas à la vie qu'il a perdue — son corps mortel reste mort et enterré — mais son être
+est transfiguré en une entité divine distincte, Palémon, exactement comme sa mère Ino devient
+Leucothéa au même instant plutôt que de "revivre".
+
+Testé par la suite complète remise à jour et repassée au vert (2157 vérifications, dont 8
+nouvelles pour ce round), citation vérifiée, rendu contrôlé visuellement.
+
+`service-worker.js` (Panthéon) : `pantheon-v79` → `pantheon-v80`.
