@@ -3095,3 +3095,51 @@ nouvelles pour ce round, y compris un contrôle que chaque fichier est un vrai J
 renommé), rendu contrôlé visuellement sur les cinq fiches.
 
 `service-worker.js` (Panthéon) : `pantheon-v87` → `pantheon-v88`.
+
+## Le frère manquant d'Aiétès/Circé/Pasiphaé + audit du quiz « relie les paires »
+
+Deux demandes de l'utilisatrice traitées ensemble : la fratrie incomplète d'Hélios et Perséis,
+et un bug de quiz repéré par capture d'écran (« Perséis » dupliqué dans une ronde, puis une
+réponse pourtant exacte — Aiétès → Hélios — refusée).
+
+**Le frère manquant.** Hésiode et Apollodore comptent quatre enfants à Hélios et Perséis, pas
+trois : Aiétès, Circé, Pasiphaé, et **Persès**, qui dépossède son frère du trône de Colchide
+avant d'être tué par le fils de Médée, Médos, venu restaurer son grand-père. Les ids « persès »
+et « persès-titan » étant déjà pris par deux homonymes sans lien (un round précédent), la
+nouvelle fiche prend l'id qualifié `persès-colchide`, affiché « Persès (roi de Colchide) ».
+Ajouté à `GENEALOGY_PARENTS` avec les mêmes parents que ses trois frère et sœurs (Hélios,
+Perséis) : il apparaît donc automatiquement comme leur frère dans l'arbre généalogique, les
+liens de fratrie y étant toujours calculés à partir des parents partagés plutôt que listés à la
+main. Les deux fiches homonymes existantes sont mises à jour pour mentionner ce troisième
+homonyme désormais réel.
+
+Bug corrigé en marge : `céphale-hersé` (créé lors d'un round précédent) n'avait jamais reçu son
+entrée dans `DEITY_NAME_OVERRIDES`, si bien que sa page affichait l'id brut « Céphale-hersé » au
+lieu du nom voulu « Céphale (fils d'Hermès) » depuis l'origine — repéré en vérifiant le même
+mécanisme pour la nouvelle fiche.
+
+**Le bug de quiz.** `quizGenMatch()` (la ronde « relie chaque figure à l'un de ses parents »)
+tirait un parent au sort pour chaque figure choisie, puis ne vérifiait que l'égalité des valeurs
+tirées — jamais le chevauchement des ENSEMBLES de parents possibles, ni la présence d'une même
+figure des deux côtés de la ronde. Deux figures aux parents partagés (Aiétès et Pasiphaé
+partagent tous deux {Hélios, Perséis}) pouvaient ainsi recevoir chacune un parent différent du
+même ensemble : taper le vrai père d'Aiétès (Hélios) tombait sur la réponse que le jeu avait en
+réalité réservée à Pasiphaé, et une figure comme Perséis pouvait être choisie à la fois comme
+sujet à relier et comme réponse-parent d'une autre figure, affichée deux fois dans la même
+ronde. Corrigé en excluant toute sélection où deux figures partagent ne serait-ce qu'un seul
+parent en commun, et où une figure-sujet réapparaît comme réponse-parent. Vérifié par 3000
+générations en boucle : zéro collision, zéro ambiguïté.
+
+Audit plus large du moteur de quiz demandé par l'utilisatrice : les autres générateurs
+(`quizGenParent`, `quizGenChild`, `quizGenGrandparent`, `quizGenTrueFalse`, `quizGenTypeAnswer`)
+excluent déjà systématiquement TOUTES les vraies réponses possibles du pool de distracteurs
+(`quizDistractorPool`), jamais seulement celle tirée au sort — aucune ambiguïté du même type n'y
+a été trouvée. Vérifié aussi l'absence de doublons dans les données qui auraient pu rendre une
+question à réponse unique ambiguë (notes de figures, descriptions de symboles et de lieux) :
+aucun trouvé.
+
+Testé par la suite complète remise à jour et repassée au vert (2490 vérifications, dont 32
+nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuellement (nouvelle
+fiche, correction Céphale-hersé, arbre généalogique).
+
+`service-worker.js` (Panthéon) : `pantheon-v88` → `pantheon-v89`.
