@@ -3252,3 +3252,37 @@ Testé (2510 vérifications, dont 5 nouvelles), rendu contrôlé visuellement en
 avec et sans progression enregistrée, avec un élément « récemment consulté ».
 
 `service-worker.js` (Panthéon) : `pantheon-v92` → `pantheon-v93`.
+
+## Phase 11 du brief produit : traitement visuel du gratuit/premium moins dominé par les cadenas
+
+Constat du brief : « Les listes Figures et Symboles utilisent actuellement beaucoup de cadenas »
+— sur 335 figures et 94 symboles, 330 et 89 sont premium, donc un 🔒 à côté de CHAQUE titre
+donnait l'impression que l'application entière est verrouillée, l'inverse de l'effet recherché.
+Suggestion du brief à explorer : « badge Premium, médaillon, mention Premium... Le cadenas peut
+rester lorsqu'il est utile, mais ne doit pas dominer la page. »
+
+**Traitement retenu, différent selon que la ligne a déjà une miniature ou non** (plutôt qu'un
+seul motif imposé partout) :
+- **Figures et Symboles** (miniatures ajoutées aux Phases 9-10) : le 🔒 quitte le texte du titre
+  pour un petit repère en coin de la miniature (`.thumb-lock`, 18px, fond de carte + fine
+  bordure) — exactement le « médaillon » suggéré par le brief, l'information reste entièrement
+  visible, juste sans dominer la ligne au premier coup d'œil. Les 5 figures et 5 symboles
+  gratuits n'ont eux tout simplement aucun repère : leur absence de marque est déjà le signal.
+- **Lieux et points de départ de la Généalogie** (pas de miniature) : le 🔒 devient une petite
+  pastille de texte `.premium-tag` (« Premium », petites capitales bronze sur marbre, coins
+  arrondis) — la « mention Premium » suggérée par le brief, stylée comme les puces déjà
+  existantes (`.access-filter-chip`, `.place-filter-chip`) plutôt qu'un nouveau langage visuel.
+
+Volontairement non touchés (le brief cible les *listes*, pas chaque occurrence de l'emoji) : le
+popup de la carte (un seul lieu affiché à la fois, jamais une liste répétitive) et le sélecteur
+de niveau de quiz (3 cartes seulement, son 🔒 sur "Expert" déjà honnête — `lockedHint` dit
+clairement « Réservé au contenu premium »). Aucune logique commerciale modifiée : `FREE_FIGURE_IDS`,
+`FREE_SYMBOL_IDS`, `FREE_PLACE_IDS` et les fonctions `*Access()` sont strictement inchangés, seul
+le rendu visuel change.
+
+Testé (2522 vérifications, dont 12 nouvelles), rendu contrôlé visuellement en clair et en sombre
+sur les 4 listes concernées, y compris un lieu réellement premium (Delphes) pour confirmer le
+rendu de la pastille, et un zoom pixel par pixel confirmant que le repère en coin n'est pas
+rogné malgré le `overflow: hidden` de la miniature.
+
+`service-worker.js` (Panthéon) : `pantheon-v93` → `pantheon-v94`.

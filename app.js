@@ -1999,18 +1999,30 @@ const DEITY_PORTRAIT_FOCUS_DEFAULT = { x: 50, y: 18, zoom: 1.4 };
 // (voir DEITY_PORTRAIT_FOCUS) pour resserrer sur le visage plutôt que sur tout le buste. Les
 // figures sans portrait dédié gardent un cercle neutre (fond marbre) plutôt que rien du tout, pour
 // que toutes les lignes de la liste restent alignées sur la même grille.
+// Petit repère discret plutôt qu'un cadenas en pleine ligne (Phase 11 du brief produit) : sur
+// 335 figures, 330 sont premium — un 🔒 à côté de CHAQUE titre finissait par donner
+// l'impression que l'application entière est verrouillée, l'exact opposé de l'effet recherché
+// (« il y a déjà beaucoup à découvrir gratuitement »). Posé en coin de la miniature plutôt que
+// dans le texte : toujours l'information réelle (rien de caché), mais un détail qu'on remarque
+// en cherchant plutôt qu'un signal qui saute aux yeux sur chaque ligne. Les 5 figures/5 symboles
+// gratuits n'ont ainsi tout simplement AUCUN repère — leur absence de marque est déjà le signal.
+function thumbLockHTML(isPremium){
+  return isPremium ? `<span class="thumb-lock">🔒</span>` : "";
+}
+
 function figureThumbnailHTML(id){
   const portrait = DEITY_PORTRAITS[id];
-  if(!portrait) return `<span class="figure-thumb"></span>`;
+  const lock = thumbLockHTML(figureAccess(id) === "premium");
+  if(!portrait) return `<span class="figure-thumb">${lock}</span>`;
   const focus = DEITY_PORTRAIT_FOCUS[id] || DEITY_PORTRAIT_FOCUS_DEFAULT;
-  return `<span class="figure-thumb"><img src="${escapeHTML(portrait)}" alt="" loading="lazy" style="object-position:${focus.x}% ${focus.y}%; transform: scale(${focus.zoom}); transform-origin:${focus.x}% ${focus.y}%;"></span>`;
+  return `<span class="figure-thumb"><img src="${escapeHTML(portrait)}" alt="" loading="lazy" style="object-position:${focus.x}% ${focus.y}%; transform: scale(${focus.zoom}); transform-origin:${focus.x}% ${focus.y}%;">${lock}</span>`;
 }
 
 function figureRowHTML([id, name, note]){
   return `<button class="list-item has-thumb" data-nav="figureDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML(normalizeSearch(name + " " + note))}">
     ${figureThumbnailHTML(id)}
     <span class="list-item-body">
-      <span class="list-item-title">${escapeHTML(name)}${figureAccess(id) === "premium" ? ' <span class="lock-badge">🔒</span>' : ""}</span>
+      <span class="list-item-title">${escapeHTML(name)}</span>
       <span class="list-item-note">${escapeHTML(note)}</span>
     </span>
   </button>`;
@@ -2049,15 +2061,16 @@ function renderFigures(query = ""){
 // sans portrait — un symbole a toujours au moins son emoji.
 function symbolThumbnailHTML(id, s){
   const illustration = SYMBOL_ILLUSTRATIONS[id];
-  if(illustration) return `<span class="figure-thumb symbol-thumb"><img src="${escapeHTML(illustration)}" alt="" loading="lazy"></span>`;
-  return `<span class="figure-thumb symbol-thumb symbol-thumb-emoji">${s.icon || "✦"}</span>`;
+  const lock = thumbLockHTML(symbolAccess(id) === "premium");
+  if(illustration) return `<span class="figure-thumb symbol-thumb"><img src="${escapeHTML(illustration)}" alt="" loading="lazy">${lock}</span>`;
+  return `<span class="figure-thumb symbol-thumb symbol-thumb-emoji">${s.icon || "✦"}${lock}</span>`;
 }
 
 function symbolRowHTML([id, s]){
   return `<button class="list-item has-thumb" data-nav="symbolDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML(normalizeSearch(s.label + " " + s.desc))}">
     ${symbolThumbnailHTML(id, s)}
     <span class="list-item-body">
-      <span class="list-item-title">${escapeHTML(s.label)}${symbolAccess(id) === "premium" ? ' <span class="lock-badge">🔒</span>' : ""}</span>
+      <span class="list-item-title">${escapeHTML(s.label)}</span>
       <span class="list-item-note">${escapeHTML(s.desc)}</span>
     </span>
   </button>`;
@@ -2655,7 +2668,7 @@ function renderGenealogyHome(){
     <div class="geneal-entrypoints">
       ${GENEALOGY_STARTING_POINTS.map(pt => `
         <button class="geneal-entry" data-nav="${pt.special ? escapeHTML(pt.special) : "genealogy"}"${pt.special ? "" : ` data-id="${escapeHTML(pt.id)}"`}>
-          <span class="geneal-entry-title">${escapeHTML(pt.label)}${genealogyAccess(pt) === "premium" ? ' <span class="lock-badge">🔒</span>' : ""}</span>
+          <span class="geneal-entry-title">${escapeHTML(pt.label)}${genealogyAccess(pt) === "premium" ? ' <span class="premium-tag">Premium</span>' : ""}</span>
           <span class="geneal-entry-sub">${escapeHTML(pt.sub)}</span>
         </button>
       `).join("")}
@@ -3167,7 +3180,7 @@ function placeFilterChipsHTML(){
 
 function placeRowHTML(p){
   return `<button class="list-item" data-nav="placeDetail" data-id="${escapeHTML(p.id)}">
-    <span class="list-item-title">${mapCategoryIconHTML(p.category, "place-row-icon")} ${escapeHTML(p.name)}${placeAccess(p.id) === "premium" ? ' <span class="lock-badge">🔒</span>' : ""}</span>
+    <span class="list-item-title">${mapCategoryIconHTML(p.category, "place-row-icon")} ${escapeHTML(p.name)}${placeAccess(p.id) === "premium" ? ' <span class="premium-tag">Premium</span>' : ""}</span>
     <span class="list-item-note">${escapeHTML(p.desc)}</span>
   </button>`;
 }

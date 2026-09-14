@@ -1021,9 +1021,49 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
   .place-detail-map{ height: 170px; }
 }
 
-/* ----- Premium : badge de verrou et paywall ----- */
+/* ----- Premium : repères discrets et paywall (Phase 11 du brief produit) -----
+   Remplace l'ancien .lock-badge (un 🔒 en taille quasi normale à côté de CHAQUE titre premium)
+   par deux repères volontairement plus discrets, pour que les listes Figures/Symboles/Lieux/
+   Généalogie ne donnent plus l'impression d'être entièrement verrouillées : la vraie
+   information (gratuit ou premium) reste toujours visible, juste sans dominer la ligne. */
 
-.lock-badge{ font-size: 0.8em; opacity: 0.75; }
+/* Sur la miniature (Figures/Symboles) : un petit repère en coin plutôt qu'un mot dans le texte
+   — les 5 figures et 5 symboles gratuits n'ont eux tout simplement aucun repère. */
+.figure-thumb{ position: relative; }
+.thumb-lock{
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  line-height: 1;
+}
+
+/* Sans miniature (Lieux, points de départ de la Généalogie) : une petite étiquette texte,
+   plutôt qu'un pictogramme de verrou, cohérente avec les pastilles déjà utilisées ailleurs
+   (.access-filter-chip, .place-filter-chip) plutôt qu'un nouveau langage visuel. */
+.premium-tag{
+  display: inline-block;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--bronze);
+  background: var(--marble-deep);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 1px 7px;
+  vertical-align: middle;
+  margin-left: 5px;
+}
 
 .paywall-detail{ text-align: center; }
 .paywall-detail h2{ margin-top: 12px; }
