@@ -3492,3 +3492,18 @@ le niveau Expert débloqué et le badge Polymathe obtenu (pour voir leur halo do
 Nous contacter sur l'écran Profil.
 
 `service-worker.js` (Panthéon) : `pantheon-v101` → `pantheon-v102`.
+
+## Médaillons du quiz agrandis (« c'est vraiment riquiqui »)
+
+Les 8 médaillons illustrés intégrés dans les deux rounds précédents reprenaient la taille exacte
+de l'emoji qu'ils remplaçaient (24-29px) — bien trop petit pour que le détail peint (chouette,
+pousse, cible, épées, livres...) se voie vraiment. Agrandis nettement, par contexte : 44px sur la
+tuile d'accueil (Quiz, Nous contacter), 48px sur les cartes de niveau, 40px sur les badges du
+profil (grille à 4 colonnes, donc plus contrainte). Seule `styles.css` change — aucune nouvelle
+image, aucun changement de structure HTML.
+
+Testé (2574 vérifications, dont 1 mise à jour), rendu contrôlé visuellement sur les 3 emplacements
+en clair et en sombre : aucun débordement, les cartes s'agrandissent naturellement pour accueillir
+les icônes plus grandes.
+
+`service-worker.js` (Panthéon) : `pantheon-v102` → `pantheon-v103`.

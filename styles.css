@@ -1130,11 +1130,13 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 /* Médaillons illustrés fournis par l'utilisatrice, en remplacement des emoji du quiz (tuile
    d'accueil, niveaux, badges) — même traitement que .nav-badge déjà en place pour les onglets du
    bas : object-fit:cover + un cercle parfait, pas juste le carré d'origine de l'image. Une seule
-   règle de forme, une taille par contexte (repris du font-size qu'occupait l'emoji remplacé). */
+   règle de forme, une taille par contexte. Agrandis sur demande de l'utilisatrice (« c'est
+   vraiment riquiqui ») par rapport à la taille d'origine, calquée sur le font-size de l'emoji
+   remplacé — bien trop petite pour que le détail peint des médaillons se voie vraiment. */
 .quiz-icon-img{ border-radius: 50%; object-fit: cover; display: block; }
-.quiz-tile-icon .quiz-icon-img{ width: 29px; height: 29px; }
-.quiz-level-icon .quiz-icon-img{ width: 26px; height: 26px; }
-.quiz-badge-icon .quiz-icon-img{ width: 24px; height: 24px; }
+.quiz-tile-icon .quiz-icon-img{ width: 44px; height: 44px; }
+.quiz-level-icon .quiz-icon-img{ width: 48px; height: 48px; }
+.quiz-badge-icon .quiz-icon-img{ width: 40px; height: 40px; }
 .quiz-tile-text{ display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
 .quiz-tile-title{ font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 1.05rem; color: var(--laurel-deep); }
 .quiz-tile-desc{ font-size: 0.85rem; color: var(--ink-soft); }
