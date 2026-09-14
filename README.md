@@ -3143,3 +3143,25 @@ nouvelles pour ce round), citations toutes vérifiées, rendu contrôlé visuell
 fiche, correction Céphale-hersé, arbre généalogique).
 
 `service-worker.js` (Panthéon) : `pantheon-v88` → `pantheon-v89`.
+
+## Phase 0 du brief produit : diagnostic, puis premier correctif (badge Expert)
+
+Suite au grand brief produit de l'utilisatrice (26 phases visant une expérience « découvrir →
+apprendre → tester → réussir → progresser → débloquer »), diagnostic technique livré d'abord
+(architecture vanilla JS sans framework, systèmes quiz/progression/premium déjà solides et à
+source de vérité unique — voir échanges), avant tout changement de code, comme demandé
+explicitement par le brief.
+
+Premier correctif validé par l'utilisatrice : le badge de profil `{ id: "expert", label:
+"Niveau Expert", desc: "Débloque le contenu premium." }` était le seul point de confusion réel
+trouvé entre progression pédagogique et statut premium — un badge affiché à côté de vrais
+accomplissements (« Sans-faute », « Polymathe », gagnés par la maîtrise) alors qu'il ne
+récompensait qu'un achat. Renommé **« Accès complet »** (icône 🔓, en écho au cadenas 🔒 déjà
+utilisé partout ailleurs pour le contenu premium verrouillé), sans toucher à la logique
+commerciale (même critère `isPremiumUnlocked() || hasOwnerPreview()`) ni au vrai niveau de
+difficulté « Expert » du sélecteur de quiz (`QUIZ_LEVELS`), resté inchangé et déjà honnête sur
+son propre statut premium.
+
+Testé (2493 vérifications, dont 3 nouvelles), rendu contrôlé visuellement sur le profil.
+
+`service-worker.js` (Panthéon) : `pantheon-v89` → `pantheon-v90`.

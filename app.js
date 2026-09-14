@@ -3939,7 +3939,13 @@ const QUIZ_BADGES = [
     earned: p => quizMasteredThemeCount(p) >= QUIZ_INTERMEDIATE_THEMES_REQUIRED },
   { id: "polymathe", icon: "📚", label: "Polymathe", desc: "Maîtrise les 10 thèmes.",
     earned: p => quizMasteredThemeCount(p) >= QUIZ_THEMES.length },
-  { id: "expert", icon: "🏆", label: "Niveau Expert", desc: "Débloque le contenu premium.",
+  // Volontairement distinct des autres entrées de cette liste : ce n'est pas un accomplissement
+  // pédagogique (contrairement à "Sans-faute" ou "Polymathe", gagnés par la maîtrise réelle),
+  // seulement un accès payant. L'appeler "Niveau Expert" — comme c'était le cas jusqu'ici —
+  // laissait croire qu'avoir payé équivalait à une compétence acquise. Le badge Expert du
+  // sélecteur de niveau de quiz (QUIZ_LEVELS ci-dessus), lui, reste un vrai palier de
+  // difficulté et n'a pas besoin d'être renommé.
+  { id: "premium", icon: "🔓", label: "Accès complet", desc: "Bibliothèque Panthéon débloquée en intégralité.",
     earned: () => isPremiumUnlocked() || hasOwnerPreview() },
 ];
 function quizBadgesHTML(progress){
