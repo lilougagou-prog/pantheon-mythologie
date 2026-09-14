@@ -3225,3 +3225,30 @@ Testé (2506 vérifications, dont 6 nouvelles), rendu contrôlé visuellement en
 y compris le repli emoji et une composition large (arc-en-ciel).
 
 `service-worker.js` (Panthéon) : `pantheon-v91` → `pantheon-v92`.
+
+## Phases 6-7 du brief produit : progression sur l'accueil + accueil allégé
+
+Deux phases traitées ensemble, l'une répondant à l'autre : intégrer la progression à
+l'expérience (Phase 6) et alléger une page d'accueil jugée trop proche d'un catalogue (Phase 7).
+
+**Hiérarchie demandée** : identité → progression/continuer → quiz ou défi → découverte du jour →
+récemment consulté → accès aux sections. Comme le quiz est déjà le seul vecteur de progression
+et de défi de l'application (aucun système de défis séparé — le brief lui-même les remet à plus
+tard, Phase 14), `quizTileHTML()` sert aux deux rôles à la fois plutôt que de créer un second
+composant redondant avec `getQuizProgress()`/`quizMasteredThemeCount()`, déjà seules sources de
+vérité. Sa description s'enrichit d'un chiffre de plus une fois qu'il y a une vraie progression à
+montrer (« 47 pts · 5 thèmes maîtrisés. ») — jamais avant, et jamais plus qu'un seul chiffre
+supplémentaire, pour ne pas « surcharger l'accueil de statistiques » comme le brief le demande
+explicitement. Remonté avant la découverte du jour dans `renderHome()`.
+
+**Allègement** : les 4 tuiles d'accès rapide (Figures, Symboles, Généalogie, Lieux) répétaient
+en réalité la barre de navigation du bas, en plus imposant — grandes cartes verticales,
+badge de 52px, phrase descriptive sous chaque titre. Elles gardent leur icône et leur titre
+complet mais perdent leur phrase descriptive et passent d'une mise en page en colonne (28px de
+padding vertical) à une rangée compacte icône + titre (12px de padding) : un accès rapide plutôt
+qu'un second catalogue à lire.
+
+Testé (2510 vérifications, dont 5 nouvelles), rendu contrôlé visuellement en clair et en sombre,
+avec et sans progression enregistrée, avec un élément « récemment consulté ».
+
+`service-worker.js` (Panthéon) : `pantheon-v92` → `pantheon-v93`.

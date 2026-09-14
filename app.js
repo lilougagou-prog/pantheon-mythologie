@@ -1924,29 +1924,25 @@ function renderHome(){
       <input type="search" class="search" id="homeSearch" placeholder="Rechercher une figure, un symbole, un lieu…">
       <div id="homeSearchResults" class="home-search-results"></div>
     </div>
-    ${figureOfTheDayHTML()}
     ${quizTileHTML()}
+    ${figureOfTheDayHTML()}
     ${recentlyViewedHTML()}
     <div class="tiles">
       <button class="tile" data-nav="figures">
         <img class="tile-badge" src="assets/badge-figures-portrait.webp" alt="">
         <span class="tile-title">Figures mythologiques</span>
-        <span class="tile-desc">Découvrez les dieux, héros et créatures des mythes grecs.</span>
       </button>
       <button class="tile" data-nav="symbols">
         <img class="tile-badge" src="assets/badge-symbols-lyre.webp" alt="">
         <span class="tile-title">Bibliothèque symbolique</span>
-        <span class="tile-desc">Explorez les objets, animaux et attributs qui peuplent les mythes.</span>
       </button>
       <button class="tile" data-nav="genealogyHome">
         <img class="tile-badge" src="assets/badge-genealogy-mother.webp" alt="">
         <span class="tile-title">Généalogie des dieux</span>
-        <span class="tile-desc">Suivez les liens de parenté entre les grandes figures mythologiques.</span>
       </button>
       <button class="tile" data-nav="places">
         <img class="tile-badge" src="assets/badge-places-map.webp" alt="">
         <span class="tile-title">Lieux mythologiques</span>
-        <span class="tile-desc">Parcourez les lieux où se déroulent les grands récits mythologiques.</span>
       </button>
     </div>
     <p class="home-footer-link"><a href="./politique-confidentialite.html" target="_blank" rel="noopener">Politique de confidentialité</a></p>
@@ -4190,12 +4186,23 @@ function quizReplay(){
 
 // --- Rendu.
 
+// Sert aussi de synthèse de progression sur l'accueil (Phase 6 du brief produit) : plutôt que
+// de créer un second composant à côté de celui-ci, qui répondait déjà en partie à « où en
+// suis-je / que puis-je faire maintenant » (points cumulés + invitation à continuer), on
+// enrichit sa description au fil de la progression réelle — jamais de nouveau système
+// parallèle à getQuizProgress()/quizMasteredThemeCount(), déjà seule source de vérité.
 function quizTileHTML(){
   const progress = getQuizProgress();
   const played = Object.values(progress.themes).reduce((sum, t) => sum + t.played, 0) + progress.figureQuizzes.played;
-  const desc = played
-    ? `Continue à tester tes connaissances${progress.totalPoints ? ` · ${progress.totalPoints} pts` : ""}.`
-    : "Trois niveaux, des questions générées à partir de toute la bibliothèque.";
+  const masteredCount = quizMasteredThemeCount(progress);
+  let desc;
+  if(!played){
+    desc = "Trois niveaux, des questions générées à partir de toute la bibliothèque.";
+  } else if(masteredCount > 0){
+    desc = `${progress.totalPoints} pt${progress.totalPoints > 1 ? "s" : ""} · ${masteredCount} thème${masteredCount > 1 ? "s" : ""} maîtrisé${masteredCount > 1 ? "s" : ""}.`;
+  } else {
+    desc = `Continue à tester tes connaissances${progress.totalPoints ? ` · ${progress.totalPoints} pts` : ""}.`;
+  }
   return `
     <section class="quiz-tile-wrap">
       <button class="quiz-tile" data-nav="quizHome">
