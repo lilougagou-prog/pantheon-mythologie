@@ -3572,3 +3572,17 @@ la tuile d'accueil avec progression, les listes Figures avec la nouvelle pastill
 états de la fenêtre de badge (gagné/à débloquer, avec sa progression).
 
 `service-worker.js` (Panthéon) : `pantheon-v104` → `pantheon-v105`.
+
+## Résumé des badges aussi sur l'écran Quiz
+
+Retour direct de l'utilisatrice : « quand on clique sur quiz mythologique je veux également que
+l'on ait un résumé des badges (comme dans profil) ». `renderQuizHome()` — l'écran atteint en
+tapant la tuile Quiz de l'accueil, avant même de choisir un niveau ou un thème — affiche
+désormais une section « Badges » sous le bouton « Commencer », en réutilisant `quizBadgesHTML()`
+telle quelle (jamais un second composant dupliqué) : même grille, même clic-pour-expliquer que
+sur le profil, gratuitement.
+
+Testé (2585 vérifications, dont 1 nouvelle), rendu contrôlé visuellement en clair et en sombre,
+clic sur un badge depuis cet écran confirmé (même fenêtre d'explication que depuis le profil).
+
+`service-worker.js` (Panthéon) : `pantheon-v105` → `pantheon-v106`.

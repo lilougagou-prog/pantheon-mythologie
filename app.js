@@ -4397,6 +4397,8 @@ function renderQuizHome(){
     <h3 class="quiz-section-title">Thème</h3>
     <div class="quiz-themes">${themesHTML}</div>
     <button class="quiz-start-btn" data-action="quiz-start"${canStart ? "" : " disabled"}>Commencer</button>
+    <h3 class="quiz-section-title">Badges</h3>
+    ${quizBadgesHTML(progress)}
   `;
 }
 
