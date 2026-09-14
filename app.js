@@ -3927,8 +3927,17 @@ function quizGenerateQuestion(levelId, theme, figureIds){
       : quizPick([quizGenPlaceDesc, quizGenPlaceCategory, quizGenPlaceFigure])();
     if(extra) return extra;
   }
+  // Retour direct de l'utilisatrice : des questions du niveau Débutant ("les grandes figures,
+  // questions directes") lui sont apparues bien plus dures que "débutant" — en fait du niveau
+  // Intermédiaire, voire Expert. Cause trouvée : quizGenParent ("Qui est le parent de X ?") était
+  // dans le vivier Débutant EN PLUS de quizGenNoteMatch — une question de généalogie/relation
+  // familiale, exactement ce que le niveau Intermédiaire promet déjà en propre ("Relations de
+  // famille"), pas une question "directe" sur l'identité d'une figure. Retiré du vivier Débutant,
+  // qui ne pose donc plus QUE des questions de reconnaissance directe (quizGenNoteMatch),
+  // cohérentes avec sa propre description — Intermédiaire et Expert, eux, gardent (et gagnent en
+  // exclusivité) tout ce qui touche à la généalogie.
   const pools = {
-    "débutant": [() => quizGenNoteMatch(scope), () => quizGenParent(scope)],
+    "débutant": [() => quizGenNoteMatch(scope)],
     "intermédiaire": [() => quizGenNoteMatch(scope), () => quizGenParent(scope), () => quizGenChild(scope), () => quizGenTrueFalse(scope)],
     "expert": [() => quizGenParent(scope), () => quizGenChild(scope), () => quizGenTrueFalse(scope), () => quizGenGrandparent(scope), () => quizGenTypeAnswer(scope)],
   };
@@ -3949,7 +3958,7 @@ function quizGenerateQuestion(levelId, theme, figureIds){
 const QUIZ_LEVELS = [
   { id: "débutant", label: "Débutant", desc: "Les grandes figures, questions directes.", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-debutant.webp" alt="">' },
   { id: "intermédiaire", label: "Intermédiaire", desc: "Relations de famille, vrai ou faux.", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-intermediaire.webp" alt="">', lockedHint: "Maîtrise 5 thèmes (note au-dessus de la moyenne) pour débloquer ce niveau." },
-  { id: "expert", label: "Expert", desc: "Généalogie sur plusieurs générations, réponses à taper.", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-expert.webp" alt="">', lockedHint: "Réservé au contenu premium." },
+  { id: "expert", label: "Expert", desc: "Généalogie sur plusieurs générations, réponses à taper.", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-expert.webp" alt="">', lockedHint: "Réservé au contenu premium, avec au moins 20 points cumulés au quiz." },
 ];
 const QUIZ_SESSION_LENGTH = 8;
 const QUIZ_PROGRESS_KEY = "pantheon-quiz-progress";
@@ -3958,6 +3967,15 @@ const QUIZ_PROGRESS_KEY = "pantheon-quiz-progress";
 // jalon plutôt qu'un simple compteur de participation.
 const QUIZ_MASTERY_RATIO = 0.5;
 const QUIZ_INTERMEDIATE_THEMES_REQUIRED = 5;
+// Retour direct de l'utilisatrice : « oui il peut être débloqué quand on paie, mais il faut quand
+// même avoir réussi un certain nombre de questions ! » — jusqu'ici, le niveau Expert ne dépendait
+// QUE du paiement (isPremiumUnlocked), sans le moindre critère de pratique réelle. Exactement le
+// genre de confusion entre achat et compétence que le brief demande d'éviter ailleurs (cf. le
+// badge autrefois "Niveau Expert", renommé "Accès complet" pour la même raison) — sauf qu'ici,
+// c'est le VRAI palier de difficulté "Expert" qui était concerné, pas un badge. totalPoints (déjà
+// affiché sur le profil, pondéré par niveau — voir QUIZ_LEVEL_POINTS) sert de seuil plutôt qu'un
+// nouveau compteur : de la pratique réelle, pas juste une carte bancaire.
+const QUIZ_EXPERT_POINTS_REQUIRED = 20;
 // Points par bonne réponse, pondérés par niveau — valorise l'Intermédiaire et l'Expert plutôt
 // que de ne compter que le nombre de bonnes réponses, et prépare un futur classement entre
 // utilisatrices sans avoir à tout retravailler plus tard.
@@ -3986,7 +4004,7 @@ function quizMasteredThemeCount(progress){
 function quizLevelUnlocked(levelId, progress){
   if(levelId === "débutant") return true;
   if(levelId === "intermédiaire") return quizMasteredThemeCount(progress) >= QUIZ_INTERMEDIATE_THEMES_REQUIRED;
-  if(levelId === "expert") return isPremiumUnlocked() || hasOwnerPreview();
+  if(levelId === "expert") return (isPremiumUnlocked() || hasOwnerPreview()) && progress.totalPoints >= QUIZ_EXPERT_POINTS_REQUIRED;
   return false;
 }
 // Enregistre le résultat d'une partie : les quiz par thème (progress.themes, meilleur score +
@@ -4283,9 +4301,16 @@ function renderQuizHome(){
     const unlocked = quizLevelUnlocked(lvl.id, progress);
     const active = quizSelection.level === lvl.id;
     // L'indice sous "Intermédiaire" verrouillé montre la progression réelle (X/5) plutôt qu'un
-    // simple rappel de la règle — plus motivant, et ça évite de se demander où on en est.
+    // simple rappel de la règle — plus motivant, et ça évite de se demander où on en est. Même
+    // principe pour "Expert", désormais à deux conditions (premium ET points) : si les points
+    // manquent encore, l'indice montre leur progression réelle (et rappelle que l'achat reste
+    // nécessaire en plus) ; s'ils sont déjà atteints, il ne reste que l'achat à mentionner.
     const hint = lvl.id === "intermédiaire" && !unlocked
       ? `${masteredCount}/${QUIZ_INTERMEDIATE_THEMES_REQUIRED} thèmes maîtrisés (note au-dessus de la moyenne) pour débloquer ce niveau.`
+      : lvl.id === "expert" && !unlocked
+      ? (progress.totalPoints >= QUIZ_EXPERT_POINTS_REQUIRED
+        ? "Réservé au contenu premium."
+        : `${progress.totalPoints}/${QUIZ_EXPERT_POINTS_REQUIRED} points cumulés, en plus de l'achat premium, pour débloquer ce niveau.`)
       : lvl.lockedHint;
     return `
       <button class="quiz-level-card${active ? " active" : ""}${unlocked ? "" : " locked"}" data-action="quiz-pick-level" data-level="${lvl.id}"${unlocked ? "" : " disabled"}>
@@ -4420,7 +4445,12 @@ function renderQuizResult(){
       <p class="quiz-result-score">${quizSession.correct}/${total}</p>
       <p class="quiz-result-message">${escapeHTML(message)}</p>
       ${quizSession.pointsEarned ? `<p class="quiz-result-points">⭐ +${quizSession.pointsEarned} points</p>` : ""}
-      ${unlockedNow ? `<p class="quiz-result-unlock">🔓 Niveau Intermédiaire débloqué !</p>` : ""}
+      ${unlockedNow ? `
+        <div class="quiz-unlock-celebration">
+          <img class="quiz-unlock-medallion" src="assets/badge-quiz-intermediaire.webp" alt="">
+          <p class="quiz-result-unlock">Niveau Intermédiaire débloqué !</p>
+        </div>
+      ` : ""}
       <div class="quiz-result-actions">
         <button class="quiz-replay-btn" data-action="quiz-replay">Rejouer</button>
         <button class="quiz-home-btn" data-nav="back">Autre thème</button>

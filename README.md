@@ -3507,3 +3507,36 @@ en clair et en sombre : aucun débordement, les cartes s'agrandissent naturellem
 les icônes plus grandes.
 
 `service-worker.js` (Panthéon) : `pantheon-v102` → `pantheon-v103`.
+
+## Trois retours directs sur le quiz : niveau Débutant trop dur, Expert trop facile, déverrouillage trop discret
+
+**« Je viens de faire quelques rubriques du niveau débutant [...] c'est pas du tout débutant,
+c'est intermédiaire voire expert ! »** — cause trouvée dans `quizGenerateQuestion()` :
+`quizGenParent` (« Qui est le parent de X ? », une vraie question de généalogie) faisait partie du
+vivier Débutant EN PLUS de `quizGenNoteMatch`, alors que la généalogie est justement ce
+qu'Intermédiaire promet en propre (« Relations de famille »). Retiré du vivier Débutant, qui ne
+pose donc plus QUE des questions de reconnaissance directe — cohérent avec sa propre description
+(« Les grandes figures, questions directes »). Vérifié en générant 200 questions Débutant : 0
+question de parenté, contre plusieurs dizaines avant.
+
+**« Il peut être débloqué quand on paie, mais il faut quand même avoir réussi un certain nombre de
+questions ! »** — le niveau Expert ne dépendait jusqu'ici QUE du paiement, sans le moindre critère
+de pratique réelle : exactement la confusion entre achat et compétence que le brief demande
+d'éviter ailleurs. Un seuil de points cumulés (`QUIZ_EXPERT_POINTS_REQUIRED = 20`, réutilisant
+`totalPoints`, déjà affiché sur le profil — pas un nouveau compteur) s'ajoute désormais au
+paiement, sans le remplacer. L'indice sous la carte verrouillée suit le même principe déjà en
+place pour Intermédiaire : progression réelle si les points manquent encore, simple rappel du
+paiement une fois ce seuil atteint.
+
+**« Ça pourrait apparaître en gros puis disparaître doucement »** — le déverrouillage du niveau
+Intermédiaire (déjà détecté via `intermediaireWasLockedBefore`) affiche désormais son médaillon en
+grand, avec un léger effet de rebond, qui s'estompe ensuite tout seul en 2,6 secondes — un seul
+temps fort, pas une boucle infinie comme le halo des badges. Le texte de confirmation, lui, reste
+affiché en permanence après la disparition du médaillon.
+
+Testé (2581 vérifications, dont 8 nouvelles), rendu contrôlé visuellement : les deux variantes de
+l'indice Expert (points insuffisants avec Premium actif / points suffisants sans Premium), et
+l'animation de déverrouillage d'Intermédiaire capturée à son apogée puis une fois retombée, en
+clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v103` → `pantheon-v104`.

@@ -1327,7 +1327,32 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 .quiz-result-score{ font-family: "Cinzel", Georgia, serif; font-size: 2.6rem; color: var(--laurel-deep); margin: 0 0 6px; }
 .quiz-result-message{ font-size: 1rem; color: var(--ink-soft); margin-bottom: 10px; }
 .quiz-result-points{ font-size: 0.9rem; color: var(--bronze); font-weight: 600; margin-bottom: 6px; }
-.quiz-result-unlock{ font-size: 0.95rem; color: var(--bronze); font-weight: 600; margin-bottom: 18px; }
+/* Déverrouillage du niveau Intermédiaire (demande de l'utilisatrice : « ça pourrait apparaître
+   en gros puis disparaître doucement ») — un seul temps fort, pas une boucle comme le halo des
+   badges (@keyframes quiz-badge-glow) : le médaillon apparaît en grand avec un léger effet de
+   rebond, tient un instant, puis s'estompe et se réduit doucement pour laisser place au texte,
+   qui lui reste affiché en permanence (la confirmation ne doit pas disparaître avec l'animation).
+   Un seul geste, sans confettis ni son, cohérent avec le reste de l'appli. */
+.quiz-unlock-celebration{ display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 18px; }
+.quiz-unlock-medallion{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(168, 120, 60, 0.3), 0 8px 24px rgba(168, 120, 60, 0.4);
+  animation: quiz-unlock-pop 2.6s ease forwards;
+}
+@keyframes quiz-unlock-pop{
+  0%{ transform: scale(0.3); opacity: 0; }
+  22%{ transform: scale(1.15); opacity: 1; }
+  35%{ transform: scale(1); opacity: 1; }
+  70%{ transform: scale(1); opacity: 1; }
+  100%{ transform: scale(0.85); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce){
+  .quiz-unlock-medallion{ animation: none; }
+}
+.quiz-result-unlock{ font-size: 0.95rem; color: var(--bronze); font-weight: 600; margin: 0; }
 .quiz-result-actions{ display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
 .quiz-home-btn{ background: var(--marble-deep); color: var(--laurel-deep); border: 1px solid var(--border); }
 .quiz-home-btn:hover{ background: var(--border); }
