@@ -2024,27 +2024,27 @@ const DEITY_PORTRAIT_FOCUS_DEFAULT = { x: 50, y: 18, zoom: 1.4 };
 // Petit repère discret plutôt qu'un cadenas en pleine ligne (Phase 11 du brief produit) : sur
 // 335 figures, 330 sont premium — un 🔒 à côté de CHAQUE titre finissait par donner
 // l'impression que l'application entière est verrouillée, l'exact opposé de l'effet recherché
-// (« il y a déjà beaucoup à découvrir gratuitement »). Posé en coin de la miniature plutôt que
-// dans le texte : toujours l'information réelle (rien de caché), mais un détail qu'on remarque
-// en cherchant plutôt qu'un signal qui saute aux yeux sur chaque ligne. Les 5 figures/5 symboles
-// gratuits n'ont ainsi tout simplement AUCUN repère — leur absence de marque est déjà le signal.
-function thumbLockHTML(isPremium){
-  return isPremium ? `<span class="thumb-lock">🔒</span>` : "";
+// (« il y a déjà beaucoup à découvrir gratuitement »). Repositionné une seconde fois sur demande
+// de l'utilisatrice : d'abord posé en coin de la miniature (Phase 11), puis ramené à côté du nom
+// — mais sous la forme d'une petite pastille dorée plutôt qu'un cadenas, pour rester discret sans
+// reprendre l'imagerie du verrou. Les 5 figures/5 symboles gratuits n'ont toujours AUCUN repère —
+// leur absence de marque est déjà le signal.
+function premiumDotHTML(isPremium){
+  return isPremium ? `<span class="premium-dot" title="Contenu premium"></span>` : "";
 }
 
 function figureThumbnailHTML(id){
   const portrait = DEITY_PORTRAITS[id];
-  const lock = thumbLockHTML(figureAccess(id) === "premium");
-  if(!portrait) return `<span class="figure-thumb">${lock}</span>`;
+  if(!portrait) return `<span class="figure-thumb"></span>`;
   const focus = DEITY_PORTRAIT_FOCUS[id] || DEITY_PORTRAIT_FOCUS_DEFAULT;
-  return `<span class="figure-thumb"><img src="${escapeHTML(portrait)}" alt="" loading="lazy" style="object-position:${focus.x}% ${focus.y}%; transform: scale(${focus.zoom}); transform-origin:${focus.x}% ${focus.y}%;">${lock}</span>`;
+  return `<span class="figure-thumb"><img src="${escapeHTML(portrait)}" alt="" loading="lazy" style="object-position:${focus.x}% ${focus.y}%; transform: scale(${focus.zoom}); transform-origin:${focus.x}% ${focus.y}%;"></span>`;
 }
 
 function figureRowHTML([id, name, note]){
   return `<button class="list-item has-thumb" data-nav="figureDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML(normalizeSearch(name + " " + note))}">
     ${figureThumbnailHTML(id)}
     <span class="list-item-body">
-      <span class="list-item-title">${escapeHTML(name)}</span>
+      <span class="list-item-title">${escapeHTML(name)}${premiumDotHTML(figureAccess(id) === "premium")}</span>
       <span class="list-item-note">${escapeHTML(note)}</span>
     </span>
   </button>`;
@@ -2083,16 +2083,15 @@ function renderFigures(query = ""){
 // sans portrait — un symbole a toujours au moins son emoji.
 function symbolThumbnailHTML(id, s){
   const illustration = SYMBOL_ILLUSTRATIONS[id];
-  const lock = thumbLockHTML(symbolAccess(id) === "premium");
-  if(illustration) return `<span class="figure-thumb symbol-thumb"><img src="${escapeHTML(illustration)}" alt="" loading="lazy">${lock}</span>`;
-  return `<span class="figure-thumb symbol-thumb symbol-thumb-emoji">${s.icon || "✦"}${lock}</span>`;
+  if(illustration) return `<span class="figure-thumb symbol-thumb"><img src="${escapeHTML(illustration)}" alt="" loading="lazy"></span>`;
+  return `<span class="figure-thumb symbol-thumb symbol-thumb-emoji">${s.icon || "✦"}</span>`;
 }
 
 function symbolRowHTML([id, s]){
   return `<button class="list-item has-thumb" data-nav="symbolDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML(normalizeSearch(s.label + " " + s.desc))}">
     ${symbolThumbnailHTML(id, s)}
     <span class="list-item-body">
-      <span class="list-item-title">${escapeHTML(s.label)}</span>
+      <span class="list-item-title">${escapeHTML(s.label)}${premiumDotHTML(symbolAccess(id) === "premium")}</span>
       <span class="list-item-note">${escapeHTML(s.desc)}</span>
     </span>
   </button>`;
@@ -4068,19 +4067,57 @@ const QUIZ_BADGES = [
   { id: "premium", icon: "🔓", label: "Accès complet", desc: "Bibliothèque Panthéon débloquée en intégralité.",
     earned: () => isPremiumUnlocked() || hasOwnerPreview() },
 ];
+// id du badge affiché dans la petite fenêtre d'explication (null = fermée) — demande directe de
+// l'utilisatrice : les badges de styles.css n'avaient jamais d'explication visible ailleurs que
+// dans un title="" (une infobulle qui ne s'affiche jamais au doigt sur mobile, seulement au survol
+// à la souris). Un clic ouvre désormais une fenêtre qui reprend b.desc, déjà écrit pour chaque
+// badge, plutôt que d'inventer un second texte.
+let quizBadgePopupId = null;
+
+// Progression réelle vers les 3 badges qui ont un vrai seuil chiffré (les 3 autres sont binaires :
+// gagnés ou non, rien à afficher en plus de leur description) — même principe déjà en place pour
+// les niveaux Intermédiaire/Expert verrouillés dans le sélecteur de niveau.
+function quizBadgeProgressLine(badgeId, progress){
+  if(badgeId === "sur-le-terrain") return `${progress.figureQuizzes.played}/10 mini-quiz lancés depuis une fiche.`;
+  if(badgeId === "intermediaire") return `${quizMasteredThemeCount(progress)}/${QUIZ_INTERMEDIATE_THEMES_REQUIRED} thèmes maîtrisés.`;
+  if(badgeId === "polymathe") return `${quizMasteredThemeCount(progress)}/${QUIZ_THEMES.length} thèmes maîtrisés.`;
+  return null;
+}
+
+function quizBadgePopupHTML(progress){
+  if(!quizBadgePopupId) return "";
+  const b = QUIZ_BADGES.find(x => x.id === quizBadgePopupId);
+  if(!b) return "";
+  const earned = b.earned(progress);
+  const progressLine = !earned ? quizBadgeProgressLine(b.id, progress) : null;
+  return `
+    <div class="modal-backdrop" data-action="quiz-badge-close">
+      <div class="modal-card quiz-badge-modal" data-action="quiz-badge-modal-noop">
+        <button class="modal-close" data-action="quiz-badge-close" aria-label="Fermer">✕</button>
+        <span class="quiz-badge-modal-icon${earned ? " earned" : ""}">${b.icon}</span>
+        <h3 class="quiz-badge-modal-title">${escapeHTML(b.label)}</h3>
+        <p class="quiz-badge-modal-status${earned ? " earned" : ""}">${earned ? "Débloqué" : "À débloquer"}</p>
+        <p class="quiz-badge-modal-desc">${escapeHTML(b.desc)}</p>
+        ${progressLine ? `<p class="quiz-badge-modal-progress">${escapeHTML(progressLine)}</p>` : ""}
+      </div>
+    </div>
+  `;
+}
+
 function quizBadgesHTML(progress){
   return `
     <div class="quiz-badges">
       ${QUIZ_BADGES.map(b => {
         const earned = b.earned(progress);
         return `
-          <div class="quiz-badge${earned ? " earned" : ""}" title="${escapeHTML(b.desc)}">
+          <button class="quiz-badge${earned ? " earned" : ""}" data-action="quiz-badge-info" data-badge="${escapeHTML(b.id)}">
             <span class="quiz-badge-icon">${b.icon}</span>
             <span class="quiz-badge-label">${escapeHTML(b.label)}</span>
-          </div>
+          </button>
         `;
       }).join("")}
     </div>
+    ${quizBadgePopupHTML(progress)}
   `;
 }
 
@@ -4268,6 +4305,16 @@ function quizReplay(){
 // suis-je / que puis-je faire maintenant » (points cumulés + invitation à continuer), on
 // enrichit sa description au fil de la progression réelle — jamais de nouveau système
 // parallèle à getQuizProgress()/quizMasteredThemeCount(), déjà seule source de vérité.
+// Retour direct de l'utilisatrice : « ça ne donne pas encore assez envie de continuer [...] on ne
+// voit pas où on en est au niveau des points, quels badges il nous reste à gagner ». Deux ajouts,
+// tous deux réutilisant QUIZ_BADGES/getQuizProgress() déjà en place plutôt qu'un nouveau système :
+// une étoile devant les points (repris du même symbole déjà utilisé sur le profil, « ⭐ 137
+// points cumulés »), et une rangée de miniatures des 6 badges (grisés tant que non gagnés, même
+// langage visuel que la grille de badges du profil) — un aperçu visuel de ce qu'il reste à
+// débloquer, pour l'explication complète il suffit d'aller sur le profil et de cliquer dessus.
+function quizTileBadgeRowHTML(progress){
+  return `<div class="quiz-tile-badges">${QUIZ_BADGES.map(b => `<span class="quiz-tile-badge${b.earned(progress) ? " earned" : ""}" title="${escapeHTML(b.label)}">${b.icon}</span>`).join("")}</div>`;
+}
 function quizTileHTML(){
   const progress = getQuizProgress();
   const played = Object.values(progress.themes).reduce((sum, t) => sum + t.played, 0) + progress.figureQuizzes.played;
@@ -4276,9 +4323,9 @@ function quizTileHTML(){
   if(!played){
     desc = "Trois niveaux, des questions générées à partir de toute la bibliothèque.";
   } else if(masteredCount > 0){
-    desc = `${progress.totalPoints} pt${progress.totalPoints > 1 ? "s" : ""} · ${masteredCount} thème${masteredCount > 1 ? "s" : ""} maîtrisé${masteredCount > 1 ? "s" : ""}.`;
+    desc = `⭐ ${progress.totalPoints} pt${progress.totalPoints > 1 ? "s" : ""} · ${masteredCount} thème${masteredCount > 1 ? "s" : ""} maîtrisé${masteredCount > 1 ? "s" : ""}.`;
   } else {
-    desc = `Continue à tester tes connaissances${progress.totalPoints ? ` · ${progress.totalPoints} pts` : ""}.`;
+    desc = `Continue à tester tes connaissances${progress.totalPoints ? ` · ⭐ ${progress.totalPoints} pts` : ""}.`;
   }
   return `
     <section class="quiz-tile-wrap">
@@ -4287,6 +4334,7 @@ function quizTileHTML(){
         <span class="quiz-tile-text">
           <span class="quiz-tile-title">Quiz mythologique</span>
           <span class="quiz-tile-desc">${escapeHTML(desc)}</span>
+          ${played ? quizTileBadgeRowHTML(progress) : ""}
         </span>
         <span class="quiz-tile-arrow">→</span>
       </button>
@@ -4598,6 +4646,9 @@ function bindAppClickDelegation(){
       else if(action === "quiz-match-right") quizMatchTapRight(actionEl.dataset.id);
       else if(action === "quiz-next") quizNext();
       else if(action === "quiz-replay") quizReplay();
+      else if(action === "quiz-badge-info"){ quizBadgePopupId = actionEl.dataset.badge; render(); }
+      else if(action === "quiz-badge-close"){ quizBadgePopupId = null; render(); }
+      else if(action === "quiz-badge-modal-noop"){ /* capture les clics à l'intérieur de la fenêtre pour empêcher sa fermeture par clic sur le fond (quiz-badge-close) */ }
       else if(action === "profile-edit-email"){ currentScreen.editingEmail = true; currentScreen.emailError = null; render(); }
       else if(action === "profile-cancel-edit"){ currentScreen.editingEmail = false; currentScreen.emailError = null; render(); }
       else if(action === "profile-skip-email"){ currentScreen.dismissedEmailPrompt = true; render(); }

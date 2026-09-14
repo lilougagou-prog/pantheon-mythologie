@@ -3540,3 +3540,35 @@ l'animation de déverrouillage d'Intermédiaire capturée à son apogée puis un
 clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v103` → `pantheon-v104`.
+
+## Accueil plus engageant, badges expliqués au clic, pastille dorée à la place du cadenas
+
+Trois retours directs de l'utilisatrice.
+
+**« Ça ne donne pas encore assez envie de continuer [...] on ne voit pas où on en est au niveau
+des points, quels badges il nous reste à gagner »** — la tuile Quiz de l'accueil affiche
+désormais une étoile devant les points (repris du même symbole déjà utilisé sur le profil) et,
+une fois qu'une partie a été jouée, une rangée d'aperçu des 6 badges (grisés tant que non gagnés,
+réutilise `QUIZ_BADGES` — rien de nouveau) : un aperçu visuel de ce qu'il reste à débloquer, sans
+mur de cadenas dès la toute première visite.
+
+**« Les badges gagnés et ceux à gagner ne contiennent aucune explication [...] une petite fenêtre
+pop up qui s'affiche quand on clique dessus »** — les badges du profil, jusqu'ici de simples
+`<div>` avec un `title=""` (une infobulle qui ne s'affiche jamais au doigt sur mobile), sont
+devenus des `<button>`. Un clic ouvre une fenêtre reprenant la description déjà écrite pour
+chaque badge (jamais un second texte dupliqué), plus, pour les 3 badges à seuil chiffré, la
+progression réelle vers ce seuil — même principe que les indices déjà en place pour les niveaux
+verrouillés. Premier vrai modal de l'appli (`.modal-backdrop`/`.modal-card`/`.modal-close`,
+volontairement générique pour être réutilisable ailleurs), avec un clic sur le fond qui referme et
+un clic à l'intérieur qui n'en fait rien.
+
+**« Au lieu du cadenas fermé mis sur l'illustration, je préférerais une petite pastille dorée à
+côté du prénom »** — `thumbLockHTML()`/`.thumb-lock` (le repère en coin de la miniature, posé là
+en Phase 11) sont retirés, remplacés par `premiumDotHTML()`/`.premium-dot` : une petite pastille
+dorée sans texte, à côté du nom dans les listes Figures et Symboles.
+
+Testé (2584 vérifications, dont 8 nouvelles), rendu contrôlé visuellement en clair et en sombre :
+la tuile d'accueil avec progression, les listes Figures avec la nouvelle pastille, et les deux
+états de la fenêtre de badge (gagné/à débloquer, avec sa progression).
+
+`service-worker.js` (Panthéon) : `pantheon-v104` → `pantheon-v105`.

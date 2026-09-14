@@ -993,29 +993,24 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
   .place-detail-map{ height: 170px; }
 }
 
-/* ----- Premium : repères discrets et paywall (Phase 11 du brief produit) -----
-   Remplace l'ancien .lock-badge (un 🔒 en taille quasi normale à côté de CHAQUE titre premium)
-   par deux repères volontairement plus discrets, pour que les listes Figures/Symboles/Lieux/
-   Généalogie ne donnent plus l'impression d'être entièrement verrouillées : la vraie
-   information (gratuit ou premium) reste toujours visible, juste sans dominer la ligne. */
+/* ----- Premium : repères discrets et paywall (Phase 11 du brief produit, puis retour direct de
+   l'utilisatrice) ----- Remplace l'ancien .lock-badge (un 🔒 en taille quasi normale à côté de
+   CHAQUE titre premium) par des repères volontairement plus discrets, pour que les listes
+   Figures/Symboles/Lieux/Généalogie ne donnent plus l'impression d'être entièrement verrouillées :
+   la vraie information (gratuit ou premium) reste toujours visible, juste sans dominer la ligne. */
 
-/* Sur la miniature (Figures/Symboles) : un petit repère en coin plutôt qu'un mot dans le texte
-   — les 5 figures et 5 symboles gratuits n'ont eux tout simplement aucun repère. */
-.figure-thumb{ position: relative; }
-.thumb-lock{
-  position: absolute;
-  bottom: -2px;
-  right: -2px;
-  width: 18px;
-  height: 18px;
+/* Sur les listes Figures/Symboles : une petite pastille dorée à côté du nom plutôt qu'un cadenas
+   sur la miniature (essayé d'abord en Phase 11, ramené ici sur demande de l'utilisatrice) — même
+   idée qu'un cadenas discret, mais sans reprendre l'imagerie du verrou. Les 5 figures et 5
+   symboles gratuits n'ont eux tout simplement aucun repère. */
+.premium-dot{
+  display: inline-block;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.62rem;
-  line-height: 1;
+  background: var(--bronze);
+  margin-left: 6px;
+  vertical-align: middle;
 }
 
 /* Sans miniature (Lieux, points de départ de la Généalogie) : une petite étiquette texte,
@@ -1490,7 +1485,10 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 .profile-points{ font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 1.1rem; color: var(--bronze); margin: 0; }
 
 /* ----- Badges : grisés/transparents tant que non gagnés, colorés + halo une fois débloqués -----
-   Calculés à la volée (voir QUIZ_BADGES/quizBadgesHTML dans app.js), jamais stockés. */
+   Calculés à la volée (voir QUIZ_BADGES/quizBadgesHTML dans app.js), jamais stockés. Devenus des
+   <button> (demande de l'utilisatrice : un clic ouvre une explication, voir plus bas
+   .quiz-badge-modal) — les propriétés propres à un bouton (curseur, police, largeur) s'ajoutent
+   donc ici, sans rien changer à l'apparence déjà en place. */
 .quiz-badges{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1503,12 +1501,16 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  width: 100%;
   padding: 12px 6px;
   border-radius: 10px;
   background: var(--marble-deep);
   border: 1px solid var(--border);
   opacity: 0.4;
   filter: grayscale(1);
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
   transition: opacity 0.2s ease, filter 0.2s ease;
 }
 .quiz-badge-icon{ font-size: 1.5rem; line-height: 1; }
@@ -1527,6 +1529,68 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
   50% { box-shadow: 0 0 0 1px rgba(168, 120, 60, 0.4), 0 0 18px rgba(168, 120, 60, 0.55); }
 }
 @media (prefers-reduced-motion: reduce){ .quiz-badge.earned{ animation: none; } }
+
+/* Fenêtre d'explication d'un badge (demande de l'utilisatrice : « les badges [...] ne contiennent
+   aucune explication [...] une petite fenêtre pop up qui s'affiche quand on clique dessus ») —
+   premier vrai modal de l'appli : un fond qui referme au clic, une carte qui ne le referme pas
+   (data-action="quiz-badge-modal-noop" capte le clic avant qu'il remonte au fond, voir
+   bindAppClickDelegation dans app.js). Générique (.modal-backdrop/.modal-card/.modal-close)
+   plutôt que spécifique aux badges, pour être réutilisable si un futur besoin de fenêtre modale
+   se présente ailleurs dans l'appli. */
+.modal-backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 16, 8, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 50;
+}
+.modal-card{
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+  padding: 28px 20px 22px;
+  text-align: center;
+}
+.modal-close{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--marble-deep);
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-close:hover{ background: var(--border); }
+.quiz-badge-modal-icon{ display: inline-flex; font-size: 2.6rem; line-height: 1; opacity: 0.45; filter: grayscale(1); margin-bottom: 8px; }
+.quiz-badge-modal-icon .quiz-icon-img{ width: 64px; height: 64px; }
+.quiz-badge-modal-icon.earned{ opacity: 1; filter: none; }
+.quiz-badge-modal-title{ font-family: "Cinzel", Georgia, serif; font-size: 1.15rem; color: var(--laurel-deep); margin: 0 0 4px; }
+.quiz-badge-modal-status{ font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; color: var(--ink-soft); margin: 0 0 12px; }
+.quiz-badge-modal-status.earned{ color: var(--bronze); }
+.quiz-badge-modal-desc{ font-size: 0.92rem; color: var(--ink); margin: 0; line-height: 1.4; }
+.quiz-badge-modal-progress{ font-size: 0.82rem; color: var(--bronze); font-weight: 600; margin: 10px 0 0; }
+
+/* Aperçu compact des 6 badges sur la tuile Quiz de l'accueil (retour direct de l'utilisatrice :
+   « quels badges il nous reste à gagner ») — mêmes médaillons, en beaucoup plus petit et sans
+   étiquette de texte (juste un aperçu, l'explication complète est sur le profil, à un tap). */
+.quiz-tile-badges{ display: flex; gap: 6px; margin-top: 6px; }
+.quiz-tile-badge{ font-size: 1.1rem; line-height: 1; opacity: 0.35; filter: grayscale(1); }
+.quiz-tile-badge .quiz-icon-img{ width: 22px; height: 22px; }
+.quiz-tile-badge.earned{ opacity: 1; filter: none; }
 
 /* ----- Phase 15 du brief produit : microanimations -----
    Trois manques concrets repérés (pas d'invention gratuite) : les changements d'écran étaient
