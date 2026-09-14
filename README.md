@@ -3330,3 +3330,36 @@ avec une progression simulée (4 badges obtenus, 2 non obtenus, y compris l'éta
 "Accès complet").
 
 `service-worker.js` (Panthéon) : `pantheon-v95` → `pantheon-v96`.
+
+## Phase 15 du brief produit : microanimations
+
+Trois manques concrets, repérés en auditant les transitions/états existants plutôt qu'en
+inventant des idées d'animation : (1) chaque changement d'écran remplaçait le contenu net
+(`innerHTML`), sans transition ; (2) aucun élément cliquable n'avait d'état `:active` — seulement
+`:hover`, qui ne se déclenche quasiment jamais au doigt sur mobile, or l'appli est d'abord pensée
+pour le tactile ; (3) la réponse au quiz apparaissait déjà colorée dès son insertion dans le DOM
+(tout l'écran est régénéré à chaque réponse), sans le moindre "reveal".
+
+**Fondu d'écran** : un léger fondu (`#app.screen-fade`, 180ms) rejoué à chaque appel de
+`render()` — une seule modification qui touche tous les écrans d'un coup.
+
+**Retour tactile au tap** : `:active` ajouté sur toutes les cartes, boutons, items de liste et
+chips de l'appli, en reprenant à chaque fois la même teinte-cible que le `:hover` déjà défini pour
+cet élément (aucune nouvelle couleur inventée) — les cartes qui s'élèvent au survol s'enfoncent
+légèrement à l'appui, les rangées/chips s'assombrissent, les boutons pleins (fond déjà coloré) via
+`filter: brightness()` plutôt qu'une couleur par bouton.
+
+**Réponse au quiz révélée** : `.quiz-choice.correct`/`.incorrect` passent d'une `@keyframes` (pas
+d'une `transition`, qui ne peut rien animer sur un nœud fraîchement créé) allant de l'apparence
+neutre du bouton à sa couleur de verdict — mêmes jetons de couleur que la version statique déjà
+en place, aucune nouvelle couleur ajoutée.
+
+Volontairement limité à ces trois moments, sans confettis, son ni mascotte, pour rester loin d'un
+habillage façon Duolingo — cohérent avec les animations déjà en place (twinkle des étoiles, halo
+des badges), et chacune des trois respecte `prefers-reduced-motion`.
+
+Testé (2538 vérifications, dont 8 nouvelles), rendu contrôlé visuellement en clair et en sombre :
+navigation entre écrans, appui maintenu sur une carte (`mouse.down`/`up` en Playwright pour
+capturer l'état `:active`), et une partie de quiz jouée jusqu'à la réponse révélée.
+
+`service-worker.js` (Panthéon) : `pantheon-v96` → `pantheon-v97`.

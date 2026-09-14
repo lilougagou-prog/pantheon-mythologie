@@ -1521,6 +1521,84 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 }
 @media (prefers-reduced-motion: reduce){ .quiz-badge.earned{ animation: none; } }
 
+/* ----- Phase 15 du brief produit : microanimations -----
+   Trois manques concrets repérés (pas d'invention gratuite) : les changements d'écran étaient
+   des coupures nettes (innerHTML remplacé sans transition), aucun élément cliquable n'avait
+   d'état :active (seulement :hover, qui ne se déclenche quasiment jamais au doigt sur mobile —
+   or l'appli est d'abord pensée pour le tactile), et la réponse au quiz apparaissait déjà
+   colorée dès son insertion dans le DOM, sans le moindre "reveal". Volontairement limité à ces
+   trois moments plutôt qu'une passe généralisée : pas de confettis, pas de son, pas de mascotte
+   qui saute — le geste reste sobre, cohérent avec le reste de l'appli (twinkle discret des
+   étoiles, halo des badges), jamais du côté Duolingo. */
+
+/* 1) Fondu léger à chaque changement d'écran (voir render() dans app.js, qui rejoue cette classe
+   à chaque rendu via un retrait + reflow forcé + réajout — une classe déjà présente sur #app ne
+   redéclencherait pas son animation lors d'un simple changement de contenu interne). */
+@keyframes pantheon-screen-fade{
+  from{ opacity: 0; transform: translateY(4px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+#app.screen-fade{ animation: pantheon-screen-fade 0.18s ease; }
+@media (prefers-reduced-motion: reduce){ #app.screen-fade{ animation: none; } }
+
+/* 2) Retour tactile au tap — deux familles reprenant chacune la même teinte-cible que le :hover
+   déjà défini pour l'élément (jamais une nouvelle couleur inventée), simplement aussi atteignable
+   au doigt. Les cartes qui "s'élèvent" au survol (translateY + ombre) s'enfoncent légèrement à
+   l'appui plutôt que de continuer à s'élever, pour une vraie sensation de pression. */
+.fotd-card:active, .recent-card:active, .tile:active, .geneal-entry:active,
+.ft-card:not(.ft-card-self):active, .quiz-tile:active,
+.quiz-level-card:active:not(:disabled), .quiz-theme-card:active{
+  transform: scale(0.97);
+  box-shadow: none;
+}
+.back:active, .sibling-nav-btn:active, .list-item:active, .nav-tab:active,
+.geneal-fiche-link:active, .profile-fab:active, .type-card:active{
+  background: var(--marble-deep);
+}
+.chip:active, .geneal-tree-link:active, .quiz-home-btn:active, .quiz-figure-btn:active{
+  background: var(--border);
+}
+.quiz-choice:active:not(:disabled), .quiz-match-item:active:not(:disabled),
+.access-filter-chip:active, .place-filter-chip:active{
+  transform: scale(0.97);
+}
+/* Boutons pleins (fond déjà coloré, pas marbre) : un assombrissement générique plutôt qu'une
+   nouvelle teinte à décliner par bouton — fonctionne identiquement quel que soit leur fond. */
+.paywall-cta:active, .quiz-start-btn:active:not(:disabled),
+.quiz-submit-btn:active, .quiz-next-btn:active, .quiz-replay-btn:active{
+  filter: brightness(0.92);
+}
+@media (prefers-reduced-motion: reduce){
+  .fotd-card:active, .recent-card:active, .tile:active, .geneal-entry:active,
+  .ft-card:not(.ft-card-self):active, .quiz-tile:active,
+  .quiz-level-card:active:not(:disabled), .quiz-theme-card:active,
+  .quiz-choice:active:not(:disabled), .quiz-match-item:active:not(:disabled),
+  .access-filter-chip:active, .place-filter-chip:active{
+    transform: none;
+  }
+}
+
+/* 3) Réponse au quiz : .quiz-choice.correct/.incorrect (voir quizChoicesHTML() dans app.js)
+   portent déjà leur couleur finale dès leur insertion dans le DOM (tout l'écran est régénéré via
+   innerHTML à chaque réponse, jamais une classe ajoutée sur un bouton existant) — une simple
+   "transition" CSS ne peut donc rien animer, un nœud fraîchement créé n'a pas d'état "avant".
+   Une @keyframes, elle, joue bien à l'insertion : le bouton part de son apparence neutre pour
+   rejoindre sa couleur de verdict, plutôt que de l'afficher d'un bloc. Mêmes jetons de couleur
+   que .quiz-choice.correct/.incorrect (aucune nouvelle couleur ajoutée). */
+@keyframes quiz-reveal-correct{
+  from{ background: var(--card-bg); border-color: var(--border); transform: scale(0.98); }
+  to{ background: rgba(74, 93, 58, 0.14); border-color: var(--laurel); transform: scale(1); }
+}
+@keyframes quiz-reveal-incorrect{
+  from{ background: var(--card-bg); border-color: var(--border); transform: scale(0.98); }
+  to{ background: rgba(181, 84, 47, 0.14); border-color: var(--terracotta); transform: scale(1); }
+}
+.quiz-choice.correct{ animation: quiz-reveal-correct 0.22s ease; }
+.quiz-choice.incorrect{ animation: quiz-reveal-incorrect 0.22s ease; }
+@media (prefers-reduced-motion: reduce){
+  .quiz-choice.correct, .quiz-choice.incorrect{ animation: none; }
+}
+
 /* ----- Nous contacter ----- */
 
 .intro-note{ font-size: 0.9rem; color: var(--ink-soft); margin: 0 0 18px; }

@@ -4471,6 +4471,14 @@ function render(){
   // styles.css) — vérifié défensivement, certains DOM simulés des tests n'ont pas classList.
   if(app.classList){
     app.classList.toggle("wide", GENEALOGY_WIDE_SCREENS.has(currentScreen.type));
+    // Phase 15 du brief produit (microanimations) : rejoue le fondu #app.screen-fade à chaque
+    // rendu. Une classe déjà présente sur #app ne redéclencherait pas son @keyframes lors d'un
+    // simple changement de contenu interne — il faut la retirer, forcer un reflow (lecture
+    // d'offsetWidth, qui oblige le navigateur à appliquer l'état "sans la classe" avant de
+    // continuer), puis la remettre pour que l'animation reparte de zéro à chaque écran.
+    app.classList.remove("screen-fade");
+    void app.offsetWidth;
+    app.classList.add("screen-fade");
   }
   document.getElementById("bottomNav").innerHTML = renderBottomNav();
   // Bouton Profil flottant : jamais réinjecté (voir index.html, élément persistant hors #app),
