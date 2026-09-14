@@ -3363,3 +3363,33 @@ navigation entre écrans, appui maintenu sur une carte (`mouse.down`/`up` en Pla
 capturer l'état `:active`), et une partie de quiz jouée jusqu'à la réponse révélée.
 
 `service-worker.js` (Panthéon) : `pantheon-v96` → `pantheon-v97`.
+
+## Retour direct de l'utilisatrice : images de portraits encore coupées + doublon d'accueil
+
+Deux demandes ponctuelles, indépendantes du plan de phases mais traitées avec la même rigueur.
+
+**« Il y a encore des images coupées (comme Abas) »** — la calibration d'origine (Phase 9)
+s'appuyait déjà sur une planche-contact visuelle des 124 portraits, mais elle n'avait pas vu
+assez de cas : seuls amphion et cassiopée avaient été corrigés. La planche-contact a été
+reconstruite en rejouant exactement le calcul CSS réel du rendu (`object-fit: cover` puis
+`transform: scale` autour du point focal), pas une approximation grossière, pour comparer les
+124 portraits dans les conditions exactes de l'appli. Résultat : **9 portraits de plus** avaient
+vraiment besoin d'un réglage individuel — tous des plans en pied ou des scènes larges où le
+visage se trouve loin du centre par défaut (abas, agon, cécrops, abaris, iris, énée, orion,
+séléné, endymion — ces deux derniers partageant une même image source, avec donc chacun leur
+propre point focal dessus). `DEITY_PORTRAIT_FOCUS` passe ainsi de 2 à 11 entrées ; les 113 autres
+compositions n'ont toujours pas besoin d'entrée dédiée.
+
+**« Enlève carrément les renvois à “figures mythologiques” etc, ça fait doublon avec le menu du
+bas »** — les 4 tuiles d'accès rapide de l'accueil (déjà compactées en rangées à la Phase 7)
+répétaient malgré tout, en toutes lettres, la barre de navigation du bas, déjà visible en
+permanence sur cet écran. Retirées entièrement (pas recompactées une nouvelle fois) : la barre du
+bas reste le seul accès à ces 4 sections depuis l'accueil. Le CSS mort correspondant
+(`.tiles`/`.tile`/`.tile-badge`/`.tile-title`, y compris leurs états `:hover`/`:active` ajoutés à
+la Phase 15) a été retiré avec, plutôt que laissé en place.
+
+Testé (2541 vérifications, dont 6 nouvelles), rendu contrôlé visuellement : les 9 nouveaux
+cadrages comparés avant/après sur l'appli réelle (recherche de chaque figure), et l'accueil
+confirmé sans tuiles en clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v97` → `pantheon-v98`.

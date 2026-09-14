@@ -1908,6 +1908,11 @@ function renderHomeSearchResults(query){
   `;
 }
 
+// Demande de l'utilisatrice : les 4 tuiles Figures/Symboles/Généalogie/Lieux qui terminaient
+// l'accueil (icône + titre complet) redisaient exactement la barre de navigation du bas, déjà
+// visible en permanence sur cet écran — un vrai doublon, pas juste un raccourci de plus. Retirées
+// entièrement plutôt que recompactées une nouvelle fois (déjà allégées aux Phases 6-7) : la barre
+// du bas reste le seul accès à ces 4 sections depuis l'accueil.
 function renderHome(){
   return `
     <header class="hero">
@@ -1927,24 +1932,6 @@ function renderHome(){
     ${quizTileHTML()}
     ${figureOfTheDayHTML()}
     ${recentlyViewedHTML()}
-    <div class="tiles">
-      <button class="tile" data-nav="figures">
-        <img class="tile-badge" src="assets/badge-figures-portrait.webp" alt="">
-        <span class="tile-title">Figures mythologiques</span>
-      </button>
-      <button class="tile" data-nav="symbols">
-        <img class="tile-badge" src="assets/badge-symbols-lyre.webp" alt="">
-        <span class="tile-title">Bibliothèque symbolique</span>
-      </button>
-      <button class="tile" data-nav="genealogyHome">
-        <img class="tile-badge" src="assets/badge-genealogy-mother.webp" alt="">
-        <span class="tile-title">Généalogie des dieux</span>
-      </button>
-      <button class="tile" data-nav="places">
-        <img class="tile-badge" src="assets/badge-places-map.webp" alt="">
-        <span class="tile-title">Lieux mythologiques</span>
-      </button>
-    </div>
     <p class="home-footer-link"><a href="./politique-confidentialite.html" target="_blank" rel="noopener">Politique de confidentialité</a></p>
   `;
 }
@@ -1980,15 +1967,33 @@ function rankedSearch(entries, nameOf, noteOf, q, limit){
     .map(([e]) => e);
 }
 
-// Réglage fin du cadrage (x/y du point focal en %, zoom) pour les deux seules compositions,
-// sur 124 portraits, où le cadrage par défaut ci-dessous (centré, 18% depuis le haut, léger
-// zoom) manque le visage — repéré via une planche-contact de l'ensemble des portraits plutôt
-// qu'en devinant : amphion (visage décentré à gauche, plus bas, à cause des blocs de pierre en
-// suspension au premier plan) et cassiopée (tête renversée en arrière, visage proche du bord
-// supérieur). Toutes les autres compositions n'ont pas besoin d'entrée ici.
+// Réglage fin du cadrage (x/y du point focal en %, zoom) pour les compositions où le cadrage par
+// défaut ci-dessous (centré, 18% depuis le haut, léger zoom) manque le visage. Signalé par
+// l'utilisatrice (« il y a encore des images coupées, comme Abas ») après la calibration
+// d'origine (amphion, cassiopée) — qui s'appuyait déjà sur une planche-contact visuelle mais n'en
+// avait tout simplement pas vu assez : celle-ci a donc été reconstruite en rejouant exactement le
+// calcul CSS réel (object-fit:cover puis transform:scale, pas une approximation) plutôt qu'un
+// aperçu grossier, pour comparer les 124 portraits dans les conditions exactes du rendu. Chaque
+// cas ci-dessous est une composition en plan large (le sujet debout en pied, ou une scène à
+// plusieurs personnages) où le visage se trouve loin du centre par défaut :
 const DEITY_PORTRAIT_FOCUS = {
   "amphion": { x: 30, y: 27, zoom: 1.6 },
   "cassiopée": { x: 50, y: 8, zoom: 1.2 },
+  // Plan en pied, visage proche du bord supérieur et décentré — cadrage par défaut trop bas.
+  "abas": { x: 58, y: 9, zoom: 1.6 },
+  "agon": { x: 67, y: 10, zoom: 1.6 },
+  "cécrops": { x: 45, y: 12, zoom: 1.5 },
+  "abaris": { x: 55, y: 10, zoom: 1.5 },
+  "iris": { x: 50, y: 7, zoom: 1.6 },
+  // Personnage debout mais lointain dans une scène large (paysage, littoral) — visage minuscule
+  // au cadrage par défaut, un zoom plus fort le ramène à une taille lisible.
+  "énée": { x: 41, y: 13, zoom: 1.8 },
+  "orion": { x: 24, y: 41, zoom: 2.4 },
+  // deity-selene-endymion.jpg est partagée entre les deux fiches (Séléné et Endymion endormi) —
+  // le cadrage par défaut ne pouvait de toute façon convenir qu'à l'une des deux compositions
+  // à la fois ; chacune a donc son propre point focal sur cette même image.
+  "séléné": { x: 36, y: 12, zoom: 1.7 },
+  "endymion": { x: 84, y: 53, zoom: 2.0 },
 };
 const DEITY_PORTRAIT_FOCUS_DEFAULT = { x: 50, y: 18, zoom: 1.4 };
 

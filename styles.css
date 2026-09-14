@@ -224,39 +224,11 @@ h1, h2, h3{
   overflow: hidden;
 }
 
-.tiles{
-  display: grid;
-  gap: 14px;
-  grid-template-columns: 1fr;
-}
-@media (min-width: 520px){
-  .tiles{ grid-template-columns: 1fr 1fr; }
-}
-
-/* Rangées compactes plutôt que grandes cartes verticales (Phase 7 du brief produit) : ces 4
-   accès rapides existent déjà, en toutes lettres, dans la barre de navigation du bas — les
-   garder aussi imposants sur l'accueil (avec une phrase descriptive chacun) les faisait doublonner
-   cette navigation plutôt que la compléter. Icône + titre seuls, en ligne, suffisent à identifier
-   la section pour qui l'a déjà visitée au moins une fois via la barre du bas. */
-.tile{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  box-shadow: 0 4px 14px var(--shadow);
-  cursor: pointer;
-  font-family: inherit;
-  color: inherit;
-  text-align: left;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.tile:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px var(--shadow); }
-.tile-badge{ width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
-.tile-title{ font-family: "Cinzel", Georgia, serif; font-size: 1rem; color: var(--laurel-deep); }
+/* .tiles/.tile/.tile-badge/.tile-title (les 4 accès rapides Figures/Symboles/Généalogie/Lieux
+   en bas de l'accueil) ont existé ici, compactés en rangées à la Phase 7. Retirés entièrement
+   sur demande de l'utilisatrice : ils redisaient exactement la barre de navigation du bas, déjà
+   visible en permanence sur cet écran — un doublon plutôt qu'un raccourci utile. Voir
+   renderHome() dans app.js. */
 
 /* ----- Généalogie ----- */
 
@@ -1545,7 +1517,7 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
    déjà défini pour l'élément (jamais une nouvelle couleur inventée), simplement aussi atteignable
    au doigt. Les cartes qui "s'élèvent" au survol (translateY + ombre) s'enfoncent légèrement à
    l'appui plutôt que de continuer à s'élever, pour une vraie sensation de pression. */
-.fotd-card:active, .recent-card:active, .tile:active, .geneal-entry:active,
+.fotd-card:active, .recent-card:active, .geneal-entry:active,
 .ft-card:not(.ft-card-self):active, .quiz-tile:active,
 .quiz-level-card:active:not(:disabled), .quiz-theme-card:active{
   transform: scale(0.97);
@@ -1569,7 +1541,7 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
   filter: brightness(0.92);
 }
 @media (prefers-reduced-motion: reduce){
-  .fotd-card:active, .recent-card:active, .tile:active, .geneal-entry:active,
+  .fotd-card:active, .recent-card:active, .geneal-entry:active,
   .ft-card:not(.ft-card-self):active, .quiz-tile:active,
   .quiz-level-card:active:not(:disabled), .quiz-theme-card:active,
   .quiz-choice:active:not(:disabled), .quiz-match-item:active:not(:disabled),
