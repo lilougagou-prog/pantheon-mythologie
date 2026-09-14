@@ -3744,6 +3744,36 @@ function quizGenTrueFalse(scopeIds){
   };
 }
 
+// Retour direct de l'utilisatrice : sur un thème étroit (7 figures pour "La guerre de Troie"),
+// Débutant/Intermédiaire/Expert posaient presque les mêmes questions, parce que quizGenNoteMatch
+// (Débutant) était AUSSI dans le vivier Intermédiaire, et quizGenParent/Child/TrueFalse
+// (Intermédiaire) étaient EN PLUS dans le vivier Expert — trois niveaux qui se recouvraient plus
+// qu'ils ne se distinguaient. Ce générateur donne à Intermédiaire un format qui lui est propre :
+// vrai/faux sur la description elle-même (DEITY_NOTES, jamais un second texte à écrire) plutôt
+// que sur une relation de parenté — toujours une vérification, pas une simple reconnaissance
+// comme quizGenNoteMatch, mais sans la généalogie que ce niveau maîtrise déjà par ailleurs.
+function quizGenNoteTrueFalse(scopeIds){
+  const candidates = scopeIds.filter(id => DEITY_NOTES[id]);
+  if(candidates.length < 2) return null;
+  const noteOwnerId = quizPick(candidates);
+  const isTrue = Math.random() < 0.5;
+  let statedId;
+  if(isTrue){
+    statedId = noteOwnerId;
+  } else {
+    const pool = quizDistractorPool(scopeIds, [noteOwnerId], 1);
+    if(!pool.length) return null;
+    statedId = pool[0];
+  }
+  return {
+    kind: "qcm",
+    prompt: `Vrai ou faux : « ${DEITY_NOTES[noteOwnerId]} » décrit ${genealogyDisplayName(statedId)}.`,
+    choices: ["Vrai", "Faux"],
+    correctIndex: isTrue ? 0 : 1,
+    explain: quizExplainNote(noteOwnerId),
+  };
+}
+
 // Le prompt dit "un parent" — n'importe laquelle des figures réellement parentes doit donc
 // compter comme bonne réponse, pas seulement celle tirée au sort pour l'affichage de secours
 // (q.answer). Bug corrigé : avant, taper un AUTRE parent tout aussi vrai (ex. "Thétis" quand
@@ -3766,6 +3796,31 @@ function quizGenTypeAnswer(scopeIds){
   return {
     kind: "text",
     prompt: `Tape le nom d'un parent de ${genealogyDisplayName(childId)}.`,
+    answer: genealogyDisplayName(correct),
+    acceptedAnswers,
+    explain: quizExplainNote(correct),
+  };
+}
+
+// Miroir de quizGenTypeAnswer côté enfant — Expert n'avait jusqu'ici qu'un seul générateur à
+// réponse tapée, toujours "tape un parent" ; jamais l'inverse. Même tolérance sur le nom "nu"
+// des figures homonymes désambiguïsées, pour la même raison (voir le commentaire au-dessus).
+function quizGenTypeAnswerChild(scopeIds){
+  const candidates = scopeIds.filter(id => (GENEALOGY_CHILDREN[id] || []).length > 0);
+  if(!candidates.length) return null;
+  const parentId = quizPick(candidates);
+  const children = GENEALOGY_CHILDREN[parentId];
+  const correct = quizPick(children);
+  const acceptedAnswers = new Set();
+  for(const cid of children){
+    const display = genealogyDisplayName(cid);
+    acceptedAnswers.add(normalizeSearch(display));
+    const bare = display.replace(/\s*\([^)]*\)\s*$/, "").trim();
+    if(bare) acceptedAnswers.add(normalizeSearch(bare));
+  }
+  return {
+    kind: "text",
+    prompt: `Tape le nom d'un enfant de ${genealogyDisplayName(parentId)}.`,
     answer: genealogyDisplayName(correct),
     acceptedAnswers,
     explain: quizExplainNote(correct),
@@ -3926,19 +3981,23 @@ function quizGenerateQuestion(levelId, theme, figureIds){
       : quizPick([quizGenPlaceDesc, quizGenPlaceCategory, quizGenPlaceFigure])();
     if(extra) return extra;
   }
-  // Retour direct de l'utilisatrice : des questions du niveau Débutant ("les grandes figures,
-  // questions directes") lui sont apparues bien plus dures que "débutant" — en fait du niveau
-  // Intermédiaire, voire Expert. Cause trouvée : quizGenParent ("Qui est le parent de X ?") était
-  // dans le vivier Débutant EN PLUS de quizGenNoteMatch — une question de généalogie/relation
-  // familiale, exactement ce que le niveau Intermédiaire promet déjà en propre ("Relations de
-  // famille"), pas une question "directe" sur l'identité d'une figure. Retiré du vivier Débutant,
-  // qui ne pose donc plus QUE des questions de reconnaissance directe (quizGenNoteMatch),
-  // cohérentes avec sa propre description — Intermédiaire et Expert, eux, gardent (et gagnent en
-  // exclusivité) tout ce qui touche à la généalogie.
+  // Retour direct de l'utilisatrice, en deux temps. D'abord : des questions du niveau Débutant
+  // lui sont apparues bien plus dures que "débutant" — quizGenParent (généalogie) traînait dans
+  // son vivier en plus de quizGenNoteMatch (reconnaissance directe), retiré. Puis, plus loin :
+  // même sur un thème étroit joué aux 3 niveaux (7 figures pour "La guerre de Troie"), les
+  // questions restaient presque les mêmes d'un niveau à l'autre — cause cette fois entre
+  // Intermédiaire et Expert, qui partageaient encore 3 générateurs sur 5 (quizGenParent/Child/
+  // TrueFalse). Les 3 viviers ne partagent donc plus AUCUN générateur, chacun avec un vrai profil :
+  // Débutant reconnaît (une description, un nom), Intermédiaire relie et vérifie en QCM (parent/
+  // enfant/vrai-faux sur la relation ET sur la description elle-même — quizGenNoteTrueFalse, pour
+  // ne pas se réduire à la seule généalogie), Expert va plus loin ET tape sa réponse (grand-parent,
+  // parent et enfant à taper). Volumes de candidats vérifiés thème par thème avant ce changement
+  // (le plus petit, "La famille d'Ulysse", 5 figures, a encore 5 candidats parent/grand-parent et
+  // 3 enfant — largement assez pour 8 questions sans jamais reformuler le même prompt).
   const pools = {
     "débutant": [() => quizGenNoteMatch(scope)],
-    "intermédiaire": [() => quizGenNoteMatch(scope), () => quizGenParent(scope), () => quizGenChild(scope), () => quizGenTrueFalse(scope)],
-    "expert": [() => quizGenParent(scope), () => quizGenChild(scope), () => quizGenTrueFalse(scope), () => quizGenGrandparent(scope), () => quizGenTypeAnswer(scope)],
+    "intermédiaire": [() => quizGenParent(scope), () => quizGenChild(scope), () => quizGenTrueFalse(scope), () => quizGenNoteTrueFalse(scope)],
+    "expert": [() => quizGenGrandparent(scope), () => quizGenTypeAnswer(scope), () => quizGenTypeAnswerChild(scope)],
   };
   const generators = pools[levelId] || pools["débutant"];
   return quizPick(generators)();

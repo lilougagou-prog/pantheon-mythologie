@@ -3586,3 +3586,47 @@ Testé (2585 vérifications, dont 1 nouvelle), rendu contrôlé visuellement en 
 clic sur un badge depuis cet écran confirmé (même fenêtre d'explication que depuis le profil).
 
 `service-worker.js` (Panthéon) : `pantheon-v105` → `pantheon-v106`.
+
+## Vraie différenciation Débutant / Intermédiaire / Expert dans le quiz
+
+Retour direct de l'utilisatrice, après avoir fait le même thème (Guerre de Troie) aux trois
+niveaux : « il n'y a toujours pas de grande différence de niveau entre débutant, intermédiaire,
+et expert [...] j'ai eu presque les mêmes questions. De plus, tu ne poses jamais de questions sur
+les événements. Ou les symboles. »
+
+Le round précédent avait retiré `quizGenNoteMatch` du vivier Intermédiaire (recouvrement avec
+Débutant), mais sans vérifier le recouvrement Intermédiaire/Expert : les deux viviers partageaient
+encore `quizGenParent`, `quizGenChild` et `quizGenTrueFalse` — d'où des questions quasi identiques
+d'un niveau à l'autre sur un même thème. Les trois viviers de `quizGenerateQuestion()` ne
+partagent désormais plus aucun générateur :
+- **Débutant** — reconnaître : associer une figure à sa description (`quizGenNoteMatch`, déjà là).
+- **Intermédiaire** — relier en QCM : parent, enfant, vrai/faux sur une relation, et un nouveau
+  vrai/faux sur une description (`quizGenNoteTrueFalse`, réutilise le texte déjà vérifié de
+  `DEITY_NOTES`, n'en écrit pas un second).
+- **Expert** — aller plus loin et taper sa réponse : grand-parent, et deux question à réponse
+  tapée (`quizGenTypeAnswer` déjà là, plus un nouveau miroir côté enfant
+  `quizGenTypeAnswerChild`), avec la même tolérance sur le nom « nu » des figures homonymes
+  désambiguïsées.
+
+Sur « événements » et « symboles », l'honnêteté oblige à dire que ce round ne les couvre pas
+encore, et pourquoi :
+- Une question sur un **symbole lié à une figure** existe déjà (`quizGenSymbolDesc`/
+  `quizGenSymbolCategory`/`quizGenPlaceFigure`) mais seulement dans les thèmes Symboles et Lieux —
+  jamais dans un thème « figures » comme Guerre de Troie, parce que le lien symbole → figure
+  (`SYMBOL_ENTRIES[...].links`) n'existe aujourd'hui que pour 6 figures sur 336 dans tout le
+  corpus. Impossible de construire un vivier fiable sur si peu de données sans risquer de piocher
+  dans le vide ou d'inventer un lien — il faudrait d'abord enrichir cette donnée.
+- Une vraie question sur un **événement** (« qui a tué qui pendant le siège », « dans quel ordre »)
+  demanderait des faits structurés par thème, écrits à la main : les extraire automatiquement du
+  texte libre de `DEITY_LORE` risquerait d'inventer ou de déformer un fait, ce que la charte du
+  projet interdit. C'est un travail de contenu, pas un correctif de code — à faire si elle le
+  souhaite, sur les thèmes qui l'intéressent en priorité.
+
+Testé (2588 vérifications, dont 3 nouvelles) : session complète générée et vérifiée pour le thème
+Troie aux 3 niveaux (questions réellement différentes), puis les 8 thèmes × 3 niveaux passés en
+revue pour confirmer qu'aucun ne produit une session trop courte avec les nouveaux viviers
+(le thème le plus petit, Ulysse, inclus). Rendu contrôlé visuellement en clair et en sombre pour
+les deux nouveaux formats de question (vrai/faux sur une description, réponse tapée côté enfant),
+réponse tapée vérifiée juste et fausse.
+
+`service-worker.js` (Panthéon) : `pantheon-v106` → `pantheon-v107`.
