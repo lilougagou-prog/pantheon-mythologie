@@ -3344,12 +3344,15 @@ function profileResultsBodyHTML(){
   // Les mini-quiz lancés depuis une fiche n'étaient jusqu'ici comptabilisés NULLE PART — un
   // vrai effort de la visitrice (répondre à des questions sur une figure qu'elle vient de lire)
   // qui ne ressortait jamais sur son profil. Une ligne à part plutôt que mêlée aux thèmes : ce
-  // n'est pas un thème, c'est une pratique différente (agrégée sur toutes les fiches testées).
+  // n'est pas un thème, c'est une pratique différente (agrégée sur toutes les parties jouées —
+  // "partie" plutôt que "fiche testée", cf. Phase 12 : progress.figureQuizzes ne retient qu'un
+  // nombre de parties, pas quelles fiches précisément, donc "X fiches testées" prétendrait une
+  // distinction que les données ne permettent pas de garantir si la même fiche est rejouée).
   const figureRow = fq.played ? `
     <div class="profile-result-row">
       <span class="profile-result-icon">🧭</span>
       <span class="profile-result-theme">Mini-quiz depuis les fiches</span>
-      <span class="profile-result-score">${fq.correct}/${fq.total}<span class="profile-result-meta"> · ${fq.played} fiche${fq.played > 1 ? "s" : ""} testée${fq.played > 1 ? "s" : ""}</span></span>
+      <span class="profile-result-score">${fq.correct}/${fq.total}<span class="profile-result-meta"> · ${fq.played} partie${fq.played > 1 ? "s" : ""}</span></span>
     </div>
   ` : "";
   return `
@@ -3994,7 +3997,15 @@ const QUIZ_BADGES = [
     earned: p => Object.values(p.themes).some(t => t.played > 0) || p.figureQuizzes.played > 0 },
   { id: "sans-faute", icon: "🎯", label: "Sans-faute", desc: "Termine une partie avec un score parfait.",
     earned: p => Object.values(p.themes).some(t => t.bestTotal > 0 && t.bestCorrect === t.bestTotal) },
-  { id: "sur-le-terrain", icon: "🔍", label: "Sur le terrain", desc: "Teste tes connaissances depuis 10 fiches différentes.",
+  // Phase 12 du brief produit (audit des badges) : l'ancien libellé promettait « 10 fiches
+  // différentes », mais progress.figureQuizzes ne compte que le nombre de parties jouées
+  // (played), sans retenir QUELLES fiches — relancer le mini-quiz 10 fois depuis la même fiche
+  // suffisait donc à obtenir un badge qui prétendait le contraire. Faux plutôt que juste
+  // approximatif, donc corrigé : le libellé décrit maintenant exactement ce qui est mesuré (10
+  // parties, pas 10 fiches distinctes), sans ajouter de nouveau suivi par identifiant de figure
+  // pour un badge mineur — et sans faire régresser les visiteuses qui l'ont déjà obtenu, puisque
+  // le seuil (10 parties) reste inchangé.
+  { id: "sur-le-terrain", icon: "🔍", label: "Sur le terrain", desc: "Réponds à 10 mini-quiz lancés depuis une fiche.",
     earned: p => p.figureQuizzes.played >= 10 },
   { id: "intermediaire", icon: "⚔️", label: "Niveau Intermédiaire", desc: "Maîtrise 5 thèmes (note au-dessus de la moyenne).",
     earned: p => quizMasteredThemeCount(p) >= QUIZ_INTERMEDIATE_THEMES_REQUIRED },

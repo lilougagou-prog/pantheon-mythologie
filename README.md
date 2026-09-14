@@ -3306,3 +3306,27 @@ texte d'interface à raccourcir.
 Testé (2526 vérifications, dont 4 nouvelles), rendu contrôlé visuellement en clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v94` → `pantheon-v95`.
+
+## Phase 12 du brief produit : audit des badges existants
+
+Revue des 6 badges de quiz (`QUIZ_BADGES`), un par un, pour vérifier que leur libellé correspond
+bien à leur critère d'obtention réel (`earned()`). Cinq badges sur six étaient cohérents,
+y compris le badge autrefois "Niveau Expert" — déjà renommé "Accès complet" lors d'une phase
+précédente pour ne plus laisser croire qu'un paiement équivaut à une compétence acquise.
+
+**Une vraie incohérence trouvée** : le badge "Sur le terrain" promettait « Teste tes
+connaissances depuis 10 fiches différentes », mais `progress.figureQuizzes` ne compte qu'un
+nombre de parties jouées (`played`), sans jamais retenir lesquelles — relancer le mini-quiz 10
+fois depuis la même fiche suffisait donc à obtenir un badge qui affirmait le contraire. Le même
+mot ("fiches testées") était aussi utilisé sur l'écran Profil pour le même chiffre. Corrigé en
+alignant le texte sur ce qui est réellement mesuré (« Réponds à 10 mini-quiz lancés depuis une
+fiche. ») plutôt qu'en ajoutant un nouveau suivi par identifiant de figure pour un badge mineur —
+et sans toucher au seuil (`>= 10`), pour ne faire régresser personne ayant déjà obtenu ce badge.
+Sur l'écran Profil, la ligne correspondante utilise maintenant le même mot que les lignes de
+thème juste au-dessus ("X parties"), gagnant au passage en cohérence de vocabulaire.
+
+Testé (2530 vérifications, dont 4 nouvelles), rendu contrôlé visuellement en clair et en sombre
+avec une progression simulée (4 badges obtenus, 2 non obtenus, y compris l'état grisé/cadenas de
+"Accès complet").
+
+`service-worker.js` (Panthéon) : `pantheon-v95` → `pantheon-v96`.
