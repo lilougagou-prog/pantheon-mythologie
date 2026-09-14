@@ -1926,7 +1926,7 @@ function renderHome(){
       <img class="tagline-olive" src="assets/home-olive-branch.webp" alt="">
     </header>
     <div class="home-search-wrap">
-      <input type="search" class="search" id="homeSearch" placeholder="Rechercher une figure, un symbole, un lieu…">
+      <input type="search" class="search" id="homeSearch" aria-label="Rechercher une figure, un symbole, un lieu" placeholder="Rechercher une figure, un symbole, un lieu…">
       <div id="homeSearchResults" class="home-search-results"></div>
     </div>
     ${quizTileHTML()}
@@ -2050,7 +2050,7 @@ function renderFigures(query = ""){
       <h2>Figures mythologiques</h2>
     </div>
     ${accessFilterBarHTML("figures", figuresAccessFilter)}
-    <input type="search" class="search" id="figuresSearch" placeholder="Chercher une figure (nom, rôle...)" value="${escapeHTML(query)}">
+    <input type="search" class="search" id="figuresSearch" aria-label="Chercher une figure" placeholder="Chercher une figure (nom, rôle...)" value="${escapeHTML(query)}">
     <div id="figuresGrid">${renderFiguresGrid(query)}</div>
   `;
 }
@@ -2095,7 +2095,7 @@ function renderSymbols(query = ""){
       <h2>Bibliothèque symbolique</h2>
     </div>
     ${accessFilterBarHTML("symbols", symbolsAccessFilter)}
-    <input type="search" class="search" id="symbolsSearch" placeholder="Chercher un symbole" value="${escapeHTML(query)}">
+    <input type="search" class="search" id="symbolsSearch" aria-label="Chercher un symbole" placeholder="Chercher un symbole" value="${escapeHTML(query)}">
     <div id="symbolsGrid">${renderSymbolsGrid(query)}</div>
   `;
 }
@@ -2673,7 +2673,7 @@ function renderGenealogyHome(){
       <h2>Généalogie des dieux</h2>
     </div>
     <p class="note">Choisissez un point de départ, puis cliquez sur un nom pour explorer sa famille de proche en proche.</p>
-    <input type="search" class="search" id="genealogySearch" placeholder="Ou cherchez directement une figure pour aller à son arbre">
+    <input type="search" class="search" id="genealogySearch" aria-label="Chercher une figure pour aller à son arbre généalogique" placeholder="Ou cherchez directement une figure pour aller à son arbre">
     <div id="genealogySearchResults" class="geneal-search-results"></div>
     <div class="geneal-entrypoints">
       ${GENEALOGY_STARTING_POINTS.map(pt => `
@@ -3209,7 +3209,7 @@ function renderPlaces(query = ""){
     <p class="note">${MAP_PLACES.length} lieux réels — sanctuaires, montagnes, cités, îles, détroits, sources et entrées des Enfers — où la tradition antique situait ses mythes.</p>
     <div id="placesMap" class="places-map"><p class="map-fallback">Chargement de la carte…</p></div>
     ${placeFilterChipsHTML()}
-    <input type="search" class="search" id="placesSearch" placeholder="Chercher un lieu (nom, mythe...)" value="${escapeHTML(query)}">
+    <input type="search" class="search" id="placesSearch" aria-label="Chercher un lieu" placeholder="Chercher un lieu (nom, mythe...)" value="${escapeHTML(query)}">
     <div id="placesGrid">${renderPlacesGrid(query)}</div>
   `;
 }

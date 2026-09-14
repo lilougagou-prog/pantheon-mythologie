@@ -3393,3 +3393,23 @@ cadrages comparés avant/après sur l'appli réelle (recherche de chaque figure)
 confirmé sans tuiles en clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v97` → `pantheon-v98`.
+
+## Audit technique : méta-description obsolète + recherche sans aria-label
+
+Corrections 1 et 2 de l'audit proposé à l'utilisatrice (approuvées : « oui, fais les corrections
+1 et 2 »).
+
+**Méta-description obsolète** : `<meta name="description">` (index.html), utilisée par les
+moteurs de recherche et les aperçus de partage, annonçait encore « 274 figures, 94 symboles et
+36 lieux » — des chiffres jamais mis à jour depuis, alors que le corpus réel compte aujourd'hui
+336 figures et 63 lieux (les symboles, eux, étaient déjà justes à 94).
+
+**Recherche sans aria-label** : aucun des 5 champs de recherche de l'appli (accueil, figures,
+symboles, généalogie, lieux) n'avait de nom accessible autre que son `placeholder` — qui
+disparaît dès la frappe et n'est pas fiable pour les lecteurs d'écran. Chacun reçoit désormais un
+`aria-label` propre, stable même une fois la saisie commencée.
+
+Testé (2544 vérifications, dont 3 nouvelles), et confirmé que les 5 champs sont bien identifiables
+par leur nom accessible (requête par rôle `searchbox` + nom, comme le ferait un lecteur d'écran).
+
+`service-worker.js` (Panthéon) : `pantheon-v98` → `pantheon-v99`.
