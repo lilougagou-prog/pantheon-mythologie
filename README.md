@@ -3468,3 +3468,27 @@ sur les 3 emplacements (tuile d'accueil, sélecteur de niveau, badges du profil 
 obtenus).
 
 `service-worker.js` (Panthéon) : `pantheon-v100` → `pantheon-v101`.
+
+## 3 médaillons de plus : Polymathe, niveau Expert, Nous contacter
+
+Suite directe du round précédent — l'utilisatrice fournit les 3 derniers emoji du quiz à
+remplacer :
+
+- 📚 (badge « Polymathe ») → pile de trois livres reliés.
+- 🏆 (niveau Expert) → livre ouvert sous une étoile filante entre deux croissants de lune.
+- ✉ (tuile « Nous contacter ») → enveloppe au soleil levant.
+
+Mêmes traitement et patron que le round précédent (recadrage carré, 256×256, webp,
+`.quiz-icon-img` déjà en place, aucune nouvelle règle CSS). Particularité assumée : les
+médaillons Expert et Nous contacter ont un fond terracotta/bronze plutôt qu'ivoire comme les 5
+précédents — un choix de l'utilisatrice, pas une incohérence à corriger, qui donne à ces deux
+éléments (l'un verrouillé au contenu premium, l'autre une prise de contact) un relief différent
+des badges/niveaux ordinaires.
+
+Seul 🔓 (badge « Accès complet ») reste un emoji — non demandé à changer.
+
+Testé (2574 vérifications, dont 8 nouvelles), rendu contrôlé visuellement en clair et en sombre :
+le niveau Expert débloqué et le badge Polymathe obtenu (pour voir leur halo doré), la tuile
+Nous contacter sur l'écran Profil.
+
+`service-worker.js` (Panthéon) : `pantheon-v101` → `pantheon-v102`.

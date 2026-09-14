@@ -3401,7 +3401,7 @@ function renderProfile(){
       ${profileResultsBodyHTML()}
     </div>
     <button class="quiz-tile" data-nav="contact" style="margin-top: 16px;">
-      <span class="quiz-tile-icon">✉</span>
+      <span class="quiz-tile-icon"><img class="quiz-icon-img" src="assets/badge-quiz-contact.webp" alt=""></span>
       <span class="quiz-tile-text">
         <span class="quiz-tile-title">Nous contacter</span>
         <span class="quiz-tile-desc">Une question, un bug à signaler, une idée ?</span>
@@ -3939,15 +3939,17 @@ function quizGenerateQuestion(levelId, theme, figureIds){
 // --- Niveaux, progression (localStorage), session en cours.
 
 // Icônes fournies par l'utilisatrice (médaillons illustrés, même esprit que les badges d'onglet
-// déjà en place — assets/badge-home-temple.webp etc.) pour remplacer les emoji du quiz : la
-// chouette/parchemin (quiz), la pousse (Débutant + badge Premier quiz, même icône réutilisée sur
-// les deux), la cible (Sans-faute), la carte/boussole (Sur le terrain) et les épées croisées
-// (Intermédiaire + badge Niveau Intermédiaire, même icône réutilisée). Même patron que NAV_TABS
-// plus bas : le champ icon porte directement le HTML de l'image, pas juste un chemin.
+// déjà en place — assets/badge-home-temple.webp etc.) pour remplacer les emoji du quiz, en deux
+// temps : la chouette/parchemin (quiz), la pousse (Débutant + badge Premier quiz, même icône
+// réutilisée sur les deux), la cible (Sans-faute), la carte/boussole (Sur le terrain) et les
+// épées croisées (Intermédiaire + badge Niveau Intermédiaire, même icône réutilisée) d'abord ;
+// puis la pile de livres (badge Polymathe), le livre ouvert sous une étoile (niveau Expert) et
+// l'enveloppe (tuile « Nous contacter ») ensuite. Même patron que NAV_TABS plus bas : le champ
+// icon porte directement le HTML de l'image, pas juste un chemin.
 const QUIZ_LEVELS = [
   { id: "débutant", label: "Débutant", desc: "Les grandes figures, questions directes.", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-debutant.webp" alt="">' },
   { id: "intermédiaire", label: "Intermédiaire", desc: "Relations de famille, vrai ou faux.", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-intermediaire.webp" alt="">', lockedHint: "Maîtrise 5 thèmes (note au-dessus de la moyenne) pour débloquer ce niveau." },
-  { id: "expert", label: "Expert", desc: "Généalogie sur plusieurs générations, réponses à taper.", icon: "🏆", lockedHint: "Réservé au contenu premium." },
+  { id: "expert", label: "Expert", desc: "Généalogie sur plusieurs générations, réponses à taper.", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-expert.webp" alt="">', lockedHint: "Réservé au contenu premium." },
 ];
 const QUIZ_SESSION_LENGTH = 8;
 const QUIZ_PROGRESS_KEY = "pantheon-quiz-progress";
@@ -4037,7 +4039,7 @@ const QUIZ_BADGES = [
     earned: p => p.figureQuizzes.played >= 10 },
   { id: "intermediaire", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-intermediaire.webp" alt="">', label: "Niveau Intermédiaire", desc: "Maîtrise 5 thèmes (note au-dessus de la moyenne).",
     earned: p => quizMasteredThemeCount(p) >= QUIZ_INTERMEDIATE_THEMES_REQUIRED },
-  { id: "polymathe", icon: "📚", label: "Polymathe", desc: "Maîtrise les 10 thèmes.",
+  { id: "polymathe", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-polymathe.webp" alt="">', label: "Polymathe", desc: "Maîtrise les 10 thèmes.",
     earned: p => quizMasteredThemeCount(p) >= QUIZ_THEMES.length },
   // Volontairement distinct des autres entrées de cette liste : ce n'est pas un accomplissement
   // pédagogique (contrairement à "Sans-faute" ou "Polymathe", gagnés par la maîtrise réelle),
