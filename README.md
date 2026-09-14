@@ -3630,3 +3630,40 @@ les deux nouveaux formats de question (vrai/faux sur une description, réponse t
 réponse tapée vérifiée juste et fausse.
 
 `service-worker.js` (Panthéon) : `pantheon-v106` → `pantheon-v107`.
+
+## Des questions sur les événements, pas seulement les personnages et la généalogie
+
+Retour direct de l'utilisatrice, dans la foulée du round précédent : « tu ne poses jamais de
+questions sur les événements. Ou les symboles. C'est tourné exclusivement autour des descriptions
+de personnages et la généalogie. »
+
+Sur les symboles, les générateurs existaient déjà (`quizGenSymbolDesc`/`quizGenSymbolCategory`),
+mais réservés au thème « Symboles » — jamais mélangés à un thème par figures comme la Guerre de
+Troie (la donnée symbole→figure reste trop rare pour ça, voir le round précédent). Sur les
+événements en revanche, il n'existait tout simplement aucun générateur nulle part : corrigé.
+
+`QUIZ_EVENTS` : quelques faits marquants écrits à la main, par thème narratif (origines, Titans,
+Olympiens, guerre de Troie, Atrides, cycle thébain, famille d'Ulysse) — 4 à 8 par thème, jamais
+extraits automatiquement de `DEITY_LORE` (un texte narratif libre risquerait de déformer ou
+d'inventer un fait, ce que la charte du projet interdit). L'ordre du tableau EST l'ordre
+chronologique du récit, sans champ séparé à maintenir en double.
+
+Trois nouveaux générateurs, un par niveau, avec la même logique de progression que le reste du
+quiz :
+- **Débutant** — `quizGenEventDesc` : reconnaître, associer une description à l'événement qu'elle
+  raconte (même format que `quizGenNoteMatch`/`quizGenSymbolDesc`).
+- **Intermédiaire** — `quizGenEventOrder` : vérifier en vrai/faux qu'un événement précède un
+  autre.
+- **Expert** — `quizGenEventOrderMulti` : repérer lequel de 4 événements piochés s'est produit en
+  DERNIER — demande de connaître leur position à tous les uns par rapport aux autres, pas
+  seulement une paire, la même marche de plus que `quizGenGrandparent` pour la généalogie.
+
+« Mélange de tout » pioche désormais aussi, à l'occasion, une question événement dans un thème
+narratif choisi au hasard, en plus des questions symbole/lieu déjà en place.
+
+Testé (2594 vérifications, dont 8 nouvelles) : génération vérifiée sur les 7 thèmes narratifs aux
+3 niveaux (au moins une question événement apparaît à chaque fois, sans jamais raccourcir une
+session), rendu contrôlé visuellement en clair et en sombre pour les 3 nouveaux formats, y
+compris l'explication affichée après une réponse Expert (ordre complet des 4 événements piochés).
+
+`service-worker.js` (Panthéon) : `pantheon-v107` → `pantheon-v108`.

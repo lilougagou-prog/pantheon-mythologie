@@ -3968,36 +3968,170 @@ function quizGenMatch(scopeIds){
   return null;
 }
 
+// --- Événements clés : retour direct de l'utilisatrice — « tu ne poses jamais de questions sur
+// les événements [...] c'est tourné exclusivement autour des descriptions de personnages et la
+// généalogie ». Écrits à la main, un par un, plutôt qu'extraits automatiquement de DEITY_LORE :
+// un texte narratif libre risquerait de donner lieu à un fait déformé ou inventé, ce que la
+// charte du projet interdit. Volontairement court par thème (4 à 8 faits bien établis, dans les
+// grandes lignes de l'Iliade, l'Odyssée, l'Orestie et la Théogonie) plutôt qu'exhaustif — mieux
+// vaut peu de faits sûrs que beaucoup de détails approximatifs. L'ORDRE du tableau EST l'ordre
+// chronologique du récit : les générateurs d'ordre ci-dessous s'appuient sur cette position,
+// aucun champ "order" séparé à maintenir en double.
+const QUIZ_EVENTS = {
+  origines: [
+    { id: "origines-1", label: "La séparation du Ciel et de la Terre", desc: "Ouranos (le Ciel) et Gaïa (la Terre), unis, engendrent les Titans avant qu'Ouranos ne soit détrôné par son propre fils." },
+    { id: "origines-2", label: "La castration d'Ouranos", desc: "Cronos mutile son père Ouranos avec une faucille offerte par Gaïa, mettant fin à son règne sur le monde." },
+    { id: "origines-3", label: "Cronos avale ses enfants", desc: "Craignant d'être détrôné à son tour comme il a détrôné son propre père, Cronos avale chacun de ses enfants à leur naissance." },
+    { id: "origines-4", label: "La naissance cachée de Zeus", desc: "Rhéa cache la naissance de Zeus en Crète et donne à Cronos une pierre emmaillotée à avaler à sa place." },
+    { id: "origines-5", label: "Cronos forcé de rendre ses enfants", desc: "Devenu adulte, Zeus force Cronos à rendre les enfants qu'il avait avalés, ses futurs frères et sœurs." },
+  ],
+  titans: [
+    { id: "titans-1", label: "Le début de la Titanomachie", desc: "Zeus et ses frères et sœurs déclarent la guerre à Cronos et aux Titans pour le pouvoir sur le monde." },
+    { id: "titans-2", label: "La libération des Cyclopes et des Hécatonchires", desc: "Zeus libère les Cyclopes et les Hécatonchires, enfermés par Cronos, pour combattre à ses côtés contre les Titans." },
+    { id: "titans-3", label: "La foudre offerte à Zeus", desc: "Les Cyclopes forgent la foudre, l'arme qui deviendra décisive pour Zeus dans sa guerre contre les Titans." },
+    { id: "titans-4", label: "La défaite des Titans", desc: "Après dix années de guerre, Zeus et les siens l'emportent sur Cronos et sur les Titans." },
+    { id: "titans-5", label: "L'enfermement des Titans dans le Tartare", desc: "Les Titans vaincus sont enfermés dans le Tartare, sous la garde des Hécatonchires." },
+    { id: "titans-6", label: "Le châtiment d'Atlas", desc: "Atlas, qui avait combattu du côté des Titans, est condamné à porter la voûte du ciel sur ses épaules pour l'éternité." },
+  ],
+  olympiens: [
+    { id: "olympiens-1", label: "Le partage du monde entre les trois frères", desc: "Après la victoire sur les Titans, Zeus, Poséidon et Hadès se partagent le monde : le ciel, la mer et les enfers." },
+    { id: "olympiens-2", label: "La naissance d'Athéna", desc: "Athéna naît tout armée, jaillie du crâne de Zeus, après qu'il a avalé sa mère Métis enceinte d'elle." },
+    { id: "olympiens-3", label: "La Gigantomachie", desc: "Les dieux de l'Olympe affrontent et finissent par vaincre les Géants, qui s'étaient soulevés contre eux." },
+    { id: "olympiens-4", label: "Le jugement de Pâris", desc: "Pâris, chargé de désigner la plus belle entre Héra, Athéna et Aphrodite, choisit Aphrodite, qui lui promet en retour l'amour de la plus belle des femmes." },
+  ],
+  troie: [
+    { id: "troie-1", label: "Le jugement de Pâris", desc: "Pâris désigne Aphrodite comme la plus belle des déesses ; elle lui promet en échange l'amour d'Hélène." },
+    { id: "troie-2", label: "L'enlèvement d'Hélène", desc: "Pâris enlève Hélène, épouse du roi grec Ménélas, ce qui déclenche la guerre de Troie." },
+    { id: "troie-3", label: "Le sacrifice d'Iphigénie", desc: "Agamemnon sacrifie sa fille Iphigénie pour obtenir d'Artémis des vents favorables vers Troie." },
+    { id: "troie-4", label: "La colère d'Achille", desc: "Achille se retire du combat après qu'Agamemnon lui a repris sa captive Briséis." },
+    { id: "troie-5", label: "La mort de Patrocle", desc: "Patrocle, l'ami le plus proche d'Achille, est tué par Hector, ce qui pousse Achille à reprendre les armes." },
+    { id: "troie-6", label: "La mort d'Hector", desc: "Achille tue Hector en duel devant les remparts de Troie, pour venger la mort de Patrocle." },
+    { id: "troie-7", label: "La mort d'Achille", desc: "Achille est tué par une flèche de Pâris, touché à son seul point vulnérable, le talon." },
+    { id: "troie-8", label: "Le cheval de Troie", desc: "Les Grecs pénètrent dans Troie cachés dans un cheval de bois offert en apparence en offrande, et la ville tombe." },
+  ],
+  atrides: [
+    { id: "atrides-1", label: "Le festin d'Atrée", desc: "Pour se venger de son frère Thyeste, Atrée tue les fils de celui-ci et les lui fait manger sans qu'il le sache, à l'origine de la malédiction de leur lignée." },
+    { id: "atrides-2", label: "Le sacrifice d'Iphigénie", desc: "Agamemnon sacrifie sa fille Iphigénie pour obtenir d'Artémis des vents favorables vers Troie." },
+    { id: "atrides-3", label: "Le meurtre d'Agamemnon", desc: "De retour de la guerre de Troie, Agamemnon est tué par son épouse Clytemnestre, aidée de son amant Égisthe." },
+    { id: "atrides-4", label: "La vengeance d'Oreste", desc: "Oreste, encouragé par sa sœur Électre, tue leur mère Clytemnestre et Égisthe pour venger le meurtre de leur père." },
+    { id: "atrides-5", label: "Le procès d'Oreste", desc: "Poursuivi par les Érinyes pour avoir tué sa mère, Oreste est finalement jugé et acquitté, avec l'aide d'Athéna." },
+  ],
+  thebain: [
+    { id: "thebain-1", label: "La fondation de Thèbes par Cadmos", desc: "Cadmos, après avoir vaincu un dragon, sème ses dents dans le sol : des guerriers en naissent et l'aident à fonder Thèbes." },
+    { id: "thebain-2", label: "L'oracle sur Œdipe", desc: "Un oracle prédit à Laïos que son fils le tuera et épousera sa propre mère ; le nouveau-né Œdipe est abandonné pour éviter ce destin." },
+    { id: "thebain-3", label: "Œdipe tue son père sans le savoir", desc: "Devenu adulte et ignorant de ses origines, Œdipe tue Laïos, son propre père, lors d'une dispute sur la route de Thèbes." },
+    { id: "thebain-4", label: "Œdipe et l'énigme du Sphinx", desc: "Œdipe résout l'énigme du Sphinx qui terrorisait Thèbes, devient roi de la cité et épouse, sans le savoir, sa propre mère Jocaste." },
+    { id: "thebain-5", label: "La chute d'Œdipe", desc: "Œdipe découvre qu'il a tué son père et épousé sa mère ; il se crève les yeux et Jocaste se donne la mort." },
+    { id: "thebain-6", label: "La guerre des fils d'Œdipe", desc: "Étéocle et Polynice, les fils d'Œdipe, s'affrontent pour le trône de Thèbes et s'entretuent en duel." },
+  ],
+  ulysse: [
+    { id: "ulysse-1", label: "Le stratagème du cheval de Troie", desc: "Ulysse conçoit la ruse du cheval de bois qui permet aux Grecs de s'emparer de Troie." },
+    { id: "ulysse-2", label: "La ruse du cyclope Polyphème", desc: "Ulysse enivre le cyclope Polyphème et se fait appeler « Personne » avant de l'aveugler pour échapper à sa caverne." },
+    { id: "ulysse-3", label: "Le séjour chez Circé", desc: "La magicienne Circé transforme les compagnons d'Ulysse en porcs, avant qu'il ne la force à leur rendre forme humaine." },
+    { id: "ulysse-4", label: "Le chant des Sirènes", desc: "Ulysse se fait attacher au mât de son navire pour entendre le chant des Sirènes sans se jeter à l'eau, tandis que ses compagnons ont les oreilles bouchées de cire." },
+    { id: "ulysse-5", label: "Le passage entre Scylla et Charybde", desc: "Ulysse doit franchir un détroit gardé par le monstre Scylla et le tourbillon Charybde, perdant quelques compagnons pour sauver le reste de l'équipage." },
+    { id: "ulysse-6", label: "Le massacre des prétendants", desc: "De retour à Ithaque après vingt ans d'absence, Ulysse, déguisé en mendiant, tue les prétendants qui courtisaient Pénélope." },
+  ],
+};
+
+// Reconnaître : associer une description à l'événement qu'elle raconte — même format que
+// quizGenNoteMatch/quizGenSymbolDesc, réservé à Débutant.
+function quizGenEventDesc(themeId){
+  const events = QUIZ_EVENTS[themeId];
+  if(!events || events.length < 4) return null;
+  const subject = quizPick(events);
+  const distractors = quizSample(events.filter(e => e.id !== subject.id), 3);
+  if(distractors.length < 3) return null;
+  const choices = quizShuffle([subject, ...distractors]);
+  return {
+    kind: "qcm",
+    prompt: `Quel événement correspond à : « ${subject.desc} » ?`,
+    choices: choices.map(e => e.label),
+    correctIndex: choices.findIndex(e => e.id === subject.id),
+  };
+}
+
+// Vérifier une relation d'ORDRE entre deux événements du même thème (vrai/faux) — la position
+// dans QUIZ_EVENTS fait foi, aucun champ "order" séparé à tenir à jour. Réservé à Intermédiaire,
+// pour la même raison que quizGenTrueFalse/quizGenNoteTrueFalse : une vérification, pas une simple
+// reconnaissance, mais sans avoir à écrire soi-même sa réponse.
+function quizGenEventOrder(themeId){
+  const events = QUIZ_EVENTS[themeId];
+  if(!events || events.length < 2) return null;
+  const i = Math.floor(Math.random() * events.length);
+  let j = Math.floor(Math.random() * events.length);
+  for(let guard = 0; j === i && guard < 10; guard++) j = Math.floor(Math.random() * events.length);
+  if(j === i) return null;
+  const [earlier, later] = i < j ? [events[i], events[j]] : [events[j], events[i]];
+  const isTrue = Math.random() < 0.5;
+  const [statedFirst, statedSecond] = isTrue ? [earlier, later] : [later, earlier];
+  return {
+    kind: "qcm",
+    prompt: `Vrai ou faux : « ${statedFirst.label} » se produit avant « ${statedSecond.label} ».`,
+    choices: ["Vrai", "Faux"],
+    correctIndex: isTrue ? 0 : 1,
+    explain: `Ordre du récit : ${earlier.label}, puis ${later.label}.`,
+  };
+}
+
+// Aller plus loin qu'une simple paire : repérer le DERNIER de 4 événements piochés dans le même
+// thème demande de connaître leur position relative à tous les autres, pas seulement à un seul
+// autre — la marche de plus que quizGenEventOrder, réservée à Expert comme quizGenGrandparent
+// (une génération de plus) l'est déjà pour la généalogie.
+function quizGenEventOrderMulti(themeId){
+  const events = QUIZ_EVENTS[themeId];
+  if(!events || events.length < 4) return null;
+  const chosen = quizSample(events, 4);
+  const chronological = events.filter(e => chosen.some(c => c.id === e.id));
+  const correct = chronological[chronological.length - 1];
+  const choices = quizShuffle(chosen);
+  return {
+    kind: "qcm",
+    prompt: "Parmi ces événements, lequel s'est produit le DERNIER ?",
+    choices: choices.map(e => e.label),
+    correctIndex: choices.findIndex(e => e.id === correct.id),
+    explain: `Ordre du récit : ${chronological.map(e => e.label).join(", ")}.`,
+  };
+}
+
 // --- Sélection du générateur selon le niveau et le thème.
 function quizGenerateQuestion(levelId, theme, figureIds){
   if(theme.symbolsOnly) return quizPick([quizGenSymbolDesc, quizGenSymbolCategory])();
   if(theme.placesOnly) return quizPick([quizGenPlaceDesc, quizGenPlaceCategory, quizGenPlaceFigure])();
   const scope = levelId === "débutant" ? quizPreferMajor(figureIds) : figureIds;
-  // "Mélange de tout" pioche aussi, de temps à autre, une question symbole ou lieu — pour
-  // varier au-delà des seules figures.
+  // "Mélange de tout" pioche aussi, de temps à autre, une question symbole, lieu, ou désormais
+  // événement (piochée dans un thème au hasard parmi ceux qui en ont) — pour varier au-delà des
+  // seules figures.
   if(theme.id === "melange" && Math.random() < 0.25){
-    const extra = Math.random() < 0.5
-      ? quizPick([quizGenSymbolDesc, quizGenSymbolCategory])()
-      : quizPick([quizGenPlaceDesc, quizGenPlaceCategory, quizGenPlaceFigure])();
+    const roll = Math.random();
+    let extra;
+    if(roll < 1 / 3) extra = quizPick([quizGenSymbolDesc, quizGenSymbolCategory])();
+    else if(roll < 2 / 3) extra = quizPick([quizGenPlaceDesc, quizGenPlaceCategory, quizGenPlaceFigure])();
+    else extra = quizGenEventDesc(quizPick(Object.keys(QUIZ_EVENTS)));
     if(extra) return extra;
   }
-  // Retour direct de l'utilisatrice, en deux temps. D'abord : des questions du niveau Débutant
-  // lui sont apparues bien plus dures que "débutant" — quizGenParent (généalogie) traînait dans
-  // son vivier en plus de quizGenNoteMatch (reconnaissance directe), retiré. Puis, plus loin :
+  // Retour direct de l'utilisatrice, en plusieurs temps. D'abord : des questions du niveau
+  // Débutant lui sont apparues bien plus dures que "débutant" — quizGenParent (généalogie)
+  // traînait dans son vivier en plus de quizGenNoteMatch (reconnaissance directe), retiré. Puis :
   // même sur un thème étroit joué aux 3 niveaux (7 figures pour "La guerre de Troie"), les
   // questions restaient presque les mêmes d'un niveau à l'autre — cause cette fois entre
   // Intermédiaire et Expert, qui partageaient encore 3 générateurs sur 5 (quizGenParent/Child/
-  // TrueFalse). Les 3 viviers ne partagent donc plus AUCUN générateur, chacun avec un vrai profil :
-  // Débutant reconnaît (une description, un nom), Intermédiaire relie et vérifie en QCM (parent/
-  // enfant/vrai-faux sur la relation ET sur la description elle-même — quizGenNoteTrueFalse, pour
-  // ne pas se réduire à la seule généalogie), Expert va plus loin ET tape sa réponse (grand-parent,
-  // parent et enfant à taper). Volumes de candidats vérifiés thème par thème avant ce changement
-  // (le plus petit, "La famille d'Ulysse", 5 figures, a encore 5 candidats parent/grand-parent et
-  // 3 enfant — largement assez pour 8 questions sans jamais reformuler le même prompt).
+  // TrueFalse), retiré à son tour. Enfin : « tu ne poses jamais de questions sur les événements »
+  // — un thème qui a une entrée dans QUIZ_EVENTS gagne, en plus de ses questions sur les figures,
+  // une question sur ce qui s'y est PASSÉ, avec le même principe de progression que le reste :
+  // Débutant reconnaît une description (quizGenEventDesc), Intermédiaire vérifie une relation
+  // d'ordre entre deux événements (quizGenEventOrder), Expert repère lequel de 4 événements
+  // piochés s'est produit en dernier (quizGenEventOrderMulti — une génération de plus, comme
+  // quizGenGrandparent l'est déjà pour la généalogie). Les thèmes qui n'ont pas (encore) d'entrée
+  // dans QUIZ_EVENTS (symboles/lieux exclus plus haut, "Mélange de tout" traité séparément
+  // au-dessus) renvoient simplement null ici, sans casser le tirage — voir la garde dans
+  // quizBuildSession. Volumes de candidats vérifiés thème par thème avant ce changement (le plus
+  // petit, "La famille d'Ulysse", 5 figures et 6 événements, a encore assez de candidats pour les
+  // 3 niveaux sans jamais reformuler le même prompt).
   const pools = {
-    "débutant": [() => quizGenNoteMatch(scope)],
-    "intermédiaire": [() => quizGenParent(scope), () => quizGenChild(scope), () => quizGenTrueFalse(scope), () => quizGenNoteTrueFalse(scope)],
-    "expert": [() => quizGenGrandparent(scope), () => quizGenTypeAnswer(scope), () => quizGenTypeAnswerChild(scope)],
+    "débutant": [() => quizGenNoteMatch(scope), () => quizGenEventDesc(theme.id)],
+    "intermédiaire": [() => quizGenParent(scope), () => quizGenChild(scope), () => quizGenTrueFalse(scope), () => quizGenNoteTrueFalse(scope), () => quizGenEventOrder(theme.id)],
+    "expert": [() => quizGenGrandparent(scope), () => quizGenTypeAnswer(scope), () => quizGenTypeAnswerChild(scope), () => quizGenEventOrderMulti(theme.id)],
   };
   const generators = pools[levelId] || pools["débutant"];
   return quizPick(generators)();
