@@ -3439,3 +3439,32 @@ corrigées à la précédente étape (fiche verrouillée ET débloquée pour Aba
 plus amphion/cassiopée en confirmation de non-régression.
 
 `service-worker.js` (Panthéon) : `pantheon-v99` → `pantheon-v100`.
+
+## 5 médaillons illustrés fournis par l'utilisatrice, en remplacement de 5 emoji du quiz
+
+L'utilisatrice a fourni 5 illustrations (médaillons dorés, même esprit que les badges d'onglet
+déjà en place — `assets/badge-home-temple.webp` etc.) pour remplacer les emoji suivants :
+
+- 🧠 (tuile « Quiz mythologique » de l'accueil) → chouette + parchemin + livres.
+- 🌱 (niveau Débutant **et** badge « Premier quiz », même emoji aux deux endroits) → pousse qui
+  sort de sa graine.
+- 🎯 (badge « Sans-faute ») → cible et flèche.
+- 🔍 (badge « Sur le terrain ») → carte, boussole et sac à dos face à l'Acropole.
+- ⚔️ (niveau Intermédiaire **et** badge « Niveau Intermédiaire », même emoji aux deux endroits) →
+  épées croisées.
+
+Chaque image a été recadrée en carré (centrée), redimensionnée à 256×256 et exportée en webp,
+dans `assets/` — même traitement que les autres illustrations de l'appli. Dans le code, même
+patron déjà utilisé par `NAV_TABS` pour les icônes d'onglet : le champ `icon` porte directement le
+HTML de l'image plutôt qu'un caractère emoji. Une seule règle de forme partagée
+(`.quiz-icon-img` : cercle, `object-fit: cover`, même traitement que `.nav-badge`), avec une
+taille par contexte reprise du `font-size` qu'occupait l'emoji remplacé (29px sur la tuile
+d'accueil, 26px sur les cartes de niveau, 24px sur les badges).
+
+Non touchés, non demandés : 🏆 (niveau Expert), 📚 (badge Polymathe) et 🔓 (badge Accès complet).
+
+Testé (2565 vérifications, dont 12 nouvelles), rendu contrôlé visuellement en clair et en sombre
+sur les 3 emplacements (tuile d'accueil, sélecteur de niveau, badges du profil — obtenus et non
+obtenus).
+
+`service-worker.js` (Panthéon) : `pantheon-v100` → `pantheon-v101`.

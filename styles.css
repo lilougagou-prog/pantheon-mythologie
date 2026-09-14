@@ -1127,6 +1127,14 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 }
 .quiz-tile:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px var(--shadow); }
 .quiz-tile-icon{ font-size: 1.8rem; line-height: 1; flex: 0 0 auto; }
+/* Médaillons illustrés fournis par l'utilisatrice, en remplacement des emoji du quiz (tuile
+   d'accueil, niveaux, badges) — même traitement que .nav-badge déjà en place pour les onglets du
+   bas : object-fit:cover + un cercle parfait, pas juste le carré d'origine de l'image. Une seule
+   règle de forme, une taille par contexte (repris du font-size qu'occupait l'emoji remplacé). */
+.quiz-icon-img{ border-radius: 50%; object-fit: cover; display: block; }
+.quiz-tile-icon .quiz-icon-img{ width: 29px; height: 29px; }
+.quiz-level-icon .quiz-icon-img{ width: 26px; height: 26px; }
+.quiz-badge-icon .quiz-icon-img{ width: 24px; height: 24px; }
 .quiz-tile-text{ display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
 .quiz-tile-title{ font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 1.05rem; color: var(--laurel-deep); }
 .quiz-tile-desc{ font-size: 0.85rem; color: var(--ink-soft); }

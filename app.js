@@ -3938,9 +3938,15 @@ function quizGenerateQuestion(levelId, theme, figureIds){
 
 // --- Niveaux, progression (localStorage), session en cours.
 
+// Icônes fournies par l'utilisatrice (médaillons illustrés, même esprit que les badges d'onglet
+// déjà en place — assets/badge-home-temple.webp etc.) pour remplacer les emoji du quiz : la
+// chouette/parchemin (quiz), la pousse (Débutant + badge Premier quiz, même icône réutilisée sur
+// les deux), la cible (Sans-faute), la carte/boussole (Sur le terrain) et les épées croisées
+// (Intermédiaire + badge Niveau Intermédiaire, même icône réutilisée). Même patron que NAV_TABS
+// plus bas : le champ icon porte directement le HTML de l'image, pas juste un chemin.
 const QUIZ_LEVELS = [
-  { id: "débutant", label: "Débutant", desc: "Les grandes figures, questions directes.", icon: "🌱" },
-  { id: "intermédiaire", label: "Intermédiaire", desc: "Relations de famille, vrai ou faux.", icon: "⚔️", lockedHint: "Maîtrise 5 thèmes (note au-dessus de la moyenne) pour débloquer ce niveau." },
+  { id: "débutant", label: "Débutant", desc: "Les grandes figures, questions directes.", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-debutant.webp" alt="">' },
+  { id: "intermédiaire", label: "Intermédiaire", desc: "Relations de famille, vrai ou faux.", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-intermediaire.webp" alt="">', lockedHint: "Maîtrise 5 thèmes (note au-dessus de la moyenne) pour débloquer ce niveau." },
   { id: "expert", label: "Expert", desc: "Généalogie sur plusieurs générations, réponses à taper.", icon: "🏆", lockedHint: "Réservé au contenu premium." },
 ];
 const QUIZ_SESSION_LENGTH = 8;
@@ -4015,9 +4021,9 @@ function recordQuizResult(level, themeId, correct, total, opts){
 // volée depuis progress plutôt que stockés — pas de risque de badge qui reste bloqué "non
 // gagné" après coup si la règle change.
 const QUIZ_BADGES = [
-  { id: "premier-quiz", icon: "🌱", label: "Premier quiz", desc: "Termine ta première partie.",
+  { id: "premier-quiz", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-debutant.webp" alt="">', label: "Premier quiz", desc: "Termine ta première partie.",
     earned: p => Object.values(p.themes).some(t => t.played > 0) || p.figureQuizzes.played > 0 },
-  { id: "sans-faute", icon: "🎯", label: "Sans-faute", desc: "Termine une partie avec un score parfait.",
+  { id: "sans-faute", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-sans-faute.webp" alt="">', label: "Sans-faute", desc: "Termine une partie avec un score parfait.",
     earned: p => Object.values(p.themes).some(t => t.bestTotal > 0 && t.bestCorrect === t.bestTotal) },
   // Phase 12 du brief produit (audit des badges) : l'ancien libellé promettait « 10 fiches
   // différentes », mais progress.figureQuizzes ne compte que le nombre de parties jouées
@@ -4027,9 +4033,9 @@ const QUIZ_BADGES = [
   // parties, pas 10 fiches distinctes), sans ajouter de nouveau suivi par identifiant de figure
   // pour un badge mineur — et sans faire régresser les visiteuses qui l'ont déjà obtenu, puisque
   // le seuil (10 parties) reste inchangé.
-  { id: "sur-le-terrain", icon: "🔍", label: "Sur le terrain", desc: "Réponds à 10 mini-quiz lancés depuis une fiche.",
+  { id: "sur-le-terrain", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-terrain.webp" alt="">', label: "Sur le terrain", desc: "Réponds à 10 mini-quiz lancés depuis une fiche.",
     earned: p => p.figureQuizzes.played >= 10 },
-  { id: "intermediaire", icon: "⚔️", label: "Niveau Intermédiaire", desc: "Maîtrise 5 thèmes (note au-dessus de la moyenne).",
+  { id: "intermediaire", icon: '<img class="quiz-icon-img" src="assets/badge-quiz-intermediaire.webp" alt="">', label: "Niveau Intermédiaire", desc: "Maîtrise 5 thèmes (note au-dessus de la moyenne).",
     earned: p => quizMasteredThemeCount(p) >= QUIZ_INTERMEDIATE_THEMES_REQUIRED },
   { id: "polymathe", icon: "📚", label: "Polymathe", desc: "Maîtrise les 10 thèmes.",
     earned: p => quizMasteredThemeCount(p) >= QUIZ_THEMES.length },
@@ -4257,7 +4263,7 @@ function quizTileHTML(){
   return `
     <section class="quiz-tile-wrap">
       <button class="quiz-tile" data-nav="quizHome">
-        <span class="quiz-tile-icon">🧠</span>
+        <span class="quiz-tile-icon"><img class="quiz-icon-img" src="assets/badge-quiz-brain.webp" alt=""></span>
         <span class="quiz-tile-text">
           <span class="quiz-tile-title">Quiz mythologique</span>
           <span class="quiz-tile-desc">${escapeHTML(desc)}</span>
