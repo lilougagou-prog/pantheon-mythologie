@@ -3286,3 +3286,23 @@ rendu de la pastille, et un zoom pixel par pixel confirmant que le repère en co
 rogné malgré le `overflow: hidden` de la miniature.
 
 `service-worker.js` (Panthéon) : `pantheon-v93` → `pantheon-v94`.
+
+## Phase 8 du brief produit : réduire les textes explicatifs (la Généalogie citée en exemple)
+
+Audit de tous les textes d'introduction de l'application (le paragraphe `.note` sous chaque
+titre d'écran) : Figures et Symboles n'en ont déjà aucun, Lieux et le sélecteur de quiz n'ont
+déjà qu'une seule phrase courte. Un seul écran restait réellement verbeux — exactement celui cité
+en exemple par le brief : l'accueil de la Généalogie, avec un texte de 2 phrases (~45 mots)
+redisant dans la description ce que le titre de l'écran et les cartes juste en dessous montrent
+déjà (parents, unions, frères et sœurs, enfants — visible sur chaque fiche familiale). Seule
+l'instruction d'usage réelle (choisir un point de départ, cliquer sur un nom pour continuer)
+apporte une information qu'on ne devine pas tout seul ; le reste est retiré.
+
+Volontairement non touché : le contenu narratif des points de départ « globaux » de la
+Généalogie (`GENEALOGY_OVERVIEWS` — Les origines du monde, Les Atrides, etc.), qui sont de vraies
+fiches mythologiques demandées explicitement par l'utilisatrice dans une phase précédente, pas du
+texte d'interface à raccourcir.
+
+Testé (2526 vérifications, dont 4 nouvelles), rendu contrôlé visuellement en clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v94` → `pantheon-v95`.

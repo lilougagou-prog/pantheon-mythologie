@@ -2657,12 +2657,17 @@ function renderGenealogySearchResults(query){
   `).join("")}</div>`;
 }
 
+// Phase 8 du brief produit : réduire les textes explicatifs, la Généalogie citée en exemple.
+// L'ancien texte (2 phrases, ~45 mots) redisait dans la description ce que le titre de l'écran
+// et les cartes juste en dessous montrent déjà (parents, unions, frères et sœurs, enfants —
+// visible sur chaque fiche familiale) ; seule l'instruction d'usage (choisir un point de départ,
+// puis cliquer sur un nom pour continuer) apporte une information qu'on ne devine pas tout seul.
 function renderGenealogyHome(){
   return `
     <div class="screen-header">
       <h2>Généalogie des dieux</h2>
     </div>
-    <p class="note">Explorez les liens de parenté entre les figures du corpus sur plusieurs générations : parents, unions, frères et sœurs, enfants. Choisissez un point de départ, puis cliquez sur n'importe quel nom pour poursuivre l'exploration de proche en proche.</p>
+    <p class="note">Choisissez un point de départ, puis cliquez sur un nom pour explorer sa famille de proche en proche.</p>
     <input type="search" class="search" id="genealogySearch" placeholder="Ou cherchez directement une figure pour aller à son arbre">
     <div id="genealogySearchResults" class="geneal-search-results"></div>
     <div class="geneal-entrypoints">
