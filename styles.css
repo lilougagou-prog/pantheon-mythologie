@@ -623,6 +623,11 @@ h1, h2, h3{
   object-fit: cover;
   display: block;
 }
+/* Miniatures de symboles (Phase 10) : contain plutôt que cover, avec un peu de marge — ce sont
+   déjà des vignettes détourées (fond transparent, sujet centré), jamais une scène à recadrer, donc
+   pas d'object-position/zoom par figure comme pour les visages. */
+.symbol-thumb img{ object-fit: contain; padding: 7px; box-sizing: border-box; }
+.symbol-thumb-emoji{ display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
 .list-item-title{ font-family: "Cinzel", Georgia, serif; font-weight: 600; color: var(--laurel-deep); font-size: 1rem; }
 .list-item-note{
   font-size: 0.88rem;

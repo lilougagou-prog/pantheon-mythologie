@@ -3199,3 +3199,29 @@ Testé (2500 vérifications, dont 7 nouvelles), rendu contrôlé visuellement en
 sur les cas par défaut, les deux exceptions réglées à la main, et les figures sans portrait.
 
 `service-worker.js` (Panthéon) : `pantheon-v90` → `pantheon-v91`.
+
+## Phase 10 du brief produit : miniatures dans la liste Symboles
+
+Même demande que la Phase 9, appliquée à la liste Symboles cette fois — mais avec un traitement
+délibérément plus simple plutôt qu'une copie mécanique de celui des Figures.
+
+Les 93 illustrations de `SYMBOL_ILLUSTRATIONS` sont déjà des vignettes détourées (fond
+transparent, sujet unique déjà centré) réutilisées ailleurs dans l'appli au même usage
+(`symbolChipIconHTML()`, pour les chips « symbole associé ») — contrairement aux portraits de
+figures, ce ne sont jamais des scènes narratives avec un visage à traquer dans la composition.
+Aucune calibration par point focal n'est donc nécessaire : `object-fit: contain` suffit à
+toujours montrer le symbole entier, jamais recadré — y compris pour une composition très large
+comme l'arc-en-ciel, qui apparaît simplement plus petit dans son médaillon plutôt que rogné.
+
+Nouveau `symbolThumbnailHTML(id, s)`, réutilisant le même cercle `.figure-thumb` que les
+Figures (cohérence visuelle demandée par le brief) avec un modificateur `.symbol-thumb`
+(`object-fit:contain` + un peu de marge). Seul Héliotrope, le seul symbole sans illustration
+dédiée sur les 94, replie sur son emoji habituel plutôt qu'un cercle vide — un symbole a toujours
+au moins son emoji, contrairement à une figure qui peut authentiquement n'avoir aucun portrait.
+`symbolRowHTML()` gagne la classe `has-thumb` déjà posée pour les Figures ; `placeRowHTML()`
+(Lieux) n'est pas concerné par ce round et reste inchangé.
+
+Testé (2506 vérifications, dont 6 nouvelles), rendu contrôlé visuellement en clair et en sombre,
+y compris le repli emoji et une composition large (arc-en-ciel).
+
+`service-worker.js` (Panthéon) : `pantheon-v91` → `pantheon-v92`.

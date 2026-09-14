@@ -2042,10 +2042,28 @@ function renderFigures(query = ""){
   `;
 }
 
+// Miniature de symbole — même esprit que figureThumbnailHTML() (Phase 9), même cercle
+// (.figure-thumb), mais un traitement différent et volontairement plus simple : les 93
+// illustrations de SYMBOL_ILLUSTRATIONS sont déjà des vignettes détourées (fond transparent,
+// sujet unique déjà centré — voir symbolChipIconHTML() plus haut, qui les affiche déjà en petit
+// ailleurs), pas des scènes narratives : nul besoin de la calibration par point focal utilisée
+// pour les visages. object-fit:contain suffit à toujours montrer le symbole entier, jamais
+// recadré. Repli sur l'emoji habituel (SYMBOL_LIBRARY[id].icon) pour le seul symbole sans
+// illustration dédiée (héliotrope), plutôt que de laisser un cercle vide comme pour une figure
+// sans portrait — un symbole a toujours au moins son emoji.
+function symbolThumbnailHTML(id, s){
+  const illustration = SYMBOL_ILLUSTRATIONS[id];
+  if(illustration) return `<span class="figure-thumb symbol-thumb"><img src="${escapeHTML(illustration)}" alt="" loading="lazy"></span>`;
+  return `<span class="figure-thumb symbol-thumb symbol-thumb-emoji">${s.icon || "✦"}</span>`;
+}
+
 function symbolRowHTML([id, s]){
-  return `<button class="list-item" data-nav="symbolDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML(normalizeSearch(s.label + " " + s.desc))}">
-    <span class="list-item-title">${escapeHTML(s.label)}${symbolAccess(id) === "premium" ? ' <span class="lock-badge">🔒</span>' : ""}</span>
-    <span class="list-item-note">${escapeHTML(s.desc)}</span>
+  return `<button class="list-item has-thumb" data-nav="symbolDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML(normalizeSearch(s.label + " " + s.desc))}">
+    ${symbolThumbnailHTML(id, s)}
+    <span class="list-item-body">
+      <span class="list-item-title">${escapeHTML(s.label)}${symbolAccess(id) === "premium" ? ' <span class="lock-badge">🔒</span>' : ""}</span>
+      <span class="list-item-note">${escapeHTML(s.desc)}</span>
+    </span>
   </button>`;
 }
 
