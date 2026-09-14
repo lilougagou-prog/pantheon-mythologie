@@ -603,6 +603,26 @@ h1, h2, h3{
 }
 .list-item:last-child{ border-bottom: none; }
 .list-item:hover{ background: var(--marble-deep); }
+/* Variante avec miniature (liste Figures) : rangée plutôt que colonne, la miniature à gauche et
+   le titre/note dans une colonne à part — voir figureThumbnailHTML()/figureRowHTML() dans app.js.
+   N'affecte pas .list-item seule (Symboles, Lieux), qui garde sa mise en page en colonne. */
+.list-item.has-thumb{ flex-direction: row; align-items: center; gap: 12px; }
+.list-item.has-thumb .list-item-body{ display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
+.figure-thumb{
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--marble-deep);
+  border: 1px solid var(--border);
+}
+.figure-thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .list-item-title{ font-family: "Cinzel", Georgia, serif; font-weight: 600; color: var(--laurel-deep); font-size: 1rem; }
 .list-item-note{
   font-size: 0.88rem;

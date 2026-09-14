@@ -3165,3 +3165,37 @@ son propre statut premium.
 Testé (2493 vérifications, dont 3 nouvelles), rendu contrôlé visuellement sur le profil.
 
 `service-worker.js` (Panthéon) : `pantheon-v89` → `pantheon-v90`.
+
+## Phase 9 du brief produit : miniatures centrées sur le visage (liste Figures)
+
+Deuxième correctif du brief produit, validé par l'utilisatrice : la liste Figures n'affichait
+que du texte (nom + note + cadenas), sans aucune image — Phase 9 demandait explicitement des
+miniatures centrées sur le visage, en réutilisant les illustrations existantes (aucune nouvelle
+illustration créée).
+
+**Méthode** : plutôt que de deviner un cadrage universel, une planche-contact des 124 portraits
+existants a été générée et inspectée visuellement (par lots, avec le cadrage réellement appliqué
+plutôt que l'image brute) pour repérer les compositions qui poseraient problème. Résultat : un
+cadrage par défaut unique — centré horizontalement, point focal à 18 % depuis le haut, léger
+zoom (×1,4) — couvre correctement la quasi-totalité des 124 portraits, y compris des scènes à
+deux personnages (Jason/Médée) où le cadrage tombe par chance sur les deux visages. Seules deux
+compositions déviaient réellement : **Amphion** (visage décentré à gauche et plus bas, à cause
+des blocs de pierre en suspension au premier plan de l'illustration) et **Cassiopée** (tête
+renversée en arrière, visage proche du bord supérieur) — chacune reçoit son propre réglage fin
+(`DEITY_PORTRAIT_FOCUS`), sans imposer une configuration par figure à l'ensemble de la
+bibliothèque comme le redoutait le brief.
+
+**Implémentation** : nouveau composant réutilisable `figureThumbnailHTML(id)` — miniature ronde
+de 46px, `object-position` pour le cadrage puis `transform: scale()` avec le même point d'ancrage
+pour zoomer vers le visage plutôt que sur tout le buste. Les figures sans portrait dédié gardent
+un cercle neutre (fond marbre) plutôt que rien, pour que toutes les lignes de la liste restent
+alignées sur la même grille. Nouvelle classe `.list-item.has-thumb` (mise en page en rangée)
+qui laisse `.list-item` seule intacte — les listes Symboles et Lieux, non concernées par ce
+round, gardent leur mise en page en colonne sans aucune modification. Bonus gratuit : la
+recherche d'accueil réutilise `figureRowHTML()`, donc ses résultats affichent désormais aussi
+les miniatures sans code supplémentaire.
+
+Testé (2500 vérifications, dont 7 nouvelles), rendu contrôlé visuellement en clair et en sombre,
+sur les cas par défaut, les deux exceptions réglées à la main, et les figures sans portrait.
+
+`service-worker.js` (Panthéon) : `pantheon-v90` → `pantheon-v91`.

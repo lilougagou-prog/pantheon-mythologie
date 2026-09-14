@@ -1984,10 +1984,39 @@ function rankedSearch(entries, nameOf, noteOf, q, limit){
     .map(([e]) => e);
 }
 
+// Réglage fin du cadrage (x/y du point focal en %, zoom) pour les deux seules compositions,
+// sur 124 portraits, où le cadrage par défaut ci-dessous (centré, 18% depuis le haut, léger
+// zoom) manque le visage — repéré via une planche-contact de l'ensemble des portraits plutôt
+// qu'en devinant : amphion (visage décentré à gauche, plus bas, à cause des blocs de pierre en
+// suspension au premier plan) et cassiopée (tête renversée en arrière, visage proche du bord
+// supérieur). Toutes les autres compositions n'ont pas besoin d'entrée ici.
+const DEITY_PORTRAIT_FOCUS = {
+  "amphion": { x: 30, y: 27, zoom: 1.6 },
+  "cassiopée": { x: 50, y: 8, zoom: 1.2 },
+};
+const DEITY_PORTRAIT_FOCUS_DEFAULT = { x: 50, y: 18, zoom: 1.4 };
+
+// Miniature ronde centrée sur le visage, pour identifier une figure d'un coup d'œil dans la
+// liste sans avoir à lire son nom — demande explicite de l'utilisatrice. Réutilise les
+// portraits déjà existants (DEITY_PORTRAITS), jamais de nouvelle illustration : object-position
+// cadre le portrait sur son point focal, puis un léger transform:scale zoome vers ce même point
+// (voir DEITY_PORTRAIT_FOCUS) pour resserrer sur le visage plutôt que sur tout le buste. Les
+// figures sans portrait dédié gardent un cercle neutre (fond marbre) plutôt que rien du tout, pour
+// que toutes les lignes de la liste restent alignées sur la même grille.
+function figureThumbnailHTML(id){
+  const portrait = DEITY_PORTRAITS[id];
+  if(!portrait) return `<span class="figure-thumb"></span>`;
+  const focus = DEITY_PORTRAIT_FOCUS[id] || DEITY_PORTRAIT_FOCUS_DEFAULT;
+  return `<span class="figure-thumb"><img src="${escapeHTML(portrait)}" alt="" loading="lazy" style="object-position:${focus.x}% ${focus.y}%; transform: scale(${focus.zoom}); transform-origin:${focus.x}% ${focus.y}%;"></span>`;
+}
+
 function figureRowHTML([id, name, note]){
-  return `<button class="list-item" data-nav="figureDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML(normalizeSearch(name + " " + note))}">
-    <span class="list-item-title">${escapeHTML(name)}${figureAccess(id) === "premium" ? ' <span class="lock-badge">🔒</span>' : ""}</span>
-    <span class="list-item-note">${escapeHTML(note)}</span>
+  return `<button class="list-item has-thumb" data-nav="figureDetail" data-id="${escapeHTML(id)}" data-search="${escapeHTML(normalizeSearch(name + " " + note))}">
+    ${figureThumbnailHTML(id)}
+    <span class="list-item-body">
+      <span class="list-item-title">${escapeHTML(name)}${figureAccess(id) === "premium" ? ' <span class="lock-badge">🔒</span>' : ""}</span>
+      <span class="list-item-note">${escapeHTML(note)}</span>
+    </span>
   </button>`;
 }
 
