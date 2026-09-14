@@ -1423,20 +1423,23 @@ function fetchOwnerPreviewContent(type, id){
 // Vignette d'en-tête partagée par la fiche détail et ses deux écrans de repli (paywall, chargement
 // de l'aperçu propriétaire) : portrait de figure (rectangulaire, DEITY_PORTRAITS), illustration de
 // symbole (détourée, SYMBOL_ILLUSTRATIONS) ou, à défaut, l'emoji d'origine — dans cet ordre.
-function detailHeadingImageHTML({ icon, portrait, illustration, name }){
-  if(portrait) return `<img class="deity-portrait" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy">`;
+// id : uniquement pour le cas "portrait" (DEITY_PORTRAIT_FOCUS/DEITY_PORTRAIT_WIDE, voir
+// deityPortraitClass()/deityPortraitStyleHTML() plus bas) — jamais utilisé pour illustration/icon,
+// qui n'ont pas ce problème de cadrage (SYMBOL_ILLUSTRATIONS sont déjà détourées).
+function detailHeadingImageHTML({ icon, portrait, illustration, name, id }){
+  if(portrait) return `<img class="${deityPortraitClass(id)}" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy"${deityPortraitStyleHTML(id)}>`;
   if(illustration) return `<img class="symbol-illustration-big" src="${escapeHTML(illustration)}" alt="${escapeHTML(name)}" loading="lazy">`;
   if(icon) return `<div class="symbol-icon-big">${icon}</div>`;
   return "";
 }
 
-function renderOwnerPreviewLoading({ icon, portrait, illustration, name, note }){
+function renderOwnerPreviewLoading({ icon, portrait, illustration, name, note, id }){
   return `
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
     </div>
     <article class="detail">
-      ${detailHeadingImageHTML({ icon, portrait, illustration, name })}
+      ${detailHeadingImageHTML({ icon, portrait, illustration, name, id })}
       <h2>${escapeHTML(name)}</h2>
       ${note ? `<p class="note">${escapeHTML(note)}</p>` : ""}
       <p class="empty">Chargement du contenu premium (aperçu propriétaire)…</p>
@@ -1448,13 +1451,13 @@ function renderOwnerPreviewLoading({ icon, portrait, illustration, name, note })
 // boutons y figurent déjà (voir section 4/23 de l'audit) mais restent volontairement inertes
 // dans ce contexte web — attemptPurchase()/attemptRestore() l'expliquent clairement plutôt que
 // de simuler un achat qui n'engagerait à rien.
-function renderPaywall({ icon, portrait, illustration, name, note }){
+function renderPaywall({ icon, portrait, illustration, name, note, id }){
   return `
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
     </div>
     <article class="detail paywall-detail">
-      ${detailHeadingImageHTML({ icon, portrait, illustration, name })}
+      ${detailHeadingImageHTML({ icon, portrait, illustration, name, id })}
       <h2>${escapeHTML(name)}</h2>
       ${note ? `<p class="note">${escapeHTML(note)}</p>` : ""}
       <section class="paywall-box">
@@ -1766,6 +1769,20 @@ function symbolsLinkingTo(deityId){
 
 function deityPortraitClass(id){
   return DEITY_PORTRAIT_WIDE.has(id) ? "deity-portrait deity-portrait-wide" : "deity-portrait";
+}
+
+// Cadrage du portrait sur la fiche détail (rectangle 4:5, object-fit:cover) : les figures
+// listées dans DEITY_PORTRAIT_FOCUS ont un visage loin du centre par défaut — signalé par
+// l'utilisatrice sur Abas après que le premier correctif n'avait couvert QUE la miniature de la
+// liste (figureThumbnailHTML), jamais cette image bien plus grande de la fiche elle-même. Même
+// point focal (x/y) que la miniature, mais sans le zoom supplémentaire : la boîte 4:5 est assez
+// grande pour qu'un simple recadrage (object-position) suffise à garder le visage visible, pas
+// besoin d'agrandir. Les figures « larges » (DEITY_PORTRAIT_WIDE) gardent leur image entière
+// (aspect-ratio:auto, jamais rognée) et n'ont donc jamais ce problème.
+function deityPortraitStyleHTML(id){
+  if(DEITY_PORTRAIT_WIDE.has(id)) return "";
+  const focus = DEITY_PORTRAIT_FOCUS[id];
+  return focus ? ` style="object-position:${focus.x}% ${focus.y}%;"` : "";
 }
 
 // Hash djb2, déterministe : sert à choisir la « figure du jour » à partir de la date du
@@ -2444,13 +2461,13 @@ function renderFigureDetail(id){
   let paragraphs = DEITY_LORE[id] || [];
   let culte = DEITY_CULT_FREE[id] || null;
   if(figureAccess(id) === "premium" && !isPremiumUnlocked()){
-    if(!hasOwnerPreview()) return renderPaywall({ portrait, name, note });
+    if(!hasOwnerPreview()) return renderPaywall({ portrait, name, note, id });
     const cached = OWNER_PREVIEW_CACHE.figures[id];
     if(!cached || cached.loading){
       fetchOwnerPreviewContent("figures", id);
-      return renderOwnerPreviewLoading({ portrait, name, note });
+      return renderOwnerPreviewLoading({ portrait, name, note, id });
     }
-    if(cached.locked) return renderPaywall({ portrait, name, note });
+    if(cached.locked) return renderPaywall({ portrait, name, note, id });
     paragraphs = cached.content.lore;
     culte = cached.content.culte || null;
   }
@@ -2461,7 +2478,7 @@ function renderFigureDetail(id){
       <button class="back" data-nav="back">← Retour</button>
     </div>
     <article class="detail">
-      ${portrait ? `<img class="${deityPortraitClass(id)}" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy">` : ""}
+      ${portrait ? `<img class="${deityPortraitClass(id)}" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy"${deityPortraitStyleHTML(id)}>` : ""}
       <h2>${escapeHTML(name)}</h2>
       <p class="note">${escapeHTML(note)}</p>
       ${paragraphs.length ? `<h3>Le mythe</h3>${paragraphs.map(p => {
@@ -2954,7 +2971,7 @@ function renderGenealogy(id){
   // que de gater chaque point d'entrée séparément évite tout contournement par un chemin
   // détourné vers la même fonction.
   if(!isPremiumUnlocked() && !hasOwnerPreview()){
-    return renderPaywall({ portrait, name, note });
+    return renderPaywall({ portrait, name, note, id });
   }
   const card = buildFamilyCard(id);
   const hasAny = card.parents.length || card.partners.length || card.siblings.length || card.childUnions.length;

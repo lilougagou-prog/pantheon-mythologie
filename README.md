@@ -3413,3 +3413,29 @@ Testé (2544 vérifications, dont 3 nouvelles), et confirmé que les 5 champs so
 par leur nom accessible (requête par rôle `searchbox` + nom, comme le ferait un lecteur d'écran).
 
 `service-worker.js` (Panthéon) : `pantheon-v98` → `pantheon-v99`.
+
+## Retour direct de l'utilisatrice : « Abas est toujours coupé »
+
+Après le correctif précédent, qui ne touchait QUE la miniature 46px de la liste Figures
+(`figureThumbnailHTML`). Le portrait bien plus grand de la fiche détail (rectangle 4:5,
+`object-fit: cover`, classe `.deity-portrait`) restait centré par défaut sans jamais consulter
+`DEITY_PORTRAIT_FOCUS` — un second chemin de rendu du portrait, jamais corrigé la première fois,
+et arguablement le plus visible des deux puisque c'est la première chose vue en ouvrant une
+fiche.
+
+Trois emplacements concernés, tous corrigés ensemble avec une nouvelle fonction partagée
+`deityPortraitStyleHTML(id)` (même point focal x/y que la miniature, mais sans le zoom
+supplémentaire — la boîte 4:5 est assez grande pour qu'un simple `object-position` suffise) :
+- le rendu inline de `renderFigureDetail()` (fiche débloquée) ;
+- `detailHeadingImageHTML()`, utilisée par `renderPaywall()` et `renderOwnerPreviewLoading()`
+  (fiche encore verrouillée, ou aperçu propriétaire en cours de chargement) — qui reçoit
+  maintenant `id` et applique au passage la vraie classe `deityPortraitClass(id)` plutôt qu'une
+  classe `"deity-portrait"` fixe (bonus : une figure « large » a désormais le même rendu
+  verrouillée ou non, alors qu'elle perdait son plein cadrage sur l'écran de paywall avant ce
+  correctif).
+
+Testé (2549 vérifications, dont 5 nouvelles), rendu contrôlé visuellement sur les 9 figures
+corrigées à la précédente étape (fiche verrouillée ET débloquée pour Abas, en clair et en sombre),
+plus amphion/cassiopée en confirmation de non-régression.
+
+`service-worker.js` (Panthéon) : `pantheon-v99` → `pantheon-v100`.
