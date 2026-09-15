@@ -3667,3 +3667,27 @@ session), rendu contrôlé visuellement en clair et en sombre pour les 3 nouveau
 compris l'explication affichée après une réponse Expert (ordre complet des 4 événements piochés).
 
 `service-worker.js` (Panthéon) : `pantheon-v107` → `pantheon-v108`.
+
+## Création de la fiche Sisyphe
+
+Demande directe de l'utilisatrice : « fais la fiche de Sisyphe ». Il n'existait dans aucune
+donnée de l'appli — créé sur le même patron qu'Ixion, la figure la plus comparable déjà en place
+(mortel condamné à un châtiment éternel aux Enfers) : `DEITY_NOTES` (le résumé toujours visible,
+même hors premium), `DEITY_LORE` vide (le mythe complet vit en premium dans `content.json`,
+comme la quasi-totalité du corpus — seuls Zeus/Héra/Poséidon/Athéna/Apollon sont gratuits), et une
+entrée `content.json` avec 3 paragraphes de mythe (sa ruse contre le voleur Autolycos, son défi à
+Zeus et sa première évasion de la Mort en enchaînant Thanatos, sa seconde évasion puis son
+châtiment final — le rocher qui retombe sans fin), un nom, une note et un culte honnêtement
+marqué « Pas de culte particulier » plutôt que d'en inventer un.
+
+Au passage : Corinthe (la fiche Lieux) citait déjà Sisyphe dans sa description sans l'avoir dans
+ses figures associées (`links`) — un renvoi resté sans cible, faute d'une fiche à pointer. Corrigé
+maintenant qu'elle existe.
+
+Testé (2602 vérifications, dont 5 nouvelles) : les 9 citations « voir la fiche » du texte de
+Sisyphe pointent bien chacune vers une figure réelle du corpus (aucune ne reste un texte mort),
+rendu contrôlé visuellement en clair et en sombre avec la clé d'aperçu propriétaire (contenu
+premium complet), Corinthe confirmée en train de lister Sisyphe parmi ses figures liées, la
+figure repérée dans la liste et la recherche.
+
+`service-worker.js` (Panthéon) : `pantheon-v108` → `pantheon-v109`.
