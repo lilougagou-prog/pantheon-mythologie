@@ -3762,3 +3762,20 @@ persistance confirmée après rechargement de page, absence totale du bouton sur
 bouton flottant de profil.
 
 `service-worker.js` (Panthéon) : `pantheon-v111` → `pantheon-v112`.
+
+## Nouveaux portraits : Zeus, Poséidon, Hadès, Héraclès, Hébé
+
+5 images envoyées par l'utilisatrice, chacune associée à une figure. Malgré leur importance
+centrale, aucune des cinq n'avait de portrait — ni principal, ni même en ligne — jusqu'ici :
+- Poséidon (trident, ruines englouties), Zeus (foudre, trône, aigle), Hadès (couronne d'épines,
+  cerbères noirs, royaume des morts), Héraclès (peau du lion de Némée, massue) et Hébé (coupe de
+  nectar, paon, aigle).
+
+La seule image qui n'était pas déjà au format 4:5 attendu (Hébé, en 2:3, plus haute que large) a
+été recadrée en hauteur pour y arriver, en gardant toute sa largeur — sans perdre ni son visage
+ni la coupe qu'elle verse.
+
+Testé (2641 vérifications, dont 16 nouvelles) : rendu contrôlé visuellement pour Zeus (gratuit)
+et Hébé (premium, via la clé d'aperçu propriétaire), portrait confirmé câblé pour les 5 figures.
+
+`service-worker.js` (Panthéon) : `pantheon-v112` → `pantheon-v113`.

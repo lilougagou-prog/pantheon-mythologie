@@ -601,6 +601,14 @@ const DEITY_PORTRAITS = {
   "danaé": "assets/deity-danae.jpg",
   "persée": "assets/deity-persee.jpg",
   "méduse": "assets/deity-meduse.jpg",
+  // Zeus, Poséidon, Hadès, Héraclès, Hébé : les trois frères olympiens, le plus célèbre des
+  // héros mortels et son épouse divine — cinq figures pourtant centrales qui n'avaient encore
+  // aucun portrait principal (ni même de portrait en ligne) jusqu'ici.
+  "zeus": "assets/deity-zeus.jpg",
+  "poséidon": "assets/deity-poseidon.jpg",
+  "hadès": "assets/deity-hades.jpg",
+  "héraclès": "assets/deity-heracles.jpg",
+  "hébé": "assets/deity-hebe.jpg",
 };
 // Même principe que DEITY_PORTRAITS, mais pour la bibliothèque symbolique : une illustration
 // dédiée (fournie par l'utilisatrice, fond détouré) qui remplace l'emoji d'un symbole partout où
