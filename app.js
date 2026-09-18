@@ -600,6 +600,7 @@ const DEITY_PORTRAITS = {
   // récit — celles-ci sont des portraits d'ensemble, demande explicite de l'utilisatrice.
   "danaé": "assets/deity-danae.jpg",
   "persée": "assets/deity-persee.jpg",
+  "méduse": "assets/deity-meduse.jpg",
 };
 // Même principe que DEITY_PORTRAITS, mais pour la bibliothèque symbolique : une illustration
 // dédiée (fournie par l'utilisatrice, fond détouré) qui remplace l'emoji d'un symbole partout où
@@ -756,6 +757,12 @@ const DEITY_INLINE_PORTRAITS = {
   "danaé": [
     { match: "sous la forme d'une pluie d'or", src: "assets/deity-danae-pluie-or.jpg", alt: "Danaé recevant Zeus changé en pluie d'or", after: true },
     { match: "un pêcheur nommé Dictys les recueillit", src: "assets/deity-danae-coffre.jpg", alt: "Danaé et le bébé Persée découverts dans le coffre", after: true },
+  ],
+  // Méduse avant sa métamorphose : demande explicite « à mettre juste avant le texte d'Athéna
+  // qui la transforme » — comportement par défaut (image avant son paragraphe), aucun after
+  // nécessaire ici, contrairement à Danaé ci-dessus.
+  "méduse": [
+    { match: "Furieuse de voir son sanctuaire profané", src: "assets/deity-meduse-avant.jpg", alt: "Méduse avant sa métamorphose, dans le temple d'Athéna" },
   ],
   "circé": [
     { match: "protégé par une plante magique", src: "assets/deity-circe-ulysse.jpg", alt: "Circé qui tente de transformer Ulysse" },

@@ -3717,3 +3717,19 @@ sur les deux fiches, ordre image/texte confirmé correct sur Danaé (après) et 
 et les autres fiches déjà en place (avant).
 
 `service-worker.js` (Panthéon) : `pantheon-v109` → `pantheon-v110`.
+
+## Nouvelles illustrations : Méduse
+
+2 images envoyées par l'utilisatrice, avec leur emplacement précisé :
+
+- **Méduse avant sa métamorphose** (jeune femme dans le temple d'Athéna) — placée juste avant le
+  paragraphe qui raconte sa transformation par la déesse (comportement par défaut de
+  `renderFigureDetail()` — image avant son paragraphe —, sans besoin du `after: true` ajouté pour
+  Danaé au round précédent).
+- **Portrait principal de Méduse** (chevelure de serpents) — elle n'en avait aucun jusqu'ici, ni
+  principal ni en ligne.
+
+Testé (2619 vérifications, dont 5 nouvelles) : rendu contrôlé visuellement en clair et en sombre,
+image bien positionnée juste avant le paragraphe « Furieuse de voir son sanctuaire profané ».
+
+`service-worker.js` (Panthéon) : `pantheon-v110` → `pantheon-v111`.
