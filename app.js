@@ -1406,6 +1406,47 @@ function promptOwnerPreviewKey(){
   } catch(e){}
 }
 
+// --- Thème clair/sombre : demande directe de l'utilisatrice, un petit bouton dans le profil
+// pour choisir soi-même plutôt que de dépendre uniquement du système (voir styles.css, qui
+// suivait jusqu'ici uniquement prefers-color-scheme). "system" (valeur par défaut, jamais
+// stockée telle quelle — voir setThemePreference) laisse le système décider, comme avant ; un
+// choix explicite ("light"/"dark") pose <html data-theme="..."> qui prend le dessus, posé une
+// première fois avant même ce script par le petit script inline d'index.html (pour éviter un
+// éclair du mauvais thème le temps qu'app.js s'exécute).
+const THEME_KEY = "pantheon-theme";
+function getThemePreference(){
+  try { return localStorage.getItem(THEME_KEY) || "system"; } catch(e){ return "system"; }
+}
+function isDarkActive(){
+  const pref = getThemePreference();
+  if(pref === "dark") return true;
+  if(pref === "light") return false;
+  return !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+}
+// Pose/retire l'attribut sur <html> ET tient à jour les deux <meta name="theme-color"> (couleur
+// de la barre de statut mobile) — leurs propres attributs media restent en place pour le cas
+// "system", mais comme les deux reçoivent ici la MÊME valeur, celui des deux qui matche
+// effectivement le système affiche toujours la bonne couleur, override ou non.
+function applyThemePreference(){
+  const pref = getThemePreference();
+  if(pref === "light" || pref === "dark") document.documentElement.setAttribute("data-theme", pref);
+  else document.documentElement.removeAttribute("data-theme");
+  const dark = isDarkActive();
+  const color = dark ? "#1b1811" : "#f6f1e7";
+  document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute("content", color));
+}
+function setThemePreference(pref){
+  try {
+    if(pref === "system") localStorage.removeItem(THEME_KEY);
+    else localStorage.setItem(THEME_KEY, pref);
+  } catch(e){}
+  applyThemePreference();
+}
+function toggleTheme(){
+  setThemePreference(isDarkActive() ? "light" : "dark");
+  render();
+}
+
 // Cache mémoire (perdu au rechargement, volontairement — rien de plus à gérer) : { loading },
 // { locked: true } (mauvaise clé ou clé absente côté serveur) ou { content } (fiche complète).
 const OWNER_PREVIEW_CACHE = { figures: {}, symbols: {}, places: {} };
@@ -3418,6 +3459,7 @@ function renderProfile(){
     <div class="screen-header">
       <button class="back" data-nav="back">← Retour</button>
       <h2>Profil</h2>
+      <button type="button" class="theme-toggle-btn" data-action="theme-toggle" aria-label="${isDarkActive() ? "Passer en mode clair" : "Passer en mode sombre"}" title="${isDarkActive() ? "Mode clair" : "Mode sombre"}">${isDarkActive() ? "☀️" : "🌙"}</button>
     </div>
     <div class="profile-card">
       ${editing ? profileEmailEmptyHTML(profile ? profile.email : "", !!profile) : profileEmailFilledHTML(profile)}
@@ -4858,6 +4900,7 @@ function bindAppClickDelegation(){
       if(action === "unlock-premium") attemptPurchase();
       else if(action === "restore-purchase") attemptRestore();
       else if(action === "owner-preview") promptOwnerPreviewKey();
+      else if(action === "theme-toggle") toggleTheme();
       else if(action === "quiz-pick-level") { quizSelection.level = actionEl.dataset.level; render(); }
       else if(action === "quiz-pick-theme") { quizSelection.themeId = actionEl.dataset.theme; render(); }
       else if(action === "quiz-start") quizStart(quizSelection.level, quizSelection.themeId);
@@ -4947,6 +4990,7 @@ function bindScreenEvents(){
 /* ===================== INIT ===================== */
 
 initOwnerPreviewFromUrl();
+applyThemePreference();
 bindAppClickDelegation();
 window.addEventListener("resize", handleFamTreeWindowResize);
 window.addEventListener("resize", handlePlacesMapWindowResize);

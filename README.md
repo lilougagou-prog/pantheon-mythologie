@@ -3733,3 +3733,32 @@ Testé (2619 vérifications, dont 5 nouvelles) : rendu contrôlé visuellement e
 image bien positionnée juste avant le paragraphe « Furieuse de voir son sanctuaire profané ».
 
 `service-worker.js` (Panthéon) : `pantheon-v110` → `pantheon-v111`.
+
+## Bouton de mode sombre manuel, dans le profil
+
+Retour direct de l'utilisatrice, dans la foulée d'une question sur le mode sombre : « j'aimerais
+bien ajouter un petit bouton mode sombre dans le profil en haut à droite ». Jusqu'ici, l'appli ne
+suivait QUE le réglage système (`prefers-color-scheme`), sans aucun contrôle propre.
+
+`<html data-theme="light"|"dark">` (posé par `setThemePreference()`/`applyThemePreference()`, et
+déjà avant le tout premier rendu par un petit script inline dans `index.html`, pour éviter un
+éclair du mauvais thème le temps qu'`app.js` s'exécute) prend le dessus sur le système quand il
+est présent. Sans y avoir jamais touché, l'appli continue de suivre `prefers-color-scheme`
+exactement comme avant — aucune régression pour qui ne connaît même pas ce bouton. Un bouton
+rond (🌙/☀️ selon l'état courant) dans l'en-tête du profil bascule entre clair et sombre ; le
+choix est mémorisé (`localStorage`) et survit à un rechargement.
+
+Bug réel trouvé et corrigé pendant ce round : placé naïvement à l'extrémité droite de l'en-tête,
+ce bouton se retrouvait pile sous `.profile-fab` — le rond flottant qui reste TOUJOURS affiché en
+haut à droite de chaque écran, y compris le profil lui-même (`position: fixed`) — rendant les
+deux boutons impossibles à distinguer au clic. Corrigé par un `margin-right` qui décale le
+nouveau bouton de la largeur de ce rond flottant plus un espace, pour que les deux restent
+cliquables côte à côte.
+
+Testé (2625 vérifications, dont 7 nouvelles) : les 3 combinaisons système clair/sombre × bouton
+non touché/forcé vérifiées en conditions réelles (`prefers-color-scheme` simulé des deux côtés),
+persistance confirmée après rechargement de page, absence totale du bouton sur tous les autres
+écrans (réservé au profil), rendu contrôlé visuellement clair/sombre sans chevauchement avec le
+bouton flottant de profil.
+
+`service-worker.js` (Panthéon) : `pantheon-v111` → `pantheon-v112`.

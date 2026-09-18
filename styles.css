@@ -18,8 +18,18 @@
   --border: #ddd0b3;
   --shadow: rgba(44, 36, 22, 0.12);
 }
+/* Demande explicite de l'utilisatrice : un petit bouton dans le profil pour choisir soi-même le
+   thème plutôt que de dépendre uniquement du réglage système. <html data-theme="light|dark">
+   (posé par setThemePreference() dans app.js, et déjà avant le premier rendu par le script
+   inline dans index.html) prend le dessus sur le système quand il est présent ; absent, l'appli
+   continue de suivre prefers-color-scheme comme avant — donc le bloc ci-dessous ne s'applique
+   plus que si aucun choix explicite n'a été fait (:not([data-theme="light"]), la seule valeur qui
+   doit l'empêcher ici puisque [data-theme="dark"] redemande de toute façon exactement les mêmes
+   valeurs). Palette dupliquée une seconde fois plus bas (forcé, hors media) plutôt qu'une seule
+   source partagée : deux blocs courts et lisibles valent mieux qu'une indirection supplémentaire
+   pour un fichier qui n'a jamais utilisé de préprocesseur. */
 @media (prefers-color-scheme: dark){
-  :root{
+  :root:not([data-theme="light"]){
     --marble: #1b1811;
     --marble-deep: #14120d;
     --ink: #ece3d0;
@@ -37,9 +47,29 @@
      voir le round précédent sur la carte) : un filtre CSS inverse leurs couleurs pour rester
      dans la palette sombre, appliqué seulement aux tuiles (pas aux marqueurs ni aux popups,
      qui suivent déjà --card-bg/--ink via leurs propres règles). */
-  .places-map .leaflet-tile-pane, .place-detail-map .leaflet-tile-pane{
+  :root:not([data-theme="light"]) .places-map .leaflet-tile-pane,
+  :root:not([data-theme="light"]) .place-detail-map .leaflet-tile-pane{
     filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.9);
   }
+}
+/* Sombre forcé (bouton du profil), qu'importe le système — mêmes valeurs que ci-dessus. */
+:root[data-theme="dark"]{
+  --marble: #1b1811;
+  --marble-deep: #14120d;
+  --ink: #ece3d0;
+  --ink-soft: #b7ab8c;
+  --laurel: #7fa06a;
+  --laurel-deep: #a3c48a;
+  --bronze: #d3a262;
+  --bronze-light: #e8c58c;
+  --terracotta: #e08a5c;
+  --card-bg: #241f17;
+  --border: #423a29;
+  --shadow: rgba(0, 0, 0, 0.45);
+}
+:root[data-theme="dark"] .places-map .leaflet-tile-pane,
+:root[data-theme="dark"] .place-detail-map .leaflet-tile-pane{
+  filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.9);
 }
 
 *{ box-sizing: border-box; }
@@ -490,6 +520,32 @@ h1, h2, h3{
 }
 .back:hover{ background: var(--marble-deep); }
 .screen-header h2{ margin: 0; font-size: 1.4rem; }
+/* Bouton de thème du profil, demande explicite de l'utilisatrice : "en haut à droite" du
+   screen-header, poussé à droite par margin-left:auto plutôt qu'un nouveau conteneur flex à
+   part — .screen-header est déjà display:flex. Rond et bordé comme .profile-fab, sans reprendre
+   sa classe (celui-ci reste local à cet en-tête, jamais flottant hors de #app).
+   margin-right : sans lui, ce bouton se superposerait EXACTEMENT à .profile-fab, le rond flottant
+   toujours présent en haut à droite de chaque écran (position:fixed, y compris sur le profil
+   lui-même) — même largeur (40px), même bord droit (right:16px de .profile-fab = padding droit
+   de #app ici). Décalé de sa largeur plus un espace pour rester cliquable à côté, jamais dessous. */
+.theme-toggle-btn{
+  margin-left: auto;
+  margin-right: 52px;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+.theme-toggle-btn:hover{ background: var(--marble-deep); }
 .screen-footer{ margin-top: 24px; }
 
 /* Navigation « ◀ Précédent / Suivant ▶ » en pied de fiche détail (figure ou symbole) — voir
@@ -1623,7 +1679,7 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
   box-shadow: none;
 }
 .back:active, .sibling-nav-btn:active, .list-item:active, .nav-tab:active,
-.geneal-fiche-link:active, .profile-fab:active, .type-card:active{
+.geneal-fiche-link:active, .profile-fab:active, .type-card:active, .theme-toggle-btn:active{
   background: var(--marble-deep);
 }
 .chip:active, .geneal-tree-link:active, .quiz-home-btn:active, .quiz-figure-btn:active{
