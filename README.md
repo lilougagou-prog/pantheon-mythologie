@@ -3832,3 +3832,16 @@ sans doublon), fiches de Maïa/Eurynomé/Hermès/Charites contrôlées individue
 enfants, liens cliquables), rendu visuel confirmé.
 
 `service-worker.js` (Panthéon) : `pantheon-v114` → `pantheon-v115`.
+
+## Remplace l'image du blocage de la naissance d'Héraclès (Ilithyie)
+
+Retour direct de l'utilisatrice : nouvelle image pour remplacer `assets/deity-ilithyie-heracles.jpg`
+sur la fiche d'Ilithyie — même emplacement (juste avant le paragraphe qui raconte l'épisode),
+seul le fichier change. La nouvelle version la montre assise, jambes ET bras croisés devant une
+porte, une correspondance encore plus directe avec le texte (« s'asseoir devant la porte
+d'Alcmène, jambes et doigts croisés ») que la précédente.
+
+Testé (2665 vérifications, inchangées — remplacement d'asset seul, aucun code touché) : rendu
+contrôlé visuellement en clair et en sombre, image bien à sa place.
+
+`service-worker.js` (Panthéon) : `pantheon-v115` → `pantheon-v116`.
