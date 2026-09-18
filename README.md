@@ -3798,3 +3798,37 @@ Testé (2648 vérifications, dont 7 nouvelles) : rendu contrôlé visuellement e
 les deux images en ligne bien positionnées juste avant leur paragraphe respectif.
 
 `service-worker.js` (Panthéon) : `pantheon-v113` → `pantheon-v114`.
+
+## Corrige la lignée de Zeus : Maïa (pas les Pléiades) et Eurynomé pour les Charites
+
+Retour direct de l'utilisatrice sur la fiche de Zeus : « pour Hermès c'est écrit "avec Pléiades"
+non il faut que ce soit écrit avec Maia. Pour les Charites, tu ne les a pas rattachées à la mère,
+et tu as mis en doublons leurs prénoms individuels. Quand il y a des groupes connus ensemble
+(muses, chariteS, heures) favorise le groupe à part si ça nuit à la cohérence. »
+
+Trois défauts distincts :
+1. **Hermès listé "avec Pléiades"** — `GENEALOGY_PARENTS["hermès"]` pointait vers le collectif
+   plutôt que sa mère précise, faute d'une fiche à son nom. Sa propre fiche le disait pourtant
+   déjà correctement en prose (« Fils de Zeus et de Maïa, l'aînée des Pléiades ») depuis le
+   début — seul le lien structuré (les puces de la fiche de Zeus) était faux. Corrigé en créant
+   la fiche de **Maïa** (parents : Atlas) et en y faisant pointer Hermès.
+2. **Les Charites sans mère** — Charites, Aglaé, Euphrosyne et Thalia n'avaient pour parent que
+   Zeus ; leur mère Eurynomé était explicitement laissée de côté par un commentaire d'un round
+   antérieur (« sans fiche propre »). Corrigé en créant la fiche d'**Eurynomé** (Océanide, parents :
+   Océan et Téthys) et en la rattachant aux quatre.
+3. **Doublon collectif/membres** — un même round avait par ailleurs sciemment accepté que le
+   collectif ET chacun de ses membres nommés apparaissent tous deux comme enfants directs d'un
+   même parent (Zeus listait « Charites » ET « Aglaé », « Euphrosyne », « Thalia » séparément —
+   même chose pour les Muses avec Mnémosyne). `GENEALOGY_GROUP_MEMBERS` (Muses, Charites, Heures
+   — généralisable à tout futur groupe similaire) permet désormais à `genealogyChildUnions()` de
+   ne plus montrer que le collectif dès qu'il figure déjà dans la même union.
+
+Maïa et Eurynomé créées sur le même patron minimal que Sisyphe/Ilithyie (`DEITY_NOTES` + lore
+premium dans `content.json`) — aucune image fournie pour elles, donc pas de portrait.
+
+Testé (2665 vérifications, dont 17 nouvelles) : lignée de Zeus vérifiée en conditions réelles
+(« avec Maïa : Hermès », « avec Eurynomé : Charites » sans doublon, « avec Mnémosyne : Muses »
+sans doublon), fiches de Maïa/Eurynomé/Hermès/Charites contrôlées individuellement (parents,
+enfants, liens cliquables), rendu visuel confirmé.
+
+`service-worker.js` (Panthéon) : `pantheon-v114` → `pantheon-v115`.
