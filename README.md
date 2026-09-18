@@ -3691,3 +3691,29 @@ premium complet), Corinthe confirmée en train de lister Sisyphe parmi ses figur
 figure repérée dans la liste et la recherche.
 
 `service-worker.js` (Panthéon) : `pantheon-v108` → `pantheon-v109`.
+
+## Nouvelles illustrations : Danaé et Persée
+
+4 images envoyées par l'utilisatrice, chacune avec son emplacement précisé :
+
+- **Portrait principal de Persée** (armure dorée) et **portrait principal de Danaé** (robe
+  dorée) — aucun des deux n'avait de portrait principal jusqu'ici, seulement des portraits en
+  ligne sur des scènes précises de leur récit.
+- **Danaé recevant Zeus changé en pluie d'or** — sous le paragraphe de sa fiche qui raconte cette
+  union.
+- **Danaé et le bébé Persée découverts dans le coffre** — sous le paragraphe qui raconte leur
+  sauvetage par le pêcheur Dictys (la même scène existait déjà en portrait sur la fiche de
+  Persée, avec sa propre image ; celle-ci est nouvelle et propre à la fiche de Danaé).
+
+Au passage : demande explicite sur ces deux nouvelles images (« à mettre en dessous du
+paragraphe le mentionnant ») — jusqu'ici, TOUTES les images en ligne de l'appli se plaçaient
+avant leur paragraphe, jamais après (comportement de `renderFigureDetail()` inchangé depuis son
+origine). Plutôt qu'un cas particulier isolé, un indicateur optionnel (`after: true`) permet
+désormais d'inverser l'ordre entrée par entrée — les dizaines d'entrées existantes, qui ne le
+demandent pas, gardent leur comportement d'origine à l'identique.
+
+Testé (2613 vérifications, dont 8 nouvelles) : rendu contrôlé visuellement en clair et en sombre
+sur les deux fiches, ordre image/texte confirmé correct sur Danaé (après) et inchangé sur Persée
+et les autres fiches déjà en place (avant).
+
+`service-worker.js` (Panthéon) : `pantheon-v109` → `pantheon-v110`.

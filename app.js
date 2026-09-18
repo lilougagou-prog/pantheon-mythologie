@@ -595,6 +595,11 @@ const DEITY_PORTRAITS = {
   "cassandre": "assets/deity-cassandre.jpg",
   "cassiopée": "assets/deity-cassiopee.jpg",
   "cécrops": "assets/deity-cecrops.jpg",
+  // Danaé et Persée : aucun des deux n'avait de portrait principal jusqu'ici, seulement des
+  // portraits en ligne (voir DEITY_INLINE_PORTRAITS plus bas) sur des scènes précises de leur
+  // récit — celles-ci sont des portraits d'ensemble, demande explicite de l'utilisatrice.
+  "danaé": "assets/deity-danae.jpg",
+  "persée": "assets/deity-persee.jpg",
 };
 // Même principe que DEITY_PORTRAITS, mais pour la bibliothèque symbolique : une illustration
 // dédiée (fournie par l'utilisatrice, fond détouré) qui remplace l'emoji d'un symbole partout où
@@ -743,6 +748,14 @@ const DEITY_INLINE_PORTRAITS = {
   "persée": [
     { match: "un pêcheur nommé Dictys les recueillit", src: "assets/deity-persee-danae-dictys.jpg", alt: "Dictys découvre Danaé et le bébé Persée" },
     { match: "Andromède", src: "assets/deity-persee-andromede-combat.jpg", alt: "Persée délivre Andromède" },
+  ],
+  // Danaé : deux nouvelles images sur sa propre fiche (jusqu'ici, la seule illustration de ces
+  // deux scènes était le portrait en ligne partagé sur la fiche de Persée ci-dessus) — l'une sous
+  // le paragraphe qui raconte l'union avec Zeus changé en pluie d'or, l'autre sous celui qui
+  // raconte la découverte du coffre par Dictys.
+  "danaé": [
+    { match: "sous la forme d'une pluie d'or", src: "assets/deity-danae-pluie-or.jpg", alt: "Danaé recevant Zeus changé en pluie d'or", after: true },
+    { match: "un pêcheur nommé Dictys les recueillit", src: "assets/deity-danae-coffre.jpg", alt: "Danaé et le bébé Persée découverts dans le coffre", after: true },
   ],
   "circé": [
     { match: "protégé par une plante magique", src: "assets/deity-circe-ulysse.jpg", alt: "Circé qui tente de transformer Ulysse" },
@@ -2484,7 +2497,13 @@ function renderFigureDetail(id){
       ${paragraphs.length ? `<h3>Le mythe</h3>${paragraphs.map(p => {
         const inline = inlinePortraits.find(cfg => p.includes(cfg.match));
         const inlineClass = inline?.wide ? "deity-portrait-inline deity-portrait-inline-wide" : "deity-portrait-inline";
-        return `${inline ? `<img class="${inlineClass}" src="${escapeHTML(inline.src)}" alt="${escapeHTML(inline.alt)}" loading="lazy">` : ""}<p class="lore-text">${linkifyLore(p)}</p>`;
+        const img = inline ? `<img class="${inlineClass}" src="${escapeHTML(inline.src)}" alt="${escapeHTML(inline.alt)}" loading="lazy">` : "";
+        const para = `<p class="lore-text">${linkifyLore(p)}</p>`;
+        // Par défaut l'image précède le paragraphe qu'elle illustre (comportement historique,
+        // inchangé pour toutes les entrées existantes). Demande explicite de l'utilisatrice sur
+        // Danaé : « à mettre en dessous du paragraphe le mentionnant » — un indicateur optionnel
+        // (cfg.after) inverse l'ordre pour cette seule entrée, sans toucher aux autres.
+        return inline?.after ? para + img : img + para;
       }).join("")}` : ""}
       ${culte ? `<h3>Culte</h3>${culte.map(p => `<p class="lore-text">${linkifyLore(p)}</p>`).join("")}` : ""}
       ${genealogyLineageHTML(id)}
