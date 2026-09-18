@@ -3779,3 +3779,22 @@ Testé (2641 vérifications, dont 16 nouvelles) : rendu contrôlé visuellement 
 et Hébé (premium, via la clé d'aperçu propriétaire), portrait confirmé câblé pour les 5 figures.
 
 `service-worker.js` (Panthéon) : `pantheon-v112` → `pantheon-v113`.
+
+## Nouvelles illustrations : Ilithyie
+
+3 images envoyées par l'utilisatrice, avec leur rôle précisé :
+
+- **Portrait principal d'Ilithyie** — elle n'en avait aucun, ni principal ni en ligne, jusqu'ici.
+- **Son rôle de déesse des accouchements** — sous le paragraphe qui la présente comme celle qui
+  permet à l'enfant de venir au monde.
+- **Le blocage de la naissance d'Héraclès** — sous le paragraphe qui raconte comment Héra l'envoie
+  s'asseoir devant la porte d'Alcmène, jambes et doigts croisés, pour retarder l'accouchement.
+
+Deux des trois images (portrait, blocage) n'étaient pas au format 4:5 attendu (plus hautes que
+larges) — recadrées en conservant toute leur largeur, sans perdre le visage ni le geste des bras
+croisés qui raconte la scène.
+
+Testé (2648 vérifications, dont 7 nouvelles) : rendu contrôlé visuellement en clair et en sombre,
+les deux images en ligne bien positionnées juste avant leur paragraphe respectif.
+
+`service-worker.js` (Panthéon) : `pantheon-v113` → `pantheon-v114`.

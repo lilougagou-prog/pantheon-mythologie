@@ -609,6 +609,7 @@ const DEITY_PORTRAITS = {
   "hadès": "assets/deity-hades.jpg",
   "héraclès": "assets/deity-heracles.jpg",
   "hébé": "assets/deity-hebe.jpg",
+  "ilithyie": "assets/deity-ilithyie.jpg",
 };
 // Même principe que DEITY_PORTRAITS, mais pour la bibliothèque symbolique : une illustration
 // dédiée (fournie par l'utilisatrice, fond détouré) qui remplace l'emoji d'un symbole partout où
@@ -771,6 +772,12 @@ const DEITY_INLINE_PORTRAITS = {
   // nécessaire ici, contrairement à Danaé ci-dessus.
   "méduse": [
     { match: "Furieuse de voir son sanctuaire profané", src: "assets/deity-meduse-avant.jpg", alt: "Méduse avant sa métamorphose, dans le temple d'Athéna" },
+  ],
+  // Ilithyie : une image sur son rôle général de déesse des accouchements (1er paragraphe), une
+  // autre sur l'épisode précis où elle bloque la naissance d'Héraclès sur ordre d'Héra (2e).
+  "ilithyie": [
+    { match: "c'est elle qui, dit-on, permet à l'enfant de venir au monde", src: "assets/deity-ilithyie-role.jpg", alt: "Ilithyie, déesse des accouchements, avec un nouveau-né" },
+    { match: "jambes et doigts croisés", src: "assets/deity-ilithyie-heracles.jpg", alt: "Ilithyie bloquant la naissance d'Héraclès sur ordre d'Héra" },
   ],
   "circé": [
     { match: "protégé par une plante magique", src: "assets/deity-circe-ulysse.jpg", alt: "Circé qui tente de transformer Ulysse" },
