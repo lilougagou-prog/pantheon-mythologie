@@ -3875,3 +3875,47 @@ Attributs (Zeus avec ses 4 attributs affiché juste avant Le mythe ; une figure 
 comme Laërte, confirmée sans la moindre boîte).
 
 `service-worker.js` (Panthéon) : `pantheon-v116` → `pantheon-v117`.
+
+## Six problèmes de généalogie relevés dans le même message
+
+Retour direct de l'utilisatrice, six points à la fois : « je ne suis toujours pas satisfaite des
+généalogies ».
+
+1. **Renommage** — « dans "guerre de Troie" il n'y a finalement que la famille de Priam et
+   Hécube » : tuile et titre d'écran renommés en « La famille de Priam et Hécube ».
+2. **Mères de Zeus manquantes** — « pour les olympiens, on n'a pas les mères des enfants de
+   Zeus » : l'écran des douze Olympiens affiche désormais les 4 vraies unions (Maïa → Hermès,
+   Léto → Artémis et Apollon, Métis → Athéna, Sémélé → Dionysos) plutôt qu'une liste plate sans
+   mère. Arès, Hébé et Ilithyie (enfants de Zeus ET Héra) restent rattachés à la carte d'Héra —
+   déjà affichée comme fille de Cronos/Rhéa sur cet écran — plutôt que dupliqués sous une
+   nouvelle carte de Zeus ; une simple ligne de mariage relie les deux cartes existantes.
+3. **Connecteur ambigu chez les Atrides** — « la branche reliant Agamemnon à son père tombe au
+   milieu de lui et Clytemnestre » : `buildScopedBranch()` et `ftPersonBranchHTML()` visaient par
+   erreur le wrapper du couple entier plutôt que la carte individuelle d'Agamemnon pour un
+   connecteur ascendant. Les deux renvoient désormais la carte de la personne elle-même.
+4. **Portraits trop petits** — « il faut faire un zoom sur les portraits » : les portraits des
+   arbres appliquent maintenant le même point focal/zoom que les vignettes de liste
+   (`DEITY_PORTRAIT_FOCUS`), dans un encart agrandi (64×80, au lieu d'une vignette 40×50 fixe).
+5. **Encart et nom** — « des branches tombent en dessous de l'encart blanc [...] relier
+   directement les branches au portrait (à défaut, mettre un encart blanc) puis mettre le nom EN
+   DESSOUS, pas dans l'encart » : chaque carte d'arbre sépare désormais l'encart visuel
+   (`.ft-card-visual` — portrait, ou blanc à défaut, seul visé par les connecteurs) du nom
+   (`.ft-card-name`, simple texte sans fond ni bordure, affiché sous l'encart).
+6. **Ulysse en triple** — « il apparaît 3 fois, alors qu'il n'a eu que deux femmes [...] je
+   déteste ces doublons » : nouveau mécanisme `ftMultiUnionHubHTML()` — une figure à plusieurs
+   unions garde désormais une carte UNIQUE, chaque conjoint devenant la racine de sa propre
+   branche (avec ses propres enfants dessous), reliés à la figure par un nouveau type de
+   connecteur (`{marriage: [...]}`) qui trace une ligne continue entre plusieurs cartes sans
+   exiger qu'elles soient voisines dans le DOM — comme un bus de fratrie, mais entre conjoints.
+   Ce mécanisme remplace l'ancien « hub + une carte redessinée par union » partout où il servait
+   (arbre borné des 4 écrans « explication globale », et l'arbre complet de n'importe quelle
+   figure), pas seulement pour Ulysse.
+
+Testé (2686 vérifications, dont 14 nouvelles) : rendu contrôlé visuellement en clair et en sombre
+sur les écrans Olympiens (Zeus et Héra chacun présents une seule fois, avec leurs mères
+respectives), Priam/Hécube, Atrides (connecteur d'Agamemnon vérifié à l'écran, centré sur sa
+carte), famille d'Ulysse (lui aussi présent une seule fois, Circé et Pénélope côte à côte), et,
+pour vérifier l'absence de régression, Titans, la lignée de Persée et les fiches complètes de
+Zeus et d'Ulysse.
+
+`service-worker.js` (Panthéon) : `pantheon-v117` → `pantheon-v118`.

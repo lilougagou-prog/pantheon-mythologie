@@ -1259,7 +1259,13 @@ function byGenealogyDisplayName(a, b){
 function genealogyPortraitHTML(id){
   const portrait = DEITY_PORTRAITS[id];
   if(!portrait) return "";
-  return `<img class="tree-portrait" src="${escapeHTML(portrait)}" alt="" loading="lazy">`;
+  // Retour direct de l'utilisatrice : « les miniatures ne sont pas bien visibles » — jusqu'ici
+  // .tree-portrait n'appliquait ni le zoom ni le point focal déjà utilisés partout ailleurs
+  // (figureThumbnailHTML, DEITY_PORTRAIT_FOCUS), juste un cover centré brut. Même mécanisme
+  // repris ici (jamais une nouvelle donnée à maintenir en double), en plus d'un encart agrandi
+  // (voir .ft-card-visual dans styles.css).
+  const focus = DEITY_PORTRAIT_FOCUS[id] || DEITY_PORTRAIT_FOCUS_DEFAULT;
+  return `<img class="tree-portrait" src="${escapeHTML(portrait)}" alt="" loading="lazy" style="object-position:${focus.x}% ${focus.y}%; transform: scale(${focus.zoom}); transform-origin:${focus.x}% ${focus.y}%;">`;
 }
 
 // Équivalent pour les chips « symbole associé » : une vignette de l'illustration dédiée
@@ -1353,7 +1359,7 @@ const GENEALOGY_STARTING_POINTS = [
   { special: "titansOverview", label: "Les douze Titans", sub: "Explorez la première grande génération divine." },
   { special: "olympiansOverview", label: "Les douze Olympiens", sub: "Découvrez les dieux qui règnent sur l'Olympe." },
   { special: "perseeLineage", label: "La lignée de Persée", sub: "Suivez la famille de Persée à travers les générations." },
-  { special: "troyOverview", label: "La guerre de Troie", sub: "Découvrez les familles au cœur de la guerre de Troie." },
+  { special: "troyOverview", label: "La famille de Priam et Hécube", sub: "Le roi et la reine de Troie, et leurs enfants au cœur de la guerre." },
   { special: "atridesOverview", label: "Les Atrides", sub: "Suivez une famille marquée par les rivalités et les tragédies." },
   { special: "thebanOverview", label: "Le cycle thébain", sub: "Explorez les générations qui ont façonné Thèbes." },
   { special: "ulysseOverview", label: "La famille d'Ulysse", sub: "Découvrez les liens qui unissent la famille d'Ulysse." },
@@ -2349,11 +2355,30 @@ function ftCardMarkup(id, opts){
   // un seul parent commun plutôt qu'au couple complet, ce style rappelle en un coup d'œil que
   // le lien n'est que partiel.
   const halfCls = opts.half ? " ft-card-half" : "";
+  // Retour direct de l'utilisatrice : « des branches tombent en dessous de l'encart blanc [...]
+  // relier directement les branches au portrait (à défaut, mettre un encart blanc) puis mettre
+  // le nom EN DESSOUS, pas dans l'encart. » Jusqu'ici .ft-card était UNE seule boîte (fond,
+  // bordure, ombre) contenant portrait ET nom empilés — drawFamTree() mesurait donc le bas de
+  // TOUTE la boîte (sous le nom) pour faire partir une branche, et le haut de toute la boîte
+  // (au-dessus du portrait) pour la faire arriver — d'où des branches qui semblaient tomber ou
+  // arriver au mauvais endroit dès qu'un nom long élargissait la boîte. .ft-card-visual isole
+  // désormais la boîte (portrait, ou vide — l'encart blanc « à défaut ») du nom, simple texte
+  // affiché SOUS elle sans bordure ni fond ; drawFamTree() cible ce sous-élément précis, jamais
+  // la carte entière (voir ftVisualRect() ci-dessous).
+  const visual = `<span class="ft-card-visual">${portrait}</span>`;
   if(opts.self){
-    return { slot, html: `<div class="ft-card ft-card-self${olympianCls}" data-slot="${slot}">${portrait}<span class="ft-card-name">${escapeHTML(name)}</span></div>` };
+    return { slot, html: `<div class="ft-card ft-card-self${olympianCls}" data-slot="${slot}">${visual}<span class="ft-card-name">${escapeHTML(name)}</span></div>` };
   }
   const nav = isSymbol ? "symbolDetail" : "genealogy";
-  return { slot, html: `<button class="ft-card${olympianCls}${halfCls}" data-slot="${slot}" data-nav="${nav}" data-id="${escapeHTML(id)}">${portrait}<span class="ft-card-name">${escapeHTML(name)}</span></button>` };
+  return { slot, html: `<button class="ft-card${olympianCls}${halfCls}" data-slot="${slot}" data-nav="${nav}" data-id="${escapeHTML(id)}">${visual}<span class="ft-card-name">${escapeHTML(name)}</span></button>` };
+}
+
+// Le sous-élément qu'un connecteur doit viser à l'intérieur d'une carte : l'encart visuel
+// (portrait ou vide) plutôt que la carte entière (qui inclut désormais le nom, hors de cet
+// encart) — voir le commentaire de ftCardMarkup() ci-dessus. Repli sur l'élément lui-même si,
+// pour une raison quelconque, l'encart est absent (jamais un connecteur qui casse silencieusement).
+function ftVisualRect(cardEl){
+  return (cardEl.querySelector(".ft-card-visual") || cardEl).getBoundingClientRect();
 }
 
 // Une branche : un couple (une ou deux cartes, réunies dans un .ft-couple qui porte son propre
@@ -2395,79 +2420,112 @@ function ftAncestorBranchHTML(connectors, childCard, personId){
   return `<div class="ft-branch ft-branch-ancestor"><div class="ft-couple" data-slot="${unionSlot}">${a.html}${b ? b.html : ""}</div></div>`;
 }
 
-// La branche complète d'une figure et de sa propre descendance : sa carte, puis — si elle a un
-// ou plusieurs unions documentées — une sous-rangée avec, pour chacune, un couple {figure +
-// conjoint} menant à ses enfants (groupés par union, jamais mélangés). La figure centrale est
-// donc dupliquée une fois par union (voir la remarque sur Zeus plus haut) : c'est le prix d'un
-// arbre lisible plutôt qu'une unique ligne ambiguë reliant un seul nœud à tous ses conjoints.
+// Le nœud d'une figure ayant plusieurs unions documentées (>1), sans jamais la dupliquer : sa
+// carte unique — jamais redessinée une fois par union comme avant (« hub » + une copie par
+// conjoint) — suivie d'une branche indépendante par conjoint connu, chacune avec ses propres
+// enfants dessous (le mécanisme à une seule carte déjà existant, inchangé). drawFamTree() relie
+// ensuite la figure à chacun de ses conjoints par une seule ligne de mariage continue (voir
+// `conn.marriage` ci-dessous), comme un bus de fratrie mais entre conjoints. Les enfants d'une
+// union sans conjoint connu restent rattachés directement à la figure elle-même. Retour direct
+// de l'utilisatrice, à propos d'Ulysse (deux épouses, trois occurrences de sa carte) : « je
+// déteste ces doublons » — cette fonction remplace l'ancien « hub + répétition » partout où il
+// servait. `buildChild(cid)` construit le nœud d'un enfant : ftLeaf pour un arbre complet
+// (ftPersonBranchHTML), un appel récursif à buildScopedBranch pour un arbre borné — seule
+// différence entre les deux appelants.
+function ftMultiUnionHubHTML(connectors, id, opts, unions, buildChild){
+  const hub = ftCardMarkup(id, opts);
+  const marriageSlots = [hub.slot];
+  const branchesHTML = [];
+  let directKidsHTML = "";
+  const directKidSlots = [];
+  for(const u of unions){
+    const kids = u.children.map(buildChild);
+    if(u.partner){
+      const spouseCard = ftCardMarkup(u.partner);
+      const spouseBranch = ftBranchHTML(connectors, {
+        cardA: spouseCard,
+        childrenHTML: kids.map(k => k.html).join(""),
+        childSlots: kids.map(k => k.slot),
+      });
+      marriageSlots.push(spouseCard.slot);
+      branchesHTML.push(spouseBranch.html);
+    } else if(kids.length){
+      directKidsHTML += kids.map(k => k.html).join("");
+      directKidSlots.push(...kids.map(k => k.slot));
+    }
+  }
+  if(directKidSlots.length) connectors.push({ unionSlot: hub.slot, childSlots: directKidSlots });
+  if(marriageSlots.length > 1) connectors.push({ marriage: marriageSlots });
+  return {
+    slot: hub.slot,
+    html: `<div class="ft-multi-union-row">
+      <div class="ft-branch">${hub.html}${directKidsHTML ? `<div class="ft-children-row">${directKidsHTML}</div>` : ""}</div>
+      ${branchesHTML.join("")}
+    </div>`
+  };
+}
+
+// La branche complète d'une figure et de sa propre descendance : sa carte, puis — si elle a une
+// ou plusieurs unions documentées — ses enfants (groupés par union, jamais mélangés). Une seule
+// union : le couple {figure + conjoint} devient directement la branche, sans redessiner la
+// figure séparément (demande explicite : « tu aurais pu mettre [le conjoint] à côté de [la
+// figure] directement, pour pas avoir à la remettre »). Plusieurs unions : voir
+// ftMultiUnionHubHTML ci-dessus, qui ne duplique jamais la figure non plus.
 function ftPersonBranchHTML(connectors, id, childUnions, opts){
   if(!childUnions.length) return ftLeaf(connectors, id, opts);
+  const buildChild = cid => ftLeaf(connectors, cid);
   if(childUnions.length === 1){
-    // Une seule union : inutile de dessiner la figure une première fois comme simple « hub »
-    // puis une seconde comme moitié du couple juste en dessous — le couple lui-même devient
-    // directement la branche (demande explicite : « tu aurais pu mettre [le conjoint] à côté
-    // de [la figure] directement, pour pas avoir à la remettre »). La duplication par union
-    // (voir plus bas) ne se justifie que s'il faut départager plusieurs conjoints.
     const u = childUnions[0];
-    const kids = u.children.map(cid => ftLeaf(connectors, cid));
-    return ftBranchHTML(connectors, {
-      cardA: ftCardMarkup(id, opts),
+    const personCard = ftCardMarkup(id, opts);
+    const kids = u.children.map(buildChild);
+    const branch = ftBranchHTML(connectors, {
+      cardA: personCard,
       cardB: u.partner ? ftCardMarkup(u.partner) : null,
       childrenHTML: kids.map(k => k.html).join(""),
       childSlots: kids.map(k => k.slot),
     });
+    // Un connecteur ascendant (les parents de cette figure, voir plus bas) doit viser SA carte,
+    // jamais le wrapper .ft-couple qui l'englobe avec son conjoint — sinon la ligne atterrit au
+    // milieu des deux plutôt que sur la bonne personne (même bug que celui décrit devant
+    // buildScopedBranch ci-dessous, ici pour la fiche familiale d'une figure quelconque).
+    return { slot: personCard.slot, html: branch.html };
   }
-  const subNodes = childUnions.map(u => {
-    const kids = u.children.map(cid => ftLeaf(connectors, cid));
-    return ftBranchHTML(connectors, {
-      cardA: ftCardMarkup(id, opts),
-      cardB: u.partner ? ftCardMarkup(u.partner) : null,
-      childrenHTML: kids.map(k => k.html).join(""),
-      childSlots: kids.map(k => k.slot),
-    });
-  });
-  return ftBranchHTML(connectors, {
-    cardA: ftCardMarkup(id, opts),
-    childrenHTML: subNodes.map(n => n.html).join(""),
-    childSlots: subNodes.map(n => n.slot),
-  });
+  return ftMultiUnionHubHTML(connectors, id, opts, childUnions, buildChild);
 }
 
 // Même principe que ftPersonBranchHTML, mais limité à un ensemble donné de figures
 // (allowedIds) plutôt qu'à la descendance complète d'une personne — utilisé par les écrans
-// « explication globale » (Troie, Atrides, cycle thébain, famille d'Ulysse) pour dessiner un
-// vrai arbre à plusieurs branches à partir d'une racine unique, sans jamais déborder sur le
+// « explication globale » (Priam/Hécube, Atrides, cycle thébain, famille d'Ulysse) pour dessiner
+// un vrai arbre à plusieurs branches à partir d'une racine unique, sans jamais déborder sur le
 // reste du corpus (les enfants non cités par le texte, ex. tous les autres fils de Priam,
-// restent hors champ). Un conjoint n'apparaît que s'il fait lui-même partie d'allowedIds.
+// restent hors champ). Un conjoint n'apparaît que s'il fait lui-même partie d'allowedIds — sinon
+// ses enfants (dans ce champ) sont rattachés directement à la figure elle-même.
 function buildScopedBranch(connectors, id, allowedIds){
   const unions = genealogyChildUnions(id)
-    .map(u => ({ partner: u.partner, children: u.children.filter(c => allowedIds.has(c)) }))
+    .map(u => ({
+      partner: u.partner && allowedIds.has(u.partner) ? u.partner : null,
+      children: u.children.filter(c => allowedIds.has(c)),
+    }))
     .filter(u => u.children.length);
+  const buildChild = cid => buildScopedBranch(connectors, cid, allowedIds);
   if(!unions.length) return ftLeaf(connectors, id);
   if(unions.length === 1){
     const u = unions[0];
-    const kids = u.children.map(cid => buildScopedBranch(connectors, cid, allowedIds));
-    return ftBranchHTML(connectors, {
-      cardA: ftCardMarkup(id),
-      cardB: u.partner && allowedIds.has(u.partner) ? ftCardMarkup(u.partner) : null,
+    const personCard = ftCardMarkup(id);
+    const kids = u.children.map(buildChild);
+    const branch = ftBranchHTML(connectors, {
+      cardA: personCard,
+      cardB: u.partner ? ftCardMarkup(u.partner) : null,
       childrenHTML: kids.map(k => k.html).join(""),
       childSlots: kids.map(k => k.slot),
     });
+    // Un connecteur ascendant (le parent de cette figure, dessiné par l'appel récursif suivant)
+    // doit viser SA carte, jamais le wrapper .ft-couple qui l'englobe avec son conjoint — sinon
+    // la ligne atterrit au milieu des deux plutôt que sur la bonne personne (signalé : chez les
+    // Atrides, la branche reliant Agamemnon à son père tombait au milieu de lui et Clytemnestre).
+    return { slot: personCard.slot, html: branch.html };
   }
-  const subNodes = unions.map(u => {
-    const kids = u.children.map(cid => buildScopedBranch(connectors, cid, allowedIds));
-    return ftBranchHTML(connectors, {
-      cardA: ftCardMarkup(id),
-      cardB: u.partner && allowedIds.has(u.partner) ? ftCardMarkup(u.partner) : null,
-      childrenHTML: kids.map(k => k.html).join(""),
-      childSlots: kids.map(k => k.slot),
-    });
-  });
-  return ftBranchHTML(connectors, {
-    cardA: ftCardMarkup(id),
-    childrenHTML: subNodes.map(n => n.html).join(""),
-    childSlots: subNodes.map(n => n.slot),
-  });
+  return ftMultiUnionHubHTML(connectors, id, {}, unions, buildChild);
 }
 
 // Trace, dans le <svg id="ftLinks"> superposé à #ftTree, tous les connecteurs enregistrés dans
@@ -2486,12 +2544,29 @@ function drawFamTree(){
   svg.setAttribute("viewBox", `0 0 ${treeRect.width} ${treeRect.height}`);
   let out = "";
   for(const conn of FT_CONNECTORS){
+    // Ligne de mariage « en bus » entre une figure et TOUS ses conjoints d'un même mouvement
+    // horizontal (voir ftMultiUnionHubHTML) — jamais une carte "hub" redessinée une fois par
+    // conjoint. Les cartes reliées n'ont pas besoin d'être voisines dans le DOM ni de partager
+    // un même .ft-couple : chaque slot est retrouvé indépendamment, comme pour un connecteur
+    // enfants/parent classique.
+    if(conn.marriage){
+      const rects = conn.marriage
+        .map(slot => tree.querySelector(`[data-slot="${slot}"]`))
+        .filter(Boolean)
+        .map(el => ftVisualRect(el));
+      if(rects.length < 2) continue;
+      const y = rects.reduce((sum, r) => sum + (r.top + r.bottom) / 2, 0) / rects.length - treeRect.top;
+      const xs = rects.map(r => r.left + r.width / 2 - treeRect.left).sort((a, b) => a - b);
+      out += `<line class="ft-line" x1="${xs[0]}" y1="${y}" x2="${xs[xs.length - 1]}" y2="${y}" />`;
+      xs.forEach(x => { out += `<circle class="ft-joint" cx="${x}" cy="${y}" r="3.5" />`; });
+      continue;
+    }
     const originEl = tree.querySelector(`[data-slot="${conn.unionSlot}"]`);
     if(!originEl) continue;
     const cards = originEl.classList.contains("ft-couple") ? Array.from(originEl.querySelectorAll(":scope > .ft-card")) : [originEl];
     let trunkX, trunkY;
     if(cards.length === 2){
-      const ra = cards[0].getBoundingClientRect(), rb = cards[1].getBoundingClientRect();
+      const ra = ftVisualRect(cards[0]), rb = ftVisualRect(cards[1]);
       const y = (Math.max(ra.top, rb.top) + Math.min(ra.bottom, rb.bottom)) / 2 - treeRect.top;
       const x1 = ra.right - treeRect.left, x2 = rb.left - treeRect.left;
       if(x2 > x1){
@@ -2501,7 +2576,7 @@ function drawFamTree(){
       trunkX = (x1 + x2) / 2;
       trunkY = y;
     } else {
-      const r = cards[0].getBoundingClientRect();
+      const r = ftVisualRect(cards[0]);
       trunkX = r.left + r.width / 2 - treeRect.left;
       trunkY = r.bottom - treeRect.top;
     }
@@ -2509,7 +2584,7 @@ function drawFamTree(){
     const childRects = conn.childSlots
       .map(slot => tree.querySelector(`[data-slot="${slot}"]`))
       .filter(Boolean)
-      .map(el => el.getBoundingClientRect());
+      .map(el => ftVisualRect(el));
     if(!childRects.length) continue;
     const childTopYs = childRects.map(r => r.top - treeRect.top);
     const childCenterXs = childRects.map(r => r.left + r.width / 2 - treeRect.left);
@@ -2873,19 +2948,28 @@ function renderGenealogyHome(){
 
 // Les enfants de Zeus retenus pour l'écran des douze Olympiens : un choix éditorial pour cet
 // écran précis (afficher ses 36 enfants recensés le rendrait illisible), mais chaque lien
-// ci-dessous reste réel — enfants vérifiés directement contre GENEALOGY_PARENTS/CHILDREN
-// (Zeus + Héra -> Arès, Hébé, Ilithyie ; Zeus + Pléiade Maïa -> Hermès ; Zeus + Léto -> Artémis
-// et Apollon ; Zeus + Métis -> Athéna ; Zeus + Sémélé -> Dionysos), pas une invention pour la
-// mise en page. Regroupés en une seule liste plutôt qu'une union par mère : Zeus n'a donc besoin
-// d'apparaître qu'une seule fois sur cet écran (demande explicite : « tu répètes trop de fois
-// Zeus alors que ça ne sert à rien [...] ne fais pas de répétitions comme ça »). Qui est la mère
-// de chacun reste consultable sur la fiche familiale complète de l'enfant concerné, à un clic.
-const OLYMPIANS_ZEUS_CHILDREN = ["arès", "hébé", "ilithyie", "hermès", "artémis", "apollon", "athéna", "dionysos"];
+// ci-dessous reste réel — enfants et mères vérifiés directement contre GENEALOGY_PARENTS/CHILDREN
+// (Zeus + Pléiade Maïa -> Hermès ; Zeus + Léto -> Artémis et Apollon ; Zeus + Métis -> Athéna ;
+// Zeus + Sémélé -> Dionysos), pas une invention pour la mise en page. Retour direct de
+// l'utilisatrice : « pour les olympiens, on n'a pas les mères des enfants de Zeus » — chaque
+// union a donc désormais sa propre mère affichée, sans pour autant redessiner Zeus une fois par
+// union (voir ftMultiUnionHubHTML, qui ne le duplique jamais). Arès, Hébé et Ilithyie (les
+// enfants de Zeus ET Héra) restent volontairement RATTACHÉS À LA CARTE D'HÉRA plus bas, aux
+// côtés d'Héphaïstos — Héra apparaît déjà comme fille de Cronos/Rhéa sur cet écran, la
+// redessiner une seconde fois comme simple conjointe de Zeus créerait exactement le genre de
+// doublon qu'elle a explicitement demandé de supprimer ; une ligne de mariage directe entre les
+// deux cartes existantes (voir plus bas) suffit à montrer le lien.
+const OLYMPIANS_ZEUS_OTHER_UNIONS = [
+  { partner: "maïa", children: ["hermès"] },
+  { partner: "léto", children: ["artémis", "apollon"] },
+  { partner: "métis", children: ["athéna"] },
+  { partner: "sémélé", children: ["dionysos"] },
+];
 
 // Écran dédié aux douze Olympiens : Cronos et Rhéa en tête, leurs six enfants juste en dessous
 // (les Olympiens ET Hadès, resté hors de l'Olympe mais bien de la même fratrie), puis, partant
-// de Zeus, sa carte unique suivie de ses enfants retenus pour ce tableau (voir
-// OLYMPIANS_ZEUS_CHILDREN), et enfin, dans une branche à part issue d'Ouranos seul, Aphrodite.
+// de Zeus, sa carte unique suivie de ses unions retenues pour ce tableau (voir
+// OLYMPIANS_ZEUS_OTHER_UNIONS), et enfin, dans une branche à part issue d'Ouranos seul, Aphrodite.
 // Toutes les lignes de parenté sont tracées par le moteur générique ci-dessus (voir
 // drawFamTree()) à partir des positions réelles des cartes, jamais approximées avec des
 // bordures CSS.
@@ -2893,13 +2977,24 @@ function renderOlympiansOverview(){
   const connectors = [];
   FT_SEQ = 0;
   const row2Ids = ["déméter", "hestia", "héra", "poséidon", "zeus", "hadès"];
+  let zeusNode = null, heraNode = null;
   const row2Nodes = row2Ids.map(cid => {
-    if(cid === "zeus") return ftPersonBranchHTML(connectors, "zeus", [{ partner: null, children: OLYMPIANS_ZEUS_CHILDREN }]);
-    // Héphaïstos, enfant d'Héra seule (sans Zeus) selon la tradition la plus répandue : même
-    // mécanisme de branche à union unique que Zeus, mais sans conjoint à afficher à côté d'elle.
-    if(cid === "héra") return ftPersonBranchHTML(connectors, "héra", [{ partner: null, children: ["héphaïstos"] }]);
+    if(cid === "zeus"){
+      zeusNode = ftPersonBranchHTML(connectors, "zeus", OLYMPIANS_ZEUS_OTHER_UNIONS);
+      return zeusNode;
+    }
+    // Héphaïstos, Arès, Hébé et Ilithyie sont tous les quatre rattachés directement à la carte
+    // d'Héra (voir le commentaire d'OLYMPIANS_ZEUS_OTHER_UNIONS ci-dessus) — Héphaïstos sans
+    // Zeus selon la tradition la plus répandue, les trois autres avec lui, mais Zeus n'a pas
+    // besoin d'une carte à côté d'Héra pour l'exprimer : une ligne de mariage directe entre les
+    // deux cartes (posée plus bas) suffit.
+    if(cid === "héra"){
+      heraNode = ftPersonBranchHTML(connectors, "héra", [{ partner: null, children: ["héphaïstos", "arès", "hébé", "ilithyie"] }]);
+      return heraNode;
+    }
     return ftLeaf(connectors, cid);
   });
+  if(zeusNode && heraNode) connectors.push({ marriage: [zeusNode.slot, heraNode.slot] });
   const cronosRhea = ftBranchHTML(connectors, {
     cardA: ftCardMarkup("cronos"),
     cardB: ftCardMarkup("rhéa"),
@@ -3037,7 +3132,7 @@ const GENEALOGY_OVERVIEWS = {
     treeScope: ["cadmos", "harmonie", "sémélé", "ino", "autonoë", "agavé", "polydoros", "labdacos", "laïos", "jocaste", "œdipe", "antigone"],
   },
   troy: {
-    title: "La guerre de Troie",
+    title: "La famille de Priam et Hécube",
     paragraphs: [
       "Priam (voir la fiche « Priam »), roi de Troie, et son épouse Hécube (voir la fiche « Hécube ») ont de très nombreux enfants, au premier rang desquels Hector (voir la fiche « Hector »), le plus vaillant défenseur de la cité, et Pâris (voir la fiche « Pâris »), dont l'enlèvement d'Hélène — épouse du roi grec Ménélas — déclenche la guerre elle-même.",
       "Cassandre (voir la fiche « Cassandre »), une autre de leurs filles, reçoit d'Apollon le don de prophétie mais aussi la malédiction de n'être jamais crue : elle prédit en vain la chute de Troie à qui veut bien l'entendre.",
