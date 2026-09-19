@@ -3919,3 +3919,41 @@ pour vérifier l'absence de régression, Titans, la lignée de Persée et les fi
 Zeus et d'Ulysse.
 
 `service-worker.js` (Panthéon) : `pantheon-v117` → `pantheon-v118`.
+
+## Audit de texte : homonymes, cohérence, et repunctuation (partie 1 : app.js)
+
+Trois demandes distinctes de l'utilisatrice dans le même message, en pleine nuit (« je te
+laisse travailler sur tout ça »).
+
+1. **« Enlève toutes les phrases du style : "homonyme de …, sans aucun lien de parenté avec
+   lui" »** — cette formule revenait dans une quinzaine d'entrées (Atlas, les trois Persès,
+   Capys, Uranie, les deux Antiope, Hippolyte/Hippolyté, Enyo, Clymène, Crotos, les Grées...),
+   à chaque fois pour signaler un simple homonyme. Préciser qu'un homonyme n'a « aucun lien de
+   parenté » est une évidence qui n'apprend rien : la queue de phrase a été retirée partout,
+   tout en gardant l'information utile (qui d'autre porte ce nom).
+2. **La fiche Clito, anneaux incohérents** — retour direct : « si il y a de la terre, même avec
+   un navire on ne peut pas franchir les anneaux ». La phrase disait les anneaux concentriques
+   de terre et d'eau de l'Atlantide « impossibles à franchir sans navire », alors qu'un navire
+   n'aide en rien à franchir les anneaux de TERRE. Réécrite pour dire ce que raconte réellement
+   Platon : infranchissables faute de tout moyen de navigation OU de passage d'un anneau à
+   l'autre, aucun des deux n'existant encore à cette époque.
+3. **« Enlève le plus possible les "—", ça fait beaucoup trop écriture IA »** — repunctuation de
+   tout le texte affiché à la lectrice dans `app.js` : `DEITY_NOTES` (36 tirets), `DEITY_LORE`
+   (25), `DEITY_CULT_FREE` (1), `SYMBOL_LIBRARY` (39), `GENEALOGY_OVERVIEWS` (11), `MAP_PLACES`
+   (12), et une poignée de chaînes ponctuelles de l'interface (alerte de paiement iOS, note de
+   l'écran Lieux, note du formulaire de profil, séparateur des « dimensions » d'un symbole,
+   stats de quiz maîtrisé) — remplacés par la virgule, le point-virgule, les deux-points ou des
+   parenthèses selon le contexte, jamais mécaniquement le même signe partout. Un seul tiret
+   subsiste volontairement, dans une référence bibliographique (« Ovide, Métamorphoses... »)
+   jugée trop risquée à retoucher sans en altérer la lisibilité. Jamais un commentaire de code
+   touché (ce fichier en use abondamment pour sa propre documentation, hors de portée de la
+   lectrice) ni le champ `name` d'une entrée.
+
+Le même travail sur `content.json` (le contenu premium, bien plus volumineux : environ 1100
+tirets à l'origine) est en cours au moment de ce commit, réparti sur plusieurs passes
+successives ; un second commit suivra une fois terminé et revérifié.
+
+Testé (2693 vérifications, dont 8 nouvelles) : suite complète repassée après chaque étape,
+`node --check` et validation JSON à chaque édition.
+
+`service-worker.js` (Panthéon) : `pantheon-v118` → `pantheon-v119`.
