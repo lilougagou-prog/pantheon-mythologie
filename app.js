@@ -1878,6 +1878,57 @@ function symbolsLinkingTo(deityId){
   return SYMBOL_ENTRIES.filter(([, s]) => (s.links || []).includes(deityId));
 }
 
+// Demande explicite de l'utilisatrice : un encart « Attributs » sur la fiche figure, sur le
+// même principe que « En un coup d'œil » côté symbole, mais affiché seulement quand une figure
+// en a — la plupart n'en ont aucun, ce n'est pas un défaut à corriger. Volontairement distinct de
+// symbolsLinkingTo() ci-dessus (SYMBOL_LIBRARY[id].links, qui n'existe que pour 6 symboles sur 94
+// et resterait bien trop pauvre pour cet usage) : cette liste-ci est construite à la main, mais
+// jamais inventée — chaque entrée reprend une association déjà explicitement affirmée dans le
+// desc d'un symbole déjà publié (« Attribut de X », « lié(e) à X », « Arbre sacré de X »...),
+// jamais une déduction ou une association tierce non écrite noir sur blanc quelque part dans
+// l'appli. Volontairement plus court qu'exhaustif : seules les associations affirmées sans
+// ambiguïté sur UN (ou deux) propriétaire(s) précis sont reprises ici — un symbole comme
+// "sceptre" ou "couronne" (aucune figure nommée dans son desc) ou "crabe"/"scorpion" (envoyés
+// PAR un dieu CONTRE quelqu'un, un épisode plutôt qu'un attribut personnel) en sont donc absents.
+const FIGURE_ATTRIBUTES = {
+  zeus: ["foudre", "aigle", "cygne", "chêne"],
+  héra: ["paon"],
+  poséidon: ["trident"],
+  athéna: ["chouette", "olivier", "olive", "lance"],
+  apollon: ["lyre", "laurier", "char solaire"],
+  artémis: ["arc"],
+  aphrodite: ["colombe", "myrte"],
+  hermès: ["caducée", "ailes"],
+  dionysos: ["vigne", "lierre"],
+  hécate: ["torches", "chien"],
+  hadès: ["grenade"],
+  perséphone: ["grenade"],
+  hélios: ["char solaire"],
+  iris: ["arc-en-ciel"],
+  pan: ["flûte"],
+  thémis: ["balance"],
+  héraclès: ["lion"],
+  éros: ["arc", "ailes"],
+  niké: ["ailes"],
+  achille: ["lance"],
+};
+
+function figureAttributesHTML(id){
+  const symbolIds = (FIGURE_ATTRIBUTES[id] || []).filter(sid => sid in SYMBOL_LIBRARY);
+  if(!symbolIds.length) return "";
+  return `
+    <section class="figure-attributes">
+      <h4>Attributs</h4>
+      <div class="chips">
+        ${symbolIds.map(sid => {
+          const s = SYMBOL_LIBRARY[sid];
+          return `<button class="chip chip-symbol" data-nav="symbolDetail" data-id="${escapeHTML(sid)}">${symbolChipIconHTML(sid, s)}${escapeHTML(s.label)}</button>`;
+        }).join("")}
+      </div>
+    </section>
+  `;
+}
+
 function deityPortraitClass(id){
   return DEITY_PORTRAIT_WIDE.has(id) ? "deity-portrait deity-portrait-wide" : "deity-portrait";
 }
@@ -2559,7 +2610,7 @@ function genealogyLineageHTML(id){
           `).join("")}
         </div>
       ` : ""}
-      <button class="geneal-tree-link" data-nav="genealogy" data-id="${escapeHTML(id)}">🌳 Voir dans l'arbre généalogique</button>
+      <button class="geneal-tree-link" data-nav="genealogy" data-id="${escapeHTML(id)}"><img class="quiz-icon-img" src="assets/badge-genealogy-tree-link.webp" alt="">Voir dans l'arbre généalogique</button>
     </div>
   `;
 }
@@ -2591,6 +2642,7 @@ function renderFigureDetail(id){
       ${portrait ? `<img class="${deityPortraitClass(id)}" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy"${deityPortraitStyleHTML(id)}>` : ""}
       <h2>${escapeHTML(name)}</h2>
       <p class="note">${escapeHTML(note)}</p>
+      ${figureAttributesHTML(id)}
       ${paragraphs.length ? `<h3>Le mythe</h3>${paragraphs.map(p => {
         const inline = inlinePortraits.find(cfg => p.includes(cfg.match));
         const inlineClass = inline?.wide ? "deity-portrait-inline deity-portrait-inline-wide" : "deity-portrait-inline";
@@ -4519,7 +4571,7 @@ function quizFigureButtonHTML(id, paragraphs){
   const rel = genealogyRelations(id);
   if(rel.parents.length + rel.children.length < 2) return "";
   if((paragraphs || []).length < 2) return "";
-  return `<button class="quiz-figure-btn" data-action="quiz-figure" data-id="${escapeHTML(id)}">🧠 Teste tes connaissances sur ${escapeHTML(genealogyDisplayName(id))}</button>`;
+  return `<button class="quiz-figure-btn" data-action="quiz-figure" data-id="${escapeHTML(id)}"><img class="quiz-icon-img" src="assets/badge-figure-quiz.webp" alt="">Teste tes connaissances sur ${escapeHTML(genealogyDisplayName(id))}</button>`;
 }
 
 function quizAnswerQcm(choiceIndex){

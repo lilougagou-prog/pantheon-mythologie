@@ -349,6 +349,16 @@ h1, h2, h3{
   margin-top: 6px;
 }
 .geneal-tree-link:hover{ background: var(--border); }
+/* Icônes fournies par l'utilisatrice, remplaçant les emoji 🌳/🧠 — même patron que
+   .quiz-icon-img déjà en place ailleurs (le champ icon porte directement du HTML), simplement
+   dimensionné pour s'aligner sur le texte d'un bouton pleine largeur plutôt qu'une tuile. */
+.geneal-tree-link .quiz-icon-img, .quiz-figure-btn .quiz-icon-img{
+  width: 28px;
+  height: 28px;
+  vertical-align: middle;
+  margin-right: 8px;
+  margin-bottom: 3px;
+}
 
 .geneal-union-line{ margin-bottom: 10px; }
 .geneal-union-line:last-child{ margin-bottom: 0; }
@@ -812,6 +822,29 @@ h1, h2, h3{
   color: var(--bronze);
 }
 .symbol-detail .symbol-glance p{ margin: 0; color: var(--ink); line-height: 1.55; }
+
+/* ----- Attributs (fiche figure) ----- */
+/* Demande explicite de l'utilisatrice : un encart « comme dans symbole "en un coup d'œil" » —
+   même boîte (fond, bordure, titre) que .symbol-glance ci-dessus, mais avec des chips cliquables
+   (vers le symbole lui-même) plutôt qu'un paragraphe, puisqu'un attribut n'est pas une phrase à
+   lire mais une liste de symboles à reconnaître. N'apparaît que pour les figures qui en ont une
+   (voir FIGURE_ATTRIBUTES dans app.js) — la plupart n'en ont aucun, ce n'est jamais un vide à
+   combler par une boîte vide.*/
+.detail .figure-attributes{
+  background: var(--marble-deep);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 4px 0 22px;
+}
+.detail .figure-attributes h4{
+  margin: 0 0 10px;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--bronze);
+}
 
 .symbol-detail .symbol-why{ margin-bottom: 8px; }
 

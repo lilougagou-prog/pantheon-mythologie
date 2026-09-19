@@ -3845,3 +3845,33 @@ Testé (2665 vérifications, inchangées — remplacement d'asset seul, aucun co
 contrôlé visuellement en clair et en sombre, image bien à sa place.
 
 `service-worker.js` (Panthéon) : `pantheon-v115` → `pantheon-v116`.
+
+## Nouvelles icônes pour les boutons de fiche figure, et encart « Attributs »
+
+Deux demandes distinctes.
+
+**Icônes des boutons contextuels** — 2 images envoyées par l'utilisatrice, une par bouton de
+fiche figure : le médaillon chouette/parchemin remplace l'emoji 🧠 (« Teste tes connaissances »),
+l'olivier remplace l'emoji 🌳 (« Voir dans l'arbre généalogique »). Même patron `.quiz-icon-img`
+déjà en place partout ailleurs, précachés dans `service-worker.js` comme les autres badges
+illustrés.
+
+**Encart « Attributs »** — demande explicite : « un petit encart, comme dans symbole "en un coup
+d'œil", et mettre "attributs" uniquement quand il y en a [...] juste avant "le mythe". »
+`FIGURE_ATTRIBUTES` est écrit à la main mais jamais inventé : chaque entrée reprend une
+association déjà affirmée dans le `desc` d'un symbole déjà publié dans l'appli (« Attribut de
+X », « lié(e) à X », « Arbre sacré de X »...), jamais une déduction personnelle ni une source
+extérieure. Volontairement plus court qu'exhaustif — un symbole comme « sceptre » ou « couronne »
+(aucune figure nommée dans son `desc`) ou « crabe »/« scorpion » (envoyés PAR un dieu CONTRE
+quelqu'un, un épisode plutôt qu'un attribut personnel) en sont donc absents. `.figure-attributes`
+reprend le style de `.symbol-glance` (même boîte : fond, bordure, titre), mais avec des chips
+cliquables vers le symbole lui-même plutôt qu'un paragraphe — un attribut se reconnaît, ça ne se
+lit pas comme une phrase. La plupart des figures (mineures, mortelles) n'ont logiquement aucune
+entrée : ce n'est jamais un vide à combler par une boîte vide, juste l'absence de la section.
+
+Testé (2672 vérifications, dont 8 nouvelles) : rendu contrôlé visuellement en clair et en sombre
+pour les deux boutons (icônes bien visibles, ni riquiqui ni disproportionnées) et pour l'encart
+Attributs (Zeus avec ses 4 attributs affiché juste avant Le mythe ; une figure sans attribut,
+comme Laërte, confirmée sans la moindre boîte).
+
+`service-worker.js` (Panthéon) : `pantheon-v116` → `pantheon-v117`.
