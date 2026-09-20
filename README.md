@@ -4147,3 +4147,23 @@ l'écran des Olympiens (ligne de mariage désormais sous le texte, sans régress
 Poséidon/Héra).
 
 `service-worker.js` (Panthéon) : `pantheon-v125` → `pantheon-v126`.
+
+## Renommage de l'aperçu de Troie, cinq enfants de Priam et Hécube ajoutés à son arbre
+
+Retour direct de l'utilisatrice : renommer l'aperçu généalogique « La famille de Priam et
+Hécube » en « La famille royale de Troie » (tuile de l'écran Généalogie et titre de l'écran
+lui-même), et y ajouter Hélénos, Déiphobe, Polyxène, Polydore et Créüse.
+
+Quatre de ces cinq figures (Hélénos, Polyxène, Polydore, Créüse) étaient déjà de vraies fiches,
+déjà documentées comme enfants de Priam et Hécube dans `GENEALOGY_PARENTS` : simplement absentes
+du `treeScope`/`chips` curés propres à cet aperçu précis, qui n'en affichait que trois (Hector,
+Pâris, Cassandre) sur les huit réellement connus. Seul Déiphobe manquait entièrement du corpus,
+alors même que son propre frère Hélénos le mentionne déjà dans sa fiche (leur rivalité pour la
+main d'Hélène après la mort de Pâris) : nouvelle fiche créée sur le même principe que ses frères
+et sœurs (2-3 paragraphes, pas de culte particulier), reliée à Priam et Hécube, et la mention
+déjà existante chez Hélénos transformée en lien maintenant qu'elle a une cible.
+
+Testé (2733 vérifications, dont 4 nouvelles) : contrôle visuel en clair et en sombre de l'aperçu
+renommé (les 8 enfants dans l'arbre et les chips), de la fiche de Déiphobe et de son arbre.
+
+`service-worker.js` (Panthéon) : `pantheon-v126` → `pantheon-v127`.

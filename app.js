@@ -157,6 +157,7 @@ const DEITY_NOTES = {
   "hécube":"Reine de Troie, épouse de Priam et mère d'un très grand nombre de leurs enfants, dont Hector et Pâris.",
   "priam":"Dernier roi de Troie, père d'Hector, Pâris et Cassandre, tué par Néoptolème à la chute de la ville.",
   "hector":"Plus grand héros troyen, fils de Priam et époux d'Andromaque, tué en duel par Achille.",
+  "déiphobe":"Fils de Priam et d'Hécube, le plus vaillant des Troyens après la mort d'Hector, tué par Ménélas à la chute de Troie.",
   "andromaque":"Épouse d'Hector, réduite en esclavage après la mort de son mari et de leur fils à la chute de Troie.",
   "molossos":"Fils de Néoptolème et d'Andromaque, il donna son nom à la Molossie, région d'Épire où sa mère l'éleva en exil.",
   "pâris":"Prince troyen dont l'enlèvement d'Hélène, promise par Aphrodite, déclencha la guerre de Troie.",
@@ -1088,6 +1089,7 @@ const GENEALOGY_PARENTS = {
   "polyxène": ["priam", "hécube"],
   "polydore": ["priam", "hécube"],
   "hector": ["priam", "hécube"],
+  "déiphobe": ["priam", "hécube"],
   "créüse": ["priam", "hécube"],
   "astyanax": ["hector", "andromaque"],
   // La Crète de Minos et Thésée.
@@ -1378,7 +1380,7 @@ const GENEALOGY_STARTING_POINTS = [
   { special: "titansOverview", label: "Les douze Titans", sub: "Explorez la première grande génération divine." },
   { special: "olympiansOverview", label: "Les douze Olympiens", sub: "Découvrez les dieux qui règnent sur l'Olympe." },
   { special: "perseeLineage", label: "La lignée de Persée", sub: "Suivez la famille de Persée à travers les générations." },
-  { special: "troyOverview", label: "La famille de Priam et Hécube", sub: "Le roi et la reine de Troie, et leurs enfants au cœur de la guerre." },
+  { special: "troyOverview", label: "La famille royale de Troie", sub: "Le roi et la reine de Troie, et leurs enfants au cœur de la guerre." },
   { special: "atridesOverview", label: "Les Atrides", sub: "Suivez une famille marquée par les rivalités et les tragédies." },
   { special: "thebanOverview", label: "Le cycle thébain", sub: "Explorez les générations qui ont façonné Thèbes." },
   { special: "ulysseOverview", label: "La famille d'Ulysse", sub: "Découvrez les liens qui unissent la famille d'Ulysse." },
@@ -3206,15 +3208,15 @@ const GENEALOGY_OVERVIEWS = {
     treeScope: ["cadmos", "harmonie", "sémélé", "ino", "autonoë", "agavé", "polydoros", "labdacos", "laïos", "jocaste", "œdipe", "antigone"],
   },
   troy: {
-    title: "La famille de Priam et Hécube",
+    title: "La famille royale de Troie",
     paragraphs: [
       "Priam (voir la fiche « Priam »), roi de Troie, et son épouse Hécube (voir la fiche « Hécube ») ont de très nombreux enfants, au premier rang desquels Hector (voir la fiche « Hector »), le plus vaillant défenseur de la cité, et Pâris (voir la fiche « Pâris »), dont l'enlèvement d'Hélène, épouse du roi grec Ménélas, déclenche la guerre elle-même.",
       "Cassandre (voir la fiche « Cassandre »), une autre de leurs filles, reçoit d'Apollon le don de prophétie mais aussi la malédiction de n'être jamais crue : elle prédit en vain la chute de Troie à qui veut bien l'entendre.",
       "La guerre décime la lignée royale : Hector tombe sous les coups d'Achille, Pâris meurt peu après, et Troie, livrée par la ruse du cheval de bois, est détruite : Priam lui-même est tué durant le sac de la ville, mettant fin à sa dynastie.",
     ],
-    chips: ["priam", "hécube", "hector", "pâris", "cassandre", "hélène", "achille"],
+    chips: ["priam", "hécube", "hector", "pâris", "cassandre", "hélénos", "déiphobe", "polyxène", "polydore", "créüse", "hélène", "achille"],
     treeRoot: "priam",
-    treeScope: ["priam", "hécube", "hector", "pâris", "cassandre"],
+    treeScope: ["priam", "hécube", "hector", "pâris", "cassandre", "hélénos", "déiphobe", "polyxène", "polydore", "créüse"],
   },
   atrides: {
     title: "Les Atrides",
