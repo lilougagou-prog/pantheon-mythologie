@@ -3949,11 +3949,45 @@ laisse travailler sur tout ça »).
    touché (ce fichier en use abondamment pour sa propre documentation, hors de portée de la
    lectrice) ni le champ `name` d'une entrée.
 
-Le même travail sur `content.json` (le contenu premium, bien plus volumineux : environ 1100
-tirets à l'origine) est en cours au moment de ce commit, réparti sur plusieurs passes
-successives ; un second commit suivra une fois terminé et revérifié.
-
 Testé (2693 vérifications, dont 8 nouvelles) : suite complète repassée après chaque étape,
 `node --check` et validation JSON à chaque édition.
 
 `service-worker.js` (Panthéon) : `pantheon-v118` → `pantheon-v119`.
+
+## Audit de texte, partie 2 : content.json, et trois incohérences supplémentaires
+
+Suite du round précédent. `content.json` (le contenu premium : 334 figures, 89 symboles, 60
+lieux) contenait environ 1100 tirets cadratins, contre une grosse centaine dans `app.js` — le
+gros du travail restait donc là. Repunctué en intégralité, entrée par entrée, en préservant
+scrupuleusement chaque fait, chaque nom et chaque citation « (voir la fiche « X ») » : plus un
+seul tiret cadratin ne subsiste dans tout le fichier.
+
+En le relisant pour retirer les tirets, quatre incohérences réelles sont aussi remontées (au-delà
+de Clito, déjà corrigée) :
+
+1. **Zéphyr contre lui-même** — sa propre fiche disait qu'il avait dévié le disque d'Apollon
+   « par dépit » d'avoir été repoussé par Chloris ; celle d'Hyacinthe disait qu'il l'avait fait
+   par jalousie amoureuse envers Hyacinthe lui-même. Les deux ne peuvent pas être vraies à la
+   fois, et la fiche de Chloris dément même la première version (Zéphyr l'épouse, il n'est
+   jamais repoussé). Harmonisé sur la version attestée, partagée désormais par les deux fiches.
+2. **La note de la Pythie contredisait son propre mythe** — « une clarté parfois brutale »,
+   alors que le mythe qui suit dit explicitement l'inverse (« réputées ambiguës autant
+   qu'infaillibles », illustré par l'oracle volontairement équivoque donné au roi Crésus).
+   Corrigée pour dire l'inverse exact.
+3. et 4. **Deux renvois orphelins** dans les symboles Myrte et Noix : « cet épisode » et « son
+   sort » renvoyaient à un épisode que seul le champ « en un coup d'œil » racontait, jamais le
+   mythe complet lui-même. Les deux phrases racontent désormais l'épisode directement.
+
+Une relecture automatisée de tout le fichier après repunctuation a aussi débusqué quatre
+artefacts mécaniques laissés par la réécriture (une double virgule chez Ilithyie, deux « en en »
+fautifs chez Mélinoé et Sisyphe, un verbe manquant chez Atys qui préexistait au round) : corrigés
+au cas par cas.
+
+Testé (2697 vérifications, dont 5 nouvelles) : suite complète, `node --check`, validation JSON,
+relecture automatisée (recherche de virgules doubles, parenthèses mal formées, mots répétés) sur
+tout `content.json`, et contrôle visuel en clair et en sombre d'une douzaine de fiches parmi les
+plus retravaillées (Clito, Zéphyr, Hyacinthe, Pythie, Atlas d'Atlantide, Héraclès, Énée, Sisyphe,
+Mélinoé, Myrte, Noix, Atlantide).
+
+`service-worker.js` (Panthéon) : `pantheon-v119` → `pantheon-v122` (une version par étape de
+correction : Zéphyr/Pythie/Myrte/Noix, puis la repunctuation complète de content.json).
