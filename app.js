@@ -4020,12 +4020,18 @@ function quizPreferMajor(ids){
 
 // --- Générateurs : figures. Le "scope" détermine le SUJET de la question (quelle figure est
 // interrogée) ET, en priorité, le vivier des distracteurs (voir quizDistractorPool) — avec
-// repli sur tout le corpus seulement si le thème n'a pas assez de candidats.
+// repli sur tout le corpus seulement si le thème n'a pas assez de candidats. `focusId`
+// (optionnel, voir quizStartForFigure/quizBuildSession) force ce sujet sur une figure précise
+// plutôt qu'un tirage au hasard dans le scope : si cette figure n'est pas une candidate valide
+// pour le type de question (ex. pas d'enfant connu pour quizGenChild), le générateur renvoie
+// null pour cet essai plutôt que de se rabattre sur une autre figure du scope — jamais de
+// question hors-sujet quand un focus est demandé.
 
-function quizGenNoteMatch(scopeIds){
+function quizGenNoteMatch(scopeIds, focusId){
   const candidates = scopeIds.filter(id => DEITY_NOTES[id]);
   if(!candidates.length) return null;
-  const subject = quizPick(candidates);
+  if(focusId && !candidates.includes(focusId)) return null;
+  const subject = focusId || quizPick(candidates);
   const distractors = quizDistractorPool(scopeIds, [subject], 3);
   if(distractors.length < 3) return null;
   const choiceIds = quizShuffle([subject, ...distractors]);
@@ -4038,10 +4044,11 @@ function quizGenNoteMatch(scopeIds){
   };
 }
 
-function quizGenParent(scopeIds){
+function quizGenParent(scopeIds, focusId){
   const candidates = scopeIds.filter(id => (GENEALOGY_PARENTS[id] || []).length > 0);
   if(!candidates.length) return null;
-  const childId = quizPick(candidates);
+  if(focusId && !candidates.includes(focusId)) return null;
+  const childId = focusId || quizPick(candidates);
   const parents = GENEALOGY_PARENTS[childId];
   const correct = quizPick(parents);
   const distractors = quizDistractorPool(scopeIds, [childId, ...parents], 3);
@@ -4056,10 +4063,11 @@ function quizGenParent(scopeIds){
   };
 }
 
-function quizGenChild(scopeIds){
+function quizGenChild(scopeIds, focusId){
   const candidates = scopeIds.filter(id => (GENEALOGY_CHILDREN[id] || []).length > 0);
   if(!candidates.length) return null;
-  const parentId = quizPick(candidates);
+  if(focusId && !candidates.includes(focusId)) return null;
+  const parentId = focusId || quizPick(candidates);
   const children = GENEALOGY_CHILDREN[parentId];
   const correct = quizPick(children);
   const distractors = quizDistractorPool(scopeIds, [parentId, ...children], 3);
@@ -4074,10 +4082,11 @@ function quizGenChild(scopeIds){
   };
 }
 
-function quizGenGrandparent(scopeIds){
+function quizGenGrandparent(scopeIds, focusId){
   const candidates = scopeIds.filter(id => (GENEALOGY_PARENTS[id] || []).some(p => (GENEALOGY_PARENTS[p] || []).length > 0));
   if(!candidates.length) return null;
-  const grandchildId = quizPick(candidates);
+  if(focusId && !candidates.includes(focusId)) return null;
+  const grandchildId = focusId || quizPick(candidates);
   const parents = GENEALOGY_PARENTS[grandchildId] || [];
   const grandparents = [];
   for(const p of parents) for(const gp of (GENEALOGY_PARENTS[p] || [])) if(!grandparents.includes(gp)) grandparents.push(gp);
@@ -4095,10 +4104,11 @@ function quizGenGrandparent(scopeIds){
   };
 }
 
-function quizGenTrueFalse(scopeIds){
+function quizGenTrueFalse(scopeIds, focusId){
   const candidates = scopeIds.filter(id => (GENEALOGY_PARENTS[id] || []).length > 0);
   if(!candidates.length) return null;
-  const childId = quizPick(candidates);
+  if(focusId && !candidates.includes(focusId)) return null;
+  const childId = focusId || quizPick(candidates);
   const parents = GENEALOGY_PARENTS[childId];
   const isTrue = Math.random() < 0.5;
   let statedParent;
@@ -4126,10 +4136,11 @@ function quizGenTrueFalse(scopeIds){
 // vrai/faux sur la description elle-même (DEITY_NOTES, jamais un second texte à écrire) plutôt
 // que sur une relation de parenté — toujours une vérification, pas une simple reconnaissance
 // comme quizGenNoteMatch, mais sans la généalogie que ce niveau maîtrise déjà par ailleurs.
-function quizGenNoteTrueFalse(scopeIds){
+function quizGenNoteTrueFalse(scopeIds, focusId){
   const candidates = scopeIds.filter(id => DEITY_NOTES[id]);
   if(candidates.length < 2) return null;
-  const noteOwnerId = quizPick(candidates);
+  if(focusId && !candidates.includes(focusId)) return null;
+  const noteOwnerId = focusId || quizPick(candidates);
   const isTrue = Math.random() < 0.5;
   let statedId;
   if(isTrue){
@@ -4469,7 +4480,7 @@ function quizGenEventOrderMulti(themeId){
 }
 
 // --- Sélection du générateur selon le niveau et le thème.
-function quizGenerateQuestion(levelId, theme, figureIds){
+function quizGenerateQuestion(levelId, theme, figureIds, focusId){
   if(theme.symbolsOnly) return quizPick([quizGenSymbolDesc, quizGenSymbolCategory])();
   if(theme.placesOnly) return quizPick([quizGenPlaceDesc, quizGenPlaceCategory, quizGenPlaceFigure])();
   const scope = levelId === "débutant" ? quizPreferMajor(figureIds) : figureIds;
@@ -4503,9 +4514,9 @@ function quizGenerateQuestion(levelId, theme, figureIds){
   // petit, "La famille d'Ulysse", 5 figures et 6 événements, a encore assez de candidats pour les
   // 3 niveaux sans jamais reformuler le même prompt).
   const pools = {
-    "débutant": [() => quizGenNoteMatch(scope), () => quizGenEventDesc(theme.id)],
-    "intermédiaire": [() => quizGenParent(scope), () => quizGenChild(scope), () => quizGenTrueFalse(scope), () => quizGenNoteTrueFalse(scope), () => quizGenEventOrder(theme.id)],
-    "expert": [() => quizGenGrandparent(scope), () => quizGenTypeAnswer(scope), () => quizGenTypeAnswerChild(scope), () => quizGenEventOrderMulti(theme.id)],
+    "débutant": [() => quizGenNoteMatch(scope, focusId), () => quizGenEventDesc(theme.id)],
+    "intermédiaire": [() => quizGenParent(scope, focusId), () => quizGenChild(scope, focusId), () => quizGenTrueFalse(scope, focusId), () => quizGenNoteTrueFalse(scope, focusId), () => quizGenEventOrder(theme.id)],
+    "expert": [() => quizGenGrandparent(scope, focusId), () => quizGenTypeAnswer(scope), () => quizGenTypeAnswerChild(scope), () => quizGenEventOrderMulti(theme.id)],
   };
   const generators = pools[levelId] || pools["débutant"];
   return quizPick(generators)();
@@ -4695,6 +4706,10 @@ function quizBuildSession(levelId, theme, opts){
   opts = opts || {};
   const figureIds = opts.figureIds || quizThemeFigureIds(theme);
   const length = opts.length || QUIZ_SESSION_LENGTH;
+  // Voir quizStartForFigure : force le sujet de chaque question générée sur cette figure
+  // précise plutôt que sur n'importe laquelle du scope. Toujours absent (undefined) pour un
+  // quiz par thème classique — comportement inchangé dans ce cas.
+  const focusId = opts.focusId || null;
   const questions = [];
   const usedPrompts = new Set();
   // Une ronde "relie les paires" en Intermédiaire/Expert, quand le thème s'y prête (jamais en
@@ -4706,7 +4721,7 @@ function quizBuildSession(levelId, theme, opts){
   let guard = 0;
   while(questions.length < length && guard < 300){
     guard++;
-    const q = quizGenerateQuestion(levelId, theme, figureIds);
+    const q = quizGenerateQuestion(levelId, theme, figureIds, focusId);
     if(!q || usedPrompts.has(q.prompt)) continue;
     usedPrompts.add(q.prompt);
     questions.push(q);
@@ -4757,7 +4772,17 @@ function quizStartForFigure(id){
   const rel = genealogyRelations(id);
   const scopeIds = [...new Set([id, ...rel.parents, ...rel.children, ...rel.siblings])];
   const theme = { id: `figure:${id}`, label: genealogyDisplayName(id), adHoc: true };
-  quizSession = quizBuildSession("intermédiaire", theme, { figureIds: scopeIds, length: 5 });
+  // Retour direct de l'utilisatrice, sur la fiche de Zéthos : « j'ai fait le quiz [...] les
+  // questions ne sont pas du tout sur lui ! » Cause : chaque générateur de question piochait son
+  // SUJET au hasard dans tout le "scope" (la figure + parents + enfants + fratrie), jamais
+  // spécifiquement sur la figure cliquée — sur une petite fratrie avec un parent aussi
+  // volumineux que Zeus, les questions finissaient presque toujours sur lui plutôt que sur
+  // Zéthos. `focusId` force désormais le sujet sur la figure elle-même chaque fois qu'elle est
+  // une candidate valide pour le type de question tiré (sinon ce générateur renvoie null pour
+  // cet essai, jamais un repli sur une autre figure du scope) ; les distracteurs, eux,
+  // continuent de venir de tout le scope (voire de tout le corpus si besoin, voir
+  // quizDistractorPool) pour rester crédibles.
+  quizSession = quizBuildSession("intermédiaire", theme, { figureIds: scopeIds, length: 5, focusId: id });
   quizSession.intermediaireWasLockedBefore = !quizLevelUnlocked("intermédiaire", progress);
   quizEnsureMatchState();
   go({ type: "quiz" });

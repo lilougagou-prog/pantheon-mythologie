@@ -4209,3 +4209,32 @@ bracket classique inchangé sur Héphaïstos), de l'arbre et de la fiche d'Antio
 Nyctée), et des fiches de Kéroessa et Byzas.
 
 `service-worker.js` (Panthéon) : `pantheon-v127` → `pantheon-v128`.
+
+## Le mini-quiz d'une fiche figure posait des questions sur n'importe qui d'autre du scope
+
+Retour direct de l'utilisatrice : « J'étais sur la fiche Zéthos et j'ai fait le quiz « teste tes
+connaissances sur Zéthos ». Les questions ne sont pas du tout sur lui ! C'était très nul. »
+
+Cause exacte : `quizStartForFigure()` limite bien le quiz à un petit "scope" (la figure, ses
+parents, ses enfants, sa fratrie), mais chaque générateur de question (`quizGenParent`,
+`quizGenChild`, `quizGenTrueFalse`, `quizGenNoteTrueFalse`) piochait ensuite son SUJET au hasard
+dans tout ce scope, jamais spécifiquement sur la figure cliquée. Pour Zéthos (scope réduit à
+lui-même, Zeus, Antiope et son frère jumeau Amphion), les questions atterrissaient donc presque
+systématiquement sur Zeus, la figure la plus "riche" du scope en relations à interroger, plutôt
+que sur Zéthos lui-même.
+
+Corrigé avec un nouveau paramètre `focusId`, propagé de `quizStartForFigure()` à travers
+`quizBuildSession()` jusqu'à chacun des quatre générateurs : le sujet de la question est
+désormais forcé sur la figure cliquée chaque fois qu'elle s'y prête (a des parents connus, des
+enfants connus, etc.) ; quand ce n'est pas le cas pour un type de question donné, ce générateur
+renvoie simplement `null` pour cet essai (un autre est retiré à la place) plutôt que de se
+rabattre sur une autre figure du scope. Les distracteurs, eux, continuent de piocher dans tout le
+scope, voire tout le corpus si besoin, pour rester crédibles. Absent (`undefined`) pour un quiz
+par thème classique (« Les douze Olympiens », etc.), qui garde son comportement inchangé.
+
+Testé (2747 vérifications, dont 3 nouvelles) : script Playwright dédié, 15 tirages sur chacune de
+Zéthos, Amphion, Hélénos, Polydore et Byzas — 100 % des questions générées portent bien sur la
+figure cliquée (relation directe, ou sa propre description avec un décoy), contre une bonne
+moitié hors-sujet avant le correctif. Contrôle visuel en clair et en sombre du quiz de Zéthos.
+
+`service-worker.js` (Panthéon) : `pantheon-v128` → `pantheon-v129`.
