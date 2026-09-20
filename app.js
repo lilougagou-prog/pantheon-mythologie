@@ -2544,21 +2544,32 @@ function drawFamTree(){
   svg.setAttribute("viewBox", `0 0 ${treeRect.width} ${treeRect.height}`);
   let out = "";
   for(const conn of FT_CONNECTORS){
-    // Ligne de mariage « en bus » entre une figure et TOUS ses conjoints d'un même mouvement
-    // horizontal (voir ftMultiUnionHubHTML) — jamais une carte "hub" redessinée une fois par
-    // conjoint. Les cartes reliées n'ont pas besoin d'être voisines dans le DOM ni de partager
-    // un même .ft-couple : chaque slot est retrouvé indépendamment, comme pour un connecteur
-    // enfants/parent classique.
+    // Ligne de mariage entre une figure et TOUS ses conjoints (voir ftMultiUnionHubHTML) —
+    // jamais une carte "hub" redessinée une fois par conjoint. Retour direct de l'utilisatrice :
+    // une ligne droite au milieu de la rangée passait derrière une carte tierce placée entre
+    // les deux conjoints (Poséidon, entre Héra et Zeus) — cachée par le fond opaque de la carte,
+    // mais donnant malgré tout l'impression trompeuse que cette carte tierce fait partie de
+    // l'union (« on dirait que c'est Poséidon le père des enfants d'Héra »). La ligne plonge
+    // désormais sous LE BAS de chaque carte de la rangée (jamais à travers une case), dans un
+    // couloir dédié, avant de rejoindre chaque conjoint par une chute verticale courte. Style
+    // distinct (tireté, teinte terracotta) pour ne jamais la confondre avec une ligne de
+    // filiation (voir .ft-line-marriage). Les cartes reliées n'ont pas besoin d'être voisines
+    // dans le DOM ni de partager un même .ft-couple : chaque slot est retrouvé indépendamment.
     if(conn.marriage){
       const rects = conn.marriage
         .map(slot => tree.querySelector(`[data-slot="${slot}"]`))
         .filter(Boolean)
         .map(el => ftVisualRect(el));
       if(rects.length < 2) continue;
-      const y = rects.reduce((sum, r) => sum + (r.top + r.bottom) / 2, 0) / rects.length - treeRect.top;
-      const xs = rects.map(r => r.left + r.width / 2 - treeRect.left).sort((a, b) => a - b);
-      out += `<line class="ft-line" x1="${xs[0]}" y1="${y}" x2="${xs[xs.length - 1]}" y2="${y}" />`;
-      xs.forEach(x => { out += `<circle class="ft-joint" cx="${x}" cy="${y}" r="3.5" />`; });
+      const laneY = Math.max(...rects.map(r => r.bottom)) - treeRect.top + 14;
+      const xs = rects.map(r => r.left + r.width / 2 - treeRect.left);
+      const sortedXs = xs.slice().sort((a, b) => a - b);
+      out += `<line class="ft-line ft-line-marriage" x1="${sortedXs[0]}" y1="${laneY}" x2="${sortedXs[sortedXs.length - 1]}" y2="${laneY}" />`;
+      out += `<circle class="ft-joint ft-joint-marriage" cx="${(sortedXs[0] + sortedXs[sortedXs.length - 1]) / 2}" cy="${laneY}" r="3.5" />`;
+      rects.forEach((r, i) => {
+        const yBottom = r.bottom - treeRect.top;
+        out += `<line class="ft-line ft-line-marriage" x1="${xs[i]}" y1="${yBottom}" x2="${xs[i]}" y2="${laneY}" />`;
+      });
       continue;
     }
     const originEl = tree.querySelector(`[data-slot="${conn.unionSlot}"]`);

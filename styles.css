@@ -399,6 +399,12 @@ h1, h2, h3{
 .ft-links{ position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
 .ft-line{ stroke: var(--bronze); stroke-width: 1.5px; fill: none; }
 .ft-joint{ fill: var(--bronze); }
+/* Ligne de mariage acheminée sous la rangée (voir drawFamTree(), conn.marriage) — jamais une
+   ligne de filiation, un style résolument distinct (tireté, teinte terracotta) pour qu'on ne
+   confonde jamais les deux, même quand elle passe sous une carte tierce non impliquée dans
+   cette union (retour direct : « on dirait que c'est Poséidon le père des enfants d'Héra »). */
+.ft-line-marriage{ stroke: var(--terracotta); stroke-dasharray: 4 3; }
+.ft-joint-marriage{ fill: var(--terracotta); }
 
 /* nowrap, jamais wrap : quand une figure a ses deux lignées de grands-parents documentées (ex.
    Ascagne, via Énée et via Créüse), un retour à la ligne ferait tomber la seconde branche sous

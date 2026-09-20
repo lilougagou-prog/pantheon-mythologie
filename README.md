@@ -4014,3 +4014,33 @@ Testé (2699 vérifications, dont 2 nouvelles) : contrôle visuel des trois écr
 confirmant des chips de texte simple sans plus aucune image qui déborde.
 
 `service-worker.js` (Panthéon) : `pantheon-v122` → `pantheon-v123`.
+
+## Restructuration de la ligne de mariage entre unions multiples
+
+Retour direct de l'utilisatrice, avec capture d'écran : « on dirait que c'est Poséidon le père
+des enfants d'Héra ! » Sur l'écran des douze Olympiens, la ligne de mariage reliant Zeus à Héra
+passait tout droit au milieu de la rangée, derrière la carte de Poséidon (placé entre les deux) —
+cachée par son fond opaque, mais donnant quand même l'impression trompeuse qu'il fait partie de
+l'union.
+
+Plusieurs remaniements ont été proposés en maquette (pastille de renvoi vers une carte déjà
+affichée, liste de texte « Unions » sous une carte unique, réordonnancement pour que les deux
+conjoints soient toujours voisins) avant que l'utilisatrice ne tranche pour une quatrième
+approche, plus proche de ce qu'elle voulait : garder un arbre entièrement graphique, sans liste
+ni raccourci, sans jamais réordonner personne, et sans jamais qu'une ligne ne traverse une carte
+tierce.
+
+La ligne de mariage plonge désormais sous le bas de chaque carte concernée, dans un couloir
+dédié en dessous de toute la rangée, avant de remonter jusqu'à l'autre conjoint — elle ne passe
+donc plus jamais derrière une case qui ne fait pas partie de l'union, quel que soit le nombre de
+cartes intercalées. Style résolument distinct des lignes de filiation (tireté, teinte terracotta
+plutôt que le bronze uni) pour qu'on ne confonde jamais les deux, même en un coup d'œil rapide.
+Ce mécanisme (`conn.marriage` dans `drawFamTree()`) est générique : il corrige du même coup
+l'écran des Olympiens, la fiche complète d'Ulysse et celle de n'importe quelle figure à
+plusieurs unions (Zeus, avec une quinzaine de conjointes réelles, en étant le cas le plus extrême).
+
+Testé (2701 vérifications, dont 3 nouvelles) : contrôle visuel en clair et en sombre de l'écran
+des Olympiens (la ligne passe bien sous Poséidon, jamais derrière), de la fiche complète de Zeus
+(une quinzaine d'unions) et de l'écran de la famille d'Ulysse, sans régression.
+
+`service-worker.js` (Panthéon) : `pantheon-v123` → `pantheon-v124`.
