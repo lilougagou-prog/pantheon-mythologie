@@ -68,7 +68,7 @@ const DEITY_NOTES = {
   "phoebé":"Titanide de l'éclat prophétique, mère de Léto et d'Astéria.",
   "crios":"Le plus effacé des douze Titans, père d'Astréos, de Pallas et de Persès (le Titan), une descendance aussi discrète que lui.",
   "eurybie":"Océanide unie au Titan Crios, mère d'Astréos, de Pallas et de Persès (le Titan).",
-  "persès-titan":"Titan marin, fils de Crios et d'Eurybie, père d'Hécate, homonyme de deux figures mortelles : l'arrière-petit-fils de Persée et Andromède, et le frère usurpateur de Circé, roi de Colchide.",
+  "persès-titan":"Titan marin, fils de Crios et d'Eurybie, père d'Hécate.",
   "persès-colchide":"Frère d'Aiétès, de Circé et de Pasiphaé, fils d'Hélios et de Perséis, il déposséda son frère du trône de Colchide avant d'être tué à son tour par le fils de Médée, venu venger son grand-père. Deux autres figures portent aussi le nom de Persès : l'arrière-petit-fils de Persée et Andromède, et le Titan marin père d'Hécate.",
   "astréos":"Dieu des étoiles, fils de Crios et d'Eurybie, uni à Éos pour engendrer les quatre vents.",
   "pallas":"Titan fils de Crios et d'Eurybie, uni à l'Océanide Styx pour engendrer Niké, Kratos, Bia et Zelos.",
@@ -104,7 +104,7 @@ const DEITY_NOTES = {
   "latinus-silvius":"Roi d'Albe la Longue, fils d'Énée Silvius, fondateur de plusieurs colonies latines.",
   "alba":"Roi d'Albe la Longue, fils de Latinus Silvius.",
   "atys":"Roi d'Albe la Longue, fils d'Alba et père de Capys (roi d'Albe).",
-  "capys-albain":"Roi d'Albe la Longue, fils d'Atys, homonyme de Capys, l'ancêtre troyen d'Énée.",
+  "capys-albain":"Roi d'Albe la Longue, fils d'Atys.",
   "capétus":"Roi d'Albe la Longue, fils de Capys (roi d'Albe), aussi appelé Calpétus.",
   "tiberinus":"Roi d'Albe la Longue, fils de Capétus, noyé en traversant le fleuve Albula, rebaptisé le Tibre en sa mémoire.",
   "agrippa":"Roi d'Albe la Longue, fils de Tiberinus.",
@@ -130,7 +130,7 @@ const DEITY_NOTES = {
   "thétis":"Néréide insaisissable, mère d'Achille, dont la ténacité et le don de métamorphose défièrent le destin annoncé pour son fils.",
   "pélée":"Roi mortel des Myrmidons de Phthie, il conquit par sa seule ténacité la main de la Néréide Thétis et devint le père du plus grand guerrier de Troie.",
   "atlas":"Titan condamné à porter le poids du ciel sur ses épaules pour l'éternité.",
-  "atlas-atlantide":"Roi légendaire d'Atlantide, fils de Poséidon et de Clito, homonyme du Titan porteur du ciel.",
+  "atlas-atlantide":"Roi légendaire d'Atlantide, fils de Poséidon et de Clito.",
   "psyché":"Mortelle aimée d'Éros, unie à lui après avoir traversé de nombreuses épreuves.",
   "charites":"Trois déesses de la grâce et de la joie, toujours représentées ensemble, jamais seules.",
   "eurynomé":"Océanide, l'une des premières épouses de Zeus selon Hésiode, mère des trois Charites.",
@@ -267,10 +267,11 @@ const DEITY_NOTES = {
   "hermaphrodite":"Enfant d'Hermès et d'Aphrodite, fondu avec la nymphe Salmacis en un seul être à la fois homme et femme.",
   "priape":"Fils de Dionysos et d'Aphrodite, petit dieu rustique de la fertilité, frappé de laideur par la jalousie d'Héra.",
   "antiope":"Reine amazone unie à Thésée, morte en défendant Athènes contre sa propre nation venue l'attaquer.",
-  "antiope-thébaine":"Princesse thébaine, fille de Nyctée, mère d'Amphion et Zéthos, homonyme de la reine amazone unie à Thésée.",
+  "antiope-thébaine":"Princesse thébaine, fille de Nyctée, mère d'Amphion et Zéthos.",
+  "nyctée":"Roi de Thèbes, père d'Antiope, dont la grossesse causée par Zeus le poussa, dit-on, à se donner la mort.",
   "thésée":"Héros fondateur d'Athènes, vainqueur du Minotaure, dont chaque grand amour tourna finalement au malheur.",
   "hippolyté":"Reine des Amazones, dont Héraclès obtint la ceinture pour son neuvième travail ; peut-être la même reine que Thésée épousa sous le nom d'Antiope.",
-  "hippolyte":"Fils de Thésée et d'Antiope, dévot exclusif d'Artémis, tué par ses propres chevaux après une fausse accusation de Phèdre, homonyme de la reine amazone Hippolyté.",
+  "hippolyte":"Fils de Thésée et d'Antiope, dévot exclusif d'Artémis, tué par ses propres chevaux après une fausse accusation de Phèdre.",
   "didon":"Reine fondatrice de Carthage, unie un temps à Énée, morte par le fer après son départ.",
   "érichthonios":"Enfant né de la terre, mi-homme mi-serpent, élevé en secret par Athéna et devenu roi d'Athènes.",
   "alcippé":"Fille d'Arès dont l'agression subie provoqua le tout premier procès jugé par les dieux entre eux.",
@@ -279,7 +280,7 @@ const DEITY_NOTES = {
   "hersé":"Fille de Cécrops aimée d'Hermès, dont la sœur Aglauros fut changée en pierre par jalousie.",
   "céphale":"Prince grec, époux de Procris, aimé malgré lui de l'Aurore ; la jalousie de son épouse causa la mort de celle-ci, frappée par le propre javelot infaillible qu'elle lui avait offert.",
   "procris":"Princesse athénienne, fille d'Érechthée, épouse de Céphale, tuée par erreur du javelot infaillible qu'elle lui avait offert, victime de sa propre jalousie.",
-  "céphale-hersé":"Fils d'Hermès et de la princesse athénienne Hersé, que la tradition antique confond parfois avec son homonyme plus célèbre, l'époux de Procris.",
+  "céphale-hersé":"Fils d'Hermès et de la princesse athénienne Hersé, que la tradition antique confond parfois avec le plus célèbre Céphale, l'époux de Procris.",
   "cécrops":"Premier roi d'Athènes, mi-homme mi-serpent, né de la terre elle-même, père d'Aglauros, Hersé et Pandrosos.",
   "aglauros":"Fille de Cécrops, mère d'Alcippé par Arès, changée en pierre par Hermès après avoir cédé à la jalousie envers sa sœur Hersé.",
   "pandrosos":"Fille de Cécrops, seule des trois sœurs à n'avoir jamais ouvert le coffre confié par Athéna.",
@@ -316,6 +317,7 @@ const DEITY_NOTES = {
   "hypermestre":"Seule des cinquante Danaïdes à épargner son époux Lyncée, par amour plutôt que par obéissance.",
   "lyncée":"Le seul des cinquante fils d'Égyptos épargné par son épouse Hypermestre, et ancêtre de Persée.",
   "byzas":"Fils de Poséidon, fondateur légendaire de Byzance.",
+  "kéroessa":"Nymphe, fille de Zeus et d'Io, mère de Byzas et légendaire éponyme de la Corne d'Or.",
   "phidaléia":"Figure féminine associée à une fondation antérieure sur le site de Byzance, peu documentée.",
   "admète":"Roi de Phères que servit Apollon comme berger, époux d'Alceste.",
   "alceste":"Fille de Pélias, elle accepta de mourir à la place de son époux Admète.",
@@ -351,7 +353,7 @@ const DEITY_NOTES = {
   "terpsichore":"Muse de la danse et du chant choral, parfois dite mère des Sirènes.",
   "érato":"Muse de la poésie lyrique et amoureuse, invoquée par Virgile pour chanter la guerre.",
   "polymnie":"Muse des hymnes sacrés, au domaine élargi avec le temps à la pantomime et à la géométrie.",
-  "uranie":"Muse de l'astronomie, homonyme d'une épiclèse d'Aphrodite.",
+  "uranie":"Muse de l'astronomie.",
   "heures":"Trois déesses filles de Zeus et de Thémis, gardiennes de l'ordre saisonnier et moral du monde.",
   "parques":"Trois déesses du destin qui filent, mesurent et tranchent le fil de chaque existence.",
   // Onze figures ajoutées pour étoffer deux lignées jugées trop peu développées : celle de
@@ -988,7 +990,9 @@ const GENEALOGY_PARENTS = {
   // la reine amazone épouse de Thésée, désormais désambiguïsée sous l'id "antiope-thébaine"
   // (affiché « Antiope (princesse thébaine) ») pour ne plus les faire apparaître à tort comme
   // demi-frères d'Hippolyte dans l'arbre.
-  "antiope-thébaine": [],
+  // Retour direct de l'utilisatrice : sa mère Nyctée, jusqu'ici seulement nommée en toutes
+  // lettres dans son propre récit, rejoint la généalogie et obtient sa propre fiche.
+  "antiope-thébaine": ["nyctée"],
   "amphion": ["zeus", "antiope-thébaine"],
   "zéthos": ["zeus", "antiope-thébaine"],
   // Deux traditions concurrentes, rapportées telles quelles dans leurs propres fiches plutôt
@@ -2659,15 +2663,27 @@ function drawFamTree(){
       .filter(Boolean)
       .map(el => ftVisualRect(el));
     if(!childRects.length) continue;
+    // Retour direct de l'utilisatrice, sur les douze Olympiens : « Héphaïstos est rattaché à
+    // Zeus alors qu'il est le fils d'Héra seule » et « la ligne en pointillés s'arrête avant
+    // Arès alors qu'Arès est le fils de Zeus ». Cause : les quatre enfants d'Héra (Héphaïstos
+    // seule ; Arès, Hébé et Ilithyie avec Zeus) partageaient jusqu'ici UN seul bracket uni
+    // (bronze plein), sans aucune distinction — rien n'indiquait que Zeus n'est le père que de
+    // trois d'entre eux. `conn.marriageStyle` bascule ce bracket dans le même style que la ligne
+    // de mariage (tireté, terracotta, voir conn.marriage plus haut) pour les enfants nés DANS
+    // cette union, tout en gardant un bracket classique (bronze plein) pour Héphaïstos seul —
+    // sans dupliquer la carte de Zeus, jamais présente qu'une fois sur cet écran.
+    const lineCls = conn.marriageStyle ? "ft-line ft-line-marriage" : "ft-line";
+    const jointCls = conn.marriageStyle ? "ft-joint ft-joint-marriage" : "ft-joint";
     const childTopYs = childRects.map(r => r.top - treeRect.top);
     const childCenterXs = childRects.map(r => r.left + r.width / 2 - treeRect.left);
     const rowTopY = Math.min(...childTopYs);
     const busY = trunkY + Math.max(18, (rowTopY - trunkY) / 2);
-    out += `<line class="ft-line" x1="${trunkX}" y1="${trunkY}" x2="${trunkX}" y2="${busY}" />`;
+    out += `<line class="${lineCls}" x1="${trunkX}" y1="${trunkY}" x2="${trunkX}" y2="${busY}" />`;
     const busX1 = Math.min(trunkX, ...childCenterXs), busX2 = Math.max(trunkX, ...childCenterXs);
-    if(busX2 > busX1) out += `<line class="ft-line" x1="${busX1}" y1="${busY}" x2="${busX2}" y2="${busY}" />`;
+    if(busX2 > busX1) out += `<line class="${lineCls}" x1="${busX1}" y1="${busY}" x2="${busX2}" y2="${busY}" />`;
+    if(conn.marriageStyle) out += `<circle class="${jointCls}" cx="${trunkX}" cy="${busY}" r="3.5" />`;
     childCenterXs.forEach((cx, i) => {
-      out += `<line class="ft-line" x1="${cx}" y1="${busY}" x2="${cx}" y2="${childTopYs[i]}" />`;
+      out += `<line class="${lineCls}" x1="${cx}" y1="${busY}" x2="${cx}" y2="${childTopYs[i]}" />`;
     });
   }
   svg.innerHTML = out;
@@ -3030,11 +3046,14 @@ function renderGenealogyHome(){
 // l'utilisatrice : « pour les olympiens, on n'a pas les mères des enfants de Zeus » — chaque
 // union a donc désormais sa propre mère affichée, sans pour autant redessiner Zeus une fois par
 // union (voir ftMultiUnionHubHTML, qui ne le duplique jamais). Arès, Hébé et Ilithyie (les
-// enfants de Zeus ET Héra) restent volontairement RATTACHÉS À LA CARTE D'HÉRA plus bas, aux
-// côtés d'Héphaïstos — Héra apparaît déjà comme fille de Cronos/Rhéa sur cet écran, la
-// redessiner une seconde fois comme simple conjointe de Zeus créerait exactement le genre de
-// doublon qu'elle a explicitement demandé de supprimer ; une ligne de mariage directe entre les
-// deux cartes existantes (voir plus bas) suffit à montrer le lien.
+// enfants de Zeus ET Héra) restent volontairement RATTACHÉS À LA CARTE D'HÉRA plus bas plutôt
+// que de redessiner Zeus une seconde fois à ses côtés (Héra apparaît déjà comme fille de
+// Cronos/Rhéa sur cet écran, la redessiner comme simple conjointe créerait exactement le genre
+// de doublon qu'elle a explicitement demandé de supprimer) — mais avec leur PROPRE bracket, dans
+// le même style tireté que la ligne de mariage juste au-dessus (retour direct : « Héphaïstos est
+// rattaché à Zeus alors qu'il est le fils d'Héra seule » / « Arès [...] est le fils de Zeus » :
+// les deux se distinguaient jusqu'ici par un unique bracket uni, sans jamais le dire). Héphaïstos
+// seul garde un bracket classique (bronze plein), pour signaler l'inverse : pas de père commun.
 const OLYMPIANS_ZEUS_OTHER_UNIONS = [
   { partner: "maïa", children: ["hermès"] },
   { partner: "léto", children: ["artémis", "apollon"] },
@@ -3060,12 +3079,26 @@ function renderOlympiansOverview(){
       return zeusNode;
     }
     // Héphaïstos, Arès, Hébé et Ilithyie sont tous les quatre rattachés directement à la carte
-    // d'Héra (voir le commentaire d'OLYMPIANS_ZEUS_OTHER_UNIONS ci-dessus) — Héphaïstos sans
-    // Zeus selon la tradition la plus répandue, les trois autres avec lui, mais Zeus n'a pas
-    // besoin d'une carte à côté d'Héra pour l'exprimer : une ligne de mariage directe entre les
-    // deux cartes (posée plus bas) suffit.
+    // d'Héra (voir le commentaire d'OLYMPIANS_ZEUS_OTHER_UNIONS ci-dessus), mais PAS avec le même
+    // bracket : Héphaïstos (Héra seule) en bronze plein classique, Arès/Hébé/Ilithyie (Zeus ET
+    // Héra) dans le style tireté de la ligne de mariage — construit à la main plutôt que via
+    // ftPersonBranchHTML, qui ne sait dessiner qu'un unique bracket uniforme par union.
     if(cid === "héra"){
-      heraNode = ftPersonBranchHTML(connectors, "héra", [{ partner: null, children: ["héphaïstos", "arès", "hébé", "ilithyie"] }]);
+      const heraCard = ftCardMarkup("héra");
+      const heraCoupleSlot = `u${FT_SEQ++}`;
+      const hephaistosLeaf = ftLeaf(connectors, "héphaïstos");
+      const aresLeaf = ftLeaf(connectors, "arès");
+      const hebeLeaf = ftLeaf(connectors, "hébé");
+      const ilithyieLeaf = ftLeaf(connectors, "ilithyie");
+      connectors.push({ unionSlot: heraCoupleSlot, childSlots: [hephaistosLeaf.slot] });
+      connectors.push({ unionSlot: heraCoupleSlot, childSlots: [aresLeaf.slot, hebeLeaf.slot, ilithyieLeaf.slot], marriageStyle: true });
+      heraNode = {
+        slot: heraCard.slot,
+        html: `<div class="ft-branch">
+          <div class="ft-couple" data-slot="${heraCoupleSlot}">${heraCard.html}</div>
+          <div class="ft-children-row">${hephaistosLeaf.html}${aresLeaf.html}${hebeLeaf.html}${ilithyieLeaf.html}</div>
+        </div>`
+      };
       return heraNode;
     }
     return ftLeaf(connectors, cid);

@@ -4167,3 +4167,45 @@ Testé (2733 vérifications, dont 4 nouvelles) : contrôle visuel en clair et en
 renommé (les 8 enfants dans l'arbre et les chips), de la fiche de Déiphobe et de son arbre.
 
 `service-worker.js` (Panthéon) : `pantheon-v126` → `pantheon-v127`.
+
+## Bracket Héra/Zeus distinct pour Héphaïstos, suppression complète des « homonyme », Nyctée et Kéroessa
+
+Retour direct de l'utilisatrice sur l'écran des douze Olympiens : « la ligne en pointillés
+s'arrête avant Arès alors qu'Arès est le fils de Zeus » et « Héphaïstos est rattaché à Zeus alors
+qu'il est le fils d'Héra seule ». Les quatre enfants d'Héra (Héphaïstos, Arès, Hébé, Ilithyie)
+partageaient jusqu'ici un unique bracket uni (bronze plein) depuis sa carte, sans aucune
+distinction entre Héphaïstos, né d'elle seule, et les trois autres, nés aussi de Zeus. Corrigé
+avec deux connecteurs indépendants depuis la même carte : Héphaïstos garde un bracket classique,
+Arès/Hébé/Ilithyie héritent désormais du même style que la ligne de mariage juste au-dessus
+(tireté, terracotta), pour signaler sans ambiguïté qu'ils sont bien nés de cette union. Nouveau
+flag générique (`marriageStyle`) dans `drawFamTree()`, réutilisable partout où ce cas se
+représentera.
+
+Deuxième retour, de portée générale cette fois : « Enlève toutes les phrases « homonyme de… »
+« sans lien de parenté avec… ». » Un round antérieur avait déjà retiré "sans lien de parenté"
+partout, mais laissé le mot « homonyme » seul, jugé à l'époque comme une information utile plutôt
+qu'un remplissage. Toutes les occurrences restantes (22 au total, dans `DEITY_NOTES` et
+`content.json`) ont été retirées : certaines en supprimant purement la clause devenue inutile
+(Atlas-Atlantide, Persès-titan, Uranie...), d'autres en gardant le fait réellement informatif mais
+reformulé sans le mot lui-même (Hippolyte et la ceinture prise par Héraclès, Céphale confondu avec
+son célèbre quasi-homonyme). Garde-fou permanent ajouté à la suite de tests.
+
+Troisième retour : ajouter la mère (en réalité le père) d'Antiope la thébaine, Nyctée, à sa
+généalogie, avec sa propre fiche. Nyctée, jusqu'ici seulement nommé dans le récit de sa fille,
+rejoint `GENEALOGY_PARENTS` et obtient une fiche complète racontant sa propre fin tragique (le
+suicide qui, selon la tradition la plus répandue, livra le trône de Thèbes à son frère Lycos).
+
+Dernier retour, sur la fiche de Byzas : enlever le détail sur sa mère Kéroessa (fille d'Io et de
+Zeus, née près de la Corne d'Or) pour ne garder qu'un lien cliquable, et lui faire sa propre
+fiche. Contrairement aux figures sans fiche ajoutées au round précédent (Halirrhothios, Rhodos...),
+Kéroessa avait ici assez de matière pour une vraie fiche à elle : sa généalogie (fille d'Io et de
+Zeus) et son propre rôle (mère de Byzas, éponyme légendaire de la Corne d'Or) y sont désormais
+racontés, la fiche de Byzas se contentant d'un lien vers elle.
+
+Testé (2745 vérifications, dont 15 nouvelles) : audit programmatique confirmant 0 citation mal
+formée et 0 occurrence du mot « homonyme » restante dans tout le corpus ; contrôle visuel en clair
+et en sombre de l'écran des Olympiens (nouveau bracket tireté bien visible sur Arès/Hébé/Ilithyie,
+bracket classique inchangé sur Héphaïstos), de l'arbre et de la fiche d'Antiope la thébaine (avec
+Nyctée), et des fiches de Kéroessa et Byzas.
+
+`service-worker.js` (Panthéon) : `pantheon-v127` → `pantheon-v128`.
