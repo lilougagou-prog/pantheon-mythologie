@@ -1050,7 +1050,12 @@ const GENEALOGY_PARENTS = {
   "abas": ["lyncée", "hypermestre"],
   "acrisios": ["abas"],
   "proétos": ["abas"],
-  "byzas": ["poséidon"],
+  // Retour direct de l'utilisatrice : la mère de Byzas, Kéroessa, « a une généalogie
+  // intéressante (fille d'Io) et mérite d'être mentionnée dans la généalogie » même sans fiche à
+  // elle. Mêmes parents que son demi-frère Épaphos (voir la fiche « Io » : Zeus et Io) d'après
+  // le récit de la fiche « Byzas ».
+  "kéroessa": ["zeus", "io"],
+  "byzas": ["poséidon", "kéroessa"],
   // Les Atrides, désormais reliées à leur ancêtre Atrée (et son frère Thyeste, père d'Égisthe),
   // eux-mêmes désormais reliés à leur père Pélops.
   "pélops": [],
@@ -1179,6 +1184,20 @@ const GENEALOGY_PARENTS = {
   "phaéton": ["hélios"],
   "calypso": ["atlas"],
   "polyphème": ["poséidon"],
+  // Retour direct de l'utilisatrice : « [Poséidon] n'a pas que 3 enfants [...] il faut les
+  // mettre », avec Halirrhothios (mentionné dans la fiche « Alcippé ») comme exemple. Repérés en
+  // reprenant chaque récit qui mentionne explicitement un enfant de Poséidon ailleurs dans le
+  // corpus : Chrysaor et Pégase (nés du sang de Méduse, voir sa fiche), Rhodos (fille d'Halia,
+  // voir sa fiche) et Taphios (fils d'Hippothoé, elle-même fille de Mestor, voir sa fiche).
+  // Aucun d'eux n'a assez de matière pour sa propre fiche (sauf Pégase, qui en avait déjà une
+  // sans être relié à son père) : ils apparaissent donc dans l'arbre sans être cliquables (voir
+  // ftCardMarkup/genealogyChipsHTML), plutôt que d'être omis ou de pointer vers une fiche vide.
+  "halirrhothios": ["poséidon"],
+  "chrysaor": ["poséidon", "méduse"],
+  "pégase": ["poséidon", "méduse"],
+  "rhodos": ["poséidon", "halia"],
+  "hippothoé": ["mestor"],
+  "taphios": ["poséidon", "hippothoé"],
 };
 
 // Index inverse construit une seule fois : pour un parent donné, la liste de ses enfants —
@@ -2328,7 +2347,10 @@ function genealogyChipsHTML(ids, title){
     <div class="geneal-group">
       <h4>${escapeHTML(title)}</h4>
       <div class="chips">
-        ${sorted.map(gid => `<button class="chip" data-nav="genealogy" data-id="${escapeHTML(gid)}">${escapeHTML(genealogyDisplayName(gid))}</button>`).join("")}
+        ${sorted.map(gid => (gid in DEITY_NOTES)
+          ? `<button class="chip" data-nav="genealogy" data-id="${escapeHTML(gid)}">${escapeHTML(genealogyDisplayName(gid))}</button>`
+          : `<span class="chip chip-inactive">${escapeHTML(genealogyDisplayName(gid))}</span>`
+        ).join("")}
       </div>
     </div>
   `;
@@ -2382,6 +2404,16 @@ function ftCardMarkup(id, opts){
   const visual = `<span class="ft-card-visual">${portrait}</span>`;
   if(opts.self){
     return { slot, html: `<div class="ft-card ft-card-self${olympianCls}" data-slot="${slot}">${visual}<span class="ft-card-name">${escapeHTML(name)}</span></div>` };
+  }
+  // Retour direct de l'utilisatrice : « il faut toujours mettre le nom des parents/conjoints,
+  // même s'ils n'ont pas de fiche [...] tu peux les mettre dans une couleur plus claire ». Une
+  // figure mentionnée dans le récit d'une autre mais sans fiche à elle (pas assez de matière,
+  // ex. Halirrhothios) n'a nulle part où mener : carte non cliquable plutôt qu'un lien mort ou
+  // qu'un nom purement et simplement omis — même principe déjà établi ailleurs pour les chips
+  // (voir .chip-inactive dans symbolDeitiesHTML).
+  const hasFiche = isSymbol || (id in DEITY_NOTES);
+  if(!hasFiche){
+    return { slot, html: `<div class="ft-card ft-card-nameonly${olympianCls}${halfCls}" data-slot="${slot}">${visual}<span class="ft-card-name">${escapeHTML(name)}</span></div>` };
   }
   const nav = isSymbol ? "symbolDetail" : "genealogy";
   return { slot, html: `<button class="ft-card${olympianCls}${halfCls}" data-slot="${slot}" data-nav="${nav}" data-id="${escapeHTML(id)}">${visual}<span class="ft-card-name">${escapeHTML(name)}</span></button>` };
@@ -2578,12 +2610,18 @@ function drawFamTree(){
     // filiation (voir .ft-line-marriage). Les cartes reliées n'ont pas besoin d'être voisines
     // dans le DOM ni de partager un même .ft-couple : chaque slot est retrouvé indépendamment.
     if(conn.marriage){
-      const rects = conn.marriage
+      const cardEls = conn.marriage
         .map(slot => tree.querySelector(`[data-slot="${slot}"]`))
-        .filter(Boolean)
-        .map(el => ftVisualRect(el));
-      if(rects.length < 2) continue;
-      const laneY = Math.max(...rects.map(r => r.bottom)) - treeRect.top + 14;
+        .filter(Boolean);
+      if(cardEls.length < 2) continue;
+      const rects = cardEls.map(el => ftVisualRect(el));
+      // Le couloir dédié plongeait à distance fixe (+14) du bas du seul PORTRAIT (ftVisualRect),
+      // sans compter le nom affiché juste en dessous (voir ftCardMarkup) — retour direct de
+      // l'utilisatrice : « la ligne [...] passe pile là où les prénoms sont écrits ». Mesure
+      // désormais le bas RÉEL de la carte entière (portrait + nom empilés) plutôt qu'un décalage
+      // deviné, pour que le couloir passe toujours sous le texte, jamais au travers.
+      const fullRects = cardEls.map(el => el.getBoundingClientRect());
+      const laneY = Math.max(...fullRects.map(r => r.bottom)) - treeRect.top + 8;
       const xs = rects.map(r => r.left + r.width / 2 - treeRect.left);
       const sortedXs = xs.slice().sort((a, b) => a - b);
       out += `<line class="ft-line ft-line-marriage" x1="${sortedXs[0]}" y1="${laneY}" x2="${sortedXs[sortedXs.length - 1]}" y2="${laneY}" />`;
@@ -2712,7 +2750,10 @@ function genealogyLineageHTML(id){
             <div class="geneal-union-line">
               <span class="geneal-union-label">${u.partner ? `avec ${escapeHTML(genealogyDisplayName(u.partner))} :` : "union non précisée :"}</span>
               <div class="chips">
-                ${u.children.map(cid => `<button class="chip" data-nav="genealogy" data-id="${escapeHTML(cid)}">${escapeHTML(genealogyDisplayName(cid))}</button>`).join("")}
+                ${u.children.map(cid => (cid in DEITY_NOTES)
+                  ? `<button class="chip" data-nav="genealogy" data-id="${escapeHTML(cid)}">${escapeHTML(genealogyDisplayName(cid))}</button>`
+                  : `<span class="chip chip-inactive">${escapeHTML(genealogyDisplayName(cid))}</span>`
+                ).join("")}
               </div>
             </div>
           `).join("")}

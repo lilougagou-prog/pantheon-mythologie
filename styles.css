@@ -532,6 +532,16 @@ h1, h2, h3{
   opacity: 0.85;
 }
 
+/* Figure mentionnée dans le récit d'une autre mais sans fiche à elle (pas assez de matière,
+   ex. Halirrhothios chez Poséidon) : retour direct de l'utilisatrice, « il faut toujours mettre
+   le nom des parents/conjoints, même s'ils n'ont pas de fiche [...] dans une couleur plus
+   claire ». Carte non cliquable (rien à afficher derrière) plutôt qu'omise, distinguée par une
+   teinte plus discrète et un nom en italique. */
+.ft-card-nameonly{ cursor: default; }
+.ft-card-nameonly .ft-card-visual{ opacity: 0.55; }
+.ft-card-nameonly .ft-card-name{ color: var(--ink-soft); font-style: italic; opacity: 0.8; }
+.ft-card-nameonly:hover .ft-card-visual{ transform: none; box-shadow: 0 3px 10px var(--shadow); }
+
 /* Portrait de la figure, quand elle en a un (DEITY_PORTRAITS) — remplit tout l'encart
    .ft-card-visual, qui porte désormais seul la bordure/l'ombre/le fond (rognées ici via
    overflow:hidden sur le parent). Zoomé et recentré comme figureThumbnailHTML() (même

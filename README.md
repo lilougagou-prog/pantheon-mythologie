@@ -4087,3 +4087,63 @@ régression de la centrale ligne de mariage), et cadrage individuel vérifié à
 Pollux, Bellérophon, Bia et Borée.
 
 `service-worker.js` (Panthéon) : `pantheon-v124` → `pantheon-v125`.
+
+## Citations « voir la fiche » mal formées, enfants manquants de Poséidon, figures sans fiche dans l'arbre, ligne de mariage sur le texte
+
+Retour direct de l'utilisatrice sur la fiche de Byzas : « Au lieu d'écrire voir fiche Io, mettre
+Io cliquable. » Le texte affichait effectivement « ... elle-même fille d'Io, voir la fiche « Io »,
+et de Zeus... » en toutes lettres plutôt qu'un lien. Cause : `linkifyLore()` ne reconnaît que la
+citation strictement isolée `(voir la fiche « X »)`, seule dans sa parenthèse ; ici, elle était
+imbriquée à l'intérieur de la parenthèse plus large décrivant Kéroessa, avec du texte avant et
+après, ce que la fonction ne peut pas démêler (à raison : mieux vaut laisser un renvoi intact que
+de risquer d'en casser un autre). Le texte a été restructuré pour isoler la citation dans sa
+propre parenthèse, sans rien retirer au contenu.
+
+Sur sa demande de généraliser le correctif, un passage du même calcul exact sur les 2313
+paragraphes du corpus (`DEITY_LORE`, `GENEALOGY_OVERVIEWS`, `MAP_PLACES`, et les figures/symboles/
+lieux de `content.json`) a trouvé 16 citations mal formées au total (dont celle d'Io), toutes
+restructurées sur le même principe. Un garde-fou permanent dans la suite de tests repère
+désormais toute occurrence future de « voir la fiche »/« voir les fiches » qui ne serait pas dans
+la forme reconnue par `linkifyLore()`.
+
+Deuxième retour : « [Poséidon] n'a pas que 3 enfants [...] il faut les mettre », avec Halirrhothios
+(mentionné dans la fiche Alcippé, tué par Arès après avoir agressé celle-ci) comme exemple concret.
+Un passage de tout le corpus à la recherche de « fils/fille de Poséidon » a permis de retrouver,
+chacun déjà raconté ailleurs mais jamais relié dans l'arbre : Halirrhothios, Chrysaor et Pégase
+(nés du sang de Méduse après sa décapitation, voir sa fiche), Rhodos (fille d'Halia, voir sa
+fiche) et Taphios (fils d'Hippothoé, elle-même fille de Mestor, voir sa fiche). Poséidon passe
+ainsi de 3 à 8 enfants documentés dans `GENEALOGY_PARENTS`.
+
+Troisième retour, à propos de la mère de Byzas : « bien que n'ayant pas forcément besoin de fiche,
+[elle] a une généalogie intéressante (fille d'Io) et mérite d'être mentionnée dans la
+généalogie. » Kéroessa a donc rejoint `GENEALOGY_PARENTS`, à la fois comme mère de Byzas et comme
+fille de Zeus et Io (même parents que son demi-frère Épaphos).
+
+Quatrième retour, de portée générale : « Dans la généalogie, de manière générale, il faut
+toujours mettre le nom des parents/conjoints, même s'ils n'ont pas de fiche. Pour les distinguer
+tu peux les mettre dans une couleur plus claire. » Aucun des noms ajoutés ci-dessus (Halirrhothios,
+Chrysaor, Pégase, Rhodos, Taphios, Hippothoé, Kéroessa) n'a assez de matière pour sa propre fiche
+(`DEITY_NOTES`) : plutôt que de les omettre ou de créer un lien mort vers une fiche vide,
+`ftCardMarkup()` (les cartes de l'arbre) rend désormais une carte non cliquable et visuellement
+distincte (`.ft-card-nameonly` : teinte plus claire, nom en italique) pour toute figure sans fiche
+propre ; `genealogyChipsHTML()` et les chips d'enfants de la section « Lignée » d'une fiche font de
+même en réutilisant `.chip-inactive`, déjà établi ailleurs dans l'application pour ce cas exact
+(voir `symbolDeitiesHTML`). Le nom reste donc toujours visible, jamais un lien mort ni une case
+vide.
+
+Dernier point : « la ligne rouge en pointillée passe pile là où les prénoms sont écrits. Décale
+l'un ou l'autre pour qu'ils ne se chevauchent plus. » La ligne de mariage (voir la restructuration
+du round précédent) plongeait à une distance fixe (+14px) sous le bas du seul encart portrait
+(`ftVisualRect`), sans compter le nom affiché juste en dessous : à cette distance, elle retombait
+systématiquement en plein milieu du texte. Elle mesure désormais le bas réel de la carte entière
+(portrait et nom empilés, via `getBoundingClientRect()`) avant de plonger, pour toujours passer
+sous le texte plutôt qu'au travers.
+
+Testé (2725 vérifications, dont 12 nouvelles) : audit programmatique des 2313 paragraphes du
+corpus confirmant 0 citation mal formée restante ; contrôle visuel en clair et en sombre de
+l'arbre de Poséidon (ses 8 enfants, les 5 sans fiche bien non cliquables et en italique), de sa
+fiche complète (section Lignée), de l'arbre de Byzas (Kéroessa et sa propre ascendance), et de
+l'écran des Olympiens (ligne de mariage désormais sous le texte, sans régression du correctif
+Poséidon/Héra).
+
+`service-worker.js` (Panthéon) : `pantheon-v125` → `pantheon-v126`.
