@@ -4044,3 +4044,46 @@ des Olympiens (la ligne passe bien sous Poséidon, jamais derrière), de la fich
 (une quinzaine d'unions) et de l'écran de la famille d'Ulysse, sans régression.
 
 `service-worker.js` (Panthéon) : `pantheon-v123` → `pantheon-v124`.
+
+## Léda au milieu de ses deux conjoints, cadrage de Castor/Pollux et d'autres portraits trop larges
+
+Retour direct de l'utilisatrice, avec capture d'écran de l'arbre de Léda : « pour Leda, son arbre
+à elle ne fonctionne pas. Il faut qu'elle soit au milieu de Tyndare et Zeus, comme ça il n'y a pas
+de confusion de lignes. » `ftMultiUnionHubHTML()`, qui construit la carte unique (hub) d'une
+figure à plusieurs unions, la plaçait jusqu'ici systématiquement en tête de rangée, avant tous ses
+conjoints — jamais entre eux. Sur l'arbre de Léda (seulement deux conjoints, Tyndare et Zeus),
+cela donnait une lecture de gauche à droite trompeuse (Léda, puis Tyndare et ses enfants, puis
+Zeus et les siens) au lieu du classique « conjoint, épouse commune, autre conjoint » attendu.
+
+Corrigé en centrant le hub parmi ses branches de conjoints plutôt qu'en le plaçant toujours en
+premier : la moitié des branches s'affiche à sa gauche, l'autre moitié à sa droite (l'éventuelle
+carte en surnombre partant à droite). Léda apparaît donc bien entre Tyndare et Zeus. Ce
+changement, générique comme le reste du mécanisme, profite aussi à Ulysse (désormais entre Circé
+et Pénélope) et à Zeus, qui reste centré parmi son éventail de conjointes aussi bien sur l'écran
+des Olympiens que sur sa propre fiche complète, sans rouvrir le problème de ligne de mariage
+passant derrière une carte tierce (Poséidon, sur l'écran des Olympiens, ne porte toujours aucun
+trait vers cette ligne).
+
+Deuxième retour, sur les mêmes portraits de généalogie : « Pour castor, il faut zoomer sur
+l'homme brun. Pour Pollux, il faut zoomer sur l'homme blond. » Les deux frères partagent une
+seule image (`deity-castor-pollux.jpg`, assis côte à côte), et le cadrage par défaut, centré
+entre les deux visages, ne cadrait clairement ni l'un ni l'autre. Corrigé en donnant à chacun son
+propre point focal sur sa moitié de l'image, exactement comme pour Séléné et Endymion (déjà dans
+ce cas de figure) : Castor cadré sur l'homme aux cheveux bruns à gauche, Pollux sur l'homme blond
+à droite.
+
+Troisième retour, plus général : « le zoom sur certains portrait n'est pas assez fort, pas assez
+centré sur le visage. » Une planche-contact complète des 133 portraits de l'application a été
+regénérée, avec le même calcul CSS exact (`object-fit:cover` puis `transform:scale`) que l'audit
+d'origine des 124 premiers portraits. Trois figures ajoutées après cet audit initial présentaient
+le même défaut que Orion et Énée déjà corrigés à l'époque : une composition en plan très large
+(le sujet en pied, ou une scène complète avec décor) où le visage n'occupe qu'une infime partie
+du cadre par défaut. Un point focal et un zoom dédiés ont été ajoutés pour Bellérophon (monté sur
+Pégase), Bia et Borée (figures en pied dans un large décor).
+
+Testé (2704 vérifications, dont 5 nouvelles) : contrôle visuel en clair et en sombre de l'arbre de
+Léda, de l'écran des Olympiens, de la fiche complète de Zeus et de celle d'Ulysse (aucune
+régression de la centrale ligne de mariage), et cadrage individuel vérifié à l'écran pour Castor,
+Pollux, Bellérophon, Bia et Borée.
+
+`service-worker.js` (Panthéon) : `pantheon-v124` → `pantheon-v125`.

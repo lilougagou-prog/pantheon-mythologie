@@ -2179,6 +2179,20 @@ const DEITY_PORTRAIT_FOCUS = {
   // à la fois ; chacune a donc son propre point focal sur cette même image.
   "séléné": { x: 36, y: 12, zoom: 1.7 },
   "endymion": { x: 84, y: 53, zoom: 2.0 },
+  // deity-castor-pollux.jpg est partagée entre les deux frères (assis côte à côte) — retour
+  // direct de l'utilisatrice : « pour Castor il faut zoomer sur l'homme brun, pour Pollux sur
+  // l'homme blond ». Même principe que Séléné/Endymion ci-dessus : chacun son point focal sur
+  // sa propre moitié de l'image plutôt que le cadrage par défaut, centré entre les deux.
+  "castor": { x: 30, y: 22, zoom: 2.0 },
+  "pollux": { x: 70, y: 18, zoom: 2.0 },
+  // Retour direct de l'utilisatrice, plus général : « le zoom sur certains portrait n'est pas
+  // assez fort, pas assez centré sur le visage ». Repassage de la planche-contact complète (133
+  // portraits) avec le même calcul CSS exact que l'audit d'origine ci-dessus : ces trois figures,
+  // ajoutées après cet audit, sont le même cas de figure qu'Orion et Énée déjà corrigés (plan très
+  // large avec un sujet en pied ou en scène, visage minuscule au cadrage par défaut).
+  "bellérophon": { x: 43, y: 15, zoom: 2.6 },
+  "bia": { x: 37, y: 14, zoom: 1.6 },
+  "borée": { x: 50, y: 13, zoom: 1.8 },
 };
 const DEITY_PORTRAIT_FOCUS_DEFAULT = { x: 50, y: 18, zoom: 1.4 };
 
@@ -2456,12 +2470,20 @@ function ftMultiUnionHubHTML(connectors, id, opts, unions, buildChild){
   }
   if(directKidSlots.length) connectors.push({ unionSlot: hub.slot, childSlots: directKidSlots });
   if(marriageSlots.length > 1) connectors.push({ marriage: marriageSlots });
+  // Retour direct de l'utilisatrice, à propos de Léda (deux conjoints, Tyndare et Zeus) : « il
+  // faut qu'elle soit au milieu de Tyndare et Zeus, comme ça il n'y a pas de confusion de
+  // lignes. » Le hub n'est donc plus systématiquement placé en tête de rangée (ce qui le
+  // laissait à une extrémité, avec tous ses conjoints d'un seul côté) mais centré parmi eux :
+  // la moitié affichée à sa gauche, l'autre à sa droite (l'éventuelle carte en surnombre partant
+  // à droite). La ligne de mariage continue de fonctionner à l'identique, quel que soit l'ordre
+  // des cartes qu'elle relie.
+  const splitAt = Math.ceil(branchesHTML.length / 2);
+  const leftHTML = branchesHTML.slice(0, splitAt).join("");
+  const rightHTML = branchesHTML.slice(splitAt).join("");
+  const hubBranchHTML = `<div class="ft-branch">${hub.html}${directKidsHTML ? `<div class="ft-children-row">${directKidsHTML}</div>` : ""}</div>`;
   return {
     slot: hub.slot,
-    html: `<div class="ft-multi-union-row">
-      <div class="ft-branch">${hub.html}${directKidsHTML ? `<div class="ft-children-row">${directKidsHTML}</div>` : ""}</div>
-      ${branchesHTML.join("")}
-    </div>`
+    html: `<div class="ft-multi-union-row">${leftHTML}${hubBranchHTML}${rightHTML}</div>`
   };
 }
 
