@@ -137,7 +137,7 @@ const DEITY_NOTES = {
   "narcisse":"Jeune homme épris de son propre reflet, incapable de voir l'amour qu'on lui offrait.",
   "écho":"Nymphe condamnée à ne répéter que les derniers mots des autres, éprise en vain de Narcisse.",
   "circé":"Magicienne capable de transformer les hommes en animaux à l'aide de breuvages trompeurs.",
-  "pythie":"Prêtresse d'Apollon à Delphes, elle rendait des oracles dans une clarté parfois brutale.",
+  "pythie":"Prêtresse d'Apollon à Delphes, elle rendait des oracles réputés aussi ambigus qu'infaillibles.",
   "endymion":"Berger plongé par Séléné dans un sommeil éternel pour rester à jamais jeune.",
   "charon":"Passeur des Enfers, il conduit les âmes à travers le Styx vers l'autre monde.",
   "ulysse":"Héros rusé de l'Odyssée, inventeur du stratagème du cheval de Troie.",
