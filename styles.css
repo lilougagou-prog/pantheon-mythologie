@@ -839,7 +839,6 @@ h1, h2, h3{
 }
 .chip:hover{ background: var(--border); }
 .chip-symbol{ color: var(--bronze); }
-.chip-portrait{ display: inline-flex; align-items: center; gap: 6px; padding-left: 4px; }
 .chip-inactive{ cursor: default; opacity: 0.75; }
 .chip-inactive:hover{ background: var(--marble-deep); }
 

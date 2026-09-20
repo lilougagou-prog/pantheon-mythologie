@@ -2314,7 +2314,7 @@ function genealogyChipsHTML(ids, title){
     <div class="geneal-group">
       <h4>${escapeHTML(title)}</h4>
       <div class="chips">
-        ${sorted.map(gid => `<button class="chip${DEITY_PORTRAITS[gid] ? " chip-portrait" : ""}" data-nav="genealogy" data-id="${escapeHTML(gid)}">${genealogyPortraitHTML(gid)}${escapeHTML(genealogyDisplayName(gid))}</button>`).join("")}
+        ${sorted.map(gid => `<button class="chip" data-nav="genealogy" data-id="${escapeHTML(gid)}">${escapeHTML(genealogyDisplayName(gid))}</button>`).join("")}
       </div>
     </div>
   `;
@@ -2679,7 +2679,7 @@ function genealogyLineageHTML(id){
             <div class="geneal-union-line">
               <span class="geneal-union-label">${u.partner ? `avec ${escapeHTML(genealogyDisplayName(u.partner))} :` : "union non précisée :"}</span>
               <div class="chips">
-                ${u.children.map(cid => `<button class="chip${DEITY_PORTRAITS[cid] ? " chip-portrait" : ""}" data-nav="genealogy" data-id="${escapeHTML(cid)}">${genealogyPortraitHTML(cid)}${escapeHTML(genealogyDisplayName(cid))}</button>`).join("")}
+                ${u.children.map(cid => `<button class="chip" data-nav="genealogy" data-id="${escapeHTML(cid)}">${escapeHTML(genealogyDisplayName(cid))}</button>`).join("")}
               </div>
             </div>
           `).join("")}
@@ -3208,7 +3208,7 @@ function renderGenealogyOverview(key){
       <div class="related">
         <h3>Figures de cette lignée</h3>
         <div class="chips">
-          ${chips.map(cid => `<button class="chip${DEITY_PORTRAITS[cid] ? " chip-portrait" : ""}" data-nav="genealogy" data-id="${escapeHTML(cid)}">${genealogyPortraitHTML(cid)}${escapeHTML(genealogyDisplayName(cid))}</button>`).join("")}
+          ${chips.map(cid => `<button class="chip" data-nav="genealogy" data-id="${escapeHTML(cid)}">${escapeHTML(genealogyDisplayName(cid))}</button>`).join("")}
         </div>
       </div>
     ` : ""}

@@ -3991,3 +3991,26 @@ Mélinoé, Myrte, Noix, Atlantide).
 
 `service-worker.js` (Panthéon) : `pantheon-v119` → `pantheon-v122` (une version par étape de
 correction : Zéphyr/Pythie/Myrte/Noix, puis la repunctuation complète de content.json).
+
+## Régression : portraits géants qui se chevauchaient sous certains écrans
+
+Signalé avec capture d'écran : sous les écrans de généalogie « La famille de Priam et Hécube »
+et « Les origines du monde », ainsi que sous la section « Lignée » de n'importe quelle fiche
+figure, de grands portraits s'affichaient les uns sous les autres, débordant largement de
+l'écran.
+
+Cause exacte : `.tree-portrait`, réécrit dans un round précédent de cette même nuit pour remplir
+tout son encart (`.ft-card-visual`, 64×80 fixe) dans l'arbre généalogique, était réutilisé tel
+quel par trois listes de chips (l'aperçu généalogique, `genealogyChipsHTML`, et les unions
+listées sous une fiche figure) qui n'ont, elles, aucun conteneur de taille fixe — l'image
+s'affichait donc à sa taille native (700×875), en pleine largeur, une fois par figure listée.
+
+Corrigé en retirant le portrait de ces trois listes plutôt qu'en leur donnant un nouvel encart :
+ce sont des listes compactes de texte, pas des cartes d'arbre, elles n'ont jamais eu besoin
+d'image (comportement d'avant l'introduction du zoom d'arbre). `.chip-portrait`, devenue
+inutilisée, a été retirée de `styles.css`.
+
+Testé (2699 vérifications, dont 2 nouvelles) : contrôle visuel des trois écrans concernés,
+confirmant des chips de texte simple sans plus aucune image qui déborde.
+
+`service-worker.js` (Panthéon) : `pantheon-v122` → `pantheon-v123`.
