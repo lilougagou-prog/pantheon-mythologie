@@ -4281,3 +4281,61 @@ toutes atteintes (contre 3 avant l'ajout des 2 faits supplémentaires, le vivier
 précédent (Zéthos, Amphion, Hélénos, Polydore, Byzas, Nyctée) donne des résultats inchangés.
 
 `service-worker.js` (Panthéon) : `pantheon-v129` → `pantheon-v130`.
+
+## Six enfants de plus pour Minos et Pasiphaé, et le triangle Jason/Médée/Glaukè complété
+
+Retour direct de l'utilisatrice, en deux demandes dans le même message :
+> « Rajoute les autres enfants de Minos et Europe, et crée des fiches si tu as quelque chose
+> d'intéressant à écrire dessus. Pour Médée : raconte aussi la version du mythe où c'est les
+> habitants qui tuent ses enfants pour se venger de la mort de leur princesse. Raconte aussi
+> qu'elle va demander de l'aide à sa tante Circé pour se purifier de son crime (et explique dans
+> sa fiche de quel crime il s'agit). Et surtout raconte toutes les fois où elle a aidé Jason. Pour
+> Jason : explique comment il est tombé amoureux de la fille de Créon, cite-la, va plus en détail
+> [...] de comment il a laissé Médée. »
+
+**Les enfants de Minos et Europe.** Zeus et Europe n'avaient déjà que leurs 3 fils classiques
+(Minos, Rhadamanthys, Sarpédon) : rien à y ajouter avec assez de certitude. C'est Minos et
+Pasiphaé, jusque-là limité à Ariane et Phèdre, qui reçoit les 6 enfants manquants recensés chez
+Apollodore : **Androgée** (athlète invaincu tué par jalousie à Athènes, dont la mort déclenche la
+guerre qui impose à la ville le tribut de jeunes gens livrés au Minotaure — le chaînon qui
+manquait avec la légende du Labyrinthe déjà racontée), **Deucalion** (roi de Crète après son père,
+il donne sa sœur Phèdre en mariage à Thésée pour sceller la paix), **Glaucos** (fils de Minos,
+noyé enfant dans un tonneau de miel puis ressuscité par le devin Polyidos grâce à une herbe vue
+sur un serpent), **Catrée** (tué sans le vouloir par son propre fils Althaimenès, accomplissant la
+prophétie qu'il avait fuie toute sa vie) et **Acacallis** (aimée d'Apollon, mère de Milet). Ces 5
+reçoivent chacun une fiche complète ; **Xénodicé**, citée par Apollodore sans le moindre épisode
+propre, apparaît dans l'arbre par son seul nom, non cliquable, comme Halirrhothios ou Rhodos avant
+elle (voir plus haut).
+
+**Jason, Médée et Glaukè.** Ni Créon (roi de Corinthe) ni sa fille n'existaient dans l'appli avant
+ce round : deux nouvelles fiches, la fille nommée **Glaukè** plutôt que l'appellation antique
+concurrente « Créüse », déjà prise par la femme troyenne d'Énée. Trois ajouts factuels dans la
+fiche de Médée : (1) **Talos**, le géant de bronze tué en Crète au retour de Colchide (elle le
+rend fou d'un regard chargé de sortilèges jusqu'à ce qu'il se blesse au seul point faible de son
+corps, la cheville), une aide à Jason qui manquait entièrement ; (2) sa **purification par sa
+tante Circé**, immédiatement après le meurtre de son frère Absyrtos, le crime dont elle a besoin
+d'être lavée, nommé en toutes lettres dans la fiche ; (3) les **deux traditions sur la mort de ses
+fils** : celle d'Euripide, où elle les tue elle-même, et une tradition plus ancienne et locale à
+Corinthe où ce sont les Corinthiens eux-mêmes qui les mettent à mort par vengeance, une cité qui
+aurait, selon des commentateurs anciens, payé Euripide pour en charger Médée à sa place. Côté
+Jason, un nouveau paragraphe raconte enfin comment il tombe amoureux de Glaukè et justifie, selon
+Euripide, la répudiation de Médée par un calcul froid (sécurité et légitimité pour lui et ses fils
+plutôt que continuer un amour que plus personne ne reconnaissait en terre étrangère) — l'ancienne
+fiche sautait directement de leur installation à Corinthe à l'exil final de Jason, sans jamais
+raconter la rupture elle-même.
+
+Piège évité en écrivant ces fiches : les noms désambiguïsés comme « Créon (roi de Corinthe) » ou
+« Glaucos (fils de Minos) » ne peuvent PAS servir de citation `(voir la fiche « ... »)`, puisque ce
+mécanisme cherche le texte cité mot pour mot dans la prose qui précède, jamais la forme entre
+parenthèses (personne n'écrit « le roi Créon (roi de Corinthe) » dans une phrase) — même piège que
+Persès (le Titan) ou Atlas (roi d'Atlantide), jamais cités en ligne non plus. Ces figures restent
+mentionnées en clair, sans lien, dans le texte ; seule Glaukè, sans désambiguïsation nécessaire,
+est correctement cliquable dans les deux fiches.
+
+Testé (2791 vérifications, dont 14 nouvelles) : script Playwright dédié vérifiant que chaque
+citation `(voir la fiche « ... »)` ajoutée se résout bien en lien cliquable (aucune laissée sous
+forme de texte brut cassé) sur les 9 fiches touchées. Contrôle visuel en clair et en sombre de
+l'arbre de Minos (6 nouvelles cartes, dont Xénodicé bien non cliquable) et des fiches de Médée et
+Jason.
+
+`service-worker.js` (Panthéon) : `pantheon-v130` → `pantheon-v131`.

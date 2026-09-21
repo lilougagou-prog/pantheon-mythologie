@@ -190,6 +190,11 @@ const DEITY_NOTES = {
   "ménélas":"Roi de Sparte, frère d'Agamemnon et époux d'Hélène, dont l'enlèvement par Pâris déclencha la guerre de Troie.",
   "europe":"Princesse phénicienne enlevée par Zeus changé en taureau, mère de Minos ; le continent européen tient d'elle son nom.",
   "phèdre":"Fille de Minos, seconde épouse de Thésée, dont la passion interdite pour son beau-fils Hippolyte causa la mort des deux.",
+  "androgée":"Fils de Minos, athlète invaincu tué à Athènes par jalousie, dont la mort déclencha la guerre qui imposa le tribut au Minotaure.",
+  "deucalion-crète":"Fils de Minos, il lui succéda sur le trône de Crète et donna sa sœur Phèdre en mariage à Thésée après la mort d'Androgée.",
+  "glaucos-crète":"Fils de Minos, noyé enfant dans un tonneau de miel, ramené à la vie par le devin Polyidos grâce à une herbe magique.",
+  "catrée":"Fils de Minos, roi de Crète, tué sans le vouloir par son propre fils Althaimenès, accomplissant la prophétie qu'il redoutait.",
+  "acacallis":"Fille de Minos, aimée d'Apollon, chassée par son père après avoir donné naissance à Milet, futur fondateur éponyme de la cité.",
   "égisthe":"Fils de Thyeste, cousin et amant de Clytemnestre, complice du meurtre d'Agamemnon avant d'être tué à son tour par Oreste.",
   "polyxène":"Plus jeune fille de Priam et d'Hécube, aimée d'Achille, sacrifiée sur son tombeau après la chute de Troie.",
   "hyacinthe":"Prince spartiate aimé d'Apollon, tué accidentellement par un disque dévié par le vent jaloux Zéphyr, changé en fleur.",
@@ -259,6 +264,8 @@ const DEITY_NOTES = {
   /* ----- Figures ajoutées à la demande directe de l'utilisatrice ----- */
   "hygie":"Déesse de la santé et de l'hygiène, fille d'Asclépios.",
   "médée":"Magicienne petite-fille d'Hélios, alliée puis ennemie jurée de Jason.",
+  "créon-corinthe":"Roi de Corinthe, il bannit Médée pour marier sa fille à Jason, avant de périr en tentant de la sauver du poison de sa rivale.",
+  "glaukè":"Fille de Créon, roi de Corinthe, seconde épouse de Jason, tuée par la robe empoisonnée offerte par Médée le jour de leurs noces.",
   "calliope":"Muse de la poésie épique, la plus vénérée des neuf Muses.",
   "cassiopée":"Reine vaniteuse d'Éthiopie, mère d'Andromède, changée en constellation.",
   "mélinoé":"Déesse des fantômes et des terreurs nocturnes, fille de Perséphone.",
@@ -438,6 +445,9 @@ const DEITY_NAME_OVERRIDES = {
   // lors de la création de la fiche, si bien que sa page affichait l'id brut « Céphale-hersé »
   // au lieu du nom désambiguïsé voulu dès l'origine.
   "céphale-hersé": "Céphale (fils d'Hermès)",
+  "deucalion-crète": "Deucalion (roi de Crète)",
+  "glaucos-crète": "Glaucos (fils de Minos)",
+  "créon-corinthe": "Créon (roi de Corinthe)",
 };
 
 const DEITY_PORTRAITS = {
@@ -1100,6 +1110,15 @@ const GENEALOGY_PARENTS = {
   "pasiphaé": ["hélios", "perséis"],
   "ariane": ["minos", "pasiphaé"],
   "phèdre": ["minos", "pasiphaé"],
+  "androgée": ["minos", "pasiphaé"],
+  "deucalion-crète": ["minos", "pasiphaé"],
+  "glaucos-crète": ["minos", "pasiphaé"],
+  "catrée": ["minos", "pasiphaé"],
+  "acacallis": ["minos", "pasiphaé"],
+  // Xénodicé n'a aucun épisode connu qui lui soit propre (seulement citée par Apollodore parmi
+  // les enfants de Minos et Pasiphaé) : pas de fiche, elle apparaît dans l'arbre par son nom
+  // seul, non cliquable, comme toute figure sans fiche (voir ftCardMarkup).
+  "xénodicé": ["minos", "pasiphaé"],
   "hippolyte": ["thésée", "antiope"],
   "icare": ["dédale"],
   // La mer : Nérée et sa descendance.
@@ -1116,6 +1135,11 @@ const GENEALOGY_PARENTS = {
   "aiétès": ["hélios", "perséis"],
   "persès-colchide": ["hélios", "perséis"],
   "médée": ["aiétès"],
+  // La fille du roi Créon de Corinthe, promise à Jason après qu'il eut quitté Médée — id
+  // désambiguïsé en prévision d'un futur Créon de Thèbes (frère de Jocaste, déjà présent dans le
+  // cycle de Thèbes/Antigone mais pas encore créé dans l'appli), sur le même principe que
+  // "persès-titan"/"persès-colchide" ou "atlas-atlantide".
+  "glaukè": ["créon-corinthe"],
   // La famille d'Ulysse.
   "circé": ["hélios", "perséis"],
   "télégonos": ["circé", "ulysse"],
