@@ -4018,6 +4018,68 @@ function quizPreferMajor(ids){
   return withPortrait.length >= 6 ? withPortrait : ids;
 }
 
+// Retour direct de l'utilisatrice, sur le quiz d'Hécate : « Rien sur ses pouvoirs, attributs ou
+// autre [...] Fais une question aussi sur son rôle dans la recherche de Perséphone. » Les
+// générateurs ci-dessous ne savent interroger QUE la généalogie (GENEALOGY_PARENTS/CHILDREN) et
+// la note courte (DEITY_NOTES) — jamais un trait, un pouvoir ou un épisode mythologique précis,
+// qui n'existent que dans le texte libre (DEITY_LORE/content.json). Plutôt qu'une extraction
+// AUTOMATIQUE de ce texte (le même risque déjà écarté pour QUIZ_EVENTS : un fait déformé ou
+// inventé), quelques faits marquants sont recopiés ici à la main, un par un, mot pour mot ou
+// presque depuis le texte déjà vérifié de la fiche — jamais une paraphrase risquée. Liste
+// volontairement partielle (quelques figures parmi les plus visitées) plutôt qu'exhaustive sur
+// les 337 figures du corpus : à compléter au fil de l'eau, jamais une case vide à combler à tout
+// prix. Phrasé pour rester grammaticalement correct qu'on l'attribue au bon sujet ou, dans la
+// branche "faux" de quizGenFigureFact, à un décoy — un « il »/« elle » interne au fait reste
+// possible (comme dans quizGenNoteTrueFalse) si l'accord de genre en pâtit occasionnellement.
+// Une figure peut avoir PLUSIEURS faits (tableau) : nécessaire pour les petites familles (ex.
+// Hécate, sans enfant ni fratrie connus) où le focus figé sur quizStartForFigure épuiserait vite
+// un fait unique — chaque fait garde son propre factKey (fact:${id}:${index}) pour pouvoir tous
+// apparaître dans une même session sans jamais reformuler le même.
+const QUIZ_FIGURE_FACTS = {
+  "hécate": [
+    "fut la seule à entendre les cris de Perséphone lors de son enlèvement par Hadès, et l'aida ensuite à retrouver Déméter",
+    "conserva seule, parmi les divinités de l'ancienne génération, l'intégralité de ses pouvoirs sur la terre, la mer et le ciel après l'arrivée au pouvoir de Zeus",
+    "est représentée sous une triple forme tournée à la fois vers le ciel, la terre et les Enfers, l'une des seules divinités avec Perséphone à circuler librement entre les trois royaumes",
+  ],
+  "zeus": ["reçut la foudre en cadeau des Cyclopes, qu'il avait libérés du Tartare, et l'utilisa comme arme absolue contre les Titans"],
+  "poséidon": ["reçut la mer en partage lors de la division du cosmos entre les trois frères, et peut d'un coup de son trident aussi bien porter les navires que déchaîner tempêtes et tremblements de terre"],
+  "athéna": ["naquit tout armée du crâne de Zeus, qui avait avalé sa mère Métis enceinte d'elle"],
+  "héra": ["fut avalée à la naissance par son père Cronos, comme tous ses frères et sœurs sauf Zeus, avant d'être rendue au jour une fois celui-ci devenu adulte"],
+  "dionysos": ["naquit deux fois : une première fois de Sémélé, sa mère mortelle foudroyée avant terme, puis une seconde fois de la cuisse de Zeus, où sa gestation s'acheva"],
+  "hadès": ["hérita du monde souterrain lors du partage du cosmos, et n'en sortit notablement que pour l'enlèvement de Perséphone"],
+  "aphrodite": ["naquit, selon le récit le plus ancien, de l'écume de mer formée autour des membres tranchés d'Ouranos"],
+  "hermès": ["déroba, dès le jour de sa naissance, le troupeau de son frère Apollon"],
+  "artémis": ["naquit avant son frère jumeau Apollon, et aida leur mère Léto à le mettre au monde peu après"],
+  "héphaïstos": ["naquit si chétif ou si laid que sa mère le rejeta du haut de l'Olympe, une chute qui le laissa boiteux pour le restant de son existence"],
+};
+
+function quizGenFigureFact(scopeIds, focusId){
+  const candidates = scopeIds.filter(id => QUIZ_FIGURE_FACTS[id] && QUIZ_FIGURE_FACTS[id].length);
+  if(!candidates.length) return null;
+  if(focusId && !candidates.includes(focusId)) return null;
+  const subject = focusId || quizPick(candidates);
+  const facts = QUIZ_FIGURE_FACTS[subject];
+  const factIndex = Math.floor(Math.random() * facts.length);
+  const fact = facts[factIndex];
+  const isTrue = Math.random() < 0.5;
+  let statedId;
+  if(isTrue){
+    statedId = subject;
+  } else {
+    const pool = quizDistractorPool(scopeIds, [subject], 1);
+    if(!pool.length) return null;
+    statedId = pool[0];
+  }
+  return {
+    kind: "qcm",
+    prompt: `Vrai ou faux : ${genealogyDisplayName(statedId)} ${fact}.`,
+    choices: ["Vrai", "Faux"],
+    correctIndex: isTrue ? 0 : 1,
+    explain: `${genealogyDisplayName(subject)} ${fact}.`,
+    factKey: `fact:${subject}:${factIndex}`,
+  };
+}
+
 // --- Générateurs : figures. Le "scope" détermine le SUJET de la question (quelle figure est
 // interrogée) ET, en priorité, le vivier des distracteurs (voir quizDistractorPool) — avec
 // repli sur tout le corpus seulement si le thème n'a pas assez de candidats. `focusId`
@@ -4041,6 +4103,7 @@ function quizGenNoteMatch(scopeIds, focusId){
     choices: choiceIds.map(id => genealogyDisplayName(id)),
     correctIndex: choiceIds.indexOf(subject),
     // Pas d'explication ici : le prompt EST déjà la note, une explication serait circulaire.
+    factKey: `note:${subject}`,
   };
 }
 
@@ -4060,6 +4123,7 @@ function quizGenParent(scopeIds, focusId){
     choices: choiceIds.map(id => genealogyDisplayName(id)),
     correctIndex: choiceIds.indexOf(correct),
     explain: quizExplainNote(correct),
+    factKey: `parent:${childId}`,
   };
 }
 
@@ -4079,6 +4143,7 @@ function quizGenChild(scopeIds, focusId){
     choices: choiceIds.map(id => genealogyDisplayName(id)),
     correctIndex: choiceIds.indexOf(correct),
     explain: quizExplainNote(correct),
+    factKey: `child:${parentId}`,
   };
 }
 
@@ -4101,6 +4166,7 @@ function quizGenGrandparent(scopeIds, focusId){
     choices: choiceIds.map(id => genealogyDisplayName(id)),
     correctIndex: choiceIds.indexOf(correct),
     explain: quizExplainNote(correct),
+    factKey: `grandparent:${grandchildId}`,
   };
 }
 
@@ -4125,6 +4191,10 @@ function quizGenTrueFalse(scopeIds, focusId){
     choices: ["Vrai", "Faux"],
     correctIndex: isTrue ? 0 : 1,
     explain: `Les parents connus de ${genealogyDisplayName(childId)} : ${parents.map(genealogyDisplayName).join(", ")}.`,
+    // Même fait que quizGenParent (qui sont les parents de childId) sous une autre forme — la clé
+    // partagée empêche de retester ce fait sous les deux formes dans la même session (voir le
+    // retour de l'utilisatrice sur Hécate : « 3 fois la même question sur ses parents »).
+    factKey: `parent:${childId}`,
   };
 }
 
@@ -4156,6 +4226,9 @@ function quizGenNoteTrueFalse(scopeIds, focusId){
     choices: ["Vrai", "Faux"],
     correctIndex: isTrue ? 0 : 1,
     explain: quizExplainNote(noteOwnerId),
+    // Même fait que quizGenNoteMatch (reconnaître qui correspond à cette description) sous une
+    // autre forme — clé partagée, même raison que pour quizGenParent/quizGenTrueFalse ci-dessus.
+    factKey: `note:${noteOwnerId}`,
   };
 }
 
@@ -4514,9 +4587,9 @@ function quizGenerateQuestion(levelId, theme, figureIds, focusId){
   // petit, "La famille d'Ulysse", 5 figures et 6 événements, a encore assez de candidats pour les
   // 3 niveaux sans jamais reformuler le même prompt).
   const pools = {
-    "débutant": [() => quizGenNoteMatch(scope, focusId), () => quizGenEventDesc(theme.id)],
-    "intermédiaire": [() => quizGenParent(scope, focusId), () => quizGenChild(scope, focusId), () => quizGenTrueFalse(scope, focusId), () => quizGenNoteTrueFalse(scope, focusId), () => quizGenEventOrder(theme.id)],
-    "expert": [() => quizGenGrandparent(scope, focusId), () => quizGenTypeAnswer(scope), () => quizGenTypeAnswerChild(scope), () => quizGenEventOrderMulti(theme.id)],
+    "débutant": [() => quizGenNoteMatch(scope, focusId), () => quizGenEventDesc(theme.id), () => quizGenFigureFact(scope, focusId)],
+    "intermédiaire": [() => quizGenParent(scope, focusId), () => quizGenChild(scope, focusId), () => quizGenTrueFalse(scope, focusId), () => quizGenNoteTrueFalse(scope, focusId), () => quizGenEventOrder(theme.id), () => quizGenFigureFact(scope, focusId)],
+    "expert": [() => quizGenGrandparent(scope, focusId), () => quizGenTypeAnswer(scope), () => quizGenTypeAnswerChild(scope), () => quizGenEventOrderMulti(theme.id), () => quizGenFigureFact(scope, focusId)],
   };
   const generators = pools[levelId] || pools["débutant"];
   return quizPick(generators)();
@@ -4712,6 +4785,10 @@ function quizBuildSession(levelId, theme, opts){
   const focusId = opts.focusId || null;
   const questions = [];
   const usedPrompts = new Set();
+  // Empêche de retester le même fait sous-jacent (ex: "les parents de X sont A et B") sous
+  // plusieurs formes de question différentes dans la même session — voir le retour de
+  // l'utilisatrice sur le quiz d'Hécate ("3 fois la même question sur ses parents").
+  const usedFactKeys = new Set();
   // Une ronde "relie les paires" en Intermédiaire/Expert, quand le thème s'y prête (jamais en
   // Débutant, ni sur les thèmes symboles/lieux qui n'ont pas de parenté à relier).
   if(levelId !== "débutant" && !theme.symbolsOnly && !theme.placesOnly){
@@ -4722,8 +4799,9 @@ function quizBuildSession(levelId, theme, opts){
   while(questions.length < length && guard < 300){
     guard++;
     const q = quizGenerateQuestion(levelId, theme, figureIds, focusId);
-    if(!q || usedPrompts.has(q.prompt)) continue;
+    if(!q || usedPrompts.has(q.prompt) || (q.factKey && usedFactKeys.has(q.factKey))) continue;
     usedPrompts.add(q.prompt);
+    if(q.factKey) usedFactKeys.add(q.factKey);
     questions.push(q);
   }
   return {

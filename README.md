@@ -4238,3 +4238,46 @@ figure cliquée (relation directe, ou sa propre description avec un décoy), con
 moitié hors-sujet avant le correctif. Contrôle visuel en clair et en sombre du quiz de Zéthos.
 
 `service-worker.js` (Panthéon) : `pantheon-v128` → `pantheon-v129`.
+
+## Le correctif du quiz par figure venait d'exposer un problème latent sur les petites familles
+
+Retour direct de l'utilisatrice, sur le quiz d'Hécate lancé depuis sa fiche (juste après le
+correctif ci-dessus qui force le sujet des questions sur la figure cliquée) : « 3 fois la même
+question sur ses parents, dont 2 fois la même réponse (Perses) avec en plus la réponse
+précédente qui donne la solution de la question suivante. Rien sur ses pouvoirs, attributs ou
+autre [...] Fais une question aussi sur son rôle dans la recherche de Perséphone. »
+
+Cause exacte : Hécate n'a que 2 parents connus (Astéria, Persès le Titan) et ni enfant ni fratrie
+recensés. En forçant le sujet de chaque générateur sur elle, `quizGenParent`, `quizGenTrueFalse`
+et `quizGenNoteTrueFalse` retombaient tous sur le même et unique fait (sa propre note, « fille
+d'Astéria et de Persès », est elle-même entièrement généalogique) — trois formulations
+différentes d'une seule information, dont l'`explain` de l'une (« Les parents connus de X : A,
+B ») donnait littéralement la réponse aux deux autres dans la même session.
+
+Deux correctifs, l'un général, l'autre spécifique à ce retour :
+- **`factKey`** : chaque question généalogique/note porte désormais une clé identifiant le FAIT
+  sous-jacent qu'elle teste, partagée entre les formulations qui testent le même fait
+  (`quizGenParent`/`quizGenTrueFalse` partagent `parent:${id}`, `quizGenNoteMatch`/
+  `quizGenNoteTrueFalse` partagent `note:${id}`). `quizBuildSession()` suit désormais un
+  `usedFactKeys` en plus de `usedPrompts`, et rejette toute question dont le fait a déjà servi
+  dans la session — quel que soit son habillage. Un quiz par thème classique (sujet non forcé)
+  n'est quasiment pas affecté : les sujets y varient déjà naturellement.
+- **`QUIZ_FIGURE_FACTS`** : nouveau générateur `quizGenFigureFact`, sur le même principe que
+  `QUIZ_EVENTS` (faits recopiés à la main depuis le texte déjà vérifié des fiches, jamais extraits
+  automatiquement — même risque de fait déformé ou inventé écarté). Couverture volontairement
+  partielle (11 figures majeures pour l'instant, à enrichir au fil de l'eau) plutôt
+  qu'exhaustive sur les 317 figures. Hécate y reçoit 3 faits distincts, chacun sa propre clé
+  (`fact:hécate:0/1/2`) : son rôle dans la recherche de Perséphone (demandé explicitement), le
+  maintien intégral de ses pouvoirs sur terre/mer/ciel après l'arrivée de Zeus, et sa triple forme
+  tournée vers les trois royaumes — trois vraies questions sur ses attributs, là où il n'y en
+  avait aucune. Vivier ajouté aux 3 niveaux (Débutant/Intermédiaire/Expert).
+
+Testé (2751 vérifications, dont 7 nouvelles) : script Playwright dédié, 40 tirages du quiz
+d'Hécate — 0 fait répété (`factKey` dupliqué) sur les 40, 0 réponse qui fuite dans une question
+suivante, le fait Perséphone présent dans la rotation, et les 5 questions ciblées désormais
+toutes atteintes (contre 3 avant l'ajout des 2 faits supplémentaires, le vivier de faits distincts
+étant sinon épuisé trop tôt pour Hécate). Contrôle visuel en clair et en sombre d'une question
+« Vrai ou faux » tirée de `QUIZ_FIGURE_FACTS`. Non-régression : le test Playwright du round
+précédent (Zéthos, Amphion, Hélénos, Polydore, Byzas, Nyctée) donne des résultats inchangés.
+
+`service-worker.js` (Panthéon) : `pantheon-v129` → `pantheon-v130`.
