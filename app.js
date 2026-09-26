@@ -479,6 +479,8 @@ const DEITY_PORTRAITS = {
   "éros": "assets/deity-eros-psyche.jpg",
   "psyché": "assets/deity-eros-psyche.jpg",
   "énée": "assets/deity-enee.jpg",
+  "anchise": "assets/deity-anchise.jpg",
+  "anticlée": "assets/deity-anticlee.jpg",
   "ariane": "assets/deity-dionysos-ariane.jpg",
   "harmonie": "assets/deity-harmonie-cadmos.jpg",
   "cadmos": "assets/deity-harmonie-cadmos.jpg",
@@ -763,6 +765,12 @@ const DEITY_INLINE_PORTRAITS = {
   "énée": [
     { match: "porta sur son dos son père âgé", src: "assets/deity-enee-fuite-troie.jpg", alt: "Énée fuyant Troie avec son père et son fils" },
     { match: "où règne la reine Didon", src: "assets/deity-enee-didon.jpg", alt: "Énée et Didon" },
+  ],
+  "anchise": [
+    { match: "se vanta malgré tout de sa conquête divine", src: "assets/deity-anchise-vantardise.jpg", alt: "Anchise se vantant de sa conquête auprès d'Aphrodite", wide: true },
+  ],
+  "anticlée": [
+    { match: "Rongée par le chagrin de l'absence prolongée de son fils", src: "assets/deity-anticlee-attente.jpg", alt: "Anticlée guettant le retour d'Ulysse" },
   ],
   "andromède": [
     { match: "Persée", src: "assets/deity-persee-andromede.jpg", alt: "Persée volant au secours d'Andromède" },

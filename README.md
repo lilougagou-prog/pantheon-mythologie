@@ -4339,3 +4339,28 @@ l'arbre de Minos (6 nouvelles cartes, dont Xénodicé bien non cliquable) et des
 Jason.
 
 `service-worker.js` (Panthéon) : `pantheon-v130` → `pantheon-v131`.
+
+## Un mot vulgaire dans la fiche de Céphale, et les premiers portraits d'Anchise et Anticlée
+
+Retour direct de l'utilisatrice : « Dans la fiche Cephale, tu parles de Lelops comme un chien
+« increvable » change de mot c'est vulgaire. » Le mot apparaissait à deux endroits : dans la fiche
+de Céphale elle-même, et dans celle de Procris, qui raconte le même épisode (les deux présents de
+Minos, le chien et le javelot) de son propre point de vue. Remplacé par « infatigable » dans les
+deux fiches à la fois.
+
+L'utilisatrice a aussi fourni 4 images pour deux figures troyennes qui existaient déjà dans
+l'appli (fiches complètes) mais sans la moindre illustration jusqu'ici : **Anchise**, le père
+d'Énée, et **Anticlée**, la mère d'Ulysse. Chacune reçoit un portrait principal et une scène en
+ligne, insérée au bon endroit du texte grâce à `DEITY_INLINE_PORTRAITS` (le mécanisme déjà en
+place pour Énée, Danaé, etc.) : pour Anchise, une scène de banquet où on le voit se vanter de sa
+conquête auprès d'Aphrodite, Zeus déjà visible dans l'orage en arrière-plan, juste avant la phrase
+qui raconte l'épisode ; pour Anticlée, une scène où on la voit sur un balcon face à la mer, guettant
+un navire au loin, juste avant le paragraphe qui raconte son chagrin et sa mort durant l'absence
+d'Ulysse. Images recadrées en 4:5 (portraits) ou 3:2 (scène large d'Anchise) pour respecter le
+format déjà utilisé par les 133 portraits et les illustrations en ligne existantes, plutôt que
+d'introduire un nouveau format ponctuel.
+
+Testé (2802 vérifications, dont 7 nouvelles) : contrôle visuel en clair et en sombre des deux
+fiches, portrait et scène en ligne bien positionnés dans les deux cas.
+
+`service-worker.js` (Panthéon) : `pantheon-v131` → `pantheon-v132`.
