@@ -1832,6 +1832,9 @@ const MAP_PLACE_ENTRIES = MAP_PLACES.slice().sort((a, b) => a.name.localeCompare
 
 let navStack = [];
 let currentScreen = { type: "home" };
+// Identité du dernier écran ayant rejoué le fondu #app.screen-fade (voir render() plus bas) —
+// distincte de currentScreen lui-même : ne sert qu'à détecter un changement d'écran RÉEL.
+let lastScreenFadeKey = null;
 
 // Historique des fiches consultées (figure/symbole/lieu), pour la section « Récemment
 // consulté » de l'accueil — voir recentlyViewedHTML() ci-dessous. Volontairement minimal :
@@ -5299,13 +5302,27 @@ function render(){
   if(app.classList){
     app.classList.toggle("wide", GENEALOGY_WIDE_SCREENS.has(currentScreen.type));
     // Phase 15 du brief produit (microanimations) : rejoue le fondu #app.screen-fade à chaque
-    // rendu. Une classe déjà présente sur #app ne redéclencherait pas son @keyframes lors d'un
-    // simple changement de contenu interne — il faut la retirer, forcer un reflow (lecture
-    // d'offsetWidth, qui oblige le navigateur à appliquer l'état "sans la classe" avant de
-    // continuer), puis la remettre pour que l'animation reparte de zéro à chaque écran.
-    app.classList.remove("screen-fade");
-    void app.offsetWidth;
-    app.classList.add("screen-fade");
+    // vrai changement d'écran (type+id). Une classe déjà présente sur #app ne redéclencherait pas
+    // son @keyframes lors d'un simple changement de contenu interne — il faut la retirer, forcer
+    // un reflow (lecture d'offsetWidth, qui oblige le navigateur à appliquer l'état "sans la
+    // classe" avant de continuer), puis la remettre pour que l'animation reparte de zéro.
+    //
+    // Retour direct de l'utilisatrice : « à chaque fois que je charge la page d'un personnage il
+    // y a un petit accrochage, une petite coupure ». Cause : render() étant rejoué une seconde
+    // fois dès que le contenu premium (aperçu propriétaire) arrive du serveur — sans ça, la fiche
+    // affiche encore le squelette de chargement (voir renderOwnerPreviewLoading) — ce fondu
+    // rejouait pour ce même écran une deuxième fois, faisant clignoter (opacité 0 puis 1) tout ce
+    // que l'utilisatrice était déjà en train de lire. Pareil pour toute autre mise à jour sur
+    // place (sélection d'une réponse de quiz, frappe dans la recherche, etc.), qui appellent
+    // toutes render() sans qu'il s'agisse d'une vraie navigation. La clé ci-dessous ne compare que
+    // type+id : le fondu ne rejoue que si l'un des deux a changé depuis le dernier rendu.
+    const screenFadeKey = `${currentScreen.type}:${currentScreen.id ?? ""}`;
+    if(screenFadeKey !== lastScreenFadeKey){
+      lastScreenFadeKey = screenFadeKey;
+      app.classList.remove("screen-fade");
+      void app.offsetWidth;
+      app.classList.add("screen-fade");
+    }
   }
   document.getElementById("bottomNav").innerHTML = renderBottomNav();
   // Bouton Profil flottant : jamais réinjecté (voir index.html, élément persistant hors #app),

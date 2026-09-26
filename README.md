@@ -4393,3 +4393,37 @@ Testé (2816 vérifications, dont 2 nouvelles) : contrôle visuel en clair et en
 fiches.
 
 `service-worker.js` (Panthéon) : `pantheon-v133` → `pantheon-v134`.
+
+## Le fondu d'écran clignotait une seconde fois à chaque ouverture de fiche
+
+Retour direct de l'utilisatrice, en deux temps : « L'image de Procris et Céphale est coupée. » puis
+« à chaque fois que je charge la page d'un personnage il y a un petit « accrochage », une petite
+coupure. Ce n'est pas fluide. »
+
+Cause commune aux deux, une fois investiguée : `render()` rejoue à chaque appel le fondu léger
+`#app.screen-fade` (opacité 0 → 1, translation verticale de 4px), en retirant puis remettant la
+classe pour forcer l'animation à repartir de zéro — un choix assumé pour qu'un vrai changement
+d'écran s'accompagne toujours de ce petit fondu. Sauf que `render()` est rappelé une seconde fois,
+sur ce même écran, dès que le contenu premium (aperçu propriétaire) arrive du serveur : la fiche
+affiche d'abord un squelette de chargement (portrait + nom + « Chargement du contenu premium… »),
+puis se redessine entièrement une fois la vraie fiche reçue — texte, images en ligne (dont la scène
+de Procris et Céphale), généalogie, tout arrive d'un coup. Le fondu rejouait pour cette deuxième
+apparition exactement comme pour la première : toute la page, déjà en train d'être lue, clignotait
+une seconde fois (opacité 0 puis 1) au moment précis où ce nouveau contenu apparaissait — d'où
+l'impression d'un « accrochage » à chaque fiche, et très probablement l'image qui semblait
+« coupée » : elle apparaissait pile pendant ce clignotement, jamais réellement rognée sur le
+fichier lui-même (revérifié : elle s'affiche entière, à la bonne place, dans les deux fiches).
+
+Corrigé avec une clé d'écran (`type:id` de `currentScreen`, comparée à celle du rendu précédent) :
+le fondu ne rejoue désormais que si l'écran a vraiment changé, jamais sur un simple rafraîchissement
+du même écran avec de nouvelles données — ce qui règle au passage le même clignotement latent sur
+toute autre mise à jour sur place (sélection d'une réponse de quiz, frappe dans la recherche,
+édition du profil…), qui appelaient elles aussi `render()` sans qu'il s'agisse d'une navigation.
+
+Testé (2817 vérifications, dont 1 nouvelle) : script Playwright dédié, comparaison directe avant/
+après correctif via un `MutationObserver` sur la classe `#app` — avant : le fondu se rejouait deux
+fois (4 mutations) à l'ouverture d'une fiche premium avec un délai réseau simulé ; après : une seule
+fois (2 mutations), tandis qu'une vraie navigation entre deux figures différentes continue de le
+rejouer normalement (vérifié séparément, toujours 2 épisodes distincts).
+
+`service-worker.js` (Panthéon) : `pantheon-v134` → `pantheon-v135`.
