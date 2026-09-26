@@ -4482,3 +4482,22 @@ Testé (2825 vérifications, dont 3 nouvelles) : contrôle visuel en clair et en
 et de l'arbre de Pyrrha qui affiche désormais bien ses deux parents.
 
 `service-worker.js` (Panthéon) : `pantheon-v136` → `pantheon-v137`.
+
+## Héra et la curiosité de Pandore : vérifié avant d'écrire
+
+Retour direct de l'utilisatrice sur la fiche fraîchement créée : « Tu as oublié Héra qui lui
+insuffle la curiosité. »
+
+Plutôt que d'ajouter la phrase directement, vérification d'abord (recherche web) : dans Hésiode
+(*Les Travaux et les Jours*), seule source antique du mythe, la liste des dons ne mentionne pas
+Héra ; la curiosité y tient plutôt à la ruse et au « esprit chien-de-garde » qu'Hermès insuffle à
+Pandore. L'attribution à Héra vient d'une simplification pédagogique moderne, très répandue sur
+les sites de vulgarisation, mais absente du texte original. Utilisatrice consultée directement sur
+la marche à suivre : ajouter la mention, mais en la distinguant explicitement comme une tradition
+plus tardive plutôt que de l'attribuer à Hésiode sans nuance.
+
+Fiche de Pandore mise à jour en conséquence, avec un lien cliquable vers la fiche d'Héra.
+
+Testé (2827 vérifications, dont 2 nouvelles) : contrôle visuel en clair de la fiche mise à jour.
+
+`service-worker.js` (Panthéon) : `pantheon-v137` → `pantheon-v138`.
