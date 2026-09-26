@@ -4501,3 +4501,13 @@ Fiche de Pandore mise à jour en conséquence, avec un lien cliquable vers la fi
 Testé (2827 vérifications, dont 2 nouvelles) : contrôle visuel en clair de la fiche mise à jour.
 
 `service-worker.js` (Panthéon) : `pantheon-v137` → `pantheon-v138`.
+
+## Retour immédiat : la mention de Héra retirée de la fiche de Pandore
+
+Retour direct de l'utilisatrice, aussitôt après le round précédent : « En fait non ne l'ajoute
+pas ! » La phrase distinguant la tradition tardive attribuant la curiosité à Héra est retirée : la
+fiche de Pandore revient à l'état d'avant, fidèle au seul texte d'Hésiode.
+
+Testé (2826 vérifications) : contrôle visuel de la fiche, identique à sa version d'avant l'ajout.
+
+`service-worker.js` (Panthéon) : `pantheon-v138` → `pantheon-v139`.
