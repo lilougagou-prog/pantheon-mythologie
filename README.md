@@ -4511,3 +4511,21 @@ fiche de Pandore revient à l'état d'avant, fidèle au seul texte d'Hésiode.
 Testé (2826 vérifications) : contrôle visuel de la fiche, identique à sa version d'avant l'ajout.
 
 `service-worker.js` (Panthéon) : `pantheon-v138` → `pantheon-v139`.
+
+## Portraits de Pandore, Prométhée et Épiméthée, plus une scène pour la fiche de Pandore
+
+Quatre images fournies par l'utilisatrice : un portrait pour **Pandore**, une scène (« Pandore
+préparée par les dieux », Athéna la coiffant, Hermès descendant avec une guirlande, les Charites
+ajustant sa robe, Héphaïstos façonnant encore ses pieds d'argile) insérée dans sa propre fiche à
+l'endroit où le texte détaille les dons de chaque divinité, et un portrait chacun pour
+**Prométhée** et **Épiméthée** — trois figures déjà présentes dans l'appli mais sans la moindre
+illustration jusqu'ici.
+
+Leçon du round précédent (têtes rognées sur les images de Céphale/Procris et Charon) appliquée
+d'emblée cette fois : recadrage systématique par le bas uniquement, jamais par le haut, sur les 4
+images.
+
+Testé (2836 vérifications, dont 4 nouvelles) : contrôle visuel en clair et en sombre des 3 fiches,
+scène bien positionnée sur celle de Pandore, aucune tête rognée sur aucune des 4 images.
+
+`service-worker.js` (Panthéon) : `pantheon-v139` → `pantheon-v140`.

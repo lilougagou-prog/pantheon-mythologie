@@ -483,6 +483,9 @@ const DEITY_PORTRAITS = {
   "psyché": "assets/deity-eros-psyche.jpg",
   "énée": "assets/deity-enee.jpg",
   "anchise": "assets/deity-anchise.jpg",
+  "pandore": "assets/deity-pandore.jpg",
+  "prométhée": "assets/deity-promethee.jpg",
+  "épiméthée": "assets/deity-epimethee.jpg",
   "anticlée": "assets/deity-anticlee.jpg",
   "céphale": "assets/deity-cephale.jpg",
   "procris": "assets/deity-procris.jpg",
@@ -776,6 +779,9 @@ const DEITY_INLINE_PORTRAITS = {
   ],
   "anticlée": [
     { match: "Rongée par le chagrin de l'absence prolongée de son fils", src: "assets/deity-anticlee-attente.jpg", alt: "Anticlée guettant le retour d'Ulysse" },
+  ],
+  "pandore": [
+    { match: "Chaque divinité de l'Olympe lui fit ensuite un présent", src: "assets/deity-pandore-preparation-dieux.jpg", alt: "Pandore préparée par les dieux de l'Olympe" },
   ],
   // Même scène (Procris offrant le javelot à Céphale), demandée explicitement « dans chacune de
   // leur fiche » : une seule image, réutilisée sur les deux fiches comme pour Éros/Psyché ou
