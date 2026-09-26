@@ -4461,3 +4461,24 @@ Testé (2820 vérifications, dont 3 nouvelles) : contrôle visuel en clair et en
 images recadrées (têtes désormais entières), et de la structure du nouveau bloc `.detail-body-fade-in`.
 
 `service-worker.js` (Panthéon) : `pantheon-v135` → `pantheon-v136`.
+
+## Nouvelle fiche : Pandore
+
+Retour direct de l'utilisatrice : « Crée la fiche de Pandore. » Elle était déjà mentionnée, sans
+fiche, dans 3 fiches existantes (Épiméthée, Pyrrha, Deucalion) — trois citations qui restaient
+jusqu'ici du simple texte, faute de cible à pointer.
+
+Fiche en 4 paragraphes : sa création par Héphaïstos sur l'ordre de Zeus, les présents de chaque
+dieu de l'Olympe (Athéna, Aphrodite, Hermès, les Charites, les Heures) qui parachèvent le piège,
+son accueil chez Épiméthée malgré l'avertissement de Prométhée, la jarre ouverte malgré l'interdit
+et l'Espoir seul resté prisonnier à l'intérieur, un détail resté ambigu depuis l'Antiquité même
+(consolation ou dernier mal retenu). L'occasion aussi de régler un « union non précisée » latent :
+la note de Pyrrha disait déjà « Fille d'Épiméthée et de Pandore », mais `GENEALOGY_PARENTS` ne
+listait qu'Épiméthée — Pandore, absente de l'arbre, ne pouvait pas non plus apparaître comme
+l'épouse d'Épiméthée. Corrigé, et les 3 citations existantes vers elle sont maintenant de vrais
+liens cliquables.
+
+Testé (2825 vérifications, dont 3 nouvelles) : contrôle visuel en clair et en sombre de la fiche,
+et de l'arbre de Pyrrha qui affiche désormais bien ses deux parents.
+
+`service-worker.js` (Panthéon) : `pantheon-v136` → `pantheon-v137`.

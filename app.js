@@ -44,6 +44,7 @@ const DEITY_NOTES = {
   "tyché":"Déesse de la fortune et du hasard.",
   "héraclès":"Héros de la force maîtrisée à travers ses douze travaux.",
   "prométhée":"Titan qui donna le feu aux hommes et fut puni pour ce don.",
+  "pandore":"Première femme, façonnée par Héphaïstos sur l'ordre de Zeus, dont la jarre ouverte malgré l'interdit répandit tous les maux sur l'humanité.",
   "hadès":"Dieu du monde souterrain, gardien du passage vers une autre existence.",
   "perséphone":"Reine des Enfers une partie de l'année, fille de Déméter.",
   "iris":"Messagère arc-en-ciel entre l'Olympe et la Terre.",
@@ -1197,7 +1198,7 @@ const GENEALOGY_PARENTS = {
   // Clymène de ce corpus, qui est déjà la mère de Prométhée lui-même (voir plus haut) : la
   // relier ici à son propre fils créerait une génération erronée, on la laisse donc de côté.
   "deucalion": ["prométhée"],
-  "pyrrha": ["épiméthée"],
+  "pyrrha": ["épiméthée", "pandore"],
   // Autres enfants d'Apollon.
   "asclépios": ["apollon", "coronis"],
   "hygie": ["asclépios"],
