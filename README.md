@@ -4364,3 +4364,21 @@ Testé (2802 vérifications, dont 7 nouvelles) : contrôle visuel en clair et en
 fiches, portrait et scène en ligne bien positionnés dans les deux cas.
 
 `service-worker.js` (Panthéon) : `pantheon-v131` → `pantheon-v132`.
+
+## Portraits de Céphale et Procris, avec une même scène partagée sur leurs deux fiches
+
+Suite directe du round précédent : l'utilisatrice fournit 3 images de plus, un portrait pour
+Céphale et un pour Procris, plus une même scène (Procris tendant le javelot à Céphale) à insérer
+« dans chacune de leur fiche, au moment où Procris offre le javelot à Céphale ».
+
+La scène du javelot est la première illustration en ligne de tout l'appli réutilisée sur DEUX
+fiches différentes plutôt qu'une seule (contrairement aux portraits principaux partagés comme
+Éros/Psyché ou Harmonie/Cadmos, qui existaient déjà) : un seul fichier image,
+`deity-cephale-procris-javelot.jpg`, référencé deux fois dans `DEITY_INLINE_PORTRAITS`, une entrée
+par fiche avec son propre `match` puisque les deux textes racontent l'épisode avec une légère
+différence de formulation (« Procris lui offrit » côté Céphale, « elle lui offrit » côté Procris).
+
+Testé (2810 vérifications, dont 4 nouvelles) : contrôle visuel en clair et en sombre des deux
+fiches, la même image apparaît bien au bon endroit dans les deux cas.
+
+`service-worker.js` (Panthéon) : `pantheon-v132` → `pantheon-v133`.

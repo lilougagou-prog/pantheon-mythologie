@@ -481,6 +481,8 @@ const DEITY_PORTRAITS = {
   "énée": "assets/deity-enee.jpg",
   "anchise": "assets/deity-anchise.jpg",
   "anticlée": "assets/deity-anticlee.jpg",
+  "céphale": "assets/deity-cephale.jpg",
+  "procris": "assets/deity-procris.jpg",
   "ariane": "assets/deity-dionysos-ariane.jpg",
   "harmonie": "assets/deity-harmonie-cadmos.jpg",
   "cadmos": "assets/deity-harmonie-cadmos.jpg",
@@ -771,6 +773,17 @@ const DEITY_INLINE_PORTRAITS = {
   ],
   "anticlée": [
     { match: "Rongée par le chagrin de l'absence prolongée de son fils", src: "assets/deity-anticlee-attente.jpg", alt: "Anticlée guettant le retour d'Ulysse" },
+  ],
+  // Même scène (Procris offrant le javelot à Céphale), demandée explicitement « dans chacune de
+  // leur fiche » : une seule image, réutilisée sur les deux fiches comme pour Éros/Psyché ou
+  // Harmonie/Cadmos (DEITY_PORTRAITS ci-dessus), mais ici en illustration en ligne plutôt qu'en
+  // portrait principal, chacune avec son propre `match` puisque les deux fiches racontent
+  // l'épisode avec un texte légèrement différent (« Procris lui offrit » / « elle lui offrit »).
+  "céphale": [
+    { match: "Procris lui offrit deux présents merveilleux", src: "assets/deity-cephale-procris-javelot.jpg", alt: "Procris offrant le javelot à Céphale", wide: true },
+  ],
+  "procris": [
+    { match: "elle lui offrit deux présents merveilleux", src: "assets/deity-cephale-procris-javelot.jpg", alt: "Procris offrant le javelot à Céphale", wide: true },
   ],
   "andromède": [
     { match: "Persée", src: "assets/deity-persee-andromede.jpg", alt: "Persée volant au secours d'Andromède" },
