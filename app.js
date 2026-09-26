@@ -451,6 +451,8 @@ const DEITY_NAME_OVERRIDES = {
 };
 
 const DEITY_PORTRAITS = {
+  "chaos": "assets/deity-chaos.jpg",
+  "charon": "assets/deity-charon.jpg",
   "hécate": "assets/deity-hecate.jpg",
   "artémis": "assets/deity-artemis.jpg",
   "aphrodite": "assets/deity-aphrodite.jpg",

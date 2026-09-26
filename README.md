@@ -4382,3 +4382,14 @@ Testé (2810 vérifications, dont 4 nouvelles) : contrôle visuel en clair et en
 fiches, la même image apparaît bien au bon endroit dans les deux cas.
 
 `service-worker.js` (Panthéon) : `pantheon-v132` → `pantheon-v133`.
+
+## Portraits de Chaos et Charon
+
+Deux images de plus fournies par l'utilisatrice : un portrait pour **Chaos**, le vide originel
+d'où tout émerge, et un pour **Charon**, le passeur des Enfers — deux figures déjà présentes dans
+l'appli mais sans la moindre illustration jusqu'ici.
+
+Testé (2816 vérifications, dont 2 nouvelles) : contrôle visuel en clair et en sombre des deux
+fiches.
+
+`service-worker.js` (Panthéon) : `pantheon-v133` → `pantheon-v134`.
