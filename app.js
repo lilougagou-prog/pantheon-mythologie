@@ -2859,6 +2859,7 @@ function renderFigureDetail(id){
       ${portrait ? `<img class="${deityPortraitClass(id)}" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy"${deityPortraitStyleHTML(id)}>` : ""}
       <h2>${escapeHTML(name)}</h2>
       <p class="note">${escapeHTML(note)}</p>
+      <div class="detail-body-fade-in">
       ${figureAttributesHTML(id)}
       ${paragraphs.length ? `<h3>Le mythe</h3>${paragraphs.map(p => {
         const inline = inlinePortraits.find(cfg => p.includes(cfg.match));
@@ -2876,6 +2877,7 @@ function renderFigureDetail(id){
       ${relatedChipsHTML(related, "symbol")}
       ${quizFigureButtonHTML(id, paragraphs)}
       ${siblingNavHTML(FIGURE_ENTRIES, id, "figureDetail", e => e[1])}
+      </div>
     </article>
     ${backButtonFooterHTML()}
   `;

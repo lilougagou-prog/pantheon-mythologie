@@ -1755,6 +1755,20 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 #app.screen-fade{ animation: pantheon-screen-fade 0.18s ease; }
 @media (prefers-reduced-motion: reduce){ #app.screen-fade{ animation: none; } }
 
+/* 1bis) Retour direct de l'utilisatrice : « à chaque fois que je charge la page d'un personnage
+   il y a un petit accrochage » — persistait même après avoir empêché #app.screen-fade de rejouer
+   sur un simple rafraîchissement (voir ci-dessus) : le vrai souci n'était pas le clignotement,
+   mais l'apparition BRUTALE, sans la moindre transition, du corps de la fiche (Le mythe, Culte,
+   Lignée...) une fois le contenu premium arrivé — jusque-là absent du squelette de chargement
+   (voir renderOwnerPreviewLoading dans app.js), qui n'affiche que portrait + nom + note. Un fondu
+   dédié sur ce seul bloc, plutôt que sur toute la fiche : comme .detail-body-fade-in est posé sur
+   un élément entièrement recréé à chaque rendu (innerHTML remplacé en bloc), l'animation rejoue
+   d'elle-même sans le moindre retrait/réajout JS — inutile ici, à la différence de #app qui, lui,
+   persiste d'un rendu à l'autre. */
+@keyframes pantheon-detail-body-fade-in{ from{ opacity: 0; } to{ opacity: 1; } }
+.detail-body-fade-in{ animation: pantheon-detail-body-fade-in 0.25s ease; }
+@media (prefers-reduced-motion: reduce){ .detail-body-fade-in{ animation: none; } }
+
 /* 2) Retour tactile au tap — deux familles reprenant chacune la même teinte-cible que le :hover
    déjà défini pour l'élément (jamais une nouvelle couleur inventée), simplement aussi atteignable
    au doigt. Les cartes qui "s'élèvent" au survol (translateY + ombre) s'enfoncent légèrement à

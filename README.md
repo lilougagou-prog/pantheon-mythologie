@@ -4427,3 +4427,37 @@ fois (2 mutations), tandis qu'une vraie navigation entre deux figures différent
 rejouer normalement (vérifié séparément, toujours 2 épisodes distincts).
 
 `service-worker.js` (Panthéon) : `pantheon-v134` → `pantheon-v135`.
+
+## Les deux bugs précédents n'étaient pas vraiment réglés : recadrage et fondu, corrigés pour de bon
+
+Retour direct de l'utilisatrice après le round précédent : « Les deux bugs signalés ne sont pas
+résolus ; l'image où Procris tend le javelot à Céphale est coupée sur la tête de Céphale. Le
+deuxième bug aussi est toujours là avec le clignotement au chargement du texte. »
+
+**Le recadrage.** En zoomant sur le fichier réellement publié plutôt que de se fier à un aperçu
+plein cadre, le défaut saute aux yeux : la fonction de recadrage centrait toujours la réduction de
+hauteur (autant rogné en haut qu'en bas), alors que dans les deux images d'origine, la tête du
+sujet touchait presque le bord supérieur — aucune marge à sacrifier de ce côté-là. Concerné :
+Céphale dans la scène du javelot (tête tranchée au niveau du front), et Charon (capuche coupée en
+haut) sur son propre portrait, ajouté deux rounds plus tôt avec le même défaut jamais repéré à
+l'époque. Les deux fichiers ont été recoupés depuis l'image d'origine en ne rognant que le BAS,
+gardant tout l'espace du haut intact — le bas de chaque image (sol, robe, barque) supportait sans
+problème toute la réduction de hauteur nécessaire. Profité de l'occasion pour repasser en revue
+les 7 autres images ajoutées ces derniers rounds (Anchise, Anticlée, Céphale, Procris, Chaos) :
+aucune autre n'a ce défaut.
+
+**Le fondu.** La correction précédente (empêcher #app.screen-fade de rejouer sur un simple
+rafraîchissement de la même fiche) était juste, mais insuffisante : elle empêchait bien la page
+entière de clignoter (opacité 0 puis 1), mais ne changeait rien à ce qui causait réellement la
+gêne, à savoir l'apparition BRUTALE, sans la moindre transition, du corps de la fiche (Le mythe,
+Culte, Lignée…) une fois le contenu premium arrivé — ce bloc entier n'existe tout simplement pas
+dans le squelette de chargement affiché juste avant (seuls portrait, nom et note y figurent).
+Corrigé avec un fondu dédié à ce seul bloc (`.detail-body-fade-in`), qui n'a besoin d'aucune
+gestion d'état en JavaScript contrairement à celui d'`#app` : comme il est entièrement recréé à
+chaque rendu (`innerHTML` remplacé en bloc), l'animation CSS rejoue toute seule dès que l'élément
+apparaît, sans jamais retoucher le portrait/nom/note déjà affichés et inchangés.
+
+Testé (2820 vérifications, dont 3 nouvelles) : contrôle visuel en clair et en sombre des deux
+images recadrées (têtes désormais entières), et de la structure du nouveau bloc `.detail-body-fade-in`.
+
+`service-worker.js` (Panthéon) : `pantheon-v135` → `pantheon-v136`.
