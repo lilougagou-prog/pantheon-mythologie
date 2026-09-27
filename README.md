@@ -4529,3 +4529,17 @@ Testé (2836 vérifications, dont 4 nouvelles) : contrôle visuel en clair et en
 scène bien positionnée sur celle de Pandore, aucune tête rognée sur aucune des 4 images.
 
 `service-worker.js` (Panthéon) : `pantheon-v139` → `pantheon-v140`.
+
+## Portrait de Pyrrha
+
+Une image fournie par l'utilisatrice : un portrait pour **Pyrrha**, fille d'Épiméthée et de
+Pandore, épouse de Deucalion et seule survivante avec lui du déluge envoyé par Zeus — déjà
+présente dans l'appli mais sans portrait jusqu'ici. Même recadrage par le bas uniquement que sur
+le round précédent. Au passage, corrigé un bug latent de généalogie repéré en préparant l'ajout :
+`GENEALOGY_PARENTS["pyrrha"]` ne citait qu'Épiméthée alors que sa propre fiche nommait déjà ses
+deux parents, d'où un « union non précisée » côté Pandore.
+
+Testé (2841 vérifications, dont 5 nouvelles) : contrôle visuel en clair et en sombre de la fiche de
+Pyrrha, tête bien cadrée dans les deux thèmes.
+
+`service-worker.js` (Panthéon) : `pantheon-v140` → `pantheon-v141`.
