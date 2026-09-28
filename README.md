@@ -4641,3 +4641,37 @@ nom dans la fiche de Zeus et vérifié un par un, citations toutes résolues, it
 vérifié à l'affichage, contrôle visuel en clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v143` → `pantheon-v144`.
+
+## Audit élargi à tout le corpus : les enfants sans fiche propre, partout, en italique
+
+Retour direct de l'utilisatrice, juste après le round précédent : étendre le même traitement
+(l'italique appliqué à Pandia dans la fiche de Zeus) à toute l'appli plutôt qu'à ce seul cas,
+avec pour exemple explicite Pandia dans la fiche de Séléné elle-même, où elle apparaissait
+jusque-là en texte simple.
+
+Construit un script d'audit repérant, dans les 1502 paragraphes du corpus entier (350 figures),
+toute phrase contenant un indice de filiation (« naquit », « engendra », « fille de », « mit au
+monde », etc.), puis croisant chaque nom propre qui en ressort avec `DEITY_NOTES` pour ne garder
+que ceux sans fiche. Un premier passage a raté plusieurs cas à cause d'un bug de regex (`naquit`
+ne capturait pas le pluriel `naquirent`) ; corrigé avant de considérer l'audit complet. Chaque
+candidat restant a ensuite été vérifié à la main pour écarter les faux positifs (parents plutôt
+qu'enfants, noms déjà couverts par une fiche sous un id différent, simples animaux comme le cheval
+Arion, ou catégories déjà largement couvertes par leurs membres individuels comme « les Titans »,
+dont les douze ont chacun leur fiche).
+
+24 cas confirmés, mis en italique dans 14 fiches : les *Ménées* et *Pandia* (Séléné) ; *Zagreus*
+(Dionysos, tradition orphique) ; *Cassiphoné* (Circé) ; *Triton* et *Rhodé* (Amphitrite) ;
+*Nicippé* (Sthénélos et Eurysthée) ; *Aphareus*, *Leucippe*, *Idas* et *Hippocoon* (Gorgophoné) ;
+*Hippothoé*, *Taphios* et *Ptérélas* (Mestor) ; *Hellen* (Deucalion) ; *Phénix* et *Cilix*
+(Agénor) ; *Iphiclès* (Alcmène) ; les *Thespiades* (Héraclès) ; les *Centaures* (Ixion) ; et les
+*Hécatonchires*, les *Géants* et les *Nymphes des frênes* (Ouranos).
+
+Au passage, dans cette même fiche d'Ouranos, complété deux citations `(voir la fiche « X »)`
+manquantes pour Érinyes et Cyclopes, qui ont chacun leur fiche mais n'étaient pas liés à cet
+endroit précis du texte.
+
+Testé (2946 vérifications, dont 50 nouvelles) : chacun des 24 noms vérifié à la fois comme présent
+en italique dans le texte et absent de `DEITY_NOTES`, citations toutes résolues, contrôle visuel
+des fiches de Séléné et Ouranos en clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v144` → `pantheon-v145`.
