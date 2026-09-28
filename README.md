@@ -4543,3 +4543,23 @@ Testé (2841 vérifications, dont 5 nouvelles) : contrôle visuel en clair et en
 Pyrrha, tête bien cadrée dans les deux thèmes.
 
 `service-worker.js` (Panthéon) : `pantheon-v140` → `pantheon-v141`.
+
+## Fiche de Séléné étoffée : ses amours et sa descendance
+
+Retour direct de l'utilisatrice : étoffer la fiche de Séléné, en particulier ses différents
+amours et sa descendance, jusque-là réduite à deux phrases sur Endymion. Vérifié via recherche web
+et theoi.com avant d'écrire quoi que ce soit, comme pour toute affirmation mythologique nouvelle.
+
+Trois amours ajoutés, chacun avec une source antique solide : Endymion (voir la fiche « Endymion »)
+et les cinquante filles nées de leurs rencontres nocturnes sur le mont Latmos, les Ménées, dont le
+nombre correspond aux cinquante mois séparant chaque Olympiade (Pausanias) ; Zeus (voir la fiche
+« Zeus »), dont elle eut une fille, Pandia, honorée chaque pleine lune à Athènes (Hymne homérique
+32 à Séléné) ; et Pan (voir la fiche « Pan »), qui la séduisit en lui offrant une toison de laine
+blanche (Virgile, Géorgiques III). Écartées volontairement les traditions les plus incertaines
+(lion de Némée, Mousaios, Narkissos), dont les sources antiques elles-mêmes attribuent la
+paternité à une figure incertaine ou tardive.
+
+Testé (2843 vérifications, dont 2 nouvelles) : citations `(voir la fiche « X »)` toutes résolues en
+liens cliquables, contrôle visuel en clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v141` → `pantheon-v142`.
