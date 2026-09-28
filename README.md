@@ -4563,3 +4563,41 @@ Testé (2843 vérifications, dont 2 nouvelles) : citations `(voir la fiche « X 
 liens cliquables, contrôle visuel en clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v141` → `pantheon-v142`.
+
+## Quatre fiches étoffées : Minos, Éole, Charon et Nérée
+
+Retour direct de l'utilisatrice, après une question exploratoire sur d'autres fiches courtes à
+étoffer sur le même principe que Séléné : « Étoffe les tous ». Cinq fiches avaient été proposées
+(Minos, Éole, Charon, Nérée, Écho) ; vérification faite via theoi.com et Wikipédia avant d'écrire
+quoi que ce soit.
+
+**Minos** passe de 2 à 4 paragraphes : la naissance du Minotaure enfin racontée (le taureau envoyé
+par Poséidon, la promesse rompue, la malédiction sur Pasiphaé), le tribut athénien imposé après la
+mort de son fils Androgée, et l'emprisonnement de Dédale et Icare suivi de la mort de Minos en
+Sicile, ébouillanté par les filles du roi Cocalos. Au passage, la mention d'Androgée dans le texte
+a été alignée sur le nom déjà utilisé dans sa propre fiche (au lieu de la forme grecque
+« Androgeos », qui aurait laissé la citation sans lien).
+
+**Éole** gagne un paragraphe sur sa maisonnée : douze enfants, six fils et six filles mariés entre
+eux, dans un palais flottant où Ulysse fut reçu (la citation vers la fiche d'Ulysse, absente du
+texte d'origine, a aussi été ajoutée).
+
+**Charon** gagne deux paragraphes sur les rares vivants qui forcèrent son passage : Héraclès,
+venu chercher Cerbère, qui s'empare de force de la rame, et Énée, qui l'obtient au contraire par la
+persuasion grâce au rameau d'or de l'Énéide. Délibérément écarté la légende, pourtant très
+répandue, d'Orphée charmant Charon de sa lyre : chez Ovide, le passeur le repousse au contraire
+sans ménagement.
+
+**Nérée** gagne un paragraphe sur l'épisode où Héraclès le surprend endormi et le maintient de
+force malgré ses métamorphoses, jusqu'à lui arracher le chemin du jardin des Hespérides, un parallèle
+assumé avec Protée déjà présent dans l'appli.
+
+**Écho** a été laissée de côté après vérification : son texte actuel (malédiction d'Héra puis
+Narcisse, d'après Ovide) couvre déjà l'essentiel des sources fiables ; les seules pistes
+supplémentaires trouvées (un vague épisode chez Pan, Hymne orphique 11, la Souda) sont trop ténues
+pour ajouter quoi que ce soit de solide sans tomber dans le remplissage.
+
+Testé (2850 vérifications, dont 7 nouvelles) : citations toutes résolues en liens cliquables,
+contrôle visuel des 4 fiches en clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v142` → `pantheon-v143`.
