@@ -4601,3 +4601,43 @@ Testé (2850 vérifications, dont 7 nouvelles) : citations toutes résolues en l
 contrôle visuel des 4 fiches en clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v142` → `pantheon-v143`.
+
+## Tous les enfants de Zeus cités dans sa propre fiche
+
+Retour direct de l'utilisatrice : « Vérifie que dans la fiche de Zeus, tous ses enfants soient
+cités (même si ils n'ont pas de fiche, comme Pandia, dans ce cas mettre en italique) ». Audité les
+37 figures de `GENEALOGY_PARENTS` ayant Zeus comme parent : un seul, Héraclès, était nommé dans le
+texte existant (dans le récit de la Gigantomachie). Les 36 autres n'apparaissaient nulle part.
+
+Ajouté 4 nouveaux paragraphes à la fiche, regroupés par union plutôt qu'en liste brute : Héra
+(Arès, Hébé, Ilithyie) ; les liaisons mortelles à l'origine de grandes lignées héroïques (Alcmène,
+Danaé, Léda, Europe, Antiope, Io) ; les naissances singulières (Athéna du crâne de Zeus après qu'il
+eut avalé Métis, Dionysos de la cuisse après la mort de Sémélé, Hermès, Apollon/Artémis,
+Perséphone) ; et les trois groupes de déesses (Muses, Charites, Heures), citées comme groupes
+plutôt que chacun de leurs 9+3+3 membres séparément, exactement comme le fait déjà le reste de
+l'appli (la fiche d'Euterpe renvoie déjà vers « les huit autres Muses » plutôt que de les nommer
+une à une).
+
+**Pandia**, fille de Zeus et de Séléné, posait un problème différent : mentionnée dans la fiche de
+Séléné (round précédent) mais sans fiche propre, faute de matière suffisante pour en justifier une
+(vérifié à l'époque, voir plus haut). `linkifyLore()` n'avait jusqu'ici aucun moyen de distinguer
+visuellement ce cas. Ajouté une syntaxe `*texte*` reconnue par la fonction et convertie en `<em>`,
+sur le même principe que le mécanisme de citation existant (édition de plage de texte avant
+échappement HTML, jamais de balise brute dans les données pour ne pas la voir échappée à
+l'affichage). Pandia est donc la seule enfant citée en italique dans la fiche de Zeus.
+
+Bug latent trouvé en cherchant comment citer correctement Antiope, princesse thébaine (mère
+d'Amphion et Zéthos) : son id désambiguïsé `antiope-thébaine` affiche « Antiope (princesse
+thébaine) », qui n'apparaît nulle part littéralement dans le texte des fiches existantes. Résultat,
+les citations `(voir la fiche « Antiope »)` dans les fiches d'Amphion (×2) et de Niobé
+pointaient en réalité vers l'*autre* Antiope de l'appli, la reine amazone, un lien trompeur
+puisque la phrase même d'Amphion précise qu'il s'agit d'une figure différente. Corrigé en retirant
+ces trois citations fautives : le nom reste en texte simple, comme le veut déjà le motif établi
+pour toute figure désambiguïsée (ex. Persès). Dans le nouveau paragraphe de Zeus, « Antiope,
+princesse thébaine » est donc mentionnée sans lien, pour la même raison.
+
+Testé (2896 vérifications, dont 46 nouvelles) : chacun des 37 enfants (ou son groupe) cité par son
+nom dans la fiche de Zeus et vérifié un par un, citations toutes résolues, italique de Pandia
+vérifié à l'affichage, contrôle visuel en clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v143` → `pantheon-v144`.
