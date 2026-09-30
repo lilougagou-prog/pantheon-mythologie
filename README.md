@@ -4710,3 +4710,20 @@ Testé (2958 vérifications, dont 12 nouvelles) : citations et italiques vérifi
 des 3 fiches en clair et en sombre (qui a permis de repérer le bug Créüse ci-dessus).
 
 `service-worker.js` (Panthéon) : `pantheon-v145` → `pantheon-v146`.
+
+## Correctif disque/pierre sur la fiche d'Hyacinthe, portraits d'Hyacinthe et Hylonome
+
+Retour direct de l'utilisatrice : la fiche d'Hyacinthe parlait d'abord d'un disque dévié par
+Zéphyr, puis d'une « pierre » qui le frappe en pleine tempe au paragraphe suivant, une
+incohérence introduite lors d'une réécriture antérieure du mythe. Corrigé : le disque reste un
+disque tout du long.
+
+Deux images fournies par l'utilisatrice : un portrait pour **Hyacinthe** lui-même et un pour
+**Hylonome**, la centauresse éprise de Cyllaros morte à ses côtés durant la Centauromachie, qui
+n'en avaient ni l'un ni l'autre jusqu'ici. Même recadrage par le bas uniquement que pour toutes
+les images depuis le round Céphale/Procris.
+
+Testé (2965 vérifications, dont 5 nouvelles) : absence de toute mention d'une « pierre » dans la
+fiche d'Hyacinthe vérifiée, contrôle visuel des 2 nouveaux portraits en clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v146` → `pantheon-v147`.
