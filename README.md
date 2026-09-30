@@ -4675,3 +4675,38 @@ en italique dans le texte et absent de `DEITY_NOTES`, citations toutes résolues
 des fiches de Séléné et Ouranos en clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v144` → `pantheon-v145`.
+
+## Portraits de Coronis, Créüse et Zéphyr, et la fiche de Zéphyr étoffée
+
+Trois images fournies par l'utilisatrice : un portrait chacun pour **Coronis**, **Créüse** et
+**Zéphyr**, qui n'en avaient aucun jusqu'ici. Recadrage par le bas uniquement, comme pour toutes
+les images depuis le round Céphale/Procris. Pour Zéphyr, demande explicite d'en profiter pour
+étoffer sa fiche, jusque-là limitée à son origine et à la tragédie d'Hyacinthe : « Amours,
+intervention dans les légendes des autres etc. »
+
+Bug repéré en intégrant le portrait de Créüse : son id réel dans l'appli est `créüse` (avec
+tréma), hérité d'un round bien antérieur (Ascagne + Créüse), mais le portrait avait été indexé par
+erreur sous `créuse` (sans tréma). Comme `DEITY_PORTRAITS` et l'en-tête de fiche fonctionnent
+indépendamment du contenu premium, l'erreur ne sautait pas aux yeux : titre et portrait
+s'affichaient normalement, mais le corps de la fiche retombait sur l'écran de paywall, faute de
+correspondre à un id reconnu. Repéré uniquement grâce au contrôle visuel systématique en clair et
+en sombre ; corrigé avant de pousser.
+
+Trois ajouts à la fiche de Zéphyr, chacun vérifié sur theoi.com avant rédaction : son mariage avec
+Chloris (déjà présente dans l'appli, Ovide, *Fastes* V) ; les chevaux immortels d'Achille, Xanthos
+et Balios, nés de son union avec la harpye Podarge (Homère, *Iliade* XVI) ; et son rôle de porteur
+de Psyché jusqu'au palais secret d'Éros, sur l'ordre de ce dernier (Apulée, *L'Âne d'or* IV).
+Écartée une tradition plus obscure (un unique fragment d'Alcée, repris par Nonnos) faisant d'Iris
+l'épouse de Zéphyr et la mère d'Éros : elle aurait directement contredit la filiation d'Éros déjà
+établie ailleurs dans l'appli (fils d'Aphrodite, parfois d'Arès). Podarge, Xanthos et Balios, sans
+fiche propre, mis en italique selon la convention établie au round précédent.
+
+Un check existant, écrit lors d'un correctif antérieur pour s'assurer que le meurtre d'Hyacinthe
+n'était plus attribué à tort à un dépit envers Chloris, interdisait toute mention de son nom dans
+toute la fiche. Devenu trop large avec ce nouvel ajout légitime (Chloris comme épouse, dans un
+paragraphe distinct) : resserré pour ne plus porter que sur le paragraphe d'Hyacinthe lui-même.
+
+Testé (2958 vérifications, dont 12 nouvelles) : citations et italiques vérifiés, contrôle visuel
+des 3 fiches en clair et en sombre (qui a permis de repérer le bug Créüse ci-dessus).
+
+`service-worker.js` (Panthéon) : `pantheon-v145` → `pantheon-v146`.
