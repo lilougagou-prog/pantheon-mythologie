@@ -4911,3 +4911,33 @@ clair, ancienne phrase ambiguë absente de la fiche de Minos, nouvelle formulati
 mot.
 
 `service-worker.js` (Panthéon) : `pantheon-v153` → `pantheon-v154`.
+
+## Deux bugs d'arbre généalogique signalés par capture d'écran : Ploutos, et Cadmos/Europe
+
+Retour direct de l'utilisatrice, deux captures d'écran à l'appui. Première : sur l'arbre de Déméter,
+Ploutos apparaissait visuellement rattaché à l'union Zeus-Déméter (celle de Perséphone), alors qu'il
+n'a rien à voir avec Zeus. Cause : `GENEALOGY_PARENTS["ploutos"]` ne listait que Déméter, sans second
+parent ; dans ce cas, `ftMultiUnionHubHTML()` rattache l'enfant directement à la carte de Déméter,
+juste à côté de son union avec Zeus — proche visuellement, sans rapport réel, mais assez pour
+induire en erreur. Corrigé à la racine plutôt qu'en pansement sur le rendu : ajouté le vrai père de
+Ploutos, le héros crétois Iasion, avec qui Déméter s'unit dans un champ labouré trois fois selon
+Hésiode (*Théogonie*, v. 969-974) — une source antique de tout premier plan, simplement absente du
+corpus jusqu'ici. Ploutos a désormais sa propre union, clairement distincte de celle de Zeus.
+
+Seconde capture : sur l'arbre d'Agénor, Europe n'apparaissait pas comme sœur de Cadmos (et
+inversement), alors que Phénix et Cilix, eux, s'affichaient bien comme frères. Cause : les quatre
+partagent le même père (Agénor), mais seuls Phénix et Cilix avaient leur mère Téléphassa
+documentée ; Cadmos et Europe, en « union non précisée », étaient de ce fait exclus du calcul de
+fratrie (`siblingContributingChildren()` ignore sciemment les unions sans partenaire identifié, pour
+ne pas transformer les naissances en solitaire comme celle d'Ouranos en fausse fratrie géante — un
+garde-fou qui, ici, écartait à tort deux vrais enfants d'un même couple). Téléphassa est pourtant,
+dans la tradition (Apollodore, *Bibliothèque* III.1.1), la mère des quatre enfants d'Agénor : ajoutée
+comme second parent de Cadmos et d'Europe aussi, ce qui les réunit tous les quatre dans la même
+union et rétablit leur fratrie à l'affichage.
+
+Testé (3049 vérifications, dont 4 nouvelles) : contrôle visuel de l'arbre de Déméter (Ploutos sous
+Iasion, Perséphone sous Zeus, deux unions bien distinctes) et de celui d'Agénor (Cadmos, Europe,
+Phénix et Cilix réunis sous Agénor et Téléphassa), vérification directe en JavaScript de
+`genealogyChildUnions()` et `genealogyRelations().siblings` pour les deux cas.
+
+`service-worker.js` (Panthéon) : `pantheon-v154` → `pantheon-v155`.

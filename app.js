@@ -1196,8 +1196,8 @@ const GENEALOGY_PARENTS = {
   // Thèbes jusqu'à Œdipe (Polydoros -> Labdacos -> Laïos -> Œdipe -> Antigone). Cadmos et
   // Europe remontent désormais eux aussi jusqu'à Agénor, donc jusqu'à la même souche que
   // Danaos et Égyptos (voir Libye/Bélos/Agénor plus haut).
-  "cadmos": ["agénor"],
-  "europe": ["agénor"],
+  "cadmos": ["agénor", "téléphassa"],
+  "europe": ["agénor", "téléphassa"],
   "sémélé": ["cadmos", "harmonie"],
   "ino": ["cadmos", "harmonie"],
   "autonoë": ["cadmos", "harmonie"],
@@ -1251,7 +1251,7 @@ const GENEALOGY_PARENTS = {
   "rhéa-silvia": ["numitor"],
   "romulus": ["arès", "rhéa-silvia"],
   "remus": ["arès", "rhéa-silvia"],
-  "ploutos": ["déméter"],
+  "ploutos": ["déméter", "iasion"],
   "phaéton": ["hélios"],
   "calypso": ["atlas"],
   "polyphème": ["poséidon"],
