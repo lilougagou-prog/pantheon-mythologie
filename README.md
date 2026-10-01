@@ -4836,3 +4836,49 @@ Jason, les deux fiches vérifiées mot pour mot identiques sur le déroulé de l
 contrôle visuel en clair.
 
 `service-worker.js` (Panthéon) : `pantheon-v151` → `pantheon-v152`.
+
+## L'italique retirée du corps du texte, partout : réservée à la Lignée
+
+Retour direct de l'utilisatrice sur la fiche de Macaria : « tu as mis des noms en italique dans le
+texte. Mets-les normalement. L'italique est réservée à la partie « généalogie » ou « lignée ».
+Pareil dans la fiche Hadès. » Plus trois bugs signalés dans le même message : une phrase de
+désambiguïsation inutile sur l'autre Macaria, l'attribut « Grenade » posé par erreur sur Hadès, et
+le mythe de Menthé mal raconté.
+
+Le diagnostic : l'italique `*Nom*` introduite il y a quelques rounds pour les enfants cités sans
+avoir de fiche propre n'aurait jamais dû vivre dans le corps du texte — l'appli dispose déjà, dans
+la section « Lignée » de chaque fiche, d'un mécanisme tout fait pour ça : un enfant présent dans
+`GENEALOGY_PARENTS` mais absent de `DEITY_NOTES` s'affiche automatiquement comme un chip grisé non
+cliquable, plutôt que d'être simplement omis. Retiré `*texte*` du corps dans les **17 fiches**
+concernées (Zeus, Dionysos, Héraclès, Séléné, Ouranos, Zéphyr, Jason, Circé, Amphitrite, Sthénélos,
+Gorgophoné, Mestor, Deucalion, Ixion, Alcmène, Agénor, Eurysthée, Macaria), et retiré le mécanisme
+`linkifyLore()` devenu inutile. Pour chaque vrai enfant parmi les noms concernés, une entrée
+`GENEALOGY_PARENTS` prend sa place : Pandia (Zeus et Séléné), Cassiphoné (Circé), Triton et Rhodé
+(Amphitrite), Aphareus, Leucippe et Hippocoon (Gorgophoné), Hellen (Deucalion), Phénix et Cilix
+(Agénor), Iphiclès (Alcmène), Xanthos et Balios (Zéphyr, sur le précédent de Pégase — un animal né
+d'une union divine, lui aussi sans fiche propre). Les noms collectifs (Thespiades, Ménées,
+Centaures, Hécatonchires, Géants, Nymphes des frênes) restent volontairement absents de la Lignée,
+comme le sont déjà Titans, Cyclopes, Érinyes, Muses, Gorgones, Amazones, Harpyes et Grées dans le
+reste de l'appli — une convention préexistante qu'il aurait été incohérent de rompre juste pour ce
+round. Les compagnons, conjoint·e·s et descendant·e·s plus lointain·e·s (Hylas, Phinée, Nicippé,
+Idas, Ptérélas...) redeviennent simplement du texte, sans traitement particulier.
+
+Dans la fiche d'Hadès précisément : retiré l'italique sur l'autre Macaria (déesse de la « mort
+heureuse », seule attestation chez la *Souda*) ainsi que la phrase qui la distinguait de celle
+d'Héraclès — devenue inutile puisque cette Macaria a désormais son propre id
+(`macaria-mort-heureuse`) et un `DEITY_NAME_OVERRIDES` qui l'affiche « Macaria (mort heureuse) »
+dans la Lignée d'Hadès, portant la distinction sans avoir besoin de l'expliciter dans le texte.
+Retiré aussi « Grenade » de ses attributs (`FIGURE_ATTRIBUTES`) : un doublon par erreur de celui de
+Perséphone, la grenade n'étant jamais un symbole d'Hadès lui-même. Et corrigé le mythe de Menthé,
+dans sa propre fiche comme dans celle d'Hadès : ce n'est pas Perséphone qui change la naïade en
+plante par rage, mais Perséphone qui la tue par jalousie, et Hadès qui, par pitié, change ses
+restes en la plante odorante qui porte son nom (vérifié via WebSearch, tradition rapportée par un
+scholiaste de Nicandre).
+
+Testé (3041 vérifications, dont 41 nouvelles) : plus aucun `*texte*` dans le corps d'aucune fiche
+(vérifié y compris via `linkifyLore()` en conditions réelles), chips de Lignée contrôlés un par un
+pour Zeus, Séléné, Hadès, Amphitrite, Zéphyr, Gorgophoné, Deucalion, Agénor, Alcmène et Circé,
+absence de la section « Attributs » sur la fiche d'Hadès (plus aucun attribut renseigné), contrôle
+visuel de la fiche d'Hadès en clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v152` → `pantheon-v153`.
