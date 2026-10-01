@@ -4772,3 +4772,14 @@ Testé (2972 vérifications, dont 3 nouvelles) : citation vers Arès résolue, p
 paragraphe vérifiée entre les deux bons voisins, contrôle visuel en clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v148` → `pantheon-v149`.
+
+## Portrait de Chloris
+
+Une image fournie par l'utilisatrice : un portrait pour **Chloris**, déesse des fleurs et épouse
+de Zéphyr (déjà présente dans l'appli, mentionnée dans sa propre fiche et dans celle de Zéphyr
+depuis deux rounds), qui n'en avait pas encore. Même recadrage par le bas uniquement que toutes
+les images depuis le round Céphale/Procris.
+
+Testé (2976 vérifications, dont 2 nouvelles) : contrôle visuel en clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v149` → `pantheon-v150`.
