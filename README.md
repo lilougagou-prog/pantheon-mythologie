@@ -4815,3 +4815,24 @@ même paragraphe), généalogie de Macaria rattachée à Héraclès, contrôle v
 clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v150` → `pantheon-v151`.
+
+## Incohérence sur la mort de Talos entre les fiches de Jason et de Médée
+
+Retour direct de l'utilisatrice : « Attention il y a une incohérence entre les fiches de Jason et
+Médée concernant le sort de Talos. » Vérifié, et confirmé : les deux fiches racontaient deux
+traditions antiques réelles mais différentes et incompatibles. Celle de Jason (ajoutée lors du
+round sur l'expédition) suivait Apollodore, *Bibliothèque* : Médée convainc Talos de retirer le
+clou qui scelle l'unique veine courant de sa nuque à sa cheville. Celle de Médée (antérieure)
+suivait Apollonios de Rhodes, *Argonautique* : Médée le rend fou d'un regard chargé de sortilèges
+jusqu'à ce qu'il se blesse lui-même au talon, son seul point faible.
+
+Harmonisé sur la version d'Apollonios dans les deux fiches, puisque c'est déjà la source citée
+pour tout le reste du voyage des Argonautes dans la fiche de Jason (Lemnos, Hylas, Phinée, les
+Symplégades, les Sirènes) : la réécrire aurait réintroduit la même incohérence sous une autre
+forme. La fiche de Jason reprend donc désormais le même déroulé que celle de Médée.
+
+Testé (2986 vérifications, dont 2 nouvelles) : absence de toute mention du clou dans la fiche de
+Jason, les deux fiches vérifiées mot pour mot identiques sur le déroulé de la mort de Talos,
+contrôle visuel en clair.
+
+`service-worker.js` (Panthéon) : `pantheon-v151` → `pantheon-v152`.
