@@ -4882,3 +4882,32 @@ absence de la section « Attributs » sur la fiche d'Hadès (plus aucun attribut
 visuel de la fiche d'Hadès en clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v152` → `pantheon-v153`.
+
+## Lignée en italique, et paragraphe peu clair réécrit sur la fiche de Minos
+
+Retour direct de l'utilisatrice, complétant le round précédent : les noms sans fiche propre
+affichés dans la section « Lignée » (chip grisé non cliquable, `.chip-inactive`) doivent apparaître
+en italique — cohérent avec le traitement déjà appliqué aux mêmes cas dans l'arbre généalogique
+(`.ft-card-nameonly`). Un seul changement de CSS (`font-style: italic` sur `.chip-inactive`) suffit,
+puisque la classe est déjà partagée par les trois endroits de l'appli où un nom sans fiche
+s'affiche ainsi (Lignée d'une fiche, arbre généalogique, divinités associées à un symbole).
+Vérifié que chaque entrée ajoutée au round précédent porte bien les deux parents quand les deux
+sont connus (Pandia : Zeus et Séléné ; Cassiphoné : Circé et Ulysse ; Triton et Rhodé : Amphitrite
+et Poséidon ; etc.) — déjà le cas pour toutes sauf l'autre Macaria, dont la seule source antique (la
+Souda) ne nomme aucune mère.
+
+Deuxième demande, sur la fiche de Minos : le paragraphe racontant l'emprisonnement de Dédale et
+Icare puis la mort de Minos en Sicile jugé peu clair et mal écrit. Deux problèmes identifiés : « Furieux
+d'avoir aidé Pasiphaé puis Ariane à déjouer ses plans » ne précisait pas qui avait déjoué les plans de
+qui (Dédale avait aidé Pasiphaé à s'unir au taureau, puis Ariane à percer le secret du Labyrinthe
+pour que Thésée en ressorte vivant) ; et « le fit périr ébouillanté dans son bain par ses propres
+filles » laissait planer une ambiguïté sur le possesseur des « propres filles » (celles de Cocalos,
+pas de Minos) sans expliquer comment le bain avait causé sa mort. Réécrit en trois phrases
+distinctes, chacune centrée sur un seul événement et son sujet.
+
+Testé (3045 vérifications, dont 4 nouvelles) : CSS de `.chip-inactive` vérifié, contrôle visuel de
+la Lignée de Minos (Xénodicé en italique) et de Hadès (Macaria (mort heureuse) en italique) en
+clair, ancienne phrase ambiguë absente de la fiche de Minos, nouvelle formulation vérifiée mot pour
+mot.
+
+`service-worker.js` (Panthéon) : `pantheon-v153` → `pantheon-v154`.

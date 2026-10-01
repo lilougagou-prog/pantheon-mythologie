@@ -855,7 +855,7 @@ h1, h2, h3{
 }
 .chip:hover{ background: var(--border); }
 .chip-symbol{ color: var(--bronze); }
-.chip-inactive{ cursor: default; opacity: 0.75; }
+.chip-inactive{ cursor: default; opacity: 0.75; font-style: italic; }
 .chip-inactive:hover{ background: var(--marble-deep); }
 
 /* ----- Fiche symbolique enrichie ----- */
