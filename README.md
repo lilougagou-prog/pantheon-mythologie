@@ -4752,3 +4752,23 @@ Testé (2970 vérifications, dont 5 nouvelles) : citations et italiques vérifi�
 clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v147` → `pantheon-v148`.
+
+## Les oiseaux du lac Stymphale, sur l'île d'Arès
+
+Retour direct de l'utilisatrice, question exploratoire sur le round précédent : « Est-ce qu'ils
+sont attaqués par les oiseaux du lac Stymphale ? » Vérifié via recherche web avant de répondre :
+oui, c'est un épisode réel de l'*Argonautique* d'Apollonios de Rhodes (livre II), sur l'île
+désertée d'Arès en mer Noire, juste après le passage des Symplégades et avant l'arrivée en
+Colchide. Les oiseaux y sont les mêmes que ceux chassés, sans être tués, par Héraclès lors de l'un
+de ses travaux (déjà dans sa propre fiche), réfugiés depuis sur cette île. Présenté la réponse à
+l'utilisatrice avant d'agir, qui a confirmé vouloir l'ajout.
+
+Un paragraphe inséré au bon endroit chronologique dans la fiche de Jason, entre celui des
+Symplégades et celui de l'arrivée chez Aiétès : les Argonautes repoussent les oiseaux à coups de
+boucliers et de casques martelés plutôt qu'à la flèche, pendant que la moitié de l'équipage rame à
+l'abri.
+
+Testé (2972 vérifications, dont 3 nouvelles) : citation vers Arès résolue, position du nouveau
+paragraphe vérifiée entre les deux bons voisins, contrôle visuel en clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v148` → `pantheon-v149`.
