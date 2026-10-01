@@ -4727,3 +4727,28 @@ Testé (2965 vérifications, dont 5 nouvelles) : absence de toute mention d'une 
 fiche d'Hyacinthe vérifiée, contrôle visuel des 2 nouveaux portraits en clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v146` → `pantheon-v147`.
+
+## L'expédition de Jason racontée en détail
+
+Retour direct de l'utilisatrice : « Raconte plus en détail l'expédition de Jason dans la fiche
+Jason. » L'ancienne fiche sautait directement de la formation de l'équipage des Argonautes à
+l'arrivée chez le roi Aiétès, sans jamais raconter le voyage lui-même. Vérifié sur Wikipédia
+(d'après Apollonios de Rhodes, l'*Argonautique*, source antique de référence) avant rédaction.
+
+Trois nouveaux paragraphes, insérés aux deux bons endroits chronologiques plutôt qu'à la suite :
+deux sur l'aller, entre la formation de l'équipage et l'arrivée en Colchide (l'escale à Lemnos
+chez la reine Hypsipyle, où Jason a un fils, Euneos, avant qu'Héraclès ne presse le départ ; la
+perte d'Hylas en Mysie, qui retient Héraclès en arrière ; puis le devin Phinée délivré des Harpyes
+par les fils ailés de Borée, Zétès et Calaïs, et le passage des Symplégades, les falaises
+mobiles, grâce à la colombe envoyée en éclaireur) ; et un sur le retour, entre la fuite avec
+Absyrtos et l'arrivée à Iolcos (le chant d'Orphée qui couvre celui des Sirènes, puis le géant de
+bronze Talos, gardien de la Crète, vaincu par Médée qui lui retire le clou scellant son unique
+veine).
+
+Hylas, Phinée, Zétès, Calaïs, les Sirènes et Talos, aucun n'ayant de fiche propre, mis en italique
+selon la convention établie il y a quelques rounds.
+
+Testé (2970 vérifications, dont 5 nouvelles) : citations et italiques vérifiés, contrôle visuel en
+clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v147` → `pantheon-v148`.
