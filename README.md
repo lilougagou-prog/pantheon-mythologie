@@ -4783,3 +4783,35 @@ les images depuis le round Céphale/Procris.
 Testé (2976 vérifications, dont 2 nouvelles) : contrôle visuel en clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v149` → `pantheon-v150`.
+
+## Nouvelle fiche : Macaria, fille d'Héraclès (et pas la fille de Perséphone)
+
+Retour direct de l'utilisatrice : « As-tu assez de matière pour ajouter Macaria ? Est-elle la
+fille de Perséphone ? » Vérifié via WebSearch avant de répondre : il existe en réalité **deux**
+Macaria distinctes dans la mythologie grecque, un homonyme comme Antiope ou Persès avant elle.
+
+La première, déesse personnifiant une « mort heureuse », est dite fille d'Hadès (jamais de
+Perséphone) dans sa seule attestation antique, la *Souda*, une encyclopédie byzantine du Xe
+siècle, donc une source tardive et isolée plutôt qu'un texte classique : aucun récit, aucun culte,
+bien trop mince pour une fiche propre, exactement le diagnostic posé pour Pandia il y a quelques
+rounds.
+
+La seconde, fille d'Héraclès, est un personnage à part entière des *Héraclides* d'Euripide (Ve
+siècle av. J.-C., une vraie source antique) : après la mort d'Héraclès, son cousin Eurysthée
+pourchasse ses enfants de cité en cité ; réfugiée à Athènes, Macaria apprend qu'un oracle exige le
+sacrifice volontaire d'une jeune fille de haute naissance à Perséphone pour que la ville l'emporte,
+et se propose elle-même plutôt que de laisser le sort en décider entre les filles d'Héraclès. Les
+Athéniens remportent la bataille, et selon Pausanias, une source près de Marathon reçut depuis son
+nom. Assez de matière pour une fiche complète, créée sous l'id simple `macaria` (pas besoin d'un id
+désambiguïsé façon `antiope-thébaine`, puisque l'autre Macaria n'a justement pas de fiche propre).
+
+Comme demandé, l'autre Macaria (celle d'Hadès) a tout de même sa place : ajoutée en italique dans
+la fiche d'Hadès lui-même, avec un renvoi explicite vers la bonne fiche pour ne jamais confondre
+les deux.
+
+Testé (2984 vérifications, dont 8 nouvelles) : citations et italique vérifiés (y compris le cas
+particulier d'un même nom qui apparaît une fois en italique et une fois en lien cliquable dans le
+même paragraphe), généalogie de Macaria rattachée à Héraclès, contrôle visuel des deux fiches en
+clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v150` → `pantheon-v151`.
