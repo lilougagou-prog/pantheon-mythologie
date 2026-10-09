@@ -5067,3 +5067,23 @@ cohérence avec le reste de la fiche (toujours mariée à Héphaïstos depuis le
 autres amants déjà présentés comme des liaisons extraconjugales).
 
 `service-worker.js` (Panthéon) : `pantheon-v160` → `pantheon-v161`.
+
+## Comment Hermès a conquis Aphrodite : l'aigle et la sandale
+
+Retour direct de l'utilisatrice, deux questions successives : « Comment se rencontrent Aphrodite et
+Dionysos, le sait-on ? » puis « Et Hermès et Aphrodite ? ». Vérifié via WebSearch pour les deux avant
+de répondre. Pour Dionysos : aucune source antique ne raconte de rencontre, seulement leur lien déjà
+connu (Priape) ; rien ajouté, pour ne pas inventer. Pour Hermès en revanche, un vrai récit existe :
+Pseudo-Hygin, *Astronomica* II.16 (IIe siècle apr. J.-C.) — Hermès, repoussé par Aphrodite, obtient
+l'aide de Zeus, qui envoie un aigle dérober l'une de ses sandales pendant qu'elle se baigne près du
+fleuve Achéloos ; l'aigle la porte jusqu'à Hermès, alors en Égypte, et c'est en venant la réclamer
+qu'elle le retrouve. Hermès place ensuite l'aigle parmi les étoiles en remerciement : l'origine
+mythique donnée à la constellation de l'Aigle (Aquila).
+
+Ajouté au paragraphe d'Hermaphrodite, dans la fiche d'Aphrodite (ni la fiche d'Hermès ni celle
+d'Hermaphrodite ne racontaient cet épisode, pas de doublon).
+
+Testé : contrôle visuel de la fiche d'Aphrodite, absence d'em-dash dans le nouveau texte, citation
+vérifiée contre la source (theoi.com, compilation de Pseudo-Hygin).
+
+`service-worker.js` (Panthéon) : `pantheon-v161` → `pantheon-v162`.
