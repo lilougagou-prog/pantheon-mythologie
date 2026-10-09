@@ -774,6 +774,7 @@ const DEITY_INLINE_PORTRAITS = {
     { match: "remporte le jugement de Pâris", src: "assets/deity-jugement-paris.jpg", alt: "Le jugement de Pâris", wide: true },
     { match: "dieu de la guerre", src: "assets/deity-ares-aphrodite.jpg", alt: "Arès et Aphrodite" },
     { match: "Diomède", src: "assets/deity-aphrodite-enee.jpg", alt: "Aphrodite qui sauve Énée" },
+    { match: "Elle aima aussi le jeune Adonis", src: "assets/deity-adonis.jpg", alt: "Adonis" },
   ],
   "artémis": [
     { match: "une meute de chiennes", src: "assets/deity-artemis-suite.jpg", alt: "Artémis et sa suite" },

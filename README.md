@@ -4959,3 +4959,18 @@ réellement présent sur le disque, contrôle visuel de la fiche d'Anchise (l'im
 au-dessus du bon paragraphe, entre celui de la foudre et celui-ci).
 
 `service-worker.js` (Panthéon) : `pantheon-v155` → `pantheon-v156`.
+
+## Le portrait d'Adonis ajouté au-dessus de son paragraphe, dans la fiche d'Aphrodite
+
+Retour direct de l'utilisatrice : ajouter le portrait d'Adonis (`assets/deity-adonis.jpg`, déjà
+utilisé comme portrait principal sur sa propre fiche) en illustration en ligne juste au-dessus du
+paragraphe qui raconte son histoire avec Aphrodite, dans la fiche de celle-ci. Ajoutée une entrée à
+`DEITY_INLINE_PORTRAITS["aphrodite"]`, qui réutilise le fichier existant plutôt que d'en demander un
+nouveau — même principe que pour Anchise/Énée au round précédent. Comportement par défaut du
+mécanisme (image avant le paragraphe), donc pas de réglage supplémentaire nécessaire.
+
+Testé : vérification que les 47 entrées de `DEITY_INLINE_PORTRAITS` pointent toutes vers un fichier
+réellement présent sur le disque, contrôle visuel de la fiche d'Aphrodite (l'image d'Adonis apparaît
+bien juste au-dessus de son paragraphe, entre celui du filet d'or d'Héphaïstos et celui-ci).
+
+`service-worker.js` (Panthéon) : `pantheon-v156` → `pantheon-v157`.
