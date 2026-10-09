@@ -4941,3 +4941,21 @@ Phénix et Cilix réunis sous Agénor et Téléphassa), vérification directe en
 `genealogyChildUnions()` et `genealogyRelations().siblings` pour les deux cas.
 
 `service-worker.js` (Panthéon) : `pantheon-v154` → `pantheon-v155`.
+
+## L'illustration « Énée portant Anchise » réutilisée sur la fiche d'Anchise
+
+Retour direct de l'utilisatrice : cette illustration existait déjà en ligne dans la fiche d'Énée
+(`DEITY_INLINE_PORTRAITS["énée"]`, associée au paragraphe « porta sur son dos son père âgé »), mais
+ne réapparaissait pas dans la fiche d'Anchise, qui raconte pourtant la même scène de son propre
+point de vue (« il fut porté hors de la ville en flammes sur le dos de son propre fils »). Ajoutée
+une seconde entrée à `DEITY_INLINE_PORTRAITS["anchise"]`, qui réutilise le même fichier
+(`assets/deity-enee-fuite-troie.jpg`) sans dupliquer l'image sur le disque — même principe déjà en
+place pour Procris/Céphale ou Éros/Psyché. Par défaut, le mécanisme place l'image juste avant le
+paragraphe qu'elle illustre (comportement historique, inchangé), ce qui correspond exactement à la
+demande.
+
+Testé : vérification que les 46 entrées de `DEITY_INLINE_PORTRAITS` pointent toutes vers un fichier
+réellement présent sur le disque, contrôle visuel de la fiche d'Anchise (l'image apparaît bien
+au-dessus du bon paragraphe, entre celui de la foudre et celui-ci).
+
+`service-worker.js` (Panthéon) : `pantheon-v155` → `pantheon-v156`.

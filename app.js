@@ -784,6 +784,7 @@ const DEITY_INLINE_PORTRAITS = {
   ],
   "anchise": [
     { match: "se vanta malgré tout de sa conquête divine", src: "assets/deity-anchise-vantardise.jpg", alt: "Anchise se vantant de sa conquête auprès d'Aphrodite", wide: true },
+    { match: "porté hors de la ville en flammes sur le dos de son propre fils", src: "assets/deity-enee-fuite-troie.jpg", alt: "Énée fuyant Troie avec son père et son fils" },
   ],
   "anticlée": [
     { match: "Rongée par le chagrin de l'absence prolongée de son fils", src: "assets/deity-anticlee-attente.jpg", alt: "Anticlée guettant le retour d'Ulysse" },
