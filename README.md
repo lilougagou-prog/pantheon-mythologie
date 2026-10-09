@@ -5009,3 +5009,23 @@ la fiche d'Aphrodite (forge au-dessus du paragraphe de la ceinture, Arès/Aphrod
 celui du piège) et de la fiche d'Héphaïstos (image inchangée).
 
 `service-worker.js` (Panthéon) : `pantheon-v157` → `pantheon-v158`.
+
+## Le jugement de Zeus sur Adonis, développé
+
+Retour direct de l'utilisatrice : le paragraphe sur Adonis, dans la fiche d'Aphrodite, ne précisait
+pas comment elle avait obtenu de passer le plus clair de son temps avec lui, et l'utilisatrice
+soupçonnait un rôle de sa ceinture magique (voir le round précédent). Vérifié via WebSearch avant de
+répondre : aucune source classique (Apollodore, *Bibliothèque* III.14.4, la référence pour cet
+épisode ; Panyasis) ne mêle la ceinture à cette histoire — c'est un geste volontaire d'Adonis
+lui-même, jamais un artifice de séduction.
+
+Développé le jugement de Zeus en conséquence, fidèle à Apollodore : Perséphone, une fois l'enfant
+vu, refuse de le rendre ; Zeus partage alors l'année en trois parts égales (seul, avec Perséphone,
+avec Aphrodite) ; Adonis, de son propre chef, ajoute ensuite sa part solitaire à celle d'Aphrodite,
+ce qui explique enfin pourquoi il passe « la majeure partie de son temps » avec elle plutôt qu'avec
+sa rivale, sans qu'aucune ceinture n'intervienne.
+
+Testé : contrôle visuel de la fiche d'Aphrodite (le portrait d'Adonis reste bien au-dessus du
+paragraphe, désormais plus détaillé), relecture du nouveau texte contre la source.
+
+`service-worker.js` (Panthéon) : `pantheon-v158` → `pantheon-v159`.
