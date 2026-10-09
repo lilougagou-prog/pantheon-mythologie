@@ -5029,3 +5029,25 @@ Testé : contrôle visuel de la fiche d'Aphrodite (le portrait d'Adonis reste bi
 paragraphe, désormais plus détaillé), relecture du nouveau texte contre la source.
 
 `service-worker.js` (Panthéon) : `pantheon-v158` → `pantheon-v159`.
+
+## La brouille avec Dionysos, et la jalousie d'Héra envers Priape, expliquées
+
+Retour direct de l'utilisatrice : le texte sur Priape mentionnait une « réconciliation passagère »
+entre Aphrodite et Dionysos sans jamais dire ce qui les avait brouillés, et attribuait la laideur du
+nouveau-né à la « jalousie » d'Héra sans en préciser la nature. Vérifié via WebSearch (dictionnaire
+de Smith, *Dictionary of Greek and Roman Biography and Mythology*, citant les scholies anciennes) :
+Aphrodite fut d'abord la compagne de Dionysos, mais lui fut infidèle avec Adonis pendant qu'il
+guerroyait en Inde ; c'est cette trahison qui causa la rupture, réparée à son retour.
+
+Scindé le paragraphe en deux (Hermaphrodite d'un côté, Dionysos/Priape de l'autre, pour laisser
+place au récit complet) et ajouté la cause de la brouille. Pour la jalousie d'Héra : pas un désir
+pour Dionysos ou pour l'enfant, mais le même ressort déjà posé dans sa propre fiche — gardienne du
+mariage qui subit sans jamais pouvoir les punir les infidélités de son propre époux Zeus, elle ne
+supporte pas d'y voir Aphrodite s'adonner librement sans la moindre conséquence ; Priape, né de
+cette liaison infidèle, en paie le prix à sa place.
+
+Testé : contrôle visuel de la fiche d'Aphrodite (les deux paragraphes s'enchaînent normalement,
+aucune image en ligne existante perturbée), vérification qu'aucun em-dash ne s'est glissé dans le
+nouveau texte, cohérence avec la caractérisation d'Héra déjà établie dans sa propre fiche.
+
+`service-worker.js` (Panthéon) : `pantheon-v159` → `pantheon-v160`.
