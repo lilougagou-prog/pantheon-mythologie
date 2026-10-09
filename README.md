@@ -5051,3 +5051,19 @@ aucune image en ligne existante perturbée), vérification qu'aucun em-dash ne s
 nouveau texte, cohérence avec la caractérisation d'Héra déjà établie dans sa propre fiche.
 
 `service-worker.js` (Panthéon) : `pantheon-v159` → `pantheon-v160`.
+
+## Dionysos amant, pas époux : clarifié que Aphrodite reste mariée à Héphaïstos
+
+Retour direct de l'utilisatrice : « Aphrodite n'est pas déjà mariée à Héphaïstos ? » — à juste titre.
+Le paragraphe ajouté au round précédent disait qu'elle « fut la compagne de Dionysos », une
+formulation ambiguë qui pouvait laisser croire à une relation parallèle à son mariage plutôt qu'à
+une liaison de plus, comme Arès, Adonis ou Hermès avant lui. Corrigé : elle « prend Dionysos pour
+amant », explicitement qualifié de « liaison de plus en marge de son mariage », pour lever toute
+ambiguïté sans toucher au reste du récit (l'infidélité pendant son expédition en Inde, la
+réconciliation, la naissance de Priape).
+
+Testé : contrôle visuel de la fiche d'Aphrodite, relecture du paragraphe complet pour vérifier sa
+cohérence avec le reste de la fiche (toujours mariée à Héphaïstos depuis le paragraphe 2, tous ses
+autres amants déjà présentés comme des liaisons extraconjugales).
+
+`service-worker.js` (Panthéon) : `pantheon-v160` → `pantheon-v161`.
