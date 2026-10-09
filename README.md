@@ -4974,3 +4974,38 @@ réellement présent sur le disque, contrôle visuel de la fiche d'Aphrodite (l'
 bien juste au-dessus de son paragraphe, entre celui du filet d'or d'Héphaïstos et celui-ci).
 
 `service-worker.js` (Panthéon) : `pantheon-v156` → `pantheon-v157`.
+
+## Nouvelle image fournie : Héphaïstos forgeant la ceinture d'Aphrodite
+
+Retour direct de l'utilisatrice, une image fournie : Héphaïstos au travail dans sa forge, en train
+de façonner un bijou pour Aphrodite. Enregistrée sous `assets/deity-aphrodite-hephaistos-forge.jpg`
+(redimensionnée à 700 px de large, convertie en JPEG, cohérente avec le reste des illustrations du
+corpus) — et non `assets/deity-hephaistos-ceinture.jpg`, comme initialement tenté : ce nom de fichier
+était déjà pris par une image plus ancienne, déjà utilisée sur la fiche d'Héphaïstos elle-même pour
+la même scène. L'écraser aurait changé silencieusement l'image affichée là-bas ; repéré avant de
+committer quoi que ce soit (`git status` montrait le fichier en "modifié" plutôt qu'en "nouveau"),
+le fichier d'origine a été restauré intact et la nouvelle image enregistrée sous son propre nom.
+
+Cette découverte a aussi révélé que la fiche d'Héphaïstos racontait déjà, et plus précisément, cette
+histoire : « il façonna pour sa propre épouse Aphrodite une ceinture magique capable de rendre
+irrésistible quiconque la porte, un bijou si redouté qu'Héra elle-même l'emprunta un jour en secret
+pour mieux détourner l'attention de Zeus, le temps que Poséidon vienne en aide aux Grecs sur le
+champ de bataille de Troie » — l'épisode exact de l'*Iliade*, chant XIV. Plutôt que de dupliquer ce
+récit en entier dans la fiche d'Aphrodite, le nouveau paragraphe y reste bref et renvoie vers la
+fiche d'Héphaïstos pour le détail, sur le modèle déjà suivi ailleurs dans l'appli pour les
+événements partagés entre deux fiches.
+
+Le paragraphe du mariage/ceinture a été séparé de celui de l'infidélité et du piège, qui
+contenaient jusqu'ici une seule illustration en ligne chacun (`DEITY_INLINE_PORTRAITS` n'affiche
+qu'une image par paragraphe) : scindé en deux paragraphes distincts pour que la nouvelle image de la
+forge ET l'image existante d'Arès et Aphrodite s'affichent chacune au-dessus du bon texte, sans se
+disputer la même place.
+
+Testé : vérification que les 48 entrées de `DEITY_INLINE_PORTRAITS` pointent toutes vers un fichier
+présent sur le disque, que `assets/deity-hephaistos-ceinture.jpg` est bien revenu à son état commité
+d'origine (`git diff` vide sur ce fichier), absence de collision entre les `match` de la ceinture et
+celui d'« dieu de la guerre » (vérifiés sur des paragraphes désormais distincts), contrôle visuel de
+la fiche d'Aphrodite (forge au-dessus du paragraphe de la ceinture, Arès/Aphrodite au-dessus de
+celui du piège) et de la fiche d'Héphaïstos (image inchangée).
+
+`service-worker.js` (Panthéon) : `pantheon-v157` → `pantheon-v158`.
