@@ -5241,3 +5241,31 @@ reste non résolue, absence d'em-dash dans les nouveaux paragraphes, contrôle v
 d'Arès (le nouveau paragraphe s'intègre naturellement juste avant Culte, sans rien perturber).
 
 `service-worker.js` (Panthéon) : `pantheon-v166` → `pantheon-v167`.
+
+## 2026-10-22 — Correction : les différences grecques/romaines ajoutées au round précédent
+appartenaient à « Culte », pas à « Le mythe »
+
+Remarque de l'utilisateur, à partir de l'exemple d'Artémis : le paragraphe sur le culte romain de
+Diane (Rex Nemorensis, bois sacré d'Aricie) avait été ajouté en fin de section « Le mythe », alors
+que son contenu (sanctuaire, prêtre, pratique rituelle) relève structurellement de la section
+« Culte », qui existe déjà et s'affiche juste après dans chaque fiche.
+
+Vérification de l'ensemble des 11 fiches touchées au round précédent, puis déplacement au cas par
+cas selon la nature du contenu (institution de culte nommée = Culte ; réputation/généalogie sans
+institution = reste dans Le mythe) :
+
+- **Déplacées vers Culte** (contenu centré sur un temple, une fête ou un sacerdoce nommé) :
+  Zeus/Jupiter, Héra/Junon, Athéna/Minerve, Aphrodite/Vénus, Hermès/Mercure, Dionysos/Bacchus,
+  Héraclès/Hercule, Déméter/Cérès, Artémis/Diane (l'exemple donné par l'utilisateur).
+- **Cronos/Saturne, cas particulier** : la phrase sur les Saturnales a été retirée de la section
+  Le mythe et une entrée distincte a été ajoutée dans Culte, formulée pour prolonger la fête des
+  Kronia déjà décrite dans son paragraphe de culte existant, plutôt que de la dupliquer isolément.
+- **Arès/Mars, resté dans Le mythe** : son paragraphe ne décrit aucune institution de culte
+  précise, seulement un contraste de réputation et un lien généalogique (père mythique de
+  Romulus) ; il n'a donc pas sa place dans « Culte ».
+
+Vérifié par script Playwright sur les 11 fiches : chaque mention du nom romain apparaît désormais
+dans la bonne moitié du texte (avant/après le titre « Culte »), confirmation visuelle en plus sur
+la fiche d'Artémis.
+
+`service-worker.js` (Panthéon) : `pantheon-v167` → `pantheon-v168`.
