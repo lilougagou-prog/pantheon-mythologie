@@ -5198,3 +5198,46 @@ redevenu lisible dans les deux), contrôle visuel de la fiche complète pour vé
 l'agrandissement reste harmonieux avec le reste de la mise en page.
 
 `service-worker.js` (Panthéon) : `pantheon-v165` → `pantheon-v166`.
+
+## Les différences de réputation entre dieux grecs et romains, pour les figures ayant les deux noms
+
+Retour direct de l'utilisatrice, à propos des noms latins ajoutés au round précédent : « Mars a une
+bien meilleure réputation que Arès », demandant de préciser ce type d'écart quand il existe.
+Vérifié via WebSearch avant d'écrire, cas par cas, plutôt que de supposer que les 35 équivalences
+cachent toutes une différence intéressante — beaucoup n'en ont pas (Hadès/Pluton, Éros/Cupidon,
+Hestia/Vesta jouent des rôles quasi identiques des deux côtés) : seules celles où la rupture est
+réellement documentée ont reçu un paragraphe, pour ne pas inventer un contraste là où il n'y en a
+pas.
+
+Onze fiches concernées, chacune avec sa propre bascule, vérifiée séparément :
+
+- **Arès/Mars** (l'exemple donné) : honni et humilié chez Homère, vénéré juste après Jupiter à
+  Rome, où il devient le père mythique de Romulus.
+- **Dionysos/Bacchus** : ses mystères, tolérés en Grèce, furent interdits dans toute l'Italie par
+  un décret du Sénat romain en 186 av. J.-C. (le *senatus consultum de Bacchanalibus*, gravé sur
+  bronze), des milliers de personnes poursuivies selon Tite-Live.
+- **Cronos/Saturne** : d'incarnation grecque du chaos dévorant ses enfants à souverain romain d'un
+  âge d'or, célébré chaque année aux Saturnales (paragraphe existant complété).
+- **Aphrodite/Vénus** : élevée au rang d'ancêtre divine de Jules César (via Énée), un rôle
+  politique qu'Aphrodite n'eut jamais en Grèce.
+- **Héraclès/Hercule** : culte propre à l'Ara Maxima de Rome, patron des marchands et des
+  généraux triomphants, un succès romain supérieur à son statut grec.
+- **Héra/Junon** : autorité plus civique et parfois guerrière à Rome (Junon Moneta et les
+  finances publiques, Junon Sospita en armes).
+- **Athéna/Minerve** : aspect guerrier nettement secondaire dans la pratique romaine courante.
+- **Hermès/Mercure** : spécialisé à Rome dans le commerce (son nom vient de *merx*, « marchandise »).
+- **Artémis/Diane** : le culte du bois d'Aricie et son prêtre, le Rex Nemorensis, désigné par
+  combat singulier, une pratique sans équivalent grec.
+- **Déméter/Cérès** : coloration sociale propre à Rome, associée à la plèbe via la triade de
+  l'Aventin.
+- **Zeus/Jupiter** : rôle plus directement politique, garant juridique de l'État via le serment
+  prêté en son nom au Capitole.
+
+Chaque paragraphe ajouté en fin de fiche, juste avant la section Culte, là où les fiches
+abordaient déjà souvent les épithètes et variantes régionales du culte.
+
+Testé : vérification programmatique sur les 11 fiches qu'aucune citation `(voir la fiche...)` ne
+reste non résolue, absence d'em-dash dans les nouveaux paragraphes, contrôle visuel de la fiche
+d'Arès (le nouveau paragraphe s'intègre naturellement juste avant Culte, sans rien perturber).
+
+`service-worker.js` (Panthéon) : `pantheon-v166` → `pantheon-v167`.
