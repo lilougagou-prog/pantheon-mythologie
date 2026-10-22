@@ -5122,3 +5122,39 @@ toutes résolues, et le renvoi mutuel Tircis ↔ Égérie fonctionne), vérifica
 nouvelles entrées apparaissent bien dans `FIGURE_ENTRIES` (navigation et recherche).
 
 `service-worker.js` (Panthéon) : `pantheon-v162` → `pantheon-v163`.
+
+## Suppression complète du Quiz
+
+Retour direct de l'utilisatrice : « Supprime les quizz. J'aime pas, ça alourdit. » Confirmé via
+`AskUserQuestion` que la suppression devait emporter aussi le système de badges/points lié au quiz
+(visible sur le profil), plutôt que de le laisser en place avec des badges devenus inatteignables.
+
+Avant de toucher quoi que ce soit, un agent d'exploration a cartographié l'intégralité de
+l'empreinte du Quiz dans le code (près de 450 lignes rien que dans `app.js`) : tous les écrans et
+leur logique (sélection de niveau/thème, génération de questions à la volée, session, résultat),
+le bouton « Teste tes connaissances » sur chaque fiche figure, le système de badges (6 badges, une
+seule clé `localStorage`), et leur empreinte dans `styles.css` et `service-worker.js`.
+
+Point d'attention identifié par cette cartographie : plusieurs classes nommées `quiz-*` ne sont
+PAS exclusives au Quiz — `.quiz-tile*` et `.quiz-icon-img` servent aussi à la tuile « Nous
+contacter » du profil et au bouton de l'arbre généalogique, `.quiz-start-btn` au formulaire email.
+Ces classes ont donc été conservées (seul leur nom garde la trace de leur origine), avec un
+commentaire explicite pour ne pas induire en erreur la prochaine lecture du code. Également
+repéré : la fonction `profileResultsBodyHTML()`, entièrement dépendante du quiz, était appelée
+sans condition par `renderProfile()` — la supprimer sans réécrire l'écran Profil en même temps
+aurait fait planter l'écran entier (`ReferenceError`), pas seulement laissé un vide.
+
+Supprimé en une passe : les écrans Quiz (accueil, session, résultat) et leur dispatch, toute la
+génération de questions, le bouton par fiche, le système de badges et son `localStorage`, la carte
+« Mes résultats » du profil (réécrite pour ne garder que le compte email et le lien de contact), le
+~400 lignes de CSS correspondantes dans `styles.css`, et les 8 images de badges désormais
+orphelines (`assets/badge-quiz-*.webp`, `assets/badge-figure-quiz.webp`), retirées du disque et de
+la liste `ASSETS` de `service-worker.js`. Au total, -1685 lignes nettes sur les trois fichiers.
+
+Testé : `node --check app.js` et `service-worker.js` propres, recherche exhaustive de « quiz »
+dans les deux fichiers (plus aucune référence orpheline, seules les classes partagées restent),
+contrôle visuel de l'accueil (tuile Quiz disparue), du profil (plus de carte résultats/badges, «
+Nous contacter » toujours fonctionnel) et d'une fiche figure (bouton de quiz disparu), sans aucune
+erreur JavaScript dans la console sur ces trois écrans.
+
+`service-worker.js` (Panthéon) : `pantheon-v163` → `pantheon-v164`.

@@ -349,10 +349,10 @@ h1, h2, h3{
   margin-top: 6px;
 }
 .geneal-tree-link:hover{ background: var(--border); }
-/* Icônes fournies par l'utilisatrice, remplaçant les emoji 🌳/🧠 — même patron que
+/* Icône fournie par l'utilisatrice, remplaçant l'emoji 🌳 — même patron que
    .quiz-icon-img déjà en place ailleurs (le champ icon porte directement du HTML), simplement
    dimensionné pour s'aligner sur le texte d'un bouton pleine largeur plutôt qu'une tuile. */
-.geneal-tree-link .quiz-icon-img, .quiz-figure-btn .quiz-icon-img{
+.geneal-tree-link .quiz-icon-img{
   width: 28px;
   height: 28px;
   vertical-align: middle;
@@ -1242,9 +1242,12 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 }
 .home-footer-link a{ color: var(--ink-soft); text-decoration: underline; }
 
-/* ===================== QUIZ ===================== */
-
-/* ----- Tuile d'accueil ----- */
+/* ===================== TUILES & BOUTON D'ACTION PARTAGÉS ===================== */
+/* Classes nommées "quiz-*" à l'origine (la fonctionnalité Quiz les utilisait), mais restées en
+   place après sa suppression car réutilisées ailleurs : la tuile d'accueil générique
+   (.quiz-tile*, aussi utilisée par « Nous contacter » sur le profil), l'icône ronde partagée
+   (.quiz-icon-img, aussi utilisée par le lien vers l'arbre généalogique) et le bouton d'action
+   principal (.quiz-start-btn, aussi utilisé par les formulaires email/contact). */
 
 .quiz-tile-wrap{ margin-bottom: 24px; }
 .quiz-tile{
@@ -1265,78 +1268,15 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 }
 .quiz-tile:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px var(--shadow); }
 .quiz-tile-icon{ font-size: 1.8rem; line-height: 1; flex: 0 0 auto; }
-/* Médaillons illustrés fournis par l'utilisatrice, en remplacement des emoji du quiz (tuile
-   d'accueil, niveaux, badges) — même traitement que .nav-badge déjà en place pour les onglets du
-   bas : object-fit:cover + un cercle parfait, pas juste le carré d'origine de l'image. Une seule
-   règle de forme, une taille par contexte. Agrandis sur demande de l'utilisatrice (« c'est
-   vraiment riquiqui ») par rapport à la taille d'origine, calquée sur le font-size de l'emoji
-   remplacé — bien trop petite pour que le détail peint des médaillons se voie vraiment. */
+/* Médaillon illustré fourni par l'utilisatrice, en remplacement de l'emoji de la tuile d'accueil
+   — même traitement que .nav-badge déjà en place pour les onglets du bas : object-fit:cover + un
+   cercle parfait, pas juste le carré d'origine de l'image. */
 .quiz-icon-img{ border-radius: 50%; object-fit: cover; display: block; }
 .quiz-tile-icon .quiz-icon-img{ width: 44px; height: 44px; }
-.quiz-level-icon .quiz-icon-img{ width: 48px; height: 48px; }
-.quiz-badge-icon .quiz-icon-img{ width: 40px; height: 40px; }
 .quiz-tile-text{ display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
 .quiz-tile-title{ font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 1.05rem; color: var(--laurel-deep); }
 .quiz-tile-desc{ font-size: 0.85rem; color: var(--ink-soft); }
 .quiz-tile-arrow{ font-size: 1.2rem; color: var(--bronze); flex: 0 0 auto; }
-
-/* ----- Écran de sélection (niveau + thème) ----- */
-
-.quiz-section-title{
-  font-family: "Cinzel", Georgia, serif;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--bronze);
-  margin: 22px 0 10px;
-}
-.quiz-levels{ display: grid; gap: 10px; grid-template-columns: 1fr; }
-@media (min-width: 520px){ .quiz-levels{ grid-template-columns: 1fr 1fr 1fr; } }
-.quiz-level-card{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 16px 14px;
-  background: var(--card-bg);
-  border: 2px solid var(--border);
-  border-radius: 12px;
-  cursor: pointer;
-  font-family: inherit;
-  color: inherit;
-  text-align: center;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-}
-.quiz-level-card:hover:not(:disabled){ transform: translateY(-2px); box-shadow: 0 6px 16px var(--shadow); }
-.quiz-level-card.active{ border-color: var(--bronze); box-shadow: 0 0 0 3px rgba(168, 120, 60, 0.18); }
-.quiz-level-card.locked{ opacity: 0.6; cursor: not-allowed; }
-.quiz-level-icon{ font-size: 1.6rem; line-height: 1; }
-.quiz-level-title{ font-family: "Cinzel", Georgia, serif; font-weight: 600; color: var(--laurel-deep); font-size: 0.95rem; }
-.quiz-level-desc{ font-size: 0.78rem; color: var(--ink-soft); line-height: 1.3; }
-
-.quiz-themes{ display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
-@media (min-width: 520px){ .quiz-themes{ grid-template-columns: 1fr 1fr 1fr; } }
-.quiz-theme-card{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 14px 10px;
-  background: var(--card-bg);
-  border: 2px solid var(--border);
-  border-radius: 12px;
-  cursor: pointer;
-  font-family: inherit;
-  color: inherit;
-  text-align: center;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-}
-.quiz-theme-card:hover{ transform: translateY(-2px); box-shadow: 0 6px 16px var(--shadow); }
-.quiz-theme-card.active{ border-color: var(--bronze); box-shadow: 0 0 0 3px rgba(168, 120, 60, 0.18); }
-.quiz-theme-icon{ font-size: 1.4rem; line-height: 1; }
-.quiz-theme-title{ font-family: "Cinzel", Georgia, serif; font-weight: 600; color: var(--laurel-deep); font-size: 0.85rem; line-height: 1.25; }
-.quiz-theme-stats{ font-size: 0.72rem; color: var(--bronze); }
-.quiz-theme-stats.mastered{ color: var(--laurel-deep); font-weight: 600; }
 
 .quiz-start-btn{
   display: block;
@@ -1354,163 +1294,6 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 }
 .quiz-start-btn:hover:not(:disabled){ background: var(--laurel); }
 .quiz-start-btn:disabled{ opacity: 0.5; cursor: not-allowed; }
-
-/* ----- Session en cours ----- */
-
-.quiz-progress-row{ display: flex; align-items: center; justify-content: center; gap: 10px; margin: 6px 0 22px; }
-.quiz-dots{ display: flex; gap: 6px; }
-.quiz-dot{ width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
-.quiz-dot.done{ background: var(--bronze); }
-.quiz-dot.current{ background: var(--laurel-deep); }
-.quiz-progress-count{ font-size: 0.82rem; color: var(--bronze); }
-
-.quiz-question{ max-width: 560px; margin: 0 auto; }
-.quiz-prompt{
-  font-family: "Cinzel", Georgia, serif;
-  font-size: 1.15rem;
-  color: var(--laurel-deep);
-  text-align: center;
-  line-height: 1.4;
-  margin-bottom: 22px;
-}
-
-.quiz-choices{ display: flex; flex-direction: column; gap: 10px; }
-.quiz-choice{
-  display: block;
-  width: 100%;
-  padding: 13px 16px;
-  background: var(--card-bg);
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  font-family: inherit;
-  font-size: 0.95rem;
-  color: inherit;
-  text-align: left;
-  cursor: pointer;
-  transition: transform 0.1s ease, border-color 0.15s ease, background 0.15s ease;
-}
-.quiz-choice:hover:not(:disabled){ transform: translateY(-1px); border-color: var(--bronze); }
-.quiz-choice:disabled{ cursor: default; }
-/* Vert (--laurel) / rouge-terracotta (--terracotta) : mêmes jetons de couleur déjà adaptés au
-   mode sombre ailleurs dans l'appli, jamais de nouvelle couleur à décliner séparément. */
-.quiz-choice.correct{ border-color: var(--laurel); background: rgba(74, 93, 58, 0.14); color: var(--laurel-deep); font-weight: 600; }
-.quiz-choice.incorrect{ border-color: var(--terracotta); background: rgba(181, 84, 47, 0.14); color: var(--terracotta); }
-
-.quiz-explain{
-  margin: 10px 0 0;
-  padding: 10px 12px;
-  background: var(--marble-deep);
-  border-left: 3px solid var(--bronze);
-  border-radius: 6px;
-  font-size: 0.85rem;
-  color: var(--ink-soft);
-  line-height: 1.4;
-}
-
-.quiz-text-input{
-  display: block;
-  width: 100%;
-  padding: 12px 14px;
-  background: var(--card-bg);
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  font-family: inherit;
-  font-size: 0.95rem;
-  color: inherit;
-  margin-bottom: 12px;
-}
-.quiz-submit-btn, .quiz-next-btn, .quiz-replay-btn, .quiz-home-btn{
-  display: block;
-  width: 100%;
-  padding: 13px;
-  border: none;
-  border-radius: 10px;
-  background: var(--laurel-deep);
-  color: var(--marble);
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 6px;
-}
-.quiz-submit-btn:hover, .quiz-next-btn:hover, .quiz-replay-btn:hover{ background: var(--laurel); }
-.quiz-text-feedback{ text-align: center; font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
-.quiz-text-feedback.correct{ color: var(--laurel-deep); }
-.quiz-text-feedback.incorrect{ color: var(--terracotta); }
-
-/* ----- Ronde "relie les paires" ----- */
-
-.quiz-match-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.quiz-match-col{ display: flex; flex-direction: column; gap: 10px; }
-.quiz-match-item{
-  padding: 12px 10px;
-  background: var(--card-bg);
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  font-family: inherit;
-  font-size: 0.88rem;
-  color: inherit;
-  cursor: pointer;
-  text-align: center;
-  transition: border-color 0.15s ease, background 0.15s ease;
-}
-.quiz-match-item:hover:not(:disabled){ border-color: var(--bronze); }
-.quiz-match-item.selected{ border-color: var(--bronze); background: rgba(168, 120, 60, 0.14); }
-.quiz-match-item.matched{ border-color: var(--laurel); background: rgba(74, 93, 58, 0.14); color: var(--laurel-deep); cursor: default; opacity: 0.85; }
-.quiz-match-item.wrong{ border-color: var(--terracotta); background: rgba(181, 84, 47, 0.14); }
-
-/* ----- Résultat ----- */
-
-.quiz-result{ max-width: 420px; margin: 20px auto 0; text-align: center; }
-.quiz-result-score{ font-family: "Cinzel", Georgia, serif; font-size: 2.6rem; color: var(--laurel-deep); margin: 0 0 6px; }
-.quiz-result-message{ font-size: 1rem; color: var(--ink-soft); margin-bottom: 10px; }
-.quiz-result-points{ font-size: 0.9rem; color: var(--bronze); font-weight: 600; margin-bottom: 6px; }
-/* Déverrouillage du niveau Intermédiaire (demande de l'utilisatrice : « ça pourrait apparaître
-   en gros puis disparaître doucement ») — un seul temps fort, pas une boucle comme le halo des
-   badges (@keyframes quiz-badge-glow) : le médaillon apparaît en grand avec un léger effet de
-   rebond, tient un instant, puis s'estompe et se réduit doucement pour laisser place au texte,
-   qui lui reste affiché en permanence (la confirmation ne doit pas disparaître avec l'animation).
-   Un seul geste, sans confettis ni son, cohérent avec le reste de l'appli. */
-.quiz-unlock-celebration{ display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 18px; }
-.quiz-unlock-medallion{
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 0 0 1px rgba(168, 120, 60, 0.3), 0 8px 24px rgba(168, 120, 60, 0.4);
-  animation: quiz-unlock-pop 2.6s ease forwards;
-}
-@keyframes quiz-unlock-pop{
-  0%{ transform: scale(0.3); opacity: 0; }
-  22%{ transform: scale(1.15); opacity: 1; }
-  35%{ transform: scale(1); opacity: 1; }
-  70%{ transform: scale(1); opacity: 1; }
-  100%{ transform: scale(0.85); opacity: 0; }
-}
-@media (prefers-reduced-motion: reduce){
-  .quiz-unlock-medallion{ animation: none; }
-}
-.quiz-result-unlock{ font-size: 0.95rem; color: var(--bronze); font-weight: 600; margin: 0; }
-.quiz-result-actions{ display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
-.quiz-home-btn{ background: var(--marble-deep); color: var(--laurel-deep); border: 1px solid var(--border); }
-.quiz-home-btn:hover{ background: var(--border); }
-
-/* ----- Bouton contextuel sur une fiche figure ----- */
-
-.quiz-figure-btn{
-  display: block;
-  width: 100%;
-  padding: 12px 14px;
-  margin-top: 22px;
-  background: var(--marble-deep);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  font-family: inherit;
-  font-size: 0.9rem;
-  color: var(--laurel-deep);
-  cursor: pointer;
-}
-.quiz-figure-btn:hover{ background: var(--border); }
 
 /* ----- Bouton Profil flottant -----
    Persistant sur tous les écrans (élément séparé de #app, jamais réinjecté par render() — voir
@@ -1616,134 +1399,14 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 .profile-empty .quiz-start-btn{ margin-top: 10px; }
 .profile-empty .profile-remove-link{ margin-top: 2px; }
 
-.profile-results{ margin-top: 10px; }
-.profile-result-row{ display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); }
-.profile-result-row:last-child{ border-bottom: none; padding-bottom: 0; }
-.profile-result-icon{ font-size: 1.25rem; flex: 0 0 auto; width: 22px; text-align: center; }
-.profile-result-theme{ font-family: "Cinzel", Georgia, serif; font-weight: 600; color: var(--ink); font-size: 0.9rem; flex: 1; min-width: 0; }
-.profile-result-score{ font-size: 0.82rem; font-weight: 600; color: var(--bronze); white-space: nowrap; }
-.profile-result-meta{ font-weight: 400; color: var(--ink-soft); }
-.profile-result-mastered{ font-family: inherit; font-weight: 600; font-size: 0.72rem; color: var(--laurel-deep); }
-
-.profile-points{ font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 1.1rem; color: var(--bronze); margin: 0; }
-
-/* ----- Badges : grisés/transparents tant que non gagnés, colorés + halo une fois débloqués -----
-   Calculés à la volée (voir QUIZ_BADGES/quizBadgesHTML dans app.js), jamais stockés. Devenus des
-   <button> (demande de l'utilisatrice : un clic ouvre une explication, voir plus bas
-   .quiz-badge-modal) — les propriétés propres à un bouton (curseur, police, largeur) s'ajoutent
-   donc ici, sans rien changer à l'apparence déjà en place. */
-.quiz-badges{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 18px;
-}
-@media (min-width: 420px){ .quiz-badges{ grid-template-columns: repeat(4, 1fr); } }
-.quiz-badge{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  width: 100%;
-  padding: 12px 6px;
-  border-radius: 10px;
-  background: var(--marble-deep);
-  border: 1px solid var(--border);
-  opacity: 0.4;
-  filter: grayscale(1);
-  cursor: pointer;
-  font-family: inherit;
-  color: inherit;
-  transition: opacity 0.2s ease, filter 0.2s ease;
-}
-.quiz-badge-icon{ font-size: 1.5rem; line-height: 1; }
-.quiz-badge-label{ font-size: 0.68rem; text-align: center; color: var(--ink-soft); line-height: 1.25; }
-.quiz-badge.earned{
-  opacity: 1;
-  filter: none;
-  border-color: var(--bronze);
-  background: linear-gradient(160deg, rgba(168, 120, 60, 0.16), var(--marble-deep));
-  box-shadow: 0 0 0 1px rgba(168, 120, 60, 0.25), 0 0 14px rgba(168, 120, 60, 0.35);
-  animation: quiz-badge-glow 2.6s ease-in-out infinite;
-}
-.quiz-badge.earned .quiz-badge-label{ color: var(--laurel-deep); font-weight: 600; }
-@keyframes quiz-badge-glow{
-  0%, 100% { box-shadow: 0 0 0 1px rgba(168, 120, 60, 0.25), 0 0 10px rgba(168, 120, 60, 0.28); }
-  50% { box-shadow: 0 0 0 1px rgba(168, 120, 60, 0.4), 0 0 18px rgba(168, 120, 60, 0.55); }
-}
-@media (prefers-reduced-motion: reduce){ .quiz-badge.earned{ animation: none; } }
-
-/* Fenêtre d'explication d'un badge (demande de l'utilisatrice : « les badges [...] ne contiennent
-   aucune explication [...] une petite fenêtre pop up qui s'affiche quand on clique dessus ») —
-   premier vrai modal de l'appli : un fond qui referme au clic, une carte qui ne le referme pas
-   (data-action="quiz-badge-modal-noop" capte le clic avant qu'il remonte au fond, voir
-   bindAppClickDelegation dans app.js). Générique (.modal-backdrop/.modal-card/.modal-close)
-   plutôt que spécifique aux badges, pour être réutilisable si un futur besoin de fenêtre modale
-   se présente ailleurs dans l'appli. */
-.modal-backdrop{
-  position: fixed;
-  inset: 0;
-  background: rgba(20, 16, 8, 0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  z-index: 50;
-}
-.modal-card{
-  position: relative;
-  width: 100%;
-  max-width: 320px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
-  padding: 28px 20px 22px;
-  text-align: center;
-}
-.modal-close{
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  background: var(--marble-deep);
-  color: var(--ink-soft);
-  font-size: 0.85rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.modal-close:hover{ background: var(--border); }
-.quiz-badge-modal-icon{ display: inline-flex; font-size: 2.6rem; line-height: 1; opacity: 0.45; filter: grayscale(1); margin-bottom: 8px; }
-.quiz-badge-modal-icon .quiz-icon-img{ width: 64px; height: 64px; }
-.quiz-badge-modal-icon.earned{ opacity: 1; filter: none; }
-.quiz-badge-modal-title{ font-family: "Cinzel", Georgia, serif; font-size: 1.15rem; color: var(--laurel-deep); margin: 0 0 4px; }
-.quiz-badge-modal-status{ font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; color: var(--ink-soft); margin: 0 0 12px; }
-.quiz-badge-modal-status.earned{ color: var(--bronze); }
-.quiz-badge-modal-desc{ font-size: 0.92rem; color: var(--ink); margin: 0; line-height: 1.4; }
-.quiz-badge-modal-progress{ font-size: 0.82rem; color: var(--bronze); font-weight: 600; margin: 10px 0 0; }
-
-/* Aperçu compact des 6 badges sur la tuile Quiz de l'accueil (retour direct de l'utilisatrice :
-   « quels badges il nous reste à gagner ») — mêmes médaillons, en beaucoup plus petit et sans
-   étiquette de texte (juste un aperçu, l'explication complète est sur le profil, à un tap). */
-.quiz-tile-badges{ display: flex; gap: 6px; margin-top: 6px; }
-.quiz-tile-badge{ font-size: 1.1rem; line-height: 1; opacity: 0.35; filter: grayscale(1); }
-.quiz-tile-badge .quiz-icon-img{ width: 22px; height: 22px; }
-.quiz-tile-badge.earned{ opacity: 1; filter: none; }
-
 /* ----- Phase 15 du brief produit : microanimations -----
-   Trois manques concrets repérés (pas d'invention gratuite) : les changements d'écran étaient
-   des coupures nettes (innerHTML remplacé sans transition), aucun élément cliquable n'avait
+   Deux manques concrets repérés (pas d'invention gratuite) : les changements d'écran étaient
+   des coupures nettes (innerHTML remplacé sans transition), et aucun élément cliquable n'avait
    d'état :active (seulement :hover, qui ne se déclenche quasiment jamais au doigt sur mobile —
-   or l'appli est d'abord pensée pour le tactile), et la réponse au quiz apparaissait déjà
-   colorée dès son insertion dans le DOM, sans le moindre "reveal". Volontairement limité à ces
-   trois moments plutôt qu'une passe généralisée : pas de confettis, pas de son, pas de mascotte
-   qui saute — le geste reste sobre, cohérent avec le reste de l'appli (twinkle discret des
-   étoiles, halo des badges), jamais du côté Duolingo. */
+   or l'appli est d'abord pensée pour le tactile). Volontairement limité à ces deux moments plutôt
+   qu'une passe généralisée : pas de confettis, pas de son, pas de mascotte qui saute — le geste
+   reste sobre, cohérent avec le reste de l'appli (twinkle discret des étoiles), jamais du côté
+   Duolingo. */
 
 /* 1) Fondu léger à chaque changement d'écran (voir render() dans app.js, qui rejoue cette classe
    à chaque rendu via un retrait + reflow forcé + réajout — une classe déjà présente sur #app ne
@@ -1774,8 +1437,7 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
    au doigt. Les cartes qui "s'élèvent" au survol (translateY + ombre) s'enfoncent légèrement à
    l'appui plutôt que de continuer à s'élever, pour une vraie sensation de pression. */
 .fotd-card:active, .recent-card:active, .geneal-entry:active,
-.quiz-tile:active,
-.quiz-level-card:active:not(:disabled), .quiz-theme-card:active{
+.quiz-tile:active{
   transform: scale(0.97);
   box-shadow: none;
 }
@@ -1787,48 +1449,23 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 .geneal-fiche-link:active, .profile-fab:active, .type-card:active, .theme-toggle-btn:active{
   background: var(--marble-deep);
 }
-.chip:active, .geneal-tree-link:active, .quiz-home-btn:active, .quiz-figure-btn:active{
+.chip:active, .geneal-tree-link:active{
   background: var(--border);
 }
-.quiz-choice:active:not(:disabled), .quiz-match-item:active:not(:disabled),
 .access-filter-chip:active, .place-filter-chip:active{
   transform: scale(0.97);
 }
 /* Boutons pleins (fond déjà coloré, pas marbre) : un assombrissement générique plutôt qu'une
    nouvelle teinte à décliner par bouton — fonctionne identiquement quel que soit leur fond. */
-.paywall-cta:active, .quiz-start-btn:active:not(:disabled),
-.quiz-submit-btn:active, .quiz-next-btn:active, .quiz-replay-btn:active{
+.paywall-cta:active, .quiz-start-btn:active:not(:disabled){
   filter: brightness(0.92);
 }
 @media (prefers-reduced-motion: reduce){
   .fotd-card:active, .recent-card:active, .geneal-entry:active,
   .ft-card:not(.ft-card-self):active, .quiz-tile:active,
-  .quiz-level-card:active:not(:disabled), .quiz-theme-card:active,
-  .quiz-choice:active:not(:disabled), .quiz-match-item:active:not(:disabled),
   .access-filter-chip:active, .place-filter-chip:active{
     transform: none;
   }
-}
-
-/* 3) Réponse au quiz : .quiz-choice.correct/.incorrect (voir quizChoicesHTML() dans app.js)
-   portent déjà leur couleur finale dès leur insertion dans le DOM (tout l'écran est régénéré via
-   innerHTML à chaque réponse, jamais une classe ajoutée sur un bouton existant) — une simple
-   "transition" CSS ne peut donc rien animer, un nœud fraîchement créé n'a pas d'état "avant".
-   Une @keyframes, elle, joue bien à l'insertion : le bouton part de son apparence neutre pour
-   rejoindre sa couleur de verdict, plutôt que de l'afficher d'un bloc. Mêmes jetons de couleur
-   que .quiz-choice.correct/.incorrect (aucune nouvelle couleur ajoutée). */
-@keyframes quiz-reveal-correct{
-  from{ background: var(--card-bg); border-color: var(--border); transform: scale(0.98); }
-  to{ background: rgba(74, 93, 58, 0.14); border-color: var(--laurel); transform: scale(1); }
-}
-@keyframes quiz-reveal-incorrect{
-  from{ background: var(--card-bg); border-color: var(--border); transform: scale(0.98); }
-  to{ background: rgba(181, 84, 47, 0.14); border-color: var(--terracotta); transform: scale(1); }
-}
-.quiz-choice.correct{ animation: quiz-reveal-correct 0.22s ease; }
-.quiz-choice.incorrect{ animation: quiz-reveal-incorrect 0.22s ease; }
-@media (prefers-reduced-motion: reduce){
-  .quiz-choice.correct, .quiz-choice.incorrect{ animation: none; }
 }
 
 /* ----- Nous contacter ----- */
