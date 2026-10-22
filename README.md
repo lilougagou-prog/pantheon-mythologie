@@ -5269,3 +5269,17 @@ dans la bonne moitié du texte (avant/après le titre « Culte »), confirmation
 la fiche d'Artémis.
 
 `service-worker.js` (Panthéon) : `pantheon-v167` → `pantheon-v168`.
+
+## 2026-10-22 — Deux oublis signalés : Vestales (Hestia) et Flora (Chloris)
+
+Remarque de l'utilisateur : la fiche Hestia ne parlait pas des Vestales dans « Culte », alors que
+c'est justement le genre d'institution romaine nommée qui appartient à cette section (même
+logique que la correction précédente). Ajout d'un paragraphe Culte sur les six Vestales, leur
+service de trente ans et leurs privilèges inédits pour des femmes romaines.
+
+Également signalé : Chloris n'avait pas son équivalent romain (Flora) dans le sous-titre, à la
+différence des 35 autres figures concernées — ajouté à `DEITY_ROMAN_NAMES`. Le mythe la mentionnait
+déjà, mais pas son culte propre : ajout d'un paragraphe Culte sur les Floralia, la fête romaine de
+Flora, puisque Chloris elle-même n'a « pas de culte particulier » en Grèce.
+
+`service-worker.js` (Panthéon) : `pantheon-v168` → `pantheon-v169`.

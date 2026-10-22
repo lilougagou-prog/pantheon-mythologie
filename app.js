@@ -500,6 +500,7 @@ const DEITY_ROMAN_NAMES = {
   "hébé": "Juventas",
   "ilithyie": "Lucina",
   "charites": "Grâces",
+  "chloris": "Flora",
 };
 
 const DEITY_PORTRAITS = {
