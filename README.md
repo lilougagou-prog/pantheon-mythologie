@@ -5185,3 +5185,16 @@ Testé : contrôle visuel en clair et en sombre sur Zeus (Jupiter), vérificatio
 Orphée, qui n'en a pas) apparaît dans le HTML rendu.
 
 `service-worker.js` (Panthéon) : `pantheon-v164` → `pantheon-v165`.
+
+## Icône du bouton « Voir dans l'arbre généalogique » agrandie
+
+Retour direct de l'utilisatrice : à 28px, le médaillon peint (un olivier) ne se distinguait plus
+du tout, réduit à une tache sombre indéchiffrable. Agrandi à 42px, repassé en `display: flex` pour
+un centrage vertical propre à cette taille (les anciens `vertical-align`/`margin` approximatifs
+suffisaient à 28px mais plus à 42px).
+
+Testé : capture rapprochée du bouton en clair et en sombre (le détail peint de l'olivier est
+redevenu lisible dans les deux), contrôle visuel de la fiche complète pour vérifier que
+l'agrandissement reste harmonieux avec le reste de la mise en page.
+
+`service-worker.js` (Panthéon) : `pantheon-v165` → `pantheon-v166`.

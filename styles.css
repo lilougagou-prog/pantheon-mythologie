@@ -336,28 +336,32 @@ h1, h2, h3{
 .geneal-lineage{ border-top: 1px solid var(--border); padding-top: 20px; }
 .geneal-lineage .geneal-group{ margin-bottom: 14px; }
 .geneal-tree-link{
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   width: 100%;
   background: var(--marble-deep);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 10px 14px;
+  padding: 8px 14px;
   font-family: inherit;
   font-size: 0.9rem;
   color: var(--laurel-deep);
   cursor: pointer;
   margin-top: 6px;
+  text-align: left;
 }
 .geneal-tree-link:hover{ background: var(--border); }
 /* Icône fournie par l'utilisatrice, remplaçant l'emoji 🌳 — même patron que
-   .quiz-icon-img déjà en place ailleurs (le champ icon porte directement du HTML), simplement
-   dimensionné pour s'aligner sur le texte d'un bouton pleine largeur plutôt qu'une tuile. */
+   .quiz-icon-img déjà en place ailleurs (le champ icon porte directement du HTML). Retour direct
+   de l'utilisatrice : à 28px le détail peint du médaillon (un olivier) ne se voyait plus du tout
+   — agrandi à 42px, assez pour redevenir lisible sans dépasser la hauteur confortable du bouton
+   (passé en flex pour un centrage vertical propre à cette taille, plutôt que les anciens
+   vertical-align/margin approximatifs qui suffisaient à 28px mais plus à 42px). */
 .geneal-tree-link .quiz-icon-img{
-  width: 28px;
-  height: 28px;
-  vertical-align: middle;
-  margin-right: 8px;
-  margin-bottom: 3px;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
 }
 
 .geneal-union-line{ margin-bottom: 10px; }
