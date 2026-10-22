@@ -5158,3 +5158,30 @@ Nous contacter » toujours fonctionnel) et d'une fiche figure (bouton de quiz di
 erreur JavaScript dans la console sur ces trois écrans.
 
 `service-worker.js` (Panthéon) : `pantheon-v163` → `pantheon-v164`.
+
+## Nom latin affiché pour les figures ayant un équivalent romain attesté
+
+Retour direct de l'utilisatrice : « Je voudrais rajouter le nom latin quand les personnages ont un
+équivalent. » Clarifié par deux questions (`AskUserQuestion`) : affiché sous le nom grec, juste le
+nom lui-même (pas de « chez les Romains » ni autre habillage), et étendu à toute figure ayant un
+équivalent solidement attesté — pas seulement les douze Olympiens.
+
+Nouvelle table `DEITY_ROMAN_NAMES` (35 entrées), volontairement conservatrice : exclut les cas où
+le nom romain n'est qu'une variante orthographique du même nom (Achille/Achilles, Ulysse/Ulixes —
+déjà la forme latine utilisée comme nom principal dans l'appli) et les équivalences vagues ou
+disputées par les spécialistes (Némésis, Thémis ou Harmonie gardaient leur nom grec même dans le
+culte romain, sans vrai nom de substitution). Retenues : les douze Olympiens, les figures
+cosmogoniques majeures (Cronos/Saturne, Rhéa/Ops, Ouranos/Caelus, Gaïa/Tellus, Nyx/Nox),
+et une quinzaine de personnifications et héros à l'équivalence bien documentée (Héraclès/Hercule,
+Asclépios/Esculape, Hygie/Salus, Éris/Discordia, Érinyes/Furies, Pan/Faunus, Hébé/Juventas,
+Ilithyie/Lucina, Charites/Grâces, etc.).
+
+Affiché sur `renderFigureDetail()` uniquement (la fiche détail d'une figure, une fois débloquée),
+jamais mêlé au texte du mythe ni ajouté aux écrans de paywall/chargement (génériques, partagés
+avec symboles et lieux, qui n'ont pas de nom latin).
+
+Testé : contrôle visuel en clair et en sombre sur Zeus (Jupiter), vérification programmatique sur
+12 figures couvrant Olympiens/cosmogoniques/personnifications que le bon nom (ou son absence pour
+Orphée, qui n'en a pas) apparaît dans le HTML rendu.
+
+`service-worker.js` (Panthéon) : `pantheon-v164` → `pantheon-v165`.

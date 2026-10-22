@@ -456,6 +456,52 @@ const DEITY_NAME_OVERRIDES = {
   "créon-corinthe": "Créon (roi de Corinthe)",
 };
 
+// Retour direct de l'utilisatrice : « je voudrais rajouter le nom latin quand les personnages ont
+// un équivalent. » Limité aux équivalences solides et largement attestées (interpretatio romana
+// classique) — jamais une simple variante orthographique du même nom (Achille/Achilles,
+// Ulysse/Ulixes ne sont pas de "vrais" noms différents, contrairement à Zeus/Jupiter), jamais une
+// parenté culturelle vague ou disputée (Némésis, Thémis, Harmonie gardent leur nom grec même à
+// Rome, sans équivalent séparé solide). Affiché en sous-titre sous le nom sur la fiche détail
+// (voir renderFigureDetail) — jamais mêlé au texte du mythe lui-même.
+const DEITY_ROMAN_NAMES = {
+  "zeus": "Jupiter",
+  "héra": "Junon",
+  "poséidon": "Neptune",
+  "athéna": "Minerve",
+  "aphrodite": "Vénus",
+  "arès": "Mars",
+  "artémis": "Diane",
+  "hermès": "Mercure",
+  "héphaïstos": "Vulcain",
+  "déméter": "Cérès",
+  "dionysos": "Bacchus",
+  "hadès": "Pluton",
+  "hestia": "Vesta",
+  "perséphone": "Proserpine",
+  "éros": "Cupidon",
+  "héraclès": "Hercule",
+  "cronos": "Saturne",
+  "rhéa": "Ops",
+  "ouranos": "Caelus",
+  "gaïa": "Tellus",
+  "nyx": "Nox",
+  "niké": "Victoria",
+  "séléné": "Luna",
+  "hélios": "Sol",
+  "éos": "Aurora",
+  "thanatos": "Mors",
+  "hypnos": "Somnus",
+  "tyché": "Fortuna",
+  "éris": "Discordia",
+  "érinyes": "Furies",
+  "pan": "Faunus",
+  "hygie": "Salus",
+  "asclépios": "Esculape",
+  "hébé": "Juventas",
+  "ilithyie": "Lucina",
+  "charites": "Grâces",
+};
+
 const DEITY_PORTRAITS = {
   "chaos": "assets/deity-chaos.jpg",
   "charon": "assets/deity-charon.jpg",
@@ -2891,6 +2937,7 @@ function renderFigureDetail(id){
     <article class="detail">
       ${portrait ? `<img class="${deityPortraitClass(id)}" src="${escapeHTML(portrait)}" alt="${escapeHTML(name)}" loading="lazy"${deityPortraitStyleHTML(id)}>` : ""}
       <h2>${escapeHTML(name)}</h2>
+      ${DEITY_ROMAN_NAMES[id] ? `<p class="roman-name">${escapeHTML(DEITY_ROMAN_NAMES[id])}</p>` : ""}
       <p class="note">${escapeHTML(note)}</p>
       <div class="detail-body-fade-in">
       ${figureAttributesHTML(id)}
