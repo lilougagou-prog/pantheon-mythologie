@@ -5087,3 +5087,38 @@ Testé : contrôle visuel de la fiche d'Aphrodite, absence d'em-dash dans le nou
 vérifiée contre la source (theoi.com, compilation de Pseudo-Hygin).
 
 `service-worker.js` (Panthéon) : `pantheon-v161` → `pantheon-v162`.
+
+## Deux nouvelles fiches : Tircis et Égérie
+
+Retour direct de l'utilisatrice : « Ajoute une page sur Tircis (mentionné bien que le nom du
+papillon vient de lui) et Égérie. » Vérifié via WebSearch avant d'écrire : aucun lien entre le nom
+du papillon et la mythologie grecque proprement dite n'était confirmé par les sources consultées,
+seulement avec Théocrite et la poésie pastorale.
+
+**Tircis** est le chevrier de la toute première Idylle de Théocrite (IIIe siècle av. J.-C.), le
+texte fondateur du genre pastoral : vainqueur d'un concours de chant, il y chante la mort de
+Daphnis, le légendaire berger sicilien inventeur de la poésie bucolique (fils d'Hermès selon la
+tradition), puni d'un amour non partagé pour avoir offensé Éros et Aphrodite. Son chant inspira
+directement la première Bucolique de Virgile, fit du nom un prénom convenu de berger dans la poésie
+pastorale française classique, et donna enfin son nom, au XVIIIe siècle, au papillon des sous-bois
+Pararge aegeria, resté « le Tircis » en français aujourd'hui.
+
+**Égérie**, nymphe romaine et l'une des Camènes, est la conseillère secrète du roi Numa Pompilius,
+second roi de Rome : elle lui aurait dicté dans un bois sacré les lois religieuses de la cité
+naissante, une autorité divine qui lui permit de les imposer après la fondation de Rome par les
+armes de Romulus. Invoquée par les femmes enceintes, son culte se confondait à Aricie avec celui de
+Diane ; à la mort de Numa, inconsolable, elle fut changée en source par la déesse, lassée de ses
+larmes. Son nom a donné le mot français « égérie » (l'inspiratrice d'un homme ou d'un mouvement),
+et sert aussi d'épithète scientifique au même papillon que Tircis, *Pararge aegeria* — un clin
+d'œil que les deux fiches se renvoient l'une à l'autre.
+
+Deux fiches premium (ajoutées à `DEITY_NOTES` et `api/_data/content.json`), sans généalogie précise
+dans les sources (aucun parent connu pour l'un ou l'autre, donc aucune entrée `GENEALOGY_PARENTS`)
+ni portrait pour l'instant.
+
+Testé : les 348 figures ont toutes désormais un champ `culte`, `node --check app.js` propre,
+contrôle visuel des deux fiches en clair (citations croisées Hermès/Aphrodite/Romulus/Artémis/Muses
+toutes résolues, et le renvoi mutuel Tircis ↔ Égérie fonctionne), vérification que les deux
+nouvelles entrées apparaissent bien dans `FIGURE_ENTRIES` (navigation et recherche).
+
+`service-worker.js` (Panthéon) : `pantheon-v162` → `pantheon-v163`.

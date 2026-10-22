@@ -397,6 +397,10 @@ const DEITY_NOTES = {
   "calypso":"Nymphe fille du Titan Atlas, qui retint Ulysse sept ans sur son île avant de le laisser repartir sur ordre de Zeus.",
   "polyphème":"Cyclope fils de Poséidon, aveuglé par Ulysse et sa ruse du « Personne », dont la malédiction retarda son retour de dix ans.",
   "déjanire":"Seconde épouse d'Héraclès, dont la jalousie et une tunique empoisonnée causèrent sans le vouloir la mort du héros.",
+  // Retour direct de l'utilisatrice : « Ajoute une page sur Tircis (mentionné bien que le nom du
+  // papillon vient de lui) et Égérie ».
+  "tircis":"Berger chanteur de l'Idylle I de Théocrite, qui y pleure la mort de Daphnis ; son nom a donné celui du papillon Tircis (Pararge aegeria).",
+  "égérie":"Nymphe romaine, conseillère et compagne secrète du roi Numa Pompilius, changée en source par la déesse Diane après sa mort.",
 };
 // Section « Culte » des 5 figures gratuites (leur mythe complet est déjà hors Premium, donc
 // leur culte l'est aussi — demande explicite : une fois qu'une fiche est intégralement
