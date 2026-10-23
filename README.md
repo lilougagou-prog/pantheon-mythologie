@@ -5476,3 +5476,18 @@ et une référence) demande un vrai travail de recherche figure par figure, qui 
 prochains rounds plutôt que d'être expédié d'un coup au risque d'inventer des citations fausses.
 
 `service-worker.js` (Panthéon) : `pantheon-v178` → `pantheon-v179`.
+
+## 2026-10-23 — Fiche Pasiphaé : retrait des phrases « muettes » et réordonnancement chronologique
+
+Retour de l'utilisatrice sur le round précédent : les phrases signalant explicitement l'absence de
+source (« le mythe ne prête cependant à Pasiphaé aucune réaction... », « aucune source antique ne
+met en scène Pasiphaé réellement à leurs côtés... ») n'apportaient rien et ont été retirées des
+trois paragraphes concernés (naissance du Minotaure/enfermement, Androgée, malédiction de Minos),
+qui gardent le reste de leur contenu factuel intact.
+
+Les paragraphes ont aussi été réordonnés chronologiquement : naissance du Minotaure → Pasiphaé
+nourrit l'enfant → sa défense devant Minos (Euripide) → enfermement dans le Labyrinthe et autres
+enfants → mort d'Androgée et tribut → malédiction de Minos → aparté généalogique sur Circé/Médée/
+Ariane, qui reste en dernier comme digression plutôt que comme étape du récit.
+
+`service-worker.js` (Panthéon) : `pantheon-v179` → `pantheon-v180`.
