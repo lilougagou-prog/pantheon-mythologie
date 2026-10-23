@@ -5594,3 +5594,29 @@ Antigone, Agavé, Penthée, Didon, Ariane, Achille, Hector, Priam, Pénélope, U
 feront l'objet d'un round de déploiement séparé.
 
 `service-worker.js` (Panthéon) : `pantheon-v184` → `pantheon-v185`.
+
+## 2026-10-23 — Approfondissement psychologique des fiches (2/2, 24 figures)
+
+Suite et fin du chantier amorcé avec Médée : les 24 autres figures de la liste établie avec
+l'utilisatrice ont été traitées, réparties en 4 lots de recherche menés en parallèle, chacun
+identifiant la matière psychologique réellement attestée dans le texte antique qui concerne ses
+figures (tragédie grecque et romaine surtout, épopée homérique et virgilienne, Héroïdes d'Ovide),
+avec vérification par recherche web des attributions incertaines.
+
+Figures enrichies : Phèdre, Œdipe, Clytemnestre, Oreste, Électre, Hécube, Antigone, Agavé,
+Penthée, Didon, Ariane, Achille, Hector, Priam, Pénélope, Ulysse, Andromaque, Énée, Iphigénie,
+Jocaste, Créüse, Déjanire, Alceste, Thyeste. Nouveaux paragraphes insérés par ordre chronologique
+dans les tableaux `lore`/`loreSections` existants, aucun paragraphe antérieur modifié ou
+supprimé ; nouvelles sources ajoutées quand un texte supplémentaire était mobilisé (ex. Pénélope
+et Ulysse : Odyssée V, VIII et XIX ; Énée : Énéide I et VI ; Créüse : Énéide II ; Thyeste :
+Sénèque).
+
+Contrôle qualité avant intégration : recherche de phrases de type « le mythe ne dit rien de... »
+(aucune trouvée), et détection de renvois croisés dupliqués dans une même fiche (4 cas corrigés
+sur Ulysse, Andromaque et Iphigénie, où un nom se trouvait relié deux fois au lieu d'une seule
+fois à sa première mention).
+
+Vérifié en local (clair et sombre) sur Œdipe : les nouveaux paragraphes s'intègrent sans rupture
+visuelle dans le fil du mythe.
+
+`service-worker.js` (Panthéon) : `pantheon-v185` → `pantheon-v186`.
