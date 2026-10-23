@@ -260,6 +260,48 @@ h1, h2, h3{
    visible en permanence sur cet écran — un doublon plutôt qu'un raccourci utile. Voir
    renderHome() dans app.js. */
 
+/* ----- Tuiles « Parcourir par famille » (accueil) -----
+   Pas un doublon de la barre de navigation du bas (voir note ci-dessus sur .tiles) : ces tuiles
+   ne mènent pas à un onglet mais pré-filtrent la liste Figures sur une famille mythologique
+   précise (voir homeCategoryTilesHTML() et activeFigureCategories dans app.js). */
+.cat-tiles{ margin-bottom: 24px; }
+.cat-tiles-label{
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--bronze);
+  margin: 0 0 8px;
+  text-align: center;
+}
+.cat-tiles-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.cat-tile{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--cat-color, var(--bronze));
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  text-align: left;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.cat-tile:hover{ transform: translateY(-2px); box-shadow: 0 4px 12px var(--shadow); }
+.cat-tile-icon{ font-size: 1.3rem; line-height: 1; flex: 0 0 auto; }
+.cat-tile-label{
+  font-size: 0.8rem;
+  font-family: "Cinzel", Georgia, serif;
+  color: var(--laurel-deep);
+  line-height: 1.25;
+}
+
 /* ----- Généalogie ----- */
 
 .geneal-entrypoints{
@@ -1449,7 +1491,7 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
    au doigt. Les cartes qui "s'élèvent" au survol (translateY + ombre) s'enfoncent légèrement à
    l'appui plutôt que de continuer à s'élever, pour une vraie sensation de pression. */
 .fotd-card:active, .recent-card:active, .geneal-entry:active,
-.quiz-tile:active{
+.quiz-tile:active, .cat-tile:active{
   transform: scale(0.97);
   box-shadow: none;
 }
@@ -1474,7 +1516,7 @@ details.symbol-more p, details.symbol-more ul{ margin-top: 10px; }
 }
 @media (prefers-reduced-motion: reduce){
   .fotd-card:active, .recent-card:active, .geneal-entry:active,
-  .ft-card:not(.ft-card-self):active, .quiz-tile:active,
+  .ft-card:not(.ft-card-self):active, .quiz-tile:active, .cat-tile:active,
   .access-filter-chip:active, .place-filter-chip:active{
     transform: none;
   }

@@ -5283,3 +5283,33 @@ déjà, mais pas son culte propre : ajout d'un paragraphe Culte sur les Floralia
 Flora, puisque Chloris elle-même n'a « pas de culte particulier » en Grèce.
 
 `service-worker.js` (Panthéon) : `pantheon-v168` → `pantheon-v169`.
+
+## 2026-10-23 — Classement des figures par grande famille mythologique
+
+Demande de l'utilisatrice : pouvoir retrouver les figures par catégorie depuis l'accueil (dieux de
+la nature, des eaux, des hommes, héros, « méchants », divinités infernales...), au-delà de la
+simple recherche par nom déjà existante.
+
+Taxonomie retenue avec l'utilisatrice (10 familles, jusqu'à 2 par figure) : Grands dieux et
+déesses, Divinités des eaux, Ciel/astres/temps, Terre et végétation, Divinités infernales, Héros
+et héroïnes, Monstres et créatures, Figures antagonistes (titans déchus et figures punies),
+Mortels et lignées légendaires, Personnifications abstraites.
+
+Classement manuel des 353 figures (`FIGURE_CATEGORIES` dans `app.js`), vérifié par script : 353/353
+figures couvertes, aucun id orphelin ni inconnu. Répartition : mortels 181, personnifications 51,
+dieux-majeurs 27, antagonistes 26, ciel-astres 26, héros 23, eaux 20, terre-végétation 17, enfers
+15, monstres 9 (total > 353 car 42 figures portent 2 catégories, ex. Déméter à la fois grande
+divinité et déesse de la terre).
+
+Interface : nouvelle section « Parcourir par famille » sur l'accueil (10 tuiles, grille 2 colonnes),
+chaque tuile menant à l'onglet Figures déjà filtré sur cette seule famille. Dans l'onglet Figures,
+nouvelle barre de chips (même composant visuel que le filtre de lieux existant) permettant de
+cocher/décocher plusieurs familles à la fois, avec un chip « Toutes » pour tout réinitialiser d'un
+coup. Une figure reste visible tant qu'au moins une de ses familles est cochée.
+
+Testé : 10 tuiles sur l'accueil, clic sur « Héros et héroïnes » → 23 figures affichées (dont
+Prométhée, qui porte aussi « antagonistes » — confirme qu'une figure à 2 catégories apparaît bien
+dès qu'une seule correspond), réinitialisation à 353, décochage manuel d'une famille (Monstres,
+9 figures) → 344 restantes. Vérifié en clair et en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v169` → `pantheon-v170`.

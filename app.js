@@ -1970,6 +1970,27 @@ function goToTab(type){
   window.scrollTo(0, 0);
 }
 
+const FIGURE_CATEGORY_META = {
+  "dieux-majeurs":      { icon:"⚡", label:"Grands dieux et déesses",        color:"var(--bronze)" },
+  "eaux":               { icon:"🌊", label:"Divinités des eaux",            color:"#1f5c74" },
+  "ciel-astres":        { icon:"✨", label:"Ciel, astres et temps",          color:"#4a5a9c" },
+  "terre-vegetation":   { icon:"🌿", label:"Terre et végétation",            color:"var(--laurel)" },
+  "enfers":             { icon:"💀", label:"Divinités infernales",          color:"#5a3a2e" },
+  "heros":              { icon:"⚔",  label:"Héros et héroïnes",             color:"#a63d2e" },
+  "monstres":           { icon:"🐉", label:"Monstres et créatures",         color:"#3e5c3a" },
+  "antagonistes":       { icon:"⛓",  label:"Figures antagonistes",          color:"#6b2d4a" },
+  "mortels":            { icon:"👑", label:"Mortels et lignées légendaires", color:"var(--ink-soft)" },
+  "personnifications":  { icon:"✦",  label:"Personnifications abstraites",  color:"#8c6a9c" },
+};
+
+// Classement par grande famille mythologique (demande utilisatrice : pouvoir retrouver les
+// figures « dieux de la nature, des eaux, des héros, méchants, divinités infernales... » depuis
+// l'accueil). Jusqu'à 2 catégories par figure quand elle est vraiment à cheval entre deux
+// familles (ex: Déméter à la fois grande divinité et déesse de la terre). Catégorie-repli
+// « Mortels et lignées légendaires » pour les très nombreuses figures mortelles sans exploit
+// personnel ni statut de grande divinité (rois, reines, princes de lignées légendaires).
+const FIGURE_CATEGORIES = {"abaris":["mortels"],"abas":["mortels"],"acacallis":["mortels"],"achille":["heros"],"acrisios":["mortels"],"actéon":["mortels"],"admète":["mortels"],"adonis":["mortels","terre-vegetation"],"agamemnon":["mortels"],"agavé":["mortels"],"aglauros":["mortels"],"aglaé":["personnifications"],"agon":["personnifications"],"agrippa":["mortels"],"agénor":["mortels"],"aiétès":["mortels"],"alba":["mortels"],"alceste":["mortels"],"alcinoos":["mortels"],"alcippé":["mortels"],"alcmène":["mortels"],"alcée":["mortels"],"aletheia":["personnifications"],"alké":["personnifications"],"amazones":["mortels"],"amphion":["mortels"],"amphitrite":["eaux"],"amphitryon":["mortels"],"amulius":["mortels","antagonistes"],"ananké":["personnifications"],"anchise":["mortels"],"androgée":["mortels"],"andromaque":["mortels"],"andromède":["mortels"],"anticlée":["mortels"],"antigone":["mortels"],"antiope":["mortels"],"antiope-thébaine":["mortels"],"apaté":["personnifications"],"aphrodite":["dieux-majeurs"],"apollon":["dieux-majeurs"],"arachné":["mortels","antagonistes"],"ariane":["mortels"],"aristée":["heros","terre-vegetation"],"artémis":["dieux-majeurs","terre-vegetation"],"arès":["dieux-majeurs"],"ascagne":["mortels"],"ascalaphos":["enfers"],"asclépios":["dieux-majeurs"],"assaracus":["mortels"],"astréos":["ciel-astres"],"astyanax":["mortels"],"astéria":["ciel-astres"],"atalante":["heros"],"athéna":["dieux-majeurs"],"atlas":["ciel-astres","antagonistes"],"atlas-atlantide":["mortels"],"atrée":["mortels","antagonistes"],"atys":["mortels"],"autolycos":["mortels"],"autonoë":["mortels"],"aventinus":["mortels"],"bellérophon":["heros"],"bia":["personnifications"],"borée":["ciel-astres"],"briséis":["mortels"],"byzas":["mortels"],"bélos":["mortels"],"cadmos":["heros"],"calchas":["mortels"],"calliope":["personnifications"],"calypso":["eaux"],"capys":["mortels"],"capys-albain":["mortels"],"capétus":["mortels"],"cassandre":["mortels"],"cassiopée":["mortels","ciel-astres"],"castor":["heros"],"catrée":["mortels"],"chaos":["personnifications"],"charites":["personnifications"],"charon":["enfers"],"chiron":["monstres"],"chloris":["terre-vegetation"],"chrysothémis":["mortels"],"chryséis":["mortels"],"circé":["antagonistes"],"clio":["personnifications"],"clito":["mortels"],"clymène":["eaux"],"clytemnestre":["mortels","antagonistes"],"clytie":["terre-vegetation"],"coronis":["mortels"],"coéos":["ciel-astres"],"crios":["antagonistes"],"cronos":["dieux-majeurs","antagonistes"],"crotos":["ciel-astres"],"créon-corinthe":["mortels","antagonistes"],"créüse":["mortels"],"ctimène":["mortels"],"ctésios":["dieux-majeurs"],"cybèle":["terre-vegetation","dieux-majeurs"],"cyclopes":["monstres"],"cyllaros":["monstres"],"cécrops":["mortels"],"céphale":["mortels"],"céphale-hersé":["mortels"],"danaos":["mortels"],"danaé":["mortels"],"danaïdes":["mortels","enfers"],"daphné":["mortels","terre-vegetation"],"deimos":["personnifications"],"deucalion":["mortels"],"deucalion-crète":["mortels"],"didon":["mortels"],"dionysos":["dieux-majeurs"],"dédale":["heros"],"déidamie":["mortels"],"déiphobe":["mortels"],"déjanire":["mortels"],"déméter":["dieux-majeurs","terre-vegetation"],"endymion":["mortels","ciel-astres"],"enyo":["personnifications"],"euphrosyne":["personnifications"],"europe":["mortels"],"euros":["ciel-astres"],"eurybie":["eaux"],"eurynomé":["eaux"],"eurysthée":["mortels","antagonistes"],"euterpe":["personnifications"],"euthénie":["personnifications"],"ganymède":["mortels"],"gaïa":["terre-vegetation"],"glaucos-crète":["mortels"],"glaukè":["mortels"],"gorgones":["monstres"],"gorgophoné":["mortels"],"grées":["monstres"],"hadès":["dieux-majeurs","enfers"],"halia":["eaux"],"harmonie":["personnifications"],"harpyes":["monstres"],"hector":["heros"],"hermaphrodite":["mortels"],"hermione":["mortels"],"hermès":["dieux-majeurs"],"hersé":["mortels"],"hespérides":["terre-vegetation"],"hestia":["dieux-majeurs"],"heures":["ciel-astres"],"himeros":["personnifications"],"hippodamie":["mortels"],"hippolyte":["mortels"],"hippolyté":["mortels"],"hormos":["personnifications"],"hyacinthe":["mortels","terre-vegetation"],"hyas":["ciel-astres"],"hygie":["dieux-majeurs"],"hylonome":["monstres"],"hyménée":["personnifications"],"hyperboréens":["mortels"],"hypermestre":["mortels"],"hypnos":["personnifications"],"hypsipyle":["mortels"],"hypérion":["ciel-astres"],"hébé":["dieux-majeurs"],"hécate":["dieux-majeurs","enfers"],"hécube":["mortels"],"hélios":["ciel-astres"],"hélène":["mortels"],"hélénos":["mortels"],"héléos":["mortels"],"héphaïstos":["dieux-majeurs"],"héra":["dieux-majeurs"],"héraclès":["heros"],"icare":["mortels"],"icarios":["mortels"],"ilithyie":["dieux-majeurs"],"ilos":["mortels"],"ino":["eaux"],"io":["mortels"],"iphigénie":["mortels"],"iris":["ciel-astres"],"ixion":["antagonistes"],"japet":["antagonistes"],"jason":["heros"],"jocaste":["mortels"],"kairos":["personnifications"],"kratos":["personnifications"],"kéroessa":["eaux"],"labdacos":["mortels"],"laomédon":["mortels","antagonistes"],"latinus-silvius":["mortels"],"laërte":["mortels"],"laïos":["mortels"],"lethée":["enfers"],"leucothoé":["mortels","terre-vegetation"],"libye":["mortels"],"lyncée":["mortels"],"léda":["mortels"],"léto":["dieux-majeurs"],"macaria":["mortels"],"maïa":["ciel-astres"],"melpomène":["personnifications"],"menthé":["enfers","terre-vegetation"],"mestor":["mortels"],"minos":["enfers","mortels"],"mnémosyne":["personnifications"],"molossos":["mortels"],"morphée":["personnifications"],"muses":["personnifications"],"myrina":["mortels"],"myrrha":["mortels","terre-vegetation"],"méduse":["monstres"],"médée":["antagonistes"],"mélinoé":["enfers"],"méléagre":["heros"],"ménélas":["mortels"],"ménétios":["antagonistes"],"métis":["personnifications"],"narcisse":["mortels"],"nausicaa":["mortels"],"niké":["personnifications"],"nil":["eaux"],"niobé":["mortels"],"notos":["ciel-astres"],"numitor":["mortels"],"nyctée":["mortels"],"nyx":["personnifications"],"némésis":["personnifications"],"néoptolème":["mortels"],"nérée":["eaux"],"néréides":["eaux"],"océan":["eaux"],"oreste":["mortels","heros"],"orion":["mortels","ciel-astres"],"orphée":["heros"],"otrera":["mortels"],"ouranos":["ciel-astres","antagonistes"],"palioxis":["personnifications"],"pallas":["antagonistes"],"pan":["terre-vegetation","dieux-majeurs"],"pandore":["mortels"],"pandrosos":["mortels"],"parques":["personnifications"],"pasiphaé":["mortels"],"penia":["personnifications"],"penthée":["mortels"],"penthésilée":["heros"],"persès":["mortels"],"persès-colchide":["mortels","antagonistes"],"persès-titan":["eaux"],"persée":["heros"],"perséis":["eaux"],"perséphone":["dieux-majeurs","enfers"],"phaéton":["ciel-astres"],"phidaléia":["mortels"],"philotès":["personnifications"],"phobos":["personnifications"],"phoebé":["ciel-astres"],"phèdre":["mortels"],"picus":["mortels"],"pirithoos":["heros"],"ploutos":["personnifications"],"pléiades":["ciel-astres"],"pollux":["heros"],"polydore":["mortels"],"polydoros":["mortels"],"polymestor":["antagonistes"],"polymnie":["personnifications"],"polyphème":["monstres"],"polyxène":["mortels"],"poséidon":["dieux-majeurs","eaux"],"priam":["mortels"],"priape":["terre-vegetation"],"proca":["mortels"],"procris":["mortels"],"prométhée":["antagonistes","heros"],"protée":["eaux"],"proétos":["mortels"],"psyché":["heros"],"pyrame":["mortels"],"pyrrha":["mortels"],"pythie":["mortels"],"pâris":["mortels"],"pélias":["mortels","antagonistes"],"pélops":["mortels"],"pélée":["mortels"],"pénélope":["mortels"],"remus":["mortels"],"rhadamanthys":["enfers","mortels"],"rhéa":["dieux-majeurs"],"rhéa-silvia":["mortels"],"romulus":["mortels"],"romulus-silvius":["mortels","antagonistes"],"sarpédon":["mortels"],"sidé":["mortels"],"silvius":["mortels"],"sisyphe":["antagonistes"],"sthénélos":["mortels"],"styx":["eaux","enfers"],"séléné":["ciel-astres"],"sémélé":["mortels"],"tartare":["enfers"],"techné":["personnifications"],"terpsichore":["personnifications"],"thalia":["personnifications"],"thalie":["personnifications"],"thanatos":["personnifications","enfers"],"thisbé":["mortels"],"thyeste":["mortels","antagonistes"],"théia":["ciel-astres"],"thémis":["personnifications"],"thésée":["heros"],"thétis":["eaux"],"tiberinus":["mortels"],"tircis":["mortels"],"tirésias":["mortels"],"triptolème":["heros","terre-vegetation"],"tros":["mortels"],"tyché":["personnifications"],"tyndare":["mortels"],"télégonos":["mortels"],"télémaque":["mortels"],"téthys":["eaux"],"ulysse":["heros"],"uranie":["personnifications"],"zelos":["personnifications"],"zeus":["dieux-majeurs"],"zéphyr":["ciel-astres"],"zéthos":["mortels"],"écho":["mortels"],"égisthe":["mortels","antagonistes"],"égyptos":["mortels"],"égérie":["mortels","eaux"],"électre":["mortels"],"électryon":["mortels"],"éléos":["personnifications"],"énée":["heros"],"énée-silvius":["mortels"],"éole":["ciel-astres"],"éos":["ciel-astres"],"épaphos":["mortels"],"épiméthée":["antagonistes"],"érato":["personnifications"],"érichthonios":["mortels"],"érinyes":["enfers"],"éris":["personnifications"],"éros":["dieux-majeurs"],"érèbe":["personnifications"],"œagre":["mortels"],"œdipe":["mortels"],"œnone":["mortels"]};
+
 /* ===================== DONNÉES DÉRIVÉES ===================== */
 
 // Liste triée une seule fois : [id, nom affiché, note] pour chaque figure.
@@ -2014,6 +2035,53 @@ function setAccessFilter(type, value){
   if(grid) grid.innerHTML = renderGrid(searchEl ? searchEl.value : "");
   const bar = document.querySelector(`.access-filter-bar[data-access-type="${type}"]`);
   if(bar) bar.outerHTML = accessFilterBarHTML(type, value);
+}
+
+// Filtre par famille mythologique sur la liste Figures — même principe que activePlaceCategories
+// (toutes actives par défaut, on peut en décocher certaines), mais une figure peut appartenir à
+// 1 ou 2 familles à la fois (voir FIGURE_CATEGORIES) : elle reste visible tant qu'AU MOINS une
+// de ses familles est cochée. Une tuile de l'accueil (voir homeCategoryTilesHTML) peut aussi
+// réduire ce filtre à une seule famille d'un coup, pour parcourir directement « les héros » par
+// exemple sans avoir à décocher les neuf autres à la main.
+let activeFigureCategories = new Set(Object.keys(FIGURE_CATEGORY_META));
+
+function figureCategoryChipsHTML(){
+  const allActive = activeFigureCategories.size === Object.keys(FIGURE_CATEGORY_META).length;
+  return `
+    <div class="place-filters">
+      <button type="button" class="place-filter-chip${allActive ? " active" : ""}" data-figure-cat="__all__" style="--place-color:var(--bronze)">
+        <span class="place-filter-dot"></span>Toutes
+      </button>
+      ${Object.entries(FIGURE_CATEGORY_META).map(([cat, meta]) => `
+        <button type="button" class="place-filter-chip${activeFigureCategories.has(cat) ? " active" : ""}" data-figure-cat="${escapeHTML(cat)}" style="--place-color:${meta.color}">
+          <span class="place-filter-dot"></span><i class="place-filter-icon place-filter-icon-emoji">${meta.icon}</i> ${escapeHTML(meta.label)}
+        </button>
+      `).join("")}
+    </div>
+  `;
+}
+
+function toggleFigureCategory(cat){
+  if(cat === "__all__"){
+    activeFigureCategories = new Set(Object.keys(FIGURE_CATEGORY_META));
+  } else if(activeFigureCategories.has(cat)){
+    activeFigureCategories.delete(cat);
+  } else {
+    activeFigureCategories.add(cat);
+  }
+  const grid = document.getElementById("figuresGrid");
+  const searchEl = document.getElementById("figuresSearch");
+  if(grid) grid.innerHTML = renderFiguresGrid(searchEl ? searchEl.value : "");
+  const bar = document.querySelector(".figures-category-filters");
+  if(bar) bar.outerHTML = `<div class="figures-category-filters">${figureCategoryChipsHTML()}</div>`;
+}
+
+// Entrée directe depuis une tuile de l'accueil (voir homeCategoryTilesHTML) : réduit le filtre
+// à cette seule famille plutôt que de partir de « toutes actives » puis forcer à décocher les
+// neuf autres.
+function goToFigureCategory(cat){
+  activeFigureCategories = new Set([cat]);
+  goToTab("figures");
 }
 
 // Barre « ◀ Précédent / Suivant ▶ » en bas d'une fiche détail (figure ou symbole) : retour
@@ -2272,7 +2340,29 @@ function renderHome(){
     </div>
     ${figureOfTheDayHTML()}
     ${recentlyViewedHTML()}
+    ${homeCategoryTilesHTML()}
     <p class="home-footer-link"><a href="./politique-confidentialite.html" target="_blank" rel="noopener">Politique de confidentialité</a></p>
+  `;
+}
+
+// Tuiles « Parcourir par famille » : demande explicite de l'utilisatrice, retrouver les figures
+// par grande famille mythologique (dieux de la nature, des eaux, héros, « méchants », divinités
+// infernales...) directement depuis l'accueil plutôt que de les chercher une à une. Chaque tuile
+// mène à l'onglet Figures avec le filtre par famille (voir activeFigureCategories) réduit à
+// cette seule famille — goToFigureCategory() s'occupe des deux à la fois.
+function homeCategoryTilesHTML(){
+  return `
+    <section class="cat-tiles">
+      <h2 class="cat-tiles-label">Parcourir par famille</h2>
+      <div class="cat-tiles-grid">
+        ${Object.entries(FIGURE_CATEGORY_META).map(([cat, meta]) => `
+          <button type="button" class="cat-tile" data-nav="figuresCategory" data-id="${escapeHTML(cat)}" style="--cat-color:${meta.color}">
+            <span class="cat-tile-icon">${meta.icon}</span>
+            <span class="cat-tile-label">${escapeHTML(meta.label)}</span>
+          </button>
+        `).join("")}
+      </div>
+    </section>
   `;
 }
 
@@ -2391,6 +2481,9 @@ function renderFiguresGrid(query){
   const q = normalizeSearch(query).trim();
   let list = q ? rankedSearch(FIGURE_ENTRIES, e => e[1], e => e[2], q, Infinity) : FIGURE_ENTRIES;
   if(figuresAccessFilter !== "all") list = list.filter(e => figureAccess(e[0]) === figuresAccessFilter);
+  if(activeFigureCategories.size < Object.keys(FIGURE_CATEGORY_META).length){
+    list = list.filter(e => (FIGURE_CATEGORIES[e[0]] || []).some(c => activeFigureCategories.has(c)));
+  }
   if(!list.length) return `<p class="empty">Aucune figure ne correspond à ${q ? `« ${escapeHTML(query)} »` : "ces critères"}.</p>`;
   return `<div class="list">${list.map(figureRowHTML).join("")}</div>`;
 }
@@ -2404,6 +2497,7 @@ function renderFigures(query = ""){
       <h2>Figures mythologiques</h2>
     </div>
     ${accessFilterBarHTML("figures", figuresAccessFilter)}
+    <div class="figures-category-filters">${figureCategoryChipsHTML()}</div>
     <input type="search" class="search" id="figuresSearch" aria-label="Chercher une figure" placeholder="Chercher une figure (nom, rôle...)" value="${escapeHTML(query)}">
     <div id="figuresGrid">${renderFiguresGrid(query)}</div>
   `;
@@ -4131,6 +4225,7 @@ function bindAppClickDelegation(){
       else if(nav === "places") goToTab("places");
       else if(nav === "placeDetail") go({ type: "placeDetail", id: navEl.dataset.id });
       else if(nav === "contact") go({ type: "contact" });
+      else if(nav === "figuresCategory") goToFigureCategory(navEl.dataset.id);
       return;
     }
     const deityEl = e.target.closest("[data-deity]");
@@ -4139,6 +4234,8 @@ function bindAppClickDelegation(){
     if(symbolEl){ go({ type: "symbolDetail", id: symbolEl.dataset.symbol }); return; }
     const placeCatEl = e.target.closest("[data-place-cat]");
     if(placeCatEl){ togglePlaceCategory(placeCatEl.dataset.placeCat); return; }
+    const figureCatEl = e.target.closest("[data-figure-cat]");
+    if(figureCatEl){ toggleFigureCategory(figureCatEl.dataset.figureCat); return; }
     const accessFilterEl = e.target.closest("[data-access-filter]");
     if(accessFilterEl){ setAccessFilter(accessFilterEl.dataset.accessType, accessFilterEl.dataset.accessFilter); return; }
     const actionEl = e.target.closest("[data-action]");
