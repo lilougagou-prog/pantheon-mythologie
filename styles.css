@@ -294,7 +294,7 @@ h1, h2, h3{
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .cat-tile:hover{ transform: translateY(-2px); box-shadow: 0 4px 12px var(--shadow); }
-.cat-tile-icon{ font-size: 1.3rem; line-height: 1; flex: 0 0 auto; }
+.cat-tile-icon{ width: 28px; height: 28px; object-fit: contain; flex: 0 0 auto; }
 .cat-tile-label{
   font-size: 0.8rem;
   font-family: "Cinzel", Georgia, serif;

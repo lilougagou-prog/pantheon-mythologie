@@ -5331,3 +5331,19 @@ Vérifié en clair et en sombre : une seule image en ligne sur la fiche, bien po
 le bon paragraphe.
 
 `service-worker.js` (Panthéon) : `pantheon-v170` → `pantheon-v171`.
+
+## 2026-10-23 — Icônes illustrées pour les tuiles de famille (au lieu d'emojis)
+
+Remarque de l'utilisatrice sur le classement par famille de la veille : les tuiles de l'accueil et
+les chips de filtre utilisaient des emojis génériques, alors qu'il existe déjà des illustrations
+fournies pour la bibliothèque symbolique et les icônes de catégorie de lieu — à réutiliser plutôt
+que d'en inventer de nouvelles.
+
+Chaque famille a reçu l'illustration déjà existante la plus proche de son thème (toutes déjà sur le
+site, aucun nouvel envoi) : Grands dieux et déesses → foudre, Divinités des eaux → eau, Ciel/astres/
+temps → étoiles, Terre et végétation → terre, Divinités infernales → monde souterrain (même icône
+que pour les lieux), Héros et héroïnes → lance, Monstres et créatures → serpent, Figures
+antagonistes → chaîne, Mortels et lignées légendaires → couronne, Personnifications abstraites →
+ouroboros.
+
+`service-worker.js` (Panthéon) : `pantheon-v171` → `pantheon-v172`.

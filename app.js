@@ -1973,18 +1973,26 @@ function goToTab(type){
   window.scrollTo(0, 0);
 }
 
+// Icône de chaque famille : pas d'emoji générique, mais une illustration déjà fournie par
+// l'utilisatrice et déjà utilisée ailleurs sur le site (bibliothèque symbolique, icônes de
+// catégorie de lieu) — demande explicite, pas de nouveau détourage nécessaire.
 const FIGURE_CATEGORY_META = {
-  "dieux-majeurs":      { icon:"⚡", label:"Grands dieux et déesses",        color:"var(--bronze)" },
-  "eaux":               { icon:"🌊", label:"Divinités des eaux",            color:"#1f5c74" },
-  "ciel-astres":        { icon:"✨", label:"Ciel, astres et temps",          color:"#4a5a9c" },
-  "terre-vegetation":   { icon:"🌿", label:"Terre et végétation",            color:"var(--laurel)" },
-  "enfers":             { icon:"💀", label:"Divinités infernales",          color:"#5a3a2e" },
-  "heros":              { icon:"⚔",  label:"Héros et héroïnes",             color:"#a63d2e" },
-  "monstres":           { icon:"🐉", label:"Monstres et créatures",         color:"#3e5c3a" },
-  "antagonistes":       { icon:"⛓",  label:"Figures antagonistes",          color:"#6b2d4a" },
-  "mortels":            { icon:"👑", label:"Mortels et lignées légendaires", color:"var(--ink-soft)" },
-  "personnifications":  { icon:"✦",  label:"Personnifications abstraites",  color:"#8c6a9c" },
+  "dieux-majeurs":      { illustration:"assets/symbol-foudre.webp",     label:"Grands dieux et déesses",        color:"var(--bronze)" },
+  "eaux":               { illustration:"assets/symbol-eau.webp",        label:"Divinités des eaux",            color:"#1f5c74" },
+  "ciel-astres":        { illustration:"assets/symbol-etoile.webp",     label:"Ciel, astres et temps",          color:"#4a5a9c" },
+  "terre-vegetation":   { illustration:"assets/symbol-terre.webp",      label:"Terre et végétation",            color:"var(--laurel)" },
+  "enfers":             { illustration:"assets/map-icon-souterrain.webp", label:"Divinités infernales",         color:"#5a3a2e" },
+  "heros":              { illustration:"assets/symbol-lance.webp",      label:"Héros et héroïnes",             color:"#a63d2e" },
+  "monstres":           { illustration:"assets/symbol-serpent.webp",    label:"Monstres et créatures",         color:"#3e5c3a" },
+  "antagonistes":       { illustration:"assets/symbol-chaine.webp",     label:"Figures antagonistes",          color:"#6b2d4a" },
+  "mortels":            { illustration:"assets/symbol-couronne.webp",   label:"Mortels et lignées légendaires", color:"var(--ink-soft)" },
+  "personnifications":  { illustration:"assets/symbol-ouroboros.webp",  label:"Personnifications abstraites",  color:"#8c6a9c" },
 };
+
+function figureCategoryIconHTML(cat, cls){
+  const meta = FIGURE_CATEGORY_META[cat];
+  return `<img class="${cls}" src="${escapeHTML(meta.illustration)}" alt="" loading="lazy">`;
+}
 
 // Classement par grande famille mythologique (demande utilisatrice : pouvoir retrouver les
 // figures « dieux de la nature, des eaux, des héros, méchants, divinités infernales... » depuis
@@ -2057,7 +2065,7 @@ function figureCategoryChipsHTML(){
       </button>
       ${Object.entries(FIGURE_CATEGORY_META).map(([cat, meta]) => `
         <button type="button" class="place-filter-chip${activeFigureCategories.has(cat) ? " active" : ""}" data-figure-cat="${escapeHTML(cat)}" style="--place-color:${meta.color}">
-          <span class="place-filter-dot"></span><i class="place-filter-icon place-filter-icon-emoji">${meta.icon}</i> ${escapeHTML(meta.label)}
+          <span class="place-filter-dot"></span>${figureCategoryIconHTML(cat, "place-filter-icon")} ${escapeHTML(meta.label)}
         </button>
       `).join("")}
     </div>
@@ -2360,7 +2368,7 @@ function homeCategoryTilesHTML(){
       <div class="cat-tiles-grid">
         ${Object.entries(FIGURE_CATEGORY_META).map(([cat, meta]) => `
           <button type="button" class="cat-tile" data-nav="figuresCategory" data-id="${escapeHTML(cat)}" style="--cat-color:${meta.color}">
-            <span class="cat-tile-icon">${meta.icon}</span>
+            ${figureCategoryIconHTML(cat, "cat-tile-icon")}
             <span class="cat-tile-label">${escapeHTML(meta.label)}</span>
           </button>
         `).join("")}
