@@ -5620,3 +5620,29 @@ Vérifié en local (clair et sombre) sur Œdipe : les nouveaux paragraphes s'int
 visuelle dans le fil du mythe.
 
 `service-worker.js` (Panthéon) : `pantheon-v185` → `pantheon-v186`.
+
+## 2026-10-23 — Approfondissement psychologique : second passage sur 14 figures
+
+Après la liste initiale de 25 figures (chantier précédent), nouveau passage sur des figures en
+dehors de cette liste mais disposant elles aussi d'une matière psychologique antique réellement
+attestée et pas encore exploitée. Même méthode en 4 lots parallèles, avec vérification des
+sources par recherche web.
+
+Figures enrichies : Myrrha (le débat intérieur avant l'inceste, Ovide *Métamorphoses* X), Niobé
+(l'ordre du massacre de ses enfants, même source), Narcisse et Écho (traitées comme un couple
+thématique, Ovide *Métamorphoses* III), Arachné (le défi à Athéna, Ovide *Métamorphoses* VI),
+Méléagre (son retrait courroucé puis la persuasion de son épouse, *Iliade* IX), Orphée (la
+« soudaine folie » du regard fatal, Virgile), Cassandre (la transe prophétique à Mycènes,
+Eschyle), Hélène (son plaidoyer devant Ménélas, Euripide *Les Troyennes*), Agamemnon (le « joug
+de la nécessité » et la scène du tapis pourpre, Eschyle), Briséis (précisions sur sa lamentation,
+*Iliade* XIX), Polyxène (sa mort revendiquée, Euripide *Hécube*), Procris (le malentendu à
+l'origine de sa mort, Ovide), Bellérophon (son errance solitaire après la chute, *Iliade* VI) et
+Œnone (sa lettre de regret, Ovide *Héroïdes* V).
+
+Contrôle qualité identique au round précédent avant intégration : aucune phrase de type « le
+mythe ne dit rien de... », aucun renvoi croisé dupliqué, aucun paragraphe existant modifié. Au
+passage, un doublon de lien préexistant repéré sur la fiche Chryséis a également été corrigé.
+
+Vérifié en local (clair et sombre) sur Myrrha : intégration sans rupture visuelle.
+
+`service-worker.js` (Panthéon) : `pantheon-v186` → `pantheon-v187`.
