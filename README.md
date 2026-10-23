@@ -5347,3 +5347,16 @@ antagonistes → chaîne, Mortels et lignées légendaires → couronne, Personn
 ouroboros.
 
 `service-worker.js` (Panthéon) : `pantheon-v171` → `pantheon-v172`.
+
+## 2026-10-23 — Tuiles de famille : hauteur uniforme et icônes agrandies
+
+Remarque de l'utilisatrice : les tuiles « Parcourir par famille » n'avaient pas toutes la même
+hauteur (certains libellés tiennent sur une ligne, d'autres sur deux), et les icônes gagnaient à
+être plus grandes.
+
+`.cat-tile` reçoit une hauteur minimale (76px, calée sur le pire cas à deux lignes) pour que
+toutes les tuiles s'alignent sur la même grille, quel que soit le nombre de lignes de leur
+libellé ; `.cat-tile-icon` passe de 28px à 38px. Vérifié : les 10 tuiles mesurent exactement la
+même hauteur (76px) en clair comme en sombre.
+
+`service-worker.js` (Panthéon) : `pantheon-v172` → `pantheon-v173`.
