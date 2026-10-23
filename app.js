@@ -570,6 +570,7 @@ const DEITY_PORTRAITS = {
   "thisbé": "assets/deity-pyrame-thisbe.jpg",
   "hermès": "assets/deity-hermes.jpg",
   "andromède": "assets/deity-andromede.jpg",
+  "didon": "assets/deity-didon.jpg",
   "apollon": "assets/deity-apollon.jpg",
   "arès": "assets/deity-ares.jpg",
   "enyo": "assets/deity-enyo.jpg",
@@ -834,6 +835,11 @@ const DEITY_INLINE_PORTRAITS = {
   "énée": [
     { match: "porta sur son dos son père âgé", src: "assets/deity-enee-fuite-troie.jpg", alt: "Énée fuyant Troie avec son père et son fils" },
     { match: "où règne la reine Didon", src: "assets/deity-enee-didon.jpg", alt: "Énée et Didon" },
+  ],
+  // Même image que DEITY_INLINE_PORTRAITS["énée"] ci-dessus (scène partagée par les deux fiches,
+  // demande explicite de l'utilisatrice), pas de nouvel asset.
+  "didon": [
+    { match: "favorisèrent en secret leur idylle", src: "assets/deity-enee-didon.jpg", alt: "Énée et Didon" },
   ],
   "anchise": [
     { match: "se vanta malgré tout de sa conquête divine", src: "assets/deity-anchise-vantardise.jpg", alt: "Anchise se vantant de sa conquête auprès d'Aphrodite", wide: true },
@@ -2449,6 +2455,9 @@ const DEITY_PORTRAIT_FOCUS = {
   "bellérophon": { x: 43, y: 15, zoom: 2.6 },
   "bia": { x: 37, y: 14, zoom: 1.6 },
   "borée": { x: 50, y: 13, zoom: 1.8 },
+  // Portrait fourni par l'utilisatrice : reine accoudée sur une terrasse, visage décentré à
+  // gauche dans le tiers supérieur de l'image.
+  "didon": { x: 38, y: 16, zoom: 1.4 },
 };
 const DEITY_PORTRAIT_FOCUS_DEFAULT = { x: 50, y: 18, zoom: 1.4 };
 

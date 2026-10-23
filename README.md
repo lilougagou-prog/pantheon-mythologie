@@ -5360,3 +5360,20 @@ libellé ; `.cat-tile-icon` passe de 28px à 38px. Vérifié : les 10 tuiles mes
 même hauteur (76px) en clair comme en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v172` → `pantheon-v173`.
+
+## 2026-10-23 — Vraie correction de la hauteur des tuiles, et portrait de Didon
+
+Capture d'écran iOS envoyée par l'utilisatrice : le `min-height` du round précédent ne suffisait
+pas, les tuiles à libellé court restaient visiblement plus basses que leurs voisines à libellé
+long sur un écran étroit. Cause probable : un `<button>` comme enfant de grille ne s'étire pas de
+façon fiable à la hauteur de sa rangée sur tous les moteurs. Remplacé par une hauteur fixe (96px,
+identique pour les dix tuiles quel que soit leur contenu) plutôt que de compter sur le stretch de
+grille ; `.cat-tile-label` se limite à 3 lignes avec ellipse en filet de sécurité. Vérifié à 375px
+de large (largeur d'écran de la capture) : les dix tuiles mesurent exactement 96px.
+
+Portrait fourni par l'utilisatrice ajouté à la fiche Didon (elle n'en avait aucun jusqu'ici), plus
+l'illustration déjà existante d'Énée et Didon ensemble (`assets/deity-enee-didon.jpg`, déjà utilisée
+sur la fiche d'Énée), placée au-dessus du paragraphe correspondant de la fiche Didon — aucun
+nouveau fichier pour cette seconde image, réutilisation telle quelle.
+
+`service-worker.js` (Panthéon) : `pantheon-v173` → `pantheon-v174`.

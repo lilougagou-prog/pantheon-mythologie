@@ -278,11 +278,21 @@ h1, h2, h3{
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
+/* height fixe plutôt que min-height : <button> comme enfant de grid ne s'étire pas de façon
+   fiable à la hauteur de sa rangée sur tous les moteurs (constaté par l'utilisatrice sur une
+   capture iOS : les tuiles à libellé court restaient visiblement plus basses que leurs voisines
+   à libellé long, alors qu'un min-height aurait dû suffire si le stretch de grille s'appliquait
+   réellement aux boutons). Une hauteur fixe, identique pour les dix tuiles quel que soit leur
+   contenu, élimine le problème à la racine plutôt que d'espérer un comportement de grille
+   spécifique aux boutons ; 96px couvre confortablement le pire cas observé (libellé sur 3
+   lignes sur un écran étroit), et .cat-tile-label se limite à 3 lignes avec ellipse au cas où un
+   écran encore plus étroit en demanderait une quatrième.
+*/
 .cat-tile{
   display: flex;
   align-items: center;
   gap: 10px;
-  min-height: 76px;
+  height: 96px;
   padding: 12px;
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -301,6 +311,10 @@ h1, h2, h3{
   font-family: "Cinzel", Georgia, serif;
   color: var(--laurel-deep);
   line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ----- Généalogie ----- */
