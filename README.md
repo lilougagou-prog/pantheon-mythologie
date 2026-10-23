@@ -5451,3 +5451,28 @@ Circé ou Aiétès malgré leur parenté : la fiche le dit explicitement plutôt
 silences par de l'invention.
 
 `service-worker.js` (Panthéon) : `pantheon-v177` → `pantheon-v178`.
+
+## 2026-10-23 — Section « Sources » sur les fiches de personnage (1ʳᵉ vague : 86 figures)
+
+Demande de l'utilisatrice : elle avait remarqué et apprécié que certaines fiches de la
+bibliothèque symbolique (chouette, foudre, serpent, laurier, olivier) citent leurs sources
+antiques en bas de page (`SYMBOL_LIBRARY[id].sources`, affiché par `symbolSourcesHTML()`) et
+voulait le même traitement sur les 353 fiches de personnage.
+
+Fonctionnalité ajoutée, identique au mécanisme des symboles : un champ `sources` (tableau de
+chaînes « Auteur, Œuvre, référence (contexte) ») par figure, affiché dans une section
+« Sources » dépliable en bas de chaque fiche (`figureSourcesHTML()`, mêmes classes CSS
+`.symbol-more`/`.symbol-sources`, aucun nouveau style nécessaire). Repli honnête quand rien
+n'est encore identifié, exactement comme pour les symboles, plutôt que d'inventer une référence.
+
+Première vague de population, 86 figures sur 353: les 5 figures gratuites (Zeus, Héra, Poséidon,
+Athéna, Apollon, sourcées directement — Hésiode, Homère, Apollodore, Ovide, Hymne homérique à
+Apollon) et 81 figures premium dont le texte citait déjà un auteur antique par son nom (« selon
+Apollodore », « rapporté par Pausanias »...) — ces citations ont été formalisées en entrées de
+bibliographie sans qu'aucune nouvelle recherche n'ait été nécessaire, puisqu'elles étaient déjà
+vérifiées au moment de la rédaction du texte. Les 267 figures restantes affichent pour l'instant
+le message de repli : les sourcer correctement (vérifier plutôt que deviner un auteur, une œuvre
+et une référence) demande un vrai travail de recherche figure par figure, qui continuera sur les
+prochains rounds plutôt que d'être expédié d'un coup au risque d'inventer des citations fausses.
+
+`service-worker.js` (Panthéon) : `pantheon-v178` → `pantheon-v179`.
