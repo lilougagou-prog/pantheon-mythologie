@@ -5524,3 +5524,14 @@ précis leur soit attribuable avec confiance ; conformément à la règle du rou
 fiche n'affiche tout simplement aucune section Sources plutôt qu'un repli vide.
 
 `service-worker.js` (Panthéon) : `pantheon-v181` → `pantheon-v182`.
+
+## 2026-10-23 — Section Sources : correction d'une figure oubliée (sidé)
+
+Repasse de contrôle sur le round précédent : parmi les 9 figures listées comme sans source,
+« sidé » (première épouse d'Orion, précipitée aux Enfers par Héra) disposait en réalité d'une
+attribution fiable (Apollodore, Bibliothèque, I, 4, 3) qui n'avait simplement pas été appliquée.
+Corrigé : 341 figures sur 348 sont désormais sourcées. Restent sans source otrera, aletheia,
+alké, euthénie, hygie, phidaléia et techné, personnifications tardives ou figures trop mineures
+pour qu'un texte antique précis leur soit attribuable avec confiance.
+
+`service-worker.js` (Panthéon) : `pantheon-v182` → `pantheon-v183`.
