@@ -5570,3 +5570,27 @@ fiche gratuite (Zeus), une fiche premium (Héraclès, Jason, Psyché) et une fic
 (Artémis), sans régression visuelle.
 
 `service-worker.js` (Panthéon) : `pantheon-v183` → `pantheon-v184`.
+
+## 2026-10-23 — Approfondissement psychologique des fiches (1/2, Médée)
+
+Nouveau chantier de fond demandé par l'utilisatrice : enrichir la psychologie des personnages à
+partir de sources antiques réellement attestées (tragédie grecque et romaine surtout, qui
+dramatise spécifiquement l'intériorité des personnages), jamais d'invention. Une première liste
+de 25 figures a été établie par ordre de richesse de la matière disponible (celles qui ont une
+tragédie entière consacrée à leur histoire en tête).
+
+Médée traitée en premier, avec une consigne particulière de l'utilisatrice : elle préfère
+nettement la tradition où ce sont les Corinthiens qui tuent les enfants de Médée plutôt que
+Médée elle-même. La fiche équilibrait déjà les deux traditions antiques (Euripide d'un côté,
+tradition corinthienne locale rapportée par Pausanias de l'autre). Ajout d'un paragraphe sur son
+humiliation, son isolement en tant qu'étrangère à Corinthe et sa fureur après l'abandon de Jason
+(discours sur la condition des épouses, crainte de la nourrice), une matière attestée qui tient
+indépendamment de la question de savoir qui a tué les enfants. Pausanias (Description de la
+Grèce, II, 3, 6-11) ajouté en source pour la tradition corinthienne déjà présente dans la fiche.
+
+Les 24 autres figures de la liste (Phèdre, Œdipe, Clytemnestre, Oreste, Électre, Hécube,
+Antigone, Agavé, Penthée, Didon, Ariane, Achille, Hector, Priam, Pénélope, Ulysse, Andromaque,
+Énée, Iphigénie, Jocaste, Créüse, Déjanire, Alceste, Thyeste) sont en cours de traitement et
+feront l'objet d'un round de déploiement séparé.
+
+`service-worker.js` (Panthéon) : `pantheon-v184` → `pantheon-v185`.
