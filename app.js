@@ -574,9 +574,16 @@ const DEITY_PORTRAITS = {
   "apollon": "assets/deity-apollon.jpg",
   "arès": "assets/deity-ares.jpg",
   "enyo": "assets/deity-enyo.jpg",
-  // Phobos réutilise le même portrait de couple que la fiche d'Arès (demande explicite,
-  // en plus de celle d'Arès plutôt qu'à sa place) — voir DEITY_INLINE_PORTRAITS["arès"].
-  "phobos": "assets/deity-deimos-phobos.jpg",
+  // Portrait principal de Phobos et de Deimos : demande explicite de l'utilisatrice de reprendre
+  // l'illustration qui les concerne, déjà présente en ligne sur la fiche d'Arès (voir
+  // DEITY_INLINE_PORTRAITS["arès"], assets/deity-deimos-phobos.jpg, les deux jumeaux côte à
+  // côte). Plutôt que de partager ce même fichier entre les deux fiches (comme pour Castor/
+  // Pollux ou Séléné/Endymion), ce portrait-ci a un ratio trop proche du cadrage 4:5 de la fiche
+  // détail pour qu'un simple object-position suffise à isoler l'un ou l'autre (la fiche détail
+  // n'applique jamais le zoom supplémentaire des vignettes, voir deityPortraitStyleHTML) : chacun
+  // a donc son propre recadrage pré-détouré à partir de la même image source.
+  "phobos": "assets/deity-phobos.jpg",
+  "deimos": "assets/deity-deimos.jpg",
   "médée": "assets/deity-medee.jpg",
   "pasiphaé": "assets/deity-pasiphae.jpg",
   "circé": "assets/deity-circe.jpg",

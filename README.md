@@ -5415,3 +5415,20 @@ Labyrinthe). Chaque fiche reçoit sa propre version du paragraphe, avec des lien
 le mythe de Médée n'est pas relié une seconde fois).
 
 `service-worker.js` (Panthéon) : `pantheon-v175` → `pantheon-v176`.
+
+## 2026-10-23 — Portraits de Phobos et Deimos, repris de l'illustration d'Arès
+
+Demande de l'utilisatrice : reprendre l'illustration des deux jumeaux (déjà présente en ligne sur
+la fiche d'Arès) pour en faire le portrait principal de leurs propres fiches.
+
+Phobos avait déjà cette image comme portrait (sans recadrage dédié), Deimos n'en avait aucun. En
+testant le partage direct du même fichier entre les deux fiches (comme pour Castor/Pollux ou
+Séléné/Endymion), constaté que la fiche détail n'applique jamais le zoom supplémentaire utilisé
+par les vignettes (seul `object-position` s'applique, voir `deityPortraitStyleHTML`) : avec un
+ratio source déjà très proche du cadrage 4:5 de la fiche, `object-position` seul n'avait aucun
+effet visible, les deux fiches auraient montré la même image intégrale avec les deux jumeaux.
+Plutôt que de changer ce comportement partagé par tout le site, chacun reçoit son propre recadrage
+pré-détouré depuis l'image source (`deity-phobos.jpg` / `deity-deimos.jpg`), isolant proprement
+chaque frère.
+
+`service-worker.js` (Panthéon) : `pantheon-v176` → `pantheon-v177`.
