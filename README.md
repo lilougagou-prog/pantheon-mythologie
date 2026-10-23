@@ -5501,3 +5501,26 @@ l'utilisatrice. La section « Sources » ne s'affiche désormais que pour les fi
 réellement — rien du tout pour les 267 figures pas encore sourcées, plutôt qu'un encart vide.
 
 `service-worker.js` (Panthéon) : `pantheon-v180` → `pantheon-v181`.
+
+## 2026-10-23 — Section Sources : les 267 figures restantes (2ᵉ et dernière vague)
+
+Remarque de l'utilisatrice sur le round précédent : le contenu des 267 figures sans source n'a
+jamais été inventé, il vient bien de la mythologie réelle — le texte ne nommait simplement pas
+l'auteur inline comme pour les 86 déjà faites. Plutôt que de laisser ces fiches sans source,
+identification des sources réelles derrière chaque fiche restante.
+
+Travail réparti en 5 lots traités en parallèle, chacun relisant le texte déjà publié d'une
+cinquantaine de figures pour identifier l'auteur et l'œuvre antiques dont ce texte est tiré
+(Apollodore pour la généalogie standard, Hésiode pour les Titans et primordiaux, Homère pour les
+épisodes homériques, Ovide pour beaucoup de métamorphoses, Tite-Live/Denys d'Halicarnasse/Virgile
+pour la lignée des rois d'Albe, Pausanias pour le culte et la géographie, Hyginus, les tragiques,
+Pindare, Apollonios de Rhodes pour les Argonautes...), avec vérification par recherche web des
+attributions incertaines plutôt qu'un pari sur la mémoire.
+
+Résultat : 339 figures sur 348 sont désormais sourcées (contre 86 avant ce round). Seules 9
+figures restent sans source — aletheia, alké, euthénie, hygie, otrera, phidaléia, proétos, sidé,
+techné — des personnifications tardives ou des figures trop mineures pour qu'un texte antique
+précis leur soit attribuable avec confiance ; conformément à la règle du round précédent, leur
+fiche n'affiche tout simplement aucune section Sources plutôt qu'un repli vide.
+
+`service-worker.js` (Panthéon) : `pantheon-v181` → `pantheon-v182`.
