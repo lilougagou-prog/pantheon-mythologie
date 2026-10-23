@@ -5377,3 +5377,22 @@ sur la fiche d'Énée), placée au-dessus du paragraphe correspondant de la fich
 nouveau fichier pour cette seconde image, réutilisation telle quelle.
 
 `service-worker.js` (Panthéon) : `pantheon-v173` → `pantheon-v174`.
+
+## 2026-10-23 — Largeur des tuiles de famille, elle aussi incohérente sur iOS
+
+Nouvelle capture de l'utilisatrice, et mesure pixel par pixel de la précédente : la hauteur des
+tuiles était bien corrigée, mais leur **largeur** restait incohérente sur iOS (colonne de droite
+nettement plus large que celle de gauche sur les cinq lignes, alors que
+`grid-template-columns: repeat(2, 1fr)` impose en théorie deux colonnes égales). Diagnostic posé
+par élimination avant d'agir à nouveau : mesure précise de la capture montrant la même asymétrie
+(colonne gauche 482px, droite 615px) sur les cinq lignes, ce qui écartait un souci ponctuel de
+contenu pour pointer vers un comportement de `<button>` comme enfant de grille — le même type de
+souci, sur l'autre axe, que celui déjà corrigé pour la hauteur.
+
+Plutôt que de compter sur le stretch par défaut de la grille (apparemment pas fiable pour un
+bouton sur certains moteurs), `.cat-tile` reçoit un `width: 100%` et un `min-width: 0` explicites,
+qui forcent chaque tuile à remplir sa colonne quel que soit ce comportement par défaut — même
+logique que `height: 96px` au round précédent. `.cat-tile-label` reçoit `flex: 1 1 auto` et
+`min-width: 0` pour que le texte continue de s'enrouler correctement dans cette largeur imposée.
+
+`service-worker.js` (Panthéon) : `pantheon-v174` → `pantheon-v175`.
