@@ -5432,3 +5432,22 @@ pré-détouré depuis l'image source (`deity-phobos.jpg` / `deity-deimos.jpg`), 
 chaque frère.
 
 `service-worker.js` (Panthéon) : `pantheon-v176` → `pantheon-v177`.
+
+## 2026-10-23 — Fiche Pasiphaé développée à partir de sources antiques attestées
+
+Demande de l'utilisatrice : approfondir la fiche, trop courte, avec des sources attestées sur son
+vécu de l'humiliation d'avoir enfanté un monstre, ce qu'elle ressent à l'enfermement de son fils
+dans le Labyrinthe, sa relation à ses autres enfants, à Minos, et à ses frère et sœur.
+
+Recherche menée avant toute rédaction plutôt que d'inventer quoi que ce soit : le matériau le
+plus solide est Les Crétois d'Euripide, tragédie perdue mais partiellement conservée sur papyrus,
+où Pasiphaé se défend elle-même devant Minos en rejetant la faute sur Poséidon. Apollodore fournit
+un second volet bien attesté (elle maudit à son tour Minos pour ses infidélités, un épisode qui
+explique au passage l'origine des cadeaux — le chien Lélaps et le javelot infaillible — que la
+fiche Procris mentionnait déjà sans la détailler). Les vases antiques attestent qu'elle nourrit
+l'enfant avant qu'il ne devienne dangereux. En revanche, aucune source ne documente ce qu'elle
+ressent à l'enfermement du Minotaure, ses liens avec ses autres enfants, ni une interaction avec
+Circé ou Aiétès malgré leur parenté : la fiche le dit explicitement plutôt que de combler ces
+silences par de l'invention.
+
+`service-worker.js` (Panthéon) : `pantheon-v177` → `pantheon-v178`.
