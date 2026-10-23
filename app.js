@@ -3057,11 +3057,45 @@ function genealogyLineageHTML(id){
   `;
 }
 
+// Un seul paragraphe de mythe, avec son éventuelle illustration en ligne — factorisé hors de
+// renderFigureDetail() pour être réutilisé identiquement que le paragraphe vienne du tableau plat
+// `paragraphs` (figures courtes, un seul titre « Le mythe ») ou d'une section nommée de
+// loreSections (figures longues scindées en « Le mythe »/« Les exploits »/« Les amours »...,
+// voir DEITY_LORE_SECTIONS et plus bas). Le matching d'image reste par simple recherche de
+// sous-chaîne dans le texte du paragraphe, peu importe la section à laquelle il appartient.
+function loreParagraphHTML(p, inlinePortraits){
+  const inline = inlinePortraits.find(cfg => p.includes(cfg.match));
+  const inlineClass = inline?.wide ? "deity-portrait-inline deity-portrait-inline-wide" : "deity-portrait-inline";
+  const img = inline ? `<img class="${inlineClass}" src="${escapeHTML(inline.src)}" alt="${escapeHTML(inline.alt)}" loading="lazy">` : "";
+  const para = `<p class="lore-text">${linkifyLore(p)}</p>`;
+  // Par défaut l'image précède le paragraphe qu'elle illustre (comportement historique, inchangé
+  // pour toutes les entrées existantes). Demande explicite de l'utilisatrice sur Danaé : « à
+  // mettre en dessous du paragraphe le mentionnant » — un indicateur optionnel (cfg.after)
+  // inverse l'ordre pour cette seule entrée, sans toucher aux autres.
+  return inline?.after ? para + img : img + para;
+}
+
+// Figures « fournies » scindées en plusieurs sections thématiques plutôt qu'un seul bloc
+// « Le mythe » trop long à lire d'une traite (demande explicite de l'utilisatrice, qui a cité
+// Héraclès comme exemple type : naissance/haine d'Héra → Les exploits → Les amours). Vocabulaire
+// de titres volontairement restreint et répété d'une fiche à l'autre plutôt qu'un titre sur
+// mesure par figure — pensé aussi pour le livre illustré évoqué par l'utilisatrice comme
+// aboutissement de cette application, où une structure de chapitre stable et prévisible compte
+// autant que la lisibilité à l'écran. Seules les figures gratuites concernées (Zeus, Apollon)
+// sont ici ; les figures premium scindées ont leur loreSections dans content.json à la place de
+// leur ancien champ "lore" (voir renderFigureDetail, qui bascule sur loreSections dès qu'il est
+// présent et retombe sinon sur le tableau "lore" plat sous un unique titre « Le mythe »).
+const DEITY_LORE_SECTIONS = {
+"zeus":[{"title":"Le mythe","paragraphs":["Plus jeune fils de Cronos et de Rhéa (voir les fiches « Cronos » et « Rhéa »), Zeus échappa au sort de ses frères et sœurs (avalés à la naissance par un père craignant d'être détrôné) grâce à sa mère, qui le cacha dans une grotte du mont Ida en Crète et fit avaler à Cronos une pierre emmaillotée à sa place.","Devenu adulte, il libéra d'abord ses frères et sœurs engloutis, puis les Cyclopes et les Hécatonchires, monstres aux cent bras enfermés au plus profond du Tartare par leur propre père Ouranos ; en échange de leur délivrance, les Cyclopes lui forgèrent la foudre, son arme absolue. Ainsi armé, il mena dix années durant la guerre contre les Titans, la Titanomachie, jusqu'à les vaincre et les précipiter à leur tour dans le Tartare, désormais gardé par les Hécatonchires eux-mêmes, établissant sur l'Olympe un nouvel ordre cosmique dont il devint le souverain incontesté, maître de la foudre.","Sa victoire eut pourtant un prix : furieuse de voir ses fils titans enchaînés, Gaïa engendra contre l'Olympe une nouvelle race de géants. Une prophétie voulait que les dieux seuls ne puissent en triompher sans l'aide d'un mortel : Zeus fit donc appel à son propre fils Héraclès (voir la fiche « Héraclès »), dont les flèches achevèrent plusieurs des géants déjà terrassés par la foudre olympienne, une victoire collective, la Gigantomachie, à laquelle prirent part la plupart des dieux de l'Olympe, chacun selon ses propres armes.","Garant de l'ordre du monde, il reste pourtant l'un des dieux aux liaisons et aux colères les plus nombreuses de toute la mythologie.","On l'invoquait aussi sous des noms précis, selon la part de sa protection sollicitée : Xénios veillait sur les hôtes et les étrangers, vengeant lui-même toute entorse aux devoirs de l'hospitalité ; Herkeios protégeait l'autel dressé dans la cour de chaque maison, marque d'une famille reconnue comme telle ; et Horkios, le plus redouté, gardait la sincérité des serments ; sa statue à Olympie, brandissant la foudre, était si terrifiante qu'aucun athlète ni juge ne s'y serait parjuré de sang-froid. Une facette plus modeste, Zeus Ctésios, veillait quant à elle sur les provisions de chaque foyer (voir la fiche « Ctésios »)."]},{"title":"Les amours","paragraphs":["De son union légitime avec Héra (voir la fiche « Héra ») naquirent Arès (voir la fiche « Arès »), dieu de la guerre, Hébé (voir la fiche « Hébé »), déesse de la jeunesse, et Ilithyie (voir la fiche « Ilithyie »), qui préside aux accouchements.","Ses innombrables liaisons avec des mortelles ou des nymphes peuplèrent la terre de héros et de lignées royales entières : d'Alcmène (voir la fiche « Alcmène ») naquit Héraclès ; de Danaé (voir la fiche « Danaé »), rejointe sous une pluie d'or, naquit Persée (voir la fiche « Persée ») ; de Léda (voir la fiche « Léda »), visitée sous la forme d'un cygne, naquirent Hélène (voir la fiche « Hélène ») et Pollux (voir la fiche « Pollux »), l'immortel des Dioscures ; d'Europe (voir la fiche « Europe »), enlevée sous celle d'un taureau, naquirent Minos (voir la fiche « Minos »), Rhadamanthys (voir la fiche « Rhadamanthys ») et Sarpédon (voir la fiche « Sarpédon ») ; d'Antiope, princesse thébaine, naquirent les jumeaux Amphion (voir la fiche « Amphion ») et Zéthos (voir la fiche « Zéthos ») ; et d'Io (voir la fiche « Io »), changée en génisse pour la soustraire à la jalousie d'Héra, naquirent Épaphos (voir la fiche « Épaphos ») et la nymphe Kéroessa (voir la fiche « Kéroessa »).","D'autres enfants naquirent tout autrement : Athéna (voir la fiche « Athéna ») jaillit tout armée de son propre crâne, après qu'il eut avalé sa mère Métis (voir la fiche « Métis ») enceinte, tandis que Dionysos (voir la fiche « Dionysos »), fils de la mortelle Sémélé (voir la fiche « Sémélé »), fut cousu dans sa cuisse pour survivre à la mort de sa mère. Hermès (voir la fiche « Hermès ») naquit de la Pléiade Maïa (voir la fiche « Maïa »), Apollon (voir la fiche « Apollon ») et Artémis (voir la fiche « Artémis ») de la Titanide Léto (voir la fiche « Léto »), et Perséphone (voir la fiche « Perséphone »), reine des Enfers une partie de l'année, de Déméter (voir la fiche « Déméter »).","Trois groupes de déesses lui doivent également le jour : les Muses (voir la fiche « Muses »), nées de la Titanide Mnémosyne (voir la fiche « Mnémosyne »), les Charites (voir la fiche « Charites »), nées de l'Océanide Eurynomé (voir la fiche « Eurynomé »), et les Heures (voir la fiche « Heures »), nées de Thémis (voir la fiche « Thémis »). Deux personnifications plus discrètes, Tyché (voir la fiche « Tyché »), déesse de la fortune, et Aletheia (voir la fiche « Aletheia »), déesse de la vérité, lui sont elles aussi parfois rattachées, même si les sources antiques hésitent sur leur origine exacte. Une dernière fille, Pandia, née de son union avec la déesse lunaire Séléné (voir la fiche « Séléné »), était honorée par les Athéniens chaque pleine lune lors d'une fête qui portait son nom."]}],
+"apollon":[{"title":"Le mythe","paragraphs":["Fils de Zeus et de Léto (voir la fiche « Léto »), Apollon naquit avec sa sœur jumelle Artémis sur l'île flottante de Délos, seul lieu qui accepta de les accueillir après qu'Héra eut interdit à toute terre ferme de recevoir l'accouchement de sa rivale.","Encore jeune, il prit part comme tous les Olympiens à la Gigantomachie, la guerre que Gaïa déclara à l'Olympe pour venger ses fils titans vaincus : aux côtés du héros mortel Héraclès (voir la fiche « Héraclès »), il visa de sa flèche l'œil resté intact du géant Éphialte, que Héraclès avait déjà frappé de l'autre, un coup double qui l'acheva.","Dieu de la lumière, de la musique et de la vérité, un rôle solaire parfois confondu avec celui d'Hélios (voir la fiche « Hélios »), qui seul conduit réellement le char du soleil, Apollon rend depuis son temple de Delphes (voir la fiche « Temple ») des oracles par la voix de la Pythie : sa devise gravée sur le fronton du temple, « Connais-toi toi-même », résume son exigence de clarté.","Chef de chœur des Muses (voir la fiche « Muses »), qu'il conduit sous le nom d'Apollon Musagète, « guide des Muses », il partage avec elles le mont Parnasse et sa source Castalie, non loin de son propre sanctuaire de Delphes.","Plusieurs surnoms rappellent ses différents visages : Pythien, en souvenir du serpent Python vaincu à Delphes ; Phoibos, « le Brillant », pour son éclat solaire ; et Loxias, « l'Ambigu », pour la nature volontairement obscure de ses oracles, qu'il fallait savoir interpréter plutôt que prendre au pied de la lettre. Un autre surnom, Lycien, reste débattu depuis l'Antiquité même : lié au loup, à la lumière ou à la région de Lycie, sans qu'aucune des trois explications ne l'emporte vraiment sur les autres."]},{"title":"Les amours","paragraphs":["Il connut aussi un amour resté sans retour : ayant un jour raillé le petit arc d'Éros (voir la fiche « Éros »), jugé indigne d'un dieu de son rang, il s'attira la vengeance du dieu vexé : frappé à son tour d'une flèche d'or, il s'éprit aussitôt de la nymphe Daphné (voir la fiche « Daphné »), elle-même atteinte d'une flèche de plomb qui la rendit incapable de l'aimer en retour. Il la poursuivit sans relâche jusqu'aux rives de son père, le dieu-fleuve Pénée, qui la changea en laurier pour la soustraire à ses avances ; Apollon en fit dès lors son arbre sacré, et la couronne de laurier devint le symbole même de la victoire qu'il n'avait pas obtenue ce jour-là (voir la fiche « Laurier »).","Éprise de la princesse thessalienne Coronis (voir la fiche « Coronis »), il apprit d'un corbeau, blanc jusqu'alors, qu'elle lui préférait un mortel alors même qu'elle portait déjà son enfant : furieux, il la fit tuer par Artémis, mais arracha l'enfant du bûcher funéraire in extremis pour le confier à Chiron (voir la fiche « Chiron »). Cet enfant, Asclépios (voir la fiche « Asclépios »), devint un guérisseur si habile qu'il ressuscitait les morts, jusqu'à ce que Zeus, inquiet de le voir bouleverser l'ordre naturel, le foudroie. Fou de chagrin, Apollon se vengea sur les Cyclopes qui avaient forgé cette foudre, un crime qui lui valut d'être condamné à servir un an durant comme simple berger mortel auprès du roi Admète (voir la fiche « Admète »), corvée qu'il transforma en amitié si sincère qu'il obtint plus tard des Parques la grâce de prolonger sa vie. Quant au corbeau messager, resté blanc jusque-là, Apollon le noircit pour toujours en punition de sa nouvelle funeste.","Il aima aussi le jeune prince spartiate Hyacinthe (voir la fiche « Hyacinthe »), avec qui il partageait le goût du disque, jusqu'à ce qu'un disque qu'il lança dévie de sa trajectoire, détourné par le vent jaloux Zéphyr (voir la fiche « Zéphyr »), et frappe mortellement le jeune homme en pleine tempe. Incapable de le sauver, Apollon changea son sang versé en une fleur nouvelle, la jacinthe, sur les pétales de laquelle on croyait pouvoir lire les lettres grecques de son deuil.","Son dernier grand amour resta, lui, sans aucune réciprocité : à la princesse troyenne Cassandre (voir la fiche « Cassandre »), fille de Priam (voir la fiche « Priam »), il offrit le don de prophétie en échange de ses faveurs, mais elle refusa de tenir sa promesse une fois le don reçu. Ne pouvant le lui reprendre, Apollon la frappa d'une malédiction plus cruelle encore : ses prédictions, toujours exactes, ne seraient plus jamais crues par personne, pas même son avertissement, resté sans écho, contre le cheval de bois conçu par Ulysse (voir la fiche « Ulysse »), qui allait livrer Troie aux Grecs."]}]
+};
+
 function renderFigureDetail(id){
   const name = genealogyDisplayName(id);
   const note = DEITY_NOTES[id];
   const portrait = DEITY_PORTRAITS[id];
   let paragraphs = DEITY_LORE[id] || [];
+  let loreSections = DEITY_LORE_SECTIONS[id] || null;
   let culte = DEITY_CULT_FREE[id] || null;
   let sources = DEITY_SOURCES[id] || null;
   if(figureAccess(id) === "premium" && !isPremiumUnlocked()){
@@ -3072,7 +3106,8 @@ function renderFigureDetail(id){
       return renderOwnerPreviewLoading({ portrait, name, note, id });
     }
     if(cached.locked) return renderPaywall({ portrait, name, note, id });
-    paragraphs = cached.content.lore;
+    paragraphs = cached.content.lore || [];
+    loreSections = cached.content.loreSections || null;
     culte = cached.content.culte || null;
     sources = cached.content.sources || null;
   }
@@ -3089,17 +3124,9 @@ function renderFigureDetail(id){
       <p class="note">${escapeHTML(note)}</p>
       <div class="detail-body-fade-in">
       ${figureAttributesHTML(id)}
-      ${paragraphs.length ? `<h3>Le mythe</h3>${paragraphs.map(p => {
-        const inline = inlinePortraits.find(cfg => p.includes(cfg.match));
-        const inlineClass = inline?.wide ? "deity-portrait-inline deity-portrait-inline-wide" : "deity-portrait-inline";
-        const img = inline ? `<img class="${inlineClass}" src="${escapeHTML(inline.src)}" alt="${escapeHTML(inline.alt)}" loading="lazy">` : "";
-        const para = `<p class="lore-text">${linkifyLore(p)}</p>`;
-        // Par défaut l'image précède le paragraphe qu'elle illustre (comportement historique,
-        // inchangé pour toutes les entrées existantes). Demande explicite de l'utilisatrice sur
-        // Danaé : « à mettre en dessous du paragraphe le mentionnant » — un indicateur optionnel
-        // (cfg.after) inverse l'ordre pour cette seule entrée, sans toucher aux autres.
-        return inline?.after ? para + img : img + para;
-      }).join("")}` : ""}
+      ${loreSections && loreSections.length
+        ? loreSections.map(sec => `<h3>${escapeHTML(sec.title)}</h3>${sec.paragraphs.map(p => loreParagraphHTML(p, inlinePortraits)).join("")}`).join("")
+        : paragraphs.length ? `<h3>Le mythe</h3>${paragraphs.map(p => loreParagraphHTML(p, inlinePortraits)).join("")}` : ""}
       ${culte ? `<h3>Culte</h3>${culte.map(p => `<p class="lore-text">${linkifyLore(p)}</p>`).join("")}` : ""}
       ${sources && sources.length ? `<details class="symbol-more"><summary>Sources</summary>${figureSourcesHTML(sources)}</details>` : ""}
       ${genealogyLineageHTML(id)}

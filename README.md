@@ -5535,3 +5535,38 @@ alké, euthénie, hygie, phidaléia et techné, personnifications tardives ou fi
 pour qu'un texte antique précis leur soit attribuable avec confiance.
 
 `service-worker.js` (Panthéon) : `pantheon-v182` → `pantheon-v183`.
+
+## 2026-10-23 — Scission du paragraphe « Le mythe » en sous-sections
+
+Demande de l'utilisatrice : certaines fiches ont un paragraphe « Le mythe » trop dense pour une
+lecture confortable. Quand le contenu s'y prête, scission en sous-sections à partir d'un
+vocabulaire volontairement restreint et fixe (« Le mythe », « Les exploits », « Les amours »)
+plutôt que des titres sur mesure par figure, à la fois pour la cohérence de lecture dans
+l'application et parce que ces mêmes titres pourront servir de repères de chapitres si le
+contenu est un jour décliné en livre illustré, objectif à long terme de l'application.
+
+Nouveau mécanisme technique, strictement additif et rétrocompatible : un champ `loreSections`
+(figures premium, dans `content.json`) ou une constante `DEITY_LORE_SECTIONS` (figures
+gratuites, dans `app.js`) peut désormais remplacer le simple tableau `lore`/`DEITY_LORE` par une
+liste de sections `{titre, paragraphes}`, chacune rendue sous son propre sous-titre. Une figure
+sans `loreSections` continue de s'afficher exactement comme avant sous un unique « Le mythe » :
+aucun risque de régression pour les quelque 330 fiches non concernées.
+
+Les 22 figures candidates (6 paragraphes de mythe ou plus) ont été relues une à une : la
+scission n'a été appliquée que lorsque les paragraphes se regroupaient proprement par thème,
+sans qu'aucun paragraphe n'ait besoin d'être réécrit ou découpé pour y entrer.
+
+12 figures scindées :
+- Héraclès : Le mythe / Les exploits / Les amours (3 sections)
+- Circé, Jason, Aphrodite, Médée, Dionysos, Psyché, Ulysse, Hadès, Persée, Zeus, Apollon :
+  Le mythe (ou Les exploits) / Les amours (2 sections)
+
+12 figures laissées en l'état, faute d'une séparation thématique nette entre les épisodes de
+leur mythe : Artémis, Arès, Pasiphaé, Perséphone, Héphaïstos, Achille, Iphigénie, Ariane, Léto,
+Cadmos, Thésée, Céphale.
+
+Vérifié en local (clair et sombre) : les nouveaux sous-titres s'affichent correctement sur une
+fiche gratuite (Zeus), une fiche premium (Héraclès, Jason, Psyché) et une fiche non scindée
+(Artémis), sans régression visuelle.
+
+`service-worker.js` (Panthéon) : `pantheon-v183` → `pantheon-v184`.
