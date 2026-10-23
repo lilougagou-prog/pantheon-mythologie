@@ -5491,3 +5491,13 @@ enfants → mort d'Androgée et tribut → malédiction de Minos → aparté gé
 Ariane, qui reste en dernier comme digression plutôt que comme étape du récit.
 
 `service-worker.js` (Panthéon) : `pantheon-v179` → `pantheon-v180`.
+
+## 2026-10-23 — Section Sources : plus de message de repli, rien plutôt qu'une absence signalée
+
+Même logique que le retrait des phrases « muettes » dans le texte des fiches (round précédent),
+appliquée cette fois à la section Sources elle-même : le message de repli « Pas de source ancienne
+précise identifiée... », calqué sur celui des symboles, n'avait pas d'intérêt aux yeux de
+l'utilisatrice. La section « Sources » ne s'affiche désormais que pour les figures qui en ont
+réellement — rien du tout pour les 267 figures pas encore sourcées, plutôt qu'un encart vide.
+
+`service-worker.js` (Panthéon) : `pantheon-v180` → `pantheon-v181`.

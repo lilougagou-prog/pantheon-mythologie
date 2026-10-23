@@ -3101,10 +3101,7 @@ function renderFigureDetail(id){
         return inline?.after ? para + img : img + para;
       }).join("")}` : ""}
       ${culte ? `<h3>Culte</h3>${culte.map(p => `<p class="lore-text">${linkifyLore(p)}</p>`).join("")}` : ""}
-      <details class="symbol-more">
-        <summary>Sources</summary>
-        ${figureSourcesHTML(sources)}
-      </details>
+      ${sources && sources.length ? `<details class="symbol-more"><summary>Sources</summary>${figureSourcesHTML(sources)}</details>` : ""}
       ${genealogyLineageHTML(id)}
       ${relatedChipsHTML(related, "symbol")}
       ${siblingNavHTML(FIGURE_ENTRIES, id, "figureDetail", e => e[1])}
@@ -3114,12 +3111,12 @@ function renderFigureDetail(id){
   `;
 }
 
-// Section « Sources » en bas de chaque fiche figure — même principe et même rendu que
-// symbolSourcesHTML() pour les fiches symboles (demande explicite de l'utilisatrice, qui avait
-// remarqué et apprécié ce traitement côté symboles). Message de repli honnête plutôt qu'une
-// source inventée quand aucune n'a encore été vérifiée pour cette figure.
+// Section « Sources » en bas de chaque fiche figure — même rendu que symbolSourcesHTML() pour
+// les fiches symboles, mais sans son message de repli : demande explicite de l'utilisatrice de
+// ne rien afficher plutôt que de signaler explicitement l'absence de source (même logique que le
+// retrait des phrases « le mythe ne dit rien sur... » dans le texte lui-même). La section entière
+// n'est donc affichée que lorsque sources en contient (voir l'appel dans renderFigureDetail).
 function figureSourcesHTML(sources){
-  if(!sources || !sources.length) return `<p class="empty">Pas de source ancienne précise identifiée pour cette figure : voir le mythe ci-dessus pour le contexte général.</p>`;
   return `<ul class="symbol-sources">${sources.map(src => `<li>${escapeHTML(src)}</li>`).join("")}</ul>`;
 }
 
