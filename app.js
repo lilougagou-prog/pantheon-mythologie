@@ -859,6 +859,9 @@ const DEITY_INLINE_PORTRAITS = {
   "andromède": [
     { match: "Persée", src: "assets/deity-persee-andromede.jpg", alt: "Persée volant au secours d'Andromède" },
   ],
+  "iris": [
+    { match: "Ses propres sœurs, les Harpyes", src: "assets/deity-iris-harpyes-sauvetage.jpg", alt: "Iris s'interposant pour sauver ses sœurs les Harpyes des fils de Borée", wide: true },
+  ],
   "arès": [
     { match: "Phobos et Deimos", src: "assets/deity-deimos-phobos.jpg", alt: "Phobos et Deimos" },
   ],
@@ -2414,7 +2417,7 @@ const DEITY_PORTRAIT_FOCUS = {
   "agon": { x: 67, y: 10, zoom: 1.6 },
   "cécrops": { x: 45, y: 12, zoom: 1.5 },
   "abaris": { x: 55, y: 10, zoom: 1.5 },
-  "iris": { x: 50, y: 7, zoom: 1.6 },
+  "iris": { x: 62, y: 16, zoom: 1.5 },
   // Personnage debout mais lointain dans une scène large (paysage, littoral) — visage minuscule
   // au cadrage par défaut, un zoom plus fort le ramène à une taille lisible.
   "énée": { x: 41, y: 13, zoom: 1.8 },

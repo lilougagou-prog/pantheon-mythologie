@@ -5313,3 +5313,21 @@ dès qu'une seule correspond), réinitialisation à 353, décochage manuel d'une
 9 figures) → 344 restantes. Vérifié en clair et en sombre.
 
 `service-worker.js` (Panthéon) : `pantheon-v169` → `pantheon-v170`.
+
+## 2026-10-23 — Nouvelles illustrations sur la fiche Iris
+
+Demande de l'utilisatrice, deux images fournies : remplacer le portrait principal d'Iris par la
+première, et placer la seconde au-dessus du paragraphe qui raconte comment elle s'interpose pour
+sauver ses sœurs les Harpyes des fils de Borée.
+
+Portrait principal (`assets/deity-iris.jpg`) remplacé ; point focal recalibré sur le nouveau
+cadrage (visage décentré à droite, proche du bord supérieur). Nouvelle illustration en ligne
+(`assets/deity-iris-harpyes-sauvetage.jpg`, format large) ajoutée à `DEITY_INLINE_PORTRAITS["iris"]`,
+calée sur le paragraphe « Ses propres sœurs, les Harpyes... » — comportement par défaut de ce
+mécanisme (l'image précède le paragraphe qu'elle illustre), pas de changement de code nécessaire
+au-delà de l'entrée elle-même.
+
+Vérifié en clair et en sombre : une seule image en ligne sur la fiche, bien positionnée juste avant
+le bon paragraphe.
+
+`service-worker.js` (Panthéon) : `pantheon-v170` → `pantheon-v171`.
