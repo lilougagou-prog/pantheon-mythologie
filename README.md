@@ -5396,3 +5396,22 @@ logique que `height: 96px` au round précédent. `.cat-tile-label` reçoit `flex
 `min-width: 0` pour que le texte continue de s'enrouler correctement dans cette largeur imposée.
 
 `service-worker.js` (Panthéon) : `pantheon-v174` → `pantheon-v175`.
+
+## 2026-10-23 — Portrait de Pasiphaé et paragraphe reliant Circé, Pasiphaé, Médée et Ariane
+
+Demande de l'utilisatrice : un portrait pour Pasiphaé (elle n'en avait aucun), et une image de
+groupe des quatre femmes (Circé, Pasiphaé, Ariane, Médée), avec un paragraphe proposé expliquant
+leur lien de parenté/dynamique si pertinent.
+
+Vérifié contre les données généalogiques déjà présentes sur le site (`GENEALOGY_PARENTS`) avant
+d'écrire quoi que ce soit : Circé et Pasiphaé sont bien sœurs (filles d'Hélios et de l'Océanide
+Perséis), Médée est bien leur nièce par leur frère Aiétès, et Ariane est bien la fille de Pasiphaé
+— ce qui fait de Médée et Ariane des cousines, toutes deux nièces de Circé. Un paragraphe a donc
+été ajouté aux 4 fiches, posant cette parenté puis la reliant à un trait de famille documenté par
+les sources antiques : transformer l'impossible en solution (les philtres de Circé et Médée,
+l'union contre nature de Pasiphaé rendue possible par Dédale, le fil d'Ariane qui vient à bout du
+Labyrinthe). Chaque fiche reçoit sa propre version du paragraphe, avec des liens croisés qui
+évitent de reposer des liens déjà présents plus haut dans la même fiche (ex. Hélios déjà lié dans
+le mythe de Médée n'est pas relié une seconde fois).
+
+`service-worker.js` (Panthéon) : `pantheon-v175` → `pantheon-v176`.

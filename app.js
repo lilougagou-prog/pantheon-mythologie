@@ -578,6 +578,7 @@ const DEITY_PORTRAITS = {
   // en plus de celle d'Arès plutôt qu'à sa place) — voir DEITY_INLINE_PORTRAITS["arès"].
   "phobos": "assets/deity-deimos-phobos.jpg",
   "médée": "assets/deity-medee.jpg",
+  "pasiphaé": "assets/deity-pasiphae.jpg",
   "circé": "assets/deity-circe.jpg",
   "amphitrite": "assets/deity-amphitrite.jpg",
   // Le jugement de Pâris : portrait de groupe (les quatre protagonistes), format large plutôt
@@ -898,12 +899,20 @@ const DEITY_INLINE_PORTRAITS = {
   "circé": [
     { match: "protégé par une plante magique", src: "assets/deity-circe-ulysse.jpg", alt: "Circé qui tente de transformer Ulysse" },
     { match: "change aussi la nymphe Scylla", src: "assets/deity-circe-scylla.jpg", alt: "Circé change Scylla en monstre" },
+    { match: "appartiennent à la même lignée, descendante du Soleil", src: "assets/deity-circe-pasiphae-ariane-medee.jpg", alt: "Circé, Pasiphaé, Ariane et Médée", wide: true },
   ],
   "thétis": [
     { match: "Leurs noces", src: "assets/deity-thetis-noces.jpg", alt: "Les noces de Thétis et Pélée" },
   ],
   "médée": [
     { match: "décocher une flèche d'or dans le cœur de Médée", src: "assets/deity-jason-medee.jpg", alt: "Jason et Médée, sous la flèche d'Éros" },
+    { match: "appartiennent à la même lignée, descendante du Soleil", src: "assets/deity-circe-pasiphae-ariane-medee.jpg", alt: "Circé, Pasiphaé, Ariane et Médée", wide: true },
+  ],
+  "pasiphaé": [
+    { match: "appartiennent à la même lignée, descendante du Soleil", src: "assets/deity-circe-pasiphae-ariane-medee.jpg", alt: "Circé, Pasiphaé, Ariane et Médée", wide: true },
+  ],
+  "ariane": [
+    { match: "appartiennent à la même lignée, descendante du Soleil", src: "assets/deity-circe-pasiphae-ariane-medee.jpg", alt: "Circé, Pasiphaé, Ariane et Médée", wide: true },
   ],
   "orion": [
     { match: "l'emporta à Délos", src: "assets/deity-eos-orion.jpg", alt: "Éos et Orion" },
@@ -2458,6 +2467,9 @@ const DEITY_PORTRAIT_FOCUS = {
   // Portrait fourni par l'utilisatrice : reine accoudée sur une terrasse, visage décentré à
   // gauche dans le tiers supérieur de l'image.
   "didon": { x: 38, y: 16, zoom: 1.4 },
+  // Portrait fourni par l'utilisatrice : plan buste, visage légèrement décentré à droite dans
+  // le tiers supérieur de l'image.
+  "pasiphaé": { x: 54, y: 15, zoom: 1.3 },
 };
 const DEITY_PORTRAIT_FOCUS_DEFAULT = { x: 50, y: 18, zoom: 1.4 };
 
