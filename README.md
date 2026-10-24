@@ -5646,3 +5646,19 @@ passage, un doublon de lien préexistant repéré sur la fiche Chryséis a égal
 Vérifié en local (clair et sombre) sur Myrrha : intégration sans rupture visuelle.
 
 `service-worker.js` (Panthéon) : `pantheon-v186` → `pantheon-v187`.
+
+## 2026-10-24 — Correction de la fiche Adonis : partage post-mortem et source
+
+Question de l'utilisatrice sur une formulation de la fiche Adonis : « les Enfers et l'Olympe se
+partagent... ce même jeune homme » laissait entendre qu'Adonis mort rejoignait littéralement
+l'Olympe, ce qui n'est pas attesté (il ne devient pas un dieu olympien ; il retrouve seulement
+Aphrodite dans le monde d'en haut). Vérification plus poussée : le partage du temps d'Adonis
+entre Perséphone et Aphrodite décrit par Apollodore (Bibliothèque, III, 14, 4) concerne son
+enfance, avant sa mort ; c'est un scholiaste de Théocrite (Idylles, III, 48) qui atteste que ce
+partage continue après sa mort, six mois « dans les bras de Perséphone » et six mois « dans les
+bras d'Aphrodite ».
+
+Paragraphe reformulé en conséquence et source Apollodore clarifiée (partage durant l'enfance) ;
+nouvelle source ajoutée pour le partage post-mortem (scholie à Théocrite).
+
+`service-worker.js` (Panthéon) : `pantheon-v187` → `pantheon-v188`.
