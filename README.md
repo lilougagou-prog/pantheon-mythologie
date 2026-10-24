@@ -5733,3 +5733,26 @@ mises à jour en conséquence.
 Vérifié en local (clair et sombre) : nouveau paragraphe bien intégré, aucun renvoi croisé dupliqué.
 
 `service-worker.js` (Panthéon) : `pantheon-v190` → `pantheon-v191`.
+
+## 2026-10-24 — Développe trois nuances demandées explicitement
+
+Retour de l'utilisatrice : les nuances méritent leur place dans les fiches elles-mêmes, pas
+seulement en résumé de conversation. Trois développements, chacun sourcé :
+
+- **Iris** : précise que dans l'Iliade, elle sert d'abord Zeus et ne porte qu'une seule fois un
+  message pour Héra ; c'est une tradition postérieure, une fois Hermès devenu le messager général
+  des dieux, qui la fixe comme son attachée personnelle.
+- **Harpyes** : développe la prophétie de Céléno à Énée (Virgile, Énéide III) : furieuse du
+  bétail volé par les Troyens échoués sur les Strophades, elle leur prédit qu'ils devront dévorer
+  leurs propres tables avant de fonder leur ville en Italie. Ajout de la réalisation de cette
+  prophétie dans le Latium (Énéide VII), avec le détail qu'Énée l'attribue par la suite, à tort, à
+  son père Anchise plutôt qu'à Céléno elle-même.
+- **Phinée** : développe pourquoi Zeus le punit, au-delà du simple « don trop généreusement
+  partagé » : la connaissance de l'avenir reste un privilège des dieux, un oracle doit toujours
+  rester partiel pour que les mortels continuent de dépendre d'un recours au ciel ; en dévoilant
+  sans retenue les projets de Zeus, Phinée piétine cette frontière.
+
+Vérifié en local (clair et sombre) sur Harpyes et Phinée, aucun renvoi croisé dupliqué sur les
+trois fiches touchées.
+
+`service-worker.js` (Panthéon) : `pantheon-v191` → `pantheon-v192`.
