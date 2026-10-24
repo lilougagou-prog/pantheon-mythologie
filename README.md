@@ -5689,3 +5689,29 @@ Vérifié en local : les trois fiches apparaissent dans la recherche, s'affichen
 leurs renvois croisés, et Zétès/Calaïs apparaissent bien comme enfants de Borée dans la Lignée.
 
 `service-worker.js` (Panthéon) : `pantheon-v188` → `pantheon-v189`.
+
+## 2026-10-24 — Complète la fiche Harpyes, réconcilie la fin de la poursuite
+
+Demande de l'utilisatrice : compléter la fiche Harpyes avec leur nombre (variable selon les
+traditions) et leurs noms, des indications sur leur relation avec Iris, et l'image déjà utilisée
+sur la fiche d'Iris (Iris s'interposant pour sauver ses sœurs) au-dessus du passage correspondant.
+
+Nouveau paragraphe sourcé sur le nombre et les noms : deux chez Hésiode (Aello et Ocypète),
+trois dans des traditions plus tardives dont Virgile (ajout de Céléno, leur cheffe), et la Harpye
+Podarge connue par Homère comme mère des chevaux d'Achille, dont l'appartenance au groupe reste
+débattue. Ajout d'une phrase sur le contraste entre Iris, parole fidèle et lien de confiance, et
+ses sœurs, qui ne sèment que rapine. Image `deity-iris-harpyes-sauvetage.jpg` (déjà présente sur
+la fiche Iris) ajoutée au-dessus du paragraphe du sauvetage par Iris.
+
+Au passage, correction d'une incohérence entre fiches sur la même scène : les fiches Phinée,
+Zétès et Calaïs, créées la veille, faisaient se terminer la poursuite des Harpyes par leur simple
+épuisement (version secondaire d'Apollodore), alors que les fiches Harpyes et Iris, déjà en
+ligne, retiennent l'intervention d'Iris et le serment sur le Styx, la version de la source
+principale de tout cet épisode (Apollonios de Rhodes, Argonautiques, II, 178-434, vérifiée
+directement). Les trois fiches ont été harmonisées sur cette version, avec les liens croisés vers
+Harpyes et Iris qui manquaient.
+
+Vérifié en local (clair et sombre) sur la fiche Harpyes : image bien positionnée au-dessus du bon
+paragraphe, aucun renvoi croisé dupliqué sur les quatre fiches touchées.
+
+`service-worker.js` (Panthéon) : `pantheon-v189` → `pantheon-v190`.

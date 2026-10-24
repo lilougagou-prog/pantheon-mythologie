@@ -891,6 +891,9 @@ const DEITY_INLINE_PORTRAITS = {
   "iris": [
     { match: "Ses propres sœurs, les Harpyes", src: "assets/deity-iris-harpyes-sauvetage.jpg", alt: "Iris s'interposant pour sauver ses sœurs les Harpyes des fils de Borée", wide: true },
   ],
+  "harpyes": [
+    { match: "Sur le point de les tuer", src: "assets/deity-iris-harpyes-sauvetage.jpg", alt: "Iris s'interposant pour sauver ses sœurs les Harpyes des fils de Borée", wide: true },
+  ],
   "arès": [
     { match: "Phobos et Deimos", src: "assets/deity-deimos-phobos.jpg", alt: "Phobos et Deimos" },
   ],
