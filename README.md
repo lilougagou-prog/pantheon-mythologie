@@ -5780,3 +5780,20 @@ Vérifié en local (clair et sombre) : fiche trouvable par recherche, Borée app
 parent dans la Lignée, aucun renvoi croisé dupliqué sur les quatre fiches touchées.
 
 `service-worker.js` (Panthéon) : `pantheon-v192` → `pantheon-v193`.
+
+## 2026-10-24 — Ajoute le passage d'Iris chez Hypnos (épisode Céyx et Alcyone)
+
+Remarque de l'utilisatrice : il manquait, dans la fiche Iris, sa mission chez Morphée (déjà
+présente côté Morphée, mais racontée sans elle). Chez Ovide, c'est bien Iris qu'Héra (sous son nom
+latin de Junon) envoie convaincre Hypnos, excédée par les prières d'Alcyone à son époux Céyx déjà
+noyé en mer ; une fois dans la grotte du Sommeil, encombrée de songes informes, l'éclat de sa robe
+suffit à peine à tirer le dieu de sa torpeur. C'est Hypnos qui délègue ensuite la tâche à son fils
+Morphée, déjà racontée côté Morphée (Ovide, Métamorphoses, XI, 633-673) : la nouvelle source (XI,
+583-632) couvre la partie qui précède, le trajet et la mission d'Iris elle-même.
+
+Nouvelle illustration supplémentaire d'un fil déjà posé dans un round précédent : Iris au service
+spécifique d'Héra, au-delà de son rôle général de messagère des dieux.
+
+Vérifié en local (clair et sombre) : paragraphe bien intégré, aucun renvoi croisé dupliqué.
+
+`service-worker.js` (Panthéon) : `pantheon-v193` → `pantheon-v194`.
