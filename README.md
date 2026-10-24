@@ -5973,3 +5973,25 @@ Vérifié en local (clair et sombre) sur Cassandre : étymologie bien intégrée
 première phrase, rendu identique aux fiches existantes.
 
 `service-worker.js` (Panthéon) : `pantheon-v199` → `pantheon-v200`.
+
+## 2026-10-25 — Grand audit de cohérence (4/n) : symboles et attributs
+
+Suite du grand audit : vérification que le système d'« Attributs » (encart affiché sur une fiche
+figure, construit à la main à partir des associations déjà affirmées dans la description d'un
+symbole publié, ex. « Attribut de Zeus » sur la fiche Foudre) n'avait pas pris de retard avec tous
+les ajouts de la nuit. Deux lacunes trouvées, chacune correspondant à une association déjà écrite
+noir sur blanc dans un symbole mais jamais reprise côté figure : **Minos**, que le symbole Balance
+mentionne explicitement (« et de Minos au Jugement ») sans qu'il ait lui-même cet attribut ; et
+**Bellérophon**, que le symbole Pégase désigne comme son cavalier sans lien retour, un oubli plus
+ancien que cette nuit mais mis au jour par la création de la fiche Pégase elle-même. Les deux
+corrigés, et un lien symbole→figure ajouté sur Pégase pour que Bellérophon apparaisse aussi dans
+ses « Symboles associés », sur le même principe que Laurier→Apollon déjà existant.
+
+Vérification complémentaire : les 94 symboles et 63 lieux du site ont tous leurs champs de base
+complets (icône, libellé, catégorie, description), et tous les renvois des lieux vers des figures
+ou des symboles pointent vers des entrées réellement existantes.
+
+Vérifié en local (clair et sombre) sur Minos et Bellérophon : les deux encarts s'affichent
+correctement.
+
+`service-worker.js` (Panthéon) : `pantheon-v200` → `pantheon-v201`.
