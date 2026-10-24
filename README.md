@@ -5825,3 +5825,30 @@ apparaît déjà automatiquement en « union non précisée » (Cyrène n'étant
 site), sans qu'aucune donnée généalogique n'ait eu besoin d'être ajoutée.
 
 `service-worker.js` (Panthéon) : `pantheon-v194` → `pantheon-v195`.
+
+## 2026-10-24 — Nouvelle fiche : Cyrène
+
+Demande de l'utilisatrice : une fiche pour Cyrène, la nymphe aimée d'Apollon et mère d'Aristée,
+déjà racontée dans leurs deux fiches respectives sans fiche propre.
+
+Avant cela, recherche distincte demandée sur d'éventuels amours et enfants d'Iris : aucune
+matière solide trouvée (déesse vierge dans la tradition dominante ; une union tardive avec
+Zéphyr, source d'Éros ou de Pothos selon Alcée et Nonnos, jugée trop mince et trop tardive après
+discussion). Rien intégré sur ce point, conformément à la décision de l'utilisatrice.
+
+Fiche Cyrène construite à partir de Pindare (Pythiques IX, le texte fondateur de toute cette
+histoire : rencontre avec Apollon alors qu'elle lutte à mains nues contre un lion sur le mont
+Pélion, consultation de Chiron, enlèvement et fondation de la cité de Cyrène en Libye) et
+d'Apollonios de Rhodes pour un second fils disputé, Idmon, devin des Argonautes. Au passage,
+source Pindare ajoutée à la fiche Apollon, qui citait déjà cet épisode sans la référencer depuis
+le round précédent.
+
+Intégrée au système (`DEITY_NOTES`, `FIGURE_CATEGORIES` en « eaux », comme les autres nymphes) ;
+Cyrène ajoutée comme second parent d'Aristée dans `GENEALOGY_PARENTS`, ce qui fait apparaître
+« avec Cyrène » au lieu d'« union non précisée » dans la Lignée d'Apollon et d'Aristée. Lien
+croisé ajouté côté Aristée vers la nouvelle fiche.
+
+Vérifié en local (clair et sombre) : fiche trouvable par recherche, Lignée correcte des deux
+côtés, aucun renvoi croisé dupliqué.
+
+`service-worker.js` (Panthéon) : `pantheon-v195` → `pantheon-v196`.
