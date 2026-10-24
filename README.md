@@ -5916,3 +5916,34 @@ Suite du grand audit à venir : nouvelles fiches pour les noms cités mais absen
 grecques, vérification des symboles/attributs.
 
 `service-worker.js` (Panthéon) : `pantheon-v197` → `pantheon-v198`.
+
+## 2026-10-25 — Grand audit de cohérence (2/n) : neuf nouvelles fiches
+
+Suite du grand audit : la généalogie du site (`GENEALOGY_PARENTS`) référençait déjà plusieurs noms
+comme parents ou enfants sans qu'ils aient leur propre fiche (affichés en puces grisées non
+cliquables). Neuf d'entre eux, jugés suffisamment intéressants et bien documentés, ont reçu leur
+fiche complète : **Chrysaor** et **Pégase** (nés du sang de Méduse décapitée par Persée, bride
+d'or d'Athéna, Bellérophon et la Chimère), **Triton** (fils de Poséidon et Amphitrite, messager
+des mers, lien avec l'épisode déjà présent de Cyrène en Libye), **Iphiclès** (frère jumeau mortel
+d'Héraclès), **Hellen** (fils de Deucalion et Pyrrha, ancêtre éponyme des Hellènes), **Téléphassa**
+(épouse d'Agénor, mère de Cadmos, Europe, Phénix et Cilix, morte en Thrace durant la recherche
+d'Europe enlevée), **Iasion** (amant mortel de Déméter, père de Ploutos), **Phénix** et **Cilix**
+(frères de Cadmos et Europe, ancêtres éponymes de la Phénicie et de la Cilicie).
+
+Sources : Hésiode, Pindare, Apollodore, Homère, Diodore de Sicile, Hérodote, Hygin, Pausanias
+selon les figures. Chaque fiche intègre, quand elle est attestée, la signification du nom grec
+(ex. Chrysaor, « à l'épée d'or » ; Hellen, à l'origine du mot « Hellènes » lui-même) directement
+dans le premier paragraphe plutôt qu'en ajout artificiel, conformément à la nouvelle demande de
+l'utilisatrice sur les étymologies.
+
+Intégrées au système complet (`DEITY_NOTES`, `FIGURE_CATEGORIES`) ; `GENEALOGY_PARENTS` n'a pas eu
+besoin d'être modifié, les entrées existaient déjà. Le site compte désormais 367 fiches (358 + 9).
+
+Vérifié en local (clair et sombre) sur Pégase (Lignée correcte, parents Poséidon et Méduse) et
+Téléphassa (ses quatre enfants apparaissent tous) ; recherche fonctionnelle pour les quatre
+figures testées ; aucun renvoi croisé cassé ou dupliqué sur l'ensemble des 367 fiches.
+
+Travail en cours en parallèle : étymologies grecques pour les 358 figures déjà existantes,
+réparties en 8 lots de recherche.
+
+`service-worker.js` (Panthéon) : `pantheon-v198` → `pantheon-v199`.
