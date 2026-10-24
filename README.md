@@ -5756,3 +5756,27 @@ Vérifié en local (clair et sombre) sur Harpyes et Phinée, aucun renvoi crois�
 trois fiches touchées.
 
 `service-worker.js` (Panthéon) : `pantheon-v191` → `pantheon-v192`.
+
+## 2026-10-24 — Nouvelle fiche : Cléopâtre, sœur de Zétès et Calaïs
+
+Demande de l'utilisatrice : une fiche pour Cléopâtre, sœur de Zétès et Calaïs et première épouse
+de Phinée, déjà mentionnée sans lien dans leurs trois fiches.
+
+Son histoire appartient à la tradition parallèle déjà notée dans la fiche Phinée (distincte de
+celle des Harpyes) : ses deux fils, Plexippos et Pandion (noms variables selon les sources),
+aveuglés sur l'accusation mensongère de leur belle-mère Idaea, et Cléopâtre elle-même jetée en
+prison par son propre mari. Contenu construit à partir d'Apollodore (*Bibliothèque*, III, 15, 3)
+pour la mise en place, des scholies à Apollonios de Rhodes (II, 207) pour sa délivrance par
+Héraclès, la mort de Phinée et le châtiment d'Idaea, et de l'historien Phylarque (cité dans les
+mêmes scholies) pour un dénouement alternatif où Asclépios rend la vue aux fils par égard pour
+leur mère, un geste qui lui coûte la vie (détail qui rejoint celui déjà présent dans la fiche
+Apollon sur la foudre de Zeus).
+
+Intégrée au système existant (`DEITY_NOTES`, `FIGURE_CATEGORIES` en « mortels »,
+`GENEALOGY_PARENTS` avec Borée comme père) ; ajout des liens croisés vers sa fiche depuis Phinée,
+Zétès et Calaïs, qui la mentionnaient déjà sans renvoi.
+
+Vérifié en local (clair et sombre) : fiche trouvable par recherche, Borée apparaît bien comme
+parent dans la Lignée, aucun renvoi croisé dupliqué sur les quatre fiches touchées.
+
+`service-worker.js` (Panthéon) : `pantheon-v192` → `pantheon-v193`.
