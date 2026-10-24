@@ -5797,3 +5797,31 @@ spécifique d'Héra, au-delà de son rôle général de messagère des dieux.
 Vérifié en local (clair et sombre) : paragraphe bien intégré, aucun renvoi croisé dupliqué.
 
 `service-worker.js` (Panthéon) : `pantheon-v193` → `pantheon-v194`.
+
+## 2026-10-24 — Étoffe « Les amours » d'Apollon, corrige sa transition d'ouverture
+
+Remarque de l'utilisatrice : le paragraphe « Les amours » d'Apollon manque de précision sur ses
+amours et ses enfants, et son ouverture (« Il connut aussi un amour resté sans retour ») n'est pas
+fluide — un reliquat de l'époque où ce paragraphe suivait directement « Le mythe » sans sous-titre
+propre.
+
+Deux amours manquaient alors que les fiches qu'ils concernent les tenaient déjà pour acquis :
+Cyrène, rencontrée alors qu'elle luttait à mains nues contre un lion sur le mont Pélion (Pindare,
+Pythiques, IX), enlevée en Libye où Apollon fonde pour elle la cité qui porte son nom, mère
+d'Aristée (déjà sur le site, sa fiche citait Apollon comme père sans retour réciproque) ; et
+Acacallis, déjà présente sur le site avec deux fils d'Apollon (Milet et Amphithémis) jamais
+mentionnés côté Apollon. Ajout des deux récits en ouverture de la section, Cyrène en tête plutôt
+que Daphné : ça règle aussi le problème de transition, puisque la section démarre maintenant sur
+une scène concrète plutôt que sur un « aussi » qui n'a plus rien à continuer. Phrase d'ouverture de
+Daphné reformulée en conséquence.
+
+Lien croisé manquant ajouté côté Aristée vers Apollon. Un doublon de lien « Chiron » créé par le
+réarrangement (apparaissait déjà dans le paragraphe Coronis) corrigé. Les deux copies du contenu
+d'Apollon dans `app.js` (la section active `DEITY_LORE_SECTIONS` et l'ancien tableau `DEITY_LORE`
+devenu mort mais conservé pour ne pas désynchroniser les deux) mises à jour à l'identique.
+
+Vérifié en local (clair et sombre) sur Apollon et Aristée ; dans la Lignée d'Apollon, Aristée
+apparaît déjà automatiquement en « union non précisée » (Cyrène n'étant pas elle-même une fiche du
+site), sans qu'aucune donnée généalogique n'ait eu besoin d'être ajoutée.
+
+`service-worker.js` (Panthéon) : `pantheon-v194` → `pantheon-v195`.
