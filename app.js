@@ -47,7 +47,7 @@ const DEITY_NOTES = {
   "pandore":"Première femme, façonnée par Héphaïstos sur l'ordre de Zeus, dont la jarre ouverte malgré l'interdit répandit tous les maux sur l'humanité.",
   "hadès":"Dieu du monde souterrain, gardien du passage vers une autre existence.",
   "perséphone":"Reine des Enfers une partie de l'année, fille de Déméter.",
-  "iris":"Messagère arc-en-ciel entre l'Olympe et la Terre.",
+  "iris":"Messagère arc-en-ciel des dieux, surtout au service d'Héra.",
   "pan":"Dieu à moitié bouc, incarnation de l'instinct non policé.",
   "poséidon":"Dieu de la mer et des séismes, capable de rupture soudaine.",
   "hécate":"Déesse des carrefours, de la magie et des passages, fille d'Astéria et de Persès (le Titan).",

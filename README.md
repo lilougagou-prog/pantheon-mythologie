@@ -5715,3 +5715,21 @@ Vérifié en local (clair et sombre) sur la fiche Harpyes : image bien positionn
 paragraphe, aucun renvoi croisé dupliqué sur les quatre fiches touchées.
 
 `service-worker.js` (Panthéon) : `pantheon-v189` → `pantheon-v190`.
+
+## 2026-10-24 — Précise le lien privilégié d'Iris avec Héra
+
+Remarque de l'utilisatrice : la fiche Iris ne précisait pas qu'elle était surtout la messagère
+d'Héra. Vérification : dans l'Iliade, Iris sert d'abord Zeus (et une fois Héra) ; c'est la
+tradition postérieure, une fois Hermès devenu le messager général des dieux, qui consacre Iris
+comme l'attachée personnelle d'Héra en particulier.
+
+Nouveau paragraphe avec deux épisodes antiques concrets plutôt qu'une affirmation abstraite :
+dans l'Iliade (XVIII, 165-202), Héra envoie Iris en secret, à l'insu de Zeus, convaincre Achille
+de se montrer au bord du fossé pour effrayer les Troyens acharnés sur le corps de Patrocle ; chez
+Callimaque (Hymne à Délos), Iris est postée par Héra en sentinelle sur les îles, aux côtés d'Arès
+chargé du continent, pour empêcher toute terre d'accueillir Léto enceinte de Zeus. Note et sources
+mises à jour en conséquence.
+
+Vérifié en local (clair et sombre) : nouveau paragraphe bien intégré, aucun renvoi croisé dupliqué.
+
+`service-worker.js` (Panthéon) : `pantheon-v190` → `pantheon-v191`.
