@@ -326,7 +326,7 @@ const DEITY_NOTES = {
   "lyncée":"Le seul des cinquante fils d'Égyptos épargné par son épouse Hypermestre, et ancêtre de Persée.",
   "byzas":"Fils de Poséidon, fondateur légendaire de Byzance.",
   "kéroessa":"Nymphe, fille de Zeus et d'Io, mère de Byzas et légendaire éponyme de la Corne d'Or.",
-  "phidaléia":"Figure féminine associée à une fondation antérieure sur le site de Byzance, peu documentée.",
+  "phidaléia":"Épouse de Byzas, surnommée « la lanceuse de serpents » pour avoir défendu Byzance assiégée.",
   "admète":"Roi de Phères que servit Apollon comme berger, époux d'Alceste.",
   "alceste":"Fille de Pélias, elle accepta de mourir à la place de son époux Admète.",
   "pélias":"Roi usurpateur d'Iolcos, oncle de Jason, tué par ses propres filles sur les conseils de Médée.",
@@ -1353,7 +1353,7 @@ const GENEALOGY_PARENTS = {
   "romulus": ["arès", "rhéa-silvia"],
   "remus": ["arès", "rhéa-silvia"],
   "ploutos": ["déméter", "iasion"],
-  "phaéton": ["hélios"],
+  "phaéton": ["hélios", "clymène"],
   "calypso": ["atlas"],
   "polyphème": ["poséidon"],
   // Retour direct de l'utilisatrice : « [Poséidon] n'a pas que 3 enfants [...] il faut les
@@ -1380,6 +1380,7 @@ const GENEALOGY_PARENTS = {
   "zétès": ["borée"],
   "calaïs": ["borée"],
   "cléopâtre": ["borée"],
+  "pirithoos": ["ixion"],
 };
 
 // Index inverse construit une seule fois : pour un parent donné, la liste de ses enfants —

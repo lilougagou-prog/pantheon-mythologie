@@ -5871,3 +5871,48 @@ Vérifié en local (clair et sombre) : la Lignée d'Apollon affiche désormais t
 (Acacallis, Coronis, Cyrène).
 
 `service-worker.js` (Panthéon) : `pantheon-v196` → `pantheon-v197`.
+
+## 2026-10-25 — Grand audit de cohérence (1/n) : liens croisés, sources, généalogie
+
+Grand chantier de nuit demandé par l'utilisatrice avant de se coucher : vérifier la cohérence de
+chaque fiche (fond, forme, sources, généalogie en particulier), les renvois de noms, créer des
+fiches pour les noms cités mais absents si pertinent, préciser les étymologies grecques, et
+revérifier symboles/attributs. Premier volet : audit structurel automatisé sur l'ensemble des 358
+fiches (353 premium + 5 gratuites), puis corrections.
+
+**Renvois croisés** : script d'audit construisant l'index complet des 358 figures + 94 symboles +
+63 lieux, puis vérifiant chaque « (voir la fiche « X ») » du site. Résultat : aucun renvoi
+réellement cassé, mais 12 doublons détectés (un même nom lié deux ou trois fois dans une même
+fiche) sur minos, aphrodite, jason (Médée liée 4 fois), circé, alcée, europe, médée, admète et
+muses. Tous corrigés : premier lien conservé, les suivants laissés en texte simple.
+
+**Sources** : nouvelle recherche sur les 7 figures encore non sourcées. Résultat : 5 sources enfin
+trouvées (Hygie : Pausanias ; Otrera : Hyginus, Pseudo-Apollodore, scholies à Apollonios ; Alké :
+Iliade V, nommée sur l'égide d'Athéna ; Techné : Philostrate, autel à Gadeira ; Phidaléia : Jean
+Malalas puis Nonnos). Deux restent sans source solide malgré nouvelle recherche sérieuse
+(Aletheia, Euthénie), laissées sans section Sources plutôt que de forcer une citation non
+pertinente.
+
+Au passage, deux corrections de fond permises par cette recherche :
+- **Otrera** : la fiche affirmait qu'aucune source antique ne donnait Hippolyté comme fille
+  littérale d'Otrera ; or Hyginus (Fables, 30) le fait explicitement. Phrase reformulée pour
+  refléter cette nuance plutôt que l'affirmation inexacte.
+- **Phidaléia** : la fiche se limitait à une vague « occupation antérieure du site » ; en réalité
+  Jean Malalas en fait l'épouse de Byzas et Nonnos la surnomme « la lanceuse de serpents » pour la
+  défense de la ville assiégée. Fiche réécrite avec ce contenu plus riche et mieux attesté ; le
+  lien avec les Amazones, déjà présent, signalé comme non confirmé par ces sources.
+
+**Généalogie** : script d'audit recoupant chaque mention de filiation dans le texte (« fils de »,
+« fille de », etc. à proximité d'un renvoi croisé) avec les entrées de `GENEALOGY_PARENTS`. Sur 137
+mentions détectées, la grande majorité concernait des tiers évoqués en passant (ex. « Cassandre,
+fille de Priam » citée dans la fiche Apollon ne dit rien de la généalogie d'Apollon lui-même) :
+après triage manuel, deux vraies lacunes corrigées : Pirithoos (fils d'Ixion, absent de l'arbre) et
+Phaéton (Clymène ajoutée aux côtés d'Hélios, déjà seul présent).
+
+Vérifié en local (clair et sombre) sur Otrera, Phidaléia et Pirithoos : contenu et Lignée corrects,
+aucun renvoi croisé dupliqué sur l'ensemble du site après correction.
+
+Suite du grand audit à venir : nouvelles fiches pour les noms cités mais absents, étymologies
+grecques, vérification des symboles/attributs.
+
+`service-worker.js` (Panthéon) : `pantheon-v197` → `pantheon-v198`.
