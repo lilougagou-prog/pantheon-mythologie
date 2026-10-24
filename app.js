@@ -1255,6 +1255,8 @@ const GENEALOGY_PARENTS = {
   "glaucos-crète": ["minos", "pasiphaé"],
   "catrée": ["minos", "pasiphaé"],
   "acacallis": ["minos", "pasiphaé"],
+  "milet": ["apollon", "acacallis"],
+  "amphithémis": ["apollon", "acacallis"],
   // Xénodicé n'a aucun épisode connu qui lui soit propre (seulement citée par Apollodore parmi
   // les enfants de Minos et Pasiphaé) : pas de fiche, elle apparaît dans l'arbre par son nom
   // seul, non cliquable, comme toute figure sans fiche (voir ftCardMarkup).

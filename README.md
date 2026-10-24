@@ -5852,3 +5852,22 @@ Vérifié en local (clair et sombre) : fiche trouvable par recherche, Lignée co
 côtés, aucun renvoi croisé dupliqué.
 
 `service-worker.js` (Panthéon) : `pantheon-v195` → `pantheon-v196`.
+
+## 2026-10-24 — Corrige la filiation d'Apollon : Milet et Amphithémis manquants
+
+Remarque de l'utilisatrice : la filiation d'Apollon n'était pas à jour. En cause, un oubli du
+round sur Cyrène : quand Cyrène avait été ajoutée comme second parent d'Aristée pour faire
+apparaître l'union dans la Lignée, Acacallis (déjà présente sur le site, mère de deux fils
+d'Apollon, Milet et Amphithémis, racontés dans la fiche Apollon elle-même) n'avait pas reçu le
+même traitement : ses deux fils n'apparaissaient dans aucune Lignée, ni celle d'Apollon ni celle
+d'Acacallis, faute d'entrée dans `GENEALOGY_PARENTS`.
+
+Corrigé : Milet et Amphithémis ajoutés comme enfants d'Apollon et Acacallis. N'ayant pas de fiche
+propre sur le site, ils s'affichent en toute cohérence comme des puces grisées, non cliquables,
+plutôt que des liens actifs, exactement comme d'autres figures mentionnées sans fiche dédiée
+ailleurs dans l'arbre généalogique.
+
+Vérifié en local (clair et sombre) : la Lignée d'Apollon affiche désormais trois unions complètes
+(Acacallis, Coronis, Cyrène).
+
+`service-worker.js` (Panthéon) : `pantheon-v196` → `pantheon-v197`.
