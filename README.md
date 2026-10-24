@@ -5947,3 +5947,29 @@ Travail en cours en parallèle : étymologies grecques pour les 358 figures déj
 réparties en 8 lots de recherche.
 
 `service-worker.js` (Panthéon) : `pantheon-v198` → `pantheon-v199`.
+
+## 2026-10-25 — Grand audit de cohérence (3/n) : 144 étymologies grecques
+
+Suite du grand audit : demande de l'utilisatrice de préciser la signification grecque des noms
+quand elle est attestée. Recherche menée en 8 lots parallèles sur l'ensemble des 358 figures déjà
+publiées avant cette nuit, chaque lot vérifiant d'abord si l'étymologie n'était pas déjà présente
+dans la fiche (cas de plusieurs personnifications déjà glosées lors de rounds précédents, non
+retouchées), puis cherchant par recherche web plutôt que par mémoire seule.
+
+144 étymologies ajoutées, intégrées comme phrase de fermeture au premier paragraphe de chaque
+fiche (« Son nom grec, X, signifie « Y » », ou une formulation prudente avec « serait lié à »
+quand la lecture est débattue plutôt qu'établie). Les cas incertains ou non consensuels ont été
+explicitement signalés comme tels (ex. Perséphone, Héphaïstos, Hécate, Cronos, Zeus et les quatre
+autres grands noms eux-mêmes : volontairement laissés de côté faute de consensus savant, plutôt
+que de trancher arbitrairement).
+
+Contrôle qualité avant intégration : sept malformations détectées et corrigées (guillemets
+imbriqués mal fermés quand le texte de la signification contenait lui-même des guillemets, deux
+tirets cadratins glissés dans le texte de deux agents, une confusion « nom grec » apposée à un mot
+latin pour deux figures romaines). Aucun souci restant après la passe de nettoyage : guillemets
+équilibrés, aucun tiret cadratin, aucun renvoi croisé cassé ou dupliqué sur l'ensemble du site.
+
+Vérifié en local (clair et sombre) sur Cassandre : étymologie bien intégrée dans le fil de la
+première phrase, rendu identique aux fiches existantes.
+
+`service-worker.js` (Panthéon) : `pantheon-v199` → `pantheon-v200`.
