@@ -5662,3 +5662,30 @@ Paragraphe reformulé en conséquence et source Apollodore clarifiée (partage d
 nouvelle source ajoutée pour le partage post-mortem (scholie à Théocrite).
 
 `service-worker.js` (Panthéon) : `pantheon-v187` → `pantheon-v188`.
+
+## 2026-10-24 — Trois nouvelles fiches : Phinée, Zétès et Calaïs
+
+Demande de l'utilisatrice : créer des fiches pour Phinée, « Zélès » et Calaïs. « Zélès » identifié
+comme une graphie probable de Zétès (Zetes), vu le contexte : Zétès et Calaïs sont les jumeaux
+ailés fils de Borée (déjà présent sur le site), et Calaïs n'a de sens mythologique qu'associé à
+son frère — aucune autre figure nommée « Zélès » n'existe dans la mythologie grecque.
+
+Les trois figures appartiennent au même épisode des Argonautiques : Phinée, roi aveugle et devin
+de Thrace tourmenté par les Harpyes, est délivré par les fils de Borée, ses anciens beaux-frères,
+en échange de sa prophétie sur le passage des Symplégades. Contenu construit à partir
+d'Apollonios de Rhodes (*Argonautiques*, II) pour l'épisode principal, Apollodore (*Bibliothèque*,
+I, 9, 21 et III, 15, 3, pour la tradition parallèle de Cléopâtre et Idaea) et Hygin (*Fables*, 14,
+pour la mort des deux frères sous les flèches d'Héraclès à Ténos).
+
+Intégration complète au système existant plutôt que des fiches isolées : ajout aux trois figures
+dans `DEITY_NOTES` (index de recherche), `FIGURE_CATEGORIES` (Phinée en « mortels », Zétès et
+Calaïs en « héros »/« ciel, astres, temps »), et `GENEALOGY_PARENTS` pour Zétès et Calaïs (Borée
+comme parent identifié ; leur mère Orithye n'étant pas elle-même une fiche du site, non ajoutée).
+Parenté de Phinée volontairement non structurée dans l'arbre généalogique, les sources antiques
+se contredisant sur son père. Les trois fiches comportent une section Sources et se renvoient
+mutuellement par les liens croisés habituels.
+
+Vérifié en local : les trois fiches apparaissent dans la recherche, s'affichent correctement avec
+leurs renvois croisés, et Zétès/Calaïs apparaissent bien comme enfants de Borée dans la Lignée.
+
+`service-worker.js` (Panthéon) : `pantheon-v188` → `pantheon-v189`.
