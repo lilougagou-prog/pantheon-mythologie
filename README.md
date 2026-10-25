@@ -6322,3 +6322,18 @@ Vérifié en local (clair et sombre) sur les cinq fiches : rien de coupé.
 `assets/deity-gorgones.jpg`, `deity-grees.jpg`, `deity-chiron.jpg`, `deity-cyclopes.jpg`,
 `deity-cyllaros.jpg` : nouveaux fichiers.
 `service-worker.js` (Panthéon) : `pantheon-v218` → `pantheon-v219`.
+
+## 2026-10-25 — Clarification de la libération de Prométhée
+
+Question de la propriétaire : qui a libéré Prométhée ? La fiche répondait déjà (Héraclès
+tue l'aigle, Chiron cède son immortalité), mais en une seule phrase dense qui mélangeait
+les deux rôles. Reformulé en deux phrases distinctes : Héraclès met fin au supplice
+physique (aigle abattu, chaînes brisées), puis Chiron rend la libération définitive en
+acceptant de céder sa propre immortalité, seule façon de lever une peine décrétée éternelle.
+
+Vérifié en local (clair et sombre) sur la fiche Prométhée ; aucun renvoi croisé cassé ou
+dupliqué sur l'ensemble du site après intégration.
+
+`api/_data/content.json` (Panthéon) : reformulation du paragraphe de la libération sur la
+fiche Prométhée.
+`service-worker.js` (Panthéon) : `pantheon-v219` → `pantheon-v220`.
