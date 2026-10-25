@@ -6226,3 +6226,26 @@ dupliqué sur l'ensemble du site après intégration.
 `app.js` (Panthéon) : ajout de `"hippotès"` à `DEITY_NOTES`, `FIGURE_CATEGORIES` et comme
 parent d'Éole dans `GENEALOGY_PARENTS`.
 `service-worker.js` (Panthéon) : `pantheon-v213` → `pantheon-v214`.
+
+## 2026-10-25 — Restructuration de la fiche Ulysse, portrait d'Éole
+
+Signalé : la section « Les amours » d'Ulysse ne contenait en fait aucun contenu amoureux
+(Sirènes/Charybde-Scylla, Nausicaa, banquet chez Alcinoos), tandis que ses deux vraies
+histoires d'amour (Circé, Calypso) étaient mêlées au récit d'aventures dans « Les exploits ».
+Fiche restructurée : « Les exploits » redevient le fil chronologique complet du voyage
+(en y réintégrant les trois paragraphes mal classés), « Les amours » se concentre
+désormais uniquement sur Circé et Calypso avec un traitement plus relationnel. Au passage,
+ajout des renvois manquants vers Éole, Tirésias, Nausicaa et Alcinoos, qui disposent
+chacun déjà de leur propre fiche.
+
+Ajout aussi du portrait principal d'Éole (fourni par la propriétaire) ; scène d'action
+(vents, outre, navire) au format large, traitée comme `DEITY_PORTRAIT_WIDE` pour ne rien
+rogner.
+
+Vérifié en local (clair et sombre) sur les deux fiches ; aucun renvoi croisé cassé ou
+dupliqué sur l'ensemble du site après intégration.
+
+`api/_data/content.json` (Panthéon) : restructuration complète des `loreSections` d'Ulysse.
+`app.js` (Panthéon) : ajout de `"éole"` à `DEITY_PORTRAITS` et `DEITY_PORTRAIT_WIDE`.
+`assets/deity-eole.jpg` : nouveau fichier.
+`service-worker.js` (Panthéon) : `pantheon-v214` → `pantheon-v215`.

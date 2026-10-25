@@ -569,6 +569,7 @@ const DEITY_PORTRAITS = {
   "éros": "assets/deity-eros-psyche.jpg",
   "psyché": "assets/deity-eros-psyche.jpg",
   "thésée": "assets/deity-thesee.jpg",
+  "éole": "assets/deity-eole.jpg",
   "énée": "assets/deity-enee.jpg",
   "anchise": "assets/deity-anchise.jpg",
   "pandore": "assets/deity-pandore.jpg",
@@ -857,7 +858,7 @@ const SYMBOL_INLINE_ILLUSTRATIONS = {
     { match: "Cerbère", src: "assets/deity-cerbere.webp", alt: "Cerbère, le chien à trois têtes qui garde l'entrée des Enfers" },
   ],
 };
-const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux", "amphion", "zéthos", "aphrodite", "antiope-thébaine", "antigone", "artémis", "arachné", "thésée"]);
+const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux", "amphion", "zéthos", "aphrodite", "antiope-thébaine", "antigone", "artémis", "arachné", "thésée", "éole"]);
 const DEITY_INLINE_PORTRAITS = {
   "dionysos": [
     { match: "Ménades", src: "assets/deity-dionysos-cortege.jpg", alt: "Le cortège de Dionysos" },
