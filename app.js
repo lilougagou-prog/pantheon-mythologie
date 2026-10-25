@@ -2574,6 +2574,19 @@ const DEITY_PORTRAIT_FOCUS = {
   // ronde, faute de point focal (l'image, plus haute que large, se recadrait par défaut
   // centrée verticalement et perdait le haut du crâne, rasé de près donc peu de marge).
   "agénor": { x: 50, y: 8, zoom: 1.4 },
+  // Les neuf Muses, signalées décentrées sur la miniature ronde de l'accueil — retour direct :
+  // « les vignettes ne sont pas centrées sur les visages [...] tu peux zoomer un peu plus ».
+  // Portraits en pied (ratio ~2:3, plus hauts que les 4:5 habituels), d'où un zoom plus fort
+  // que la moyenne pour que le visage reste lisible dans la miniature ronde.
+  "calliope": { x: 50, y: 15, zoom: 1.9 },
+  "clio": { x: 45, y: 17, zoom: 2.0 },
+  "euterpe": { x: 45, y: 15, zoom: 2.0 },
+  "melpomène": { x: 48, y: 8, zoom: 1.8 },
+  "polymnie": { x: 50, y: 18, zoom: 1.9 },
+  "terpsichore": { x: 52, y: 12, zoom: 2.0 },
+  "thalie": { x: 42, y: 10, zoom: 2.0 },
+  "uranie": { x: 50, y: 13, zoom: 2.0 },
+  "érato": { x: 48, y: 15, zoom: 2.0 },
 };
 const DEITY_PORTRAIT_FOCUS_DEFAULT = { x: 50, y: 18, zoom: 1.4 };
 

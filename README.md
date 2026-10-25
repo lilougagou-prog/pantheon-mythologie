@@ -6486,3 +6486,19 @@ du site après intégration.
 `api/_data/content.json` (Panthéon) : nouvelle fiche Piérides.
 `app.js` (Panthéon) : ajout de `"piérides"` à `DEITY_NOTES` et `FIGURE_CATEGORIES`.
 `service-worker.js` (Panthéon) : `pantheon-v227` → `pantheon-v228`.
+
+## 2026-10-25 — Recadrage des miniatures rondes des neuf Muses
+
+Signalé sur l'accueil (section « Récemment consulté ») : les miniatures des Muses
+n'étaient pas centrées sur leur visage, et gagneraient à être davantage zoomées. Cause :
+leurs neuf portraits sont des plans en pied (ratio ~2:3), plus hauts que les portraits
+buste habituels de l'app, sans aucun point focal dédié jusqu'ici (recadrage par défaut,
+peu adapté à ce format). Valeurs retrouvées empiriquement pour chacune, avec un zoom plus
+marqué que la moyenne, vérifiées à la fois sur la miniature ronde (recadrage + zoom
+combinés) et sur le recadrage 4:5 de la fiche détail.
+
+Vérifié en local sur l'accueil (les neuf Muses passées en revue dans « Récemment
+consulté ») et sur les fiches détail correspondantes.
+
+`app.js` (Panthéon) : ajout des neuf Muses à `DEITY_PORTRAIT_FOCUS`.
+`service-worker.js` (Panthéon) : `pantheon-v228` → `pantheon-v229`.
