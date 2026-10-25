@@ -2563,6 +2563,10 @@ const DEITY_PORTRAIT_FOCUS = {
   // de Chiron) alors qu'aucun point focal n'existait encore pour elle, malgré un portrait déjà
   // proche du format 4:5 par défaut : son visage reste décentré à droite dans l'image source.
   "hylonome": { x: 55, y: 15, zoom: 1.4 },
+  // Signalé par l'utilisatrice : tête coupée à la fois sur la fiche détail et la miniature
+  // ronde, faute de point focal (l'image, plus haute que large, se recadrait par défaut
+  // centrée verticalement et perdait le haut du crâne, rasé de près donc peu de marge).
+  "agénor": { x: 50, y: 8, zoom: 1.4 },
 };
 const DEITY_PORTRAIT_FOCUS_DEFAULT = { x: 50, y: 18, zoom: 1.4 };
 

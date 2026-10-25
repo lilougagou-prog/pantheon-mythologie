@@ -6369,3 +6369,15 @@ Vérifié en local (clair et sombre) sur la page d'accueil et sur les deux fiche
 `app.js` (Panthéon) : point focal de `"chiron"` ajusté, ajout de `"hylonome"` à
 `DEITY_PORTRAIT_FOCUS`.
 `service-worker.js` (Panthéon) : `pantheon-v221` → `pantheon-v222`.
+
+## 2026-10-25 — Correction du portrait d'Agénor (tête coupée)
+
+Même problème que Chiron/Hylonome, signalé cette fois sur Agénor : aucun point focal
+n'existait pour lui, et son portrait (plus haut que large, crâne rasé de près donc peu de
+marge en haut de l'image) se recadrait par défaut centré verticalement, perdant le haut du
+crâne à la fois sur la fiche détail et la miniature ronde.
+
+Vérifié en local sur les deux affichages : tête entière visible.
+
+`app.js` (Panthéon) : ajout de `"agénor"` à `DEITY_PORTRAIT_FOCUS`.
+`service-worker.js` (Panthéon) : `pantheon-v222` → `pantheon-v223`.
