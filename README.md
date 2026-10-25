@@ -6381,3 +6381,33 @@ Vérifié en local sur les deux affichages : tête entière visible.
 
 `app.js` (Panthéon) : ajout de `"agénor"` à `DEITY_PORTRAIT_FOCUS`.
 `service-worker.js` (Panthéon) : `pantheon-v222` → `pantheon-v223`.
+
+## 2026-10-25 — Correction d'une boucle généalogique (Nil/Memphis/Libye), portraits de Libye et Épaphos
+
+Signalé par la propriétaire : Nil était donné comme l'union directe de Libye pour engendrer
+Bélos et Agénor, alors que la fiche d'Épaphos disait déjà, correctement, que Libye est la
+fille d'Épaphos et de Memphis, elle-même fille du Nil — ce qui ferait du Nil à la fois le
+grand-père maternel de Libye et son compagnon, une boucle intenable.
+
+Corrigé en suivant la généalogie standard (Apollodore, Bibliothèque, II, 1, 4) : Nil → sa
+fille Memphis → épouse d'Épaphos → leur fille Libye → unie à Poséidon → leurs jumeaux
+Agénor et Bélos. Memphis, absente du corpus, a reçu sa propre fiche ; Libye, Nil, Agénor et
+Bélos ont chacun été corrigés en conséquence (généalogie ET texte des fiches).
+
+Ajout au passage des portraits de Libye et d'Épaphos (fournis par la propriétaire).
+
+Corrigé également, à cette occasion, une fragilité de l'outil d'audit interne (non publié) :
+son analyseur de parenthèses ne reconnaissait pas les commentaires JS, et une apostrophe
+dans un commentaire ancien faussait le comptage des accolades.
+
+Vérifié en local (clair et sombre) sur les six fiches concernées ; liens de parenté
+corrects dans chaque panneau « Lignée » ; aucun renvoi croisé cassé ou dupliqué sur
+l'ensemble du site après intégration.
+
+`api/_data/content.json` (Panthéon) : nouvelle fiche Memphis ; paragraphes corrigés sur
+Nil, Libye, Agénor et Bélos.
+`app.js` (Panthéon) : ajout de `"memphis"` (notes, catégorie, généalogie) ; généalogie de
+`"libye"`, `"agénor"`, `"bélos"` corrigée ; ajout de `"libye"` et `"épaphos"` à
+`DEITY_PORTRAITS`.
+`assets/deity-libye.jpg`, `deity-epaphos.jpg` : nouveaux fichiers.
+`service-worker.js` (Panthéon) : `pantheon-v223` → `pantheon-v224`.
