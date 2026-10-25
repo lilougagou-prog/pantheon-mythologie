@@ -6067,3 +6067,33 @@ premium (Héraclès), le hub généalogie et l'arbre des douze Titans : contenu 
 sans paywall. Aucun renvoi croisé cassé ou dupliqué sur l'ensemble du site après intégration.
 
 `service-worker.js` (Panthéon) : `pantheon-v203` → `pantheon-v204`.
+
+## 2026-10-25 — Audit des sections Culte (second lot, intégration)
+
+Intégration des 26 expansions de culte issues du second lot de recherche (28 figures
+vérifiées : Cadmos, Hébé, Léto, Aristée, Rhéa, Hector, Prométhée, Énée, Persée, Ilithyie,
+Éros, Arès, Triptolème, Oreste, Héphaïstos, Ctésios, Perséphone, Hygie, Castor, Pollux,
+Thésée, Hécate, Orphée, Achille, Cybèle, Pan, Asclépios, Hadès).
+
+Hébé et Prométhée confirmées déjà complètes, sans ajout. Pour les 26 autres, un paragraphe
+sourcé (Pausanias, Hérodote, Strabon, Plutarque, Tite-Live, Diodore de Sicile, inscriptions
+et corpus archéologiques) est venu compléter la section Culte existante : sanctuaires
+secondaires, fêtes locales, trouvailles archéologiques ou attestations épigraphiques
+absentes jusqu'ici.
+
+Correction notable : la fiche de Léto affirmait à tort l'absence de « culte séparé de
+grande ampleur » alors que le Létoon de Xanthos, sanctuaire fédéral lycien majeur
+(inscription trilingue de 337 av. J.-C.), la contredit directement ; la phrase erronée a
+été retirée avant l'ajout du nouveau paragraphe plutôt que laissée en contradiction.
+
+Deux pistes explicitement écartées par la recherche pour rester fiable : l'équivalence
+Hygie/Salus romaine (trop lâche, débattue) et un détail non vérifiable sur une statue de
+Pan fouettée aux scilles (source introuvable dans Théocrite malgré une récurrence dans la
+littérature de vulgarisation).
+
+Vérifié en local (clair et sombre) sur Léto et Hadès ; aucun tiret cadratin ni déséquilibre
+de guillemets sur les 26 nouveaux paragraphes ; aucun renvoi croisé cassé ou dupliqué sur
+l'ensemble du site après intégration.
+
+`api/_data/content.json` (Panthéon) : 26 figures, nouveau paragraphe Culte + sources.
+`service-worker.js` (Panthéon) : `pantheon-v204` → `pantheon-v205`.
