@@ -6110,3 +6110,17 @@ d'en-tête et illustration en ligne positionnée au bon paragraphe.
 `app.js` (Panthéon) : ajout de `"léto"` à `DEITY_PORTRAITS` et `DEITY_INLINE_PORTRAITS`.
 `assets/deity-leto.jpg`, `assets/deity-leto-grenouilles-lycie.jpg` : nouveaux fichiers.
 `service-worker.js` (Panthéon) : `pantheon-v205` → `pantheon-v206`.
+
+## 2026-10-25 — Correction d'une erreur de génération sur la fiche Phoebé
+
+La fiche affirmait que Phoebé était l'arrière-grand-mère d'Apollon, d'Artémis et d'Hécate,
+alors que Phoebé → Léto/Astéria → Apollon/Artémis/Hécate ne compte que deux générations :
+c'est bien sa grand-mère, pas son arrière-grand-mère (incohérent au passage avec le
+paragraphe précédent de la même fiche, qui parle correctement de « petite-fille » et
+« petit-fils »).
+
+Vérifié en local sur la fiche Phoebé ; aucun renvoi croisé cassé ou dupliqué sur l'ensemble
+du site après correction.
+
+`api/_data/content.json` (Panthéon) : correction du lien de parenté sur la fiche Phoebé.
+`service-worker.js` (Panthéon) : `pantheon-v206` → `pantheon-v207`.
