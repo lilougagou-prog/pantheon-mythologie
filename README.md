@@ -6461,3 +6461,13 @@ après intégration.
 `api/_data/content.json` (Panthéon) : 19 figures, nouveau paragraphe Culte + sources ;
 correction du paragraphe Culte de Tiberinus.
 `service-worker.js` (Panthéon) : `pantheon-v225` → `pantheon-v226`.
+
+## 2026-10-25 — Portraits de Memphis et Nil
+
+Ajout des portraits principaux des deux figures (fournis par la propriétaire).
+
+Vérifié en local (clair et sombre) sur les deux fiches.
+
+`app.js` (Panthéon) : ajout de `"memphis"` et `"nil"` à `DEITY_PORTRAITS`.
+`assets/deity-memphis.jpg`, `deity-nil.jpg` : nouveaux fichiers.
+`service-worker.js` (Panthéon) : `pantheon-v226` → `pantheon-v227`.

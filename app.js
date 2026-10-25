@@ -573,6 +573,8 @@ const DEITY_PORTRAITS = {
   "éole": "assets/deity-eole.jpg",
   "libye": "assets/deity-libye.jpg",
   "épaphos": "assets/deity-epaphos.jpg",
+  "memphis": "assets/deity-memphis.jpg",
+  "nil": "assets/deity-nil.jpg",
   "gorgones": "assets/deity-gorgones.jpg",
   "grées": "assets/deity-grees.jpg",
   "chiron": "assets/deity-chiron.jpg",
