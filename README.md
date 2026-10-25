@@ -6249,3 +6249,16 @@ dupliqué sur l'ensemble du site après intégration.
 `app.js` (Panthéon) : ajout de `"éole"` à `DEITY_PORTRAITS` et `DEITY_PORTRAIT_WIDE`.
 `assets/deity-eole.jpg` : nouveau fichier.
 `service-worker.js` (Panthéon) : `pantheon-v214` → `pantheon-v215`.
+
+## 2026-10-25 — Ajout de Pénélope aux amours d'Ulysse
+
+Signalé : la restructuration précédente de « Les amours » couvrait Circé et Calypso mais
+oubliait Pénélope, pourtant la relation centrale de toute l'Odyssée. Ajout d'un paragraphe
+de clôture : le mariage avant Troie, l'attachement qui motive son refus de l'immortalité
+offerte par Calypso, et les retrouvailles scellées par l'épreuve du lit nuptial.
+
+Vérifié en local (clair et sombre) sur la fiche Ulysse ; aucun renvoi croisé cassé ou
+dupliqué sur l'ensemble du site après intégration.
+
+`api/_data/content.json` (Panthéon) : paragraphe Pénélope ajouté aux amours d'Ulysse.
+`service-worker.js` (Panthéon) : `pantheon-v215` → `pantheon-v216`.
