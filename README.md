@@ -6097,3 +6097,16 @@ l'ensemble du site après intégration.
 
 `api/_data/content.json` (Panthéon) : 26 figures, nouveau paragraphe Culte + sources.
 `service-worker.js` (Panthéon) : `pantheon-v204` → `pantheon-v205`.
+
+## 2026-10-25 — Portraits de Léto
+
+Ajout du portrait principal de Léto (fourni par la propriétaire) et d'une illustration en
+ligne pour l'épisode des paysans de Lycie changés en grenouilles, placée juste avant ce
+paragraphe du mythe.
+
+Vérifié en local (clair et sombre) : les deux images s'affichent correctement, portrait
+d'en-tête et illustration en ligne positionnée au bon paragraphe.
+
+`app.js` (Panthéon) : ajout de `"léto"` à `DEITY_PORTRAITS` et `DEITY_INLINE_PORTRAITS`.
+`assets/deity-leto.jpg`, `assets/deity-leto-grenouilles-lycie.jpg` : nouveaux fichiers.
+`service-worker.js` (Panthéon) : `pantheon-v205` → `pantheon-v206`.

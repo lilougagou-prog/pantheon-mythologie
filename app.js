@@ -533,6 +533,7 @@ const DEITY_PORTRAITS = {
   "chaos": "assets/deity-chaos.jpg",
   "charon": "assets/deity-charon.jpg",
   "hécate": "assets/deity-hecate.jpg",
+  "léto": "assets/deity-leto.jpg",
   "artémis": "assets/deity-artemis.jpg",
   "aphrodite": "assets/deity-aphrodite.jpg",
   "perséphone": "assets/deity-persephone.jpg",
@@ -865,6 +866,9 @@ const DEITY_INLINE_PORTRAITS = {
   ],
   "artémis": [
     { match: "une meute de chiennes", src: "assets/deity-artemis-suite.jpg", alt: "Artémis et sa suite" },
+  ],
+  "léto": [
+    { match: "boire à un étang et y baigner ses enfants", src: "assets/deity-leto-grenouilles-lycie.jpg", alt: "Léto et ses enfants chassés de l'étang par les paysans de Lycie" },
   ],
   "énée": [
     { match: "porta sur son dos son père âgé", src: "assets/deity-enee-fuite-troie.jpg", alt: "Énée fuyant Troie avec son père et son fils" },
