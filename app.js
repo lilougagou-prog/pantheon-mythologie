@@ -2587,6 +2587,10 @@ const DEITY_PORTRAIT_FOCUS = {
   "thalie": { x: 42, y: 10, zoom: 2.0 },
   "uranie": { x: 50, y: 13, zoom: 2.0 },
   "érato": { x: 48, y: 15, zoom: 2.0 },
+  // Signalés dans la foulée des Muses, même défaut (aucun point focal dédié) : « pareil pour
+  // Memphis et Enyo ».
+  "memphis": { x: 45, y: 12, zoom: 1.8 },
+  "enyo": { x: 45, y: 10, zoom: 1.8 },
 };
 const DEITY_PORTRAIT_FOCUS_DEFAULT = { x: 50, y: 18, zoom: 1.4 };
 

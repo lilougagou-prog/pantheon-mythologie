@@ -6502,3 +6502,13 @@ consulté ») et sur les fiches détail correspondantes.
 
 `app.js` (Panthéon) : ajout des neuf Muses à `DEITY_PORTRAIT_FOCUS`.
 `service-worker.js` (Panthéon) : `pantheon-v228` → `pantheon-v229`.
+
+## 2026-10-25 — Recadrage des miniatures de Memphis et Enyo
+
+Même défaut signalé dans la foulée des Muses : Memphis et Enyo n'avaient encore aucun
+point focal dédié, d'où une miniature ronde décentrée sur l'accueil.
+
+Vérifié en local sur la page d'accueil (section « Récemment consulté »).
+
+`app.js` (Panthéon) : ajout de `"memphis"` et `"enyo"` à `DEITY_PORTRAIT_FOCUS`.
+`service-worker.js` (Panthéon) : `pantheon-v229` → `pantheon-v230`.
