@@ -6287,3 +6287,24 @@ l'ensemble du site après intégration.
 `api/_data/content.json` (Panthéon) : 18 figures, nouveau paragraphe Culte + sources ;
 source ajoutée sur la fiche d'Hypnos.
 `service-worker.js` (Panthéon) : `pantheon-v216` → `pantheon-v217`.
+
+## 2026-10-25 — Précision sur l'origine de Sthéno et Euryale (fiches Méduse et Gorgones)
+
+Question de la propriétaire : comment les sœurs de Méduse sont-elles « changées » en
+Gorgones ? Réponse : elles ne le sont pas, contrairement à Méduse. Chez Hésiode, notre plus
+ancienne source, les trois sœurs naissent Gorgones, filles de Phorcys et de Céto ; seule la
+mortalité distingue Méduse des deux autres. Le récit bien plus connu d'une belle jeune
+femme punie et transformée par Athéna (celui que raconte déjà la fiche de Méduse) est une
+tradition plus tardive, propre à Ovide, et ne s'applique jamais à Sthéno et Euryale dans
+aucune source antique.
+
+Précision ajoutée directement dans les deux fiches plutôt que laissée en simple réponse de
+conversation, conformément à la demande explicite d'intégrer ce genre de nuances dans le
+texte lui-même.
+
+Vérifié en local (clair et sombre) sur les deux fiches ; aucun renvoi croisé cassé ou
+dupliqué sur l'ensemble du site après intégration.
+
+`api/_data/content.json` (Panthéon) : nouveau paragraphe sur la fiche Gorgones, paragraphe
+complété sur la fiche Méduse.
+`service-worker.js` (Panthéon) : `pantheon-v217` → `pantheon-v218`.
