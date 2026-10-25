@@ -6203,3 +6203,26 @@ Vérifié en local (clair et sombre) sur les cinq fiches : visages entiers, rien
 `assets/deity-minos.jpg`, `deity-phedre.jpg`, `deity-perseis.jpg`, `deity-gaia.jpg`,
 `deity-cronos.jpg` : nouveaux fichiers.
 `service-worker.js` (Panthéon) : `pantheon-v212` → `pantheon-v213`.
+
+## 2026-10-25 — Filiation d'Éole et nouvelle fiche Hippotès
+
+Demande : préciser les parents, l'épouse et les enfants d'Éole (le gardien des vents de
+l'Odyssée). Recherche faite avant intégration : le père, Hippotès, est bien attesté
+(Homère, Odyssée, X, 1-2, patronyme « Hippotade »), mais ni l'épouse ni les douze enfants
+ne sont nommés par Homère, et aucune source antique fiable ne comble ce vide pour ce
+personnage précis (la seule liste de noms connue vient d'un scoliaste byzantin tardif,
+Jean Tzetzès, qui emprunte en réalité les noms d'un autre Éole, fils d'Hellen). Décision de
+la propriétaire : préciser uniquement le père, sans phrase justifiant l'absence des autres
+noms.
+
+Création d'une fiche minimale pour Hippotès (seul fait attesté : le patronyme donné à
+Éole par Homère, aucun récit propre). Ajout du lien de filiation Éole → Hippotès dans la
+généalogie, et d'une mention dans le texte même de la fiche d'Éole.
+
+Vérifié en local (clair et sombre) sur les deux fiches ; aucun renvoi croisé cassé ou
+dupliqué sur l'ensemble du site après intégration.
+
+`api/_data/content.json` (Panthéon) : nouvelle fiche Hippotès, paragraphe d'Éole mis à jour.
+`app.js` (Panthéon) : ajout de `"hippotès"` à `DEITY_NOTES`, `FIGURE_CATEGORIES` et comme
+parent d'Éole dans `GENEALOGY_PARENTS`.
+`service-worker.js` (Panthéon) : `pantheon-v213` → `pantheon-v214`.
