@@ -6308,3 +6308,17 @@ dupliqué sur l'ensemble du site après intégration.
 `api/_data/content.json` (Panthéon) : nouveau paragraphe sur la fiche Gorgones, paragraphe
 complété sur la fiche Méduse.
 `service-worker.js` (Panthéon) : `pantheon-v217` → `pantheon-v218`.
+
+## 2026-10-25 — Portraits de Gorgones, Grées, Chiron, Cyclopes et Cyllaros
+
+Ajout des portraits principaux des cinq figures (fournis par la propriétaire). Les cinq
+images, au format large (groupes de plusieurs personnages ou scène en pied avec décor),
+rejoignent `DEITY_PORTRAIT_WIDE` pour ne rien rogner.
+
+Vérifié en local (clair et sombre) sur les cinq fiches : rien de coupé.
+
+`app.js` (Panthéon) : ajout de `"gorgones"`, `"grées"`, `"chiron"`, `"cyclopes"`,
+`"cyllaros"` à `DEITY_PORTRAITS` et `DEITY_PORTRAIT_WIDE`.
+`assets/deity-gorgones.jpg`, `deity-grees.jpg`, `deity-chiron.jpg`, `deity-cyclopes.jpg`,
+`deity-cyllaros.jpg` : nouveaux fichiers.
+`service-worker.js` (Panthéon) : `pantheon-v218` → `pantheon-v219`.
