@@ -534,6 +534,8 @@ const DEITY_PORTRAITS = {
   "charon": "assets/deity-charon.jpg",
   "hécate": "assets/deity-hecate.jpg",
   "léto": "assets/deity-leto.jpg",
+  "phoebé": "assets/deity-phoebe.jpg",
+  "coéos": "assets/deity-coeos.jpg",
   "artémis": "assets/deity-artemis.jpg",
   "aphrodite": "assets/deity-aphrodite.jpg",
   "perséphone": "assets/deity-persephone.jpg",

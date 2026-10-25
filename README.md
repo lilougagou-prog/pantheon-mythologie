@@ -6124,3 +6124,13 @@ du site après correction.
 
 `api/_data/content.json` (Panthéon) : correction du lien de parenté sur la fiche Phoebé.
 `service-worker.js` (Panthéon) : `pantheon-v206` → `pantheon-v207`.
+
+## 2026-10-25 — Portraits de Phoebé et Coéos
+
+Ajout des portraits principaux de Phoebé et Coéos (fournis par la propriétaire).
+
+Vérifié en local (clair et sombre) sur les deux fiches.
+
+`app.js` (Panthéon) : ajout de `"phoebé"` et `"coéos"` à `DEITY_PORTRAITS`.
+`assets/deity-phoebe.jpg`, `assets/deity-coeos.jpg` : nouveaux fichiers.
+`service-worker.js` (Panthéon) : `pantheon-v207` → `pantheon-v208`.
