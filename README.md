@@ -6154,3 +6154,23 @@ Vérifié en local (clair et sombre) : couronne et halo entiers visibles.
 
 `app.js` (Panthéon) : ajout de `"phoebé"` à `DEITY_PORTRAIT_FOCUS`.
 `service-worker.js` (Panthéon) : `pantheon-v209` → `pantheon-v210`.
+
+## 2026-10-25 — Correction du paragraphe Ariane/Égée sur la fiche Thésée
+
+Signalé par la propriétaire : la phrase laissait entendre que c'était l'abandon d'Ariane sur
+Naxos lui-même qui avait coûté cher à Égée, alors qu'il s'agit en réalité de deux oublis
+distincts et sans rapport (abandonner Ariane endormie, puis séparément oublier de hisser les
+voiles blanches). Reformulé pour dissocier clairement les deux épisodes.
+
+Ajout, comme demandé, de la raison de cet abandon : les sources antiques divergent
+réellement sur ce point plutôt que de converger vers une seule explication, donc la fiche
+rapporte les trois versions attestées (Plutarque/Héréas de Mégare : Thésée aimait déjà
+Aigle ; Apollodore : c'est Dionysos qui enlève Ariane, ôtant toute responsabilité à
+Thésée ; Catulle et Ovide : aucune raison donnée) plutôt que d'en retenir une seule comme
+si elle faisait consensus.
+
+Vérifié en local (clair et sombre) sur la fiche Thésée ; aucun renvoi croisé cassé ou
+dupliqué sur l'ensemble du site après intégration.
+
+`api/_data/content.json` (Panthéon) : reformulation du paragraphe Ariane/Égée sur Thésée.
+`service-worker.js` (Panthéon) : `pantheon-v210` → `pantheon-v211`.
