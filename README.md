@@ -6023,3 +6023,25 @@ Vérifié en local (clair et sombre) sur Héraclès et Pélops ; aucun renvoi cr
 aucun tiret cadratin, sur l'ensemble du site après intégration.
 
 `service-worker.js` (Panthéon) : `pantheon-v201` → `pantheon-v202`.
+
+## 2026-10-25 — Audit des sections Culte (premier lot)
+
+Vérification systématique de douze figures majeures affichant « Pas de culte particulier. » :
+Atalante, Bellérophon, Dédale, Jason, Méléagre, Penthésilée, Pirithoos, Psyché, Ulysse,
+Zétès et Calaïs, Iphiclès.
+
+Une seule attestation solide trouvée : **Ulysse**. Section Culte ajoutée, sourcée sur la
+grotte votive de la baie de Polis à Ithaque, le site d'Agios Athanasios (identifié par des
+fouilles récentes comme l'Odysseion) et un décret de Magnésie du Méandre (fin IIIe s. av.
+J.-C.) attestant la fête annuelle des Odysseia.
+
+Pour les onze autres, culte confirmé absent après recherche ; deux pistes explicitement
+écartées faute de fondement : la fête des Daedala (liée à Héra, pas à Dédale, d'après
+Pausanias) et le culte corinthien lié au mythe de Jason, qui appartient en réalité aux
+enfants de Médée (déjà couvert dans sa propre fiche).
+
+Vérifié en local (clair et sombre) sur Ulysse ; aucun renvoi croisé cassé ou dupliqué sur
+l'ensemble du site après intégration.
+
+`api/_data/content.json` (Panthéon) : ajout de la section Culte d'Ulysse et d'une source.
+`service-worker.js` (Panthéon) : `pantheon-v202` → `pantheon-v203`.
