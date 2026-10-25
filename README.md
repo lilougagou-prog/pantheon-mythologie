@@ -6145,3 +6145,12 @@ Vérifié en local (clair et sombre) : tête et couronne entières visibles.
 
 `app.js` (Panthéon) : ajout de `"coéos"` à `DEITY_PORTRAIT_FOCUS`.
 `service-worker.js` (Panthéon) : `pantheon-v208` → `pantheon-v209`.
+
+## 2026-10-25 — Recadrage du portrait de Phoebé
+
+Même problème signalé que pour Coéos : couronne rognée en haut de l'image. Même correctif.
+
+Vérifié en local (clair et sombre) : couronne et halo entiers visibles.
+
+`app.js` (Panthéon) : ajout de `"phoebé"` à `DEITY_PORTRAIT_FOCUS`.
+`service-worker.js` (Panthéon) : `pantheon-v209` → `pantheon-v210`.
