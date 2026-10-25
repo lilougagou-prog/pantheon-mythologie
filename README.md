@@ -6262,3 +6262,28 @@ dupliqué sur l'ensemble du site après intégration.
 
 `api/_data/content.json` (Panthéon) : paragraphe Pénélope ajouté aux amours d'Ulysse.
 `service-worker.js` (Panthéon) : `pantheon-v215` → `pantheon-v216`.
+
+## 2026-10-25 — Audit des sections Culte (troisième lot)
+
+Vérification de 27 figures affichant une section Culte courte (androgée, sarpédon, nyx,
+cassandre, hypnos, ménélas, ploutos, néoptolème, pandrosos, cécrops, épaphos, minos,
+amphitrite, europe, agamemnon, danaos, mélinoé, parques, sémélé, hyménée, éléos, thanatos,
+aglauros, hermaphrodite, romulus, hippolyte, kairos), en excluant les Muses et les Charites
+(culte collectif déjà correctement décrit) ainsi qu'Hébé et Prométhée (déjà vérifiées lors
+d'un tour précédent).
+
+18 figures enrichies d'un paragraphe sourcé (Pausanias, Hérodote, Diodore de Sicile,
+Athénée, inscriptions et fouilles archéologiques). 9 confirmées déjà complètes sans ajout.
+Deux fausses pistes explicitement écartées valent d'être signalées : l'« Agraulia »
+mentionnée pour Aglauros, et l'« Arrhéphorie » pour Pandrosos, aucune des deux n'étant
+reliée à ces figures par une source antique directe. Au passage, ajout d'une source
+manquante (Pausanias III, 18, 1) sur la fiche d'Hypnos, dont le texte était déjà correct
+mais non sourcé dans la fiche.
+
+Vérifié en local (clair et sombre) sur Ménélas et Hermaphrodite ; 5 tirets cadratins
+corrigés sur les 18 nouveaux paragraphes ; aucun renvoi croisé cassé ou dupliqué sur
+l'ensemble du site après intégration.
+
+`api/_data/content.json` (Panthéon) : 18 figures, nouveau paragraphe Culte + sources ;
+source ajoutée sur la fiche d'Hypnos.
+`service-worker.js` (Panthéon) : `pantheon-v216` → `pantheon-v217`.
