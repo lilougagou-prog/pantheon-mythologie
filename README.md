@@ -5995,3 +5995,31 @@ Vérifié en local (clair et sombre) sur Minos et Bellérophon : les deux encart
 correctement.
 
 `service-worker.js` (Panthéon) : `pantheon-v200` → `pantheon-v201`.
+
+## 2026-10-25 — Second cercle d'approfondissement psychologique (8 figures)
+
+Suite demandée par l'utilisatrice après le bilan du grand audit : continuer le travail
+d'approfondissement psychologique entamé lors d'un round précédent (~39 figures), en ciblant un
+second cercle de personnages avec une vraie matière dramatique antique pas encore exploitée.
+
+Huit figures traitées en deux lots parallèles : **Héraclès** (sa folie meurtrière n'était évoquée
+qu'en une phrase ; développée à partir d'Euripide, *Héraclès*, avec son retour à la raison,
+l'intervention de Thésée empêchant son suicide — chronologie distincte de celle déjà présente,
+signalée comme telle plutôt que fusionnée), **Prométhée** (son défi à Hermès venu lui arracher le
+secret de la chute de Zeus, *Prométhée enchaîné* d'Eschyle), **Atrée** (sa préméditation glaçante
+chez Sénèque, en miroir de ce qui existait déjà côté Thyeste, sans chevauchement), **Admète** (la
+confrontation avec son père Phérès chez Euripide, qui retourne contre lui l'accusation de
+lâcheté), **Égisthe** (son discours de justification chez Eschyle après le meurtre d'Agamemnon),
+**Pélops** (la trahison et la malédiction de Myrtilos), **Io** (sa propre plainte dans le
+*Prométhée enchaîné*) et les **Danaïdes** (leur terreur du mariage forcé dans *Les Suppliantes*).
+
+Correction au passage : la fiche Pélops citait Pindare comme source unique pour l'ensemble du
+mythe, y compris l'épisode du banquet cannibale de Tantale — or Pindare, dans sa première
+Olympique, rejette explicitement ce récit comme une calomnie et raconte à la place un enlèvement
+par Poséidon. Sources séparées (Hyginus pour le banquet, Pindare pour la course de chars) et
+nuance ajoutée dans le texte lui-même plutôt que laissée telle quelle.
+
+Vérifié en local (clair et sombre) sur Héraclès et Pélops ; aucun renvoi croisé cassé ou dupliqué,
+aucun tiret cadratin, sur l'ensemble du site après intégration.
+
+`service-worker.js` (Panthéon) : `pantheon-v201` → `pantheon-v202`.
