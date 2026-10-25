@@ -6188,3 +6188,18 @@ Vérifié en local (clair et sombre) : les deux images s'affichent en entier, sa
 `DEITY_INLINE_PORTRAITS`.
 `assets/deity-thesee.jpg`, `assets/deity-thesee-minotaure.jpg` : nouveaux fichiers.
 `service-worker.js` (Panthéon) : `pantheon-v211` → `pantheon-v212`.
+
+## 2026-10-25 — Portraits de Minos, Phèdre, Perséis, Gaïa et Cronos
+
+Ajout des portraits principaux des cinq figures (fournis par la propriétaire). Minos, Phèdre
+et Cronos, livrés dans un cadre plus large que haut, reçoivent un point focal dans
+`DEITY_PORTRAIT_FOCUS` pour garder le visage dans le recadrage 4:5 habituel ; Perséis et
+Gaïa, déjà proches du format portrait, n'en ont pas eu besoin.
+
+Vérifié en local (clair et sombre) sur les cinq fiches : visages entiers, rien de coupé.
+
+`app.js` (Panthéon) : ajout de `"minos"`, `"phèdre"`, `"perséis"`, `"gaïa"`, `"cronos"` à
+`DEITY_PORTRAITS`, et des trois premiers à `DEITY_PORTRAIT_FOCUS`.
+`assets/deity-minos.jpg`, `deity-phedre.jpg`, `deity-perseis.jpg`, `deity-gaia.jpg`,
+`deity-cronos.jpg` : nouveaux fichiers.
+`service-worker.js` (Panthéon) : `pantheon-v212` → `pantheon-v213`.

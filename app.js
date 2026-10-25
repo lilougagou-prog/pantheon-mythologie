@@ -536,6 +536,11 @@ const DEITY_PORTRAITS = {
   "léto": "assets/deity-leto.jpg",
   "phoebé": "assets/deity-phoebe.jpg",
   "coéos": "assets/deity-coeos.jpg",
+  "minos": "assets/deity-minos.jpg",
+  "phèdre": "assets/deity-phedre.jpg",
+  "perséis": "assets/deity-perseis.jpg",
+  "gaïa": "assets/deity-gaia.jpg",
+  "cronos": "assets/deity-cronos.jpg",
   "artémis": "assets/deity-artemis.jpg",
   "aphrodite": "assets/deity-aphrodite.jpg",
   "perséphone": "assets/deity-persephone.jpg",
@@ -2534,6 +2539,11 @@ const DEITY_PORTRAIT_FOCUS = {
   // de l'image — retour direct : « si tu dois faire un choix coupe plutôt le bas ».
   "coéos": { x: 48, y: 8, zoom: 1.3 },
   "phoebé": { x: 46, y: 8, zoom: 1.3 },
+  // Portraits fournis par l'utilisatrice, cadrage large (buste serré dans un canevas plus
+  // large que haut) : point focal pour garder le visage dans le recadrage 4:5 serré.
+  "minos": { x: 48, y: 15, zoom: 1.4 },
+  "phèdre": { x: 32, y: 22, zoom: 1.4 },
+  "cronos": { x: 50, y: 20, zoom: 1.4 },
 };
 const DEITY_PORTRAIT_FOCUS_DEFAULT = { x: 50, y: 18, zoom: 1.4 };
 
