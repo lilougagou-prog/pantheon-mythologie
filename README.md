@@ -6436,3 +6436,28 @@ manuellement (l'audit automatisé ne couvre que les fiches de personnages, pas l
 des fiches Tyr et Libye (région).
 `app.js` (Panthéon) : ajout de `"memphis-égypte"` et `"sidon"` à `MAP_PLACES`.
 `service-worker.js` (Panthéon) : `pantheon-v224` → `pantheon-v225`.
+
+## 2026-10-25 — Audit des sections Culte (quatrième lot)
+
+Vérification de 27 figures affichant une section Culte courte (thémis, tiberinus, actéon,
+séléné, hyperboréens, érichthonios, tirésias, iphigénie, thétis, œdipe, deucalion, égérie,
+io, ino, tyché, hélène, endymion, érinyes, médée, némésis, néréides, pasiphaé, ariane,
+hyacinthe, adonis, charon, mnémosyne).
+
+19 figures enrichies d'un paragraphe sourcé (Pausanias, Hérodote, Plutarque, Ovide,
+inscriptions et calendriers antiques). 8 confirmées déjà complètes sans ajout.
+
+Correction au passage d'une erreur relevée sur la fiche de Tiberinus : elle attribuait les
+offrandes rituelles dans le Tibre à une fête des « Volturnales », qui appartient en réalité
+à un dieu distinct (Volturnus), sans attestation antique directe le reliant à Tiberinus. La
+fête réellement documentée pour lui par un calendrier romain, les Tiberinalia du 8 décembre,
+était déjà correctement citée dans le paragraphe suivant ; la mention erronée a été retirée
+plutôt que laissée en contradiction.
+
+Vérifié en local (clair et sombre) sur Tiberinus et Ariane ; 4 tirets cadratins corrigés sur
+les 19 nouveaux paragraphes ; aucun renvoi croisé cassé ou dupliqué sur l'ensemble du site
+après intégration.
+
+`api/_data/content.json` (Panthéon) : 19 figures, nouveau paragraphe Culte + sources ;
+correction du paragraphe Culte de Tiberinus.
+`service-worker.js` (Panthéon) : `pantheon-v225` → `pantheon-v226`.
