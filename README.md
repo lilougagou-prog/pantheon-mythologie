@@ -6411,3 +6411,28 @@ Nil, Libye, Agénor et Bélos.
 `DEITY_PORTRAITS`.
 `assets/deity-libye.jpg`, `deity-epaphos.jpg` : nouveaux fichiers.
 `service-worker.js` (Panthéon) : `pantheon-v223` → `pantheon-v224`.
+
+## 2026-10-25 — Memphis et Sidon ajoutées à la carte, correction d'une erreur généalogique oubliée
+
+Demande : placer sur la carte les villes correspondant à Memphis, Égyptos, Danaos, Bélos et
+Agénor, si utile. Danaos (via Argos, déjà présente) et Bélos (via « Libye (région) »,
+déjà présente) étaient déjà couverts ; Égyptos n'a pas de cité fondatrice distincte dans le
+mythe, seulement l'Égypte en général, donc rien à ajouter pour lui. Ajout de deux nouvelles
+cités réelles et utiles : Memphis (capitale fondée par Épaphos en l'honneur de son épouse)
+et Sidon (seconde cité d'Agénor aux côtés de Tyr, absente jusqu'ici).
+
+En vérifiant les fiches « Tyr » et « Libye (région) » existantes pour y ajouter les bons
+renvois, découverte d'une copie oubliée de l'erreur généalogique corrigée la dernière fois
+(« Agénor, fils de Libye et du Nil ») : ces deux fiches de lieux avaient leur propre texte,
+distinct de celui des fiches de personnages, jamais touché lors de la correction précédente.
+Corrigées de la même façon (Poséidon, pas le Nil ; Memphis ajoutée comme mère de Libye).
+
+Vérifié en local (clair et sombre) sur les quatre fiches de lieux concernées, via la carte
+et non la recherche (pour éviter la confusion entre la figure et le lieu « Memphis », qui
+partagent leur nom mais ont des identifiants distincts) ; liens de chaque fiche revérifiés
+manuellement (l'audit automatisé ne couvre que les fiches de personnages, pas les lieux).
+
+`api/_data/content.json` (Panthéon) : nouvelles fiches de lieux Memphis et Sidon ; correction
+des fiches Tyr et Libye (région).
+`app.js` (Panthéon) : ajout de `"memphis-égypte"` et `"sidon"` à `MAP_PLACES`.
+`service-worker.js` (Panthéon) : `pantheon-v224` → `pantheon-v225`.
