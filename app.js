@@ -382,7 +382,7 @@ const DEITY_NOTES = {
   // définitivement les racines encore isolées (Cadmos/Europe, Danaos/Égyptos, Persée) jusqu'au
   // socle primordial du corpus.
   "alcmène":"Fille d'Électryon, mère d'Héraclès par Zeus, épouse d'Amphitryon.",
-  "amphitryon":"Fils d'Alcée, époux d'Alcmène et père légal d'Héraclès, qu'il éleva sans savoir qu'il était de Zeus.",
+  "amphitryon":"Fils d'Alcée, époux d'Alcmène et père légal d'Héraclès, qu'il éleva en sachant qu'il était de Zeus.",
   "tyndare":"Roi de Sparte, époux de Léda, père mortel de Castor et de Clytemnestre.",
   "icarios":"Fils de Gorgophoné, père de Pénélope.",
   "pélops":"Roi de Pise dans le Péloponnèse, il gagna la main d'Hippodamie grâce à une course de chars truquée. Père d'Atrée et Thyeste, il est à l'origine de la malédiction des Atrides.",

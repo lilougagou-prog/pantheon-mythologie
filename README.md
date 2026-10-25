@@ -6550,3 +6550,21 @@ corrigés sur la fiche-lieu « Libye (région) ».
 `deity-tethys.jpg`, `deity-theia.jpg`, `deity-hyperion.jpg`, `deity-crios.jpg`,
 `deity-deidamie.jpg`) et le nouveau fichier des noces (`deity-thetis-pelee-mariage.jpg`).
 `service-worker.js` (Panthéon) : `pantheon-v230` → `pantheon-v231`.
+
+## 2026-10-25 — Correction d'une contradiction sur la fiche Amphitryon
+
+Signalé par la propriétaire : le résumé de la fiche affirmait qu'Amphitryon avait élevé
+Héraclès « sans savoir qu'il était de Zeus », alors que le texte du mythe raconte
+explicitement qu'il découvre dès son retour que Zeus l'avait devancé d'une nuit sous ses
+propres traits, puis qu'il élève Héraclès sans jamais laisser cette naissance divine
+entamer son affection pour lui, ce qui suppose au contraire qu'il la connaissait.
+
+Résumé corrigé pour suivre le texte du mythe (conforme à la tradition d'Apollodore) :
+Amphitryon élève Héraclès en sachant qu'il est le fils de Zeus.
+
+Vérifié en local (clair et sombre) sur la fiche Amphitryon.
+
+`app.js` (Panthéon) : résumé d'`"amphitryon"` corrigé dans `DEITY_NOTES`.
+`api/_data/content.json` (Panthéon) : champ `note` d'Amphitryon corrigé à l'identique.
+`service-worker.js` (Panthéon) : `pantheon-v231` → `pantheon-v232`.
+
