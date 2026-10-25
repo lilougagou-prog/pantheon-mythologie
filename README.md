@@ -6134,3 +6134,14 @@ Vérifié en local (clair et sombre) sur les deux fiches.
 `app.js` (Panthéon) : ajout de `"phoebé"` et `"coéos"` à `DEITY_PORTRAITS`.
 `assets/deity-phoebe.jpg`, `assets/deity-coeos.jpg` : nouveaux fichiers.
 `service-worker.js` (Panthéon) : `pantheon-v207` → `pantheon-v208`.
+
+## 2026-10-25 — Recadrage du portrait de Coéos
+
+Retour direct : la couronne de Coéos était rognée en haut de l'image sur la fiche détail
+(recadrage 4:5 par défaut, centré). Point focal ajouté dans `DEITY_PORTRAIT_FOCUS` pour
+privilégier le haut de l'image (tête) et reporter la coupe sur le bas plutôt.
+
+Vérifié en local (clair et sombre) : tête et couronne entières visibles.
+
+`app.js` (Panthéon) : ajout de `"coéos"` à `DEITY_PORTRAIT_FOCUS`.
+`service-worker.js` (Panthéon) : `pantheon-v208` → `pantheon-v209`.

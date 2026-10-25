@@ -2526,6 +2526,9 @@ const DEITY_PORTRAIT_FOCUS = {
   // Portrait fourni par l'utilisatrice : plan buste, visage légèrement décentré à droite dans
   // le tiers supérieur de l'image.
   "pasiphaé": { x: 54, y: 15, zoom: 1.3 },
+  // Portrait fourni par l'utilisatrice : couronne de laurier touchant presque le bord supérieur
+  // de l'image — retour direct : « si tu dois faire un choix coupe plutôt le bas ».
+  "coéos": { x: 48, y: 8, zoom: 1.3 },
 };
 const DEITY_PORTRAIT_FOCUS_DEFAULT = { x: 50, y: 18, zoom: 1.4 };
 
