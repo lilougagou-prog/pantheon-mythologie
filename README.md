@@ -6512,3 +6512,41 @@ Vérifié en local sur la page d'accueil (section « Récemment consulté »).
 
 `app.js` (Panthéon) : ajout de `"memphis"` et `"enyo"` à `DEITY_PORTRAIT_FOCUS`.
 `service-worker.js` (Panthéon) : `pantheon-v229` → `pantheon-v230`.
+
+## 2026-10-25 — Portraits de onze figures, suppression d'un doublon sur Éris, remplacement de l'image des noces de Thétis, ajout de Skyros sur la carte
+
+Fournis par la propriétaire : les portraits des Piérides, des Hespérides, de Nyx, d'Éris,
+de Thétis, de Rhéa, de Téthys, de Théia, d'Hypérion, de Crios et de Déidamie — onze figures
+déjà présentes dans le corpus mais jusqu'ici sans portrait. Les Piérides, seule scène de
+groupe du lot, rejoignent `DEITY_PORTRAIT_WIDE` (affichage non recadré) ; les dix autres ont
+chacune reçu un point focal dédié dans `DEITY_PORTRAIT_FOCUS`, vérifié à la fois sur le
+cadrage 4:5 de la fiche et sur la miniature ronde de l'accueil (les deux mécanismes de
+recadrage distincts identifiés plus tôt dans la session).
+
+Sur demande explicite : l'image insérée dans le texte d'Éris (la pomme d'or jetée aux
+noces de Thétis) a été retirée, désormais redondante avec son nouveau portrait ; et
+l'image illustrant les noces de Thétis et Pélée a été remplacée par celle fournie par la
+propriétaire.
+
+Ajout de Skyros à la carte (île des Cyclades, liée à Déidamie et Achille), avec sa fiche
+complète côté `content.json`. À cette occasion, une seconde copie oubliée de l'erreur
+généalogique Nil/Libye (corrigée le même jour sur les fiches) a été repérée et corrigée
+dans les renvois de la fiche-lieu « Libye (région) », qui pointait encore vers Nil au lieu
+de Memphis et Poséidon.
+
+Vérifié en local (clair et sombre) sur les onze fiches, sur la fiche Skyros, sur le
+paragraphe des noces de Thétis et sur la section « Récemment consulté » de l'accueil ;
+aucun renvoi croisé cassé ou dupliqué après intégration.
+
+`app.js` (Panthéon) : ajout de `"piérides"`, `"hespérides"`, `"nyx"`, `"éris"`, `"thétis"`,
+`"rhéa"`, `"téthys"`, `"théia"`, `"hypérion"`, `"crios"`, `"déidamie"` à
+`DEITY_PORTRAITS` ; ajout de `"piérides"` à `DEITY_PORTRAIT_WIDE` ; ajout des dix autres à
+`DEITY_PORTRAIT_FOCUS` ; suppression de l'entrée image en ligne d'Éris ; mise à jour de la
+source de l'image en ligne des noces de Thétis ; ajout de Skyros à `MAP_PLACES` ; liens
+corrigés sur la fiche-lieu « Libye (région) ».
+`api/_data/content.json` (Panthéon) : nouvelle fiche-lieu Skyros.
+`assets/` : onze nouveaux portraits (`deity-pierides.jpg`, `deity-hesperides.jpg`,
+`deity-nyx.jpg`, `deity-eris.jpg`, `deity-thetis.jpg`, `deity-rhea.jpg`,
+`deity-tethys.jpg`, `deity-theia.jpg`, `deity-hyperion.jpg`, `deity-crios.jpg`,
+`deity-deidamie.jpg`) et le nouveau fichier des noces (`deity-thetis-pelee-mariage.jpg`).
+`service-worker.js` (Panthéon) : `pantheon-v230` → `pantheon-v231`.
