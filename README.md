@@ -6350,3 +6350,22 @@ Vérifié en local (clair et sombre) : visage bien centré dans le cadrage.
 `DEITY_PORTRAIT_FOCUS`.
 `assets/deity-chiron.jpg` : image remplacée.
 `service-worker.js` (Panthéon) : `pantheon-v220` → `pantheon-v221`.
+
+## 2026-10-25 — Correction des miniatures rondes de Chiron et Hylonome
+
+Signalé sur la page d'accueil (section « Récemment consulté ») : les miniatures rondes de
+Chiron et Hylonome n'étaient pas centrées sur leur visage. Cause : la miniature ronde
+combine recadrage ET zoom (voir figureThumbnailHTML, mécanique différente du recadrage 4:5
+simple de la fiche détail), donc le point focal qui convenait à la fiche détail de Chiron ne
+convenait pas forcément à sa miniature ; Hylonome, elle, n'avait encore aucun point focal
+dédié alors que son portrait source a le visage décentré.
+
+Valeurs retrouvées empiriquement en testant la combinaison exacte recadrage+zoom utilisée
+par la miniature, puis revérifiées sur le recadrage 4:5 de la fiche détail pour s'assurer
+qu'elles conviennent aux deux usages à la fois.
+
+Vérifié en local (clair et sombre) sur la page d'accueil et sur les deux fiches détail.
+
+`app.js` (Panthéon) : point focal de `"chiron"` ajusté, ajout de `"hylonome"` à
+`DEITY_PORTRAIT_FOCUS`.
+`service-worker.js` (Panthéon) : `pantheon-v221` → `pantheon-v222`.

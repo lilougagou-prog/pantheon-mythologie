@@ -2554,8 +2554,15 @@ const DEITY_PORTRAIT_FOCUS = {
   "cronos": { x: 50, y: 20, zoom: 1.4 },
   // Portrait fourni par l'utilisatrice : scène large (archer en arrière-plan, temple), visage
   // de Chiron décentré à droite dans le tiers supérieur — retour direct : « fais bien
-  // attention que le vignetage soit centré sur son visage ».
-  "chiron": { x: 66, y: 7, zoom: 1.6 },
+  // attention que le vignetage soit centré sur son visage ». Valeurs vérifiées à la fois sur
+  // le recadrage 4:5 de la fiche détail et sur la miniature ronde (recadrage + zoom combinés,
+  // mécanique différente — voir figureThumbnailHTML), signalée décentrée séparément par
+  // l'utilisatrice sur la page d'accueil.
+  "chiron": { x: 58, y: 8, zoom: 1.4 },
+  // Miniature ronde également signalée décentrée (« Hylonome ne sont pas centrés », aux côtés
+  // de Chiron) alors qu'aucun point focal n'existait encore pour elle, malgré un portrait déjà
+  // proche du format 4:5 par défaut : son visage reste décentré à droite dans l'image source.
+  "hylonome": { x: 55, y: 15, zoom: 1.4 },
 };
 const DEITY_PORTRAIT_FOCUS_DEFAULT = { x: 50, y: 18, zoom: 1.4 };
 
