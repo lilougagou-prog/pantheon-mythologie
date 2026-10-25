@@ -863,7 +863,7 @@ const SYMBOL_INLINE_ILLUSTRATIONS = {
     { match: "Cerbère", src: "assets/deity-cerbere.webp", alt: "Cerbère, le chien à trois têtes qui garde l'entrée des Enfers" },
   ],
 };
-const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux", "amphion", "zéthos", "aphrodite", "antiope-thébaine", "antigone", "artémis", "arachné", "thésée", "éole", "gorgones", "grées", "chiron", "cyclopes", "cyllaros"]);
+const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux", "amphion", "zéthos", "aphrodite", "antiope-thébaine", "antigone", "artémis", "arachné", "thésée", "éole", "gorgones", "grées", "cyclopes", "cyllaros"]);
 const DEITY_INLINE_PORTRAITS = {
   "dionysos": [
     { match: "Ménades", src: "assets/deity-dionysos-cortege.jpg", alt: "Le cortège de Dionysos" },
@@ -2552,6 +2552,10 @@ const DEITY_PORTRAIT_FOCUS = {
   "minos": { x: 48, y: 15, zoom: 1.4 },
   "phèdre": { x: 32, y: 22, zoom: 1.4 },
   "cronos": { x: 50, y: 20, zoom: 1.4 },
+  // Portrait fourni par l'utilisatrice : scène large (archer en arrière-plan, temple), visage
+  // de Chiron décentré à droite dans le tiers supérieur — retour direct : « fais bien
+  // attention que le vignetage soit centré sur son visage ».
+  "chiron": { x: 66, y: 7, zoom: 1.6 },
 };
 const DEITY_PORTRAIT_FOCUS_DEFAULT = { x: 50, y: 18, zoom: 1.4 };
 

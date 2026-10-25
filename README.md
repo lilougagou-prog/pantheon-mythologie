@@ -6337,3 +6337,16 @@ dupliqué sur l'ensemble du site après intégration.
 `api/_data/content.json` (Panthéon) : reformulation du paragraphe de la libération sur la
 fiche Prométhée.
 `service-worker.js` (Panthéon) : `pantheon-v219` → `pantheon-v220`.
+
+## 2026-10-25 — Remplacement du portrait de Chiron, recadrage sur le visage
+
+Nouvelle image fournie par la propriétaire, avec demande explicite d'un vignetage centré
+sur le visage plutôt que la scène entière. Chiron quitte donc `DEITY_PORTRAIT_WIDE` pour
+le recadrage 4:5 habituel, avec un point focal dédié dans `DEITY_PORTRAIT_FOCUS`.
+
+Vérifié en local (clair et sombre) : visage bien centré dans le cadrage.
+
+`app.js` (Panthéon) : retrait de `"chiron"` de `DEITY_PORTRAIT_WIDE`, ajout à
+`DEITY_PORTRAIT_FOCUS`.
+`assets/deity-chiron.jpg` : image remplacée.
+`service-worker.js` (Panthéon) : `pantheon-v220` → `pantheon-v221`.
