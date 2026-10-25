@@ -562,6 +562,7 @@ const DEITY_PORTRAITS = {
   // dans Ariane »), Dionysos n'en hérite pas.
   "éros": "assets/deity-eros-psyche.jpg",
   "psyché": "assets/deity-eros-psyche.jpg",
+  "thésée": "assets/deity-thesee.jpg",
   "énée": "assets/deity-enee.jpg",
   "anchise": "assets/deity-anchise.jpg",
   "pandore": "assets/deity-pandore.jpg",
@@ -850,7 +851,7 @@ const SYMBOL_INLINE_ILLUSTRATIONS = {
     { match: "Cerbère", src: "assets/deity-cerbere.webp", alt: "Cerbère, le chien à trois têtes qui garde l'entrée des Enfers" },
   ],
 };
-const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux", "amphion", "zéthos", "aphrodite", "antiope-thébaine", "antigone", "artémis", "arachné"]);
+const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux", "amphion", "zéthos", "aphrodite", "antiope-thébaine", "antigone", "artémis", "arachné", "thésée"]);
 const DEITY_INLINE_PORTRAITS = {
   "dionysos": [
     { match: "Ménades", src: "assets/deity-dionysos-cortege.jpg", alt: "Le cortège de Dionysos" },
@@ -871,6 +872,9 @@ const DEITY_INLINE_PORTRAITS = {
   ],
   "léto": [
     { match: "boire à un étang et y baigner ses enfants", src: "assets/deity-leto-grenouilles-lycie.jpg", alt: "Léto et ses enfants chassés de l'étang par les paysans de Lycie" },
+  ],
+  "thésée": [
+    { match: "affronter le Minotaure enfermé dans le Labyrinthe", src: "assets/deity-thesee-minotaure.jpg", alt: "Thésée affrontant le Minotaure dans le Labyrinthe", wide: true },
   ],
   "énée": [
     { match: "porta sur son dos son père âgé", src: "assets/deity-enee-fuite-troie.jpg", alt: "Énée fuyant Troie avec son père et son fils" },

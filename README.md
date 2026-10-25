@@ -6174,3 +6174,17 @@ dupliqué sur l'ensemble du site après intégration.
 
 `api/_data/content.json` (Panthéon) : reformulation du paragraphe Ariane/Égée sur Thésée.
 `service-worker.js` (Panthéon) : `pantheon-v210` → `pantheon-v211`.
+
+## 2026-10-25 — Portraits de Thésée
+
+Ajout du portrait principal de Thésée et d'une illustration en ligne pour le paragraphe du
+Minotaure (fournis par la propriétaire), placée juste avant ce paragraphe. Les deux images
+étant des scènes d'action au format large, elles rejoignent `DEITY_PORTRAIT_WIDE` (image
+entière, jamais rognée) plutôt que le recadrage 4:5 habituel qui aurait coupé le Minotaure.
+
+Vérifié en local (clair et sombre) : les deux images s'affichent en entier, sans rognage.
+
+`app.js` (Panthéon) : ajout de `"thésée"` à `DEITY_PORTRAITS`, `DEITY_PORTRAIT_WIDE` et
+`DEITY_INLINE_PORTRAITS`.
+`assets/deity-thesee.jpg`, `assets/deity-thesee-minotaure.jpg` : nouveaux fichiers.
+`service-worker.js` (Panthéon) : `pantheon-v211` → `pantheon-v212`.
