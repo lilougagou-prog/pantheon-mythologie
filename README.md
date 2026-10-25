@@ -6471,3 +6471,18 @@ Vérifié en local (clair et sombre) sur les deux fiches.
 `app.js` (Panthéon) : ajout de `"memphis"` et `"nil"` à `DEITY_PORTRAITS`.
 `assets/deity-memphis.jpg`, `deity-nil.jpg` : nouveaux fichiers.
 `service-worker.js` (Panthéon) : `pantheon-v226` → `pantheon-v227`.
+
+## 2026-10-25 — Nouvelle fiche Piérides
+
+Création de la fiche des neuf filles de Pierus, roi d'Émathie, vaincues par les Muses lors
+d'un concours de chant sur l'Hélicon et changées en pies pour avoir refusé d'admettre leur
+défaite (Ovide, Métamorphoses, V, 294-678). Précision ajoutée pour éviter la confusion avec
+les Muses elles-mêmes, parfois surnommées « Piérides » en référence à leur sanctuaire
+d'origine, Piérie.
+
+Vérifié en local (clair et sombre) ; aucun renvoi croisé cassé ou dupliqué sur l'ensemble
+du site après intégration.
+
+`api/_data/content.json` (Panthéon) : nouvelle fiche Piérides.
+`app.js` (Panthéon) : ajout de `"piérides"` à `DEITY_NOTES` et `FIGURE_CATEGORIES`.
+`service-worker.js` (Panthéon) : `pantheon-v227` → `pantheon-v228`.
