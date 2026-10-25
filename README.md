@@ -6045,3 +6045,25 @@ l'ensemble du site après intégration.
 
 `api/_data/content.json` (Panthéon) : ajout de la section Culte d'Ulysse et d'une source.
 `service-worker.js` (Panthéon) : `pantheon-v202` → `pantheon-v203`.
+
+## 2026-10-25 — Désactivation temporaire du paywall (contenu premium ouvert à tous)
+
+À la demande de la propriétaire : le palier premium (fiches, symboles, lieux, arbres
+généalogiques au-delà des points d'entrée gratuits) est désormais accessible à tout le monde,
+sans clé d'aperçu ni achat. Le vrai circuit de vente (StoreKit/Capacitor) n'a jamais été branché
+côté app, seul le mécanisme de clé d'aperçu propriétaire fonctionnait réellement ; c'est ce
+chemin qui est maintenant ouvert à tous les visiteurs plutôt que réservé à une seule clé.
+
+`app.js` : `hasOwnerPreview()` renvoie désormais toujours vrai, et `fetchOwnerPreviewContent()`
+n'exige plus de clé mémorisée pour interroger `/api/content`.
+`api/content.js` : la vérification de clé/droit d'achat est retirée, toute fiche demandée est
+renvoyée déverrouillée.
+
+Les deux changements sont commentés dans le code pour une réactivation future du paywall, le
+jour où un vrai système de vente sera branché.
+
+Vérifié en local (clair et sombre, visiteur anonyme sans aucune clé stockée) sur une fiche
+premium (Héraclès), le hub généalogie et l'arbre des douze Titans : contenu complet affiché
+sans paywall. Aucun renvoi croisé cassé ou dupliqué sur l'ensemble du site après intégration.
+
+`service-worker.js` (Panthéon) : `pantheon-v203` → `pantheon-v204`.

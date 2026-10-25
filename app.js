@@ -1631,11 +1631,18 @@ function isPremiumUnlocked(){
 // valeur — seulement ce que l'URL contenait —, exactement comme un mot de passe qu'on retape
 // sans jamais le comparer soi-même. N'affecte JAMAIS isPremiumUnlocked() : ceci reste un aperçu
 // pour une seule personne qui connaît la clé, pas une preuve d'achat.
+//
+// Paywall temporairement désactivé à la demande du propriétaire (tant qu'aucun vrai système de
+// vente n'est branché) : hasOwnerPreview() renvoie donc toujours vrai, ce qui ouvre à tout le
+// monde le même chemin que l'aperçu propriétaire. api/content.js, interrogé ci-dessous, renvoie
+// lui aussi tout contenu déverrouillé sans condition — voir son propre commentaire. Pour
+// réactiver le paywall, remettre `return !!ownerPreviewKey();` ici et rétablir la vérification
+// d'entitlement côté serveur.
 function ownerPreviewKey(){
   try { return localStorage.getItem("pantheon-owner-preview-key") || null; } catch(e){ return null; }
 }
 function hasOwnerPreview(){
-  return !!ownerPreviewKey();
+  return true;
 }
 
 // Capture ?preview=<clé> une seule fois au chargement, la mémorise, puis nettoie l'URL — pour
@@ -1724,10 +1731,9 @@ const CONTENT_TYPE_SCREEN = { figures: "figureDetail", symbols: "symbolDetail", 
 function fetchOwnerPreviewContent(type, id){
   if(OWNER_PREVIEW_CACHE[type][id]) return; // déjà en cache, en cours ou déjà résolu
   const key = ownerPreviewKey();
-  if(!key) return;
   OWNER_PREVIEW_CACHE[type][id] = { loading: true };
   fetch(`api/content?type=${encodeURIComponent(type)}&id=${encodeURIComponent(id)}`, {
-    headers: { "x-owner-preview-key": key },
+    headers: key ? { "x-owner-preview-key": key } : {},
   })
     .then(res => res.json())
     .then(data => {
@@ -4070,7 +4076,7 @@ function renderProfile(){
       <span class="quiz-tile-arrow">→</span>
     </button>
     ${profile ? `<button class="profile-remove-link" data-action="profile-remove-data">Retirer mes données de cet appareil</button>` : ""}
-    <button type="button" class="paywall-restore" data-action="owner-preview">${hasOwnerPreview() ? "Propriétaire : modifier la clé d'aperçu (actuellement active sur cet appareil)" : "Propriétaire : entrer la clé d'aperçu"}</button>
+    <button type="button" class="paywall-restore" data-action="owner-preview">${ownerPreviewKey() ? "Propriétaire : modifier la clé d'aperçu (actuellement active sur cet appareil)" : "Propriétaire : entrer la clé d'aperçu"}</button>
     ${backButtonFooterHTML()}
   `;
 }

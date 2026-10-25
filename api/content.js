@@ -10,7 +10,6 @@
 // débit (voir _lib/rate-limit.js) ralentit délibérément.
 const fs = require("fs");
 const path = require("path");
-const { ensureSchema, isEntitled } = require("./_lib/db");
 const { checkRateLimit, clientIp } = require("./_lib/rate-limit");
 
 const CONTENT = JSON.parse(fs.readFileSync(path.join(__dirname, "_data", "content.json"), "utf8"));
@@ -57,33 +56,10 @@ module.exports = async function handler(req, res){
     return;
   }
 
-  // Aperçu propriétaire : contourne entièrement la vérification en base — utile tant qu'aucune
-  // base de données n'est encore configurée, et pour toujours pouvoir tout relire soi-même sans
-  // passer par un achat réel. Jamais un mécanisme pour un utilisateur normal : la clé n'est
-  // connue que du propriétaire (variable d'environnement Vercel), jamais présente dans app.js
-  // (public) — seul ce fichier, qui ne tourne jamais dans le navigateur, la connaît.
-  const ownerKey = req.headers["x-owner-preview-key"];
-  if(process.env.OWNER_PREVIEW_KEY && ownerKey === process.env.OWNER_PREVIEW_KEY){
-    res.status(200).json({ locked: false, content: full });
-    return;
-  }
-
-  try {
-    await ensureSchema();
-    const originalTransactionId = req.headers["x-original-transaction-id"];
-    const entitled = typeof originalTransactionId === "string" && await isEntitled(originalTransactionId);
-    if(!entitled){
-      res.status(200).json({ locked: true, preview: previewOf(type, id, full) });
-      return;
-    }
-    res.status(200).json({ locked: false, content: full });
-  } catch(err) {
-    // Ne jamais laisser une panne de vérification (base de données injoignable ou pas encore
-    // configurée) faire planter la fiche pour l'utilisateur : on retombe proprement sur le
-    // paywall, comme si le droit n'était pas prouvé, plutôt que de renvoyer une erreur 500 que
-    // le client ne sait pas distinguer d'un contenu débloqué (voir fetchOwnerPreviewContent()
-    // côté app.js, qui ne traite explicitement que { locked: true } ou { content }).
-    console.error("Erreur /api/content, repli sur le paywall:", err);
-    res.status(200).json({ locked: true, preview: previewOf(type, id, full) });
-  }
+  // Paywall temporairement désactivé à la demande du propriétaire (contenu premium partagé
+  // publiquement tant qu'aucun vrai système de vente StoreKit n'est branché) : toute fiche
+  // demandée est renvoyée déverrouillée, sans vérification de clé ni d'entitlement Apple. Pour
+  // réactiver le paywall, rétablir ici la vérification x-owner-preview-key / isEntitled
+  // (voir l'historique git de ce fichier).
+  res.status(200).json({ locked: false, content: full });
 };
