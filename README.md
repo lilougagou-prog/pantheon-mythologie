@@ -6568,3 +6568,31 @@ Vérifié en local (clair et sombre) sur la fiche Amphitryon.
 `api/_data/content.json` (Panthéon) : champ `note` d'Amphitryon corrigé à l'identique.
 `service-worker.js` (Panthéon) : `pantheon-v231` → `pantheon-v232`.
 
+## 2026-10-26 — Portrait d'Océan, nouvelle fiche Chronos
+
+Fournis par la propriétaire : le portrait d'Océan, Titan déjà présent dans le corpus mais
+sans portrait, et un portrait pour « Chronos ». Clarifié avant intégration : Chronos
+(Khrónos), personnification primordiale et incréée du Temps selon la tradition orphique,
+est distinct du Titan Cronos (Krónos), fils d'Ouranos et de Gaïa, déjà présent avec son
+propre portrait — la proximité des deux noms français avait créé une ambiguïté, tranchée
+par l'utilisatrice en faveur d'une nouvelle fiche séparée plutôt que du remplacement du
+portrait existant de Cronos.
+
+Nouvelle fiche rédigée à partir des théogonies orphiques telles que résumées par le
+philosophe néoplatonicien Damascius : Chronos serpentin à trois têtes, uni à Anankè,
+provoque l'éclatement de l'œuf cosmique primordial d'où naissent le Ciel, la Mer, la Terre
+et Phanès, premier des dieux. Rédigée en évitant toute contradiction avec la généalogie
+hésiodique déjà retenue ailleurs dans l'encyclopédie pour Chaos et Érèbe (tradition
+distincte, non fusionnée).
+
+Vérifié en local (clair et sombre) sur les deux fiches et sur la section « Récemment
+consulté » de l'accueil ; aucun renvoi croisé cassé après intégration.
+
+`app.js` (Panthéon) : ajout de `"chronos"` (note, généalogie, catégorie) et de ses
+portraits, ainsi que du portrait d'`"océan"`, à `DEITY_PORTRAITS` et
+`DEITY_PORTRAIT_FOCUS`.
+`api/_data/content.json` (Panthéon) : nouvelle fiche Chronos.
+`assets/` : nouveaux portraits `deity-ocean.jpg` et `deity-chronos.jpg`.
+`service-worker.js` (Panthéon) : `pantheon-v232` → `pantheon-v233`.
+
+
