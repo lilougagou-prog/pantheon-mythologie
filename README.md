@@ -6595,4 +6595,38 @@ portraits, ainsi que du portrait d'`"océan"`, à `DEITY_PORTRAITS` et
 `assets/` : nouveaux portraits `deity-ocean.jpg` et `deity-chronos.jpg`.
 `service-worker.js` (Panthéon) : `pantheon-v232` → `pantheon-v233`.
 
+## 2026-10-28 — Enrichissement de la fiche Héra (séduction, complot, punition, Héphaïstos)
+
+Demande explicite de l'utilisatrice : étoffer le mythe d'Héra avec quatre épisodes absents
+jusqu'ici. Rédigés et sourcés après vérification, en évitant toute contradiction entre eux :
+
+- La séduction par Zeus changé en coucou (Pausanias, Description de la Grèce, II, 17, 4 et
+  II, 36, 2), à l'origine du nom du mont Coucou en Argolide et du coucou d'or sur le
+  sceptre de sa statue de culte à Argos.
+- Le complot avec Poséidon et Athéna pour ligoter Zeus dans son sommeil, déjoué par
+  l'intervention de Thétis et de Briarée (Iliade, I, 396-406).
+- Sa punition pour avoir déchaîné une tempête contre Héraclès : suspendue dans le ciel par
+  des enclumes et une chaîne d'or (Iliade, XV, 18-24) ; et la chute d'Héphaïstos sur Lemnos
+  pour avoir pris son parti dans cet épisode (Iliade, I, 586-594), un second épisode distinct
+  du précédent.
+- Sa relation avec Héphaïstos : rejeté par elle seule à la naissance pour sa difformité
+  (Hésiode, Théogonie, v. 927-929, déjà la version retenue sur la fiche d'Héphaïstos), puis
+  piégée en retour sur un trône d'or aux liens invisibles, libérée seulement par Dionysos
+  une fois Héphaïstos enivré (Libanios, Narrations, 7 ; Pausanias, III, 18, 16).
+
+Les deux chutes d'Héphaïstos (jeté par Zeus pour avoir défendu Héra ; jeté par Héra elle-même
+à sa naissance) sont deux traditions distinctes et toutes deux attestées, présentées comme
+telles plutôt que fusionnées en un seul récit, en cohérence avec la fiche d'Héphaïstos qui
+mentionne déjà les deux (sa naissance d'une part, sa « querelle avec Zeus » menant à Lemnos
+d'autre part, dans sa section Culte).
+
+Vérifié en local (clair et sombre) sur la fiche Héra au complet ; aucun renvoi croisé cassé
+ou dupliqué après intégration (le lien déjà posé sur Héraclès dans un paragraphe plus loin a
+été retiré, son premier renvoi se trouvant désormais plus tôt dans le texte).
+
+`app.js` (Panthéon) : quatre nouveaux paragraphes dans `DEITY_LORE["héra"]` ; cinq nouvelles
+sources dans `DEITY_SOURCES["héra"]`.
+`service-worker.js` (Panthéon) : `pantheon-v233` → `pantheon-v234`.
+
+
 
