@@ -6628,5 +6628,28 @@ ou dupliqué après intégration (le lien déjà posé sur Héraclès dans un pa
 sources dans `DEITY_SOURCES["héra"]`.
 `service-worker.js` (Panthéon) : `pantheon-v233` → `pantheon-v234`.
 
+## 2026-11-12 — Tradition alternative sur les survivants de Niobé
+
+Demandé par l'utilisatrice : vérifier si une source ancienne fait échapper un enfant de
+Niobé au massacre d'Apollon et Artémis, la fiche ne retenant jusqu'ici que la version
+d'Ovide (Métamorphoses, VI) où les quatorze enfants meurent tous, y compris la dernière
+fille que Niobé tente de couvrir de son corps.
+
+Vérifié : Apollodore (Bibliothèque, III, 5, 6) rapporte bien une tradition différente, où
+une fille, Chloris l'aînée (plus tard épouse de Nélée de Pylos), survit parmi les filles —
+sans qu'aucune raison ne soit donnée à cette survie, ni qu'Artémis soit présentée comme
+ayant épargné qui que ce soit par pitié. Apollodore cite lui-même une seconde version
+concurrente, due à la poétesse Telesilla, où ce seraient plutôt un fils (Amyclas) et une
+autre fille (Méliboée) qui survivent, tandis qu'Amphion, le père, est alors tué à son tour.
+Les deux versions sont incompatibles entre elles (noms de survivants différents, sort
+différent du père) et toutes deux distinctes de celle d'Ovide ; présentées comme telles,
+en une tradition alternative plutôt que fondues dans le récit principal.
+
+Vérifié en local (clair et sombre) sur la fiche Niobé complète, section Sources dépliée.
+
+`api/_data/content.json` (Panthéon) : nouveau paragraphe dans `figures["niobé"].lore` ;
+nouvelle source dans `figures["niobé"].sources`.
+`service-worker.js` (Panthéon) : `pantheon-v234` → `pantheon-v235`.
+
 
 
