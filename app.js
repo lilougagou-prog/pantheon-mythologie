@@ -651,6 +651,7 @@ const DEITY_PORTRAITS = {
   "pasiphaé": "assets/deity-pasiphae.jpg",
   "circé": "assets/deity-circe.jpg",
   "amphitrite": "assets/deity-amphitrite.jpg",
+  "galatée": "assets/deity-galatee.jpg",
   // Le jugement de Pâris : portrait de groupe (les quatre protagonistes), format large plutôt
   // que le recadrage 4:5 habituel, même traitement que les Muses plus haut — voir
   // DEITY_PORTRAIT_WIDE ci-dessous.

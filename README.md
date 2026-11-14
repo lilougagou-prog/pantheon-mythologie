@@ -6680,5 +6680,20 @@ l'arbre généalogique de Nérée.
 `figures["polyphème"].lore`.
 `service-worker.js` (Panthéon) : `pantheon-v235` → `pantheon-v236`.
 
+## 2026-11-14 — Portrait de Galatée
+
+Fourni par l'utilisatrice : un portrait pour la fiche Galatée créée plus tôt dans la
+journée. Recadré de 1199x1312 à 700x875 (ratio 4:5, même convention que les autres
+portraits de fiche) en gardant le visage centré ; aucun recadrage personnalisé
+(`DEITY_PORTRAIT_FOCUS`) nécessaire, le cadrage par défaut suffisant à garder le visage
+dans le cadre.
+
+Vérifié en local (clair et sombre) sur la fiche Galatée et sur la vignette de l'arbre
+généalogique de Nérée.
+
+`app.js` (Panthéon) : nouvelle entrée `"galatée"` dans `DEITY_PORTRAITS`.
+`assets/` : nouveau portrait `deity-galatee.jpg`.
+`service-worker.js` (Panthéon) : `pantheon-v236` → `pantheon-v237`.
+
 
 
