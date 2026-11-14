@@ -6651,5 +6651,34 @@ Vérifié en local (clair et sombre) sur la fiche Niobé complète, section Sour
 nouvelle source dans `figures["niobé"].sources`.
 `service-worker.js` (Panthéon) : `pantheon-v234` → `pantheon-v235`.
 
+## 2026-11-14 — Nouvelle fiche Galatée
+
+Demandé par l'utilisatrice : la Néréide Galatée, déjà mentionnée sans fiche propre dans le
+texte de Polyphème (son amour malheureux pour elle, rival du berger Acis), n'avait encore
+aucune fiche à elle, contrairement à ses sœurs Néréides Amphitrite et Thétis.
+
+Vérifié avant rédaction : filiation d'Acis (fils de Faune et de la naïade Symèthis, Ovide,
+Métamorphoses, XIII), étymologie de son nom (grec gala, « lait »), localisation du fleuve
+Acis au pied de l'Etna, et l'absence du personnage d'Acis chez Théocrite (Idylles, VI et
+XI, qui ne connaissent que le chant d'amour non payé de retour de Polyphème — l'épisode
+d'Acis est une élaboration propre à Ovide). Point de vigilance signalé par la recherche :
+à ne pas confondre avec l'autre « Galatée », la statue de Pygmalion — un nom resté absent
+des sources antiques (y compris Ovide), qui ne lui a été donné qu'au XVIIIe siècle,
+popularisé par Rousseau ; sans rapport avec la Néréide.
+
+Nouvelle fiche placée dans la généalogie comme fille de Nérée, aux côtés d'Amphitrite,
+Thétis et du groupe des Néréides. Le paragraphe existant de Polyphème sur son amour pour
+Galatée a reçu un renvoi croisé `(voir la fiche « Galatée »)`, resté absent jusqu'ici faute
+de fiche à cibler.
+
+Vérifié en local (clair et sombre) sur la fiche Galatée, la fiche Polyphème mise à jour, et
+l'arbre généalogique de Nérée.
+
+`app.js` (Panthéon) : nouvelle entrée `"galatée"` dans `DEITY_NOTES`, `FIGURE_CATEGORIES`
+(catégorie eaux) et `GENEALOGY_PARENTS` (fille de Nérée).
+`api/_data/content.json` (Panthéon) : nouvelle fiche Galatée ; renvoi croisé ajouté dans
+`figures["polyphème"].lore`.
+`service-worker.js` (Panthéon) : `pantheon-v235` → `pantheon-v236`.
+
 
 
