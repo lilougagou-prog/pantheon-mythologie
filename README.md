@@ -6834,5 +6834,21 @@ Hadès, où elle apparaît désormais cliquable.
 `api/_data/content.json` (Panthéon) : nouvelle fiche `macaria-mort-heureuse`.
 `service-worker.js` (Panthéon) : `pantheon-v243` → `pantheon-v244`.
 
+## 2026-11-15 — Portrait de Perséphone, allègement de la fiche Macaria (Hadès)
+
+Deux demandes de l'utilisatrice. Portrait de Perséphone remplacé par celui qu'elle a fourni.
+Et, sur la fiche Macaria fille d'Hadès créée plus tôt dans la journée : retrait de la
+phrase de mise en garde contre la confusion avec l'autre Macaria, à la fois dans le résumé
+et dans le dernier paragraphe du mythe, jugée inutilement condescendante par l'utilisatrice.
+Le reste du texte (source unique et mince, la Souda, proverbe sur la mort) reste inchangé.
+
+Vérifié en local (clair et sombre) sur les deux fiches.
+
+`app.js` (Panthéon) : résumé de `"macaria-mort-heureuse"` allégé dans `DEITY_NOTES`.
+`api/_data/content.json` (Panthéon) : `note` allégée et dernier paragraphe retiré dans
+`figures["macaria-mort-heureuse"]`.
+`assets/` : portrait `deity-persephone.jpg` remplacé.
+`service-worker.js` (Panthéon) : `pantheon-v244` → `pantheon-v245`.
+
 
 

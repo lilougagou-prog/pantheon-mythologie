@@ -173,7 +173,7 @@ const DEITY_NOTES = {
   "électryon":"Roi de Mycènes, fils de Persée et père d'Alcmène, tué par accident par son propre gendre Amphitryon.",
   "sthénélos":"Roi de Mycènes, fils de Persée et père d'Eurysthée, qui imposa ses douze travaux à Héraclès.",
   "eurysthée":"Roi de Mycènes, cousin d'Héraclès. Né avant lui grâce à une ruse d'Héra, il put légitimement lui imposer les douze travaux.","macaria":"Fille d'Héraclès, elle se sacrifia volontairement pour sauver Athènes de la guerre menée par Eurysthée.",
-  "macaria-mort-heureuse":"Personnification de la « bienheureuse mort », fille d'Hadès selon la Souda — à ne pas confondre avec l'autre Macaria, fille d'Héraclès.",
+  "macaria-mort-heureuse":"Personnification de la « bienheureuse mort », fille d'Hadès selon la Souda.",
   "gorgophoné":"Fille de Persée et Andromède, dont les deux mariages font d'elle l'ancêtre de Tyndare, d'Icarios et des fils d'Aphareus.",
   "alcée":"Roi de Tirynthe, fils de Persée et père d'Amphitryon. Héraclès enfant porta d'abord son nom, Alcide, en son honneur.",
   "mestor":"Fils de Persée et Andromède, dont la descendance par sa fille Hippothoé donnera les Ptérélaïdes.",
