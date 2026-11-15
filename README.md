@@ -6695,5 +6695,25 @@ généalogique de Nérée.
 `assets/` : nouveau portrait `deity-galatee.jpg`.
 `service-worker.js` (Panthéon) : `pantheon-v236` → `pantheon-v237`.
 
+## 2026-11-15 — Autre étymologie possible du nom des Amazones
+
+Demandé par l'utilisatrice : après la phrase sur l'étymologie grecque populaire (a-mazos,
+« sans sein », contredite par l'art antique qui les figure toujours avec leurs deux seins),
+ajouter l'autre origine probable du mot, qu'elle pensait iranienne.
+
+Vérifié avant rédaction : l'hypothèse alternative la plus citée dérive le nom d'un ancien
+mot iranien, *ha-mazan, « guerrier » (racine *maz-, « combat »), proposée notamment dans
+l'Encyclopaedia Iranica — mais explicitement qualifiée de disputée par cette même source, et
+jugée improbable par au moins un linguiste (Hjalmar Frisk) ; une autre hypothèse concurrente
+existe (G. Hinge, 2006). Ajoutée avec la même prudence que l'étymologie grecque : présentée
+comme une hypothèse débattue parmi d'autres, jamais comme un consensus, en cohérence avec
+l'origine scythe ou sarmate généralement proposée pour ces guerrières.
+
+Vérifié en local (clair et sombre) sur la fiche Amazones au complet.
+
+`api/_data/content.json` (Panthéon) : paragraphe étymologique complété dans
+`figures["amazones"].lore` ; nouvelle source dans `figures["amazones"].sources`.
+`service-worker.js` (Panthéon) : `pantheon-v237` → `pantheon-v238`.
+
 
 
