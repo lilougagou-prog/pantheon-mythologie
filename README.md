@@ -6810,5 +6810,29 @@ Vérifié en local (clair et sombre) sur la fiche Perséphone au complet.
 `figures["perséphone"].lore`.
 `service-worker.js` (Panthéon) : `pantheon-v242` → `pantheon-v243`.
 
+## 2026-11-15 — Nouvelle fiche pour Macaria, fille d'Hadès
+
+Signalé par l'utilisatrice : l'id `macaria-mort-heureuse` existait déjà dans l'arbre
+généalogique (fille d'Hadès) et dans les noms d'affichage, mais sans aucune fiche
+derrière — elle apparaissait dans l'arbre par son seul nom, non cliquable, faute d'entrée
+dans `DEITY_NOTES`.
+
+Vérifié avant rédaction : source unique et très mince, la Souda (encyclopédie byzantine du
+Xe siècle, entrée μ 51), qui la dit fille d'Hadès sans nommer de mère — une mention de
+lexique, pas un personnage avec mythe ou épisodes propres. Son nom est à l'origine d'un
+proverbe, « s'en aller vers Macaria », euphémisme pour la mort, glosé dans une autre entrée
+de la Souda (β 74). Aucun culte ni légende narrative attestés au-delà de ce proverbe ;
+rédigé en évitant d'en faire une déesse active comme le font certains résumés modernes qui
+dépassent ce que dit la source. Risque de confusion signalé avec l'autre Macaria (fille
+d'Héraclès, déjà dans l'appli), que la Souda elle-même place juste à côté.
+
+Vérifié en local (clair et sombre) sur la nouvelle fiche et sur l'arbre généalogique de
+Hadès, où elle apparaît désormais cliquable.
+
+`app.js` (Panthéon) : nouvelle entrée `"macaria-mort-heureuse"` dans `DEITY_NOTES` et
+`FIGURE_CATEGORIES` (personnifications, enfers).
+`api/_data/content.json` (Panthéon) : nouvelle fiche `macaria-mort-heureuse`.
+`service-worker.js` (Panthéon) : `pantheon-v243` → `pantheon-v244`.
+
 
 
