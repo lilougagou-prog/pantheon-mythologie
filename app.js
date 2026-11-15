@@ -1050,6 +1050,9 @@ const DEITY_INLINE_PORTRAITS = {
   "œdipe": [
     { match: "avant de partir en exil, accompagné de sa fille Antigone", src: "assets/deity-antigone-oedipe-colone.jpg", alt: "Antigone guidant Œdipe aveugle vers Colone", wide: true },
   ],
+  "iphigénie": [
+    { match: "substitua une biche", src: "assets/deity-iphigenie-biche.jpg", alt: "Artémis substitue une biche à Iphigénie sur l'autel", wide: true },
+  ],
 };
 
 /* ===================== GÉNÉALOGIE ===================== */

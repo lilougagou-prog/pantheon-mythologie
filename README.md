@@ -6765,5 +6765,21 @@ Vérifié en local (clair et sombre) sur les quatre fiches.
 `deity-electre.jpg`, `deity-chrysothemis.jpg`.
 `service-worker.js` (Panthéon) : `pantheon-v239` → `pantheon-v240`.
 
+## 2026-11-15 — Portrait et illustration inline pour Iphigénie
+
+Fournis par l'utilisatrice : remplacement du portrait principal d'Iphigénie, et une
+illustration inline pour la scène où Artémis substitue une biche sur l'autel, placée via
+`DEITY_INLINE_PORTRAITS` (ancrée sur « substitua une biche », mode `wide` pour garder toute
+la scène — Agamemnon et les témoins à gauche, Iphigénie, Artémis et la biche à droite —
+sans recadrage qui en aurait sacrifié une partie).
+
+Vérifié en local (clair et sombre) : nouveau portrait en tête de fiche, illustration bien
+positionnée juste avant le paragraphe du sacrifice.
+
+`app.js` (Panthéon) : nouvelle entrée `"iphigénie"` dans `DEITY_INLINE_PORTRAITS`.
+`assets/` : portrait `deity-iphigenie.jpg` remplacé ; nouvelle illustration
+`deity-iphigenie-biche.jpg`.
+`service-worker.js` (Panthéon) : `pantheon-v240` → `pantheon-v241`.
+
 
 
