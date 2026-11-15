@@ -6924,5 +6924,16 @@ Vérifié en local sur la fiche Thalie.
 `figures["thalie"].lore`.
 `service-worker.js` (Panthéon) : `pantheon-v248` → `pantheon-v249`.
 
+## 2026-11-15 — Retrait de la mise en garde symétrique sur la fiche Thalia
+
+Suite demandée par l'utilisatrice : même retrait que sur Thalie, cette fois sur la fiche
+Thalia (Charite), qui portait la mention réciproque sur l'autre Thalie (Muse).
+
+Vérifié en local sur la fiche Thalia.
+
+`api/_data/content.json` (Panthéon) : dernier paragraphe retiré de
+`figures["thalia"].lore`.
+`service-worker.js` (Panthéon) : `pantheon-v249` → `pantheon-v250`.
+
 
 
