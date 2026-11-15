@@ -653,6 +653,10 @@ const DEITY_PORTRAITS = {
   "circé": "assets/deity-circe.jpg",
   "amphitrite": "assets/deity-amphitrite.jpg",
   "galatée": "assets/deity-galatee.jpg",
+  "europe": "assets/deity-europe.jpg",
+  "oreste": "assets/deity-oreste.jpg",
+  "électre": "assets/deity-electre.jpg",
+  "chrysothémis": "assets/deity-chrysothemis.jpg",
   // Le jugement de Pâris : portrait de groupe (les quatre protagonistes), format large plutôt
   // que le recadrage 4:5 habituel, même traitement que les Muses plus haut — voir
   // DEITY_PORTRAIT_WIDE ci-dessous.
@@ -886,7 +890,7 @@ const SYMBOL_INLINE_ILLUSTRATIONS = {
     { match: "Cerbère", src: "assets/deity-cerbere.webp", alt: "Cerbère, le chien à trois têtes qui garde l'entrée des Enfers" },
   ],
 };
-const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux", "amphion", "zéthos", "aphrodite", "antiope-thébaine", "antigone", "artémis", "arachné", "thésée", "éole", "gorgones", "grées", "cyclopes", "cyllaros", "piérides"]);
+const DEITY_PORTRAIT_WIDE = new Set(["muses", "pâris", "orion", "heures", "parques", "hersé", "amazones", "penthésilée", "castor", "pollux", "amphion", "zéthos", "aphrodite", "antiope-thébaine", "antigone", "artémis", "arachné", "thésée", "éole", "gorgones", "grées", "cyclopes", "cyllaros", "piérides", "europe"]);
 const DEITY_INLINE_PORTRAITS = {
   "dionysos": [
     { match: "Ménades", src: "assets/deity-dionysos-cortege.jpg", alt: "Le cortège de Dionysos" },

@@ -6747,5 +6747,23 @@ jour.
 `figures["hippolyté"].lore`.
 `service-worker.js` (Panthéon) : `pantheon-v238` → `pantheon-v239`.
 
+## 2026-11-15 — Portraits d'Europe, Oreste, Électre et Chrysothémis
+
+Fournis par l'utilisatrice : quatre portraits pour des fiches qui n'en avaient encore
+aucun. Europe, scène large (Europe et le taureau, composition horizontale 1536x1024),
+ajoutée à `DEITY_PORTRAIT_WIDE` et redimensionnée à 700px de large en conservant son ratio
+d'origine plutôt que recadrée en 4:5 — la scène aurait perdu la moitié de sa largeur et
+probablement le taureau ou le visage selon le centrage. Oreste, Électre et Chrysothémis,
+portraits bustes classiques (1254x1254), recadrés en 4:5 (700x875) selon la convention
+habituelle, cadrage centré suffisant dans les trois cas.
+
+Vérifié en local (clair et sombre) sur les quatre fiches.
+
+`app.js` (Panthéon) : nouvelles entrées `"europe"`, `"oreste"`, `"électre"` et
+`"chrysothémis"` dans `DEITY_PORTRAITS` ; `"europe"` ajoutée à `DEITY_PORTRAIT_WIDE`.
+`assets/` : nouveaux portraits `deity-europe.jpg`, `deity-oreste.jpg`,
+`deity-electre.jpg`, `deity-chrysothemis.jpg`.
+`service-worker.js` (Panthéon) : `pantheon-v239` → `pantheon-v240`.
+
 
 
