@@ -6935,5 +6935,41 @@ Vérifié en local sur la fiche Thalia.
 `figures["thalia"].lore`.
 `service-worker.js` (Panthéon) : `pantheon-v249` → `pantheon-v250`.
 
+## 2026-11-15 — Ion ajouté aux amours d'Apollon, nouvelles fiches Ion et Créüse athénienne
+
+Signalé par l'utilisatrice : la fiche Apollon semblait manquer un enfant. Vérifié : Ion,
+sujet entier de la tragédie d'Euripide du même nom et ancêtre éponyme légendaire des
+Ioniens, était absent, alors que sa mère Créüse existait déjà dans l'appli — mais sous
+l'identité de la princesse troyenne, épouse d'Énée, une personne totalement différente
+malgré le nom identique.
+
+Point de vigilance vérifié avant rédaction : la paternité d'Apollon n'est PAS la version
+standard. C'est une variante propre à Euripide ; la tradition la plus ancienne et la plus
+répandue (Hésiode, Hérodote, Apollodore) fait d'Ion le fils légitime de Xouthos et Créüse,
+Xouthos étant fils d'Hellen. Les deux versions sont présentées comme telles dans le texte,
+sur les trois fiches concernées.
+
+Nouvelle Créüse (athénienne, fille d'Érechthée) distinguée de l'autre Créüse sans aucune
+phrase de mise en garde : un nom d'affichage différent («Créüse (princesse athénienne)»,
+même mécanisme déjà en place pour Antiope/Antiope-thébaine) suffit à la rendre reconnaissable
+partout où elle apparaît (listes, arbre, lignée), sans avoir besoin de l'écrire en toutes
+lettres dans le texte.
+
+Choix pour l'arbre généalogique : Ion placé sous Créüse seule (parent commun aux deux
+versions), sans trancher entre Apollon et Xouthos (ce dernier non présent dans l'appli) —
+la nuance reste dans le texte plutôt que dans la structure de l'arbre.
+
+Vérifié en local (clair et sombre) sur les trois fiches (Apollon, Ion, Créüse athénienne) :
+nouveau paragraphe bien positionné dans « Les amours » d'Apollon, lignée correcte sur les
+deux nouvelles fiches.
+
+`app.js` (Panthéon) : nouvelles entrées `"ion"` et `"créüse-athénienne"` dans
+`DEITY_NOTES`, `FIGURE_CATEGORIES`, `DEITY_NAME_OVERRIDES` (pour Créüse athénienne) et
+`GENEALOGY_PARENTS` (Ion sous Créüse athénienne) ; nouveau paragraphe dans
+`DEITY_LORE_SECTIONS["apollon"]` (section Les amours) et `DEITY_LORE["apollon"]` ; deux
+nouvelles sources dans `DEITY_SOURCES["apollon"]`.
+`api/_data/content.json` (Panthéon) : nouvelles fiches `ion` et `créüse-athénienne`.
+`service-worker.js` (Panthéon) : `pantheon-v250` → `pantheon-v251`.
+
 
 
