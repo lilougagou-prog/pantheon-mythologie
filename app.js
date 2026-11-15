@@ -1055,6 +1055,10 @@ const DEITY_INLINE_PORTRAITS = {
   "iphigénie": [
     { match: "substitua une biche", src: "assets/deity-iphigenie-biche.jpg", alt: "Artémis substitue une biche à Iphigénie sur l'autel", wide: true },
   ],
+  "perséphone": [
+    { match: "Ascalaphos", src: "assets/deity-persephone-ascalaphos.jpg", alt: "Ascalaphos épie Perséphone cueillant la grenade" },
+    { match: "Adonis", src: "assets/deity-persephone-adonis.jpg", alt: "Adonis entre Aphrodite et Perséphone" },
+  ],
 };
 
 /* ===================== GÉNÉALOGIE ===================== */

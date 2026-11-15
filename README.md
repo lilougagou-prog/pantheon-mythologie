@@ -6850,5 +6850,29 @@ Vérifié en local (clair et sombre) sur les deux fiches.
 `assets/` : portrait `deity-persephone.jpg` remplacé.
 `service-worker.js` (Panthéon) : `pantheon-v244` → `pantheon-v245`.
 
+## 2026-11-15 — Amour de Perséphone pour Adonis, deux illustrations inline
+
+Demandé par l'utilisatrice : enrichir la fiche Perséphone avec son amour pour Adonis, déjà
+raconté côté Aphrodite et Adonis (fiche Adonis) mais absent de la fiche Perséphone
+elle-même. Nouveau paragraphe repris à l'identique de la version déjà posée sur la fiche
+Adonis (élevé en secret, disputé entre les deux déesses, tranché par Zeus, puis partagé six
+mois/six mois après sa mort selon un scholiaste de Théocrite) pour ne pas introduire de
+version différente entre les deux fiches.
+
+Deux illustrations fournies par l'utilisatrice, placées via `DEITY_INLINE_PORTRAITS` :
+Adonis entre Aphrodite et Perséphone pour ce nouveau paragraphe, et Ascalaphos épiant
+Perséphone cueillant la grenade pour le paragraphe déjà existant sur cet épisode.
+
+Vérifié en local (clair et sombre) sur la fiche Perséphone au complet, les deux
+illustrations bien positionnées devant leurs paragraphes respectifs.
+
+`api/_data/content.json` (Panthéon) : nouveau paragraphe dans
+`figures["perséphone"].lore`.
+`app.js` (Panthéon) : nouvelle entrée `"perséphone"` dans `DEITY_INLINE_PORTRAITS`
+(Ascalaphos, Adonis).
+`assets/` : nouvelles illustrations `deity-persephone-adonis.jpg` et
+`deity-persephone-ascalaphos.jpg`.
+`service-worker.js` (Panthéon) : `pantheon-v245` → `pantheon-v246`.
+
 
 
