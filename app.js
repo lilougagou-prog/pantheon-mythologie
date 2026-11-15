@@ -1182,6 +1182,11 @@ const GENEALOGY_PARENTS = {
   "apollon": ["zeus", "léto"],
   "artémis": ["zeus", "léto"],
   "perséphone": ["zeus", "déméter"],
+  // Selon l'hymne orphique, Zeus prend l'apparence d'Hadès pour s'unir à Perséphone : même
+  // convention que pour Héraclès (né d'Amphitryon dans la légende, mais placé sous Zeus et
+  // Alcmène dans l'arbre, voir plus haut) — le parent biologique réel plutôt que l'identité
+  // empruntée au moment de la conception.
+  "mélinoé": ["zeus", "perséphone"],
   "athéna": ["zeus", "métis"],
   "arès": ["zeus", "héra"],
   "héphaïstos": ["héra"],

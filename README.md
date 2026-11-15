@@ -6874,5 +6874,23 @@ illustrations bien positionnées devant leurs paragraphes respectifs.
 `deity-persephone-ascalaphos.jpg`.
 `service-worker.js` (Panthéon) : `pantheon-v245` → `pantheon-v246`.
 
+## 2026-11-15 — Mélinoé ajoutée à l'arbre généalogique
+
+Signalé par l'utilisatrice : Mélinoé avait déjà sa fiche et son renvoi croisé avec
+Perséphone, mais n'apparaissait pas dans l'arbre généalogique, faute d'entrée dans
+`GENEALOGY_PARENTS`.
+
+Placée comme fille de Zeus et Perséphone — le parent biologique réel plutôt que
+l'apparence empruntée par Zeus (celle d'Hadès) au moment de la conception, selon l'hymne
+orphique déjà résumé sur sa fiche. Même convention que pour Héraclès, placé sous Zeus et
+Alcmène dans l'arbre malgré le subterfuge d'Amphitryon dans le mythe.
+
+Vérifié en local (clair et sombre) : elle apparaît désormais, cliquable, sous Perséphone
+dans l'arbre, et sa propre fiche affiche la bonne lignée.
+
+`app.js` (Panthéon) : nouvelle entrée `"mélinoé": ["zeus", "perséphone"]` dans
+`GENEALOGY_PARENTS`.
+`service-worker.js` (Panthéon) : `pantheon-v246` → `pantheon-v247`.
+
 
 
