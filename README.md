@@ -6794,5 +6794,21 @@ Vérifié en local (clair et sombre) sur la bonne fiche.
 `assets/` : nouveau portrait `deity-macaria.jpg`.
 `service-worker.js` (Panthéon) : `pantheon-v241` → `pantheon-v242`.
 
+## 2026-11-15 — Renvoi croisé vers Mélinoé sur la fiche Perséphone
+
+Signalé par l'utilisatrice : la fiche de Mélinoé renvoie déjà vers Perséphone, sa mère selon
+l'hymne orphique, mais la fiche de Perséphone ne la mentionnait pas en retour.
+
+Nouveau paragraphe ajouté après l'épisode d'Alceste, reprenant la même nuance
+généalogique déjà posée sur la fiche Mélinoé (née d'une ruse de Zeus ayant pris l'apparence
+d'Hadès, plutôt que directement fille d'Hadès comme le simplifient de nombreux récits
+modernes), pour ne pas introduire de version différente entre les deux fiches.
+
+Vérifié en local (clair et sombre) sur la fiche Perséphone au complet.
+
+`api/_data/content.json` (Panthéon) : nouveau paragraphe dans
+`figures["perséphone"].lore`.
+`service-worker.js` (Panthéon) : `pantheon-v242` → `pantheon-v243`.
+
 
 
