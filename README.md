@@ -6781,5 +6781,18 @@ positionnée juste avant le paragraphe du sacrifice.
 `deity-iphigenie-biche.jpg`.
 `service-worker.js` (Panthéon) : `pantheon-v240` → `pantheon-v241`.
 
+## 2026-11-15 — Portrait de Macaria (fille d'Héraclès)
+
+Fourni par l'utilisatrice : un portrait pour une fiche Macaria, mais l'appli en distingue
+deux, homonymes sans rapport (`macaria`, fille d'Héraclès sacrifiée pour sauver Athènes, et
+`macaria-mort-heureuse`, figure liée à Hadès). Demandé confirmation avant d'assigner le
+portrait : il s'agit de la fille d'Héraclès.
+
+Vérifié en local (clair et sombre) sur la bonne fiche.
+
+`app.js` (Panthéon) : nouvelle entrée `"macaria"` dans `DEITY_PORTRAITS`.
+`assets/` : nouveau portrait `deity-macaria.jpg`.
+`service-worker.js` (Panthéon) : `pantheon-v241` → `pantheon-v242`.
+
 
 

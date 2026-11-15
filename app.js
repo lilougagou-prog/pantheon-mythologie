@@ -712,6 +712,7 @@ const DEITY_PORTRAITS = {
   "hélène": "assets/deity-helene.jpg",
   "clytemnestre": "assets/deity-clytemnestre.jpg",
   "iphigénie": "assets/deity-iphigenie.jpg",
+  "macaria": "assets/deity-macaria.jpg",
   "hermione": "assets/deity-hermione.jpg",
   "castor": "assets/deity-castor-pollux.jpg",
   "pollux": "assets/deity-castor-pollux.jpg",
