@@ -6892,5 +6892,25 @@ dans l'arbre, et sa propre fiche affiche la bonne lignée.
 `GENEALOGY_PARENTS`.
 `service-worker.js` (Panthéon) : `pantheon-v246` → `pantheon-v247`.
 
+## 2026-11-15 — Fiche Perséphone scindée en « Le mythe » / « Les amours »
+
+Demandé par l'utilisatrice, à la suite de l'ajout d'Adonis : la fiche était devenue un seul
+bloc « Le mythe » trop long, incluant à la fois son récit fondateur et ses deux épisodes
+amoureux (Adonis, Mélinoé). Scindée en deux sections via `loreSections`, même convention
+déjà en place sur les fiches Zeus et Apollon (lues pour vérifier l'usage exact du champ).
+
+« Le mythe » : enlèvement et nom, grenade et lien aux Enfers, Ascalaphos, clémence envers
+Alceste, réflexion sur la transformation, autres noms cultuels (Coré, Despoina, Hagné).
+« Les amours » : Adonis disputé à Aphrodite, Mélinoé. Même contenu qu'avant, seulement
+réorganisé ; aucun texte modifié.
+
+Vérifié en local (clair et sombre) : les deux titres de section s'affichent correctement,
+illustrations toujours bien positionnées devant leurs paragraphes.
+
+`api/_data/content.json` (Panthéon) : nouveau champ `loreSections` dans
+`figures["perséphone"]` ; `lore` réordonné à l'identique (mythe puis amours) pour rester
+cohérent, sans changement de texte.
+`service-worker.js` (Panthéon) : `pantheon-v247` → `pantheon-v248`.
+
 
 
