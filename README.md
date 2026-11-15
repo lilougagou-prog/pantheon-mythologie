@@ -6715,5 +6715,37 @@ Vérifié en local (clair et sombre) sur la fiche Amazones au complet.
 `figures["amazones"].lore` ; nouvelle source dans `figures["amazones"].sources`.
 `service-worker.js` (Panthéon) : `pantheon-v237` → `pantheon-v238`.
 
+## 2026-11-15 — Nouvelle fiche Mélanippe
+
+Demandé par l'utilisatrice, à la suite d'une question sur d'autres Amazones à citer :
+nouvelle fiche pour Mélanippe, suggérée comme la candidate la plus solide car directement
+liée à l'épisode déjà couvert de la ceinture d'Hippolyté (neuvième travail d'Héraclès).
+
+Vérifié avant rédaction, texte par texte : trois versions anciennes réellement
+incompatibles, présentées comme telles plutôt que fusionnées. Apollonios de Rhodes (chant
+II) en fait la sœur d'Hippolyté, capturée en premier, rachetée par la ceinture de cette
+dernière — seule source où ce lien de sororité est explicite. Diodore de Sicile (IV, 16,
+1-4) raconte une tout autre histoire, sans parenté avec Hippolyté : une vraie bataille
+rangée où Mélanippe, cheffe de guerre des Amazones, est capturée après la mort de
+plusieurs de ses compagnes nommées (Aella, Prothoé), puis libérée contre sa propre
+ceinture. Apollodore (II, 5, 9), troisième source majeure sur ce travail d'Héraclès, ne la
+mentionne jamais : chez lui, Hippolyté cède sa ceinture de bon gré avant qu'Héra ne pousse
+les Amazones à l'attaque, bataille où Héraclès la tue — c'est la version déjà retenue sur
+la fiche Hippolyté elle-même. Signalé pour mémoire : un autre nom, « Mélanippe », désigne
+par ailleurs une fille du centaure Chiron, sans rapport avec cette Amazone.
+
+Un renvoi croisé vers la nouvelle fiche a été ajouté dans le texte de Hippolyté, présentant
+la version d'Apollonios comme une tradition différente plutôt qu'en la mêlant au récit
+d'Apollodore déjà en place.
+
+Vérifié en local (clair et sombre) sur la fiche Mélanippe et sur la fiche Hippolyté mise à
+jour.
+
+`app.js` (Panthéon) : nouvelle entrée `"mélanippe"` dans `DEITY_NOTES` et
+`FIGURE_CATEGORIES` (catégorie mortels).
+`api/_data/content.json` (Panthéon) : nouvelle fiche Mélanippe ; renvoi croisé ajouté dans
+`figures["hippolyté"].lore`.
+`service-worker.js` (Panthéon) : `pantheon-v238` → `pantheon-v239`.
+
 
 
