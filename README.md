@@ -6912,5 +6912,17 @@ illustrations toujours bien positionnées devant leurs paragraphes.
 cohérent, sans changement de texte.
 `service-worker.js` (Panthéon) : `pantheon-v247` → `pantheon-v248`.
 
+## 2026-11-15 — Retrait de la mise en garde sur Thalie/Thalia
+
+Demandé par l'utilisatrice : sur la fiche Thalie (muse de la comédie), retrait de la phrase
+signalant l'existence d'une autre Thalia parmi les Charites, jugée inutile. La fiche Thalia
+(Charite) garde sa propre mention réciproque, non concernée par cette demande.
+
+Vérifié en local sur la fiche Thalie.
+
+`api/_data/content.json` (Panthéon) : dernier paragraphe retiré de
+`figures["thalie"].lore`.
+`service-worker.js` (Panthéon) : `pantheon-v248` → `pantheon-v249`.
+
 
 
